@@ -64,16 +64,5 @@
     "link": "packages/bali.html",
     "sort_order": 6,
     "active": true
-  },
-  {
-    "name": "Coimbatore Relief",
-    "location": "Coimbatore & OOTY",
-    "duration": "14 days / 13 nights",
-    "description": "",
-    "image_url": "",
-    "link": "packages/coimbatore-relief.html",
-    "sort_order": 0,
-    "active": false,
-    "id": "1782495057189"
   }
 ]
