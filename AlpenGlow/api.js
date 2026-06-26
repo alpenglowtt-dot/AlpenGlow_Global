@@ -131,6 +131,18 @@
         headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
       }).then(r => r.json()).catch(() => []),
 
+    /** Fetch active destinations from Supabase (used by index.html) */
+    fetchDestinations: () =>
+      fetch(`${SUPABASE_URL}/rest/v1/destinations?active=eq.true&order=sort_order.asc`, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+      }).then(r => r.json()).catch(() => []),
+
+    /** Fetch active tour packages from Supabase (used by index.html) */
+    fetchPackages: () =>
+      fetch(`${SUPABASE_URL}/rest/v1/packages?active=eq.true&order=sort_order.asc`, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+      }).then(r => r.json()).catch(() => []),
+
     /** Returns true if this phone+code combo already claimed an offer */
     checkOfferClaimed: async (phone, code) => {
       if (DEV_MODE) return false

@@ -467,111 +467,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
       <h2>Our <em>Destinations</em></h2>
     </div>
     <div class="destinations-track" id="destTrack">
-
-      <div class="dest-card" data-dest="subcontinent" onclick="toggleDest(this, event)">
-        <img src="tajmahal.jpg" alt="Taj Mahal">
-        <div class="dest-overlay">
-          <div class="dest-number">01</div>
-          <div class="dest-expand-icon">+</div>
-          <h3 class="dest-name">The Cultural Soul</h3>
-          <div class="dest-countries">India · Nepal · Bhutan · Sri Lanka</div>
-          <p class="dest-desc">Seamless border-crossing trails through the subcontinent's sacred and scenic core.</p>
-          <div class="dest-tap-hint">Tap to explore →</div>
-        </div>
-        <div class="subdest-panel" id="panel-subcontinent">
-          <div class="subdest-panel-inner">
-            <div class="subdest-panel-head">
-              <h4>The Sub-Continent Expert</h4>
-              <button class="subdest-close" onclick="event.stopPropagation(); closeDest('subcontinent')">×</button>
-            </div>
-            <div class="subdest-scroll">
-              <a href="packages/india.html" class="subdest-card"><img src="india.jpg" alt="India"><div class="subdest-card-overlay"><div class="subdest-card-name">India</div><div class="subdest-card-desc">Discover the vibrant culture and breathtaking landscapes of India.</div></div></a>
-              <a href="packages/nepal.html" class="subdest-card"><img src="nepal.jpg" alt="Nepal"><div class="subdest-card-overlay"><div class="subdest-card-name">Nepal</div><div class="subdest-card-desc">Explore the majestic mountains and rich cultural heritage of Nepal.</div></div></a>
-              <a href="packages/bhutan.html" class="subdest-card"><img src="bhutan.jpg" alt="Bhutan"><div class="subdest-card-overlay"><div class="subdest-card-name">Bhutan</div><div class="subdest-card-desc">Discover the unique culture and pristine landscapes of Bhutan.</div></div></a>
-              <a href="packages/srilanka.html" class="subdest-card"><img src="srilanka.jpg" alt="Sri Lanka"><div class="subdest-card-overlay"><div class="subdest-card-name">Sri Lanka</div><div class="subdest-card-desc">Explore the tropical beaches and ancient temples of Sri Lanka.</div></div></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dest-card" data-dest="longhaul" onclick="toggleDest(this, event)">
-        <img src="aurora.jpg" alt="High-Value Long Haul">
-        <div class="dest-overlay">
-          <div class="dest-number">02</div>
-          <div class="dest-expand-icon">+</div>
-          <h3 class="dest-name">Once-in-a-Lifetime</h3>
-          <div class="dest-countries">Scandinavia · Japan · NZ · Australia · S. Korea</div>
-          <p class="dest-desc">Bucket-list journeys built for travelers who plan years, not weekends, ahead.</p>
-          <div class="dest-tap-hint">Tap to explore →</div>
-        </div>
-        <div class="subdest-panel" id="panel-longhaul">
-          <div class="subdest-panel-inner">
-            <div class="subdest-panel-head">
-              <h4>The High-Value Long Haul</h4>
-              <button class="subdest-close" onclick="event.stopPropagation(); closeDest('longhaul')">×</button>
-            </div>
-            <div class="subdest-scroll">
-              <a href="packages/norway.html" class="subdest-card"><img src="norway.jpg" alt="Scandinavia"><div class="subdest-card-overlay"><div class="subdest-card-name">Scandinavia</div><div class="subdest-card-desc">Discover the stunning fjords and vibrant cities of Scandinavia.</div></div></a>
-              <a href="packages/japan.html" class="subdest-card"><img src="japan.png" alt="Japan"><div class="subdest-card-overlay"><div class="subdest-card-name">Japan</div><div class="subdest-card-desc">Experience the perfect blend of traditional culture and modern innovation in Japan.</div></div></a>
-              <a href="packages/newzealand.html" class="subdest-card"><img src="newzealand.jpg" alt="New Zealand"><div class="subdest-card-overlay"><div class="subdest-card-name">New Zealand</div><div class="subdest-card-desc">Discover the natural beauty and unique culture of New Zealand.</div></div></a>
-              <a href="packages/australia.html" class="subdest-card"><img src="australia.jpg" alt="Australia"><div class="subdest-card-overlay"><div class="subdest-card-name">Australia</div><div class="subdest-card-desc">Explore the diverse landscapes and vibrant cities of Australia.</div></div></a>
-              <a href="packages/southkorea.html" class="subdest-card"><img src="southkorea.jpg" alt="South Korea"><div class="subdest-card-overlay"><div class="subdest-card-name">South Korea</div><div class="subdest-card-desc">Discover the dynamic culture and delicious cuisine of South Korea.</div></div></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dest-card" data-dest="islands" onclick="toggleDest(this, event)">
-        <img src="honeymoon.jpg" alt="Island & Beach Specialist">
-        <div class="dest-overlay">
-          <div class="dest-number">03</div>
-          <div class="dest-expand-icon">+</div>
-          <h3 class="dest-name">Glowcations & Honeymoons</h3>
-          <div class="dest-countries">Maldives · Seychelles · Mauritius · Bali</div>
-          <p class="dest-desc">Pure isolation or culture-plus-luxury, curated for couples and wellness escapes.</p>
-          <div class="dest-tap-hint">Tap to explore →</div>
-        </div>
-        <div class="subdest-panel" id="panel-islands">
-          <div class="subdest-panel-inner">
-            <div class="subdest-panel-head">
-              <h4>The Island & Beach Specialist</h4>
-              <button class="subdest-close" onclick="event.stopPropagation(); closeDest('islands')">×</button>
-            </div>
-            <div class="subdest-scroll">
-              <a href="packages/maldives.html" class="subdest-card"><img src="maldives.jpg" alt="Maldives"><div class="subdest-card-overlay"><div class="subdest-card-name">Maldives</div><div class="subdest-card-desc">Experience the crystal-clear waters and overwater bungalows of the Maldives.</div></div></a>
-              <a href="packages/seychelles.html" class="subdest-card"><img src="seychelles.jpg" alt="Seychelles"><div class="subdest-card-overlay"><div class="subdest-card-name">Seychelles</div><div class="subdest-card-desc">Discover the pristine beaches and unique wildlife of the Seychelles.</div></div></a>
-              <a href="packages/mauritius.html" class="subdest-card"><img src="mauritius.jpg" alt="Mauritius"><div class="subdest-card-overlay"><div class="subdest-card-name">Mauritius</div><div class="subdest-card-desc">Explore the tropical paradise of Mauritius with its stunning beaches and vibrant culture.</div></div></a>
-              <a href="packages/bali.html" class="subdest-card"><img src="bali.jpg" alt="Bali"><div class="subdest-card-overlay"><div class="subdest-card-name">Bali</div><div class="subdest-card-desc">Discover the spiritual and cultural richness of Bali.</div></div></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="dest-card" data-dest="cruises" onclick="toggleDest(this, event)">
-        <img src="cruise.jpg" alt="Cruise Sailings">
-        <div class="dest-overlay">
-          <div class="dest-number">04</div>
-          <div class="dest-expand-icon">+</div>
-          <h3 class="dest-name">Family & MICE Sailings</h3>
-          <div class="dest-countries">River Cruises · Large Liners</div>
-          <p class="dest-desc">The volume engine — European river cruising and large-liner departures across Asia.</p>
-          <div class="dest-tap-hint">Tap to explore →</div>
-        </div>
-        <div class="subdest-panel" id="panel-cruises">
-          <div class="subdest-panel-inner">
-            <div class="subdest-panel-head">
-              <h4>The Volume Driver: Cruise Sailings</h4>
-              <button class="subdest-close" onclick="event.stopPropagation(); closeDest('cruises')">×</button>
-            </div>
-            <div class="subdest-scroll">
-              <a href="packages/rivercruise-europe.html" class="subdest-card"><img src="europeanrivercruise.jpg" alt="European River Cruise"><div class="subdest-card-overlay"><div class="subdest-card-name">European River Cruise</div><div class="subdest-card-desc">Experience the charm of Europe's great rivers aboard luxury cruise ships.</div></div></a>
-              <a href="packages/royalcaribbean.html" class="subdest-card"><img src="royalcaribbean.jpg" alt="Royal Caribbean"><div class="subdest-card-overlay"><div class="subdest-card-name">Royal Caribbean</div><div class="subdest-card-desc">Set sail on a luxury cruise through the Caribbean and beyond.</div></div></a>
-              <a href="packages/resortsworld.html" class="subdest-card"><img src="resortsworld.jpg" alt="Resorts World"><div class="subdest-card-overlay"><div class="subdest-card-name">Resorts World</div><div class="subdest-card-desc">Explore the luxurious amenities and stunning locations of Resorts World.</div></div></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!-- Populated dynamically from Supabase -->
     </div>
   </div>
 </section>
@@ -582,61 +478,8 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     <div class="section-tag">Curated Journeys</div>
     <h2 class="section-title">Tour <em>Packages</em></h2>
   </div>
-  <div class="packages-grid">
-    <div class="package-card reveal">
-      <div class="package-img"><img src="norway.jpg" alt="Norway"><span class="package-duration">8 Days / 7 Nights</span></div>
-      <div class="package-body">
-        <div class="package-location">Scandinavia</div>
-        <h3 class="package-name">Norwegian Fjords Expedition</h3>
-        <div class="package-desc-wrap"><p class="package-desc">Towering cliffs and crystal waters carve nature's masterpiece. Cruise through breathtaking fjords beneath snow-capped peaks. Discover charming Nordic villages steeped in timeless traditions. An unforgettable journey into the heart of Scandinavia's wilderness.</p><div class="package-blur"></div></div>
-        <a href="packages/norway.html" class="btn-details">View Details</a>
-      </div>
-    </div>
-    <div class="package-card reveal">
-      <div class="package-img"><img src="santorini.jpg" alt="Santorini"><span class="package-duration">6 Days / 5 Nights</span></div>
-      <div class="package-body">
-        <div class="package-location">Greece</div>
-        <h3 class="package-name">Santorini – Aegean Dreams</h3>
-        <div class="package-desc-wrap"><p class="package-desc">Whitewashed villages cascading down volcanic cliffs above the Aegean Sea. World-famous sunsets paint the horizon in shades of gold and crimson. Luxury, romance, and timeless Greek charm at every turn.</p><div class="package-blur"></div></div>
-        <a href="packages/santorini.html" class="btn-details">View Details</a>
-      </div>
-    </div>
-    <div class="package-card reveal">
-      <div class="package-img"><img src="italy.jpg" alt="Italy"><span class="package-duration">10 Days / 9 Nights</span></div>
-      <div class="package-body">
-        <div class="package-location">Italy</div>
-        <h3 class="package-name">Italian Grand Tour</h3>
-        <div class="package-desc-wrap"><p class="package-desc">Discover the rich culture and stunning landscapes of Italy on this unforgettable journey.</p><div class="package-blur"></div></div>
-        <a href="packages/italy.html" class="btn-details">View Details</a>
-      </div>
-    </div>
-    <div class="package-card reveal">
-      <div class="package-img"><img src="swissalps.jpg" alt="Swiss Alps"><span class="package-duration">7 Days / 6 Nights</span></div>
-      <div class="package-body">
-        <div class="package-location">Switzerland</div>
-        <h3 class="package-name">Swiss Alpine Wonderland</h3>
-        <div class="package-desc-wrap"><p class="package-desc">Towering peaks and emerald valleys frame every moment. Ride legendary mountain railways through clouds and into the heart of the Alps. A journey built for wonder.</p><div class="package-blur"></div></div>
-        <a href="packages/switzerland.html" class="btn-details">View Details</a>
-      </div>
-    </div>
-    <div class="package-card reveal">
-      <div class="package-img"><img src="japan.jpg" alt="Japan"><span class="package-duration">9 Days / 8 Nights</span></div>
-      <div class="package-body">
-        <div class="package-location">Japan</div>
-        <h3 class="package-name">Japan – Land of Contrasts</h3>
-        <div class="package-desc-wrap"><p class="package-desc">Experience the perfect blend of traditional culture and modern innovation in Japan.</p><div class="package-blur"></div></div>
-        <a href="packages/japan.html" class="btn-details">View Details</a>
-      </div>
-    </div>
-    <div class="package-card reveal">
-      <div class="package-img"><img src="baligods.jpg" alt="Bali"><span class="package-duration">7 Days / 6 Nights</span></div>
-      <div class="package-body">
-        <div class="package-location">Indonesia</div>
-        <h3 class="package-name">Bali – Island of the Gods</h3>
-        <div class="package-desc-wrap"><p class="package-desc">Immerse yourself in the vibrant culture and breathtaking scenery of Bali, where ancient traditions meet modern luxury.</p><div class="package-blur"></div></div>
-        <a href="packages/bali.html" class="btn-details">View Details</a>
-      </div>
-    </div>
+  <div class="packages-grid" id="packages-grid">
+    <!-- Populated dynamically from Supabase -->
   </div>
 </section>
 
@@ -1282,6 +1125,42 @@ async function leadVerifyEmail() {
 }
 
 // === DYNAMIC CONTENT LOADING ===
+const FALLBACK_DESTINATIONS = [
+  { slug:'subcontinent', number:'01', name:'The Cultural Soul', countries:'India · Nepal · Bhutan · Sri Lanka', description:"Seamless border-crossing trails through the subcontinent's sacred and scenic core.", image_url:'tajmahal.jpg', panel_title:'The Sub-Continent Expert', sub_destinations:[
+    {name:'India',     desc:'Discover the vibrant culture and breathtaking landscapes of India.',         image_url:'india.jpg',    link:'packages/india.html'},
+    {name:'Nepal',     desc:'Explore the majestic mountains and rich cultural heritage of Nepal.',        image_url:'nepal.jpg',    link:'packages/nepal.html'},
+    {name:'Bhutan',    desc:'Discover the unique culture and pristine landscapes of Bhutan.',             image_url:'bhutan.jpg',   link:'packages/bhutan.html'},
+    {name:'Sri Lanka', desc:'Explore the tropical beaches and ancient temples of Sri Lanka.',             image_url:'srilanka.jpg', link:'packages/srilanka.html'},
+  ]},
+  { slug:'longhaul', number:'02', name:'Once-in-a-Lifetime', countries:'Scandinavia · Japan · NZ · Australia · S. Korea', description:'Bucket-list journeys built for travelers who plan years, not weekends, ahead.', image_url:'aurora.jpg', panel_title:'The High-Value Long Haul', sub_destinations:[
+    {name:'Scandinavia',  desc:'Discover the stunning fjords and vibrant cities of Scandinavia.',                          image_url:'norway.jpg',      link:'packages/norway.html'},
+    {name:'Japan',        desc:'Experience the perfect blend of traditional culture and modern innovation in Japan.',       image_url:'japan.png',       link:'packages/japan.html'},
+    {name:'New Zealand',  desc:'Discover the natural beauty and unique culture of New Zealand.',                           image_url:'newzealand.jpg',  link:'packages/newzealand.html'},
+    {name:'Australia',    desc:'Explore the diverse landscapes and vibrant cities of Australia.',                          image_url:'australia.jpg',   link:'packages/australia.html'},
+    {name:'South Korea',  desc:'Discover the dynamic culture and delicious cuisine of South Korea.',                       image_url:'southkorea.jpg',  link:'packages/southkorea.html'},
+  ]},
+  { slug:'islands', number:'03', name:'Glowcations & Honeymoons', countries:'Maldives · Seychelles · Mauritius · Bali', description:'Pure isolation or culture-plus-luxury, curated for couples and wellness escapes.', image_url:'honeymoon.jpg', panel_title:'The Island & Beach Specialist', sub_destinations:[
+    {name:'Maldives',   desc:'Experience the crystal-clear waters and overwater bungalows of the Maldives.',  image_url:'maldives.jpg',   link:'packages/maldives.html'},
+    {name:'Seychelles', desc:'Discover the pristine beaches and unique wildlife of the Seychelles.',          image_url:'seychelles.jpg', link:'packages/seychelles.html'},
+    {name:'Mauritius',  desc:'Explore the tropical paradise of Mauritius with its stunning beaches and vibrant culture.', image_url:'mauritius.jpg', link:'packages/mauritius.html'},
+    {name:'Bali',       desc:'Discover the spiritual and cultural richness of Bali.',                         image_url:'bali.jpg',       link:'packages/bali.html'},
+  ]},
+  { slug:'cruises', number:'04', name:'Family & MICE Sailings', countries:'River Cruises · Large Liners', description:'The volume engine — European river cruising and large-liner departures across Asia.', image_url:'cruise.jpg', panel_title:'The Volume Driver: Cruise Sailings', sub_destinations:[
+    {name:'European River Cruise', desc:"Experience the charm of Europe's great rivers aboard luxury cruise ships.", image_url:'europeanrivercruise.jpg', link:'packages/rivercruise-europe.html'},
+    {name:'Royal Caribbean',       desc:'Set sail on a luxury cruise through the Caribbean and beyond.',              image_url:'royalcaribbean.jpg',       link:'packages/royalcaribbean.html'},
+    {name:'Resorts World',         desc:'Explore the luxurious amenities and stunning locations of Resorts World.',   image_url:'resortsworld.jpg',         link:'packages/resortsworld.html'},
+  ]},
+]
+
+const FALLBACK_PACKAGES = [
+  { name:'Norwegian Fjords Expedition', location:'Scandinavia', duration:'8 Days / 7 Nights',  description:"Towering cliffs and crystal waters carve nature's masterpiece. Cruise through breathtaking fjords beneath snow-capped peaks. Discover charming Nordic villages steeped in timeless traditions. An unforgettable journey into the heart of Scandinavia's wilderness.", image_url:'norway.jpg',    link:'packages/norway.html' },
+  { name:'Santorini – Aegean Dreams',   location:'Greece',      duration:'6 Days / 5 Nights',  description:'Whitewashed villages cascading down volcanic cliffs above the Aegean Sea. World-famous sunsets paint the horizon in shades of gold and crimson. Luxury, romance, and timeless Greek charm at every turn.',                                                            image_url:'santorini.jpg', link:'packages/santorini.html' },
+  { name:'Italian Grand Tour',          location:'Italy',       duration:'10 Days / 9 Nights', description:'Discover the rich culture and stunning landscapes of Italy on this unforgettable journey.',                                                                                                                                                                           image_url:'italy.jpg',     link:'packages/italy.html' },
+  { name:'Swiss Alpine Wonderland',     location:'Switzerland', duration:'7 Days / 6 Nights',  description:'Towering peaks and emerald valleys frame every moment. Ride legendary mountain railways through clouds and into the heart of the Alps. A journey built for wonder.',                                                                                                   image_url:'swissalps.jpg', link:'packages/switzerland.html' },
+  { name:'Japan – Land of Contrasts',   location:'Japan',       duration:'9 Days / 8 Nights',  description:'Experience the perfect blend of traditional culture and modern innovation in Japan.',                                                                                                                                                                                 image_url:'japan.jpg',     link:'packages/japan.html' },
+  { name:'Bali – Island of the Gods',   location:'Indonesia',   duration:'7 Days / 6 Nights',  description:'Immerse yourself in the vibrant culture and breathtaking scenery of Bali, where ancient traditions meet modern luxury.',                                                                                                                                              image_url:'baligods.jpg',  link:'packages/bali.html' },
+]
+
 const FALLBACK_OFFERS = [
   { id:'f1', title:'Summer Beach Escape', badge:'30% OFF', code:'SUMMER30', description:'Book any beach destination — Maldives, Bali, Santorini — before July 31 and save 30% on your total package price.', image_url:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80', cta_text:'Claim Offer →' },
   { id:'f2', title:'Plan Ahead & Save', badge:'EARLY BIRD 20%', code:'EARLY2027', description:'Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all Alpen Glow packages.', image_url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80', cta_text:'Learn More →' },
@@ -1339,23 +1218,74 @@ function renderBlogPosts(posts) {
   }
 }
 
+function renderDestinations(destinations) {
+  const track = document.getElementById('destTrack')
+  if (!track || !destinations || !destinations.length) return
+  track.innerHTML = destinations.map(d => {
+    const subs = Array.isArray(d.sub_destinations) ? d.sub_destinations
+      : (typeof d.sub_destinations === 'string' ? JSON.parse(d.sub_destinations || '[]') : [])
+    return `<div class="dest-card" data-dest="${d.slug}" onclick="toggleDest(this, event)">
+      <img src="${d.image_url || ''}" alt="${d.name || ''}">
+      <div class="dest-overlay">
+        <div class="dest-number">${d.number || ''}</div>
+        <div class="dest-expand-icon">+</div>
+        <h3 class="dest-name">${d.name || ''}</h3>
+        <div class="dest-countries">${d.countries || ''}</div>
+        <p class="dest-desc">${d.description || ''}</p>
+        <div class="dest-tap-hint">Tap to explore →</div>
+      </div>
+      <div class="subdest-panel" id="panel-${d.slug}">
+        <div class="subdest-panel-inner">
+          <div class="subdest-panel-head">
+            <h4>${d.panel_title || d.name}</h4>
+            <button class="subdest-close" onclick="event.stopPropagation(); closeDest('${d.slug}')">×</button>
+          </div>
+          <div class="subdest-scroll">
+            ${subs.map(s => `<a href="${s.link||'#'}" class="subdest-card"><img src="${s.image_url||''}" alt="${s.name||''}"><div class="subdest-card-overlay"><div class="subdest-card-name">${s.name||''}</div><div class="subdest-card-desc">${s.desc||''}</div></div></a>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>`
+  }).join('')
+}
+
+function renderPackages(packages) {
+  const grid = document.getElementById('packages-grid')
+  if (!grid || !packages || !packages.length) return
+  grid.innerHTML = packages.map(p => `
+    <div class="package-card reveal">
+      <div class="package-img"><img src="${p.image_url||''}" alt="${p.name||''}"><span class="package-duration">${p.duration||''}</span></div>
+      <div class="package-body">
+        <div class="package-location">${p.location||''}</div>
+        <h3 class="package-name">${p.name||''}</h3>
+        <div class="package-desc-wrap"><p class="package-desc">${p.description||''}</p><div class="package-blur"></div></div>
+        <a href="${p.link||'#'}" class="btn-details">View Details</a>
+      </div>
+    </div>`).join('')
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el))
+  if (typeof AlpenAPI !== 'undefined' && AlpenAPI.isVerified()) {
+    grid.querySelectorAll('.package-blur').forEach(el => el.style.display = 'none')
+  }
+}
+
 async function loadPageContent() {
   try {
-    const [offers, posts] = await Promise.all([
+    const [offers, posts, packages, destinations] = await Promise.all([
       AlpenAPI.fetchOffers(),
-      AlpenAPI.fetchBlogPosts()
+      AlpenAPI.fetchBlogPosts(),
+      AlpenAPI.fetchPackages(),
+      AlpenAPI.fetchDestinations()
     ])
     renderOffers(offers && offers.length ? offers : FALLBACK_OFFERS)
-    if (posts && posts.length) {
-      renderBlogPosts(posts)
-    } else {
-      BLOG_POSTS = FALLBACK_ARTICLES
-      renderBlogPosts(FALLBACK_ARTICLES)
-    }
+    renderBlogPosts(posts && posts.length ? posts : FALLBACK_ARTICLES)
+    renderPackages(packages && packages.length ? packages : FALLBACK_PACKAGES)
+    renderDestinations(destinations && destinations.length ? destinations : FALLBACK_DESTINATIONS)
   } catch(e) {
     renderOffers(FALLBACK_OFFERS)
     BLOG_POSTS = FALLBACK_ARTICLES
     renderBlogPosts(FALLBACK_ARTICLES)
+    renderPackages(FALLBACK_PACKAGES)
+    renderDestinations(FALLBACK_DESTINATIONS)
   }
 }
 
