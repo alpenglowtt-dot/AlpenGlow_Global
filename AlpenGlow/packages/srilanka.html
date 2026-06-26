@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Lanka - The Cultural Soul | Alpen Glow Tours and Travels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="package.css">
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo">
+    <img src="../alpenglow-removebg-preview.png" alt="Alpen Glow">
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="../index.html#destinations">Destinations</a>
+    <a href="../index.html#packages">Packages</a>
+    <a href="../index.html#offers">Offers</a>
+    <a href="../index.html#contact">Contact</a>
+    <a href="../index.html#contact" class="nav-cta">Plan Your Trip</a>
+  </div>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="breadcrumb">
+  <a href="../index.html#destinations">Back to Destinations</a>
+</div>
+
+<section class="detail-hero">
+  <img src="https://images.unsplash.com/photo-1546708973-b339540b5162?w=1600&q=80" alt="Sri Lanka">
+  <div class="detail-hero-overlay">
+    <span class="detail-duration">7 Days / 6 Nights</span>
+    <div class="detail-location">Sub-Continent - Sri Lanka</div>
+    <h1 class="detail-title">Sri Lanka - Ancient Kingdoms and Coastline</h1>
+  </div>
+</section>
+
+<div class="detail-wrap">
+  <div class="detail-main locked" id="detailMain">
+    <div class="content-overlay" id="contentOverlay">
+      <div class="co-lock">&#128274;</div>
+      <h3>Verify to Unlock Full Itinerary</h3>
+      <p>Read the overview below for free. Verify your WhatsApp &amp; Email to unlock the full day-by-day itinerary and pricing.</p>
+      <button class="btn-scroll-verify" onclick="document.getElementById('gateCard').scrollIntoView({behavior:'smooth',block:'start'})">Verify &amp; Unlock Now</button>
+    </div>
+    <div class="overview-free">
+    <h2>Overview</h2>
+    <p>Sri Lanka fits an unreasonable amount of variety into a small island — ancient rock fortresses, tea-country hill stations, wildlife safaris, and a south coast of palm-lined beaches, all reachable within a few hours' drive of each other. This trip threads through the cultural triangle before winding down on the coast.</p>
+    <p>Good for travelers who want history, hill-country scenery, and beach time all in one trip.</p>
+    </div>
+<h2>Itinerary</h2>
+    <div class="itinerary-day">
+      <div class="itinerary-day-num">Day 1-2</div>
+      <div class="itinerary-day-content"><h4>Sigiriya & Dambulla</h4><p>Climb the ancient Sigiriya rock fortress at sunrise, then explore the cave temples of Dambulla.</p></div>
+    </div>
+    <div class="itinerary-day">
+      <div class="itinerary-day-num">Day 3</div>
+      <div class="itinerary-day-content"><h4>Kandy</h4><p>Drive to Kandy for the Temple of the Sacred Tooth Relic and a visit to the Royal Botanical Gardens at Peradeniya.</p></div>
+    </div>
+    <div class="itinerary-day">
+      <div class="itinerary-day-num">Day 4</div>
+      <div class="itinerary-day-content"><h4>Nuwara Eliya — Tea Country</h4><p>Scenic drive into the hill country, with a working tea estate tour and tasting in Nuwara Eliya.</p></div>
+    </div>
+    <div class="itinerary-day">
+      <div class="itinerary-day-num">Day 5</div>
+      <div class="itinerary-day-content"><h4>Yala Safari</h4><p>Transfer to Yala National Park for a jeep safari in search of leopards, elephants, and sloth bears.</p></div>
+    </div>
+    <div class="itinerary-day">
+      <div class="itinerary-day-num">Day 6-7</div>
+      <div class="itinerary-day-content"><h4>South Coast</h4><p>Relax on the south coast at Mirissa or Bentota's beaches, with an optional whale-watching excursion.</p></div>
+    </div>
+    <h2>What's Included</h2>
+    <div class="tag-row">
+      <span class="tag-pill">6 nights accommodation</span>
+      <span class="tag-pill">Sigiriya rock fortress entry</span>
+      <span class="tag-pill">Yala National Park jeep safari</span>
+      <span class="tag-pill">Tea estate tour & tasting</span>
+      <span class="tag-pill">Daily breakfast</span>
+    </div>
+  </div>
+
+  <div class="detail-sidebar">
+    <div class="gate-card" id="gateCard">
+      <span class="gate-badge">Verification Required</span>
+      <h3>Unlock Full Itinerary</h3>
+      <div id="gateStep1">
+        <p>Enter your details to access the day-by-day itinerary, pricing, and a personal callback from our travel team.</p>
+        <div class="form-group"><label>Full Name</label><input type="text" id="gateName" placeholder="Your name"></div>
+        <div class="form-group"><label>WhatsApp Number</label><input type="tel" id="gatePhone" placeholder="+91 98765 43210"></div>
+        <button class="btn-verify" id="gateBtn1" onclick="gateSendWhatsApp()">Send WhatsApp Code</button>
+        <p class="gate-note">Step 1 of 2 — WhatsApp verification</p>
+      </div>
+      <div id="gateStep2" style="display:none;">
+        <p style="font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:1rem;">Enter the 4-digit code sent to your WhatsApp.</p>
+        <div style="display:flex;gap:.5rem;margin-bottom:.8rem;">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveW(this,1)" id="gWOtp0">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveW(this,2)" id="gWOtp1">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveW(this,3)" id="gWOtp2">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveW(this,4)" id="gWOtp3">
+        </div>
+        <div style="font-size:.73rem;color:rgba(255,255,255,.4);margin-bottom:.9rem;">Didn't receive it? <a onclick="gateResendWhatsApp()" style="color:var(--orange);cursor:pointer;font-weight:600;">Resend</a></div>
+        <button class="btn-verify" id="gateBtn2" onclick="gateVerifyWhatsApp()">Verify WhatsApp</button>
+        <p class="gate-note">Step 1 of 2 — WhatsApp verification</p>
+      </div>
+      <div id="gateStep3" style="display:none;">
+        <p style="font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:1rem;">WhatsApp verified! Now enter your email to complete verification.</p>
+        <div class="form-group"><label>Email Address</label><input type="email" id="gateEmail" placeholder="you@example.com"></div>
+        <button class="btn-verify" id="gateBtn3" onclick="gateSendEmail()">Send Email Code</button>
+        <p class="gate-note">Step 2 of 2 — Email verification</p>
+      </div>
+      <div id="gateStep4" style="display:none;">
+        <p style="font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:1rem;">Enter the 4-digit code sent to your email.</p>
+        <div style="display:flex;gap:.5rem;margin-bottom:.8rem;">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveE(this,1)" id="gEOtp0">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveE(this,2)" id="gEOtp1">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveE(this,3)" id="gEOtp2">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveE(this,4)" id="gEOtp3">
+        </div>
+        <div style="font-size:.73rem;color:rgba(255,255,255,.4);margin-bottom:.9rem;">Didn't receive it? <a onclick="gateResendEmail()" style="color:var(--orange);cursor:pointer;font-weight:600;">Resend</a></div>
+        <button class="btn-verify" id="gateBtn4" onclick="gateVerifyEmail()">Verify &amp; Unlock</button>
+        <p class="gate-note">Step 2 of 2 — Email verification</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><img src="../alpenglow-removebg-preview.png" alt="Alpen Glow"></div>
+  <div class="footer-links">
+    <a href="../index.html#destinations">Destinations</a>
+    <a href="../index.html#packages">Packages</a>
+    <a href="../index.html#offers">Offers</a>
+    <a href="../index.html#reviews">Reviews</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+  <p>&copy; 2026 Alpen Glow Tours and Travels. All rights reserved.</p>
+</footer>
+
+<script src="../api.js"></script>
+<script>
+let _gateName = "", _gatePhone = "", _gateEmail = "";
+function unlockContent() {
+  const main = document.getElementById("detailMain");
+  const overlay = document.getElementById("contentOverlay");
+  if (main) main.classList.remove("locked");
+  if (overlay) { overlay.style.opacity = "0"; setTimeout(() => overlay.remove(), 500); }
+  const card = document.getElementById("gateCard");
+  if (card) card.innerHTML = "<div style=\"text-align:center;padding:1rem 0;\"><div style=\"font-size:2rem;margin-bottom:.7rem;\">&#10003;</div><h3 style=\"font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);margin-bottom:.5rem;\">Itinerary Unlocked</h3><p style=\"font-size:.82rem;color:rgba(255,255,255,.55);\">Our team will be in touch within 24 hours.</p></div>";
+}
+function gateSendWhatsApp() {
+  _gateName = document.getElementById("gateName").value.trim();
+  _gatePhone = document.getElementById("gatePhone").value.trim();
+  if (!_gateName || !_gatePhone) { alert("Please enter your name and WhatsApp number."); return; }
+  const btn = document.getElementById("gateBtn1");
+  btn.textContent = "Sending..."; btn.disabled = true;
+  AlpenAPI.sendSMSOTP(_gatePhone, "package_unlock", { name: _gateName })
+    .then(() => { document.getElementById("gateStep1").style.display = "none"; document.getElementById("gateStep2").style.display = "block"; setTimeout(() => document.getElementById("gWOtp0").focus(), 100); })
+    .catch((err) => { btn.textContent = "Send WhatsApp Code"; btn.disabled = false; alert(err?.message || "Could not send WhatsApp code. Please check your number and try again."); });
+}
+function gateMoveW(el, next) { if (el.value.length === 1 && next <= 3) document.getElementById("gWOtp" + next).focus(); }
+function gateResendWhatsApp() {
+  ["gWOtp0","gWOtp1","gWOtp2","gWOtp3"].forEach(id => document.getElementById(id).value = "");
+  AlpenAPI.sendSMSOTP(_gatePhone, "package_unlock").catch(() => {});
+  document.getElementById("gWOtp0").focus();
+}
+function gateVerifyWhatsApp() {
+  const code = ["gWOtp0","gWOtp1","gWOtp2","gWOtp3"].map(id => document.getElementById(id).value).join("");
+  if (code.length < 4) { document.getElementById("gWOtp0").focus(); return; }
+  const btn = document.getElementById("gateBtn2");
+  btn.textContent = "Verifying..."; btn.disabled = true;
+  AlpenAPI.verifySMSOTP(_gatePhone, code)
+    .then(() => { document.getElementById("gateStep2").style.display = "none"; document.getElementById("gateStep3").style.display = "block"; setTimeout(() => document.getElementById("gateEmail").focus(), 100); })
+    .catch((err) => { btn.textContent = "Verify WhatsApp"; btn.disabled = false; alert(err?.message || "Invalid code. Please try again."); });
+}
+function gateSendEmail() {
+  _gateEmail = document.getElementById("gateEmail").value.trim();
+  if (!_gateEmail) { document.getElementById("gateEmail").focus(); return; }
+  const btn = document.getElementById("gateBtn3");
+  btn.textContent = "Sending..."; btn.disabled = true;
+  AlpenAPI.sendEmailOTP(_gateEmail, "package_unlock")
+    .then(() => { document.getElementById("gateStep3").style.display = "none"; document.getElementById("gateStep4").style.display = "block"; setTimeout(() => document.getElementById("gEOtp0").focus(), 100); })
+    .catch((err) => { btn.textContent = "Send Email Code"; btn.disabled = false; alert(err?.message || "Could not send email code. Please check your email and try again."); });
+}
+function gateMoveE(el, next) { if (el.value.length === 1 && next <= 3) document.getElementById("gEOtp" + next).focus(); }
+function gateResendEmail() {
+  ["gEOtp0","gEOtp1","gEOtp2","gEOtp3"].forEach(id => document.getElementById(id).value = "");
+  AlpenAPI.sendEmailOTP(_gateEmail, "package_unlock").catch(() => {});
+  document.getElementById("gEOtp0").focus();
+}
+function gateVerifyEmail() {
+  const code = ["gEOtp0","gEOtp1","gEOtp2","gEOtp3"].map(id => document.getElementById(id).value).join("");
+  if (code.length < 4) { document.getElementById("gEOtp0").focus(); return; }
+  const btn = document.getElementById("gateBtn4");
+  btn.textContent = "Verifying..."; btn.disabled = true;
+  AlpenAPI.verifyEmailOTP(_gateEmail, code)
+    .then(() => {
+      AlpenAPI.submitLead({ name: _gateName, phone: _gatePhone, email: _gateEmail, source: "package_unlock", verifiedPhone: true, verifiedEmail: true }).catch(() => {});
+      unlockContent();
+    })
+    .catch((err) => { btn.textContent = "Verify & Unlock"; btn.disabled = false; alert(err?.message || "Invalid code. Please try again."); });
+}
+const mobileToggle = document.getElementById("mobileToggle");
+const navLinks = document.getElementById("navLinks");
+mobileToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
+</script>
+</body>
+</html>
