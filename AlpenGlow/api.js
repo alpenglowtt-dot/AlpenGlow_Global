@@ -33,40 +33,83 @@
     return data
   }
 
-  // In dev mode, auto-unlock content gates and hide blur overlays on page load
+  // ─── SESSION VERIFICATION ─────────────────────────────────────
+  // Once a visitor completes OTP verification, we store that in
+  // sessionStorage. It persists while the tab stays open and is
+  // cleared automatically when the tab is closed — so they only
+  // verify once per browsing session, not on every page.
+  function isVerified() {
+    return sessionStorage.getItem('ag_verified') === '1'
+  }
+  function markVerified() {
+    sessionStorage.setItem('ag_verified', '1')
+  }
+  // ─────────────────────────────────────────────────────────────
+
+  // Dev mode: auto-unlock gates and hide blur overlays on page load
   if (DEV_MODE) {
     document.addEventListener('DOMContentLoaded', function () {
-      // Package pages: remove the locked class so full itinerary is visible
       var main = document.getElementById('detailMain')
       if (main) main.classList.remove('locked')
 
-      // Package pages: replace gate card with an unlocked notice
       var gate = document.getElementById('gateCard')
       if (gate) gate.innerHTML = '<div style="text-align:center;padding:1rem 0;"><div style="font-size:1.5rem;margin-bottom:.5rem;">🔓</div><p style="font-size:.8rem;color:rgba(255,255,255,.45);">DEV MODE — gate bypassed</p></div>'
 
-      // Homepage / package cards: hide gradient blur overlays
       document.querySelectorAll('.package-blur, .blog-blur').forEach(function (el) {
         el.style.display = 'none'
       })
     })
   }
 
+  // Production mode: if already verified this session, auto-unlock on page load
+  if (!DEV_MODE) {
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!isVerified()) return
+      // Package pages: remove locked class and collapse gate card
+      var main = document.getElementById('detailMain')
+      if (main) main.classList.remove('locked')
+      var gate = document.getElementById('gateCard')
+      if (gate) gate.innerHTML = '<div style="text-align:center;padding:1rem 0;"><div style="font-size:1.5rem;margin-bottom:.5rem;">✓</div><p style="font-size:.8rem;color:rgba(255,255,255,.45);">Already verified</p></div>'
+      // Homepage: remove blur overlays so blog cards show fully
+      document.querySelectorAll('.package-blur, .blog-blur').forEach(function (el) {
+        el.style.display = 'none'
+      })
+      var overlay = document.getElementById('contentOverlay')
+      if (overlay) { overlay.style.opacity = '0'; setTimeout(function () { overlay.remove() }, 500) }
+    })
+  }
+
   window.AlpenAPI = {
+    /** Returns true if the visitor has already verified this session */
+    isVerified: isVerified,
+
     /** Send a 4-digit SMS OTP via Twilio */
-    sendSMSOTP: (phone, purpose, metadata = {}) =>
-      callEdge('send-sms-otp', { phone, purpose, metadata }),
+    sendSMSOTP: (phone, purpose, metadata = {}) => {
+      if (DEV_MODE || isVerified()) return Promise.resolve({ ok: true })
+      return callEdge('send-sms-otp', { phone, purpose, metadata })
+    },
 
     /** Verify a submitted SMS OTP code */
-    verifySMSOTP: (phone, code) =>
-      callEdge('verify-sms-otp', { phone, code }),
+    verifySMSOTP: async (phone, code) => {
+      if (DEV_MODE || isVerified()) return { verified: true }
+      const r = await callEdge('verify-sms-otp', { phone, code })
+      markVerified()
+      return r
+    },
 
     /** Send a 4-digit email OTP via Resend */
-    sendEmailOTP: (email, purpose, metadata = {}) =>
-      callEdge('send-email-otp', { email, purpose, metadata }),
+    sendEmailOTP: (email, purpose, metadata = {}) => {
+      if (DEV_MODE || isVerified()) return Promise.resolve({ ok: true })
+      return callEdge('send-email-otp', { email, purpose, metadata })
+    },
 
     /** Verify a submitted email OTP code */
-    verifyEmailOTP: (email, code) =>
-      callEdge('verify-email-otp', { email, code }),
+    verifyEmailOTP: async (email, code) => {
+      if (DEV_MODE || isVerified()) return { verified: true }
+      const r = await callEdge('verify-email-otp', { email, code })
+      markVerified()
+      return r
+    },
 
     /** Submit contact form — stores lead + emails agency */
     submitContact: (data) =>

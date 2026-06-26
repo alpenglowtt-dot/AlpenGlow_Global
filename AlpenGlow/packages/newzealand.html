@@ -206,6 +206,7 @@ function gateVerifyEmail() {
 const mobileToggle = document.getElementById("mobileToggle");
 const navLinks = document.getElementById("navLinks");
 mobileToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
+if (typeof AlpenAPI !== "undefined" && AlpenAPI.isVerified()) unlockContent();
 </script>
 </body>
 </html>

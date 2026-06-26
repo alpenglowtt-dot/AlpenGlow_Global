@@ -1038,9 +1038,13 @@ function openOfferModal(title, badge, code, desc) {
   document.getElementById('offerRevealCode').textContent = code;
   document.getElementById('offerRevealDesc').textContent = desc;
   document.querySelectorAll('.offer-modal-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('offerStep1').classList.add('active');
-  document.getElementById('offerPhone').value = '';
-  for (let i = 0; i < 4; i++) document.getElementById('otp' + i).value = '';
+  // Skip OTP steps if already verified this session
+  const startStep = AlpenAPI.isVerified() ? 'offerStep3' : 'offerStep1';
+  document.getElementById(startStep).classList.add('active');
+  if (!AlpenAPI.isVerified()) {
+    document.getElementById('offerPhone').value = '';
+    for (let i = 0; i < 4; i++) document.getElementById('otp' + i).value = '';
+  }
   document.getElementById('offer-modal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -1157,6 +1161,18 @@ function leadProgress(step) {
 
 function openModal(articleIdx) {
   _currentArticle = articleIdx || 0;
+  // Already verified this session — show article immediately, skip all OTP steps
+  if (AlpenAPI.isVerified()) {
+    const art = ARTICLES[_currentArticle];
+    document.getElementById('articleTitle').textContent = art.title;
+    document.getElementById('articleContent').innerHTML = art.content;
+    ['leadStep1','leadStep2','leadStep3','leadStep4'].forEach(id => document.getElementById(id).style.display = 'none');
+    document.getElementById('leadStep5').style.display = 'block';
+    document.getElementById('modalProgress').style.display = 'none';
+    document.getElementById('lead-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    return;
+  }
   ['leadStep1','leadStep2','leadStep3','leadStep4','leadStep5'].forEach((id, i) => {
     document.getElementById(id).style.display = i === 0 ? 'block' : 'none';
   });
