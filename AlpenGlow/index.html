@@ -791,7 +791,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
 
 <!-- FOOTER -->
 <footer id="footer">
-  <div class="footer-logo"><img src="alpenglow-removebg-preview.png" alt="Alpen Glow"></div>
+  <div class="footer-logo"><img src="alpenglow-removebg-preview.png" alt="Alpen Glow" id="footer-logo-secret" style="cursor:pointer"></div>
   <div class="footer-links">
     <a href="#destinations">Destinations</a>
     <a href="#packages">Packages</a>
@@ -919,6 +919,21 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
 
 <script src="api.js"></script>
 <script>
+// === OWNER DASHBOARD — SECRET ACCESS ===
+// Click the footer logo 5 times quickly, OR press Alt+Shift+D
+;(function () {
+  var clicks = 0, timer = null
+  document.getElementById('footer-logo-secret').addEventListener('click', function () {
+    clicks++
+    clearTimeout(timer)
+    if (clicks >= 5) { clicks = 0; window.location.href = 'dashboard.html' }
+    timer = setTimeout(function () { clicks = 0 }, 2000)
+  })
+  document.addEventListener('keydown', function (e) {
+    if (e.altKey && e.shiftKey && e.key === 'D') window.location.href = 'dashboard.html'
+  })
+})()
+
 // === NAV SCROLL ===
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 60); });

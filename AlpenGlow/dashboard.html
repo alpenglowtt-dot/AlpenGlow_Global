@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Dashboard — Alpen Glow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#9d2420;--orange:#ef7e19;--orange-light:#f5a623;
+  --dark:#181818;--dark-soft:#2a2a2a;--cream:#faf6f1;
+  --white:#ffffff;--text-light:#6b6560;
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'DM Sans',system-ui,sans-serif;
+  --ease-out:cubic-bezier(0.22,1,0.36,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--white);background:var(--dark);min-height:100vh;overflow-x:hidden}
+button{cursor:pointer;border:none;font-family:var(--font-body)}
+input,select,textarea{font-family:var(--font-body)}
+
+/* LOGIN */
+#login-gate{position:fixed;inset:0;z-index:9999;background:var(--dark);display:flex;align-items:center;justify-content:center}
+.login-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:3rem 2.5rem;width:100%;max-width:400px;text-align:center;backdrop-filter:blur(20px)}
+.login-card img{height:72px;width:auto;margin:0 auto 1.5rem;display:block}
+.login-card h2{font-family:var(--font-display);font-size:1.55rem;font-weight:400;margin-bottom:.35rem}
+.login-card p{font-size:.82rem;color:rgba(255,255,255,.4);margin-bottom:1.8rem}
+.login-input{width:100%;padding:.85rem 1.2rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);border-radius:12px;color:var(--white);font-size:.95rem;outline:none;letter-spacing:.1em;transition:border-color .2s,box-shadow .2s;margin-bottom:1rem}
+.login-input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(239,126,25,.15)}
+.login-input.error{border-color:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.15);animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.btn-login{width:100%;padding:.85rem;background:var(--orange);color:var(--dark);border-radius:12px;font-weight:600;font-size:.9rem;letter-spacing:.04em;transition:all .3s var(--ease-out)}
+.btn-login:hover{background:var(--orange-light);transform:translateY(-2px);box-shadow:0 6px 20px rgba(239,126,25,.4)}
+.login-err{font-size:.78rem;color:#f87171;margin-top:.6rem;min-height:1rem}
+
+/* SHELL */
+#dashboard{display:none;min-height:100vh}
+
+/* HEADER */
+.dash-header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(24,24,24,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.header-logo{display:flex;align-items:center;gap:.7rem}
+.header-logo img{height:48px;width:auto}
+.header-logo span{font-size:.62rem;font-weight:500;color:rgba(255,255,255,.3);letter-spacing:.15em;text-transform:uppercase;padding-left:.7rem;border-left:1px solid rgba(255,255,255,.1)}
+.header-title{font-family:var(--font-display);font-size:.95rem;font-style:italic;color:rgba(255,255,255,.5);text-align:center;flex:1}
+.header-right{display:flex;align-items:center;gap:1rem}
+#live-clock{font-size:.72rem;color:rgba(255,255,255,.35);letter-spacing:.04em;white-space:nowrap}
+.btn-logout{padding:.42rem .9rem;border-radius:50px;border:1.5px solid rgba(255,255,255,.18);background:transparent;color:rgba(255,255,255,.55);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;transition:all .25s}
+.btn-logout:hover{border-color:var(--orange);color:var(--orange)}
+
+/* MAIN */
+.dash-main{padding:96px 2rem 3rem;max-width:1600px;margin:0 auto}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-bottom:1.8rem}
+.stat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:1.4rem 1.6rem;position:relative;overflow:hidden;transition:transform .3s var(--ease-out),border-color .3s}
+.stat-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.14)}
+.stat-glow{position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;opacity:.12;pointer-events:none}
+.stat-card:nth-child(1) .stat-glow{background:radial-gradient(circle,#ef7e19,transparent)}
+.stat-card:nth-child(2) .stat-glow{background:radial-gradient(circle,#22c55e,transparent)}
+.stat-card:nth-child(3) .stat-glow{background:radial-gradient(circle,#f59e0b,transparent)}
+.stat-card:nth-child(4) .stat-glow{background:radial-gradient(circle,#eab308,transparent)}
+.stat-icon{font-size:1.2rem;margin-bottom:.7rem}
+.stat-value{font-family:var(--font-display);font-size:2.5rem;font-weight:400;color:var(--white);line-height:1;margin-bottom:.35rem}
+.stat-label{font-size:.63rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+
+/* ERROR BANNER */
+.err-banner{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:.85rem 1.2rem;display:none;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;color:#f87171;font-size:.82rem}
+.err-banner.show{display:flex}
+.btn-retry{padding:.32rem .75rem;border-radius:8px;border:1px solid #f87171;background:transparent;color:#f87171;font-size:.73rem;cursor:pointer;transition:background .2s}
+.btn-retry:hover{background:rgba(239,68,68,.12)}
+
+/* FILTER BAR */
+.filter-bar{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:.9rem 1.1rem;margin-bottom:1.4rem}
+.search-wrap{position:relative;flex:1;min-width:200px}
+.search-wrap svg{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);opacity:.3;pointer-events:none}
+.filter-input{width:100%;padding:.58rem .9rem .58rem 2.3rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:var(--white);font-size:.82rem;outline:none;transition:border-color .2s}
+.filter-input:focus{border-color:var(--orange)}
+.filter-input::placeholder{color:rgba(255,255,255,.28)}
+.filter-select{padding:.58rem .9rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:var(--white);font-size:.82rem;outline:none;cursor:pointer;transition:border-color .2s;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.3)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .65rem center;padding-right:1.9rem}
+.filter-select:focus{border-color:var(--orange)}
+.filter-select option{background:#1a1a1a;color:var(--white)}
+.date-pills{display:flex;gap:.35rem}
+.date-pill{padding:.42rem .85rem;border-radius:50px;border:1px solid rgba(255,255,255,.12);background:transparent;color:rgba(255,255,255,.45);font-size:.73rem;font-weight:500;transition:all .2s}
+.date-pill.active{background:var(--orange);border-color:var(--orange);color:var(--dark)}
+.date-pill:hover:not(.active){border-color:rgba(255,255,255,.3);color:var(--white)}
+.btn-export{padding:.58rem 1.1rem;border-radius:10px;border:1.5px solid rgba(255,255,255,.14);background:transparent;color:rgba(255,255,255,.65);font-size:.76rem;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:.4rem;margin-left:auto;white-space:nowrap}
+.btn-export:hover{border-color:var(--orange);color:var(--orange)}
+
+/* TABLE */
+.table-wrap{background:#1a1a1a;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+table{width:100%;border-collapse:collapse}
+thead tr{background:rgba(239,126,25,.08)}
+thead th{padding:.8rem 1rem;text-align:left;font-size:.63rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);white-space:nowrap}
+tbody tr{border-top:1px solid rgba(255,255,255,.04);transition:background .15s,border-left .15s}
+tbody tr:nth-child(even){background:rgba(255,255,255,.02)}
+tbody tr:hover{background:rgba(239,126,25,.06);border-left:3px solid var(--orange)}
+tbody td{padding:.8rem 1rem;font-size:.82rem;color:rgba(255,255,255,.8);vertical-align:middle}
+.td-name-wrap{display:flex;align-items:center;gap:.45rem}
+.new-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.65)}}
+.td-clip{max-width:155px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:.25rem;padding:.22rem .65rem;border-radius:50px;font-size:.68rem;font-weight:600;letter-spacing:.04em;cursor:pointer;position:relative;white-space:nowrap;border:1px solid transparent;transition:opacity .2s}
+.badge:hover{opacity:.8}
+.b-new{background:rgba(59,130,246,.15);color:#60a5fa;border-color:rgba(59,130,246,.25)}
+.b-contacted{background:rgba(245,158,11,.15);color:#fbbf24;border-color:rgba(245,158,11,.25)}
+.b-quoted{background:rgba(139,92,246,.15);color:#a78bfa;border-color:rgba(139,92,246,.25)}
+.b-booked{background:rgba(34,197,94,.15);color:#4ade80;border-color:rgba(34,197,94,.25)}
+.b-cancelled{background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.25)}
+
+/* STATUS DROPDOWN */
+.s-drop{position:absolute;top:calc(100% + 5px);left:0;z-index:300;background:#242424;border:1px solid rgba(255,255,255,.12);border-radius:10px;overflow:hidden;min-width:125px;box-shadow:0 8px 28px rgba(0,0,0,.5);display:none}
+.s-drop.open{display:block}
+.s-opt{padding:.5rem .85rem;font-size:.76rem;font-weight:500;color:rgba(255,255,255,.7);cursor:pointer;transition:background .12s}
+.s-opt:hover{background:rgba(255,255,255,.07)}
+
+/* ACTION BUTTONS */
+.act-wrap{display:flex;align-items:center;gap:.35rem}
+.act-btn{width:30px;height:30px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:all .2s;cursor:pointer}
+.act-btn:hover{background:rgba(255,255,255,.1);color:var(--white);border-color:rgba(255,255,255,.25)}
+.act-btn.wa:hover{background:rgba(37,211,102,.15);color:#25d366;border-color:rgba(37,211,102,.3)}
+.act-btn.del:hover{background:rgba(239,68,68,.15);color:#f87171;border-color:rgba(239,68,68,.3)}
+
+/* SKELETON */
+.skel td{padding:.95rem 1rem}
+.skel-cell{height:13px;border-radius:5px;background:linear-gradient(90deg,#1e1e1e 0%,#2e2e2e 50%,#1e1e1e 100%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:4.5rem 2rem;color:rgba(255,255,255,.3)}
+.empty-icon{font-size:3.5rem;margin-bottom:.8rem;opacity:.3}
+.empty-state h3{font-family:var(--font-display);font-size:1.3rem;font-weight:400;color:rgba(255,255,255,.45);margin-bottom:.4rem}
+.empty-state p{font-size:.82rem}
+
+/* CHARTS */
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:2rem}
+.chart-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:1.6rem}
+.chart-title{font-size:.65rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--orange);margin-bottom:1.1rem}
+.chart-box{position:relative;height:180px}
+
+/* DRAWER */
+#drw-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none;opacity:0;transition:opacity .3s}
+#drw-overlay.open{display:block;opacity:1}
+#drw{position:fixed;top:0;right:-460px;bottom:0;z-index:501;width:440px;max-width:100vw;background:rgba(18,18,18,.99);border-left:2px solid var(--orange);overflow-y:auto;transition:right .4s var(--ease-out)}
+#drw.open{right:0}
+.drw-head{position:sticky;top:0;z-index:10;background:rgba(18,18,18,.96);backdrop-filter:blur(10px);padding:1.1rem 1.4rem;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem}
+.drw-title{font-family:var(--font-display);font-size:1.35rem;font-weight:400;color:var(--white)}
+.drw-sub{font-size:.73rem;color:rgba(255,255,255,.32);margin-top:.15rem}
+.drw-close{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;transition:all .2s}
+.drw-close:hover{background:rgba(239,126,25,.2);color:var(--orange)}
+.drw-body{padding:1.4rem}
+.drw-field{margin-bottom:.9rem}
+.drw-lbl{font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:.25rem}
+.drw-val{font-size:.86rem;color:rgba(255,255,255,.78);line-height:1.5}
+.drw-hr{height:1px;background:rgba(255,255,255,.06);margin:1.1rem 0}
+.drw-notes{width:100%;min-height:85px;padding:.75rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:var(--white);font-size:.82rem;line-height:1.6;resize:vertical;outline:none;transition:border-color .2s;margin-top:.35rem}
+.drw-notes:focus{border-color:var(--orange)}
+.btn-save{margin-top:.5rem;padding:.45rem .9rem;border-radius:8px;background:rgba(239,126,25,.14);border:1px solid rgba(239,126,25,.28);color:var(--orange);font-size:.76rem;font-weight:500;transition:all .2s}
+.btn-save:hover{background:rgba(239,126,25,.24)}
+.drw-actions{display:flex;gap:.5rem;flex-wrap:wrap;padding:1.1rem 1.4rem;border-top:1px solid rgba(255,255,255,.06)}
+.drw-btn{flex:1;min-width:110px;padding:.65rem .9rem;border-radius:10px;font-size:.78rem;font-weight:500;display:flex;align-items:center;justify-content:center;gap:.35rem;transition:all .2s}
+.drw-wa{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.22);color:#25d366}
+.drw-wa:hover{background:rgba(37,211,102,.2)}
+.drw-book{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);color:#4ade80}
+.drw-book:hover{background:rgba(34,197,94,.2)}
+.drw-arch{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.18);color:#f87171}
+.drw-arch:hover{background:rgba(239,68,68,.15)}
+.tl{margin-top:.4rem}
+.tl-item{display:flex;gap:.7rem;padding:.5rem 0;position:relative}
+.tl-item+.tl-item::before{content:'';position:absolute;top:0;left:8px;width:1px;height:100%;background:rgba(255,255,255,.07)}
+.tl-dot{width:17px;height:17px;border-radius:50%;background:rgba(239,126,25,.12);border:1px solid rgba(239,126,25,.35);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.52rem}
+.tl-txt{font-size:.76rem;color:rgba(255,255,255,.65)}
+.tl-time{font-size:.66rem;color:rgba(255,255,255,.27);margin-top:.08rem}
+
+/* MOBILE */
+@media(max-width:900px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .charts-row{grid-template-columns:1fr}
+  .header-title{display:none}
+  .dash-main{padding:88px 1rem 3rem}
+  thead{display:none}
+  tbody tr{display:block;margin-bottom:.9rem;border-radius:14px;border:1px solid rgba(255,255,255,.06);border-left:3px solid transparent;padding:.9rem}
+  tbody tr:hover{border-left-color:var(--orange)}
+  tbody td{display:flex;justify-content:space-between;align-items:center;padding:.35rem 0;font-size:.8rem}
+  tbody td::before{content:attr(data-label);font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);flex-shrink:0;margin-right:.8rem}
+  #drw{width:100%;right:-100%}
+}
+@media(max-width:480px){
+  .stats-row{gap:.7rem}
+  .stat-value{font-size:2rem}
+  .filter-bar{gap:.45rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-gate">
+  <div class="login-card">
+    <img src="alpenglow-removebg-preview.png" alt="Alpen Glow">
+    <h2>Owner Dashboard</h2>
+    <p>Enter your password to access lead data</p>
+    <input type="password" id="pw" class="login-input" placeholder="Password" onkeydown="if(event.key==='Enter')login()">
+    <button class="btn-login" onclick="login()">Enter Dashboard</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header class="dash-header">
+    <div class="header-logo">
+      <img src="alpenglow-removebg-preview.png" alt="Alpen Glow">
+      <span>Lead Dashboard</span>
+    </div>
+    <div class="header-title">Alpen Glow — Owner Dashboard</div>
+    <div class="header-right">
+      <span id="live-clock"></span>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <main class="dash-main">
+    <div class="err-banner" id="err-banner">
+      <span>⚠ Could not load leads — check your Supabase connection or RLS settings.</span>
+      <button class="btn-retry" onclick="loadLeads()">Retry</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-glow"></div><div class="stat-icon">✉</div><div class="stat-value" id="s-total">—</div><div class="stat-label">Total Enquiries</div></div>
+      <div class="stat-card"><div class="stat-glow"></div><div class="stat-icon">✦</div><div class="stat-value" id="s-today">—</div><div class="stat-label">New Today</div></div>
+      <div class="stat-card"><div class="stat-glow"></div><div class="stat-icon">🔔</div><div class="stat-value" id="s-pending">—</div><div class="stat-label">Needs Attention</div></div>
+      <div class="stat-card"><div class="stat-glow"></div><div class="stat-icon">✓</div><div class="stat-value" id="s-booked">—</div><div class="stat-label">Converted</div></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="f-search" class="filter-input" placeholder="Search name, email, phone, source…" oninput="applyFilters()">
+      </div>
+      <select class="filter-select" id="f-status" onchange="applyFilters()">
+        <option value="">All Statuses</option>
+        <option value="new">New</option>
+        <option value="contacted">Contacted</option>
+        <option value="quoted">Quoted</option>
+        <option value="booked">Booked</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+      <select class="filter-select" id="f-source" onchange="applyFilters()">
+        <option value="">All Sources</option>
+        <option value="contact_form">Contact Form</option>
+        <option value="package_unlock">Package Page</option>
+        <option value="offer_otp">Offer OTP</option>
+        <option value="blog_unlock">Blog Gate</option>
+      </select>
+      <div class="date-pills">
+        <button class="date-pill" onclick="setDays(7,this)">7d</button>
+        <button class="date-pill" onclick="setDays(30,this)">30d</button>
+        <button class="date-pill active" onclick="setDays(0,this)">All</button>
+      </div>
+      <button class="btn-export" onclick="exportCSV()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export CSV
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table id="leads-table">
+        <thead>
+          <tr>
+            <th>#</th><th>Name</th><th>Phone</th><th>Email</th>
+            <th>Source</th><th>Package / Message</th><th>Status</th>
+            <th>Received</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="leads-body">
+          <tr class="skel"><td><div class="skel-cell" style="width:18px"></div></td><td><div class="skel-cell" style="width:110px"></div></td><td><div class="skel-cell" style="width:95px"></div></td><td><div class="skel-cell" style="width:140px"></div></td><td><div class="skel-cell" style="width:80px"></div></td><td><div class="skel-cell" style="width:95px"></div></td><td><div class="skel-cell" style="width:65px"></div></td><td><div class="skel-cell" style="width:75px"></div></td><td><div class="skel-cell" style="width:65px"></div></td></tr>
+          <tr class="skel"><td><div class="skel-cell" style="width:18px"></div></td><td><div class="skel-cell" style="width:130px"></div></td><td><div class="skel-cell" style="width:95px"></div></td><td><div class="skel-cell" style="width:120px"></div></td><td><div class="skel-cell" style="width:90px"></div></td><td><div class="skel-cell" style="width:105px"></div></td><td><div class="skel-cell" style="width:65px"></div></td><td><div class="skel-cell" style="width:75px"></div></td><td><div class="skel-cell" style="width:65px"></div></td></tr>
+          <tr class="skel"><td><div class="skel-cell" style="width:18px"></div></td><td><div class="skel-cell" style="width:100px"></div></td><td><div class="skel-cell" style="width:95px"></div></td><td><div class="skel-cell" style="width:150px"></div></td><td><div class="skel-cell" style="width:75px"></div></td><td><div class="skel-cell" style="width:90px"></div></td><td><div class="skel-cell" style="width:65px"></div></td><td><div class="skel-cell" style="width:75px"></div></td><td><div class="skel-cell" style="width:65px"></div></td></tr>
+        </tbody>
+      </table>
+      <div id="empty-state" class="empty-state" style="display:none">
+        <div class="empty-icon">🧭</div>
+        <h3>No leads found</h3>
+        <p>Try adjusting your filters, or wait for your first enquiry to arrive.</p>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Enquiry Volume — Last 30 Days</div>
+        <div class="chart-box"><canvas id="chart-vol"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Most Common Sources</div>
+        <div class="chart-box"><canvas id="chart-src"></canvas></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- DETAIL DRAWER -->
+<div id="drw-overlay" onclick="closeDrawer()"></div>
+<div id="drw">
+  <div class="drw-head">
+    <div>
+      <div class="drw-title" id="drw-name">—</div>
+      <div class="drw-sub" id="drw-sub">—</div>
+    </div>
+    <button class="drw-close" onclick="closeDrawer()">×</button>
+  </div>
+  <div class="drw-body" id="drw-body"></div>
+  <div class="drw-actions" id="drw-actions"></div>
+</div>
+
+<script>
+// ── CONFIG ─────────────────────────────────────────────
+const PWD = 'alpenglow2025'   // ← change this password
+const SB_URL = 'https://yexrmmhadfscormovskn.supabase.co'
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlleHJtbWhhZGZzY29ybW92c2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNjg0NzYsImV4cCI6MjA5Nzk0NDQ3Nn0.vxkcZDdTfE0qDxW8YwsnbGsLaaSUfwgZ78nQicq2Uoc'
+
+// ── STATE ──────────────────────────────────────────────
+let ALL = [], FILTERED = [], DAY_FILTER = 0, ACTIVE_LEAD = null
+let volChart = null, srcChart = null, delTarget = null
+
+// ── AUTH ───────────────────────────────────────────────
+function login() {
+  const input = document.getElementById('pw')
+  const err = document.getElementById('login-err')
+  if (input.value === PWD) {
+    sessionStorage.setItem('ag_auth', '1')
+    document.getElementById('login-gate').style.display = 'none'
+    document.getElementById('dashboard').style.display = 'block'
+    init()
+  } else {
+    input.classList.add('error')
+    err.textContent = 'Incorrect password. Please try again.'
+    setTimeout(() => input.classList.remove('error'), 500)
+    input.value = ''; input.focus()
+  }
+}
+function logout() {
+  sessionStorage.removeItem('ag_auth')
+  location.reload()
+}
+if (sessionStorage.getItem('ag_auth') === '1') {
+  document.getElementById('login-gate').style.display = 'none'
+  document.getElementById('dashboard').style.display = 'block'
+  init()
+}
+
+function init() { startClock(); loadLeads() }
+
+// ── CLOCK ──────────────────────────────────────────────
+function startClock() {
+  const tick = () => {
+    document.getElementById('live-clock').textContent =
+      new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })
+  }
+  tick(); setInterval(tick, 1000)
+}
+
+// ── SUPABASE ───────────────────────────────────────────
+const H = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+
+async function loadLeads() {
+  document.getElementById('err-banner').classList.remove('show')
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/leads?select=*&order=created_at.desc`, { headers: H })
+    if (!r.ok) throw new Error(r.status)
+    ALL = await r.json()
+    applyFilters(); renderStats(); renderCharts()
+  } catch(e) {
+    console.error(e)
+    document.getElementById('err-banner').classList.add('show')
+    document.getElementById('leads-body').innerHTML = ''
+  }
+}
+
+async function patch(id, fields) {
+  await fetch(`${SB_URL}/rest/v1/leads?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    body: JSON.stringify(fields)
+  })
+  const idx = ALL.findIndex(l => l.id === id)
+  if (idx !== -1) Object.assign(ALL[idx], fields)
+}
+
+async function remove(id) {
+  await fetch(`${SB_URL}/rest/v1/leads?id=eq.${id}`, { method: 'DELETE', headers: H })
+  ALL = ALL.filter(l => l.id !== id)
+  applyFilters(); renderStats(); renderCharts()
+}
+
+// ── FILTERS ────────────────────────────────────────────
+function setDays(d, el) {
+  DAY_FILTER = d
+  document.querySelectorAll('.date-pill').forEach(p => p.classList.remove('active'))
+  el.classList.add('active')
+  applyFilters()
+}
+
+function applyFilters() {
+  const q = document.getElementById('f-search').value.toLowerCase()
+  const st = document.getElementById('f-status').value
+  const src = document.getElementById('f-source').value
+  const cutoff = DAY_FILTER ? new Date(Date.now() - DAY_FILTER * 86400000) : null
+
+  FILTERED = ALL.filter(l => {
+    if (cutoff && new Date(l.created_at) < cutoff) return false
+    if (st && (l.status || 'new') !== st) return false
+    if (src && l.source !== src) return false
+    if (q) {
+      const hay = [l.name, l.email, l.phone, l.source, l.package_name, l.message].filter(Boolean).join(' ').toLowerCase()
+      if (!hay.includes(q)) return false
+    }
+    return true
+  })
+  renderTable()
+}
+
+// ── STATS ──────────────────────────────────────────────
+function renderStats() {
+  const today = new Date().toDateString()
+  document.getElementById('s-total').textContent = ALL.length
+  document.getElementById('s-today').textContent = ALL.filter(l => new Date(l.created_at).toDateString() === today).length
+  document.getElementById('s-pending').textContent = ALL.filter(l => !l.status || l.status === 'new' || l.status === 'contacted').length
+  document.getElementById('s-booked').textContent = ALL.filter(l => l.status === 'booked').length
+}
+
+// ── TABLE ──────────────────────────────────────────────
+const SL = { new:'New', contacted:'Contacted', quoted:'Quoted', booked:'Booked', cancelled:'Cancelled' }
+const SC = { new:'b-new', contacted:'b-contacted', quoted:'b-quoted', booked:'b-booked', cancelled:'b-cancelled' }
+const SRC = { contact_form:'Contact Form', package_unlock:'Package Page', offer_otp:'Offer OTP', blog_unlock:'Blog Gate' }
+
+function e(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
+
+function renderTable() {
+  const tbody = document.getElementById('leads-body')
+  const empty = document.getElementById('empty-state')
+  if (!FILTERED.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return }
+  empty.style.display = 'none'
+  const now = Date.now()
+  tbody.innerHTML = FILTERED.map((l, i) => {
+    const st = l.status || 'new'
+    const fresh = now - new Date(l.created_at).getTime() < 86400000
+    const dt = new Date(l.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
+    const pkg = e(l.package_name || l.message || '—')
+    return `<tr>
+      <td data-label="#">${i+1}</td>
+      <td data-label="Name"><div class="td-name-wrap">${fresh?'<span class="new-dot"></span>':''}<span>${e(l.name||'—')}</span></div></td>
+      <td data-label="Phone">${e(l.phone||'—')}</td>
+      <td data-label="Email"><span class="td-clip" title="${e(l.email||'')}">${e(l.email||'—')}</span></td>
+      <td data-label="Source">${e(SRC[l.source]||l.source||'—')}</td>
+      <td data-label="Package"><span class="td-clip" title="${pkg}">${pkg}</span></td>
+      <td data-label="Status" style="position:relative">
+        <span class="badge ${SC[st]}" onclick="toggleDrop(event,'${l.id}')">
+          ${SL[st]}
+          <div class="s-drop" id="sd-${l.id}">
+            ${Object.entries(SL).map(([k,v])=>`<div class="s-opt" onclick="chStatus(event,'${l.id}','${k}')">${v}</div>`).join('')}
+          </div>
+        </span>
+      </td>
+      <td data-label="Received">${dt}</td>
+      <td data-label="Actions">
+        <div class="act-wrap">
+          <button class="act-btn" title="View details" onclick="openDrawer('${l.id}')">👁</button>
+          ${l.phone?`<button class="act-btn wa" title="WhatsApp" onclick="waLink('${e(l.phone)}','${e(l.name||'')}','${e(l.package_name||'')}')">💬</button>`:''}
+          <button class="act-btn del" title="Delete" onclick="confirmDel('${l.id}',this)">🗑</button>
+        </div>
+      </td>
+    </tr>`
+  }).join('')
+}
+
+// ── STATUS DROPDOWN ────────────────────────────────────
+document.addEventListener('click', () => document.querySelectorAll('.s-drop.open').forEach(d => d.classList.remove('open')))
+function toggleDrop(ev, id) {
+  ev.stopPropagation()
+  const dd = document.getElementById('sd-' + id)
+  const was = dd.classList.contains('open')
+  document.querySelectorAll('.s-drop.open').forEach(d => d.classList.remove('open'))
+  if (!was) dd.classList.add('open')
+}
+async function chStatus(ev, id, st) {
+  ev.stopPropagation()
+  document.querySelectorAll('.s-drop.open').forEach(d => d.classList.remove('open'))
+  await patch(id, { status: st })
+  applyFilters(); renderStats()
+  if (ACTIVE_LEAD && ACTIVE_LEAD.id === id) openDrawer(id)
+}
+
+// ── DELETE ─────────────────────────────────────────────
+function confirmDel(id, btn) {
+  if (delTarget === id) { remove(id); delTarget = null; if (ACTIVE_LEAD?.id === id) closeDrawer(); return }
+  delTarget = id
+  const orig = btn.innerHTML
+  btn.innerHTML = '✓?'; btn.style.borderColor = '#ef4444'; btn.style.color = '#f87171'
+  setTimeout(() => { if (delTarget === id) { delTarget = null; btn.innerHTML = orig; btn.style.borderColor = ''; btn.style.color = '' } }, 2500)
+}
+
+// ── WHATSAPP ───────────────────────────────────────────
+function waLink(phone, name, pkg) {
+  const clean = phone.replace(/\D/g, '')
+  const msg = encodeURIComponent(`Hi ${name}, this is Alpen Glow Tours — following up on your enquiry${pkg ? ` about ${pkg}` : ''}. How can we help you?`)
+  window.open(`https://wa.me/${clean}?text=${msg}`, '_blank')
+}
+
+// ── DRAWER ─────────────────────────────────────────────
+function openDrawer(id) {
+  const lead = ALL.find(l => String(l.id) === String(id))
+  if (!lead) return
+  ACTIVE_LEAD = lead
+  const st = lead.status || 'new'
+  const dt = new Date(lead.created_at).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })
+  document.getElementById('drw-name').textContent = lead.name || '—'
+  document.getElementById('drw-sub').textContent = lead.email || '—'
+  document.getElementById('drw-body').innerHTML = `
+    <div class="drw-field"><div class="drw-lbl">Status</div><span class="badge ${SC[st]}">${SL[st]}</span></div>
+    <div class="drw-field"><div class="drw-lbl">Phone</div><div class="drw-val">${e(lead.phone||'—')}</div></div>
+    <div class="drw-field"><div class="drw-lbl">Email</div><div class="drw-val">${e(lead.email||'—')}</div></div>
+    <div class="drw-field"><div class="drw-lbl">Source</div><div class="drw-val">${e(SRC[lead.source]||lead.source||'—')}</div></div>
+    ${lead.package_name?`<div class="drw-field"><div class="drw-lbl">Package</div><div class="drw-val">${e(lead.package_name)}</div></div>`:''}
+    ${lead.offer_code?`<div class="drw-field"><div class="drw-lbl">Offer Code</div><div class="drw-val">${e(lead.offer_code)}</div></div>`:''}
+    ${lead.message?`<div class="drw-field"><div class="drw-lbl">Message</div><div class="drw-val">${e(lead.message)}</div></div>`:''}
+    <div class="drw-field"><div class="drw-lbl">Verified</div><div class="drw-val">${lead.verified_phone?'✓ WhatsApp':'✗ WhatsApp'} &nbsp; ${lead.verified_email?'✓ Email':'✗ Email'}</div></div>
+    <div class="drw-hr"></div>
+    <div class="drw-lbl">Notes</div>
+    <textarea class="drw-notes" id="drw-notes-ta" placeholder="Add notes about this lead…">${e(lead.notes||'')}</textarea>
+    <button class="btn-save" onclick="saveNotes('${lead.id}')">Save Notes</button>
+    <div class="drw-hr"></div>
+    <div class="drw-lbl">Timeline</div>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-dot">✦</div><div><div class="tl-txt">Lead created</div><div class="tl-time">${dt}</div></div></div>
+      ${st!=='new'?`<div class="tl-item"><div class="tl-dot">◦</div><div><div class="tl-txt">Status updated → ${SL[st]}</div><div class="tl-time">Manually updated</div></div></div>`:''}
+    </div>
+  `
+  document.getElementById('drw-actions').innerHTML = `
+    ${lead.phone?`<button class="drw-btn drw-wa" onclick="waLink('${e(lead.phone)}','${e(lead.name||'')}','${e(lead.package_name||'')}')">💬 WhatsApp</button>`:''}
+    <button class="drw-btn drw-book" onclick="chStatus(event,'${lead.id}','booked')">✓ Mark Booked</button>
+    <button class="drw-btn drw-arch" onclick="chStatus(event,'${lead.id}','cancelled')">Archive</button>
+  `
+  document.getElementById('drw-overlay').classList.add('open')
+  document.getElementById('drw').classList.add('open')
+}
+function closeDrawer() {
+  document.getElementById('drw-overlay').classList.remove('open')
+  document.getElementById('drw').classList.remove('open')
+  ACTIVE_LEAD = null
+}
+async function saveNotes(id) {
+  const notes = document.getElementById('drw-notes-ta').value
+  await patch(id, { notes })
+  const btn = document.querySelector('.btn-save')
+  btn.textContent = 'Saved ✓'
+  setTimeout(() => btn.textContent = 'Save Notes', 1600)
+}
+
+// ── EXPORT CSV ─────────────────────────────────────────
+function exportCSV() {
+  const cols = ['name','email','phone','source','package_name','offer_code','status','verified_phone','verified_email','message','created_at']
+  const rows = [cols.join(',')]
+  FILTERED.forEach(l => rows.push(cols.map(c => {
+    const v = l[c] == null ? '' : String(l[c])
+    return v.includes(',') || v.includes('"') || v.includes('\n') ? `"${v.replace(/"/g,'""')}"` : v
+  }).join(',')))
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(new Blob([rows.join('\n')], { type: 'text/csv' }))
+  a.download = `alpenglow-leads-${new Date().toISOString().slice(0,10)}.csv`
+  a.click()
+}
+
+// ── CHARTS ─────────────────────────────────────────────
+function renderCharts() {
+  // Volume — last 30 days
+  const labels = [], counts = []
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i)
+    const key = d.toDateString()
+    labels.push(d.toLocaleDateString('en-IN', { day:'numeric', month:'short' }))
+    counts.push(ALL.filter(l => new Date(l.created_at).toDateString() === key).length)
+  }
+  if (volChart) volChart.destroy()
+  volChart = new Chart(document.getElementById('chart-vol'), {
+    type: 'line',
+    data: { labels, datasets: [{ data: counts, borderColor: '#ef7e19', backgroundColor: 'rgba(239,126,25,.09)', fill: true, tension: .4, pointRadius: 3, pointBackgroundColor: '#ef7e19' }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { color: 'rgba(255,255,255,.32)', font: { size: 10 }, maxTicksLimit: 8 } },
+        y: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { color: 'rgba(255,255,255,.32)', font: { size: 10 }, stepSize: 1 }, beginAtZero: true }
+      }
+    }
+  })
+
+  // Sources
+  const srcMap = {}
+  ALL.forEach(l => { const s = SRC[l.source] || l.source || 'Unknown'; srcMap[s] = (srcMap[s]||0) + 1 })
+  const sl = Object.keys(srcMap), sd = Object.values(srcMap)
+  if (sourcesChart) sourcesChart.destroy()
+  sourcesChart = new Chart(document.getElementById('chart-src'), {
+    type: 'bar',
+    data: { labels: sl, datasets: [{ data: sd, backgroundColor: sl.map((_,i) => `rgba(239,${126-i*18},${25+i*12},.75)`), borderRadius: 6 }] },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { color: 'rgba(255,255,255,.32)', font: { size: 10 }, stepSize: 1 }, beginAtZero: true },
+        y: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,.5)', font: { size: 11 } } }
+      }
+    }
+  })
+}
+// fix variable name typo guard
+var sourcesChart = null
+</script>
+</body>
+</html>
