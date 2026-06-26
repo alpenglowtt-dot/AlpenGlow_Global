@@ -217,8 +217,13 @@ nav.scrolled .nav-logo img { height: 75px; }
 #offers .section-tag::before, #offers .section-tag::after { background: var(--orange-light); }
 #offers .section-title { color: var(--white); }
 #offers .section-title em { color: var(--orange); }
-.offers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-.offer-card { position: relative; border-radius: 20px; overflow: hidden; height: 320px; cursor: pointer; transition: transform 0.5s var(--ease-out); }
+.offers-carousel { position: relative; max-width: 1200px; margin: 0 auto; }
+.offers-track { display: flex; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
+.offers-track::-webkit-scrollbar { display: none; }
+.offers-nav { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
+.offers-nav button { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.22); color: var(--white); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all .3s var(--ease-out); cursor: pointer; }
+.offers-nav button:hover { background: var(--orange); border-color: var(--orange); }
+.offer-card { flex: 0 0 380px; scroll-snap-align: start; position: relative; border-radius: 20px; overflow: hidden; height: 320px; cursor: pointer; transition: transform 0.5s var(--ease-out); }
 .offer-card:hover { transform: scale(1.02); }
 .offer-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-out); }
 .offer-card:hover img { transform: scale(1.1); }
@@ -231,8 +236,13 @@ nav.scrolled .nav-logo img { height: 75px; }
 
 /* === BLOG === */
 #blog { padding: 7rem 3rem; background: var(--warm-gray); }
-.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-.blog-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.04); transition: all 0.4s var(--ease-out); }
+.blog-carousel { position: relative; max-width: 1200px; margin: 0 auto; }
+.blog-track { display: flex; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
+.blog-track::-webkit-scrollbar { display: none; }
+.blog-nav { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
+.blog-nav button { width: 44px; height: 44px; border-radius: 50%; background: var(--white); border: 1.5px solid var(--dark); color: var(--dark); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all .3s var(--ease-out); cursor: pointer; }
+.blog-nav button:hover { background: var(--dark); color: var(--white); }
+.blog-card { flex: 0 0 380px; scroll-snap-align: start; background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.04); transition: all 0.4s var(--ease-out); }
 .blog-card:hover { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(0,0,0,0.08); }
 .blog-img { height: 200px; overflow: hidden; }
 .blog-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease-out); }
@@ -310,9 +320,10 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
 .offer-modal-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1.6rem; line-height: 1.6; }
 .offer-modal-step { display: none; }
 .offer-modal-step.active { display: block; }
-.otp-input-row { display: flex; gap: 0.75rem; margin: 1.2rem 0; }
-.otp-digit { flex: 1; height: 56px; border-radius: 12px; text-align: center; font-size: 1.5rem; font-weight: 600; color: var(--dark); border: 1.5px solid rgba(0,0,0,0.14); background: var(--cream); outline: none; font-family: var(--font-body); transition: border-color 0.2s; }
+.otp-input-row { display: flex; gap: 0.6rem; margin: 1.2rem 0; width: 100%; }
+.otp-digit { flex: 1; min-width: 0; width: 0; height: 54px; border-radius: 12px; text-align: center; font-size: 1.4rem; font-weight: 600; color: var(--dark); border: 1.5px solid rgba(0,0,0,0.16); background: var(--cream); outline: none; font-family: var(--font-body); transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; }
 .otp-digit:focus { border-color: var(--orange); background: var(--white); box-shadow: 0 0 0 3px rgba(239,126,25,0.12); }
+.otp-digit::placeholder { color: rgba(0,0,0,0.2); }
 .otp-resend { font-size: 0.78rem; color: var(--text-light); margin-top: 0.6rem; }
 .otp-resend a { color: var(--red); font-weight: 600; cursor: pointer; }
 .offer-reveal-box { background: linear-gradient(135deg, var(--red) 0%, var(--orange) 100%); border-radius: 16px; padding: 1.8rem; text-align: center; color: var(--white); }
@@ -383,7 +394,9 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
   .nav-links a { font-size: 1.05rem; }
   .mobile-toggle { display: flex; z-index: 1001; }
   #packages, #offers, #blog, #reviews, #contact { padding: 4rem 1.5rem; }
-  .packages-grid, .offers-grid, .blog-grid { grid-template-columns: 1fr; }
+  .packages-grid { grid-template-columns: 1fr; }
+  .offer-card { flex: 0 0 300px; }
+  .blog-card { flex: 0 0 300px; }
   .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
   .form-row { grid-template-columns: 1fr; }
   .review-card { flex: 0 0 300px; }
@@ -396,7 +409,8 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
   .hero-actions { flex-direction: column; align-items: center; }
   .btn-primary, .btn-outline { width: 100%; text-align: center; }
   .review-card { flex: 0 0 280px; padding: 1.5rem; }
-  .offer-card { height: 260px; }
+  .offer-card { flex: 0 0 280px; height: 260px; }
+  .blog-card { flex: 0 0 280px; }
   .dest-card { flex: 0 0 320px; height: 380px; }
 }
 #reviews {
@@ -640,33 +654,13 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     <div class="section-tag">Limited-Time Deals</div>
     <h2 class="section-title">Exclusive <em>Offers</em></h2>
   </div>
-  <div class="offers-grid">
-    <div class="offer-card reveal" onclick="openOfferModal('Summer Beach Escape','30% OFF','SUMMER30','Book any beach destination — Maldives, Bali, Santorini — before July 31 and save 30% on your total package price.')">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Summer Deal">
-      <div class="offer-overlay">
-        <div class="offer-badge">30% OFF</div>
-        <h3 class="offer-title">Summer Beach Escape</h3>
-        <p class="offer-detail">Book any beach destination before July 31 and save big on your tropical getaway.</p>
-        <span class="offer-cta">Claim Offer →</span>
-      </div>
+  <div class="offers-carousel">
+    <div class="offers-track" id="offers-track">
+      <!-- Populated dynamically from Supabase -->
     </div>
-    <div class="offer-card reveal" onclick="openOfferModal('Plan Ahead &amp; Save','EARLY BIRD 20%','EARLY2027','Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all Alpen Glow packages.')">
-      <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80" alt="Early Bird">
-      <div class="offer-overlay">
-        <div class="offer-badge">EARLY BIRD</div>
-        <h3 class="offer-title">Plan Ahead & Save 20%</h3>
-        <p class="offer-detail">Book your 2027 holiday before September and enjoy exclusive early-bird pricing.</p>
-        <span class="offer-cta">Learn More →</span>
-      </div>
-    </div>
-    <div class="offer-card reveal" onclick="openOfferModal('Honeymoon Special','25% Off + Upgrades','HONEY25','Celebrate your love in paradise. Applies to all couple packages with complimentary room upgrades and a welcome amenity.')">
-      <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80" alt="Honeymoon">
-      <div class="offer-overlay">
-        <div class="offer-badge">COUPLES</div>
-        <h3 class="offer-title">Honeymoon Special – 25% Off</h3>
-        <p class="offer-detail">Special packages for newlyweds with complimentary upgrades.</p>
-        <span class="offer-cta">View Packages →</span>
-      </div>
+    <div class="offers-nav">
+      <button onclick="scrollOffers(-1)" aria-label="Previous offer">&#8592;</button>
+      <button onclick="scrollOffers(1)" aria-label="Next offer">&#8594;</button>
     </div>
   </div>
 </section>
@@ -695,42 +689,13 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     <div class="section-tag">Travel Insights</div>
     <h2 class="section-title">From Our <em>Journal</em></h2>
   </div>
-  <div class="blog-grid">
-    <div class="blog-card reveal">
-      <div class="blog-img"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" alt="Blog 1"></div>
-      <div class="blog-body">
-        <div class="blog-meta">Travel Tips — June 2026</div>
-        <h3 class="blog-title">10 Hidden Beaches You've Never Heard Of</h3>
-        <div class="blog-excerpt">
-          <div class="blog-excerpt-text">Beyond the crowded tourist shores lie some of the world's most breathtaking coastal secrets. From the turquoise coves of the Philippines to the volcanic black sand beaches of the Azores, these untouched paradises offer solitude and natural beauty that will leave you speechless.</div>
-          <div class="blog-blur"></div>
-        </div>
-        <div class="blog-unlock"><button class="btn-unlock" onclick="openModal(0)">Unlock Full Article</button></div>
-      </div>
+  <div class="blog-carousel">
+    <div class="blog-track" id="blog-track">
+      <!-- Populated dynamically from Supabase -->
     </div>
-    <div class="blog-card reveal">
-      <div class="blog-img"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80" alt="Blog 2"></div>
-      <div class="blog-body">
-        <div class="blog-meta">Guides — May 2026</div>
-        <h3 class="blog-title">Packing Like a Pro: The Ultimate Carry-On Guide</h3>
-        <div class="blog-excerpt">
-          <div class="blog-excerpt-text">Master the art of traveling light without sacrificing style or comfort. Our seasoned travel editors reveal the packing strategies used by flight crews and globetrotters alike. From rolling techniques that maximize every inch to the essential gadgets that make long-haul flights bearable.</div>
-          <div class="blog-blur"></div>
-        </div>
-        <div class="blog-unlock"><button class="btn-unlock" onclick="openModal(1)">Unlock Full Article</button></div>
-      </div>
-    </div>
-    <div class="blog-card reveal">
-      <div class="blog-img"><img src="https://images.unsplash.com/photo-1504150558240-0b4fd8946624?w=600&q=80" alt="Blog 3"></div>
-      <div class="blog-body">
-        <div class="blog-meta">Culture — April 2026</div>
-        <h3 class="blog-title">Why Slow Travel Is the Future of Exploration</h3>
-        <div class="blog-excerpt">
-          <div class="blog-excerpt-text">In a world obsessed with checking off bucket lists, a growing movement of travelers is choosing depth over distance. Slow travel isn't just about lingering longer in each destination — it's a philosophy that prioritizes meaningful connections with local cultures and sustainable tourism.</div>
-          <div class="blog-blur"></div>
-        </div>
-        <div class="blog-unlock"><button class="btn-unlock" onclick="openModal(2)">Unlock Full Article</button></div>
-      </div>
+    <div class="blog-nav">
+      <button onclick="scrollBlogs(-1)" aria-label="Previous post">&#8592;</button>
+      <button onclick="scrollBlogs(1)" aria-label="Next post">&#8594;</button>
     </div>
   </div>
 </section>
@@ -1029,6 +994,34 @@ setInterval(() => {
   track.scrollTo({ left: reviewIndex * cardWidth, behavior: 'smooth' });
 }, 10000);
 
+// === OFFERS CAROUSEL ===
+let offersIdx = 0, offersTimer = null
+function scrollOffers(dir) {
+  const track = document.getElementById('offers-track')
+  if (!track) return
+  const cards = track.querySelectorAll('.offer-card')
+  if (!cards.length) return
+  const cardWidth = cards[0].offsetWidth + 32
+  offersIdx = (offersIdx + dir + cards.length) % cards.length
+  track.scrollTo({ left: offersIdx * cardWidth, behavior: 'smooth' })
+  clearInterval(offersTimer)
+  offersTimer = setInterval(() => scrollOffers(1), 10000)
+}
+
+// === BLOG CAROUSEL ===
+let blogIdx = 0, blogTimer = null
+function scrollBlogs(dir) {
+  const track = document.getElementById('blog-track')
+  if (!track) return
+  const cards = track.querySelectorAll('.blog-card')
+  if (!cards.length) return
+  const cardWidth = cards[0].offsetWidth + 32
+  blogIdx = (blogIdx + dir + cards.length) % cards.length
+  track.scrollTo({ left: blogIdx * cardWidth, behavior: 'smooth' })
+  clearInterval(blogTimer)
+  blogTimer = setInterval(() => scrollBlogs(1), 10000)
+}
+
 // === OFFER MODAL ===
 let currentOffer = {};
 function openOfferModal(title, badge, code, desc) {
@@ -1083,6 +1076,13 @@ async function verifyOfferOTP() {
   btn.textContent = 'Verifying…'; btn.disabled = true;
   try {
     await AlpenAPI.verifySMSOTP(phone, code);
+    // Check if this phone already claimed this offer — one code per number
+    const alreadyClaimed = await AlpenAPI.checkOfferClaimed(phone, currentOffer.code);
+    if (alreadyClaimed) {
+      btn.textContent = 'Verify & Unlock'; btn.disabled = false;
+      alert('This offer has already been claimed with your WhatsApp number. Each number can only claim an offer code once.');
+      return;
+    }
     await AlpenAPI.submitLead({ phone, source: 'offer_otp', offerCode: currentOffer.code, verifiedPhone: true }).catch(() => {});
     document.getElementById('offerStep2').classList.remove('active');
     document.getElementById('offerStep3').classList.add('active');
@@ -1093,7 +1093,9 @@ async function verifyOfferOTP() {
 }
 
 // === LEAD MODAL — 4-STEP DUAL VERIFICATION ===
-const ARTICLES = [
+// BLOG_POSTS is populated dynamically from Supabase; fallback used if fetch fails or tables not yet set up
+let BLOG_POSTS = []
+const FALLBACK_ARTICLES = [
   {
     title: '10 Hidden Beaches You\'ve Never Heard Of',
     content: `<p>Beyond the crowded tourist shores lie some of the world's most breathtaking coastal secrets. We spent months researching and visiting each location to bring you this definitive guide.</p>
@@ -1147,7 +1149,7 @@ const ARTICLES = [
     <p>Every itinerary we build is designed around this philosophy — fewer stops, more time, better experiences. We build in unscheduled afternoons, second visits to places worth returning to, and room for spontaneity that only comes when you're not racing to the next train.</p>
     <p><em>Talk to our team about building a slow travel itinerary. We specialise in giving you the feeling that you actually lived somewhere, even briefly.</em></p>`
   }
-];
+]
 
 let _leadName = '', _leadPhone = '', _leadEmail = '', _currentArticle = 0;
 
@@ -1163,7 +1165,7 @@ function openModal(articleIdx) {
   _currentArticle = articleIdx || 0;
   // Already verified this session — show article immediately, skip all OTP steps
   if (AlpenAPI.isVerified()) {
-    const art = ARTICLES[_currentArticle];
+    const art = BLOG_POSTS[_currentArticle];
     document.getElementById('articleTitle').textContent = art.title;
     document.getElementById('articleContent').innerHTML = art.content;
     ['leadStep1','leadStep2','leadStep3','leadStep4'].forEach(id => document.getElementById(id).style.display = 'none');
@@ -1198,7 +1200,7 @@ async function leadSendWhatsApp() {
   const btn = document.getElementById('leadBtn1');
   btn.textContent = 'Sending…'; btn.disabled = true;
   try {
-    await AlpenAPI.sendSMSOTP(_leadPhone, 'blog_unlock', { article: ARTICLES[_currentArticle].title });
+    await AlpenAPI.sendSMSOTP(_leadPhone, 'blog_unlock', { article: BLOG_POSTS[_currentArticle].title });
     document.getElementById('leadStep1').style.display = 'none';
     document.getElementById('leadStep2').style.display = 'block';
     leadProgress(2);
@@ -1238,7 +1240,7 @@ async function leadSendEmail() {
   const btn = document.getElementById('leadBtn3');
   btn.textContent = 'Sending…'; btn.disabled = true;
   try {
-    await AlpenAPI.sendEmailOTP(_leadEmail, 'blog_unlock', { article: ARTICLES[_currentArticle].title });
+    await AlpenAPI.sendEmailOTP(_leadEmail, 'blog_unlock', { article: BLOG_POSTS[_currentArticle].title });
     document.getElementById('leadStep3').style.display = 'none';
     document.getElementById('leadStep4').style.display = 'block';
     leadProgress(4);
@@ -1266,7 +1268,7 @@ async function leadVerifyEmail() {
       name: _leadName, phone: _leadPhone, email: _leadEmail,
       source: 'blog_unlock', verifiedPhone: true, verifiedEmail: true
     }).catch(() => {});
-    const art = ARTICLES[_currentArticle];
+    const art = BLOG_POSTS[_currentArticle];
     document.getElementById('articleTitle').textContent = art.title;
     document.getElementById('articleContent').innerHTML = art.content;
     document.getElementById('leadStep4').style.display = 'none';
@@ -1278,6 +1280,88 @@ async function leadVerifyEmail() {
     alert(err?.message || 'Invalid code. Please try again.');
   }
 }
+
+// === DYNAMIC CONTENT LOADING ===
+const FALLBACK_OFFERS = [
+  { id:'f1', title:'Summer Beach Escape', badge:'30% OFF', code:'SUMMER30', description:'Book any beach destination — Maldives, Bali, Santorini — before July 31 and save 30% on your total package price.', image_url:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80', cta_text:'Claim Offer →' },
+  { id:'f2', title:'Plan Ahead & Save', badge:'EARLY BIRD 20%', code:'EARLY2027', description:'Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all Alpen Glow packages.', image_url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80', cta_text:'Learn More →' },
+  { id:'f3', title:'Honeymoon Special', badge:'25% Off + Upgrades', code:'HONEY25', description:'Celebrate your love in paradise. Applies to all couple packages with complimentary room upgrades and a welcome amenity.', image_url:'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80', cta_text:'View Packages →' }
+]
+
+function renderOffers(offers) {
+  const track = document.getElementById('offers-track')
+  if (!track) return
+  if (!offers || !offers.length) { track.innerHTML = ''; return }
+  track.innerHTML = offers.map(o => {
+    const title = (o.title || '').replace(/'/g, "\\'")
+    const badge = (o.badge || '').replace(/'/g, "\\'")
+    const code  = (o.code  || '').replace(/'/g, "\\'")
+    const desc  = (o.description || '').replace(/'/g, "\\'")
+    return `<div class="offer-card" onclick="openOfferModal('${title}','${badge}','${code}','${desc}')">
+      <img src="${o.image_url || ''}" alt="${o.title || ''}">
+      <div class="offer-overlay">
+        <div class="offer-badge">${o.badge || ''}</div>
+        <h3 class="offer-title">${o.title || ''}</h3>
+        <p class="offer-detail">${o.description || ''}</p>
+        <span class="offer-cta">${o.cta_text || 'Claim Offer →'}</span>
+      </div>
+    </div>`
+  }).join('')
+  offersIdx = 0
+  clearInterval(offersTimer)
+  offersTimer = setInterval(() => scrollOffers(1), 10000)
+}
+
+function renderBlogPosts(posts) {
+  const track = document.getElementById('blog-track')
+  if (!track) return
+  if (!posts || !posts.length) { track.innerHTML = ''; return }
+  BLOG_POSTS = posts
+  track.innerHTML = posts.map((p, i) => `
+    <div class="blog-card">
+      <div class="blog-img"><img src="${p.image_url || ''}" alt="${p.title || ''}"></div>
+      <div class="blog-body">
+        <div class="blog-meta">${p.meta || ''}</div>
+        <h3 class="blog-title">${p.title || ''}</h3>
+        <div class="blog-excerpt">
+          <div class="blog-excerpt-text">${p.excerpt || ''}</div>
+          <div class="blog-blur"></div>
+        </div>
+        <div class="blog-unlock"><button class="btn-unlock" onclick="openModal(${i})">Unlock Full Article</button></div>
+      </div>
+    </div>`).join('')
+  blogIdx = 0
+  clearInterval(blogTimer)
+  blogTimer = setInterval(() => scrollBlogs(1), 10000)
+  // Re-apply DEV_MODE blur removal if active
+  if (typeof AlpenAPI !== 'undefined' && AlpenAPI.isVerified()) {
+    document.querySelectorAll('.blog-blur').forEach(el => el.style.display = 'none')
+  }
+}
+
+async function loadPageContent() {
+  try {
+    const [offers, posts] = await Promise.all([
+      AlpenAPI.fetchOffers(),
+      AlpenAPI.fetchBlogPosts()
+    ])
+    renderOffers(offers && offers.length ? offers : FALLBACK_OFFERS)
+    if (posts && posts.length) {
+      renderBlogPosts(posts)
+    } else {
+      BLOG_POSTS = FALLBACK_ARTICLES
+      renderBlogPosts(FALLBACK_ARTICLES)
+    }
+  } catch(e) {
+    renderOffers(FALLBACK_OFFERS)
+    BLOG_POSTS = FALLBACK_ARTICLES
+    renderBlogPosts(FALLBACK_ARTICLES)
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadPageContent()
+})
 
 // === CONTACT FORM ===
 async function handleContactSubmit(e) {

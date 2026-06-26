@@ -39,7 +39,7 @@
   // cleared automatically when the tab is closed — so they only
   // verify once per browsing session, not on every page.
   function isVerified() {
-    return sessionStorage.getItem('ag_verified') === '1'
+    return DEV_MODE || sessionStorage.getItem('ag_verified') === '1'
   }
   function markVerified() {
     sessionStorage.setItem('ag_verified', '1')
@@ -118,6 +118,31 @@
     /** Store a generic lead (blog, package gate, offer) */
     submitLead: (data) =>
       callEdge('submit-lead', data),
+
+    /** Fetch active offers from Supabase (used by index.html) */
+    fetchOffers: () =>
+      fetch(`${SUPABASE_URL}/rest/v1/offers?active=eq.true&order=created_at.asc`, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+      }).then(r => r.json()).catch(() => []),
+
+    /** Fetch active blog posts from Supabase (used by index.html) */
+    fetchBlogPosts: () =>
+      fetch(`${SUPABASE_URL}/rest/v1/blog_posts?active=eq.true&order=created_at.asc`, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+      }).then(r => r.json()).catch(() => []),
+
+    /** Returns true if this phone+code combo already claimed an offer */
+    checkOfferClaimed: async (phone, code) => {
+      if (DEV_MODE) return false
+      try {
+        const r = await fetch(
+          `${SUPABASE_URL}/rest/v1/leads?phone=eq.${encodeURIComponent(phone)}&offer_code=eq.${encodeURIComponent(code)}&select=id`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+        )
+        const data = await r.json()
+        return Array.isArray(data) && data.length > 0
+      } catch { return false }
+    },
   }
 
 })()
