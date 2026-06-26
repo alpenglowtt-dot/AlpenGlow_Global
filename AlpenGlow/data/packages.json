@@ -1,0 +1,79 @@
+[
+  {
+    "id": "1",
+    "name": "Norwegian Fjords Expedition",
+    "location": "Scandinavia",
+    "duration": "8 Days / 7 Nights",
+    "description": "Towering cliffs and crystal waters carve nature's masterpiece. Cruise through breathtaking fjords beneath snow-capped peaks. Discover charming Nordic villages steeped in timeless traditions. An unforgettable journey into the heart of Scandinavia's wilderness.",
+    "image_url": "norway.jpg",
+    "link": "packages/norway.html",
+    "sort_order": 1,
+    "active": true
+  },
+  {
+    "id": "2",
+    "name": "Santorini – Aegean Dreams",
+    "location": "Greece",
+    "duration": "6 Days / 5 Nights",
+    "description": "Whitewashed villages cascading down volcanic cliffs above the Aegean Sea. World-famous sunsets paint the horizon in shades of gold and crimson. Luxury, romance, and timeless Greek charm at every turn.",
+    "image_url": "santorini.jpg",
+    "link": "packages/santorini.html",
+    "sort_order": 2,
+    "active": true
+  },
+  {
+    "id": "3",
+    "name": "Italian Grand Tour",
+    "location": "Italy",
+    "duration": "10 Days / 9 Nights",
+    "description": "Discover the rich culture and stunning landscapes of Italy on this unforgettable journey.",
+    "image_url": "italy.jpg",
+    "link": "packages/italy.html",
+    "sort_order": 3,
+    "active": true
+  },
+  {
+    "id": "4",
+    "name": "Swiss Alpine Wonderland",
+    "location": "Switzerland",
+    "duration": "7 Days / 6 Nights",
+    "description": "Towering peaks and emerald valleys frame every moment. Ride legendary mountain railways through clouds and into the heart of the Alps. A journey built for wonder.",
+    "image_url": "swissalps.jpg",
+    "link": "packages/switzerland.html",
+    "sort_order": 4,
+    "active": true
+  },
+  {
+    "id": "5",
+    "name": "Japan – Land of Contrasts",
+    "location": "Japan",
+    "duration": "9 Days / 8 Nights",
+    "description": "Experience the perfect blend of traditional culture and modern innovation in Japan.",
+    "image_url": "japan.jpg",
+    "link": "packages/japan.html",
+    "sort_order": 5,
+    "active": true
+  },
+  {
+    "id": "6",
+    "name": "Bali – Island of the Gods",
+    "location": "Indonesia",
+    "duration": "7 Days / 6 Nights",
+    "description": "Immerse yourself in the vibrant culture and breathtaking scenery of Bali, where ancient traditions meet modern luxury.",
+    "image_url": "baligods.jpg",
+    "link": "packages/bali.html",
+    "sort_order": 6,
+    "active": true
+  },
+  {
+    "name": "Coimbatore Relief",
+    "location": "Coimbatore & OOTY",
+    "duration": "14 days / 13 nights",
+    "description": "",
+    "image_url": "",
+    "link": "packages/coimbatore-relief.html",
+    "sort_order": 0,
+    "active": false,
+    "id": "1782495057189"
+  }
+]

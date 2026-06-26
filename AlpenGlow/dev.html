@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -169,6 +169,15 @@ html, body { height: 100%; background: var(--dark); color: var(--white); font-fa
 .btn-add-sd:hover { border-color: var(--orange); color: var(--orange) }
 .ce-section-lbl { font-size: .63rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.25); margin: 1.2rem 0 .6rem; border-top: 1px solid rgba(255,255,255,.06); padding-top: .9rem }
 
+/* ── PLACE ROWS (package page editor) ── */
+.place-row { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: .9rem .75rem .75rem; margin-bottom: .75rem; position: relative }
+.place-row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem }
+.place-row-grid .full { grid-column: span 2 }
+.incl-row { display: flex; gap: .4rem; margin-bottom: .4rem; align-items: center }
+.incl-row .ce-input { flex: 1 }
+.para-row { display: flex; gap: .4rem; margin-bottom: .4rem; align-items: flex-start }
+.para-row .ce-textarea { flex: 1; min-height: 70px }
+
 @media(max-width: 600px) {
   #ce-drw { width: 100%; right: -100% }
   .dev-header { padding: .75rem 1rem }
@@ -190,6 +199,18 @@ html, body { height: 100%; background: var(--dark); color: var(--white); font-fa
     <button class="btn-login" onclick="login()">Enter Editor</button>
     <div class="login-err" id="login-err"></div>
   </div>
+</div>
+
+<!-- FOLDER GATE (shown after login, before content) -->
+<div id="folder-gate" style="display:none; position:fixed; inset:0; background:var(--dark); z-index:900; align-items:center; justify-content:center; flex-direction:column; gap:1.2rem; text-align:center; padding:2rem">
+  <img src="alpenglow-removebg-preview.png" style="height:44px;filter:brightness(1.1)">
+  <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:300">Open Project Folder</div>
+  <p style="font-size:.83rem;color:rgba(255,255,255,.45);max-width:360px;line-height:1.7">
+    Grant access to the <strong style="color:rgba(255,255,255,.7)">AlpenGlow</strong> folder so the editor can read and write files directly to disk.<br>
+    <span style="font-size:.75rem;opacity:.6">⚠ Requires Chrome or Edge. Firefox / Safari not supported.</span>
+  </p>
+  <button class="btn-login" style="max-width:280px" onclick="openFolder()">📂 Open AlpenGlow Folder</button>
+  <div id="folder-err" style="font-size:.78rem;color:#f87171;min-height:1rem"></div>
 </div>
 
 <!-- APP -->
@@ -246,6 +267,19 @@ html, body { height: 100%; background: var(--dark); color: var(--white); font-fa
       <div id="pkg-list"><div class="empty-note">Loading…</div></div>
     </div>
 
+    <!-- Package Page Content -->
+    <div class="content-block">
+      <div class="content-block-head">
+        <div class="content-block-title">Package Page Content</div>
+        <button class="btn-add" onclick="openCE('page', null)">+ New Page</button>
+      </div>
+      <div class="empty-note" style="font-size:.75rem;color:rgba(255,255,255,.25);margin-bottom:.8rem">
+        Edit hero image, overview, places/cities section, and inclusions for each package page.<br>
+        Slug must match the HTML filename — e.g. <strong style="color:rgba(255,255,255,.4)">"japan"</strong> for packages/japan.html
+      </div>
+      <div id="pages-list"><div class="empty-note">Loading…</div></div>
+    </div>
+
   </main>
 </div>
 
@@ -265,12 +299,88 @@ html, body { height: 100%; background: var(--dark); color: var(--white); font-fa
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────
-const DEV_PASS = 'alpenglow_dev_2025'   // change this to your dev password
+const DEV_PASS = 'alpenglow_dev_2025'
 
-const SB_URL = 'https://yexrmmhadfscormovskn.supabase.co'
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlleHJtbWhhZGZzY29ybW92c2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNjg0NzYsImV4cCI6MjA5Nzk0NDQ3Nn0.vxkcZDdTfE0qDxW8YwsnbGsLaaSUfwgZ78nQicq2Uoc'
+// ── FILE SYSTEM API ───────────────────────────────────────────
+let dirHandle = null   // root: the AlpenGlow folder
 
-const H = { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+async function openFolder() {
+  try {
+    dirHandle = await window.showDirectoryPicker({ mode: 'readwrite', id: 'alpenglow' })
+    document.getElementById('folder-gate').style.display = 'none'
+    document.getElementById('app').style.display = 'block'
+    loadAll()
+  } catch(err) {
+    if (err.name !== 'AbortError') {
+      document.getElementById('folder-err').textContent = 'Could not open folder: ' + err.message
+    }
+  }
+}
+
+async function getSubDir(path, create) {
+  const parts = path.split('/')
+  let dir = dirHandle
+  for (const p of parts) {
+    dir = await dir.getDirectoryHandle(p, { create: !!create })
+  }
+  return dir
+}
+
+async function readJSON(path) {
+  try {
+    const parts = path.split('/')
+    let dir = dirHandle
+    for (let i = 0; i < parts.length - 1; i++) dir = await dir.getDirectoryHandle(parts[i])
+    const fh = await dir.getFileHandle(parts[parts.length - 1])
+    return JSON.parse(await (await fh.getFile()).text())
+  } catch(e) { return null }
+}
+
+async function writeJSON(path, data) {
+  const parts = path.split('/')
+  let dir = dirHandle
+  for (let i = 0; i < parts.length - 1; i++) dir = await dir.getDirectoryHandle(parts[i], { create: true })
+  const fh = await dir.getFileHandle(parts[parts.length - 1], { create: true })
+  const w = await fh.createWritable()
+  await w.write(JSON.stringify(data, null, 2))
+  await w.close()
+}
+
+async function writeTextFile(path, text) {
+  const parts = path.split('/')
+  let dir = dirHandle
+  for (let i = 0; i < parts.length - 1; i++) dir = await dir.getDirectoryHandle(parts[i], { create: true })
+  const fh = await dir.getFileHandle(parts[parts.length - 1], { create: true })
+  const w = await fh.createWritable()
+  await w.write(text)
+  await w.close()
+}
+
+async function writeBinaryFile(path, file) {
+  const parts = path.split('/')
+  let dir = dirHandle
+  for (let i = 0; i < parts.length - 1; i++) dir = await dir.getDirectoryHandle(parts[i], { create: true })
+  const fh = await dir.getFileHandle(parts[parts.length - 1], { create: true })
+  const w = await fh.createWritable()
+  await w.write(file)
+  await w.close()
+}
+
+async function listJSONDir(path) {
+  try {
+    const dir = await getSubDir(path)
+    const items = []
+    for await (const [name, handle] of dir.entries()) {
+      if (name.endsWith('.json') && handle.kind === 'file') {
+        try {
+          const f = await handle.getFile()
+          items.push(JSON.parse(await f.text()))
+        } catch(e) {}
+      }
+    }
+    return items
+  } catch(e) { return [] }
+}
 
 // ── AUTH ─────────────────────────────────────────────────────
 function login() {
@@ -278,8 +388,9 @@ function login() {
   if (val === DEV_PASS) {
     sessionStorage.setItem('ag_dev_auth', '1')
     document.getElementById('login-gate').style.display = 'none'
-    document.getElementById('app').style.display = 'block'
-    loadAll()
+    // Show folder-gate — user must pick their AlpenGlow folder
+    const fg = document.getElementById('folder-gate')
+    fg.style.display = 'flex'
   } else {
     const err = document.getElementById('login-err')
     err.textContent = 'Incorrect password.'
@@ -290,13 +401,15 @@ function login() {
 
 function logout() {
   sessionStorage.removeItem('ag_dev_auth')
+  dirHandle = null
   location.reload()
 }
 
 if (sessionStorage.getItem('ag_dev_auth') === '1') {
-  document.getElementById('login-gate').style.display = 'none'
-  document.getElementById('app').style.display = 'block'
-  document.addEventListener('DOMContentLoaded', loadAll)
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('login-gate').style.display = 'none'
+    document.getElementById('folder-gate').style.display = 'flex'
+  })
 }
 
 // ── HTML ESCAPE ───────────────────────────────────────────────
@@ -305,24 +418,27 @@ function e(s) {
 }
 
 // ── DATA ─────────────────────────────────────────────────────
-let ALL_OFFERS = [], ALL_BLOGS = [], ALL_DESTS = [], ALL_PKGS = []
+let ALL_OFFERS = [], ALL_BLOGS = [], ALL_DESTS = [], ALL_PKGS = [], ALL_PAGES = []
 let CE_TYPE = null, CE_ID = null
 
 async function loadAll() {
+  if (!dirHandle) return
   const [offers, blogs, dests, pkgs] = await Promise.all([
-    fetch(`${SB_URL}/rest/v1/offers?order=created_at.asc`,       { headers: H }).then(r => r.json()).catch(() => []),
-    fetch(`${SB_URL}/rest/v1/blog_posts?order=created_at.asc`,   { headers: H }).then(r => r.json()).catch(() => []),
-    fetch(`${SB_URL}/rest/v1/destinations?order=sort_order.asc`, { headers: H }).then(r => r.json()).catch(() => []),
-    fetch(`${SB_URL}/rest/v1/packages?order=sort_order.asc`,     { headers: H }).then(r => r.json()).catch(() => [])
+    readJSON('data/offers.json'),
+    readJSON('data/blog_posts.json'),
+    readJSON('data/destinations.json'),
+    readJSON('data/packages.json'),
   ])
   ALL_OFFERS = Array.isArray(offers) ? offers : []
   ALL_BLOGS  = Array.isArray(blogs)  ? blogs  : []
   ALL_DESTS  = Array.isArray(dests)  ? dests  : []
   ALL_PKGS   = Array.isArray(pkgs)   ? pkgs   : []
+  ALL_PAGES  = (await listJSONDir('data/pages')).sort((a,b) => (a.slug||'').localeCompare(b.slug||''))
   renderOffers()
   renderBlogs()
   renderDests()
   renderPkgs()
+  renderPages()
 }
 
 // ── RENDER OFFERS ─────────────────────────────────────────────
@@ -365,18 +481,15 @@ function renderBlogs() {
     </div>`).join('')
 }
 
-// ── OPEN EDITOR DRAWER ────────────────────────────────────────
+// ── OPEN EDITOR DRAWER (unified — handles all types) ─────────
 function openCE(type, id) {
   CE_TYPE = type; CE_ID = id
-  const isOffer = type === 'offer'
-  const item = id ? (isOffer ? ALL_OFFERS : ALL_BLOGS).find(x => x.id === id) : null
+  let html = ''
 
-  document.getElementById('ce-drw-title').textContent = id
-    ? (isOffer ? 'Edit Offer' : 'Edit Blog Post')
-    : (isOffer ? 'New Offer'  : 'New Blog Post')
-
-  if (isOffer) {
-    document.getElementById('ce-body').innerHTML = `
+  if (type === 'offer') {
+    const item = id ? ALL_OFFERS.find(x => x.id === id) : null
+    document.getElementById('ce-drw-title').textContent = id ? 'Edit Offer' : 'New Offer'
+    html = `
       <div class="ce-field">
         <label class="ce-lbl">Title</label>
         <input class="ce-input" id="ce-title" placeholder="e.g. Summer Beach Escape" value="${e(item?.title||'')}">
@@ -407,8 +520,11 @@ function openCE(type, id) {
           onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
         <span class="ce-active-lbl">Offer is active (visible on website)</span>
       </div>`
-  } else {
-    document.getElementById('ce-body').innerHTML = `
+
+  } else if (type === 'blog') {
+    const item = id ? ALL_BLOGS.find(x => x.id === id) : null
+    document.getElementById('ce-drw-title').textContent = id ? 'Edit Blog Post' : 'New Blog Post'
+    html = `
       <div class="ce-field">
         <label class="ce-lbl">Title</label>
         <input class="ce-input" id="ce-title" placeholder="e.g. 10 Hidden Beaches" value="${e(item?.title||'')}">
@@ -433,8 +549,161 @@ function openCE(type, id) {
           onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
         <span class="ce-active-lbl">Post is active (visible on website)</span>
       </div>`
+
+  } else if (type === 'dest') {
+    const item = id ? ALL_DESTS.find(x => x.id === id) : null
+    document.getElementById('ce-drw-title').textContent = id ? 'Edit Destination' : 'New Destination'
+    const subs = Array.isArray(item?.sub_destinations) ? item.sub_destinations : []
+    html = `
+      <div class="ce-row">
+        <div class="ce-field">
+          <label class="ce-lbl">Number</label>
+          <input class="ce-input" id="ce-number" placeholder="01" value="${e(item?.number||'')}">
+        </div>
+        <div class="ce-field">
+          <label class="ce-lbl">Slug (unique key)</label>
+          <input class="ce-input" id="ce-slug" placeholder="e.g. subcontinent" value="${e(item?.slug||'')}">
+        </div>
+      </div>
+      <div class="ce-field">
+        <label class="ce-lbl">Destination Name</label>
+        <input class="ce-input" id="ce-title" placeholder="e.g. The Cultural Soul" value="${e(item?.name||'')}">
+      </div>
+      <div class="ce-field">
+        <label class="ce-lbl">Countries (shown as sub-title)</label>
+        <input class="ce-input" id="ce-countries" placeholder="India · Nepal · Bhutan" value="${e(item?.countries||'')}">
+      </div>
+      <div class="ce-field">
+        <label class="ce-lbl">Card Description</label>
+        <textarea class="ce-textarea" id="ce-desc" placeholder="Short teaser on the card">${e(item?.description||'')}</textarea>
+      </div>
+      <div class="ce-field">
+        <label class="ce-lbl">Panel Title (inside expanded panel)</label>
+        <input class="ce-input" id="ce-panel-title" placeholder="e.g. The Sub-Continent Expert" value="${e(item?.panel_title||'')}">
+      </div>
+      ${ceImgField('ce-img','ce-img-preview',item?.image_url,'Main Card Image (URL or upload from folder)')}
+      <div class="ce-field">
+        <label class="ce-lbl">Sort Order</label>
+        <input class="ce-input" id="ce-order" type="number" placeholder="1" value="${e(String(item?.sort_order??''))}">
+      </div>
+      <div class="ce-active-row">
+        <button class="cr-toggle ${(item?.active!==false)?'on':'off'}" id="ce-active-toggle"
+          onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        <span class="ce-active-lbl">Destination is active (visible on website)</span>
+      </div>
+      <div class="ce-section-lbl">Sub-destinations (countries/places inside this card)</div>
+      <div id="ce-subdests"></div>
+      <button class="btn-add-sd" onclick="addSubDestRow(document.getElementById('ce-subdests'))">+ Add Sub-destination</button>`
+    document.getElementById('ce-body').innerHTML = html
+    const container = document.getElementById('ce-subdests')
+    subs.forEach(s => addSubDestRow(container, s))
+    document.getElementById('ce-overlay').classList.add('open')
+    document.getElementById('ce-drw').classList.add('open')
+    return
+
+  } else if (type === 'pkg') {
+    const item = id ? ALL_PKGS.find(x => x.id === id) : null
+    document.getElementById('ce-drw-title').textContent = id ? 'Edit Package' : 'New Package'
+    html = `
+      <div class="ce-field">
+        <label class="ce-lbl">Package Name</label>
+        <input class="ce-input" id="ce-title" placeholder="e.g. Norwegian Fjords Expedition"
+          value="${e(item?.name||'')}" oninput="autoFillLink(this)">
+      </div>
+      <div class="ce-row">
+        <div class="ce-field">
+          <label class="ce-lbl">Location / Region</label>
+          <input class="ce-input" id="ce-location" placeholder="e.g. Scandinavia" value="${e(item?.location||'')}">
+        </div>
+        <div class="ce-field">
+          <label class="ce-lbl">Duration</label>
+          <input class="ce-input" id="ce-duration" placeholder="e.g. 8 Days / 7 Nights" value="${e(item?.duration||'')}">
+        </div>
+      </div>
+      <div class="ce-field">
+        <label class="ce-lbl">Description</label>
+        <textarea class="ce-textarea" id="ce-desc" placeholder="Card description paragraph">${e(item?.description||'')}</textarea>
+      </div>
+      ${ceImgField('ce-img','ce-img-preview',item?.image_url,'Image (URL or upload from folder)')}
+      <div class="ce-field">
+        <label class="ce-lbl">Detail Page Link</label>
+        <input class="ce-input" id="ce-link" placeholder="packages/norway.html" value="${e(item?.link||'')}">
+      </div>
+      <div class="ce-field">
+        <label class="ce-lbl">Sort Order</label>
+        <input class="ce-input" id="ce-order" type="number" placeholder="1" value="${e(String(item?.sort_order??''))}">
+      </div>
+      <div class="ce-active-row">
+        <button class="cr-toggle ${(item?.active!==false)?'on':'off'}" id="ce-active-toggle"
+          onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        <span class="ce-active-lbl">Package is active (visible on website)</span>
+      </div>`
+
+  } else if (type === 'page') {
+    const item = id ? ALL_PAGES.find(x => x.slug === id || x.id === id) : null
+    document.getElementById('ce-drw-title').textContent = id ? 'Edit Package Page' : 'New Package Page'
+    const paras = Array.isArray(item?.overview_paragraphs) ? item.overview_paragraphs : []
+    const places = Array.isArray(item?.places) ? item.places : []
+    const inclusions = Array.isArray(item?.inclusions) ? item.inclusions : []
+    html = `
+      <div class="ce-field">
+        <label class="ce-lbl">Page Slug <span style="font-weight:400;text-transform:none;letter-spacing:0;opacity:.6">(filename without .html — e.g. japan)</span></label>
+        <input class="ce-input" id="ce-slug" placeholder="japan" value="${e(item?.slug||'')}">
+      </div>
+      <div class="ce-field">
+        <label class="ce-lbl">Browser Tab Title</label>
+        <input class="ce-input" id="ce-page-title" placeholder="Japan — Land of Contrasts | Alpen Glow Tours" value="${e(item?.page_title||'')}">
+      </div>
+      <div class="ce-section-lbl">Hero Section</div>
+      ${ceImgField('ce-img','ce-img-preview',item?.hero_image_url,'Hero Image (URL or upload)')}
+      <div class="ce-row">
+        <div class="ce-field">
+          <label class="ce-lbl">Location</label>
+          <input class="ce-input" id="ce-location" placeholder="Japan" value="${e(item?.location||'')}">
+        </div>
+        <div class="ce-field">
+          <label class="ce-lbl">Duration</label>
+          <input class="ce-input" id="ce-duration" placeholder="9 Days / 8 Nights" value="${e(item?.duration||'')}">
+        </div>
+      </div>
+      <div class="ce-field">
+        <label class="ce-lbl">Page Title (h1)</label>
+        <input class="ce-input" id="ce-title" placeholder="Japan — Land of Contrasts" value="${e(item?.title||'')}">
+      </div>
+      <div class="ce-section-lbl">Overview</div>
+      <div class="ce-field">
+        <label class="ce-lbl">Overview Heading</label>
+        <input class="ce-input" id="ce-overview-heading" placeholder="Overview" value="${e(item?.overview_heading||'Overview')}">
+      </div>
+      <div class="ce-lbl" style="margin-bottom:.4rem">Overview Paragraphs</div>
+      <div id="ce-overview-paras"></div>
+      <button class="btn-add-sd" onclick="addOverviewParaRow(document.getElementById('ce-overview-paras'))">+ Add Paragraph</button>
+      <div class="ce-section-lbl">Places / Cities Section</div>
+      <div class="ce-field">
+        <label class="ce-lbl">Section Heading</label>
+        <input class="ce-input" id="ce-places-heading" placeholder="Explore the Cities" value="${e(item?.places_heading||'Explore the Cities')}">
+      </div>
+      <div class="ce-lbl" style="margin-bottom:.4rem">Place Cards</div>
+      <div id="ce-places"></div>
+      <button class="btn-add-sd" onclick="addPlaceRow(document.getElementById('ce-places'))">+ Add Place / City</button>
+      <div class="ce-section-lbl">What's Included</div>
+      <div class="ce-field">
+        <label class="ce-lbl">Section Heading</label>
+        <input class="ce-input" id="ce-inclusions-heading" placeholder="What's Included" value="${e(item?.inclusions_heading||"What's Included")}">
+      </div>
+      <div class="ce-lbl" style="margin-bottom:.4rem">Inclusion Items</div>
+      <div id="ce-inclusions"></div>
+      <button class="btn-add-sd" onclick="addInclusionRow(document.getElementById('ce-inclusions'))">+ Add Inclusion</button>`
+    document.getElementById('ce-body').innerHTML = html
+    paras.forEach(p => addOverviewParaRow(document.getElementById('ce-overview-paras'), p))
+    places.forEach(p => addPlaceRow(document.getElementById('ce-places'), p))
+    inclusions.forEach(i => addInclusionRow(document.getElementById('ce-inclusions'), i))
+    document.getElementById('ce-overlay').classList.add('open')
+    document.getElementById('ce-drw').classList.add('open')
+    return
   }
 
+  document.getElementById('ce-body').innerHTML = html
   document.getElementById('ce-overlay').classList.add('open')
   document.getElementById('ce-drw').classList.add('open')
 }
@@ -445,6 +714,24 @@ function closeCE() {
   CE_TYPE = null; CE_ID = null
 }
 
+function slugify(str) {
+  return str.toLowerCase().trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+function autoFillLink(nameInput) {
+  const linkInput = document.getElementById('ce-link')
+  if (!linkInput) return
+  // Only auto-fill if the link field is empty or was previously auto-filled
+  const current = linkInput.value
+  if (current && !current.match(/^packages\/[a-z0-9-]+\.html$/)) return
+  const s = slugify(nameInput.value)
+  linkInput.value = s ? 'packages/' + s + '.html' : ''
+}
+
 function previewImg(url, previewId) {
   const img = document.getElementById(previewId || 'ce-img-preview')
   if (!img) return
@@ -452,27 +739,15 @@ function previewImg(url, previewId) {
   else { img.classList.remove('show') }
 }
 
-// ── IMAGE UPLOAD TO SUPABASE STORAGE ─────────────────────────
-// Requires a PUBLIC bucket named "site-images" in Supabase Storage.
-// Setup: Supabase Dashboard → Storage → New Bucket → Name: site-images → Public: ON
-async function _doUpload(file) {
-  const ext  = file.name.split('.').pop().toLowerCase()
+// ── IMAGE UPLOAD — saves to images/uploads/ inside project folder ─
+// Images are stored locally in the repo so they always work on GitHub.
+async function _saveImgLocal(file) {
+  if (!dirHandle) throw new Error('Project folder not open. Refresh and re-grant access.')
   const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, '_')
-  const fname = `${Date.now()}-${safe}`
-  const res = await fetch(`${SB_URL}/storage/v1/object/site-images/${fname}`, {
-    method: 'POST',
-    headers: {
-      'apikey': SB_KEY,
-      'Authorization': `Bearer ${SB_KEY}`,
-      'Content-Type': file.type || 'application/octet-stream',
-    },
-    body: file
-  })
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}))
-    throw new Error(err.message || `HTTP ${res.status}`)
-  }
-  return `${SB_URL}/storage/v1/object/public/site-images/${fname}`
+  const fname = Date.now() + '-' + safe
+  const destPath = 'images/uploads/' + fname
+  await writeBinaryFile(destPath, file)
+  return destPath   // relative to AlpenGlow root, e.g. "images/uploads/1234-foo.jpg"
 }
 
 async function uploadImg(fileInput, urlInputId, previewId) {
@@ -480,16 +755,16 @@ async function uploadImg(fileInput, urlInputId, previewId) {
   if (!file) return
   const label = fileInput.closest('.btn-upload-img')
   if (label) label.classList.add('uploading')
-  // Show local preview immediately while uploading
+  // Show local preview immediately
   const reader = new FileReader()
   reader.onload = ev => previewImg(ev.target.result, previewId)
   reader.readAsDataURL(file)
   try {
-    const url = await _doUpload(file)
+    const relPath = await _saveImgLocal(file)
     const inp = document.getElementById(urlInputId)
-    if (inp) { inp.value = url; previewImg(url, previewId) }
+    if (inp) { inp.value = relPath; previewImg(URL.createObjectURL(file), previewId) }
   } catch(err) {
-    alert(`Upload failed: ${err.message}\n\nMake sure you have created a "site-images" bucket in Supabase:\nStorage → New Bucket → Name: site-images → Public: ON`)
+    alert('Image save failed: ' + err.message)
   } finally {
     if (label) label.classList.remove('uploading')
     fileInput.value = ''
@@ -502,16 +777,87 @@ async function uploadImgNearby(fileInput, targetSelector) {
   const label = fileInput.closest('.btn-upload-img')
   if (label) label.classList.add('uploading')
   try {
-    const url = await _doUpload(file)
-    const target = fileInput.closest('.sd-row')?.querySelector(targetSelector)
+    const relPath = await _saveImgLocal(file)
+    const target = fileInput.closest('.place-row')?.querySelector(targetSelector)
+      || fileInput.closest('.sd-row')?.querySelector(targetSelector)
       || fileInput.closest('.sd-img-group')?.querySelector(targetSelector)
-    if (target) target.value = url
+    if (target) target.value = relPath
   } catch(err) {
-    alert(`Upload failed: ${err.message}\n\nSetup: Supabase → Storage → New Bucket → site-images → Public ON`)
+    alert('Image save failed: ' + err.message)
   } finally {
     if (label) label.classList.remove('uploading')
     fileInput.value = ''
   }
+}
+
+// ── PAGE DRAWER HELPERS ───────────────────────────────────────
+function addOverviewParaRow(container, text) {
+  const row = document.createElement('div')
+  row.className = 'para-row'
+  row.innerHTML = `
+    <textarea class="ce-textarea para-text" placeholder="Overview paragraph…">${e(text||'')}</textarea>
+    <button class="sd-remove" style="position:static;flex-shrink:0;margin-top:.3rem" onclick="this.parentElement.remove()">✕</button>
+  `
+  container.appendChild(row)
+}
+
+function addPlaceRow(container, p) {
+  p = p || {}
+  const row = document.createElement('div')
+  row.className = 'place-row'
+  row.innerHTML = `
+    <button class="sd-remove" onclick="this.parentElement.remove()" title="Remove">✕</button>
+    <div class="place-row-grid">
+      <input class="ce-input place-key"     placeholder="Key (e.g. tokyo)"   value="${e(p.key||'')}">
+      <input class="ce-input place-name"    placeholder="Name (e.g. Tokyo)"  value="${e(p.name||'')}">
+      <input class="ce-input place-tagline full" placeholder="Card tagline (short text on the card)"   value="${e(p.tagline||'')}">
+      <div class="sd-img-group full">
+        <input class="ce-input place-card-img" placeholder="Card image URL" value="${e(p.card_image_url||'')}">
+        <label class="btn-upload-img" title="Upload card image">&#128193; Card
+          <input type="file" accept="image/*" style="display:none" onchange="uploadImgNearby(this,'.place-card-img')">
+        </label>
+      </div>
+      <div class="sd-img-group full">
+        <input class="ce-input place-modal-img" placeholder="Modal image URL (leave blank to reuse card image)" value="${e(p.modal_image_url||'')}">
+        <label class="btn-upload-img" title="Upload modal image">&#128193; Modal
+          <input type="file" accept="image/*" style="display:none" onchange="uploadImgNearby(this,'.place-modal-img')">
+        </label>
+      </div>
+      <input class="ce-input place-modal-tagline full" placeholder="Modal tagline (headline inside popup)" value="${e(p.modal_tagline||'')}">
+      <textarea class="ce-textarea place-desc full" placeholder="Full description shown in the popup modal…">${e(p.desc||'')}</textarea>
+    </div>
+  `
+  container.appendChild(row)
+}
+
+function addInclusionRow(container, text) {
+  const row = document.createElement('div')
+  row.className = 'incl-row'
+  row.innerHTML = `
+    <input class="ce-input incl-text" placeholder="e.g. 8 nights accommodation" value="${e(text||'')}">
+    <button class="sd-remove" style="position:static;flex-shrink:0" onclick="this.parentElement.remove()">✕</button>
+  `
+  container.appendChild(row)
+}
+
+function collectOverviewParas() {
+  return Array.from(document.querySelectorAll('#ce-overview-paras .para-text'))
+    .map(t => t.value.trim()).filter(Boolean)
+}
+function collectPlaces() {
+  return Array.from(document.querySelectorAll('#ce-places .place-row')).map(row => ({
+    key:             row.querySelector('.place-key').value.trim(),
+    name:            row.querySelector('.place-name').value.trim(),
+    tagline:         row.querySelector('.place-tagline').value.trim(),
+    card_image_url:  row.querySelector('.place-card-img').value.trim(),
+    modal_image_url: row.querySelector('.place-modal-img').value.trim(),
+    modal_tagline:   row.querySelector('.place-modal-tagline').value.trim(),
+    desc:            row.querySelector('.place-desc').value.trim(),
+  })).filter(p => p.name || p.key)
+}
+function collectInclusions() {
+  return Array.from(document.querySelectorAll('#ce-inclusions .incl-text'))
+    .map(i => i.value.trim()).filter(Boolean)
 }
 
 // Helper: generates the image field HTML (URL input + Upload button + preview)
@@ -534,12 +880,112 @@ function ceImgField(inputId, previewId, value, labelText) {
     </div>`
 }
 
-// ── SAVE ─────────────────────────────────────────────────────
+// ── SAVE (unified — handles all types: offer, blog, dest, pkg, page) ──
 async function saveCE() {
+  const btn = document.querySelector('.btn-ce-save')
+
+  // ── Page ──────────────────────────────────────────────────────
+  if (CE_TYPE === 'page') {
+    const slug = document.getElementById('ce-slug').value.trim()
+    if (!slug) { alert('Slug is required (e.g. japan).'); return }
+    const body = {
+      slug,
+      page_title:          document.getElementById('ce-page-title').value.trim(),
+      hero_image_url:      document.getElementById('ce-img').value.trim(),
+      location:            document.getElementById('ce-location').value.trim(),
+      duration:            document.getElementById('ce-duration').value.trim(),
+      title:               document.getElementById('ce-title').value.trim(),
+      overview_heading:    document.getElementById('ce-overview-heading').value.trim() || 'Overview',
+      overview_paragraphs: collectOverviewParas(),
+      places_heading:      document.getElementById('ce-places-heading').value.trim() || 'Explore the Cities',
+      places:              collectPlaces(),
+      inclusions_heading:  document.getElementById('ce-inclusions-heading').value.trim() || "What's Included",
+      inclusions:          collectInclusions(),
+    }
+    btn.textContent = 'Saving…'; btn.disabled = true
+    try {
+      await writeJSON('data/pages/' + slug + '.json', body)
+      closeCE(); await loadAll()
+    } catch(err) { alert('Save failed: ' + err.message)
+    } finally { btn.textContent = 'Save'; btn.disabled = false }
+    return
+  }
+
+  // ── Destination / Package ─────────────────────────────────────
+  if (CE_TYPE === 'dest' || CE_TYPE === 'pkg') {
+    const isDest = CE_TYPE === 'dest'
+    const active = document.getElementById('ce-active-toggle').classList.contains('on')
+    const body = isDest ? {
+      slug:             document.getElementById('ce-slug').value.trim(),
+      number:           document.getElementById('ce-number').value.trim(),
+      name:             document.getElementById('ce-title').value.trim(),
+      countries:        document.getElementById('ce-countries').value.trim(),
+      description:      document.getElementById('ce-desc').value.trim(),
+      panel_title:      document.getElementById('ce-panel-title').value.trim(),
+      image_url:        document.getElementById('ce-img').value.trim(),
+      sort_order:       parseInt(document.getElementById('ce-order').value) || 0,
+      sub_destinations: collectSubDests(),
+      active,
+    } : {
+      name:        document.getElementById('ce-title').value.trim(),
+      location:    document.getElementById('ce-location').value.trim(),
+      duration:    document.getElementById('ce-duration').value.trim(),
+      description: document.getElementById('ce-desc').value.trim(),
+      image_url:   document.getElementById('ce-img').value.trim(),
+      link:        document.getElementById('ce-link').value.trim(),
+      sort_order:  parseInt(document.getElementById('ce-order').value) || 0,
+      active,
+    }
+    if (!body.name) { alert('Name is required.'); return }
+    if (isDest && !body.slug) { alert('Slug is required (e.g. subcontinent).'); return }
+    btn.textContent = 'Saving…'; btn.disabled = true
+    try {
+      const arr = isDest ? [...ALL_DESTS] : [...ALL_PKGS]
+      const file = isDest ? 'data/destinations.json' : 'data/packages.json'
+      if (CE_ID) {
+        const idx = arr.findIndex(x => x.id === CE_ID)
+        if (idx >= 0) arr[idx] = { ...arr[idx], ...body }
+      } else {
+        body.id = Date.now().toString()
+        // Auto-generate link from name if not provided
+        if (!isDest && !body.link) {
+          body.link = 'packages/' + slugify(body.name) + '.html'
+        }
+        arr.push(body)
+        if (!isDest) {
+          const slug = body.link.replace(/^packages\//, '').replace(/\.html$/, '') || slugify(body.name)
+          if (slug) {
+            const html = generatePackageHTML(slug, body.name, body.location, body.duration, body.image_url)
+            await writeTextFile('packages/' + slug + '.html', html)
+            const pageData = {
+              slug,
+              page_title:          body.name + ' | Alpen Glow Tours and Travels',
+              hero_image_url:      body.image_url || '',
+              duration:            body.duration || '',
+              location:            body.location || '',
+              title:               body.name,
+              overview_heading:    'Overview',
+              overview_paragraphs: [body.description || ''],
+              places_heading:      'Explore the Highlights',
+              places:              [],
+              inclusions_heading:  "What's Included",
+              inclusions:          []
+            }
+            await writeJSON('data/pages/' + slug + '.json', pageData)
+            alert('✓ Created packages/' + slug + '.html\n✓ Created data/pages/' + slug + '.json\n\nNext: go to "Package Page Content" to add places and inclusions.')
+          }
+        }
+      }
+      await writeJSON(file, arr)
+      closeCE(); await loadAll()
+    } catch(err) { alert('Save failed: ' + err.message)
+    } finally { btn.textContent = 'Save'; btn.disabled = false }
+    return
+  }
+
+  // ── Offer / Blog ──────────────────────────────────────────────
   const isOffer = CE_TYPE === 'offer'
   const active  = document.getElementById('ce-active-toggle').classList.contains('on')
-  const table   = isOffer ? 'offers' : 'blog_posts'
-
   const body = isOffer ? {
     title:       document.getElementById('ce-title').value.trim(),
     badge:       document.getElementById('ce-badge').value.trim(),
@@ -556,44 +1002,44 @@ async function saveCE() {
     image_url: document.getElementById('ce-img').value.trim(),
     active,
   }
-
   if (!body.title) { alert('Title is required.'); return }
-
-  const btn = document.querySelector('.btn-ce-save')
   btn.textContent = 'Saving…'; btn.disabled = true
-
   try {
+    const arr = isOffer ? [...ALL_OFFERS] : [...ALL_BLOGS]
     if (CE_ID) {
-      const res = await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${CE_ID}`, {
-        method: 'PATCH',
-        headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-        body: JSON.stringify(body)
-      })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const idx = arr.findIndex(x => x.id === CE_ID)
+      if (idx >= 0) arr[idx] = { ...arr[idx], ...body }
     } else {
-      const res = await fetch(`${SB_URL}/rest/v1/${table}`, {
-        method: 'POST',
-        headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-        body: JSON.stringify(body)
-      })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      body.id = Date.now().toString()
+      arr.push(body)
     }
-    closeCE()
-    await loadAll()
-  } catch(err) {
-    alert('Save failed: ' + err.message)
-  } finally {
-    btn.textContent = 'Save'; btn.disabled = false
-  }
+    await writeJSON(isOffer ? 'data/offers.json' : 'data/blog_posts.json', arr)
+    closeCE(); await loadAll()
+  } catch(err) { alert('Save failed: ' + err.message)
+  } finally { btn.textContent = 'Save'; btn.disabled = false }
+}
+
+// ── TABLE → JSON FILE MAPPING ─────────────────────────────────
+const TABLE_FILE = {
+  offers:       'data/offers.json',
+  blog_posts:   'data/blog_posts.json',
+  destinations: 'data/destinations.json',
+  packages:     'data/packages.json',
+}
+const TABLE_ARR = {
+  offers:       () => ALL_OFFERS,
+  blog_posts:   () => ALL_BLOGS,
+  destinations: () => ALL_DESTS,
+  packages:     () => ALL_PKGS,
 }
 
 // ── TOGGLE ACTIVE ─────────────────────────────────────────────
 async function toggleItem(table, id, newActive) {
-  await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, {
-    method: 'PATCH',
-    headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-    body: JSON.stringify({ active: newActive })
-  }).catch(() => {})
+  const arr = TABLE_ARR[table]?.()
+  if (!arr) return
+  const item = arr.find(x => x.id === id)
+  if (item) item.active = newActive
+  await writeJSON(TABLE_FILE[table], arr).catch(() => {})
   await loadAll()
 }
 
@@ -601,9 +1047,25 @@ async function toggleItem(table, id, newActive) {
 let _delTarget = null
 async function deleteItem(table, id, btn) {
   if (_delTarget === id) {
-    await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${id}`, {
-      method: 'DELETE', headers: H
-    }).catch(() => {})
+    let arr, file
+    if (table === 'package_pages') {
+      // Delete the page JSON file
+      const item = ALL_PAGES.find(p => p.id === id || p.slug === id)
+      if (item?.slug) {
+        try {
+          const dir = await getSubDir('data/pages')
+          await dir.removeEntry(item.slug + '.json')
+        } catch(e) {}
+      }
+    } else {
+      arr = TABLE_ARR[table]?.()
+      file = TABLE_FILE[table]
+      if (arr && file) {
+        const idx = arr.findIndex(x => x.id === id)
+        if (idx >= 0) arr.splice(idx, 1)
+        await writeJSON(file, arr).catch(() => {})
+      }
+    }
     _delTarget = null
     await loadAll()
     return
@@ -656,6 +1118,28 @@ function renderPkgs() {
     </div>`).join('')
 }
 
+// ── RENDER PACKAGE PAGES ──────────────────────────────────────
+function renderPages() {
+  const el = document.getElementById('pages-list')
+  if (!ALL_PAGES.length) { el.innerHTML = '<div class="empty-note">No pages yet. Click "+ New Page" to create the first one.</div>'; return }
+  el.innerHTML = ALL_PAGES.map(p => {
+    const places = Array.isArray(p.places) ? p.places : []
+    const inclusions = Array.isArray(p.inclusions) ? p.inclusions : []
+    return `
+    <div class="content-row">
+      <img class="cr-img" src="${e(p.hero_image_url||'')}" onerror="this.style.display='none'" alt="">
+      <div class="cr-info">
+        <div class="cr-title">${e(p.title||p.slug)} <span class="cr-code">${e(p.slug)}</span></div>
+        <div class="cr-sub">${e(p.duration||'')} · ${places.length} places · ${inclusions.length} inclusions</div>
+      </div>
+      <div class="cr-actions">
+        <button class="cr-btn" title="Edit" onclick="openCE('page','${p.slug}')">✏</button>
+        <button class="cr-btn del" title="Delete" onclick="deleteItem('package_pages','${p.slug}',this)">🗑</button>
+      </div>
+    </div>`
+  }).join('')
+}
+
 // ── DESTINATION DRAWER HELPERS ────────────────────────────────
 function addSubDestRow(container, s) {
   s = s || { name:'', desc:'', image_url:'', link:'' }
@@ -687,168 +1171,231 @@ function collectSubDests() {
   })).filter(s => s.name)
 }
 
-// ── OPEN EDITOR DRAWER (extended for dest + pkg) ──────────────
-const _origOpenCE = openCE
-function openCE(type, id) {
-  if (type !== 'dest' && type !== 'pkg') { _origOpenCE(type, id); return }
-  CE_TYPE = type; CE_ID = id
-  const isDest = type === 'dest'
-  const item = id ? (isDest ? ALL_DESTS : ALL_PKGS).find(x => x.id === id) : null
 
-  document.getElementById('ce-drw-title').textContent = id
-    ? (isDest ? 'Edit Destination' : 'Edit Package')
-    : (isDest ? 'New Destination'  : 'New Package')
+// ── PACKAGE PAGE HTML TEMPLATE ────────────────────────────────
+function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
+  const _img = heroImg || 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&q=80'
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${pkgName} | Alpen Glow Tours and Travels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="package.css">
+</head>
+<body>
 
-  if (isDest) {
-    const subs = Array.isArray(item?.sub_destinations) ? item.sub_destinations : []
-    document.getElementById('ce-body').innerHTML = `
-      <div class="ce-row">
-        <div class="ce-field">
-          <label class="ce-lbl">Number</label>
-          <input class="ce-input" id="ce-number" placeholder="01" value="${e(item?.number||'')}">
-        </div>
-        <div class="ce-field">
-          <label class="ce-lbl">Slug (unique key)</label>
-          <input class="ce-input" id="ce-slug" placeholder="e.g. subcontinent" value="${e(item?.slug||'')}">
-        </div>
-      </div>
-      <div class="ce-field">
-        <label class="ce-lbl">Destination Name</label>
-        <input class="ce-input" id="ce-title" placeholder="e.g. The Cultural Soul" value="${e(item?.name||'')}">
-      </div>
-      <div class="ce-field">
-        <label class="ce-lbl">Countries (shown as sub-title)</label>
-        <input class="ce-input" id="ce-countries" placeholder="India · Nepal · Bhutan" value="${e(item?.countries||'')}">
-      </div>
-      <div class="ce-field">
-        <label class="ce-lbl">Card Description</label>
-        <textarea class="ce-textarea" id="ce-desc" placeholder="Short teaser on the card">${e(item?.description||'')}</textarea>
-      </div>
-      <div class="ce-field">
-        <label class="ce-lbl">Panel Title (inside expanded panel)</label>
-        <input class="ce-input" id="ce-panel-title" placeholder="e.g. The Sub-Continent Expert" value="${e(item?.panel_title||'')}">
-      </div>
-      ${ceImgField('ce-img','ce-img-preview',item?.image_url,'Main Card Image (URL or upload from folder)')}
-      <div class="ce-field">
-        <label class="ce-lbl">Sort Order</label>
-        <input class="ce-input" id="ce-order" type="number" placeholder="1" value="${e(String(item?.sort_order??''))}">
-      </div>
-      <div class="ce-active-row">
-        <button class="cr-toggle ${(item?.active!==false)?'on':'off'}" id="ce-active-toggle"
-          onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
-        <span class="ce-active-lbl">Destination is active (visible on website)</span>
-      </div>
-      <div class="ce-section-lbl">Sub-destinations (countries/places inside this card)</div>
-      <div id="ce-subdests"></div>
-      <button class="btn-add-sd" onclick="addSubDestRow(document.getElementById('ce-subdests'))">+ Add Sub-destination</button>
-    `
-    const container = document.getElementById('ce-subdests')
-    subs.forEach(s => addSubDestRow(container, s))
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo">
+    <img src="../alpenglow-removebg-preview.png" alt="Alpen Glow">
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="../index.html#destinations">Destinations</a>
+    <a href="../index.html#packages">Packages</a>
+    <a href="../index.html#offers">Offers</a>
+    <a href="../index.html#contact">Contact</a>
+    <a href="../index.html#contact" class="nav-cta">Plan Your Trip</a>
+  </div>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  } else {
-    document.getElementById('ce-body').innerHTML = `
-      <div class="ce-field">
-        <label class="ce-lbl">Package Name</label>
-        <input class="ce-input" id="ce-title" placeholder="e.g. Norwegian Fjords Expedition" value="${e(item?.name||'')}">
-      </div>
-      <div class="ce-row">
-        <div class="ce-field">
-          <label class="ce-lbl">Location / Region</label>
-          <input class="ce-input" id="ce-location" placeholder="e.g. Scandinavia" value="${e(item?.location||'')}">
-        </div>
-        <div class="ce-field">
-          <label class="ce-lbl">Duration</label>
-          <input class="ce-input" id="ce-duration" placeholder="e.g. 8 Days / 7 Nights" value="${e(item?.duration||'')}">
-        </div>
-      </div>
-      <div class="ce-field">
-        <label class="ce-lbl">Description</label>
-        <textarea class="ce-textarea" id="ce-desc" placeholder="Card description paragraph">${e(item?.description||'')}</textarea>
-      </div>
-      ${ceImgField('ce-img','ce-img-preview',item?.image_url,'Image (URL or upload from folder)')}
-      <div class="ce-field">
-        <label class="ce-lbl">Detail Page Link</label>
-        <input class="ce-input" id="ce-link" placeholder="packages/norway.html" value="${e(item?.link||'')}">
-      </div>
-      <div class="ce-field">
-        <label class="ce-lbl">Sort Order</label>
-        <input class="ce-input" id="ce-order" type="number" placeholder="1" value="${e(String(item?.sort_order??''))}">
-      </div>
-      <div class="ce-active-row">
-        <button class="cr-toggle ${(item?.active!==false)?'on':'off'}" id="ce-active-toggle"
-          onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
-        <span class="ce-active-lbl">Package is active (visible on website)</span>
-      </div>`
-  }
+<div class="breadcrumb">
+  <a href="../index.html#packages">&larr; Back to Packages</a>
+</div>
 
-  document.getElementById('ce-overlay').classList.add('open')
-  document.getElementById('ce-drw').classList.add('open')
+<section class="detail-hero">
+  <img src="${_img}" alt="${pkgName}">
+  <div class="detail-hero-overlay">
+    <span class="detail-duration">${duration || ''}</span>
+    <div class="detail-location">${location || ''}</div>
+    <h1 class="detail-title">${pkgName}</h1>
+  </div>
+</section>
+
+<div class="detail-wrap">
+  <div class="detail-main locked" id="detailMain">
+    <div class="content-overlay" id="contentOverlay">
+      <div class="co-lock">&#128274;</div>
+      <h3>Verify to Unlock Full Itinerary</h3>
+      <p>Read the overview below for free. Verify your WhatsApp &amp; Email to unlock the full day-by-day itinerary and pricing.</p>
+      <button class="btn-scroll-verify" onclick="document.getElementById('gateCard').scrollIntoView({behavior:'smooth',block:'start'})">Verify &amp; Unlock Now</button>
+    </div>
+    <div class="overview-free">
+      <h2>Overview</h2>
+      <p>Overview content will be added here.</p>
+    </div>
+    <h2 id="placesHeading">Explore the Highlights</h2>
+    <div class="city-showcase"></div>
+    <h2 id="inclusionsHeading">What's Included</h2>
+    <div class="tag-row">
+      <span class="tag-pill">To be updated</span>
+    </div>
+  </div>
+
+  <div class="detail-sidebar">
+    <div class="gate-card" id="gateCard">
+      <span class="gate-badge">Verification Required</span>
+      <h3>Unlock Full Itinerary</h3>
+      <div id="gateStep1">
+        <p>Enter your details to access the day-by-day itinerary, pricing, and a personal callback from our travel team.</p>
+        <div class="form-group"><label>Full Name</label><input type="text" id="gateName" placeholder="Your name"></div>
+        <div class="form-group"><label>WhatsApp Number</label><input type="tel" id="gatePhone" placeholder="+91 98765 43210"></div>
+        <button class="btn-verify" id="gateBtn1" onclick="gateSendWhatsApp()">Send WhatsApp Code</button>
+        <p class="gate-note">Step 1 of 2 &mdash; WhatsApp verification</p>
+      </div>
+      <div id="gateStep2" style="display:none;">
+        <p style="font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:1rem;">Enter the 4-digit code sent to your WhatsApp.</p>
+        <div style="display:flex;gap:.5rem;margin-bottom:.8rem;">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveW(this,1)" id="gWOtp0">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveW(this,2)" id="gWOtp1">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveW(this,3)" id="gWOtp2">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveW(this,4)" id="gWOtp3">
+        </div>
+        <div style="font-size:.73rem;color:rgba(255,255,255,.4);margin-bottom:.9rem;">Didn't receive it? <a onclick="gateResendWhatsApp()" style="color:var(--orange);cursor:pointer;font-weight:600;">Resend</a></div>
+        <button class="btn-verify" id="gateBtn2" onclick="gateVerifyWhatsApp()">Verify WhatsApp</button>
+        <p class="gate-note">Step 1 of 2 &mdash; WhatsApp verification</p>
+      </div>
+      <div id="gateStep3" style="display:none;">
+        <p style="font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:1rem;">WhatsApp verified! Now enter your email to complete verification.</p>
+        <div class="form-group"><label>Email Address</label><input type="email" id="gateEmail" placeholder="you@example.com"></div>
+        <button class="btn-verify" id="gateBtn3" onclick="gateSendEmail()">Send Email Code</button>
+        <p class="gate-note">Step 2 of 2 &mdash; Email verification</p>
+      </div>
+      <div id="gateStep4" style="display:none;">
+        <p style="font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:1rem;">Enter the 4-digit code sent to your email.</p>
+        <div style="display:flex;gap:.5rem;margin-bottom:.8rem;">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveE(this,1)" id="gEOtp0">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveE(this,2)" id="gEOtp1">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveE(this,3)" id="gEOtp2">
+          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveE(this,4)" id="gEOtp3">
+        </div>
+        <div style="font-size:.73rem;color:rgba(255,255,255,.4);margin-bottom:.9rem;">Didn't receive it? <a onclick="gateResendEmail()" style="color:var(--orange);cursor:pointer;font-weight:600;">Resend</a></div>
+        <button class="btn-verify" id="gateBtn4" onclick="gateVerifyEmail()">Verify &amp; Unlock</button>
+        <p class="gate-note">Step 2 of 2 &mdash; Email verification</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="city-modal-backdrop" id="cityModalBackdrop" onclick="if(event.target===this) closeCityModal()">
+  <div class="city-modal">
+    <button class="city-modal-close" onclick="closeCityModal()">&#x2715;</button>
+    <div class="city-modal-img"><img id="cityModalImg" src="" alt=""></div>
+    <div class="city-modal-body">
+      <h3 id="cityModalName"></h3>
+      <div class="city-modal-tagline" id="cityModalTagline"></div>
+      <p id="cityModalDesc"></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><img src="../alpenglow-removebg-preview.png" alt="Alpen Glow"></div>
+  <div class="footer-links">
+    <a href="../index.html#destinations">Destinations</a>
+    <a href="../index.html#packages">Packages</a>
+    <a href="../index.html#offers">Offers</a>
+    <a href="../index.html#blog">Blog</a>
+    <a href="../index.html#reviews">Reviews</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+  <p>&copy; 2026 Alpen Glow Tours and Travels. All rights reserved.</p>
+</footer>
+
+<script src="../api.js">\x3c/script>
+<script>
+let _gateName = "", _gatePhone = "", _gateEmail = "";
+function unlockContent() {
+  const main = document.getElementById("detailMain");
+  const overlay = document.getElementById("contentOverlay");
+  if (main) main.classList.remove("locked");
+  if (overlay) { overlay.style.opacity = "0"; setTimeout(() => overlay.remove(), 500); }
+  const card = document.getElementById("gateCard");
+  if (card) card.innerHTML = "<div style=\\"text-align:center;padding:1rem 0;\\"><div style=\\"font-size:2rem;margin-bottom:.7rem;\\">&#10003;</div><h3 style=\\"font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);margin-bottom:.5rem;\\">Itinerary Unlocked</h3><p style=\\"font-size:.82rem;color:rgba(255,255,255,.55);\\">Our team will be in touch within 24 hours.</p></div>";
 }
-
-// ── SAVE (extended for dest + pkg) ────────────────────────────
-const _origSaveCE = saveCE
-async function saveCE() {
-  if (CE_TYPE !== 'dest' && CE_TYPE !== 'pkg') { await _origSaveCE(); return }
-  const isDest = CE_TYPE === 'dest'
-  const active = document.getElementById('ce-active-toggle').classList.contains('on')
-  const table  = isDest ? 'destinations' : 'packages'
-
-  const body = isDest ? {
-    slug:             document.getElementById('ce-slug').value.trim(),
-    number:           document.getElementById('ce-number').value.trim(),
-    name:             document.getElementById('ce-title').value.trim(),
-    countries:        document.getElementById('ce-countries').value.trim(),
-    description:      document.getElementById('ce-desc').value.trim(),
-    panel_title:      document.getElementById('ce-panel-title').value.trim(),
-    image_url:        document.getElementById('ce-img').value.trim(),
-    sort_order:       parseInt(document.getElementById('ce-order').value) || 0,
-    sub_destinations: collectSubDests(),
-    active,
-  } : {
-    name:        document.getElementById('ce-title').value.trim(),
-    location:    document.getElementById('ce-location').value.trim(),
-    duration:    document.getElementById('ce-duration').value.trim(),
-    description: document.getElementById('ce-desc').value.trim(),
-    image_url:   document.getElementById('ce-img').value.trim(),
-    link:        document.getElementById('ce-link').value.trim(),
-    sort_order:  parseInt(document.getElementById('ce-order').value) || 0,
-    active,
-  }
-
-  if (!body.name) { alert('Name is required.'); return }
-  if (isDest && !body.slug) { alert('Slug is required (e.g. subcontinent).'); return }
-
-  const btn = document.querySelector('.btn-ce-save')
-  btn.textContent = 'Saving…'; btn.disabled = true
-  try {
-    if (CE_ID) {
-      const res = await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${CE_ID}`, {
-        method: 'PATCH',
-        headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-        body: JSON.stringify(body)
-      })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    } else {
-      const res = await fetch(`${SB_URL}/rest/v1/${table}`, {
-        method: 'POST',
-        headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-        body: JSON.stringify(body)
-      })
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
-    }
-    closeCE()
-    await loadAll()
-  } catch(err) {
-    alert('Save failed: ' + err.message)
-  } finally {
-    btn.textContent = 'Save'; btn.disabled = false
-  }
+function gateSendWhatsApp() {
+  _gateName = document.getElementById("gateName").value.trim();
+  _gatePhone = document.getElementById("gatePhone").value.trim();
+  if (!_gateName || !_gatePhone) { alert("Please enter your name and WhatsApp number."); return; }
+  const btn = document.getElementById("gateBtn1");
+  btn.textContent = "Sending..."; btn.disabled = true;
+  AlpenAPI.sendSMSOTP(_gatePhone, "package_unlock", { name: _gateName })
+    .then(() => { document.getElementById("gateStep1").style.display = "none"; document.getElementById("gateStep2").style.display = "block"; setTimeout(() => document.getElementById("gWOtp0").focus(), 100); })
+    .catch((err) => { btn.textContent = "Send WhatsApp Code"; btn.disabled = false; alert(err?.message || "Could not send code. Please check your number and try again."); });
+}
+function gateMoveW(el, next) { if (el.value.length === 1 && next <= 3) document.getElementById("gWOtp" + next).focus(); }
+function gateResendWhatsApp() {
+  ["gWOtp0","gWOtp1","gWOtp2","gWOtp3"].forEach(id => document.getElementById(id).value = "");
+  AlpenAPI.sendSMSOTP(_gatePhone, "package_unlock").catch(() => {});
+  document.getElementById("gWOtp0").focus();
+}
+function gateVerifyWhatsApp() {
+  const code = ["gWOtp0","gWOtp1","gWOtp2","gWOtp3"].map(id => document.getElementById(id).value).join("");
+  if (code.length < 4) { document.getElementById("gWOtp0").focus(); return; }
+  const btn = document.getElementById("gateBtn2");
+  btn.textContent = "Verifying..."; btn.disabled = true;
+  AlpenAPI.verifySMSOTP(_gatePhone, code)
+    .then(() => { document.getElementById("gateStep2").style.display = "none"; document.getElementById("gateStep3").style.display = "block"; setTimeout(() => document.getElementById("gateEmail").focus(), 100); })
+    .catch((err) => { btn.textContent = "Verify WhatsApp"; btn.disabled = false; alert(err?.message || "Invalid code. Please try again."); });
+}
+function gateSendEmail() {
+  _gateEmail = document.getElementById("gateEmail").value.trim();
+  if (!_gateEmail) { document.getElementById("gateEmail").focus(); return; }
+  const btn = document.getElementById("gateBtn3");
+  btn.textContent = "Sending..."; btn.disabled = true;
+  AlpenAPI.sendEmailOTP(_gateEmail, "package_unlock")
+    .then(() => { document.getElementById("gateStep3").style.display = "none"; document.getElementById("gateStep4").style.display = "block"; setTimeout(() => document.getElementById("gEOtp0").focus(), 100); })
+    .catch((err) => { btn.textContent = "Send Email Code"; btn.disabled = false; alert(err?.message || "Could not send code. Please check your email and try again."); });
+}
+function gateMoveE(el, next) { if (el.value.length === 1 && next <= 3) document.getElementById("gEOtp" + next).focus(); }
+function gateResendEmail() {
+  ["gEOtp0","gEOtp1","gEOtp2","gEOtp3"].forEach(id => document.getElementById(id).value = "");
+  AlpenAPI.sendEmailOTP(_gateEmail, "package_unlock").catch(() => {});
+  document.getElementById("gEOtp0").focus();
+}
+function gateVerifyEmail() {
+  const code = ["gEOtp0","gEOtp1","gEOtp2","gEOtp3"].map(id => document.getElementById(id).value).join("");
+  if (code.length < 4) { document.getElementById("gEOtp0").focus(); return; }
+  const btn = document.getElementById("gateBtn4");
+  btn.textContent = "Verifying..."; btn.disabled = true;
+  AlpenAPI.verifyEmailOTP(_gateEmail, code)
+    .then(() => {
+      AlpenAPI.submitLead({ name: _gateName, phone: _gatePhone, email: _gateEmail, source: "package_unlock", verifiedPhone: true, verifiedEmail: true }).catch(() => {});
+      unlockContent();
+    })
+    .catch((err) => { btn.textContent = "Verify & Unlock"; btn.disabled = false; alert(err?.message || "Invalid code. Please try again."); });
+}
+var cityData = {};
+function openCityModal(key) {
+  const data = cityData[key]; if (!data) return;
+  document.getElementById("cityModalImg").src = data.img;
+  document.getElementById("cityModalImg").alt = data.name;
+  document.getElementById("cityModalName").textContent = data.name;
+  document.getElementById("cityModalTagline").textContent = data.tagline;
+  document.getElementById("cityModalDesc").textContent = data.desc;
+  document.getElementById("cityModalBackdrop").classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+function closeCityModal() {
+  document.getElementById("cityModalBackdrop").classList.remove("active");
+  document.body.style.overflow = "";
+}
+const mobileToggle = document.getElementById("mobileToggle");
+const navLinks = document.getElementById("navLinks");
+mobileToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
+if (typeof AlpenAPI !== "undefined" && AlpenAPI.isVerified()) unlockContent();
+if (typeof AlpenAPI !== "undefined" && AlpenAPI.loadPackagePage) AlpenAPI.loadPackagePage('${slug}');
+\x3c/script>
+</body>
+</html>`
 }
 
 // ── BOOT ─────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  if (sessionStorage.getItem('ag_dev_auth') === '1') loadAll()
-})
+// Auth re-check on DOMContentLoaded is now handled in the login() function above
 </script>
 </body>
 </html>

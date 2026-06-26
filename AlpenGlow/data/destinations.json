@@ -1,0 +1,150 @@
+[
+  {
+    "slug": "subcontinent",
+    "number": "01",
+    "name": "The Cultural Soul",
+    "countries": "India · Nepal · Bhutan · Sri Lanka",
+    "description": "Seamless border-crossing trails through the subcontinent's sacred and scenic core.",
+    "image_url": "tajmahal.jpg",
+    "panel_title": "The Sub-Continent Expert",
+    "sort_order": 1,
+    "active": true,
+    "sub_destinations": [
+      {
+        "name": "India",
+        "desc": "Discover the vibrant culture and breathtaking landscapes of India.",
+        "image_url": "india.jpg",
+        "link": "packages/india.html"
+      },
+      {
+        "name": "Nepal",
+        "desc": "Explore the majestic mountains and rich cultural heritage of Nepal.",
+        "image_url": "nepal.jpg",
+        "link": "packages/nepal.html"
+      },
+      {
+        "name": "Bhutan",
+        "desc": "Discover the unique culture and pristine landscapes of Bhutan.",
+        "image_url": "bhutan.jpg",
+        "link": "packages/bhutan.html"
+      },
+      {
+        "name": "Sri Lanka",
+        "desc": "Explore the tropical beaches and ancient temples of Sri Lanka.",
+        "image_url": "srilanka.jpg",
+        "link": "packages/srilanka.html"
+      }
+    ]
+  },
+  {
+    "slug": "longhaul",
+    "number": "02",
+    "name": "Once-in-a-Lifetime",
+    "countries": "Scandinavia · Japan · NZ · Australia · S. Korea",
+    "description": "Bucket-list journeys built for travelers who plan years, not weekends, ahead.",
+    "image_url": "aurora.jpg",
+    "panel_title": "The High-Value Long Haul",
+    "sort_order": 2,
+    "active": true,
+    "sub_destinations": [
+      {
+        "name": "Scandinavia",
+        "desc": "Discover the stunning fjords and vibrant cities of Scandinavia.",
+        "image_url": "norway.jpg",
+        "link": "packages/norway.html"
+      },
+      {
+        "name": "Japan",
+        "desc": "Experience the perfect blend of traditional culture and modern innovation in Japan.",
+        "image_url": "japan.png",
+        "link": "packages/japan.html"
+      },
+      {
+        "name": "New Zealand",
+        "desc": "Discover the natural beauty and unique culture of New Zealand.",
+        "image_url": "newzealand.jpg",
+        "link": "packages/newzealand.html"
+      },
+      {
+        "name": "Australia",
+        "desc": "Explore the diverse landscapes and vibrant cities of Australia.",
+        "image_url": "australia.jpg",
+        "link": "packages/australia.html"
+      },
+      {
+        "name": "South Korea",
+        "desc": "Discover the dynamic culture and delicious cuisine of South Korea.",
+        "image_url": "southkorea.jpg",
+        "link": "packages/southkorea.html"
+      }
+    ]
+  },
+  {
+    "slug": "islands",
+    "number": "03",
+    "name": "Glowcations & Honeymoons",
+    "countries": "Maldives · Seychelles · Mauritius · Bali",
+    "description": "Pure isolation or culture-plus-luxury, curated for couples and wellness escapes.",
+    "image_url": "honeymoon.jpg",
+    "panel_title": "The Island & Beach Specialist",
+    "sort_order": 3,
+    "active": true,
+    "sub_destinations": [
+      {
+        "name": "Maldives",
+        "desc": "Experience the crystal-clear waters and overwater bungalows of the Maldives.",
+        "image_url": "maldives.jpg",
+        "link": "packages/maldives.html"
+      },
+      {
+        "name": "Seychelles",
+        "desc": "Discover the pristine beaches and unique wildlife of the Seychelles.",
+        "image_url": "seychelles.jpg",
+        "link": "packages/seychelles.html"
+      },
+      {
+        "name": "Mauritius",
+        "desc": "Explore the tropical paradise of Mauritius with its stunning beaches and vibrant culture.",
+        "image_url": "mauritius.jpg",
+        "link": "packages/mauritius.html"
+      },
+      {
+        "name": "Bali",
+        "desc": "Discover the spiritual and cultural richness of Bali.",
+        "image_url": "bali.jpg",
+        "link": "packages/bali.html"
+      }
+    ]
+  },
+  {
+    "slug": "cruises",
+    "number": "04",
+    "name": "Family & MICE Sailings",
+    "countries": "River Cruises · Large Liners",
+    "description": "The volume engine — European river cruising and large-liner departures across Asia.",
+    "image_url": "cruise.jpg",
+    "panel_title": "The Volume Driver: Cruise Sailings",
+    "sort_order": 4,
+    "active": true,
+    "sub_destinations": [
+      {
+        "name": "European River Cruise",
+        "desc": "Experience the charm of Europe's great rivers aboard luxury cruise ships.",
+        "image_url": "europeanrivercruise.jpg",
+        "link": "packages/rivercruise-europe.html"
+      },
+      {
+        "name": "Royal Caribbean",
+        "desc": "Set sail on a luxury cruise through the Caribbean and beyond.",
+        "image_url": "royalcaribbean.jpg",
+        "link": "packages/royalcaribbean.html"
+      },
+      {
+        "name": "Resorts World",
+        "desc": "Explore the luxurious amenities and stunning locations of Resorts World.",
+        "image_url": "resortsworld.jpg",
+        "link": "packages/resortsworld.html"
+      }
+    ]
+  }
+]
