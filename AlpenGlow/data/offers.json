@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "title": "Summer Beach Escape",
+    "badge": "30% OFF",
+    "code": "SUMMER30",
+    "description": "Book any beach destination — Maldives, Bali, Santorini — before July 31 and save 30% on your total package price.",
+    "image_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+    "cta_text": "Claim Offer →",
+    "active": true
+  },
+  {
+    "id": "2",
+    "title": "Plan Ahead & Save",
+    "badge": "EARLY BIRD 20%",
+    "code": "EARLY2027",
+    "description": "Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all Alpen Glow packages.",
+    "image_url": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80",
+    "cta_text": "Learn More →",
+    "active": true
+  },
+  {
+    "id": "3",
+    "title": "Honeymoon Special",
+    "badge": "25% Off + Upgrades",
+    "code": "HONEY25",
+    "description": "Celebrate your love in paradise. Applies to all couple packages with complimentary room upgrades and a welcome amenity.",
+    "image_url": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80",
+    "cta_text": "View Packages →",
+    "active": true
+  }
+]
