@@ -3,16 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Japan — Land of Contrasts | AlpenGlow Global</title>
+<title>Japan — Land of Contrasts | Alpen Glow Tours and Travels</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="package.css?v=2026062715">
+<link rel="stylesheet" href="package.css">
+<style>
+/* === FULL PAGE JAPAN BACKGROUND === */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 35%;
+  height: 100%;
+  background-image: url('pagoda.jpg');
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.50;
+  mask-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Overview card */
+.overview-card-float {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.97);
+  border-radius: 18px;
+  border-left: 4px solid #ef7e19;
+  padding: 2.2rem 2.4rem;
+  max-width: 580px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+  margin-bottom: 1rem;
+}
+.overview-card-float h2 {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 1.6rem !important;
+  font-weight: 400 !important;
+  color: #181818 !important;
+  margin: 0 0 0.3rem 0 !important;
+}
+.overview-card-float .o-rule {
+  width: 40px; height: 2px;
+  background: #ef7e19;
+  margin-bottom: 1.1rem;
+}
+.overview-card-float p {
+  font-size: 0.95rem !important;
+  line-height: 1.8 !important;
+  color: #6b6560 !important;
+  margin-bottom: 0.9rem !important;
+}
+.overview-card-float p:last-child { margin-bottom: 0 !important; }
+
+/* Override blur for overview-free */
+.detail-main.locked .overview-free,
+.detail-main.locked .overview-free *,
+.detail-main.locked .overview-card-float,
+.detail-main.locked .overview-card-float * {
+  filter: none !important;
+  opacity: 1 !important;
+  user-select: auto !important;
+  pointer-events: auto !important;
+}
+</style>
 </head>
 <body>
 
 <nav id="navbar">
   <a href="../index.html" class="nav-logo">
-    <img src="../alpenglow-removebg-preview.png" alt="AlpenGlow Global">
+    <img src="../alpenglow-removebg-preview.png" alt="Alpen Glow">
   </a>
   <div class="nav-links" id="navLinks">
     <a href="../index.html#destinations">Destinations</a>
@@ -49,23 +110,11 @@
     </div>
 
     <div class="overview-free">
-      <!-- OVERVIEW SCENE: inline styles so CSS file order cannot block it -->
-      <div style="position:relative !important;border-radius:20px;overflow:hidden;background-image:url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1400&q=80');background-size:cover;background-position:center top;padding:2.5rem 2rem;display:flex !important;align-items:center;min-height:300px;margin-bottom:1rem;opacity:1 !important;filter:none !important;pointer-events:auto !important;">
-        <div style="
-          position: relative;
-          z-index: 1;
-          background: rgba(255,255,255,0.96);
-          border-radius: 16px;
-          border-left: 4px solid #ef7e19;
-          padding: 2rem 2.2rem;
-          max-width: 540px;
-          box-shadow: 0 8px 40px rgba(0,0,0,0.22);
-        ">
-          <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:1.7rem;font-weight:400;color:#181818;margin:0 0 0.4rem 0;">Overview</h2>
-          <div style="width:40px;height:2px;background:#ef7e19;margin-bottom:1rem;"></div>
-          <p style="font-size:0.93rem;line-height:1.8;color:#3a3a3a;margin-bottom:0.9rem;">Japan holds two ideas in balance better than almost anywhere else — centuries-old tradition and some of the world's most futuristic cities, often on the same block. This trip moves from Tokyo's neon density to Kyoto's temple gardens to Mount Fuji's classic postcard view, built around the bullet train so the transitions feel as smooth as the destinations are different.</p>
-          <p style="font-size:0.93rem;line-height:1.8;color:#3a3a3a;margin:0;">Best for travelers who want both the modern-Japan spectacle and the quieter, older side of the country.</p>
-        </div>
+      <div class="overview-card-float">
+        <h2>Overview</h2>
+        <div class="o-rule"></div>
+        <p>Japan holds two ideas in balance better than almost anywhere else — centuries-old tradition and some of the world's most futuristic cities, often on the same block. This trip moves from Tokyo's neon density to Kyoto's temple gardens to Mount Fuji's classic postcard view, built around the bullet train so the transitions feel as smooth as the destinations are different.</p>
+        <p>Best for travelers who want both the modern-Japan spectacle and the quieter, older side of the country.</p>
       </div>
     </div>
 
@@ -178,7 +227,7 @@
 </div>
 
 <footer>
-  <div class="footer-logo"><img src="../alpenglow-removebg-preview.png" alt="AlpenGlow Global"></div>
+  <div class="footer-logo"><img src="../alpenglow-removebg-preview.png" alt="Alpen Glow"></div>
   <div class="footer-links">
     <a href="../index.html#destinations">Destinations</a>
     <a href="../index.html#packages">Packages</a>
@@ -187,7 +236,7 @@
     <a href="../index.html#reviews">Reviews</a>
     <a href="../index.html#contact">Contact</a>
   </div>
-  <p>© 2026 AlpenGlow Global. All rights reserved.</p>
+  <p>© 2026 Alpen Glow Tours and Travels. All rights reserved.</p>
 </footer>
 
 <script src="../data/bundle.js"></script>
@@ -278,18 +327,7 @@ function closeCityModal() {
 const mobileToggle = document.getElementById("mobileToggle");
 const navLinks = document.getElementById("navLinks");
 mobileToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
-/* Dev preview bypass: add ?preview=ag2025 to URL to skip OTP gate */
-(function() {
-  var p = new URLSearchParams(window.location.search);
-  if (p.get('preview') === 'ag2025') {
-    unlockContent();
-    var bar = document.createElement('div');
-    bar.className = 'dev-preview-bar';
-    bar.innerHTML = 'DEV PREVIEW MODE &nbsp;<span>Gate bypassed — remove ?preview=ag2025 before publishing</span><button onclick="this.parentElement.remove();document.body.classList.remove(\'dev-preview-active\')">Dismiss</button>';
-    document.body.classList.add('dev-preview-active');
-    document.body.insertBefore(bar, document.body.firstChild);
-  } else if (typeof AlpenAPI !== "undefined" && AlpenAPI.isVerified()) unlockContent();
-})();
+if (typeof AlpenAPI !== "undefined" && AlpenAPI.isVerified()) unlockContent();
 if (typeof AlpenAPI !== "undefined" && AlpenAPI.loadPackagePage) AlpenAPI.loadPackagePage('japan');
 </script>
 </body>
