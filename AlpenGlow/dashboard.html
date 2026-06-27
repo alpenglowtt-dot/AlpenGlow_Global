@@ -73,10 +73,19 @@ radial-gradient(circle at top,rgba(239,126,25,.035),transparent 38%),
 var(--bg);
 min-height:100vh;
 overflow-x:hidden;
+overflow-y:auto;
 font-size:15px;
 line-height:1.5;
 -webkit-font-smoothing:antialiased;
 text-rendering:optimizeLegibility;
+
+/* Hide scrollbar but keep scrolling */
+scrollbar-width:none;      /* Firefox */
+-ms-overflow-style:none;   /* IE/Edge */
+}
+
+body::-webkit-scrollbar{
+display:none;              /* Chrome, Edge, Safari */
 }
 button{cursor:pointer;border:none;font-family:var(--font-body)}
 input,select,textarea{font-family:var(--font-body)}
@@ -641,6 +650,8 @@ border-top:1px solid rgba(255,255,255,.03);
 
 .s-pill{
 
+position:relative;
+
 display:inline-flex;
 align-items:center;
 justify-content:center;
@@ -662,6 +673,10 @@ transition:.22s var(--ease);
 
 border:1px solid transparent;
 
+}
+.s-pill > span{
+position:relative;
+z-index:1;
 }
 
 .s-pill:hover{
@@ -714,11 +729,7 @@ border-color:rgba(239,111,111,.22);
 
 .s-drop{
 
-position:absolute;
-
-top:calc(100% + 8px);
-
-left:0;
+position:fixed;
 
 width:170px;
 
@@ -732,7 +743,7 @@ border:1px solid rgba(255,255,255,.06);
 
 box-shadow:
 
-0 20px 50px rgba(0,0,0,.55);
+0 20px 50px rgba(0,0,0,.7);
 
 z-index:99999;
 
@@ -757,6 +768,14 @@ align-items:center;
 gap:.65rem;
 
 font-size:.82rem;
+
+font-weight:500;
+
+text-transform:none;
+
+letter-spacing:normal;
+
+color:rgba(255,255,255,.78);
 
 cursor:pointer;
 
@@ -855,46 +874,82 @@ padding-top:.4rem;
 }
 
 /* ── DRAWER ─────────────────────────────────────────── */
-#drw-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.55);display:none;opacity:0;transition:opacity .3s}
+#drw-overlay{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.72);
+
+backdrop-filter:blur(10px);
+
+opacity:0;
+
+visibility:hidden;
+
+transition:.25s ease;
+
+z-index:500;
+
+}
+
+#drw-overlay.open{
+
+opacity:1;
+
+visibility:visible;
+
+}
 #drw-overlay.open{display:block;opacity:1}
 #drw{
 
-position:fixed;
-top:18px;
-right:-470px;
-bottom:18px;
+    position:absolute;
 
-width:440px;
-max-width:100vw;
+    left:50%;
 
-background:linear-gradient(
-180deg,
-#241d17,
-#17130f
-);
+    top:80px;
 
-border:1px solid rgba(255,255,255,.05);
+    transform:
+        translateX(-50%)
+        scale(.98);
 
-border-radius:26px 0 0 26px;
+    width:720px;
+    max-width:92vw;
 
-box-shadow:
--30px 0 70px rgba(0,0,0,.45);
+    background:linear-gradient(
+        180deg,
+        #211b16,
+        #18130f
+    );
 
-overflow:hidden;
+    border:1px solid rgba(255,255,255,.06);
 
-display:flex;
-flex-direction:column;
+    border-radius:24px;
 
-transition:right .45s var(--ease);
+    box-shadow:
+        0 45px 120px rgba(0,0,0,.65);
 
-z-index:501;
+    opacity:0;
+
+    visibility:hidden;
+
+    z-index:501;
+
+    transition:
+        opacity .28s var(--ease),
+        transform .32s var(--ease);
 
 }
 #drw.open{
 
-right:0;
+    opacity:1;
 
-animation:drawerSlide .45s cubic-bezier(.22,1,.36,1);
+    visibility:visible;
+
+    transform:
+        translateX(-50%)
+        scale(1);
 
 }
 @keyframes drawerSlide{
@@ -918,16 +973,14 @@ transform:none;
 }
 .drw-head{
 
-padding:2rem;
+padding:2rem 2.2rem;
 
 border-bottom:1px solid rgba(255,255,255,.05);
 
-background:rgba(255,255,255,.015);
-
-backdrop-filter:blur(16px);
-
 display:flex;
+
 justify-content:space-between;
+
 align-items:flex-start;
 
 }
@@ -961,11 +1014,13 @@ color:rgba(255,255,255,.52);
 .drw-close:hover{border-color:var(--orange);color:var(--orange)}
 .drw-body{
 
-flex:1;
+padding:2rem 2.2rem;
 
-overflow-y:auto;
+display:grid;
 
-padding:2rem;
+grid-template-columns:1fr 1fr;
+
+gap:1.6rem;
 
 }
 .drw-field{
@@ -1012,17 +1067,13 @@ color:white;
 .btn-save:hover{border-color:var(--orange);background:rgba(239,126,25,.06)}
 .drw-actions{
 
-padding:1.6rem;
+padding:1.6rem 2.2rem;
 
-display:grid;
+display:flex;
 
-grid-template-columns:1fr;
-
-gap:.8rem;
+gap:1rem;
 
 border-top:1px solid rgba(255,255,255,.05);
-
-background:#17130f;
 
 }
 .drw-btn{
@@ -1068,7 +1119,13 @@ transition:.22s var(--ease);
   tbody tr{display:block;margin-bottom:.75rem;border:1px solid var(--rule-faint);padding:.85rem}
   tbody td{display:flex;justify-content:space-between;align-items:center;padding:.3rem 0;font-size:.78rem;border:none}
   tbody td::before{content:attr(data-label);font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);flex-shrink:0;margin-right:.8rem}
-  #drw{width:100%;right:-100%}
+  #drw{
+
+width:95vw;
+
+max-height:94vh;
+
+}
 }
 @media(max-width:480px){
   .stats-ledger{grid-template-columns:1fr}
@@ -1679,7 +1736,7 @@ function renderTable() {
       <td data-label="Package"><span class="td-clip" title="${pkg}">${pkg}</span></td>
       <td data-label="Status" style="position:relative; overflow:visible;">
         <span class="s-pill ${SC[st]}" onclick="toggleDrop(event,'${l.id}')">
-          ${SL[st]}
+          <span>${SL[st]}</span>
           <div class="s-drop" id="sd-${l.id}">
             ${Object.entries(SL).map(([k,v])=>`<div class="s-opt" onclick="chStatus(event,'${l.id}','${k}')">${v}</div>`).join('')}
           </div>
@@ -1717,7 +1774,12 @@ function toggleDrop(ev, id) {
   const dd = document.getElementById('sd-' + id)
   const was = dd.classList.contains('open')
   document.querySelectorAll('.s-drop.open').forEach(d => d.classList.remove('open'))
-  if (!was) dd.classList.add('open')
+  if (!was) {
+    const pill = ev.currentTarget.getBoundingClientRect()
+    dd.style.top = (pill.bottom + 8) + 'px'
+    dd.style.left = pill.left + 'px'
+    dd.classList.add('open')
+  }
 }
 async function chStatus(ev, id, st) {
   ev.stopPropagation()
@@ -1775,7 +1837,7 @@ function openDrawer(id) {
   document.getElementById('drw-actions').innerHTML = `
     ${lead.phone?`<button class="drw-btn drw-wa" onclick="waLink('${e(lead.phone)}','${e(lead.name||'')}','${e(lead.package_name||'')}')">💬 WhatsApp</button>`:''}
     <button class="drw-btn drw-book" onclick="chStatus(event,'${lead.id}','booked')">✓ Mark Booked</button>
-    <button class="drw-btn drw-arch" onclick="chStatus(event,'${lead.id}','cancelled')">Archive</button>
+    <button class="drw-btn drw-arch" onclick="chStatus(event,'${lead.id}','cancelled')">Cancel</button>
   `
   document.getElementById('drw-overlay').classList.add('open')
   document.getElementById('drw').classList.add('open')
@@ -2183,7 +2245,7 @@ function renderCharts() {
 });
 
 // fix variable name typo guard
-var sourcesChart = nul
+var sourcesChart = null
 </script>
 </body>
 </html>
