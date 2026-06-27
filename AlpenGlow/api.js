@@ -217,6 +217,22 @@
         }
         if (!d) return
 
+        // ── Side background image (body::before) ─────────────
+        if (d.bg_image_url) {
+          document.body.classList.add('has-page-bg')
+          var bgStyle = document.getElementById('_ag_bg_style')
+          if (!bgStyle) {
+            bgStyle = document.createElement('style')
+            bgStyle.id = '_ag_bg_style'
+            document.head.appendChild(bgStyle)
+          }
+          bgStyle.textContent = 'body.has-page-bg::before { background-image: url("' + resolveImg(d.bg_image_url).replace(/"/g, '\\"') + '"); }'
+        } else {
+          document.body.classList.remove('has-page-bg')
+          var existing = document.getElementById('_ag_bg_style')
+          if (existing) existing.remove()
+        }
+
         // ── Hero ──────────────────────────────────────────────
         if (d.hero_image_url) {
           const hi = document.querySelector('.detail-hero img')

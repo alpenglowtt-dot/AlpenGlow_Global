@@ -456,29 +456,44 @@ var(--shadow);
 }
 .filter-input:focus{border-color:var(--rule)}
 .filter-input::placeholder{color:var(--ghost)}
-.filter-select{
-
-padding:.82rem 1rem;
-
-background:linear-gradient(
-180deg,
-#211a14,
-#191410
-);
-
-border-radius:14px;
-
-border:1px solid rgba(255,255,255,.05);
-
-font-size:.88rem;
-
-color:var(--text);
-
-box-shadow:var(--shadow-sm);
-
+.select-wrap{
+  position:relative;
+  display:inline-flex;
+  align-items:stretch;
+  border-radius:14px;
+  background:linear-gradient(180deg,#211a14,#191410);
+  border:1px solid rgba(255,255,255,.07);
+  box-shadow:var(--shadow-sm);
+  transition:border-color .22s var(--ease),box-shadow .22s var(--ease);
 }
-.filter-select:focus{border-color:var(--rule)}
-.filter-select option{background:#1c1712;color:var(--white)}
+.select-wrap:focus-within{
+  border-color:rgba(239,126,25,.38);
+  box-shadow:0 0 0 4px rgba(239,126,25,.08),var(--shadow);
+}
+.select-wrap::after{
+  content:'';
+  position:absolute;
+  right:1rem;
+  top:50%;
+  transform:translateY(-50%);
+  width:10px;height:6px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  pointer-events:none;
+}
+.filter-select{
+  padding:.82rem 2.6rem .82rem 1rem;
+  background:transparent;
+  border:none;
+  border-radius:14px;
+  font-size:.88rem;
+  color:var(--text);
+  outline:none;
+  cursor:pointer;
+  -webkit-appearance:none;
+  appearance:none;
+  width:100%;
+}
+.filter-select option{background:#1e1812;color:var(--white)}
 .date-pills{display:flex;gap:0;border:1px solid var(--rule-faint)}
 .date-pill{
   padding:.42rem .75rem;border:none;
@@ -499,6 +514,36 @@ box-shadow:
 
 }
 .date-pill:hover:not(.active){background:var(--surface2);color:var(--text)}
+
+/* ───────────── PAGINATION ───────────── */
+.leads-pagination{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;margin-top:1rem;padding:.5rem 0;
+}
+.pag-btn{
+  padding:.55rem 1.4rem;
+  background:linear-gradient(180deg,#211a14,#191410);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  color:var(--text);
+  font-size:.82rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  box-shadow:var(--shadow-sm);
+  transition:all .2s var(--ease);
+}
+.pag-btn:hover:not(:disabled){
+  background:var(--surface3);
+  border-color:rgba(239,126,25,.35);
+  color:var(--orange);
+}
+.pag-btn:disabled{opacity:.28;cursor:not-allowed}
+.pag-info{
+  font-size:.78rem;
+  color:var(--muted);
+  letter-spacing:.02em;
+  white-space:nowrap;
+}
 
 /* ───────────── PREMIUM TABLE ───────────── */
 
@@ -867,14 +912,14 @@ visibility:visible;
 #drw-overlay.open{display:block;opacity:1}
 #drw{
 
-    position:absolute;
+    position:fixed;
 
     left:50%;
 
-    top:80px;
+    top:50%;
 
     transform:
-        translateX(-50%)
+        translate(-50%,-50%)
         scale(.98);
 
     width:720px;
@@ -915,7 +960,7 @@ visibility:visible;
     visibility:visible;
 
     transform:
-        translateX(-50%)
+        translate(-50%,-50%)
         scale(1);
 
 }
@@ -1288,7 +1333,7 @@ box-shadow:
       <img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global">
       <span>Leads Dashboard</span>
     </div>
-    <div class="header-title">AlpenGlow Global Leads Dashboard</div>
+    <div class="header-title">AlpenGlow Global Dashboard</div>
     <div class="header-right">
       <span id="live-clock"></span>
       <button class="btn-logout" onclick="logout()">Logout</button>
@@ -1452,22 +1497,26 @@ Converted
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="f-search" class="filter-input" placeholder="Search name, email, phone, source…" oninput="applyFilters()">
       </div>
-      <select class="filter-select" id="f-status" onchange="applyFilters()">
-        <option value="">All Statuses</option>
-        <option value="new">New</option>
-        <option value="contacted">Contacted</option>
-        <option value="quoted">Quoted</option>
-        <option value="booked">Booked</option>
-        <option value="cancelled">Cancelled</option>
-      </select>
-      <select class="filter-select" id="f-source" onchange="applyFilters()">
-        <option value="">All Sources</option>
-        <option value="trip_planner">Trip Planner</option>
-        <option value="contact_form">Contact Form</option>
-        <option value="package_unlock">Package Page</option>
-        <option value="offer_otp">Offer OTP</option>
-        <option value="blog_unlock">Blog Gate</option>
-      </select>
+      <div class="select-wrap">
+        <select class="filter-select" id="f-status" onchange="applyFilters()">
+          <option value="">All Statuses</option>
+          <option value="new">New</option>
+          <option value="contacted">Contacted</option>
+          <option value="quoted">Quoted</option>
+          <option value="booked">Booked</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="select-wrap">
+        <select class="filter-select" id="f-source" onchange="applyFilters()">
+          <option value="">All Sources</option>
+          <option value="trip_planner">Trip Planner</option>
+          <option value="contact_form">Contact Form</option>
+          <option value="package_unlock">Package Page</option>
+          <option value="offer_otp">Offer OTP</option>
+          <option value="blog_unlock">Blog Gate</option>
+        </select>
+      </div>
       <div class="date-pills">
         <button class="date-pill" onclick="setDays(7,this)">7d</button>
         <button class="date-pill" onclick="setDays(30,this)">30d</button>
@@ -1497,6 +1546,7 @@ Converted
         <p>Try adjusting your filters, or wait for your first enquiry to arrive.</p>
       </div>
     </div>
+    <div id="leads-pagination" class="leads-pagination" style="display:none"></div>
 
     <!-- Charts -->
     <div class="charts-row">
@@ -1538,6 +1588,8 @@ const H = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
 
 // ── STATE ──────────────────────────────────────────────
 let ALL = [], FILTERED = [], DAY_FILTER = 0, ACTIVE_LEAD = null
+let PAGE = 0
+const PER_PAGE = 10
 let volChart = null, srcChart = null, sourcesChart = null, delTarget = null
 
 // ── AUTH ───────────────────────────────────────────────
@@ -1639,6 +1691,7 @@ function applyFilters() {
     }
     return true
   })
+  PAGE = 0
   renderTable()
 }
 
@@ -1697,19 +1750,30 @@ const SRC = { contact_form:'Contact Form', package_unlock:'Package Page', offer_
 
 function e(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
 
+function changePage(delta) {
+  const totalPages = Math.ceil(FILTERED.length / PER_PAGE)
+  PAGE = Math.max(0, Math.min(PAGE + delta, totalPages - 1))
+  renderTable()
+  document.querySelector('.table-wrap')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 function renderTable() {
   const tbody = document.getElementById('leads-body')
   const empty = document.getElementById('empty-state')
-  if (!FILTERED.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return }
+  const pag   = document.getElementById('leads-pagination')
+  if (!FILTERED.length) { tbody.innerHTML = ''; empty.style.display = 'block'; pag.style.display = 'none'; return }
   empty.style.display = 'none'
+  const totalPages = Math.ceil(FILTERED.length / PER_PAGE)
+  const pageData = FILTERED.slice(PAGE * PER_PAGE, (PAGE + 1) * PER_PAGE)
   const now = Date.now()
-  tbody.innerHTML = FILTERED.map((l, i) => {
+  tbody.innerHTML = pageData.map((l, i) => {
+    const globalIdx = PAGE * PER_PAGE + i + 1
     const st = l.status || 'new'
     const fresh = now - new Date(l.created_at).getTime() < 86400000
     const dt = new Date(l.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
     const pkg = e(l.package_name || l.message || '—')
     return `<tr>
-      <td data-label="#">${i+1}</td>
+      <td data-label="#">${globalIdx}</td>
       <td data-label="Name"><div class="td-name-wrap">${fresh?'<span class="new-ring"></span>':''}<span>${e(l.name||'—')}</span></div></td>
       <td data-label="Phone">${e(l.phone||'—')}</td>
       <td data-label="Email"><span class="td-clip" title="${e(l.email||'')}">${e(l.email||'—')}</span></td>
@@ -1743,10 +1807,23 @@ function renderTable() {
       </td>
     </tr>`
   }).join('')
+
+  /* Pagination controls */
+  if (totalPages <= 1) {
+    pag.style.display = 'none'
+  } else {
+    pag.style.display = 'flex'
+    pag.innerHTML = `
+      <button class="pag-btn" onclick="changePage(-1)" ${PAGE === 0 ? 'disabled' : ''}>&#8592; Prev</button>
+      <span class="pag-info">Page ${PAGE + 1} of ${totalPages}&nbsp;&nbsp;·&nbsp;&nbsp;${FILTERED.length} leads</span>
+      <button class="pag-btn" onclick="changePage(1)" ${PAGE >= totalPages - 1 ? 'disabled' : ''}>Next &#8594;</button>
+    `
+  }
 }
 
 // ── STATUS DROPDOWN ────────────────────────────────────
 document.addEventListener('click', () => { document.getElementById('s-global-drop').classList.remove('open') })
+window.addEventListener('scroll', () => { document.getElementById('s-global-drop').classList.remove('open') }, { passive: true })
 function toggleDrop(ev, id) {
   ev.stopPropagation()
   const drop = document.getElementById('s-global-drop')

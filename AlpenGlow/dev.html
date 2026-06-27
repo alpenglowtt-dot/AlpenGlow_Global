@@ -872,39 +872,58 @@ function openCE(type, id) {
 
   } else if (type === 'page') {
     const item = id ? ALL_PAGES.find(x => x.slug === id || x.id === id) : null
+    // Matching packages.json entry — used as fallback for any fields not yet in the page JSON
+    const _pkg = id ? ALL_PKGS.find(p => {
+      const s = (p.link||'').replace(/^packages\//, '').replace(/\.html$/, '')
+      return s === id
+    }) : null
     document.getElementById('ce-drw-title').textContent = id ? 'Edit Package Page' : 'New Package Page'
-    const paras = Array.isArray(item?.overview_paragraphs) ? item.overview_paragraphs : []
-    const places = Array.isArray(item?.places) ? item.places : []
+    // For each field: page JSON is authoritative; fall back to packages.json when blank
+    const _slug      = item?.slug      || id          || ''
+    const _pageTitle = item?.page_title || (_pkg?.name ? _pkg.name + ' | AlpenGlow Global' : '')
+    const _heroImg   = item?.hero_image_url || _pkg?.image_url  || ''
+    const _loc       = item?.location   || _pkg?.location  || ''
+    const _dur       = item?.duration   || _pkg?.duration  || ''
+    const _title     = item?.title      || _pkg?.name      || ''
+    const _ovHead    = item?.overview_heading  || 'Overview'
+    const _plHead    = item?.places_heading    || 'Explore the Cities'
+    const _inclHead  = item?.inclusions_heading || "What's Included"
+    // Pre-fill overview paragraphs from page JSON; fall back to package description
+    const paras = (Array.isArray(item?.overview_paragraphs) && item.overview_paragraphs.length)
+      ? item.overview_paragraphs
+      : (_pkg?.description ? [_pkg.description] : [])
+    const places     = Array.isArray(item?.places)     ? item.places     : []
     const inclusions = Array.isArray(item?.inclusions) ? item.inclusions : []
     html = `
       <div class="ce-field">
         <label class="ce-lbl">Page Slug <span style="font-weight:400;text-transform:none;letter-spacing:0;opacity:.6">(filename without .html — e.g. japan)</span></label>
-        <input class="ce-input" id="ce-slug" placeholder="japan" value="${e(item?.slug||'')}">
+        <input class="ce-input" id="ce-slug" placeholder="japan" value="${e(_slug)}">
       </div>
       <div class="ce-field">
         <label class="ce-lbl">Browser Tab Title</label>
-        <input class="ce-input" id="ce-page-title" placeholder="Japan — Land of Contrasts | AlpenGlow Global" value="${e(item?.page_title||'')}">
+        <input class="ce-input" id="ce-page-title" placeholder="Japan — Land of Contrasts | AlpenGlow Global" value="${e(_pageTitle)}">
       </div>
       <div class="ce-section-lbl">Hero Section</div>
-      ${ceImgField('ce-img','ce-img-preview',item?.hero_image_url,'Hero Image (URL or upload)')}
+      ${ceImgField('ce-img','ce-img-preview',_heroImg,'Hero Image (URL or upload)')}
+      ${ceImgField('ce-bg-img','ce-bg-img-preview',item?.bg_image_url||'','Side Background Image (decorative left-edge image, optional)')}
       <div class="ce-row">
         <div class="ce-field">
           <label class="ce-lbl">Location</label>
-          <input class="ce-input" id="ce-location" placeholder="Japan" value="${e(item?.location||'')}">
+          <input class="ce-input" id="ce-location" placeholder="Japan" value="${e(_loc)}">
         </div>
         <div class="ce-field">
           <label class="ce-lbl">Duration</label>
-          <input class="ce-input" id="ce-duration" placeholder="9 Days / 8 Nights" value="${e(item?.duration||'')}">
+          <input class="ce-input" id="ce-duration" placeholder="9 Days / 8 Nights" value="${e(_dur)}">
         </div>
       </div>
       <div class="ce-field">
         <label class="ce-lbl">Page Title (h1)</label>
-        <input class="ce-input" id="ce-title" placeholder="Japan — Land of Contrasts" value="${e(item?.title||'')}">
+        <input class="ce-input" id="ce-title" placeholder="Japan — Land of Contrasts" value="${e(_title)}">
       </div>
       <div class="ce-section-lbl">Overview</div>
       <div class="ce-field">
         <label class="ce-lbl">Overview Heading</label>
-        <input class="ce-input" id="ce-overview-heading" placeholder="Overview" value="${e(item?.overview_heading||'Overview')}">
+        <input class="ce-input" id="ce-overview-heading" placeholder="Overview" value="${e(_ovHead)}">
       </div>
       <div class="ce-lbl" style="margin-bottom:.4rem">Overview Paragraphs</div>
       <div id="ce-overview-paras"></div>
@@ -912,7 +931,7 @@ function openCE(type, id) {
       <div class="ce-section-lbl">Places / Cities Section</div>
       <div class="ce-field">
         <label class="ce-lbl">Section Heading</label>
-        <input class="ce-input" id="ce-places-heading" placeholder="Explore the Cities" value="${e(item?.places_heading||'Explore the Cities')}">
+        <input class="ce-input" id="ce-places-heading" placeholder="Explore the Cities" value="${e(_plHead)}">
       </div>
       <div class="ce-lbl" style="margin-bottom:.4rem">Place Cards</div>
       <div id="ce-places"></div>
@@ -920,7 +939,7 @@ function openCE(type, id) {
       <div class="ce-section-lbl">What's Included</div>
       <div class="ce-field">
         <label class="ce-lbl">Section Heading</label>
-        <input class="ce-input" id="ce-inclusions-heading" placeholder="What's Included" value="${e(item?.inclusions_heading||"What's Included")}">
+        <input class="ce-input" id="ce-inclusions-heading" placeholder="What's Included" value="${e(_inclHead)}">
       </div>
       <div class="ce-lbl" style="margin-bottom:.4rem">Inclusion Items</div>
       <div id="ce-inclusions"></div>
@@ -1126,6 +1145,7 @@ async function saveCE() {
       slug,
       page_title:          document.getElementById('ce-page-title').value.trim(),
       hero_image_url:      document.getElementById('ce-img').value.trim(),
+      bg_image_url:        document.getElementById('ce-bg-img').value.trim(),
       location:            document.getElementById('ce-location').value.trim(),
       duration:            document.getElementById('ce-duration').value.trim(),
       title:               document.getElementById('ce-title').value.trim(),
@@ -1139,6 +1159,13 @@ async function saveCE() {
     }
     btn.textContent = 'Saving…'; btn.disabled = true
     try {
+      // If slug changed while editing, remove the old file
+      if (CE_ID && CE_ID !== slug) {
+        try {
+          const pagesDir = await getSubDir('data/pages')
+          await pagesDir.removeEntry(CE_ID + '.json')
+        } catch(e) {}
+      }
       await writeJSON('data/pages/' + slug + '.json', body)
       closeCE(); await loadAll()
     } catch(err) { alert('Save failed: ' + err.message)
@@ -1400,6 +1427,7 @@ function renderPkgs() {
           onclick="${toggleAct}"></button>
         ${openBtn}
         <button class="cr-btn" title="Edit Package" onclick="${editAct}">✏</button>
+        <button class="cr-btn" title="Edit Page Content" onclick="openCE('page','${e(slug)}')" style="font-size:.7rem;padding:.28rem .45rem">&#128196;</button>
         ${deleteBtn}
       </div>
     </div>`
@@ -1499,6 +1527,7 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="package.css">
+<link rel="stylesheet" href="../trip-planner.css">
 </head>
 <body>
 
@@ -1511,7 +1540,7 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
     <a href="../index.html#packages">Packages</a>
     <a href="../index.html#offers">Offers</a>
     <a href="../index.html#contact">Contact</a>
-    <a href="../index.html#contact" class="nav-cta">Plan Your Trip</a>
+    <a href="#" class="nav-cta" onclick="event.preventDefault();typeof initTripPlanner==='function'&&initTripPlanner()">Plan Your Trip</a>
   </div>
   <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1540,8 +1569,11 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
       <button class="btn-scroll-verify" onclick="document.getElementById('gateCard').scrollIntoView({behavior:'smooth',block:'start'})">Verify &amp; Unlock Now</button>
     </div>
     <div class="overview-free">
-      <h2>Overview</h2>
-      <p>Overview content will be added here.</p>
+      <div class="overview-card-float">
+        <h2>Overview</h2>
+        <div class="o-rule"></div>
+        <p>Overview content will be added here.</p>
+      </div>
     </div>
     <h2 id="placesHeading">Explore the Highlights</h2>
     <div class="city-showcase"></div>
@@ -1622,6 +1654,7 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
 </footer>
 
 <script src="../api.js">\x3c/script>
+<script src="../trip-planner.js">\x3c/script>
 <script>
 let _gateName = "", _gatePhone = "", _gateEmail = "";
 function unlockContent() {
