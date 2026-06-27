@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lead Dashboard — Alpen Glow</title>
+<title>Leads Dashboard — AlpenGlow Global</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -499,43 +499,6 @@ box-shadow:
 
 }
 .date-pill:hover:not(.active){background:var(--surface2);color:var(--text)}
-.btn-export{
-
-display:flex;
-align-items:center;
-gap:.6rem;
-
-padding:.82rem 1.2rem;
-
-border-radius:14px;
-
-background:linear-gradient(
-180deg,
-#211a14,
-#191410
-);
-
-border:1px solid rgba(255,255,255,.05);
-
-box-shadow:var(--shadow-sm);
-
-font-weight:600;
-
-color:var(--muted);
-
-}
-
-.btn-export:hover{
-
-transform:translateY(-2px);
-
-border-color:rgba(239,126,25,.22);
-
-box-shadow:var(--shadow);
-
-color:var(--orange);
-
-}
 
 /* ───────────── PREMIUM TABLE ───────────── */
 
@@ -916,6 +879,10 @@ visibility:visible;
 
     width:720px;
     max-width:92vw;
+    max-height:88vh;
+
+    display:flex;
+    flex-direction:column;
 
     background:linear-gradient(
         180deg,
@@ -973,7 +940,7 @@ transform:none;
 }
 .drw-head{
 
-padding:2rem 2.2rem;
+padding:1.8rem 2.2rem 1.6rem;
 
 border-bottom:1px solid rgba(255,255,255,.05);
 
@@ -982,6 +949,8 @@ display:flex;
 justify-content:space-between;
 
 align-items:flex-start;
+
+flex-shrink:0;
 
 }
 .drw-title{
@@ -1013,20 +982,29 @@ color:rgba(255,255,255,.52);
 }
 .drw-close:hover{border-color:var(--orange);color:var(--orange)}
 .drw-body{
-
-padding:2rem 2.2rem;
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:1.6rem;
-
+  padding:1.6rem 2.2rem;
+  flex:1;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.08) transparent;
 }
+.drw-info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0.4rem 1.6rem;
+}
+.drw-notes-section{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+.drw-timeline-section{ display:flex; flex-direction:column; gap:0; }
 .drw-field{
-
-margin-bottom:1.6rem;
-
+  margin-bottom:.2rem;
+  padding:.7rem 0;
 }
 .drw-lbl{
 
@@ -1052,28 +1030,32 @@ color:white;
 }
 .drw-hr{height:1px;background:var(--rule-faint);margin:1.2rem 0}
 .drw-notes{
-  width:100%;min-height:80px;padding:.7rem;
-  background:var(--bg);border:1px solid var(--rule-faint);
-  color:var(--text);font-size:.8rem;line-height:1.6;resize:vertical;outline:none;
-  transition:border-color .2s;margin-top:.3rem;
+  width:100%;min-height:110px;padding:.85rem 1rem;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;
+  color:var(--text);font-size:.88rem;line-height:1.65;resize:vertical;outline:none;
+  transition:border-color .2s, background .2s;margin-top:.6rem;
 }
-.drw-notes:focus{border-color:var(--orange)}
+.drw-notes:focus{border-color:var(--orange);background:rgba(255,255,255,.05)}
 .btn-save{
-  margin-top:.5rem;padding:.42rem .85rem;
-  background:transparent;border:1px solid var(--rule);
-  color:var(--orange);font-size:.74rem;font-weight:500;
+  width:100%;margin-top:.75rem;padding:.7rem 1rem;
+  background:rgba(239,126,25,.1);border:1px solid rgba(239,126,25,.3);
+  border-radius:10px;
+  color:var(--orange);font-size:.85rem;font-weight:600;letter-spacing:.04em;
   transition:all .2s;
 }
-.btn-save:hover{border-color:var(--orange);background:rgba(239,126,25,.06)}
+.btn-save:hover{border-color:var(--orange);background:rgba(239,126,25,.18);transform:none}
 .drw-actions{
 
-padding:1.6rem 2.2rem;
+padding:1.4rem 2.2rem;
 
 display:flex;
 
 gap:1rem;
 
 border-top:1px solid rgba(255,255,255,.05);
+
+flex-shrink:0;
 
 }
 .drw-btn{
@@ -1290,7 +1272,7 @@ box-shadow:
 <!-- LOGIN -->
 <div id="login-gate">
   <div class="login-card">
-    <img src="alpenglow-removebg-preview.png" alt="Alpen Glow">
+    <img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global">
     <h2>Owner Dashboard</h2>
     <p>Enter your password to access lead data</p>
     <input type="password" id="pw" class="login-input" placeholder="Password" onkeydown="if(event.key==='Enter')login()">
@@ -1303,10 +1285,10 @@ box-shadow:
 <div id="dashboard">
   <header class="dash-header">
     <div class="header-logo">
-      <img src="alpenglow-removebg-preview.png" alt="Alpen Glow">
-      <span>Leads Navigator</span>
+      <img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global">
+      <span>Leads Dashboard</span>
     </div>
-    <div class="header-title">Alpenglow Global Owner Dashboard</div>
+    <div class="header-title">AlpenGlow Global Leads Dashboard</div>
     <div class="header-right">
       <span id="live-clock"></span>
       <button class="btn-logout" onclick="logout()">Logout</button>
@@ -1480,6 +1462,7 @@ Converted
       </select>
       <select class="filter-select" id="f-source" onchange="applyFilters()">
         <option value="">All Sources</option>
+        <option value="trip_planner">Trip Planner</option>
         <option value="contact_form">Contact Form</option>
         <option value="package_unlock">Package Page</option>
         <option value="offer_otp">Offer OTP</option>
@@ -1490,10 +1473,6 @@ Converted
         <button class="date-pill" onclick="setDays(30,this)">30d</button>
         <button class="date-pill active" onclick="setDays(0,this)">All</button>
       </div>
-      <button class="btn-export" onclick="exportCSV()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Export CSV
-      </button>
     </div>
 
     <!-- Table -->
@@ -1714,7 +1693,7 @@ const SC = {
     booked:'s-booked',
     cancelled:'s-cancelled'
 }
-const SRC = { contact_form:'Contact Form', package_unlock:'Package Page', offer_otp:'Offer OTP', blog_unlock:'Blog Gate' }
+const SRC = { contact_form:'Contact Form', package_unlock:'Package Page', offer_otp:'Offer OTP', blog_unlock:'Blog Gate', trip_planner:'Trip Planner' }
 
 function e(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
 
@@ -1804,7 +1783,7 @@ function confirmDel(id, btn) {
 // ── WHATSAPP ───────────────────────────────────────────
 function waLink(phone, name, pkg) {
   const clean = phone.replace(/\D/g, '')
-  const msg = encodeURIComponent(`Hi ${name}, this is Alpen Glow Tours — following up on your enquiry${pkg ? ` about ${pkg}` : ''}. How can we help you?`)
+  const msg = encodeURIComponent(`Hi ${name}, this is AlpenGlow Global — following up on your enquiry${pkg ? ` about ${pkg}` : ''}. How can we help you?`)
   window.open(`https://wa.me/${clean}?text=${msg}`, '_blank')
 }
 
@@ -1817,24 +1796,45 @@ function openDrawer(id) {
   const dt = new Date(lead.created_at).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })
   document.getElementById('drw-name').textContent = lead.name || '—'
   document.getElementById('drw-sub').textContent = lead.email || '—'
-  document.getElementById('drw-body').innerHTML = `
+  // Build info grid fields (2-column)
+  const isTripPlanner = lead.source === 'trip_planner'
+  let infoFields = `
     <div class="drw-field"><div class="drw-lbl">Status</div><span class="s-pill ${SC[st]}">${SL[st]}</span></div>
+    <div class="drw-field"><div class="drw-lbl">Source</div><div class="drw-val">${e(SRC[lead.source]||lead.source||'—')}</div></div>
     <div class="drw-field"><div class="drw-lbl">Phone</div><div class="drw-val">${e(lead.phone||'—')}</div></div>
     <div class="drw-field"><div class="drw-lbl">Email</div><div class="drw-val">${e(lead.email||'—')}</div></div>
-    <div class="drw-field"><div class="drw-lbl">Source</div><div class="drw-val">${e(SRC[lead.source]||lead.source||'—')}</div></div>
-    ${lead.package_name?`<div class="drw-field"><div class="drw-lbl">Package</div><div class="drw-val">${e(lead.package_name)}</div></div>`:''}
     ${lead.offer_code?`<div class="drw-field"><div class="drw-lbl">Offer Code</div><div class="drw-val">${e(lead.offer_code)}</div></div>`:''}
-    ${lead.message?`<div class="drw-field"><div class="drw-lbl">Message</div><div class="drw-val">${e(lead.message)}</div></div>`:''}
-    <div class="drw-field"><div class="drw-lbl">Verified</div><div class="drw-val">${lead.verified_phone?'✓ WhatsApp':'✗ WhatsApp'} &nbsp; ${lead.verified_email?'✓ Email':'✗ Email'}</div></div>
+    ${!isTripPlanner&&lead.package_name?`<div class="drw-field"><div class="drw-lbl">Package</div><div class="drw-val">${e(lead.package_name)}</div></div>`:''}
+    <div class="drw-field"><div class="drw-lbl">Verified</div><div class="drw-val">${lead.verified_phone?'✓ WhatsApp':'✗ WhatsApp'}&nbsp;&nbsp;${lead.verified_email?'✓ Email':'✗ Email'}</div></div>
+  `
+  // Trip planner details go into the info grid
+  if (isTripPlanner && lead.message) {
+    infoFields += lead.message.split('|').map(part => {
+      const [lbl,...rest] = part.trim().split(':')
+      return `<div class="drw-field"><div class="drw-lbl">${e(lbl.trim())}</div><div class="drw-val">${e(rest.join(':').trim())}</div></div>`
+    }).join('')
+  }
+  // Regular message (full-width block, rendered outside the info grid)
+  const msgBlock = (!isTripPlanner && lead.message)
+    ? `<div class="drw-hr"></div><div class="drw-field"><div class="drw-lbl">Message</div><div class="drw-val" style="white-space:pre-wrap;line-height:1.7">${e(lead.message)}</div></div>`
+    : ''
+
+  document.getElementById('drw-body').innerHTML = `
+    <div class="drw-info-grid">${infoFields}</div>
+    ${msgBlock}
     <div class="drw-hr"></div>
-    <div class="drw-lbl">Notes</div>
-    <textarea class="drw-notes" id="drw-notes-ta" placeholder="Add notes about this lead…">${e(lead.notes||'')}</textarea>
-    <button class="btn-save" onclick="saveNotes('${lead.id}')">Save Notes</button>
+    <div class="drw-notes-section">
+      <div class="drw-lbl">Internal Notes</div>
+      <textarea class="drw-notes" id="drw-notes-ta" placeholder="Add private notes about this lead…">${e(lead.notes||'')}</textarea>
+      <button class="btn-save" onclick="saveNotes('${lead.id}')">Save Notes</button>
+    </div>
     <div class="drw-hr"></div>
-    <div class="drw-lbl">Timeline</div>
-    <div class="tl">
-      <div class="tl-item"><div class="tl-dot">✦</div><div><div class="tl-txt">Lead created</div><div class="tl-time">${dt}</div></div></div>
-      ${st!=='new'?`<div class="tl-item"><div class="tl-dot">◦</div><div><div class="tl-txt">Status updated → ${SL[st]}</div><div class="tl-time">Manually updated</div></div></div>`:''}
+    <div class="drw-timeline-section">
+      <div class="drw-lbl">Timeline</div>
+      <div class="tl">
+        <div class="tl-item"><div class="tl-dot">✦</div><div><div class="tl-txt">Lead received</div><div class="tl-time">${dt}</div></div></div>
+        ${st!=='new'?`<div class="tl-item"><div class="tl-dot">◦</div><div><div class="tl-txt">Status → ${SL[st]}</div><div class="tl-time">Manually updated</div></div></div>`:''}
+      </div>
     </div>
   `
   document.getElementById('drw-actions').innerHTML = `
@@ -1858,19 +1858,6 @@ async function saveNotes(id) {
   setTimeout(() => btn.textContent = 'Save Notes', 1600)
 }
 
-// ── EXPORT CSV ─────────────────────────────────────────
-function exportCSV() {
-  const cols = ['name','email','phone','source','package_name','offer_code','status','verified_phone','verified_email','message','created_at']
-  const rows = [cols.join(',')]
-  FILTERED.forEach(l => rows.push(cols.map(c => {
-    const v = l[c] == null ? '' : String(l[c])
-    return v.includes(',') || v.includes('"') || v.includes('\n') ? `"${v.replace(/"/g,'""')}"` : v
-  }).join(',')))
-  const a = document.createElement('a')
-  a.href = URL.createObjectURL(new Blob([rows.join('\n')], { type: 'text/csv' }))
-  a.download = `alpenglow-leads-${new Date().toISOString().slice(0,10)}.csv`
-  a.click()
-}
 
 // ── CHARTS ─────────────────────────────────────────────
 function renderCharts() {

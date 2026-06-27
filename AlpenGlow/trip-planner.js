@@ -37,12 +37,11 @@
   const UNS = (id, w) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w || 900}&q=80`;
 
   const VIBES = [
-    { id:'beach',     label:'Beach',              sub:'Sun, sand & sea',           img: UNS('photo-1507525428034-b723cf961d3e') },
-    { id:'mountains', label:'Mountains',           sub:'Peaks & crisp air',         img: UNS('photo-1506905925346-21bda4d32df4') },
-    { id:'cultural',  label:'Cultural / Heritage', sub:'History & traditions',      img: UNS('photo-1524492412937-b28074a5d7da') },
-    { id:'adventure', label:'Adventure',           sub:'Thrills & the unknown',     img: UNS('photo-1551632811-561732d1e306') },
-    { id:'wildlife',  label:'Wildlife',            sub:'Nature up close',           img: UNS('photo-1516426122078-c23e76319801') },
-    { id:'honeymoon', label:'Honeymoon / Romantic',sub:'Just the two of you',      img: UNS('photo-1530103862676-de8c9debad1d') },
+    { id:'beach',     label:'Beach',                sub:'Sun, sand & sea',              img: UNS('photo-1507525428034-b723cf961d3e') },
+    { id:'mountains', label:'Mountains',             sub:'Peaks & crisp air',            img: UNS('photo-1506905925346-21bda4d32df4') },
+    { id:'cultural',  label:'Cultural / Heritage',  sub:'History & traditions',         img: UNS('photo-1524492412937-b28074a5d7da') },
+    { id:'adventure', label:'Adventure & Wildlife',  sub:'Thrills, nature & the wild',  img: UNS('photo-1551632811-561732d1e306') },
+    { id:'honeymoon', label:'Honeymoon / Romantic',  sub:'Just the two of you',         img: UNS('photo-1530103862676-de8c9debad1d') },
   ];
 
   /* Vibe backgrounds — full-screen hero on hover / select */
@@ -51,7 +50,6 @@
     mountains: UNS('photo-1506905925346-21bda4d32df4', 1920),
     cultural:  UNS('photo-1524492412937-b28074a5d7da', 1920),
     adventure: UNS('photo-1551632811-561732d1e306',    1920),
-    wildlife:  UNS('photo-1516426122078-c23e76319801', 1920),
     honeymoon: UNS('photo-1530103862676-de8c9debad1d', 1920),
   };
 
@@ -107,29 +105,11 @@
     {
       id:'srilanka', name:'Sri Lanka', country:'South Asia',
       img: BASE + 'srilanka.jpg',
-      vibes:['beach','cultural','wildlife'],
+      vibes:['beach','cultural','adventure'],
       bestMonths:[10,11,0,1,2,3],
       proof:634, proofPop:false,
       alt:'Thailand',
       altReason:'southwest monsoon (May–Sep)'
-    },
-    {
-      id:'thailand', name:'Thailand', country:'Southeast Asia',
-      img: UNS('photo-1528181304800-259b08848526'),
-      vibes:['beach','cultural','adventure'],
-      bestMonths:[10,11,0,1,2,3],
-      proof:1543, proofPop:false,
-      alt:'Bali',
-      altReason:'rainy season (Apr–Sep on west coast)'
-    },
-    {
-      id:'dubai', name:'Dubai', country:'UAE',
-      img: UNS('photo-1512453979798-5ea266f8880c'),
-      vibes:['cultural','honeymoon','adventure'],
-      bestMonths:[10,11,0,1,2,3],
-      proof:876, proofPop:false,
-      alt:'Maldives',
-      altReason:'extreme summer heat (May–Sep, 45 °C+)'
     },
     {
       id:'switzerland', name:'Switzerland', country:'Europe',
@@ -143,7 +123,7 @@
     {
       id:'nepal', name:'Nepal', country:'South Asia',
       img: BASE + 'nepal.jpg',
-      vibes:['mountains','adventure','wildlife'],
+      vibes:['mountains','adventure'],
       bestMonths:[2,3,9,10],
       proof:967, proofPop:false,
       alt:'Bhutan',
@@ -159,7 +139,7 @@
       altReason:'monsoon (Jul–Aug, limited trekking)'
     },
     {
-      id:'scandinavia', name:'Scandinavia', country:'Norway · Iceland · Finland',
+      id:'norway', name:'Norwegian Fjords', country:'Norway · Iceland · Finland',
       img: BASE + 'norway.jpg',
       vibes:['mountains','adventure'],
       bestMonths:[5,6,7,11,0,1],
@@ -170,7 +150,7 @@
     {
       id:'newzealand', name:'New Zealand', country:'Pacific',
       img: BASE + 'newzealand.jpg',
-      vibes:['mountains','adventure','wildlife'],
+      vibes:['mountains','adventure'],
       bestMonths:[11,0,1,2],
       proof:718, proofPop:false,
       alt:'Australia',
@@ -179,7 +159,7 @@
     {
       id:'australia', name:'Australia', country:'Pacific',
       img: BASE + 'australia.jpg',
-      vibes:['adventure','wildlife'],
+      vibes:['adventure'],
       bestMonths:[2,3,4,8,9,10],
       proof:856, proofPop:false,
       alt:'New Zealand',
@@ -197,7 +177,7 @@
     {
       id:'india', name:'India', country:'South Asia',
       img: BASE + 'india.jpg',
-      vibes:['cultural','wildlife','adventure'],
+      vibes:['cultural','adventure'],
       bestMonths:[9,10,11,0,1,2],
       proof:2456, proofPop:true,
       alt:'Sri Lanka',
@@ -316,12 +296,12 @@
   const STEP_BGS = [
     UNS('photo-1476514525535-07fb3b4ae5f1', 1920), /* 0 – vibe          */
     UNS('photo-1476514525535-07fb3b4ae5f1', 1920), /* 1 – destination   */
-    UNS('photo-1491555103944-7c647fd857e6', 1920), /* 2 – travelers     */
+    UNS('photo-1529156069898-49953e39b3ac', 1920), /* 2 – travelers     */
     UNS('photo-1566438480900-0609be27a4be', 1920), /* 3 – count/rooms   */
     UNS('photo-1436491865332-7a61a109cc05', 1920), /* 4 – month         */
     UNS('photo-1500835556837-99ac94a94552', 1920), /* 5 – origin city   */
     UNS('photo-1503220317375-aaad61436b1b', 1920), /* 6 – duration      */
-    UNS('photo-1455587734955-081b22074882', 1920), /* 7 – budget        */
+    UNS('photo-1566073771259-6a8506099945', 1920), /* 7 – budget        */
     UNS('photo-1452421822248-d4c2b47f0c81', 1920), /* 8 – contact       */
   ];
 
@@ -388,7 +368,7 @@
   <div id="tp-veil"></div>
 
   <header id="tp-header">
-    <button id="tp-close" aria-label="Close trip planner">✕</button>
+    <button id="tp-close" aria-label="Close trip planner" onclick="window.__tpClose&&window.__tpClose()">✕</button>
     <nav id="tp-breadcrumb"></nav>
     <div id="tp-progress"><div id="tp-progress-fill"></div></div>
   </header>
@@ -432,13 +412,14 @@
      GLOBAL EVENT BINDINGS
      ───────────────────────────────────────────────────────────── */
   function _bindGlobal() {
-    document.getElementById('tp-close').addEventListener('click', _close);
-    _btnBack.addEventListener('click', _goBack);
-    document.getElementById('tp-warn-dismiss').addEventListener('click', function () {
+    var closeBtn = document.getElementById('tp-close');
+    if (closeBtn) { closeBtn.onclick = function() { _close(); }; }
+    _btnBack.onclick = _goBack;
+    document.getElementById('tp-warn-dismiss').onclick = function () {
       _warn.classList.remove('tp-show');
       _s.warnDismissed = true;
-    });
-    _confirm.querySelector('.tp-confirm-close').addEventListener('click', _close);
+    };
+    _confirm.querySelector('.tp-confirm-close').onclick = _close;
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && _root && _root.classList.contains('tp-open')) _close();
     });
@@ -453,12 +434,16 @@
   }
 
   function _close() {
+    if (!_root) return;
     _root.classList.remove('tp-open');
     setTimeout(function () {
       document.body.style.overflow = '';
-      _confirm.classList.remove('tp-show');
+      if (_confirm) _confirm.classList.remove('tp-show');
     }, 500);
   }
+
+  /* Expose globally so inline onclick in HTML always works */
+  window.__tpClose = function () { _close(); };
 
   function _state_reset() {
     _s.step          = 0;
@@ -524,12 +509,21 @@
 
     STEPS[idx].bind && STEPS[idx].bind();
     _bindStep(idx);
+    _bindNextBtn();
   }
+
+  /* Maps step.id → the answers key that indicates the step is complete */
+  var _stepDoneKey = {
+    vibe:'vibe', destination:'destination', travelers:'travelerType',
+    count:'adults', month:'month', origin:'originCity',
+    duration:'duration', budget:'budget', contact:'name'
+  };
 
   function _updateBreadcrumb(currentIdx) {
     let html = '';
     STEPS.forEach(function (s, i) {
-      const isDone   = _s.answers[s.id] !== undefined && i < currentIdx;
+      var key = _stepDoneKey[s.id] || s.id;
+      const isDone   = _s.answers[key] !== undefined && i < currentIdx;
       const isActive = i === currentIdx;
       const cls = isDone ? 'tp-dot tp-dot-done' : isActive ? 'tp-dot tp-dot-active' : 'tp-dot';
       if (i > 0) html += '<div class="tp-dot-line"></div>';
@@ -548,6 +542,19 @@
     _progressFill.style.width = ((idx / (STEPS.length - 1)) * 100) + '%';
   }
 
+  /* ── Next Step button helpers ─────────────────────────────── */
+  function _nextBtnHtml() {
+    return '<div class="tp-next-wrap"><button class="tp-next-btn" id="tp-next" disabled>Next Step &rarr;</button></div>';
+  }
+  function _bindNextBtn() {
+    var btn = document.getElementById('tp-next');
+    if (btn) btn.onclick = _advance;
+  }
+  function _enableNextBtn() {
+    var btn = document.getElementById('tp-next');
+    if (btn) { btn.disabled = false; }
+  }
+
   /* ─────────────────────────────────────────────────────────────
      STEP RENDERS
      ───────────────────────────────────────────────────────────── */
@@ -563,7 +570,8 @@
           '<div class="tp-card-overlay"><div class="tp-card-name">' + v.label + '</div><div class="tp-card-sub">' + v.sub + '</div></div>' +
           '<div class="tp-check">✓</div></div>';
       }).join('') +
-      '</div>';
+      '</div>' +
+      _nextBtnHtml();
   }
 
   /* ── Step 1: Destination ──────────────────────────────────── */
@@ -591,7 +599,8 @@
           '</div>' +
           '<div class="tp-check">✓</div></div>';
       }).join('') +
-      '</div>';
+      '</div>' +
+      _nextBtnHtml();
   }
 
   /* ── Step 2: Who's traveling ──────────────────────────────── */
@@ -607,7 +616,8 @@
           '<div class="tp-icon-desc">' + t.desc + '</div>' +
           '</div>';
       }).join('') +
-      '</div>';
+      '</div>' +
+      _nextBtnHtml();
   }
 
   /* ── Step 3: Traveler count + rooms ──────────────────────── */
@@ -620,7 +630,8 @@
       _stepper('tp-adults',   'Adults',   '12 years and above', adults,   1, 20) +
       _stepper('tp-children', 'Children', 'Under 12 years',     children, 0, 20) +
       _stepper('tp-rooms',    'Rooms',    'Hotel rooms needed',  rooms,    1, 10) +
-      '</div>';
+      '</div>' +
+      _nextBtnHtml();
   }
 
   /* ── Step 4: Travel month ─────────────────────────────────── */
@@ -632,7 +643,8 @@
         return '<div class="tp-month-card' + (sel === m.idx ? ' tp-sel' : '') + '" data-midx="' + m.idx + '" tabindex="0">' +
           '<span class="tp-month-abbr">' + m.abbr + '</span><span class="tp-month-full">' + m.full + '</span></div>';
       }).join('') +
-      '</div>';
+      '</div>' +
+      _nextBtnHtml();
   }
 
   /* ── Step 5: Origin city ──────────────────────────────────── */
@@ -643,7 +655,8 @@
       '<input class="tp-city-input" id="tp-city-input" type="text" placeholder="Search your city…" value="' + sel + '" autocomplete="off">' +
       '<div class="tp-city-list" id="tp-city-list">' +
       _cityRows(CITIES, sel) +
-      '</div></div>';
+      '</div></div>' +
+      _nextBtnHtml();
   }
 
   function _cityRows(list, sel) {
@@ -664,7 +677,8 @@
           '<div class="tp-dur-days">' + d.label + '</div>' +
           '<div class="tp-dur-label">' + d.desc + '</div></div>';
       }).join('') +
-      '</div>';
+      '</div>' +
+      _nextBtnHtml();
   }
 
   /* ── Step 7: Budget ───────────────────────────────────────── */
@@ -678,7 +692,8 @@
           '<div class="tp-budget-name">' + b.name + '</div>' +
           '<div class="tp-budget-desc">' + b.desc + '</div></div>';
       }).join('') +
-      '</div>';
+      '</div>' +
+      _nextBtnHtml();
   }
 
   /* ── Step 8: Contact ──────────────────────────────────────── */
@@ -716,12 +731,12 @@
         const vibeId = el.dataset.vibe;
         const changed = _s.answers.vibe !== vibeId;
         _s.answers.vibe = vibeId;
-        if (changed) delete _s.answers.destination; /* reset destination on vibe change */
+        if (changed) delete _s.answers.destination;
         _s.warnDismissed = false;
         _setBg(VIBE_BGS[vibeId] || STEP_BGS[0]);
         _stepWrap.querySelectorAll('[data-vibe]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(1);
-        setTimeout(_advance, 320);
+        _enableNextBtn();
       });
       el.addEventListener('mouseenter', function () { _setBg(VIBE_BGS[el.dataset.vibe] || STEP_BGS[0]); });
       el.addEventListener('mouseleave', function () {
@@ -729,6 +744,8 @@
         _setBg(cur ? VIBE_BGS[cur] : STEP_BGS[0]);
       });
     });
+    /* re-enable if vibe already chosen (returning to this step) */
+    if (_s.answers.vibe) _enableNextBtn();
   }
 
   function _bindDestination() {
@@ -738,9 +755,10 @@
         _s.warnDismissed = false;
         _stepWrap.querySelectorAll('[data-dest]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(2);
-        setTimeout(_advance, 320);
+        _enableNextBtn();
       });
     });
+    if (_s.answers.destination) _enableNextBtn();
   }
 
   function _bindTravelers() {
@@ -749,9 +767,10 @@
         _s.answers.travelerType = el.dataset.trav;
         _stepWrap.querySelectorAll('[data-trav]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(3);
-        setTimeout(_advance, 320);
+        _enableNextBtn();
       });
     });
+    if (_s.answers.travelerType) _enableNextBtn();
   }
 
   function _bindCount() {
@@ -780,22 +799,17 @@
         }
       });
     }
+    /* Set defaults before enabling */
+    if (_s.answers.adults   === undefined) _s.answers.adults   = 2;
+    if (_s.answers.children === undefined) _s.answers.children = 0;
+    if (_s.answers.rooms    === undefined) _s.answers.rooms    = 1;
+
     _mkStepper('tp-adults',   'adults',   1, 20);
     _mkStepper('tp-children', 'children', 0, 20);
     _mkStepper('tp-rooms',    'rooms',    1, 10);
 
-    /* Auto-advance: no single-click trigger; add a continue button instead */
-    const wrap = document.createElement('div');
-    wrap.style.cssText = 'margin-top:24px;display:flex;justify-content:flex-end;';
-    wrap.innerHTML = '<button class="tp-submit" style="width:auto;padding:13px 32px;" id="tp-count-next">Continue →</button>';
-    _stepWrap.appendChild(wrap);
-    document.getElementById('tp-count-next').addEventListener('click', function () {
-      if (_s.answers.adults === undefined) _s.answers.adults = 2;
-      if (_s.answers.rooms  === undefined) _s.answers.rooms  = 1;
-      if (_s.answers.children === undefined) _s.answers.children = 0;
-      _sbUpsert(4);
-      _advance();
-    });
+    _sbUpsert(4);
+    _enableNextBtn();
   }
 
   function _bindMonth() {
@@ -806,9 +820,10 @@
         _stepWrap.querySelectorAll('[data-midx]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(5);
         _checkSeasonalWarning();
-        setTimeout(_advance, 360);
+        _enableNextBtn();
       });
     });
+    if (_s.answers.month !== undefined) _enableNextBtn();
   }
 
   function _checkSeasonalWarning() {
@@ -846,13 +861,14 @@
           list.querySelectorAll('[data-city]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
           _checkSeasonalWarning();
           _sbUpsert(6);
-          setTimeout(_advance, 300);
+          _enableNextBtn();
         });
       });
     }
 
     input.addEventListener('input', function () { _filter(input.value); });
     _bindCityRows();
+    if (_s.answers.originCity) _enableNextBtn();
   }
 
   function _bindDuration() {
@@ -861,9 +877,10 @@
         _s.answers.duration = el.dataset.dur;
         _stepWrap.querySelectorAll('[data-dur]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(7);
-        setTimeout(_advance, 320);
+        _enableNextBtn();
       });
     });
+    if (_s.answers.duration) _enableNextBtn();
   }
 
   function _bindBudget() {
@@ -872,9 +889,10 @@
         _s.answers.budget = el.dataset.budget;
         _stepWrap.querySelectorAll('[data-budget]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(8);
-        setTimeout(_advance, 320);
+        _enableNextBtn();
       });
     });
+    if (_s.answers.budget) _enableNextBtn();
   }
 
   function _bindContact() {
@@ -955,7 +973,43 @@
       .upsert(_buildPayload(9, 'submitted'), { onConflict: 'session_id' })
       .then(function (res) {
         if (res.error) throw res.error;
+        return _insertLeadRecord();
       });
+  }
+
+  function _insertLeadRecord() {
+    const sb = _getSb();
+    if (!sb) return Promise.resolve();
+    const a = _s.answers;
+
+    const parts = [];
+    if (a.vibe)         parts.push('Vibe: ' + a.vibe.charAt(0).toUpperCase() + a.vibe.slice(1));
+    if (a.destination)  parts.push('Destination: ' + a.destination.charAt(0).toUpperCase() + a.destination.slice(1));
+    if (a.travelerType) parts.push('Type: ' + a.travelerType);
+    const adultStr = a.adults  !== undefined ? a.adults  + ' Adult'  + (a.adults  !== 1 ? 's' : '') : '';
+    const childStr = a.children !== undefined && a.children > 0 ? a.children + ' Child' + (a.children !== 1 ? 'ren' : '') : '';
+    const roomStr  = a.rooms   !== undefined ? a.rooms   + ' Room'   + (a.rooms   !== 1 ? 's' : '') : '';
+    const travelers = [adultStr, childStr, roomStr].filter(Boolean).join(', ');
+    if (travelers)      parts.push('Travelers: ' + travelers);
+    if (a.month !== undefined) parts.push('Month: ' + MONTHS[a.month].full);
+    if (a.originCity)   parts.push('From: ' + a.originCity);
+    if (a.duration)     parts.push('Duration: ' + a.duration);
+    if (a.budget)       parts.push('Budget: ' + a.budget.charAt(0).toUpperCase() + a.budget.slice(1));
+
+    return sb.from('leads')
+      .insert({
+        name:         a.name         || null,
+        phone:        a.phone        || null,
+        email:        a.email        || null,
+        source:       'trip_planner',
+        package_name: a.destination  ? a.destination.charAt(0).toUpperCase() + a.destination.slice(1) : null,
+        message:      parts.join(' | ') || null,
+        status:       'new',
+      })
+      .then(function (res) {
+        if (res.error) console.warn('[TripPlanner] leads sync error:', res.error.message);
+      })
+      .catch(function () {});
   }
 
   /* ─────────────────────────────────────────────────────────────

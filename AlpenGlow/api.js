@@ -1,5 +1,5 @@
-/**
- * api.js — Alpen Glow Backend Client
+﻿/**
+ * api.js — AlpenGlow Global Backend Client
  * ─────────────────────────────────────────────────────────────
  * Drop this file in the website root (same level as index.html).
  * Package pages load it as: <script src="../api.js"></script>
@@ -207,6 +207,8 @@
      * Falls back silently to hardcoded HTML if no record found.
      */
     loadPackagePage: async function(slug) {
+      /* DEV_MODE: skip JSON override so hardcoded HTML in the page is visible as-is */
+      if (DEV_MODE) return
       try {
         const D = window.ALPEN_DATA
         let d = (D && D.pages && D.pages[slug]) ? D.pages[slug] : null

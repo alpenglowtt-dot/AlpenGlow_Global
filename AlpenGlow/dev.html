@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dev — Content Editor · Alpen Glow</title>
+<title>Dev — Content Editor · AlpenGlow Global</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -258,7 +258,7 @@ html, body { height: 100%; background: var(--dark); color: var(--white); font-fa
 <!-- LOGIN -->
 <div id="login-gate">
   <div class="login-card">
-    <img src="alpenglow-removebg-preview.png" alt="Alpen Glow">
+    <img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global">
     <div class="login-tag">Dev Access Only</div>
     <h2>Content Editor</h2>
     <p>For developer use only — manage offers and blog posts</p>
@@ -285,9 +285,9 @@ html, body { height: 100%; background: var(--dark); color: var(--white); font-fa
 <div id="app">
   <header class="dev-header">
     <div class="dev-brand">
-      <img src="alpenglow-removebg-preview.png" alt="Alpen Glow">
+      <img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global">
       <div class="dev-brand-text">
-        <div class="dev-brand-name">Alpen Glow Tours</div>
+        <div class="dev-brand-name">AlpenGlow Global</div>
         <div class="dev-brand-sub">Content Editor</div>
       </div>
     </div>
@@ -883,7 +883,7 @@ function openCE(type, id) {
       </div>
       <div class="ce-field">
         <label class="ce-lbl">Browser Tab Title</label>
-        <input class="ce-input" id="ce-page-title" placeholder="Japan — Land of Contrasts | Alpen Glow Tours" value="${e(item?.page_title||'')}">
+        <input class="ce-input" id="ce-page-title" placeholder="Japan — Land of Contrasts | AlpenGlow Global" value="${e(item?.page_title||'')}">
       </div>
       <div class="ce-section-lbl">Hero Section</div>
       ${ceImgField('ce-img','ce-img-preview',item?.hero_image_url,'Hero Image (URL or upload)')}
@@ -1194,7 +1194,7 @@ async function saveCE() {
             await writeTextFile('packages/' + slug + '.html', html)
             const pageData = {
               slug,
-              page_title:          body.name + ' | Alpen Glow Tours and Travels',
+              page_title:          body.name + ' | AlpenGlow Global',
               hero_image_url:      body.image_url || '',
               duration:            body.duration || '',
               location:            body.location || '',
@@ -1495,7 +1495,7 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${pkgName} | Alpen Glow Tours and Travels</title>
+<title>${pkgName} | AlpenGlow Global</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="package.css">
@@ -1504,7 +1504,7 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
 
 <nav id="navbar">
   <a href="../index.html" class="nav-logo">
-    <img src="../alpenglow-removebg-preview.png" alt="Alpen Glow">
+    <img src="../alpenglow-removebg-preview.png" alt="AlpenGlow Global">
   </a>
   <div class="nav-links" id="navLinks">
     <a href="../index.html#destinations">Destinations</a>
@@ -1609,7 +1609,7 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
 </div>
 
 <footer>
-  <div class="footer-logo"><img src="../alpenglow-removebg-preview.png" alt="Alpen Glow"></div>
+  <div class="footer-logo"><img src="../alpenglow-removebg-preview.png" alt="AlpenGlow Global"></div>
   <div class="footer-links">
     <a href="../index.html#destinations">Destinations</a>
     <a href="../index.html#packages">Packages</a>
@@ -1618,7 +1618,7 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
     <a href="../index.html#reviews">Reviews</a>
     <a href="../index.html#contact">Contact</a>
   </div>
-  <p>&copy; 2026 Alpen Glow Tours and Travels. All rights reserved.</p>
+  <p>&copy; 2026 AlpenGlow Global. All rights reserved.</p>
 </footer>
 
 <script src="../api.js">\x3c/script>

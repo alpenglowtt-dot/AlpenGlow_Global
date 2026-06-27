@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alpen Glow Tours and Travels</title>
+<title>AlpenGlow Global</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
@@ -67,6 +67,8 @@ nav.scrolled .nav-logo img { height: 75px; }
   border-radius: 50px; font-weight: 600; font-size: 0.78rem;
   letter-spacing: 0.06em; text-transform: uppercase;
   transition: all 0.3s var(--ease-out);
+  border: none; cursor: pointer; font-family: inherit;
+  box-shadow: 0 4px 16px rgba(239,126,25,0.28);
 }
 .nav-cta:hover { background: var(--white); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(239,126,25,0.4); }
 .nav-cta::after { display: none !important; }
@@ -125,6 +127,10 @@ nav.scrolled .nav-logo img { height: 75px; }
   font-weight: 600; font-size: 0.88rem; letter-spacing: 0.05em;
   transition: all 0.4s var(--ease-out);
   box-shadow: 0 4px 20px rgba(239,126,25,0.3);
+  /* button-element resets */
+  border: none; cursor: pointer; font: inherit; text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  outline: none;
 }
 .btn-primary:hover { background: var(--white); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(239,126,25,0.5); }
 .btn-outline {
@@ -133,6 +139,9 @@ nav.scrolled .nav-logo img { height: 75px; }
   padding: 1rem 2.5rem; border-radius: 50px;
   font-weight: 500; font-size: 0.88rem; letter-spacing: 0.05em;
   transition: all 0.4s var(--ease-out);
+  cursor: pointer; font: inherit; text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  outline: none;
 }
 .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); transform: translateY(-3px); }
 .hero-scroll {
@@ -431,7 +440,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
 <!-- NAVIGATION -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <img src="alpenglow-removebg-preview.png" alt="Alpen Glow">
+    <img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global">
   </a>
   <div class="nav-links" id="navLinks">
     <a href="#destinations">Destinations</a>
@@ -440,7 +449,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     <a href="#blog">Blog</a>
     <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
-    <button class="nav-cta" onclick="initTripPlanner()" style="background:none;border:none;font:inherit;cursor:pointer;padding:0;color:inherit;">Plan Your Trip</button>
+    <button class="nav-cta" onclick="initTripPlanner()">Plan Your Trip</button>
   </div>
   <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -651,12 +660,12 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
         <p class="offer-detail">Book any beach destination — Maldives, Bali, Santorini — before July 31 and save 30% on your total package price.</p>
         <span class="offer-cta">Claim Offer →</span>
       </div>
-    </div><div class="offer-card" onclick="openOfferModal('Plan Ahead & Save','EARLY BIRD 20%','EARLY2027','Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all Alpen Glow packages.')">
+    </div><div class="offer-card" onclick="openOfferModal('Plan Ahead & Save','EARLY BIRD 20%','EARLY2027','Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all AlpenGlow Global packages.')">
       <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&amp;q=80" alt="Plan Ahead &amp; Save">
       <div class="offer-overlay">
         <div class="offer-badge">EARLY BIRD 20%</div>
         <h3 class="offer-title">Plan Ahead &amp; Save</h3>
-        <p class="offer-detail">Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all Alpen Glow packages.</p>
+        <p class="offer-detail">Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all AlpenGlow Global packages.</p>
         <span class="offer-cta">Learn More →</span>
       </div>
     </div><div class="offer-card" onclick="openOfferModal('Honeymoon Special','25% Off + Upgrades','HONEY25','Celebrate your love in paradise. Applies to all couple packages with complimentary room upgrades and a welcome amenity.')">
@@ -741,7 +750,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     </div>
 <!-- ALPEN:BLOG:END --></div>
 <!-- ALPEN:BLOG_DATA:START -->
-<script>window._BAKED_BLOG=[{"id":"1","title":"10 Hidden Beaches You've Never Heard Of","meta":"Travel Tips — June 2026","excerpt":"Beyond the crowded tourist shores lie some of the world's most breathtaking coastal secrets. We spent months researching each location.","image_url":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80","content":"<p>Beyond the crowded tourist shores lie some of the world's most breathtaking coastal secrets. We spent months researching and visiting each location to bring you this definitive guide.</p><h4>1. El Nido Secret Beach, Philippines</h4><p>Accessible only by swimming through a narrow limestone crevice, this hidden lagoon near Palawan rewards the adventurous with impossibly clear turquoise water and absolute solitude. Visit at sunrise when the light turns everything gold.</p><h4>2. Praia do Camilo, Portugal</h4><p>Carved into dramatic ochre cliffs on the Algarve coast, reached by a wooden staircase cut into the rock face. Two sea arches frame the small cove and make for unforgettable photographs.</p><h4>3. Furuzamami Beach, Japan</h4><p>On the tiny Zamami Island of Okinawa, this beach consistently ranks among Asia's finest yet sees a fraction of the crowds of the main island. Coral reefs teeming with tropical fish lie just metres from shore.</p><h4>4. Anse Source d'Argent, Seychelles</h4><p>Famous for its granite boulders and shallow calm waters on La Digue Island. The warm Indian Ocean water barely reaches waist height for hundreds of metres.</p><h4>5. Whitehaven Beach, Australia</h4><p>Seven kilometres of 98% pure silica sand that stays cool to the touch even in peak summer. The swirling tidal flats at Hill Inlet create ever-changing patterns of white, cream, and turquoise visible from the hilltop lookout.</p><p><em>Planning a beach escape? Our travel team specialises in crafting bespoke itineraries to destinations like these.</em></p>","active":true},{"id":"2","title":"Packing Like a Pro: The Ultimate Carry-On Guide","meta":"Travel Tips — May 2026","excerpt":"Master the art of traveling light without sacrificing style or comfort — strategies used by flight crews and veteran globetrotters.","image_url":"https://images.unsplash.com/photo-1553531889-56cc480ac5cb?w=600&q=80","content":"<p>Master the art of traveling light without sacrificing style or comfort. These are the strategies used by flight crews and veteran globetrotters who live out of a single bag.</p><h4>The Golden Rule: One Week, One Bag</h4><p>Every item you pack should serve at least two purposes. A merino wool sweater works as a layering piece, a pillow substitute, and a light blanket on cold flights. Dark-wash jeans go from hiking to a restaurant without looking out of place.</p><h4>The Fabric Hierarchy</h4><p>Merino wool is unbeatable for travel — it resists odour for days, wicks moisture, and packs down small. Synthetic blends dry overnight when hand-washed. Pure cotton is the enemy of the light packer: it wrinkles, holds moisture, and takes forever to dry.</p><h4>The Capsule Wardrobe Formula</h4><p>For a two-week trip: 3 tops, 2 bottoms, 1 dress or smart option, 1 layer, 2 pairs of shoes. Everything should mix and match. Stick to a three-colour palette.</p><p><em>Alpen Glow's travel team provides destination-specific packing lists with every itinerary. Ask us when you book.</em></p>","active":true},{"id":"3","title":"Why Slow Travel Is the Future of Exploration","meta":"Inspiration — April 2026","excerpt":"In a world obsessed with bucket lists, a growing movement of travellers is choosing depth over distance — and coming back with better stories.","image_url":"https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80","content":"<p>In a world obsessed with bucket lists, a growing movement of travellers is choosing depth over distance. Slow travel isn't a trend — it's a correction to decades of rushed tourism.</p><h4>What Slow Travel Actually Means</h4><p>Slow travel doesn't mean travelling slowly — it means staying long enough in each place to develop a relationship with it. It means returning to the same café twice so the owner remembers your order. It means learning three words of the local language and watching how people's faces change when you use them.</p><h4>The Problem With Seven Cities in Ten Days</h4><p>The traditional European highlights tour — Paris, Rome, Barcelona, Amsterdam, Prague in ten days — creates a blur. You've technically been to five countries but your memories are airport lounges and hotel lobbies.</p><h4>The Tuscan Village Argument</h4><p>Spend a week in a single village in the Chianti region of Tuscany. Walk the same road to the market every morning. Find out which vineyard the locals actually buy from. Get lost twice and find something better both times.</p><h4>Alpen Glow's Approach</h4><p>Every itinerary we build is designed around this philosophy — fewer stops, more time, better experiences. We build in unscheduled afternoons and room for spontaneity that only comes when you're not racing to the next train.</p><p><em>Talk to our team about building a slow travel itinerary.</em></p>","active":true}];</script>
+<script>window._BAKED_BLOG=[{"id":"1","title":"10 Hidden Beaches You've Never Heard Of","meta":"Travel Tips — June 2026","excerpt":"Beyond the crowded tourist shores lie some of the world's most breathtaking coastal secrets. We spent months researching each location.","image_url":"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80","content":"<p>Beyond the crowded tourist shores lie some of the world's most breathtaking coastal secrets. We spent months researching and visiting each location to bring you this definitive guide.</p><h4>1. El Nido Secret Beach, Philippines</h4><p>Accessible only by swimming through a narrow limestone crevice, this hidden lagoon near Palawan rewards the adventurous with impossibly clear turquoise water and absolute solitude. Visit at sunrise when the light turns everything gold.</p><h4>2. Praia do Camilo, Portugal</h4><p>Carved into dramatic ochre cliffs on the Algarve coast, reached by a wooden staircase cut into the rock face. Two sea arches frame the small cove and make for unforgettable photographs.</p><h4>3. Furuzamami Beach, Japan</h4><p>On the tiny Zamami Island of Okinawa, this beach consistently ranks among Asia's finest yet sees a fraction of the crowds of the main island. Coral reefs teeming with tropical fish lie just metres from shore.</p><h4>4. Anse Source d'Argent, Seychelles</h4><p>Famous for its granite boulders and shallow calm waters on La Digue Island. The warm Indian Ocean water barely reaches waist height for hundreds of metres.</p><h4>5. Whitehaven Beach, Australia</h4><p>Seven kilometres of 98% pure silica sand that stays cool to the touch even in peak summer. The swirling tidal flats at Hill Inlet create ever-changing patterns of white, cream, and turquoise visible from the hilltop lookout.</p><p><em>Planning a beach escape? Our travel team specialises in crafting bespoke itineraries to destinations like these.</em></p>","active":true},{"id":"2","title":"Packing Like a Pro: The Ultimate Carry-On Guide","meta":"Travel Tips — May 2026","excerpt":"Master the art of traveling light without sacrificing style or comfort — strategies used by flight crews and veteran globetrotters.","image_url":"https://images.unsplash.com/photo-1553531889-56cc480ac5cb?w=600&q=80","content":"<p>Master the art of traveling light without sacrificing style or comfort. These are the strategies used by flight crews and veteran globetrotters who live out of a single bag.</p><h4>The Golden Rule: One Week, One Bag</h4><p>Every item you pack should serve at least two purposes. A merino wool sweater works as a layering piece, a pillow substitute, and a light blanket on cold flights. Dark-wash jeans go from hiking to a restaurant without looking out of place.</p><h4>The Fabric Hierarchy</h4><p>Merino wool is unbeatable for travel — it resists odour for days, wicks moisture, and packs down small. Synthetic blends dry overnight when hand-washed. Pure cotton is the enemy of the light packer: it wrinkles, holds moisture, and takes forever to dry.</p><h4>The Capsule Wardrobe Formula</h4><p>For a two-week trip: 3 tops, 2 bottoms, 1 dress or smart option, 1 layer, 2 pairs of shoes. Everything should mix and match. Stick to a three-colour palette.</p><p><em>AlpenGlow Global's travel team provides destination-specific packing lists with every itinerary. Ask us when you book.</em></p>","active":true},{"id":"3","title":"Why Slow Travel Is the Future of Exploration","meta":"Inspiration — April 2026","excerpt":"In a world obsessed with bucket lists, a growing movement of travellers is choosing depth over distance — and coming back with better stories.","image_url":"https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80","content":"<p>In a world obsessed with bucket lists, a growing movement of travellers is choosing depth over distance. Slow travel isn't a trend — it's a correction to decades of rushed tourism.</p><h4>What Slow Travel Actually Means</h4><p>Slow travel doesn't mean travelling slowly — it means staying long enough in each place to develop a relationship with it. It means returning to the same café twice so the owner remembers your order. It means learning three words of the local language and watching how people's faces change when you use them.</p><h4>The Problem With Seven Cities in Ten Days</h4><p>The traditional European highlights tour — Paris, Rome, Barcelona, Amsterdam, Prague in ten days — creates a blur. You've technically been to five countries but your memories are airport lounges and hotel lobbies.</p><h4>The Tuscan Village Argument</h4><p>Spend a week in a single village in the Chianti region of Tuscany. Walk the same road to the market every morning. Find out which vineyard the locals actually buy from. Get lost twice and find something better both times.</p><h4>AlpenGlow Global's Approach</h4><p>Every itinerary we build is designed around this philosophy — fewer stops, more time, better experiences. We build in unscheduled afternoons and room for spontaneity that only comes when you're not racing to the next train.</p><p><em>Talk to our team about building a slow travel itinerary.</em></p>","active":true}];</script>
 <!-- ALPEN:BLOG_DATA:END -->
     <div class="blog-nav">
       <button onclick="scrollBlogs(-1)" aria-label="Previous post">&#8592;</button>
@@ -757,7 +766,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     <h2 class="section-title">What Travelers <em>Say</em></h2>
   </div>
   <div class="reviews-track" id="reviewsTrack">
-    <div class="review-card"><div class="review-quote">"</div><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">Most agencies build an itinerary. Alpen Glow built a reason to wake up early. The Norway trip had zero dead time and zero rush — somehow both.</p><div class="review-author"><div class="review-avatar">A</div><div><div class="review-name">Adharsh</div><div class="review-trip">Norwegian Fjords Explorer</div></div></div></div>
+    <div class="review-card"><div class="review-quote">"</div><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">Most agencies build an itinerary. AlpenGlow Global built a reason to wake up early. The Norway trip had zero dead time and zero rush — somehow both.</p><div class="review-author"><div class="review-avatar">A</div><div><div class="review-name">Adharsh</div><div class="review-trip">Norwegian Fjords Explorer</div></div></div></div>
     <div class="review-card"><div class="review-quote">"</div><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">I told them I wanted Santorini without the Instagram queue version of Santorini. They actually delivered that. Quiet mornings, real wine, no crowd in a single photo.</p><div class="review-author"><div class="review-avatar">S</div><div><div class="review-name">Sidvick</div><div class="review-trip">Santorini Explorer</div></div></div></div>
     <div class="review-card"><div class="review-quote">"</div><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">Bali has a way of making every itinerary feel like a missed opportunity. This one didn't. The rice terraces at sunrise alone were worth the early alarm.</p><div class="review-author"><div class="review-avatar">T</div><div><div class="review-name">Trevik</div><div class="review-trip">Bali Explorer</div></div></div></div>
     <div class="review-card"><div class="review-quote">"</div><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">The Japan itinerary felt incredibly balanced. We covered iconic places without feeling rushed, and every recommendation felt genuinely local rather than touristy.</p><div class="review-author"><div class="review-avatar">V</div><div><div class="review-name">Vaibhav</div><div class="review-trip">Japan Explorer</div></div></div></div>
@@ -806,7 +815,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
 
 <!-- FOOTER -->
 <footer id="footer">
-  <div class="footer-logo"><img src="alpenglow-removebg-preview.png" alt="Alpen Glow" id="footer-logo-secret" style="cursor:pointer"></div>
+  <div class="footer-logo"><img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global" id="footer-logo-secret" style="cursor:pointer"></div>
   <div class="footer-links">
     <a href="#destinations">Destinations</a>
     <a href="#packages">Packages</a>
@@ -815,7 +824,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
   </div>
-  <p>© 2026 Alpen Glow Tours and Travels. All rights reserved.</p>
+  <p>© 2026 AlpenGlow Global. All rights reserved.</p>
 </footer>
 
 <!-- OTP OFFER MODAL -->
@@ -1183,7 +1192,7 @@ const FALLBACK_ARTICLES = [
     <p>A universal adaptor with USB-A and USB-C ports replaces four separate chargers. Noise-cancelling earbuds are non-negotiable on long-haul flights. A portable battery bank of at least 10,000mAh keeps everything charged through a full day of sightseeing.</p>
     <h4>Toiletry Rules</h4>
     <p>Solid toiletries — shampoo bars, solid conditioner, soap — take up a fraction of the space of liquids and never trigger airport security. Decant everything else into matching 30ml bottles and label them. You never actually use full-sized products on a trip.</p>
-    <p><em>Alpen Glow's travel team provides destination-specific packing lists with every itinerary. Ask us when you book.</em></p>`
+    <p><em>AlpenGlow Global's travel team provides destination-specific packing lists with every itinerary. Ask us when you book.</em></p>`
   },
   {
     title: 'Why Slow Travel Is the Future of Exploration',
@@ -1198,7 +1207,7 @@ const FALLBACK_ARTICLES = [
     <p>Frequent short-haul flights have an outsized carbon footprint relative to the experience they deliver. One longer trip with fewer flights and more time in each destination is significantly more sustainable without giving up exploration altogether.</p>
     <h4>How to Start</h4>
     <p>Your next trip: halve the number of destinations and double the time in each one. If you were planning four cities in eight days, try two cities in eight days instead. You'll spend less time in transit, save money on internal travel, and come back with a story rather than a highlight reel.</p>
-    <h4>Alpen Glow's Approach</h4>
+    <h4>AlpenGlow Global's Approach</h4>
     <p>Every itinerary we build is designed around this philosophy — fewer stops, more time, better experiences. We build in unscheduled afternoons, second visits to places worth returning to, and room for spontaneity that only comes when you're not racing to the next train.</p>
     <p><em>Talk to our team about building a slow travel itinerary. We specialise in giving you the feeling that you actually lived somewhere, even briefly.</em></p>`
   }
@@ -1373,7 +1382,7 @@ const FALLBACK_PACKAGES = [
 
 const FALLBACK_OFFERS = [
   { id:'f1', title:'Summer Beach Escape', badge:'30% OFF', code:'SUMMER30', description:'Book any beach destination — Maldives, Bali, Santorini — before July 31 and save 30% on your total package price.', image_url:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80', cta_text:'Claim Offer →' },
-  { id:'f2', title:'Plan Ahead & Save', badge:'EARLY BIRD 20%', code:'EARLY2027', description:'Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all Alpen Glow packages.', image_url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80', cta_text:'Learn More →' },
+  { id:'f2', title:'Plan Ahead & Save', badge:'EARLY BIRD 20%', code:'EARLY2027', description:'Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all AlpenGlow Global packages.', image_url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80', cta_text:'Learn More →' },
   { id:'f3', title:'Honeymoon Special', badge:'25% Off + Upgrades', code:'HONEY25', description:'Celebrate your love in paradise. Applies to all couple packages with complimentary room upgrades and a welcome amenity.', image_url:'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80', cta_text:'View Packages →' }
 ]
 

@@ -349,11 +349,15 @@ footer {
 
 /* === OVERVIEW FREE — exempt from blur even when detail-main is locked === */
 .detail-main.locked .overview-free,
-.detail-main.locked .overview-free * {
+.detail-main.locked .overview-free *,
+.detail-main.locked .overview-free div,
+.detail-main.locked .overview-free h2,
+.detail-main.locked .overview-free p {
   filter: none !important;
   opacity: 1 !important;
   user-select: auto !important;
   pointer-events: auto !important;
+  blur: none !important;
 }
 
 .detail-main:not(.locked) .content-overlay { display: none; }
@@ -386,3 +390,85 @@ footer {
   background: #fff;
   box-shadow: 0 0 0 3px rgba(157,36,32,0.1);
 }
+
+/* === OVERVIEW SCENE (scenic background card) === */
+.overview-scene {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center top;
+  padding: 2.5rem 2rem;
+  display: flex;
+  align-items: center;
+  min-height: 300px;
+  margin-bottom: 1rem;
+}
+
+.overview-scene::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.05) 100%
+  );
+  pointer-events: none;
+}
+
+.overview-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 16px;
+  border-left: 4px solid var(--orange);
+  padding: 2rem 2.2rem;
+  max-width: 540px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.22);
+}
+
+.overview-card h2 {
+  font-family: var(--font-display) !important;
+  font-size: 1.7rem !important;
+  font-weight: 400 !important;
+  color: var(--dark) !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.overview-card h2::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--orange);
+  margin-top: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.overview-card p {
+  font-size: 0.93rem !important;
+  line-height: 1.8 !important;
+  color: #3a3a3a !important;
+  margin-bottom: 0.9rem !important;
+}
+
+.overview-card p:last-child { margin-bottom: 0 !important; }
+
+/* === DEV PREVIEW BANNER === */
+.dev-preview-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+  background: #1a1a1a; color: #ef7e19;
+  padding: 0.45rem 1.2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(239,126,25,0.35);
+}
+.dev-preview-bar span { opacity: 0.55; font-weight: 400; }
+.dev-preview-bar button {
+  background: rgba(239,126,25,0.12); border: 1px solid rgba(239,126,25,0.3);
+  color: #ef7e19; padding: 0.2rem 0.65rem; font-size: 0.68rem; font-weight: 600;
+  cursor: pointer; letter-spacing: 0.04em;
+}
+body.dev-preview-active { padding-top: 34px; }
