@@ -14,7 +14,7 @@
   // ─── DEV MODE ────────────────────────────────────────────────
   // Set to true during development to bypass content blur/lock gates.
   // Set to false before going live / showing to client.
-  const DEV_MODE = true
+  const DEV_MODE = false
   // ─────────────────────────────────────────────────────────────
 
   const SUPABASE_URL      = 'https://yexrmmhadfscormovskn.supabase.co'
@@ -207,8 +207,6 @@
      * Falls back silently to hardcoded HTML if no record found.
      */
     loadPackagePage: async function(slug) {
-      /* DEV_MODE: skip JSON override so hardcoded HTML in the page is visible as-is */
-      if (DEV_MODE) return
       try {
         const D = window.ALPEN_DATA
         let d = (D && D.pages && D.pages[slug]) ? D.pages[slug] : null
@@ -234,7 +232,11 @@
           : (typeof d.overview_paragraphs === 'string' ? JSON.parse(d.overview_paragraphs || '[]') : [])
         const overviewEl = document.querySelector('.overview-free')
         if (overviewEl && paras.length) {
-          overviewEl.innerHTML = `<h2>${d.overview_heading || 'Overview'}</h2>`
+          /* Preserve overview-card-float wrapper if present in the page template */
+          const cardFloat = overviewEl.querySelector('.overview-card-float')
+          const target = cardFloat || overviewEl
+          target.innerHTML = `<h2>${d.overview_heading || 'Overview'}</h2>`
+            + (cardFloat ? '<div class="o-rule"></div>' : '')
             + paras.map(p => `<p>${p}</p>`).join('')
         }
 

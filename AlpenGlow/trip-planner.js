@@ -228,12 +228,28 @@
   ];
 
   /* Icon glyphs — avoids all broken-image issues; looks more premium */
+  /* Feather Icons — all verified 24×24 stroke paths */
+  const _S = 'xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+  const _svg = {
+    /* traveler types */
+    heart:  '<svg ' + _S + '><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>',
+    home:   '<svg ' + _S + '><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',
+    users:  '<svg ' + _S + '><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    user:   '<svg ' + _S + '><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    sun:    '<svg ' + _S + '><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+    /* budget tiers */
+    card:   '<svg ' + _S + '><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
+    send:   '<svg ' + _S + '><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
+    star:   '<svg ' + _S + '><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    award:  '<svg ' + _S + '><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>',
+  };
+
   const TRAVELER_TYPES = [
-    { id:'couple',  label:'Couple',          sub:'Two of you',            icon:'♡',  desc:'Romantic getaways & honeymoon packages' },
-    { id:'family',  label:'Family',          sub:'Kids & grown-ups',      icon:'⌂',  desc:'Kid-friendly stays & activities included' },
-    { id:'friends', label:'Friends',         sub:'Squad goals',           icon:'✦',  desc:'Group bookings & shared experiences' },
-    { id:'solo',    label:'Solo',            sub:'Just me',               icon:'◈',  desc:'Safe, curated experiences for one' },
-    { id:'senior',  label:'Senior Citizen',  sub:'Comfort & ease first', icon:'✿',  desc:'Slower pace, comfortable transfers' },
+    { id:'couple',  label:'Couple',          sub:'Two of you',            icon:_svg.heart, desc:'Romantic getaways & honeymoon packages' },
+    { id:'family',  label:'Family',          sub:'Kids & grown-ups',      icon:_svg.home,  desc:'Kid-friendly stays & activities included' },
+    { id:'friends', label:'Friends',         sub:'Squad goals',           icon:_svg.users, desc:'Group bookings & shared experiences' },
+    { id:'solo',    label:'Solo',            sub:'Just me',               icon:_svg.user,  desc:'Safe, curated experiences for one' },
+    { id:'senior',  label:'Senior Citizen',  sub:'Comfort & ease first',  icon:_svg.sun,   desc:'Slower pace, comfortable transfers' },
   ];
 
   const MONTHS = [
@@ -286,10 +302,10 @@
   ];
 
   const BUDGETS = [
-    { id:'budget',    icon:'💰', name:'Budget',    desc:'Value picks, local stays, street food & smart choices.' },
-    { id:'midrange',  icon:'✈️', name:'Mid-range', desc:'Comfortable hotels, curated tours, a few splurges.' },
-    { id:'premium',   icon:'🥂', name:'Premium',   desc:'4-star resorts, business class, private transfers.' },
-    { id:'luxury',    icon:'👑', name:'Luxury',    desc:'Over-water villas, butler service, bespoke itineraries.' },
+    { id:'budget',    icon:_svg.card,  name:'Budget',    desc:'Value picks, local stays, street food & smart choices.' },
+    { id:'midrange',  icon:_svg.send,  name:'Mid-range', desc:'Comfortable hotels, curated tours, a few splurges.' },
+    { id:'premium',   icon:_svg.star,  name:'Premium',   desc:'4-star resorts, business class, private transfers.' },
+    { id:'luxury',    icon:_svg.award, name:'Luxury',    desc:'Over-water villas, butler service, bespoke itineraries.' },
   ];
 
   /* Step backgrounds (full-screen behind each question) */
@@ -367,18 +383,15 @@
   <div id="tp-bg-b" class="tp-bg tp-bg-hidden"></div>
   <div id="tp-veil"></div>
 
+  <div id="tp-progress"><div id="tp-progress-fill"></div></div>
+  <button id="tp-close" aria-label="Close trip planner" onclick="window.__tpClose&&window.__tpClose()">✕</button>
+
   <header id="tp-header">
-    <button id="tp-close" aria-label="Close trip planner" onclick="window.__tpClose&&window.__tpClose()">✕</button>
     <nav id="tp-breadcrumb"></nav>
-    <div id="tp-progress"><div id="tp-progress-fill"></div></div>
   </header>
 
   <main id="tp-main">
     <div id="tp-step-wrap"></div>
-    <div id="tp-warn">
-      <span id="tp-warn-text"></span>
-      <button id="tp-warn-dismiss" aria-label="Dismiss">✕</button>
-    </div>
   </main>
 
   <div id="tp-confirm">
@@ -404,7 +417,7 @@
     _footer       = document.getElementById('tp-footer');
     _btnBack      = document.getElementById('tp-btn-back');
     _stepCt       = document.getElementById('tp-step-ct');
-    _warn         = document.getElementById('tp-warn');
+    _warn         = null; /* seasonal warning removed */
     _confirm      = document.getElementById('tp-confirm');
   }
 
@@ -415,10 +428,6 @@
     var closeBtn = document.getElementById('tp-close');
     if (closeBtn) { closeBtn.onclick = function() { _close(); }; }
     _btnBack.onclick = _goBack;
-    document.getElementById('tp-warn-dismiss').onclick = function () {
-      _warn.classList.remove('tp-show');
-      _s.warnDismissed = true;
-    };
     _confirm.querySelector('.tp-confirm-close').onclick = _close;
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && _root && _root.classList.contains('tp-open')) _close();
@@ -480,12 +489,20 @@
   }
 
   function _goBack() {
-    if (_s.step > 0) _goTo(_s.step - 1, 'back');
+    if (_s.step > 0) {
+      var prev = _s.step - 1;
+      /* Solo traveler: skip back over the count step */
+      if (prev === 3 && _s.answers.travelerType === 'solo') prev = 2;
+      _goTo(prev, 'back');
+    }
   }
 
   function _advance() {
     if (_s.step < STEPS.length - 1) {
-      _goTo(_s.step + 1, 'fwd');
+      var next = _s.step + 1;
+      /* Solo traveler: counts already set to 1 adult — skip the count step */
+      if (next === 3 && _s.answers.travelerType === 'solo') next = 4;
+      _goTo(next, 'fwd');
     }
   }
 
@@ -498,7 +515,7 @@
     _updateProgress(idx);
     _btnBack.hidden = idx === 0;
     _stepCt.textContent = 'Step ' + (idx + 1) + ' of ' + STEPS.length;
-    _warn.classList.remove('tp-show');
+    if (_warn) _warn.classList.remove('tp-show');
 
     const animClass = dir === 'back' ? 'tp-anim-in-back' : 'tp-anim-in-fwd';
     const html = STEPS[idx].render();
@@ -673,9 +690,10 @@
       '<div class="tp-dur-grid" id="tp-dur-grid">' +
       DURATIONS.map(function (d) {
         return '<div class="tp-dur-card' + (sel === d.id ? ' tp-sel' : '') + '" data-dur="' + d.id + '" tabindex="0">' +
-          (d.popular ? '<div class="tp-dur-pop">Most popular</div>' : '') +
           '<div class="tp-dur-days">' + d.label + '</div>' +
-          '<div class="tp-dur-label">' + d.desc + '</div></div>';
+          '<div class="tp-dur-label">' + d.desc + '</div>' +
+          (d.popular ? '<div class="tp-dur-pop">Most popular</div>' : '') +
+          '</div>';
       }).join('') +
       '</div>' +
       _nextBtnHtml();
@@ -765,6 +783,11 @@
     _stepWrap.querySelectorAll('[data-trav]').forEach(function (el) {
       el.addEventListener('click', function () {
         _s.answers.travelerType = el.dataset.trav;
+        if (_s.answers.travelerType === 'solo') {
+          _s.answers.adults   = 1;
+          _s.answers.children = 0;
+          _s.answers.rooms    = 1;
+        }
         _stepWrap.querySelectorAll('[data-trav]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(3);
         _enableNextBtn();
@@ -819,7 +842,6 @@
         _s.answers.month = mIdx;
         _stepWrap.querySelectorAll('[data-midx]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(5);
-        _checkSeasonalWarning();
         _enableNextBtn();
       });
     });
@@ -859,7 +881,6 @@
         el.addEventListener('click', function () {
           _s.answers.originCity = el.dataset.city;
           list.querySelectorAll('[data-city]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
-          _checkSeasonalWarning();
           _sbUpsert(6);
           _enableNextBtn();
         });
