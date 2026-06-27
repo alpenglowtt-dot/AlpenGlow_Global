@@ -1533,6 +1533,9 @@ Converted
   </main>
 </div>
 
+<!-- GLOBAL STATUS DROPDOWN -->
+<div id="s-global-drop" class="s-drop"></div>
+
 <!-- DETAIL DRAWER -->
 <div id="drw-overlay" onclick="closeDrawer()"></div>
 <div id="drw">
@@ -1552,10 +1555,11 @@ Converted
 const PWD = 'alpenglow2025'   // ← change this password
 const SB_URL = 'https://yexrmmhadfscormovskn.supabase.co'
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlleHJtbWhhZGZzY29ybW92c2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNjg0NzYsImV4cCI6MjA5Nzk0NDQ3Nn0.vxkcZDdTfE0qDxW8YwsnbGsLaaSUfwgZ78nQicq2Uoc'
+const H = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
 
 // ── STATE ──────────────────────────────────────────────
 let ALL = [], FILTERED = [], DAY_FILTER = 0, ACTIVE_LEAD = null
-let volChart = null, srcChart = null, delTarget = null
+let volChart = null, srcChart = null, sourcesChart = null, delTarget = null
 
 // ── AUTH ───────────────────────────────────────────────
 function login() {
@@ -1602,8 +1606,6 @@ function startClock() {
 }
 
 // ── SUPABASE ───────────────────────────────────────────
-const H = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
-
 async function loadLeads() {
   document.getElementById('err-banner').classList.remove('show')
   try {
@@ -1734,12 +1736,9 @@ function renderTable() {
       <td data-label="Email"><span class="td-clip" title="${e(l.email||'')}">${e(l.email||'—')}</span></td>
       <td data-label="Source">${e(SRC[l.source]||l.source||'—')}</td>
       <td data-label="Package"><span class="td-clip" title="${pkg}">${pkg}</span></td>
-      <td data-label="Status" style="position:relative; overflow:visible;">
+      <td data-label="Status">
         <span class="s-pill ${SC[st]}" onclick="toggleDrop(event,'${l.id}')">
           <span>${SL[st]}</span>
-          <div class="s-drop" id="sd-${l.id}">
-            ${Object.entries(SL).map(([k,v])=>`<div class="s-opt" onclick="chStatus(event,'${l.id}','${k}')">${v}</div>`).join('')}
-          </div>
         </span>
       </td>
       <td data-label="Received">${dt}</td>
@@ -1768,22 +1767,26 @@ function renderTable() {
 }
 
 // ── STATUS DROPDOWN ────────────────────────────────────
-document.addEventListener('click', () => document.querySelectorAll('.s-drop.open').forEach(d => d.classList.remove('open')))
+document.addEventListener('click', () => { document.getElementById('s-global-drop').classList.remove('open') })
 function toggleDrop(ev, id) {
   ev.stopPropagation()
-  const dd = document.getElementById('sd-' + id)
-  const was = dd.classList.contains('open')
-  document.querySelectorAll('.s-drop.open').forEach(d => d.classList.remove('open'))
-  if (!was) {
-    const pill = ev.currentTarget.getBoundingClientRect()
-    dd.style.top = (pill.bottom + 8) + 'px'
-    dd.style.left = pill.left + 'px'
-    dd.classList.add('open')
+  const drop = document.getElementById('s-global-drop')
+  const pill = ev.currentTarget.getBoundingClientRect()
+  const wasOpen = drop.dataset.leadId === String(id) && drop.classList.contains('open')
+  drop.classList.remove('open')
+  if (!wasOpen) {
+    drop.dataset.leadId = String(id)
+    drop.innerHTML = Object.entries(SL).map(([k,v]) =>
+      `<div class="s-opt" onclick="chStatus(event,'${id}','${k}')">${v}</div>`
+    ).join('')
+    drop.style.top = (pill.bottom + 6) + 'px'
+    drop.style.left = Math.min(pill.left, window.innerWidth - 185) + 'px'
+    drop.classList.add('open')
   }
 }
 async function chStatus(ev, id, st) {
   ev.stopPropagation()
-  document.querySelectorAll('.s-drop.open').forEach(d => d.classList.remove('open'))
+  document.getElementById('s-global-drop').classList.remove('open')
   await patch(id, { status: st })
   applyFilters(); renderStats()
   if (ACTIVE_LEAD && ACTIVE_LEAD.id === id) openDrawer(id)
@@ -2147,105 +2150,6 @@ function renderCharts() {
   );
 
 }
-
-  sourcesChart = new Chart(document.getElementById('chart-src'),{
-
-    type:'bar',
-
-    data:{
-
-        labels:sl,
-
-        datasets:[{
-
-            data:sd,
-
-            borderRadius:12,
-
-            borderSkipped:false,
-
-            backgroundColor:'#ef7e19',
-
-            hoverBackgroundColor:'#ff9d45',
-
-            maxBarThickness:24
-
-        }]
-
-    },
-
-    options:{
-
-        indexAxis:'y',
-
-        responsive:true,
-
-        maintainAspectRatio:false,
-
-        plugins:{
-
-            legend:{
-                display:false
-            },
-
-            tooltip:{
-                backgroundColor:'#1f1813',
-                borderColor:'rgba(239,126,25,.18)',
-                borderWidth:1,
-                displayColors:false,
-                padding:12
-            }
-
-        },
-
-        scales:{
-
-            x:{
-
-                beginAtZero:true,
-
-                border:{
-                    display:false
-                },
-
-                grid:{
-                    color:'rgba(255,255,255,.045)'
-                },
-
-                ticks:{
-                    color:'rgba(255,255,255,.38)',
-                    stepSize:1
-                }
-
-            },
-
-            y:{
-
-                border:{
-                    display:false
-                },
-
-                grid:{
-                    display:false
-                },
-
-                ticks:{
-                    color:'#fff',
-                    font:{
-                        weight:'600'
-                    }
-                }
-
-            }
-
-        }
-
-    }
-
-});
-
-// fix variable name typo guard
-var sourcesChart = null
 </script>
 </body>
 </html>

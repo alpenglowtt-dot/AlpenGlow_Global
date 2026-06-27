@@ -486,8 +486,22 @@ function e(s) {
 }
 
 // ── DATA ─────────────────────────────────────────────────────
-let ALL_OFFERS = [], ALL_BLOGS = [], ALL_DESTS = [], ALL_PKGS = [], ALL_PAGES = []
+let ALL_OFFERS = [], ALL_BLOGS = [], ALL_DESTS = [], ALL_PKGS = [], ALL_PAGES = [], ALL_PKG_FILES = []
 let CE_TYPE = null, CE_ID = null
+
+let _uidCounter = Date.now()
+function genUID() { return (_uidCounter++).toString(36) }
+
+async function listPkgHTMLFiles() {
+  try {
+    const dir = await getSubDir('packages')
+    const files = []
+    for await (const [name, handle] of dir.entries()) {
+      if (name.endsWith('.html') && handle.kind === 'file') files.push(name)
+    }
+    return files.sort()
+  } catch(e) { return [] }
+}
 
 async function loadAll() {
   if (!dirHandle) return
@@ -501,7 +515,11 @@ async function loadAll() {
   ALL_BLOGS  = Array.isArray(blogs)  ? blogs  : []
   ALL_DESTS  = Array.isArray(dests)  ? dests  : []
   ALL_PKGS   = Array.isArray(pkgs)   ? pkgs   : []
-  ALL_PAGES  = (await listJSONDir('data/pages')).sort((a,b) => (a.slug||'').localeCompare(b.slug||''))
+  // Assign in-memory IDs to any items that were manually added without one
+  ALL_DESTS.forEach(d => { if (!d.id) d.id = 'dest_' + genUID() })
+  ALL_PKGS.forEach(p  => { if (!p.id) p.id  = 'pkg_'  + genUID() })
+  ALL_PAGES    = (await listJSONDir('data/pages')).sort((a,b) => (a.slug||'').localeCompare(b.slug||''))
+  ALL_PKG_FILES = await listPkgHTMLFiles()
   renderOffers()
   renderBlogs()
   renderDests()
@@ -670,13 +688,17 @@ function openCE(type, id) {
     return
 
   } else if (type === 'pkg') {
-    const item = id ? ALL_PKGS.find(x => x.id === id) : null
-    document.getElementById('ce-drw-title').textContent = id ? 'Edit Package' : 'New Package'
+    // id may be a real pkg id OR 'slug:xxx' for orphan HTML files not yet in packages.json
+    const slugPrefill = (id && id.startsWith('slug:')) ? id.slice(5) : null
+    const item = (!slugPrefill && id) ? ALL_PKGS.find(x => x.id === id) : null
+    if (slugPrefill) CE_ID = null   // treat as new entry so save() pushes instead of updating
+    document.getElementById('ce-drw-title').textContent = (item || !id) ? (item ? 'Edit Package' : 'New Package') : 'Add Package — ' + (slugPrefill || '')
+    const prefillLink = slugPrefill ? 'packages/' + slugPrefill + '.html' : ''
     html = `
       <div class="ce-field">
         <label class="ce-lbl">Package Name</label>
         <input class="ce-input" id="ce-title" placeholder="e.g. Norwegian Fjords Expedition"
-          value="${e(item?.name||'')}" oninput="autoFillLink(this)">
+          value="${e(item?.name || (slugPrefill ? slugPrefill.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()) : ''))}" oninput="autoFillLink(this)">
       </div>
       <div class="ce-row">
         <div class="ce-field">
@@ -695,7 +717,7 @@ function openCE(type, id) {
       ${ceImgField('ce-img','ce-img-preview',item?.image_url,'Image (URL or upload from folder)')}
       <div class="ce-field">
         <label class="ce-lbl">Detail Page Link</label>
-        <input class="ce-input" id="ce-link" placeholder="packages/norway.html" value="${e(item?.link||'')}">
+        <input class="ce-input" id="ce-link" placeholder="packages/norway.html" value="${e(item?.link || prefillLink)}">
       </div>
       <div class="ce-field">
         <label class="ce-lbl">Sort Order</label>
@@ -761,7 +783,12 @@ function openCE(type, id) {
       </div>
       <div class="ce-lbl" style="margin-bottom:.4rem">Inclusion Items</div>
       <div id="ce-inclusions"></div>
-      <button class="btn-add-sd" onclick="addInclusionRow(document.getElementById('ce-inclusions'))">+ Add Inclusion</button>`
+      <button class="btn-add-sd" onclick="addInclusionRow(document.getElementById('ce-inclusions'))">+ Add Inclusion</button>
+      <div class="ce-active-row">
+        <button class="cr-toggle ${(item?.active!==false)?'on':'off'}" id="ce-active-toggle"
+          onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
+        <span class="ce-active-lbl">Page is active (visible on website)</span>
+      </div>`
     document.getElementById('ce-body').innerHTML = html
     paras.forEach(p => addOverviewParaRow(document.getElementById('ce-overview-paras'), p))
     places.forEach(p => addPlaceRow(document.getElementById('ce-places'), p))
@@ -967,6 +994,7 @@ async function saveCE() {
       places:              collectPlaces(),
       inclusions_heading:  document.getElementById('ce-inclusions-heading').value.trim() || "What's Included",
       inclusions:          collectInclusions(),
+      active:              document.getElementById('ce-active-toggle').classList.contains('on'),
     }
     btn.textContent = 'Saving…'; btn.disabled = true
     try {
@@ -1009,7 +1037,7 @@ async function saveCE() {
       const arr = isDest ? [...ALL_DESTS] : [...ALL_PKGS]
       const file = isDest ? 'data/destinations.json' : 'data/packages.json'
       if (CE_ID) {
-        const idx = arr.findIndex(x => x.id === CE_ID)
+        const idx = arr.findIndex(x => x.id === CE_ID || (isDest && x.slug === CE_ID))
         if (idx >= 0) arr[idx] = { ...arr[idx], ...body }
       } else {
         body.id = Date.now().toString()
@@ -1176,21 +1204,79 @@ function renderDests() {
 // ── RENDER PACKAGES ───────────────────────────────────────────
 function renderPkgs() {
   const el = document.getElementById('pkg-list')
-  if (!ALL_PKGS.length) { el.innerHTML = '<div class="empty-note">No packages yet. Click "+ Add Package" to create one.</div>'; return }
-  el.innerHTML = ALL_PKGS.map(p => `
-    <div class="content-row">
-      <img class="cr-img" src="${e(p.image_url||'')}" onerror="this.style.display='none'" alt="">
+
+  // Build one unified row per HTML file, then append JSON-only entries (no HTML file)
+  const seenSlugs = new Set()
+  const rows = []
+
+  ALL_PKG_FILES.forEach(fname => {
+    const slug = fname.replace(/\.html$/, '')
+    seenSlugs.add(slug)
+    const pkg = ALL_PKGS.find(p => (p.link||'').replace(/^packages\//, '').replace(/\.html$/, '') === slug)
+    rows.push({ slug, fname, pkg })
+  })
+  // JSON entries whose HTML file wasn't found in the folder
+  ALL_PKGS.forEach(p => {
+    const slug = (p.link||'').replace(/^packages\//, '').replace(/\.html$/, '')
+    if (!seenSlugs.has(slug)) rows.push({ slug, fname: null, pkg: p })
+  })
+
+  if (!rows.length) { el.innerHTML = '<div class="empty-note">No packages yet. Click "+ Add Package" to create one.</div>'; return }
+
+  el.innerHTML = rows.map(({ slug, fname, pkg }) => {
+    const isOrphan  = !pkg
+    const isActive  = pkg ? pkg.active !== false : false
+    const name      = pkg?.name      || slug
+    const location  = pkg?.location  || ''
+    const duration  = pkg?.duration  || ''
+    const imageUrl  = pkg?.image_url || ''
+
+    const toggleAct = pkg
+      ? `toggleItem('packages','${pkg.id}',${!isActive})`
+      : `toggleOrphanPkg('${slug}',true)`
+
+    const editAct = pkg
+      ? `openCE('pkg','${pkg.id}')`
+      : `openCE('pkg','slug:${slug}')`
+
+    const openBtn = fname
+      ? `<a class="cr-btn" title="Open Page" href="packages/${e(fname)}" target="_blank" style="text-decoration:none">&#128279;</a>`
+      : ''
+
+    const deleteBtn = pkg
+      ? `<button class="cr-btn del" title="Delete" onclick="deleteItem('packages','${pkg.id}',this)">🗑</button>`
+      : ''
+
+    return `
+    <div class="content-row"${isOrphan ? ' style="opacity:.7"' : ''}>
+      <img class="cr-img" src="${e(imageUrl)}" onerror="this.style.display='none'" alt="">
       <div class="cr-info">
-        <div class="cr-title">${e(p.name||'')}</div>
-        <div class="cr-sub">${e(p.location||'')} · ${e(p.duration||'')} · <span style="opacity:.6">${e(p.link||'')}</span></div>
+        <div class="cr-title">${e(name)} <span class="cr-code">${e(slug)}</span>${isOrphan ? ' <span style="font-size:.63rem;color:rgba(239,126,25,.55);margin-left:.4rem">not in packages.json</span>' : ''}</div>
+        <div class="cr-sub">${e(location)}${location && duration ? ' · ' : ''}${e(duration)}</div>
       </div>
       <div class="cr-actions">
-        <button class="cr-toggle ${p.active?'on':'off'}" title="${p.active?'Active':'Inactive'}"
-          onclick="toggleItem('packages','${p.id}',${!p.active})"></button>
-        <button class="cr-btn" title="Edit" onclick="openCE('pkg','${p.id}')">✏</button>
-        <button class="cr-btn del" title="Delete" onclick="deleteItem('packages','${p.id}',this)">🗑</button>
+        <button class="cr-toggle ${isActive?'on':'off'}" title="${isActive?'Active':'Inactive'}"
+          onclick="${toggleAct}"></button>
+        ${openBtn}
+        <button class="cr-btn" title="Edit Package" onclick="${editAct}">✏</button>
+        ${deleteBtn}
       </div>
-    </div>`).join('')
+    </div>`
+  }).join('')
+}
+
+// ── CREATE ORPHAN PACKAGE ENTRY ───────────────────────────────
+async function toggleOrphanPkg(slug, newActive) {
+  const newPkg = {
+    id:          Date.now().toString(),
+    name:        slug,
+    link:        'packages/' + slug + '.html',
+    active:      newActive,
+    location:    '', duration: '', description: '', image_url: '', sort_order: 0
+  }
+  ALL_PKGS.push(newPkg)
+  await writeJSON('data/packages.json', ALL_PKGS)
+  await loadAll()
 }
 
 // ── RENDER PACKAGE PAGES ──────────────────────────────────────
@@ -1200,6 +1286,7 @@ function renderPages() {
   el.innerHTML = ALL_PAGES.map(p => {
     const places = Array.isArray(p.places) ? p.places : []
     const inclusions = Array.isArray(p.inclusions) ? p.inclusions : []
+    const isActive = p.active !== false
     return `
     <div class="content-row">
       <img class="cr-img" src="${e(p.hero_image_url||'')}" onerror="this.style.display='none'" alt="">
@@ -1208,11 +1295,23 @@ function renderPages() {
         <div class="cr-sub">${e(p.duration||'')} · ${places.length} places · ${inclusions.length} inclusions</div>
       </div>
       <div class="cr-actions">
+        <button class="cr-toggle ${isActive?'on':'off'}" title="${isActive?'Active':'Inactive'}"
+          onclick="togglePage('${p.slug}',${!isActive})"></button>
+        <a class="cr-btn" title="Open Page" href="packages/${e(p.slug)}.html" target="_blank" style="text-decoration:none">&#128279;</a>
         <button class="cr-btn" title="Edit" onclick="openCE('page','${p.slug}')">✏</button>
         <button class="cr-btn del" title="Delete" onclick="deleteItem('package_pages','${p.slug}',this)">🗑</button>
       </div>
     </div>`
   }).join('')
+}
+
+// ── TOGGLE PAGE ACTIVE ────────────────────────────────────────
+async function togglePage(slug, newActive) {
+  const page = ALL_PAGES.find(p => p.slug === slug)
+  if (!page) return
+  page.active = newActive
+  await writeJSON('data/pages/' + slug + '.json', page).catch(() => {})
+  await loadAll()
 }
 
 // ── DESTINATION DRAWER HELPERS ────────────────────────────────
