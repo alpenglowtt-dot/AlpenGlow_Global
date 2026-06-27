@@ -424,6 +424,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
 }
 #reviews .section-header, #reviews .reviews-track, #reviews .reviews-nav { position: relative; z-index: 1; }
 </style>
+<link rel="stylesheet" href="trip-planner.css">
 </head>
 <body>
 
@@ -439,7 +440,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     <a href="#blog">Blog</a>
     <a href="#reviews">Reviews</a>
     <a href="#contact">Contact</a>
-    <a href="#contact" class="nav-cta">Plan Your Trip</a>
+    <button class="nav-cta" onclick="initTripPlanner()" style="background:none;border:none;font:inherit;cursor:pointer;padding:0;color:inherit;">Plan Your Trip</button>
   </div>
   <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -455,7 +456,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     <p class="hero-sub">Handcrafted journeys through Scandinavia, Europe, and the world's most breathtaking landscapes — designed for travelers who seek more than just a destination.</p>
     <div class="hero-actions">
       <a href="#destinations" class="btn-primary">Explore Destinations</a>
-      <a href="#contact" class="btn-outline">Plan Your Trip</a>
+      <button class="btn-outline" onclick="initTripPlanner()">Plan Your Trip</button>
     </div>
   </div>
   <div class="hero-scroll">
@@ -931,8 +932,10 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="data/bundle.js"></script>
 <script src="api.js"></script>
+<script src="trip-planner.js"></script>
 <script>
 // === OWNER DASHBOARD — SECRET ACCESS ===
 // Click the footer logo 5 times quickly, OR press Alt+Shift+D
