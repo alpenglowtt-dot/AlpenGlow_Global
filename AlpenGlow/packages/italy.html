@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Italian Grand Tour | Alpen Glow Tours and Travels</title>
+<title>Italian Grand Tour | AlpenGlow Global</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="package.css">
+<link rel="stylesheet" href="package.css?v=2026062715">
 </head>
 <body>
 
 <nav id="navbar">
   <a href="../index.html" class="nav-logo">
-    <img src="../alpenglow-removebg-preview.png" alt="Alpen Glow">
+    <img src="../alpenglow-removebg-preview.png" alt="AlpenGlow Global">
   </a>
   <div class="nav-links" id="navLinks">
     <a href="../index.html#destinations">Destinations</a>
@@ -129,7 +129,7 @@
 </div>
 
 <footer>
-  <div class="footer-logo"><img src="../alpenglow-removebg-preview.png" alt="Alpen Glow"></div>
+  <div class="footer-logo"><img src="../alpenglow-removebg-preview.png" alt="AlpenGlow Global"></div>
   <div class="footer-links">
     <a href="../index.html#destinations">Destinations</a>
     <a href="../index.html#packages">Packages</a>
@@ -138,7 +138,7 @@
     <a href="../index.html#reviews">Reviews</a>
     <a href="../index.html#contact">Contact</a>
   </div>
-  <p>© 2026 Alpen Glow Tours and Travels. All rights reserved.</p>
+  <p>© 2026 AlpenGlow Global. All rights reserved.</p>
 </footer>
 
 <script src="../data/bundle.js"></script>
@@ -208,7 +208,18 @@ function gateVerifyEmail() {
 const mobileToggle = document.getElementById("mobileToggle");
 const navLinks = document.getElementById("navLinks");
 mobileToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
-if (typeof AlpenAPI !== "undefined" && AlpenAPI.isVerified()) unlockContent();
+/* Dev preview bypass: add ?preview=ag2025 to URL to skip OTP gate */
+(function() {
+  var p = new URLSearchParams(window.location.search);
+  if (p.get('preview') === 'ag2025') {
+    unlockContent();
+    var bar = document.createElement('div');
+    bar.className = 'dev-preview-bar';
+    bar.innerHTML = 'DEV PREVIEW MODE &nbsp;<span>Gate bypassed — remove ?preview=ag2025 before publishing</span><button onclick="this.parentElement.remove();document.body.classList.remove(\'dev-preview-active\')">Dismiss</button>';
+    document.body.classList.add('dev-preview-active');
+    document.body.insertBefore(bar, document.body.firstChild);
+  } else if (typeof AlpenAPI !== "undefined" && AlpenAPI.isVerified()) unlockContent();
+})();
 </script>
 </body>
 </html>
