@@ -144,24 +144,40 @@
       callEdge('submit-lead', data),
 
     /** Fetch active offers from local data/offers.json */
-    fetchOffers: () =>
-      fetch(dataUrl('data/offers.json')).then(r => r.json())
-        .then(arr => arr.filter(o => o.active !== false)).catch(() => []),
+    fetchOffers: () => {
+      const D = window.ALPEN_DATA
+      if (D && Array.isArray(D.offers))
+        return Promise.resolve(D.offers.filter(o => o.active !== false))
+      return fetch(dataUrl('data/offers.json')).then(r => r.json())
+        .then(arr => arr.filter(o => o.active !== false)).catch(() => [])
+    },
 
     /** Fetch active blog posts from local data/blog_posts.json */
-    fetchBlogPosts: () =>
-      fetch(dataUrl('data/blog_posts.json')).then(r => r.json())
-        .then(arr => arr.filter(o => o.active !== false)).catch(() => []),
+    fetchBlogPosts: () => {
+      const D = window.ALPEN_DATA
+      if (D && Array.isArray(D.blog_posts))
+        return Promise.resolve(D.blog_posts.filter(o => o.active !== false))
+      return fetch(dataUrl('data/blog_posts.json')).then(r => r.json())
+        .then(arr => arr.filter(o => o.active !== false)).catch(() => [])
+    },
 
     /** Fetch active destinations from local data/destinations.json */
-    fetchDestinations: () =>
-      fetch(dataUrl('data/destinations.json')).then(r => r.json())
-        .then(arr => arr.filter(o => o.active !== false).sort((a,b) => (a.sort_order||0)-(b.sort_order||0))).catch(() => []),
+    fetchDestinations: () => {
+      const D = window.ALPEN_DATA
+      if (D && Array.isArray(D.destinations))
+        return Promise.resolve(D.destinations.filter(o => o.active !== false).sort((a,b) => (a.sort_order||0)-(b.sort_order||0)))
+      return fetch(dataUrl('data/destinations.json')).then(r => r.json())
+        .then(arr => arr.filter(o => o.active !== false).sort((a,b) => (a.sort_order||0)-(b.sort_order||0))).catch(() => [])
+    },
 
     /** Fetch active tour packages from local data/packages.json */
-    fetchPackages: () =>
-      fetch(dataUrl('data/packages.json')).then(r => r.json())
-        .then(arr => arr.filter(o => o.active !== false).sort((a,b) => (a.sort_order||0)-(b.sort_order||0))).catch(() => []),
+    fetchPackages: () => {
+      const D = window.ALPEN_DATA
+      if (D && Array.isArray(D.packages))
+        return Promise.resolve(D.packages.filter(o => o.active !== false).sort((a,b) => (a.sort_order||0)-(b.sort_order||0)))
+      return fetch(dataUrl('data/packages.json')).then(r => r.json())
+        .then(arr => arr.filter(o => o.active !== false).sort((a,b) => (a.sort_order||0)-(b.sort_order||0))).catch(() => [])
+    },
 
     /** Returns true if this phone+code combo already claimed an offer */
     checkOfferClaimed: async (phone, code) => {
@@ -177,21 +193,28 @@
     },
 
     /** Fetch a single package page from local data/pages/{slug}.json (used by dev.html) */
-    fetchPackagePage: (slug) =>
-      fetch(dataUrl('data/pages/' + encodeURIComponent(slug) + '.json'))
-        .then(r => r.json()).catch(() => null),
+    fetchPackagePage: (slug) => {
+      const D = window.ALPEN_DATA
+      if (D && D.pages && D.pages[slug]) return Promise.resolve(D.pages[slug])
+      return fetch(dataUrl('data/pages/' + encodeURIComponent(slug) + '.json'))
+        .then(r => r.json()).catch(() => null)
+    },
 
     /**
      * loadPackagePage(slug)
      * Called at the bottom of each package HTML page.
-     * Fetches the page's Supabase record and overwrites the DOM.
+     * Fetches data/pages/{slug}.json (or bundled data) and overwrites the DOM.
      * Falls back silently to hardcoded HTML if no record found.
      */
     loadPackagePage: async function(slug) {
       try {
-        const r = await fetch(dataUrl('data/pages/' + encodeURIComponent(slug) + '.json'))
-        if (!r.ok) return
-        const d = await r.json()
+        const D = window.ALPEN_DATA
+        let d = (D && D.pages && D.pages[slug]) ? D.pages[slug] : null
+        if (!d) {
+          const r = await fetch(dataUrl('data/pages/' + encodeURIComponent(slug) + '.json'))
+          if (!r.ok) return
+          d = await r.json()
+        }
         if (!d) return
 
         // ── Hero ──────────────────────────────────────────────
