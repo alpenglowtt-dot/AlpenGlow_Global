@@ -390,20 +390,12 @@ footer {
   background: #fff;
   box-shadow: 0 0 0 3px rgba(157,36,32,0.1);
 }
-<<<<<<< HEAD
-/* === OVERVIEW SCENE (Japan background) === */
-=======
 
 /* === OVERVIEW SCENE (scenic background card) === */
->>>>>>> 11205e3480911c62993cbf53943f765b3305e5d2
 .overview-scene {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-<<<<<<< HEAD
-  background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1400&q=80');
-=======
->>>>>>> 11205e3480911c62993cbf53943f765b3305e5d2
   background-size: cover;
   background-position: center top;
   padding: 2.5rem 2rem;
@@ -462,10 +454,64 @@ footer {
   margin-bottom: 0.9rem !important;
 }
 
-<<<<<<< HEAD
 .overview-card p:last-child { margin-bottom: 0 !important; }
-=======
-.overview-card p:last-child { margin-bottom: 0 !important; }
+
+/* === OVERVIEW CARD FLOAT (styled white card inside overview-free) === */
+.overview-card-float {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.97);
+  border-radius: 18px;
+  border-left: 4px solid var(--orange);
+  padding: 2.2rem 2.4rem;
+  max-width: 580px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+  margin-bottom: 1rem;
+}
+.overview-card-float h2 {
+  font-family: var(--font-display) !important;
+  font-size: 1.6rem !important;
+  font-weight: 400 !important;
+  color: #181818 !important;
+  margin: 0 0 0.3rem 0 !important;
+}
+.overview-card-float .o-rule {
+  width: 40px; height: 2px;
+  background: var(--orange);
+  margin-bottom: 1.1rem;
+}
+.overview-card-float p {
+  font-size: 0.95rem !important;
+  line-height: 1.8 !important;
+  color: #6b6560 !important;
+  margin-bottom: 0.9rem !important;
+}
+.overview-card-float p:last-child { margin-bottom: 0 !important; }
+
+/* Exempt overview card from content-gate blur */
+.detail-main.locked .overview-card-float,
+.detail-main.locked .overview-card-float * {
+  filter: none !important;
+  opacity: 1 !important;
+  user-select: auto !important;
+  pointer-events: auto !important;
+}
+
+/* === PAGE BACKGROUND (set via loadPackagePage from JSON bg_image_url) === */
+body.has-page-bg::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 35%;
+  height: 100%;
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.50;
+  mask-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
 
 /* === DEV PREVIEW BANNER === */
 .dev-preview-bar {
@@ -483,4 +529,3 @@ footer {
   cursor: pointer; letter-spacing: 0.04em;
 }
 body.dev-preview-active { padding-top: 34px; }
->>>>>>> 11205e3480911c62993cbf53943f765b3305e5d2

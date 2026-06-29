@@ -8,67 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="package.css">
 <link rel="stylesheet" href="../trip-planner.css">
-<style>
-/* === FULL PAGE JAPAN BACKGROUND === */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 35%;
-  height: 100%;
-  background-image: url('pagoda.jpg');
-  background-size: cover;
-  background-position: center top;
-  opacity: 0.50;
-  mask-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Overview card */
-.overview-card-float {
-  position: relative;
-  z-index: 1;
-  background: rgba(255,255,255,0.97);
-  border-radius: 18px;
-  border-left: 4px solid #ef7e19;
-  padding: 2.2rem 2.4rem;
-  max-width: 580px;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.10);
-  margin-bottom: 1rem;
-}
-.overview-card-float h2 {
-  font-family: 'Playfair Display', Georgia, serif !important;
-  font-size: 1.6rem !important;
-  font-weight: 400 !important;
-  color: #181818 !important;
-  margin: 0 0 0.3rem 0 !important;
-}
-.overview-card-float .o-rule {
-  width: 40px; height: 2px;
-  background: #ef7e19;
-  margin-bottom: 1.1rem;
-}
-.overview-card-float p {
-  font-size: 0.95rem !important;
-  line-height: 1.8 !important;
-  color: #6b6560 !important;
-  margin-bottom: 0.9rem !important;
-}
-.overview-card-float p:last-child { margin-bottom: 0 !important; }
-
-/* Override blur for overview-free */
-.detail-main.locked .overview-free,
-.detail-main.locked .overview-free *,
-.detail-main.locked .overview-card-float,
-.detail-main.locked .overview-card-float * {
-  filter: none !important;
-  opacity: 1 !important;
-  user-select: auto !important;
-  pointer-events: auto !important;
-}
-</style>
 </head>
 <body>
 
