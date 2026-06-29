@@ -397,7 +397,8 @@
   <div id="tp-confirm">
     <div class="tp-confirm-circle">✓</div>
     <div class="tp-confirm-title">You're all set!</div>
-    <div class="tp-confirm-sub">Our travel expert will reach out within 24 hours with a personalised itinerary just for you.</div>
+    '<div class="tp-confirm-sub">Our travel expert will reach out within 24 hours with a personalised itinerary just for you.</div>' +
+    '<div class="tp-confirm-summary" id="tp-confirm-summary"></div>'
     <button class="tp-confirm-close">Close</button>
   </div>
 
@@ -755,6 +756,7 @@
         _stepWrap.querySelectorAll('[data-vibe]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(1);
         _enableNextBtn();
+        setTimeout(_advance, 320);
       });
       el.addEventListener('mouseenter', function () { _setBg(VIBE_BGS[el.dataset.vibe] || STEP_BGS[0]); });
       el.addEventListener('mouseleave', function () {
@@ -946,6 +948,16 @@
 
     _sbSubmit().then(function () {
       _confirm.classList.add('tp-show');
+      const a = _s.answers;
+      const bits = [
+        a.destination && '✈ ' + a.destination.charAt(0).toUpperCase() + a.destination.slice(1),
+        a.travelerType && '👥 ' + a.travelerType.charAt(0).toUpperCase() + a.travelerType.slice(1),
+        a.month !== undefined && '📅 ' + MONTHS[a.month].full,
+        a.duration && '⏱ ' + a.duration + ' days',
+        a.budget && '💰 ' + a.budget.charAt(0).toUpperCase() + a.budget.slice(1),
+      ].filter(Boolean);
+      const el = document.getElementById('tp-confirm-summary');
+      if (el) el.innerHTML = bits.map(function(b){ return '<span class="tp-sum-pill">' + b + '</span>'; }).join('');
     }).catch(function () {
       btn.disabled = false;
       btn.textContent = 'Send My Enquiry →';
@@ -1037,8 +1049,9 @@
      HTML HELPERS
      ───────────────────────────────────────────────────────────── */
   function _heading(num, q) {
-    return '<div class="tp-step-eyebrow">Step ' + num + '</div>' +
-           '<h2 class="tp-step-q">' + q + '</h2>';
+    return '<div class="tp-step-eyebrow">Step ' + num + ' of ' + STEPS.length + '</div>' +
+           '<h2 class="tp-step-q">' + q + '</h2>' +
+           '<div class="tp-q-rule"></div>';
   }
 
   function _stepper(id, label, desc, val, min, max) {
@@ -1053,8 +1066,10 @@
   }
 
   function _field(id, type, label, placeholder, val) {
-    return '<div><label class="tp-field-label" for="' + id + '">' + label + '</label>' +
-      '<input class="tp-input" id="' + id + '" type="' + type + '" placeholder="' + placeholder + '" value="' + _esc(val) + '"></div>';
+    return '<div class="tp-field-wrap">' +
+      '<input class="tp-input" id="' + id + '" type="' + type + '" placeholder=" " value="' + _esc(val) + '">' +
+      '<label class="tp-field-label tp-field-float" for="' + id + '">' + label + '</label>' +
+      '</div>';
   }
 
   function _esc(s) { return String(s).replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
