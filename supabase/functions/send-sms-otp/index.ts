@@ -40,6 +40,16 @@ serve(async (req) => {
       )
     }
 
+    // ── Validate WhatsApp credentials before touching the DB ──
+    const phoneNumberId = Deno.env.get('WHATSAPP_PHONE_NUMBER_ID') ?? ''
+    const accessToken   = Deno.env.get('WHATSAPP_ACCESS_TOKEN') ?? ''
+    const templateName  = Deno.env.get('WHATSAPP_TEMPLATE_NAME') ?? ''
+
+    if (!phoneNumberId || !accessToken) {
+      console.error('[send-sms-otp] WhatsApp credentials not set')
+      throw new Error('WhatsApp service not configured. Contact support.')
+    }
+
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL')!,
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -70,9 +80,6 @@ serve(async (req) => {
     if (dbErr) throw dbErr
 
     // ── Meta WhatsApp Cloud API ───────────────────────────────
-    const phoneNumberId  = Deno.env.get('WHATSAPP_PHONE_NUMBER_ID')!
-    const accessToken    = Deno.env.get('WHATSAPP_ACCESS_TOKEN')!
-    const templateName   = Deno.env.get('WHATSAPP_TEMPLATE_NAME') ?? ''
 
     const apiUrl = `https://graph.facebook.com/v19.0/${phoneNumberId}/messages`
 

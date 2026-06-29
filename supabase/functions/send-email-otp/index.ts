@@ -22,6 +22,15 @@ serve(async (req) => {
       )
     }
 
+    const resendKey  = Deno.env.get('RESEND_API_KEY') ?? ''
+    const fromDomain = Deno.env.get('EMAIL_FROM_DOMAIN') ?? ''
+    const fromAddr   = fromDomain ? `AlpenGlow Global <info@${fromDomain}>` : 'onboarding@resend.dev'
+
+    if (!resendKey) {
+      console.error('[send-email-otp] RESEND_API_KEY not set')
+      throw new Error('Email service not configured. Contact support.')
+    }
+
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL')!,
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
@@ -43,17 +52,7 @@ serve(async (req) => {
 
     if (dbErr) throw dbErr
 
-    // Log OTP for debugging — remove in production
     console.log(`[send-email-otp] OTP for ${email}: ${code}`)
-
-    const resendKey  = Deno.env.get('RESEND_API_KEY') ?? ''
-    const fromDomain = Deno.env.get('EMAIL_FROM_DOMAIN') ?? ''
-    const fromAddr   = fromDomain ? `AlpenGlow Global <info@${fromDomain}>` : 'onboarding@resend.dev'
-
-    if (!resendKey) {
-      console.error('[send-email-otp] RESEND_API_KEY not set')
-      throw new Error('Email service not configured. Contact support.')
-    }
 
     const emailRes = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -64,17 +63,16 @@ serve(async (req) => {
       body: JSON.stringify({
         from:    fromAddr,
         to:      [email],
-        subject: 'Your Alpen Glow Verification Code',
+        subject: 'Your AlpenGlow Global Verification Code',
         html: `<!DOCTYPE html>
 <html>
 <body style="margin:0;padding:0;background:#f0ebe4;font-family:Helvetica,sans-serif;">
   <div style="max-width:480px;margin:40px auto;background:#faf6f1;border-radius:20px;overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,0.07);">
     <div style="background:#181818;padding:28px 36px;">
       <p style="margin:0;font-family:Georgia,serif;font-size:20px;color:#fff;font-weight:400;">
-        Alpen <em style="color:#ef7e19;">Glow</em>
+        AlpenGlow <em style="color:#ef7e19;">Global</em>
       </p>
       <p style="margin:5px 0 0;font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:.12em;text-transform:uppercase;">
-        Tours and Travels
       </p>
     </div>
     <div style="padding:36px;">
@@ -96,7 +94,7 @@ serve(async (req) => {
     </div>
     <div style="border-top:1px solid #e8e3dc;padding:18px 36px;background:#f5f0ea;">
       <p style="margin:0;font-size:11px;color:#b0a9a0;">
-        Alpen Glow Tours and Travels &middot; 1078, Big Bazaar Street, Coimbatore - 1
+        AlpenGlow Global &middot; 1078, Big Bazaar Street, Coimbatore - 1
       </p>
     </div>
   </div>
