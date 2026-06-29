@@ -48,7 +48,7 @@ serve(async (req) => {
 
     const resendKey  = Deno.env.get('RESEND_API_KEY') ?? ''
     const fromDomain = Deno.env.get('EMAIL_FROM_DOMAIN') ?? ''
-    const fromAddr   = fromDomain ? `noreply@${fromDomain}` : 'onboarding@resend.dev'
+    const fromAddr   = fromDomain ? `AlpenGlow Global <info@${fromDomain}>` : 'onboarding@resend.dev'
 
     if (!resendKey) {
       console.error('[send-email-otp] RESEND_API_KEY not set')

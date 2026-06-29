@@ -109,27 +109,25 @@
 
     /** Send a 4-digit SMS OTP via Twilio */
     sendSMSOTP: (phone, purpose, metadata = {}) => {
-      if (DEV_MODE || isVerified()) return Promise.resolve({ ok: true })
+      if (DEV_MODE) return Promise.resolve({ ok: true })
       return callEdge('send-sms-otp', { phone, purpose, metadata })
     },
 
     /** Verify a submitted SMS OTP code */
     verifySMSOTP: async (phone, code) => {
-      if (DEV_MODE || isVerified()) return { verified: true }
-      const r = await callEdge('verify-sms-otp', { phone, code })
-      markVerified()
-      return r
+      if (DEV_MODE) return { verified: true }
+      return callEdge('verify-sms-otp', { phone, code })
     },
 
     /** Send a 4-digit email OTP via Resend */
     sendEmailOTP: (email, purpose, metadata = {}) => {
-      if (DEV_MODE || isVerified()) return Promise.resolve({ ok: true })
+      if (DEV_MODE) return Promise.resolve({ ok: true })
       return callEdge('send-email-otp', { email, purpose, metadata })
     },
 
     /** Verify a submitted email OTP code */
     verifyEmailOTP: async (email, code) => {
-      if (DEV_MODE || isVerified()) return { verified: true }
+      if (DEV_MODE) return { verified: true }
       const r = await callEdge('verify-email-otp', { email, code })
       markVerified()
       return r
