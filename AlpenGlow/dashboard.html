@@ -99,46 +99,62 @@ input,select,textarea{font-family:var(--font-body)}
 .login-card{
 
 width:100%;
-max-width:390px;
+max-width:420px;
 
-padding:3rem;
+padding:3.4rem 3.2rem;
 
-border-radius:22px;
+border-radius:26px;
 
 background:
 
 linear-gradient(
 180deg,
-#201914,
-#17120e
+#211a14,
+#16110d
 );
 
-border:1px solid rgba(239,126,25,.12);
+border:1px solid rgba(239,126,25,.14);
 
-box-shadow:var(--shadow-lg);
+box-shadow:
+0 30px 90px rgba(0,0,0,.55),
+inset 0 1px 0 rgba(255,255,255,.04);
+
+animation: loginIn .5s var(--ease) both;
 
 }
-.login-card img{height:68px;width:auto;margin:0 auto 1.8rem;display:block}
-.login-card h2{font-family:var(--font-display);font-size:1.5rem;font-weight:400;font-style:italic;color:var(--white);margin-bottom:.3rem}
-.login-card p{font-size:.78rem;color:var(--muted);margin-bottom:2rem;letter-spacing:.02em}
+@keyframes loginIn{
+from{opacity:0;transform:translateY(16px) scale(.98)}
+to{opacity:1;transform:translateY(0) scale(1)}
+}
+.login-card img{height:104px;width:auto;margin:0 auto 1.6rem;display:block}
+.login-card h2{font-family:var(--font-display);font-size:1.85rem;font-weight:400;font-style:italic;color:var(--white);margin-bottom:.5rem;letter-spacing:-.01em}
+.login-card p{font-size:.82rem;color:var(--muted);margin-bottom:2.4rem;letter-spacing:.03em;line-height:1.5}
 .login-input{
-  width:100%;padding:.8rem 1rem;
+  width:100%;padding:.95rem 1rem;
   background:transparent;
-  border:none;border-bottom:1px solid var(--ghost);
-  color:var(--white);font-size:.95rem;outline:none;letter-spacing:.12em;
-  transition:border-color .2s;margin-bottom:1.6rem;
+  border:none;border-bottom:1.5px solid var(--ghost);
+  color:var(--white);font-size:1.02rem;outline:none;letter-spacing:.14em;
+  transition:border-color .3s var(--ease),padding-bottom .3s var(--ease);
+  margin-bottom:1.8rem;
   text-align:center;
 }
-.login-input:focus{border-color:var(--orange)}
+.login-input:focus{border-color:var(--orange);padding-bottom:1.05rem}
 .login-input.error{border-color:var(--red);animation:shake .4s ease}
 @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
 .btn-login{
-  width:100%;padding:.8rem;
-  background:var(--orange);color:var(--bg);
-  font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;
+  width:100%;padding:1rem;
+  border-radius:12px;
+  background:linear-gradient(135deg,var(--orange) 0%,var(--amber) 100%);
+  color:var(--bg);
+  font-weight:700;font-size:.84rem;letter-spacing:.1em;text-transform:uppercase;
+  box-shadow:0 10px 30px rgba(239,126,25,.28);
   transition:all .3s var(--ease);
 }
-.btn-login:hover{background:var(--amber);letter-spacing:.14em}
+.btn-login:hover{
+  letter-spacing:.14em;
+  transform:translateY(-2px);
+  box-shadow:0 16px 40px rgba(239,126,25,.4);
+}
 .login-err{font-size:.75rem;color:var(--red);margin-top:.8rem;min-height:1rem}
 
 /* ── SHELL ─────────────────────────────────────────── */
