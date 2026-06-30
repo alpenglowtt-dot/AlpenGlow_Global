@@ -233,9 +233,15 @@ z-index:100;
 
 .stats-row{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:1.4rem;
-    margin:0 0 2rem;
+    grid-template-columns:repeat(4,1fr);
+    gap:1.2rem;
+    margin:0 0 1rem;
+}
+@media(max-width:900px){
+  .stats-row{grid-template-columns:repeat(2,1fr)!important}
+}
+@media(max-width:480px){
+  .stats-row{grid-template-columns:1fr!important}
 }
 
 .stat-card{
@@ -243,7 +249,7 @@ z-index:100;
     position:relative;
     overflow:hidden;
 
-    padding:1.6rem;
+    padding:1.3rem 1.4rem;
 
     border-radius:22px;
 
@@ -306,14 +312,14 @@ margin-bottom:1.2rem;
 
 .stat-icon{
 
-width:52px;
-height:52px;
+width:44px;
+height:44px;
 
 display:flex;
 align-items:center;
 justify-content:center;
 
-border-radius:16px;
+border-radius:13px;
 
 background:
 rgba(239,126,25,.08);
@@ -326,8 +332,8 @@ color:var(--orange);
 
 .stat-icon svg{
 
-width:24px;
-height:24px;
+width:20px;
+height:20px;
 
 }
 
@@ -350,11 +356,11 @@ font-weight:700;
 
 .stat-value{
 
-font-size:3rem;
+font-size:clamp(1.5rem,2.8vw,3rem);
 
 font-weight:700;
 
-letter-spacing:-.05em;
+letter-spacing:-.04em;
 
 color:white;
 
@@ -364,19 +370,25 @@ margin-bottom:.45rem;
 
 font-variant-numeric:tabular-nums;
 
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+
 }
 
 .stat-label{
 
-font-size:.76rem;
+font-size:.68rem;
 
-letter-spacing:.14em;
+letter-spacing:.08em;
 
 text-transform:uppercase;
 
 color:var(--muted);
 
-margin-bottom:.9rem;
+margin-bottom:.7rem;
+
+line-height:1.4;
 
 }
 
@@ -398,10 +410,17 @@ justify-content:space-between;
 
 align-items:center;
 
-font-size:.76rem;
+font-size:.7rem;
 
 color:var(--muted);
 
+gap:.3rem;
+
+}
+.stat-footer span{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 .stat-footer strong{
@@ -816,10 +835,11 @@ background:rgba(255,255,255,.05);
 /* ── ACTION BUTTONS ────────────────────────────────── */
 .act-wrap{display:flex;align-items:center;gap:.3rem}
 .act-btn{
-  width:28px;height:28px;
-  border:1px solid var(--rule-faint);background:transparent;
-  color:var(--ghost);
+  width:30px;height:30px;
+  border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);
+  color:rgba(255,255,255,.55);
   display:flex;align-items:center;justify-content:center;font-size:.78rem;
+  border-radius:8px;
   transition:all .18s;cursor:pointer;
 }
 .act-btn:hover{
@@ -1111,8 +1131,9 @@ color:white;
 padding:1.4rem 2.2rem;
 
 display:flex;
+flex-wrap:wrap;
 
-gap:1rem;
+gap:.6rem;
 
 border-top:1px solid rgba(255,255,255,.05);
 
@@ -1122,14 +1143,18 @@ flex-shrink:0;
 .drw-btn{
 
 height:46px;
+padding:0 1.1rem;
 
 border-radius:14px;
+border:1px solid transparent;
 
 font-weight:600;
 
 letter-spacing:.04em;
 
 transition:.22s var(--ease);
+
+cursor:pointer;
 
 }
 .drw-wa{border-color:rgba(92,206,160,.22);color:var(--green);background:rgba(92,206,160,.05)}
@@ -1273,7 +1298,14 @@ color .22s;
 
 }
 
-button:hover{
+.btn-login:hover,
+.pag-btn:hover:not(:disabled),
+.drw-btn:hover,
+.act-btn:hover,
+.btn-save:hover,
+.em-btn:hover,
+.btn-add-fu:hover,
+.btn-log-int:hover{
 
 transform:translateY(-2px);
 
@@ -1281,7 +1313,7 @@ transform:translateY(-2px);
 
 button:active{
 
-transform:translateY(0);
+transform:translateY(0) !important;
 
 }
 
@@ -1386,7 +1418,13 @@ box-shadow:
 .bulk-del-btn{background:rgba(239,111,111,.08);border:1px solid rgba(239,111,111,.22);color:var(--red)}
 .bulk-del-btn:hover{background:rgba(239,111,111,.15)}
 .bulk-clear{background:transparent;border:1px solid var(--rule-faint);color:var(--muted);padding:.52rem .9rem;border-radius:9px;font-size:.78rem;cursor:pointer}
-.bulk-status-drop{position:absolute;bottom:64px;left:0;background:#1d1813;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.35rem;box-shadow:0 20px 50px rgba(0,0,0,.7);z-index:410;display:none;min-width:160px}
+.bulk-status-drop{
+  position:absolute;bottom:calc(100% + 8px);left:0;
+  background:#1d1813;border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;padding:.35rem;
+  box-shadow:0 -10px 40px rgba(0,0,0,.6);
+  z-index:410;display:none;min-width:160px;
+}
 .bulk-status-drop.open{display:block}
 
 /* ── SAVED FILTER CHIPS ──────────────────────────────── */
@@ -1485,7 +1523,7 @@ box-shadow:
     </div>
   </header>
 
-  <main class="dash-main">
+  <main class="dash-main" id="dash-main-list">
     <div class="err-banner" id="err-banner">
       <span>⚠ Could not load leads — check your Supabase connection or RLS settings.</span>
       <button class="btn-retry" onclick="loadLeads()">Retry</button>
@@ -1593,7 +1631,7 @@ Needs Attention
 <div class="stat-divider"></div>
 
 <div class="stat-footer">
-<span>Pending follow-up</span>
+<span>Pending</span>
 <strong>Priority</strong>
 </div>
 
@@ -1634,6 +1672,8 @@ Converted
 
 </div>
 
+<!-- CRM Stats Row 2 -->
+<div class="stats-row" style="grid-template-columns:repeat(3,1fr);margin-top:-.2rem;margin-bottom:1.4rem">
 
 <div class="stat-card">
 <div class="stat-glow"></div>
@@ -1666,7 +1706,7 @@ Converted
 <div class="stat-change" style="background:rgba(239,111,111,.09);border-color:rgba(239,111,111,.15);color:var(--red)" id="s-overdue-badge">Due Today</div>
 </div>
 <div class="stat-value" id="s-overdue">—</div>
-<div class="stat-label">Overdue Follow-ups</div>
+<div class="stat-label">Overdue Tasks</div>
 <div class="stat-divider"></div>
 <div class="stat-footer"><span>Needs action</span><strong>Today</strong></div>
 </div>
@@ -1685,8 +1725,8 @@ Converted
     <!-- Saved Filter Chips -->
     <div class="saved-filters-row" id="saved-filters-row" style="display:none"></div>
 
-    <!-- Filters -->
-    <div class="filter-bar">
+    <!-- Filters Row 1: search + dropdowns -->
+    <div class="filter-bar" style="margin-bottom:.6rem;border-bottom:none;padding-bottom:0">
       <div class="search-wrap">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="f-search" class="filter-input" placeholder="Search name, email, phone, source…" oninput="applyFilters()">
@@ -1711,6 +1751,9 @@ Converted
           <option value="blog_unlock">Blog Gate</option>
         </select>
       </div>
+    </div>
+    <!-- Filters Row 2: date controls + actions -->
+    <div class="filter-bar" style="margin-bottom:1.2rem">
       <div class="date-pills">
         <button class="date-pill" onclick="setDays(7,this)">7d</button>
         <button class="date-pill" onclick="setDays(30,this)">30d</button>
@@ -1722,8 +1765,10 @@ Converted
         <span class="dr-label">To</span>
         <input type="date" class="dr-input" id="f-date-to" onchange="applyFilters()">
       </div>
-      <button class="btn-save-filter" onclick="saveCurrentFilter()" title="Save this filter combination">+ Save Filter</button>
-      <button class="bulk-csv-btn bulk-btn" onclick="exportCSV()" title="Export current view to CSV">↓ CSV</button>
+      <div style="margin-left:auto;display:flex;gap:.5rem;align-items:center">
+        <button class="btn-save-filter" onclick="saveCurrentFilter()" title="Save current filter">+ Save Filter</button>
+        <button class="bulk-csv-btn bulk-btn" onclick="exportCSV()" title="Export to CSV">↓ CSV</button>
+      </div>
     </div>
 
     <!-- Table -->
@@ -1766,7 +1811,7 @@ Converted
 </div>
 
 <!-- KANBAN BOARD -->
-<div class="dash-main" id="kanban-section" style="display:none;padding-top:82px">
+<div id="kanban-section" style="display:none;padding:82px 2rem 3rem;max-width:1640px;margin:0 auto">
   <div class="kanban-board active" id="kanban-board">
     <div class="kanban-col" id="kcol-new" ondragover="kDragOver(event,'new')" ondrop="kDrop(event,'new')" ondragleave="kDragLeave(event)">
       <div class="kanban-col-head"><span>New</span><span class="kanban-col-count" id="kcount-new">0</span></div>
@@ -1793,9 +1838,6 @@ Converted
 
 <!-- GLOBAL STATUS DROPDOWN -->
 <div id="s-global-drop" class="s-drop"></div>
-
-<!-- BULK STATUS DROPDOWN (attached to bulk bar) -->
-<div id="bulk-status-drop" class="bulk-status-drop"></div>
 
 <!-- DETAIL DRAWER -->
 <div id="drw-overlay" onclick="closeDrawer()"></div>
@@ -2220,14 +2262,10 @@ function clearSelection() {
 function toggleBulkStatusDrop(ev) {
   ev.stopPropagation()
   const drop = document.getElementById('bulk-status-drop')
-  const rect = ev.currentTarget.getBoundingClientRect()
   if (drop.classList.contains('open')) { drop.classList.remove('open'); return }
   drop.innerHTML = Object.entries(SL).map(([k,v]) =>
     `<div class="s-opt" onclick="bulkSetStatus('${k}')">${v}</div>`
   ).join('')
-  drop.style.bottom = (window.innerHeight - rect.top + 6) + 'px'
-  drop.style.left = rect.left + 'px'
-  drop.style.position = 'fixed'
   drop.classList.add('open')
 }
 document.addEventListener('click', () => {
@@ -2634,14 +2672,17 @@ function setView(view) {
   CURRENT_VIEW = view
   document.getElementById('btn-list-view').classList.toggle('active', view === 'list')
   document.getElementById('btn-kanban-view').classList.toggle('active', view === 'kanban')
-  const mainSection = document.querySelector('.dash-main:not(#kanban-section)')
+  const mainSection = document.getElementById('dash-main-list')
   const kanbanSection = document.getElementById('kanban-section')
+  const dashEl = document.getElementById('dashboard')
   if (view === 'kanban') {
     mainSection.style.display = 'none'
+    dashEl.style.minHeight = '0'
     kanbanSection.style.display = 'block'
     renderKanban()
   } else {
     mainSection.style.display = ''
+    dashEl.style.minHeight = ''
     kanbanSection.style.display = 'none'
   }
 }
