@@ -366,6 +366,13 @@
 
 /* ── Budget cards ───────────────────────────────────────── */
 .tp-budget-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+.tp-exact-budget-wrap { margin-top: 18px; }
+.tp-exact-budget-label { display: block; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.tp-exact-budget-row { position: relative; display: flex; align-items: center; }
+.tp-exact-budget-prefix { position: absolute; left: 14px; color: var(--orange); font-weight: 700; font-size: 15px; pointer-events: none; z-index: 1; }
+.tp-exact-budget-input { border-radius: 12px; padding-left: 30px !important; }
+.tp-exact-budget-input::-webkit-inner-spin-button,
+.tp-exact-budget-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .tp-budget-card {
   background: var(--glass); backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);

@@ -704,6 +704,7 @@
   /* ── Step 7: Budget ───────────────────────────────────────── */
   function renderBudget() {
     const sel = _s.answers.budget || '';
+    const exactVal = _s.answers.exactBudget || '';
     return _heading('08', STEPS[7].q) +
       '<div class="tp-budget-grid" id="tp-budget-grid">' +
       BUDGETS.map(function (b) {
@@ -712,6 +713,14 @@
           '<div class="tp-budget-name">' + b.name + '</div>' +
           '<div class="tp-budget-desc">' + b.desc + '</div></div>';
       }).join('') +
+      '</div>' +
+      '<div class="tp-exact-budget-wrap">' +
+        '<label class="tp-exact-budget-label">Expected budget (₹) <span style="opacity:.5;font-size:.8em">— optional</span></label>' +
+        '<div class="tp-exact-budget-row">' +
+          '<span class="tp-exact-budget-prefix">₹</span>' +
+          '<input class="tp-input tp-exact-budget-input" id="tp-exact-budget" type="number" min="0" placeholder="e.g. 150000"' +
+          (exactVal ? ' value="' + exactVal + '"' : '') + '>' +
+        '</div>' +
       '</div>' +
       _nextBtnHtml();
   }
@@ -974,6 +983,12 @@
         _enableNextBtn();
       });
     });
+    var exactInput = document.getElementById('tp-exact-budget');
+    if (exactInput) {
+      exactInput.addEventListener('input', function () {
+        _s.answers.exactBudget = this.value ? parseInt(this.value, 10) : null;
+      });
+    }
     if (_s.answers.budget) _enableNextBtn();
   }
 
@@ -1176,6 +1191,7 @@
       origin_city:   a.originCity    || null,
       duration:      a.duration      || null,
       budget_range:  a.budget        || null,
+      exact_budget:  a.exactBudget   || null,
       contact_name:  a.name          || null,
       contact_phone: a.phone         || null,
       contact_email: a.email         || null,
@@ -1220,6 +1236,7 @@
     if (a.originCity)   parts.push('From: ' + a.originCity);
     if (a.duration)     parts.push('Duration: ' + a.duration);
     if (a.budget)       parts.push('Budget: ' + a.budget.charAt(0).toUpperCase() + a.budget.slice(1));
+    if (a.exactBudget)  parts.push('Expected Price: ₹' + Number(a.exactBudget).toLocaleString('en-IN'));
 
     return sb.from('leads')
       .insert({

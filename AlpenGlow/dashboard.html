@@ -618,15 +618,16 @@ table-layout:fixed;
 
 /* Column width distribution */
 table colgroup col:nth-child(1){ width:50px }   /* checkbox */
-table colgroup col:nth-child(2){ width:48px }   /* # */
-table colgroup col:nth-child(3){ width:13% }    /* name */
-table colgroup col:nth-child(4){ width:12% }    /* phone */
-table colgroup col:nth-child(5){ width:17% }    /* email */
-table colgroup col:nth-child(6){ width:11% }    /* source */
-table colgroup col:nth-child(7){ width:13% }    /* package */
-table colgroup col:nth-child(8){ width:130px }  /* status */
-table colgroup col:nth-child(9){ width:130px }  /* received */
-table colgroup col:nth-child(10){ width:110px } /* actions */
+table colgroup col:nth-child(2){ width:44px }   /* # */
+table colgroup col:nth-child(3){ width:12% }    /* name */
+table colgroup col:nth-child(4){ width:11% }    /* phone */
+table colgroup col:nth-child(5){ width:16% }    /* email */
+table colgroup col:nth-child(6){ width:10% }    /* source */
+table colgroup col:nth-child(7){ width:12% }    /* package */
+table colgroup col:nth-child(8){ width:11% }    /* budget */
+table colgroup col:nth-child(9){ width:110px }  /* status */
+table colgroup col:nth-child(10){ width:110px } /* received */
+table colgroup col:nth-child(11){ width:100px } /* actions */
 
 thead{
 
@@ -1923,13 +1924,13 @@ Converted
     <div class="table-wrap">
       <table id="leads-table">
         <colgroup>
-          <col><col><col><col><col><col><col><col><col><col>
+          <col><col><col><col><col><col><col><col><col><col><col>
         </colgroup>
         <thead>
           <tr>
             <th><input type="checkbox" class="cb-lead" id="cb-all" onchange="toggleAll(this.checked)" title="Select all"></th>
             <th>#</th><th>Name</th><th>Phone</th><th>Email</th>
-            <th>Source</th><th>Package / Message</th><th>Status</th>
+            <th>Source</th><th>Package / Message</th><th>Budget</th><th>Status</th>
             <th>Received</th><th>Actions</th>
           </tr>
         </thead>
@@ -2085,7 +2086,6 @@ let PAGE = 0, CURRENT_VIEW = 'list'
 const PER_PAGE = 10
 let volChart = null, srcChart = null, sourcesChart = null, delTarget = null
 let SELECTED = new Set()
-let _autoRefreshTimer = null
 let _dragLeadId = null
 
 // ── AUTH ───────────────────────────────────────────────
@@ -2118,7 +2118,6 @@ function init() {
   startClock()
   loadLeads()
   loadSavedFilters()
-  startAutoRefresh()
 }
 
 // ── TOAST ──────────────────────────────────────────────
@@ -2131,26 +2130,6 @@ function showToast(msg, type='info', duration=3200) {
   setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(20px)'; setTimeout(()=>t.remove(), 350) }, duration)
 }
 
-// ── AUTO REFRESH ───────────────────────────────────────
-function startAutoRefresh() {
-  if (_autoRefreshTimer) clearInterval(_autoRefreshTimer)
-  _autoRefreshTimer = setInterval(silentRefresh, 60000)
-}
-async function silentRefresh() {
-  try {
-    const r = await fetch(`${SB_URL}/rest/v1/leads?select=*&order=created_at.desc`, { headers: H })
-    if (!r.ok) return
-    const fresh = await r.json()
-    if (fresh.length !== ALL.length) {
-      const diff = fresh.length - ALL.length
-      ALL = fresh
-      applyFilters(); renderStats(); renderCharts()
-      if (CURRENT_VIEW === 'kanban') renderKanban()
-      loadTodayFollowUps()
-      if (diff > 0) showToast(`${diff} new lead${diff>1?'s':''} arrived`, 'ok')
-    }
-  } catch(e) { /* silent */ }
-}
 
 // ── CLOCK ──────────────────────────────────────────────
 function startClock() {
@@ -2324,6 +2303,17 @@ function renderTable() {
   if (!FILTERED.length) { tbody.innerHTML = ''; empty.style.display = 'block'; pag.style.display = 'none'; return }
   empty.style.display = 'none'
   const totalPages = Math.ceil(FILTERED.length / PER_PAGE)
+  function _extractBudget(msg) {
+    if (!msg) return { tier: null, price: null }
+    var tier = null, price = null
+    msg.split('|').forEach(function(part) {
+      var kv = part.trim().split(':'), k = kv[0].trim().toLowerCase(), v = kv.slice(1).join(':').trim()
+      if (k === 'budget') tier = v
+      if (k === 'expected price') price = v
+    })
+    return { tier, price }
+  }
+
   const pageData = FILTERED.slice(PAGE * PER_PAGE, (PAGE + 1) * PER_PAGE)
   const now = Date.now()
   tbody.innerHTML = pageData.map((l, i) => {
@@ -2341,6 +2331,7 @@ function renderTable() {
       <td data-label="Email"><span class="td-clip" title="${e(l.email||'')}">${e(l.email||'—')}</span></td>
       <td data-label="Source">${e(SRC[l.source]||l.source||'—')}</td>
       <td data-label="Package"><span class="td-clip" title="${pkg}">${pkg}</span></td>
+      <td data-label="Budget">${(() => { const b=_extractBudget(l.message); if(!b.tier&&!b.price) return '<span style="color:var(--ghost)">—</span>'; return (b.tier?`<span style="font-size:.72rem;font-weight:600;color:var(--orange);text-transform:capitalize">${e(b.tier)}</span>`:'')+(b.price?`<br><span style="font-size:.72rem;color:var(--muted)">${e(b.price)}</span>`:''); })()}</td>
       <td data-label="Status">
         <span class="s-pill ${SC[st]}" onclick="toggleDrop(event,'${l.id}')"><span>${SL[st]}</span></span>
       </td>
