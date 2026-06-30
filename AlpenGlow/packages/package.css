@@ -25,11 +25,11 @@ button { cursor: pointer; border: none; font-family: var(--font-body); }
 /* === NAV (static, dark, no scroll-fade needed on detail pages) === */
 nav {
   position: relative; width: 100%; z-index: 1000;
-  padding: 1.2rem 3rem;
+  padding: 0.4rem 3rem;
   display: flex; align-items: center; justify-content: space-between;
   background: var(--dark);
 }
-.nav-logo img { height: 42px; width: auto; }
+.nav-logo img { height: 100px; width: auto; }
 .nav-links { display: flex; gap: 2.2rem; align-items: center; }
 .nav-links a {
   color: rgba(255,255,255,0.8); font-size: 0.8rem; font-weight: 500;
@@ -182,7 +182,7 @@ nav {
   .city-modal-img { min-height: 200px; }
 }
 /* === SIDEBAR / UNLOCK GATE === */
-.detail-sidebar { position: relative; }
+.detail-sidebar { position: relative; padding-left: 1.5rem; }
 .gate-card {
   background: var(--dark); border-radius: 20px; padding: 2.2rem;
   color: var(--white); position: sticky; top: 1.5rem;
@@ -235,8 +235,10 @@ footer {
   text-align: center; color: rgba(255,255,255,0.35);
   font-size: 0.78rem;
 }
-.footer-logo { display: flex; justify-content: center; margin-bottom: 1rem; }
-.footer-logo img { height: 36px; width: auto; opacity: 0.7; }
+.footer-logo { display: flex; justify-content: center; align-items: center; gap: 2rem; margin-bottom: 1rem; }
+.footer-logo img { width: auto; opacity: 0.7; }
+.footer-logo img:first-child { height: 100px; }
+.footer-logo img:last-child { height: 70px; }
 .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
 .footer-links a { color: rgba(255,255,255,0.55); transition: color 0.3s; font-size: 0.8rem; }
 .footer-links a:hover { color: var(--orange); }
@@ -370,6 +372,28 @@ footer {
   opacity: 0.45;
   margin-top: 1rem;
 }
+/* ── Phone row with country code (gate card) ─────────────────── */
+.phone-cc-select {
+  flex-shrink: 0;
+  padding: 0.65rem 0.5rem;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  color: var(--white, #fff);
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s;
+  min-width: 80px;
+}
+.phone-cc-select:focus {
+  border-color: var(--orange, #ef7e19);
+  background: rgba(255,255,255,0.13);
+}
+.phone-cc-select option { background: #1a1410; color: #fff; }
 /* ── OTP digit inputs (gate card) ────────────────────────────── */
 .otp-digit {
   flex: 1;
@@ -378,16 +402,16 @@ footer {
   text-align: center;
   font-size: 1.4rem;
   font-weight: 600;
-  color: var(--dark, #181818);
-  border: 1.5px solid rgba(0,0,0,0.15);
-  background: var(--cream, #faf6f1);
+  color: var(--white, #ffffff);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
   outline: none;
   font-family: inherit;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .otp-digit:focus {
   border-color: var(--red, #9d2420);
-  background: #fff;
+  background: rgba(255,255,255,0.15);
   box-shadow: 0 0 0 3px rgba(157,36,32,0.1);
 }
 

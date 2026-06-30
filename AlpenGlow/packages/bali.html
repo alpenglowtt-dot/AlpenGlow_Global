@@ -13,7 +13,7 @@
 
 <nav id="navbar">
   <a href="../index.html" class="nav-logo">
-    <img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global">
+    <img src="../alpenglow-removebg-preview.png" alt="AlpenGlow Global">
   </a>
   <div class="nav-links" id="navLinks">
     <a href="../index.html#destinations">Destinations</a>
@@ -91,7 +91,7 @@
       <div id="gateStep1">
         <p>Enter your details to access the day-by-day itinerary, pricing, and a personal callback from our travel team.</p>
         <div class="form-group"><label>Full Name</label><input type="text" id="gateName" placeholder="Your name"></div>
-        <div class="form-group"><label>WhatsApp Number</label><input type="tel" id="gatePhone" placeholder="+91 98765 43210"></div>
+        <div class="form-group"><label>WhatsApp Number</label><div style="display:flex;gap:8px;"><select id="gatePhoneCC" class="phone-cc-select"><option value="+91">+91 IN</option><option value="+1">+1 US</option><option value="+44">+44 UK</option><option value="+61">+61 AU</option><option value="+65">+65 SG</option><option value="+971">+971 AE</option><option value="+60">+60 MY</option><option value="+64">+64 NZ</option></select><input type="tel" id="gatePhone" placeholder="98765 43210" maxlength="10" oninput="this.value=this.value.replace(/\D/g,'')" inputmode="numeric" style="flex:1;"></div></div>
         <button class="btn-verify" id="gateBtn1" onclick="gateSendWhatsApp()">Send WhatsApp Code</button>
         <p class="gate-note">Step 1 of 2 — WhatsApp verification</p>
       </div>
@@ -130,7 +130,7 @@
 </div>
 
 <footer>
-  <div class="footer-logo"><img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global"></div>
+  <div class="footer-logo"><img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global"><img src="../alpenglow-removebg-preview-removebg-preview.png" alt="AlpenGlow Global"></div>
   <div class="footer-links">
     <a href="../index.html#destinations">Destinations</a>
     <a href="../index.html#packages">Packages</a>
@@ -156,8 +156,9 @@ function unlockContent() {
 }
 function gateSendWhatsApp() {
   _gateName = document.getElementById("gateName").value.trim();
-  _gatePhone = document.getElementById("gatePhone").value.trim();
-  if (!_gateName || !_gatePhone) { alert("Please enter your name and WhatsApp number."); return; }
+  var _gateCC = document.getElementById("gatePhoneCC").value;
+  _gatePhone = _gateCC + document.getElementById("gatePhone").value.trim();
+  if (!_gateName || document.getElementById("gatePhone").value.trim().length !== 10) { alert("Please enter your name and a valid 10-digit WhatsApp number."); return; }
   const btn = document.getElementById("gateBtn1");
   btn.textContent = "Sending..."; btn.disabled = true;
   AlpenAPI.sendSMSOTP(_gatePhone, "package_unlock", { name: _gateName })
@@ -225,3 +226,4 @@ mobileToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
 <script src="../trip-planner.js"></script>
 </body>
 </html>
+

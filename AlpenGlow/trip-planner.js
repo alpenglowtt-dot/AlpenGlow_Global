@@ -395,11 +395,12 @@
   </main>
 
   <div id="tp-confirm">
-    <div class="tp-confirm-circle">✓</div>
-    <div class="tp-confirm-title">You're all set!</div>
-    '<div class="tp-confirm-sub">Our travel expert will reach out within 24 hours with a personalised itinerary just for you.</div>' +
-    '<div class="tp-confirm-summary" id="tp-confirm-summary"></div>'
-    <button class="tp-confirm-close">Close</button>
+    <div class="tp-confirm-circle">&#10003;</div>
+    <div class="tp-confirm-title">You&#8217;re all set!</div>
+    <div class="tp-confirm-sub">Our travel expert will reach out within 24 hours with a personalised itinerary just for you.</div>
+    <div class="tp-confirm-divider"></div>
+    <div class="tp-confirm-summary" id="tp-confirm-summary"></div>
+    <button class="tp-confirm-close">CLOSE</button>
   </div>
 
   <footer id="tp-footer">
@@ -716,14 +717,73 @@
   }
 
   /* ── Step 8: Contact ──────────────────────────────────────── */
+  var _TP_CC_OPTS = [
+    {v:'+91',l:'🇮🇳 +91'},{v:'+1',l:'🇺🇸 +1'},{v:'+44',l:'🇬🇧 +44'},
+    {v:'+61',l:'🇦🇺 +61'},{v:'+65',l:'🇸🇬 +65'},{v:'+971',l:'🇦🇪 +971'},
+    {v:'+60',l:'🇲🇾 +60'},{v:'+64',l:'🇳🇿 +64'},{v:'+49',l:'🇩🇪 +49'},{v:'+33',l:'🇫🇷 +33'}
+  ];
+  function _ccOptions(sel) {
+    return _TP_CC_OPTS.map(function(c){
+      return '<option value="'+c.v+'"'+(c.v===(sel||'+91')?' selected':'')+'>'+c.l+'</option>';
+    }).join('');
+  }
+
   function renderContact() {
-    const a = _s.answers;
+    var a = _s.answers;
+    var ccSel = a.phoneCC || '+91';
     return _heading('09', STEPS[8].q) +
       '<div class="tp-contact-form" id="tp-contact-form">' +
-      _field('tp-cname',  'text',  'Full Name',     'Your name',          a.name  || '') +
-      _field('tp-cphone', 'tel',   'Phone Number',  '+91 98765 43210',    a.phone || '') +
-      _field('tp-cemail', 'email', 'Email Address', 'you@example.com',    a.email || '') +
-      '<button class="tp-submit" id="tp-submit-btn">Send My Enquiry →</button>' +
+
+      /* ── Name ── */
+      _field('tp-cname', 'text', 'Full Name', 'Your name', a.name || '') +
+
+      /* ── Phone + inline OTP ── */
+      '<div class="tp-field-wrap">' +
+        '<div class="tp-verify-row">' +
+          '<select class="tp-cc-select" id="tp-cphone-cc">'+_ccOptions(ccSel)+'</select>' +
+          '<div class="tp-input-slot">' +
+            '<input class="tp-input" id="tp-cphone" type="tel" placeholder=" " maxlength="10"' +
+            ' value="'+_esc(a.phone||'')+'" oninput="this.value=this.value.replace(/\\D/g,\'\')" inputmode="numeric">' +
+            '<label class="tp-field-label tp-field-float" for="tp-cphone">Phone (10 digits)</label>' +
+          '</div>' +
+          '<button class="tp-send-otp-btn" id="tp-phone-send-btn">Send OTP</button>' +
+        '</div>' +
+        '<div class="tp-otp-inline" id="tp-phone-otp-block">' +
+          '<p class="tp-verify-note" id="tp-potp-note" style="margin-top:10px;">Enter the code sent to your WhatsApp.</p>' +
+          '<div class="tp-otp-row">' +
+            '<input type="tel" maxlength="1" class="tp-otp-digit" id="tp-otp-0">' +
+            '<input type="tel" maxlength="1" class="tp-otp-digit" id="tp-otp-1">' +
+            '<input type="tel" maxlength="1" class="tp-otp-digit" id="tp-otp-2">' +
+            '<input type="tel" maxlength="1" class="tp-otp-digit" id="tp-otp-3">' +
+          '</div>' +
+          '<div class="tp-resend-line">Didn\'t get it? <span class="tp-resend-link" id="tp-potp-resend">Resend</span></div>' +
+          '<button class="tp-submit" id="tp-phone-confirm-btn" style="width:100%;margin-bottom:12px;">Confirm Phone &rarr;</button>' +
+        '</div>' +
+      '</div>' +
+
+      /* ── Email + inline OTP ── */
+      '<div class="tp-field-wrap">' +
+        '<div class="tp-verify-row">' +
+          '<div class="tp-input-slot">' +
+            '<input class="tp-input" id="tp-cemail" type="email" placeholder=" " value="'+_esc(a.email||'')+'">' +
+            '<label class="tp-field-label tp-field-float" for="tp-cemail">Email Address</label>' +
+          '</div>' +
+          '<button class="tp-send-otp-btn" id="tp-email-send-btn">Send OTP</button>' +
+        '</div>' +
+        '<div class="tp-otp-inline" id="tp-email-otp-block">' +
+          '<p class="tp-verify-note" id="tp-eotp-note" style="margin-top:10px;">Enter the code sent to your email.</p>' +
+          '<div class="tp-otp-row">' +
+            '<input type="tel" maxlength="1" class="tp-otp-digit" id="tp-eotp-0">' +
+            '<input type="tel" maxlength="1" class="tp-otp-digit" id="tp-eotp-1">' +
+            '<input type="tel" maxlength="1" class="tp-otp-digit" id="tp-eotp-2">' +
+            '<input type="tel" maxlength="1" class="tp-otp-digit" id="tp-eotp-3">' +
+          '</div>' +
+          '<div class="tp-resend-line">Didn\'t get it? <span class="tp-resend-link" id="tp-eotp-resend">Resend</span></div>' +
+          '<button class="tp-submit" id="tp-email-confirm-btn" style="width:100%;margin-bottom:12px;">Confirm Email &rarr;</button>' +
+        '</div>' +
+      '</div>' +
+
+      '<button class="tp-submit" id="tp-final-submit-btn" style="display:none;width:100%;">Submit Enquiry &rarr;</button>' +
       '</div>';
   }
 
@@ -756,7 +816,6 @@
         _stepWrap.querySelectorAll('[data-vibe]').forEach(function (c) { c.classList.toggle('tp-sel', c === el); });
         _sbUpsert(1);
         _enableNextBtn();
-        setTimeout(_advance, 320);
       });
       el.addEventListener('mouseenter', function () { _setBg(VIBE_BGS[el.dataset.vibe] || STEP_BGS[0]); });
       el.addEventListener('mouseleave', function () {
@@ -919,49 +978,159 @@
   }
 
   function _bindContact() {
-    const btn = document.getElementById('tp-submit-btn');
-    btn.addEventListener('click', _submitContact);
+    function _bindOtpGroup(prefix, count) {
+      for (var i = 0; i < count; i++) {
+        (function(idx) {
+          var el = document.getElementById(prefix + idx);
+          if (!el) return;
+          el.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g,'').slice(0,1);
+            if (this.value && idx < count - 1) document.getElementById(prefix+(idx+1)).focus();
+          });
+          el.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && !this.value && idx > 0) document.getElementById(prefix+(idx-1)).focus();
+          });
+        })(i);
+      }
+    }
+    _bindOtpGroup('tp-otp-', 4);
+    _bindOtpGroup('tp-eotp-', 4);
+
+    document.getElementById('tp-phone-send-btn').addEventListener('click', _tpSendPhoneOTP);
+    document.getElementById('tp-phone-confirm-btn').addEventListener('click', _tpConfirmPhoneOTP);
+    document.getElementById('tp-email-send-btn').addEventListener('click', _tpSendEmailOTP);
+    document.getElementById('tp-email-confirm-btn').addEventListener('click', _tpConfirmEmailOTP);
+    document.getElementById('tp-final-submit-btn').addEventListener('click', _tpFinalSubmit);
+    document.getElementById('tp-potp-resend').addEventListener('click', function() {
+      AlpenAPI.sendSMSOTP(_s.answers.fullPhone, 'trip_planner').catch(function(){});
+    });
+    document.getElementById('tp-eotp-resend').addEventListener('click', function() {
+      AlpenAPI.sendEmailOTP(_s.answers.email, 'trip_planner').catch(function(){});
+    });
   }
 
-  function _submitContact() {
-    const nameEl  = document.getElementById('tp-cname');
-    const phoneEl = document.getElementById('tp-cphone');
-    const emailEl = document.getElementById('tp-cemail');
+  function _tpSendPhoneOTP() {
+    var nameEl  = document.getElementById('tp-cname');
+    var phoneEl = document.getElementById('tp-cphone');
+    var ccEl    = document.getElementById('tp-cphone-cc');
+    nameEl.classList.remove('tp-err');
+    phoneEl.classList.remove('tp-err');
+    if (!nameEl.value.trim()) { nameEl.classList.add('tp-err'); nameEl.focus(); return; }
+    if (phoneEl.value.replace(/\D/g,'').length !== 10) { phoneEl.classList.add('tp-err'); phoneEl.focus(); return; }
 
-    let ok = true;
-    [nameEl, phoneEl, emailEl].forEach(function (el) {
-      el.classList.remove('tp-err');
-      if (!el.value.trim()) { el.classList.add('tp-err'); ok = false; }
+    _s.answers.name     = nameEl.value.trim();
+    _s.answers.phone    = phoneEl.value.trim();
+    _s.answers.phoneCC  = ccEl.value;
+    _s.answers.fullPhone = ccEl.value + phoneEl.value.trim();
+
+    var btn = document.getElementById('tp-phone-send-btn');
+    btn.textContent = '...'; btn.disabled = true;
+
+    AlpenAPI.sendSMSOTP(_s.answers.fullPhone, 'trip_planner').then(function() {
+      document.getElementById('tp-potp-note').textContent = 'Code sent to ' + _s.answers.fullPhone;
+      document.getElementById('tp-phone-otp-block').classList.add('tp-open');
+      btn.textContent = 'Resend'; btn.disabled = false;
+      btn.classList.add('tp-otp-sent');
+      setTimeout(function() { document.getElementById('tp-otp-0').focus(); }, 420);
+    }).catch(function(e) {
+      btn.textContent = 'Send OTP'; btn.disabled = false;
+      alert((e && e.message) || 'Could not send code. Please check your number.');
     });
-    if (!ok) return;
-    if (!/^\S+@\S+\.\S+$/.test(emailEl.value.trim())) {
-      emailEl.classList.add('tp-err'); return;
-    }
+  }
 
-    _s.answers.name  = nameEl.value.trim();
-    _s.answers.phone = phoneEl.value.trim();
+  function _tpConfirmPhoneOTP() {
+    var code = ['tp-otp-0','tp-otp-1','tp-otp-2','tp-otp-3']
+      .map(function(id){ return document.getElementById(id).value; }).join('');
+    if (code.length < 4) { document.getElementById('tp-otp-0').focus(); return; }
+
+    var btn = document.getElementById('tp-phone-confirm-btn');
+    btn.disabled = true; btn.textContent = 'Verifying…';
+
+    AlpenAPI.verifySMSOTP(_s.answers.fullPhone, code).then(function() {
+      _s.answers.phoneVerified = true;
+      document.getElementById('tp-phone-otp-block').classList.remove('tp-open');
+      var sendBtn = document.getElementById('tp-phone-send-btn');
+      sendBtn.textContent = '✓ Verified'; sendBtn.disabled = true;
+      sendBtn.classList.remove('tp-otp-sent'); sendBtn.classList.add('tp-otp-ok');
+      document.getElementById('tp-cphone').readOnly = true;
+      document.getElementById('tp-cphone-cc').disabled = true;
+      _tpCheckBothVerified();
+    }).catch(function(e) {
+      btn.disabled = false; btn.textContent = 'Confirm Phone →';
+      alert((e && e.message) || 'Invalid code. Please try again.');
+    });
+  }
+
+  function _tpSendEmailOTP() {
+    var emailEl = document.getElementById('tp-cemail');
+    emailEl.classList.remove('tp-err');
+    if (!/^\S+@\S+\.\S+$/.test(emailEl.value.trim())) { emailEl.classList.add('tp-err'); emailEl.focus(); return; }
+
     _s.answers.email = emailEl.value.trim();
 
-    const btn = document.getElementById('tp-submit-btn');
-    btn.disabled = true;
-    btn.textContent = 'Submitting…';
+    var btn = document.getElementById('tp-email-send-btn');
+    btn.textContent = '...'; btn.disabled = true;
 
-    _sbSubmit().then(function () {
+    AlpenAPI.sendEmailOTP(_s.answers.email, 'trip_planner').then(function() {
+      document.getElementById('tp-eotp-note').textContent = 'Code sent to ' + _s.answers.email;
+      document.getElementById('tp-email-otp-block').classList.add('tp-open');
+      btn.textContent = 'Resend'; btn.disabled = false;
+      btn.classList.add('tp-otp-sent');
+      setTimeout(function() { document.getElementById('tp-eotp-0').focus(); }, 420);
+    }).catch(function(e) {
+      btn.textContent = 'Send OTP'; btn.disabled = false;
+      alert((e && e.message) || 'Could not send code. Please check your email.');
+    });
+  }
+
+  function _tpConfirmEmailOTP() {
+    var code = ['tp-eotp-0','tp-eotp-1','tp-eotp-2','tp-eotp-3']
+      .map(function(id){ return document.getElementById(id).value; }).join('');
+    if (code.length < 4) { document.getElementById('tp-eotp-0').focus(); return; }
+
+    var btn = document.getElementById('tp-email-confirm-btn');
+    btn.disabled = true; btn.textContent = 'Verifying…';
+
+    AlpenAPI.verifyEmailOTP(_s.answers.email, code).then(function() {
+      _s.answers.emailVerified = true;
+      document.getElementById('tp-email-otp-block').classList.remove('tp-open');
+      var sendBtn = document.getElementById('tp-email-send-btn');
+      sendBtn.textContent = '✓ Verified'; sendBtn.disabled = true;
+      sendBtn.classList.remove('tp-otp-sent'); sendBtn.classList.add('tp-otp-ok');
+      document.getElementById('tp-cemail').readOnly = true;
+      _tpCheckBothVerified();
+    }).catch(function(e) {
+      btn.disabled = false; btn.textContent = 'Confirm Email →';
+      alert((e && e.message) || 'Invalid code. Please try again.');
+    });
+  }
+
+  function _tpCheckBothVerified() {
+    if (_s.answers.phoneVerified && _s.answers.emailVerified) {
+      var submitBtn = document.getElementById('tp-final-submit-btn');
+      submitBtn.style.display = 'block';
+      setTimeout(function() { submitBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+    }
+  }
+
+  function _tpFinalSubmit() {
+    var btn = document.getElementById('tp-final-submit-btn');
+    btn.disabled = true; btn.textContent = 'Submitting…';
+    _sbSubmit().then(function() {
       _confirm.classList.add('tp-show');
-      const a = _s.answers;
-      const bits = [
-        a.destination && '✈ ' + a.destination.charAt(0).toUpperCase() + a.destination.slice(1),
-        a.travelerType && '👥 ' + a.travelerType.charAt(0).toUpperCase() + a.travelerType.slice(1),
-        a.month !== undefined && '📅 ' + MONTHS[a.month].full,
-        a.duration && '⏱ ' + a.duration + ' days',
-        a.budget && '💰 ' + a.budget.charAt(0).toUpperCase() + a.budget.slice(1),
+      var a = _s.answers;
+      var bits = [
+        a.destination  && a.destination.charAt(0).toUpperCase()  + a.destination.slice(1),
+        a.travelerType && a.travelerType.charAt(0).toUpperCase() + a.travelerType.slice(1),
+        a.month !== undefined && MONTHS[a.month].full,
+        a.duration && a.duration + ' days',
+        a.budget   && a.budget.charAt(0).toUpperCase() + a.budget.slice(1),
       ].filter(Boolean);
-      const el = document.getElementById('tp-confirm-summary');
-      if (el) el.innerHTML = bits.map(function(b){ return '<span class="tp-sum-pill">' + b + '</span>'; }).join('');
-    }).catch(function () {
-      btn.disabled = false;
-      btn.textContent = 'Send My Enquiry →';
-      alert('Something went wrong. Please try again.');
+      var el = document.getElementById('tp-confirm-summary');
+      if (el) el.innerHTML = bits.map(function(b){ return '<span class="tp-sum-pill">'+b+'</span>'; }).join('');
+    }).catch(function(e) {
+      btn.disabled = false; btn.textContent = 'Submit Enquiry →';
+      alert((e && e.message) || 'Something went wrong. Please try again.');
     });
   }
 
@@ -1001,7 +1170,7 @@
 
   function _sbSubmit() {
     const sb = _getSb();
-    if (!sb) return Promise.reject(new Error('Supabase not ready'));
+    if (!sb) return Promise.resolve(); /* no CDN (file://) — skip silently */
     return sb.from('trip_leads')
       .upsert(_buildPayload(9, 'submitted'), { onConflict: 'session_id' })
       .then(function (res) {

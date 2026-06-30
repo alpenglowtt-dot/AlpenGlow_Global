@@ -450,6 +450,87 @@
   background: rgba(12,10,8,0.92); padding: 0 5px;
 }
 
+/* ── Inline verify row (CC + input + SEND OTP btn) ──────── */
+.tp-verify-row { display: flex; gap: 4px; align-items: stretch; }
+.tp-input-slot { position: relative; flex: 1; min-width: 0; }
+.tp-input-slot .tp-input { width: 100%; height: 100%; }
+
+/* CC select in the verify row */
+.tp-cc-select {
+  flex-shrink: 0; width: 88px;
+  background: var(--glass); backdrop-filter: blur(16px);
+  border: 1px solid var(--border-hi);
+  color: var(--text); font-size: 12px; outline: none;
+  padding: 0 8px; cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: border-color 0.22s, background 0.22s;
+  font-family: var(--font-body);
+}
+.tp-cc-select:focus { border-color: var(--orange); background: var(--glass-hi); }
+.tp-cc-select option { background: #1a1410; color: var(--text); }
+
+/* SEND OTP / status button — dark glass tile */
+.tp-send-otp-btn {
+  flex-shrink: 0; padding: 0 14px;
+  background: rgba(10,8,6,0.72);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-hi);
+  color: var(--orange); font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; white-space: nowrap; font-family: var(--font-body);
+  outline: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  transition: background 0.22s, color 0.22s, border-color 0.22s, box-shadow 0.22s;
+}
+.tp-send-otp-btn:hover:not(:disabled):not(.tp-otp-sent):not(.tp-otp-ok) {
+  background: var(--orange); color: #0a0806; border-color: var(--orange);
+  box-shadow: 0 0 0 2px var(--sel-ring), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.tp-send-otp-btn.tp-otp-sent {
+  color: var(--muted); cursor: default; font-size: 9px;
+  background: rgba(10,8,6,0.5);
+}
+.tp-send-otp-btn.tp-otp-ok {
+  color: #5cb85c; border-color: rgba(92,184,92,0.6);
+  background: rgba(92,184,92,0.08); cursor: default;
+}
+.tp-send-otp-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* Inline OTP reveal block */
+.tp-otp-inline {
+  overflow: hidden; max-height: 0; opacity: 0;
+  transition: max-height 0.42s var(--ease), opacity 0.35s var(--ease);
+}
+.tp-otp-inline.tp-open { max-height: 240px; opacity: 1; }
+
+/* ── OTP digits for trip planner (dark theme) ─────────────── */
+.tp-otp-row { display: flex; gap: 8px; margin: 10px 0 6px; }
+.tp-otp-digit {
+  flex: 1; height: 56px; max-width: 64px;
+  background: var(--glass); backdrop-filter: blur(16px);
+  border: 1px solid var(--border-hi);
+  color: var(--text); font-size: 1.5rem; font-weight: 700;
+  text-align: center; outline: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: border-color 0.22s, background 0.22s, box-shadow 0.22s;
+  font-family: var(--font-body);
+}
+.tp-otp-digit:focus {
+  border-color: var(--orange); background: var(--glass-hi);
+  box-shadow: 0 0 0 2px var(--sel-ring);
+}
+
+/* ── Verification sub-step UI ────────────────────────────── */
+.tp-verify-note {
+  font-size: 13px; color: rgba(255,255,255,0.65);
+  margin-bottom: 4px; line-height: 1.55;
+}
+.tp-resend-line { font-size: 11px; color: var(--muted); margin: 4px 0 16px; }
+.tp-resend-link { color: var(--orange); cursor: pointer; font-weight: 600; }
+.tp-resend-link:hover { color: var(--amber); }
+/* tp-cs-block removed — now using inline OTP reveal (.tp-otp-inline) */
+
 /* ── CTA buttons ─────────────────────────────────────────── */
 .tp-submit,
 .tp-next-btn {
@@ -506,7 +587,7 @@
 /* ── Confirmation overlay ────────────────────────────────── */
 #tp-confirm {
   display: none; position: absolute; inset: 0; z-index: 20;
-  background: rgba(12,10,8,0.9); backdrop-filter: blur(14px);
+  background: rgba(10,8,6,0.94); backdrop-filter: blur(18px);
   flex-direction: column; align-items: center; justify-content: center;
   text-align: center; gap: 18px; padding: 40px;
 }
@@ -519,43 +600,53 @@
   to   { opacity: 1; transform: scale(1); }
 }
 .tp-confirm-circle {
-  width: 64px; height: 64px; background: var(--orange);
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--orange);
   display: flex; align-items: center; justify-content: center;
-  font-size: 24px; color: var(--bg); margin: 0 auto;
-  box-shadow: 0 0 0 12px rgba(239,126,25,0.1), 0 0 0 24px rgba(239,126,25,0.04);
+  font-size: 28px; color: #0a0806; margin: 0 auto;
+  box-shadow: 0 0 0 14px rgba(239,126,25,0.1), 0 0 0 28px rgba(239,126,25,0.05);
   animation: tp-confirm-pop 600ms var(--spring) 100ms both;
 }
 @keyframes tp-confirm-pop {
-  from { transform: scale(0.3); box-shadow: none; }
-  to   { transform: scale(1); }
+  from { transform: scale(0.2); opacity: 0; box-shadow: none; }
+  to   { transform: scale(1);   opacity: 1; }
 }
 .tp-confirm-title {
-  font-family: var(--font-display); font-size: 1.9rem;
-  font-weight: 400; font-style: italic; margin-top: 4px;
+  font-family: var(--font-display); font-size: 2rem;
+  font-weight: 400; font-style: italic; margin-top: 6px;
   animation: tp-in 400ms var(--ease) 220ms both;
 }
 .tp-confirm-sub {
-  font-size: 14px; color: var(--muted); max-width: 340px; line-height: 1.65;
+  font-size: 14px; color: rgba(255,255,255,0.5);
+  max-width: 320px; line-height: 1.7; margin-top: -4px;
   animation: tp-in 400ms var(--ease) 320ms both;
 }
+.tp-confirm-divider {
+  width: 40px; height: 1px; background: rgba(255,255,255,0.12); margin: 2px auto;
+  animation: tp-in 400ms var(--ease) 360ms both;
+}
 .tp-confirm-summary {
-  display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; margin-top: 2px;
-  animation: tp-in 400ms var(--ease) 380ms both;
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+  animation: tp-in 400ms var(--ease) 400ms both;
 }
 .tp-sum-pill {
-  background: rgba(239,126,25,0.1); border: 1px solid rgba(239,126,25,0.22);
-  padding: 4px 13px; font-size: 11px; color: rgba(255,255,255,0.78);
+  background: rgba(239,126,25,0.08); border: 1px solid rgba(239,126,25,0.2);
+  padding: 5px 14px; font-size: 11px; font-weight: 500;
+  color: rgba(255,255,255,0.72); letter-spacing: 0.04em;
+  text-transform: capitalize;
 }
 .tp-confirm-close {
-  background: transparent; border: 1px solid var(--border-hi); color: var(--text);
-  padding: 10px 28px; font-size: 13px; cursor: pointer;
-  letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500;
-  transition: border-color 0.22s, background 0.22s, transform 0.3s var(--spring);
-  animation: tp-in 400ms var(--ease) 440ms both;
+  margin-top: 6px;
+  background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6);
+  padding: 11px 36px; font-size: 11px; cursor: pointer;
+  letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+  font-family: var(--font-body);
+  transition: border-color 0.22s, background 0.22s, color 0.22s, transform 0.3s var(--spring);
+  animation: tp-in 400ms var(--ease) 480ms both;
 }
 .tp-confirm-close:hover {
   border-color: var(--orange); background: rgba(239,126,25,0.08);
-  color: var(--amber); transform: translateY(-1px);
+  color: var(--orange); transform: translateY(-1px);
 }
 
 /* ── Responsive ─────────────────────────────────────────── */
