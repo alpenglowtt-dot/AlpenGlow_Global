@@ -1535,6 +1535,7 @@ async function loadPageContent() {
     renderBlogPosts(hasBundle || posts.length ? posts : FALLBACK_ARTICLES)
     renderPackages(hasBundle || packages.length ? packages : FALLBACK_PACKAGES)
     renderDestinations(hasBundle || destinations.length ? destinations : FALLBACK_DESTINATIONS)
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el))
   } catch(e) {
     if (!hasBundle) {
       renderOffers(FALLBACK_OFFERS)
@@ -1542,6 +1543,7 @@ async function loadPageContent() {
       renderBlogPosts(FALLBACK_ARTICLES)
       renderPackages(FALLBACK_PACKAGES)
       renderDestinations(FALLBACK_DESTINATIONS)
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el))
     }
   }
 }
