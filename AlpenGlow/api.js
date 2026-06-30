@@ -14,7 +14,7 @@
   // ─── DEV MODE ────────────────────────────────────────────────
   // Set to true during development to bypass content blur/lock gates.
   // Set to false before going live / showing to client.
-  const DEV_MODE = false
+  const DEV_MODE = true
   // ─────────────────────────────────────────────────────────────
 
   const SUPABASE_URL      = 'https://yexrmmhadfscormovskn.supabase.co'
@@ -68,7 +68,6 @@
   function markVerified() {
     sessionStorage.setItem('ag_verified', '1')
   }
-  // ─────────────────────────────────────────────────────────────
 
   // Dev mode: auto-unlock gates and hide blur overlays on page load
   if (DEV_MODE) {
@@ -104,8 +103,13 @@
   }
 
   window.AlpenAPI = {
+    /** Returns true if DEV_MODE is active (used by trip-planner.js to bypass OTP) */
+    isDevMode: function() { return DEV_MODE },
+
     /** Returns true if the visitor has already verified this session */
     isVerified: isVerified,
+
+    markVerified: markVerified,
 
     /** Send a 4-digit SMS OTP via Twilio */
     sendSMSOTP: (phone, purpose, metadata = {}) => {

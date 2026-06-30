@@ -98,7 +98,7 @@ window.ALPEN_DATA = {
           "link": "packages/srilanka.html"
         }
       ],
-      "id": "dest_mr0hdkjv"
+      "id": "dest_mr0sfflw"
     },
     {
       "slug": "longhaul",
@@ -142,7 +142,7 @@ window.ALPEN_DATA = {
           "link": "packages/southkorea.html"
         }
       ],
-      "id": "dest_mr0hdkjw"
+      "id": "dest_mr0sfflx"
     },
     {
       "slug": "islands",
@@ -180,7 +180,7 @@ window.ALPEN_DATA = {
           "link": "packages/bali.html"
         }
       ],
-      "id": "dest_mr0hdkjx"
+      "id": "dest_mr0sffly"
     },
     {
       "slug": "cruises",
@@ -212,7 +212,7 @@ window.ALPEN_DATA = {
           "link": "packages/resortsworld.html"
         }
       ],
-      "id": "dest_mr0hdkjy"
+      "id": "dest_mr0sfflz"
     }
   ],
   "packages": [

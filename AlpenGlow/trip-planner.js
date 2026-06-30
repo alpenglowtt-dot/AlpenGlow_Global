@@ -1018,10 +1018,22 @@
     if (!nameEl.value.trim()) { nameEl.classList.add('tp-err'); nameEl.focus(); return; }
     if (phoneEl.value.replace(/\D/g,'').length !== 10) { phoneEl.classList.add('tp-err'); phoneEl.focus(); return; }
 
-    _s.answers.name     = nameEl.value.trim();
-    _s.answers.phone    = phoneEl.value.trim();
-    _s.answers.phoneCC  = ccEl.value;
+    _s.answers.name      = nameEl.value.trim();
+    _s.answers.phone     = phoneEl.value.trim();
+    _s.answers.phoneCC   = ccEl.value;
     _s.answers.fullPhone = ccEl.value + phoneEl.value.trim();
+
+    // DEV MODE: skip OTP entirely, auto-mark phone as verified
+    if (window.AlpenAPI && window.AlpenAPI.isDevMode && window.AlpenAPI.isDevMode()) {
+      _s.answers.phoneVerified = true;
+      var sendBtn = document.getElementById('tp-phone-send-btn');
+      sendBtn.textContent = '✓ Verified (dev)'; sendBtn.disabled = true;
+      sendBtn.classList.remove('tp-otp-sent'); sendBtn.classList.add('tp-otp-ok');
+      document.getElementById('tp-cphone').readOnly = true;
+      document.getElementById('tp-cphone-cc').disabled = true;
+      _tpCheckBothVerified();
+      return;
+    }
 
     var btn = document.getElementById('tp-phone-send-btn');
     btn.textContent = '...'; btn.disabled = true;
@@ -1067,6 +1079,17 @@
     if (!/^\S+@\S+\.\S+$/.test(emailEl.value.trim())) { emailEl.classList.add('tp-err'); emailEl.focus(); return; }
 
     _s.answers.email = emailEl.value.trim();
+
+    // DEV MODE: skip OTP entirely, auto-mark email as verified
+    if (window.AlpenAPI && window.AlpenAPI.isDevMode && window.AlpenAPI.isDevMode()) {
+      _s.answers.emailVerified = true;
+      var sendBtn = document.getElementById('tp-email-send-btn');
+      sendBtn.textContent = '✓ Verified (dev)'; sendBtn.disabled = true;
+      sendBtn.classList.remove('tp-otp-sent'); sendBtn.classList.add('tp-otp-ok');
+      document.getElementById('tp-cemail').readOnly = true;
+      _tpCheckBothVerified();
+      return;
+    }
 
     var btn = document.getElementById('tp-email-send-btn');
     btn.textContent = '...'; btn.disabled = true;
