@@ -300,7 +300,7 @@
           if (tagRow) tagRow.innerHTML = inclusions.map(i => `<span class="tag-pill">${i}</span>`).join('')
         }
       } catch(e) {
-        // Silently fall back to hardcoded HTML
+        console.error('[AlpenAPI] loadPackagePage error:', e)
       }
     },
   }

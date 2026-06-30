@@ -1326,6 +1326,131 @@ box-shadow:
 0 26px 60px rgba(0,0,0,.35);
 
 }
+
+/* ── TOAST ──────────────────────────────────────────── */
+#toast-container{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;pointer-events:none}
+.toast{padding:.75rem 1.2rem;border-radius:12px;font-size:.82rem;font-weight:500;min-width:220px;max-width:360px;display:flex;align-items:center;gap:.6rem;pointer-events:all;backdrop-filter:blur(12px);animation:toastIn .3s var(--ease) both;box-shadow:0 8px 28px rgba(0,0,0,.45)}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+.toast.ok{background:rgba(79,211,154,.12);border:1px solid rgba(79,211,154,.25);color:var(--green)}
+.toast.err{background:rgba(239,111,111,.12);border:1px solid rgba(239,111,111,.25);color:var(--red)}
+.toast.info{background:rgba(239,126,25,.12);border:1px solid rgba(239,126,25,.25);color:var(--orange)}
+
+/* ── VIEW TOGGLE ─────────────────────────────────────── */
+.view-toggle{display:flex;gap:0;border:1px solid var(--rule-faint);border-radius:10px;overflow:hidden}
+.vt-btn{padding:.38rem .85rem;background:transparent;border:none;color:var(--ghost);font-size:.72rem;font-weight:600;letter-spacing:.04em;transition:all .18s;cursor:pointer}
+.vt-btn.active{background:var(--orange);color:#fff;box-shadow:0 4px 14px rgba(239,126,25,.25)}
+.vt-btn:hover:not(.active){color:var(--text);background:var(--surface2)}
+
+/* ── KANBAN ──────────────────────────────────────────── */
+.kanban-board{display:none;gap:1rem;padding-bottom:2rem;overflow-x:auto;padding-top:.2rem}
+.kanban-board.active{display:flex}
+.kanban-col{flex:0 0 230px;min-width:230px;background:rgba(30,24,19,.7);border:1px solid rgba(255,255,255,.05);border-radius:18px;padding:1rem;display:flex;flex-direction:column;gap:.5rem}
+.kanban-col-head{font-size:.66rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);padding:.3rem .1rem .6rem;display:flex;justify-content:space-between;align-items:center}
+.kanban-col-count{font-size:.72rem;background:rgba(255,255,255,.06);padding:.15rem .5rem;border-radius:999px;color:var(--muted);font-weight:600;letter-spacing:0}
+.kanban-card{background:rgba(36,29,22,.95);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:.85rem .9rem;cursor:pointer;transition:all .22s var(--ease)}
+.kanban-card:hover{border-color:rgba(239,126,25,.22);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.kanban-card[draggable]:active{opacity:.6}
+.kc-name{font-size:.88rem;font-weight:600;color:#fff;margin-bottom:.3rem}
+.kc-pkg{font-size:.72rem;color:var(--muted);margin-bottom:.4rem;line-height:1.4}
+.kc-meta{font-size:.65rem;color:var(--ghost)}
+.kanban-drop-zone{min-height:52px;border:2px dashed rgba(255,255,255,.06);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--ghost);font-size:.72rem;transition:all .2s}
+.kanban-drop-zone.drag-target{border-color:var(--orange);background:rgba(239,126,25,.05);color:var(--orange)}
+
+/* ── EMAIL MODAL ─────────────────────────────────────── */
+#email-modal-backdrop{position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center}
+#email-modal-backdrop.open{display:flex}
+.email-modal{width:540px;max-width:92vw;max-height:88vh;overflow-y:auto;background:linear-gradient(180deg,#211b16,#18130f);border:1px solid rgba(255,255,255,.07);border-radius:22px;box-shadow:0 40px 100px rgba(0,0,0,.6);padding:2rem 2.2rem;display:flex;flex-direction:column;gap:1rem}
+.email-modal h3{font-family:var(--font-display);font-size:1.35rem;font-weight:400;font-style:italic;color:#fff;margin-bottom:.2rem}
+.em-field{display:flex;flex-direction:column;gap:.35rem}
+.em-lbl{font-size:.67rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.42)}
+.em-input,.em-textarea{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:var(--text);font-size:.88rem;padding:.7rem .9rem;outline:none;transition:border-color .2s;font-family:var(--font-body)}
+.em-input:focus,.em-textarea:focus{border-color:var(--orange)}
+.em-textarea{min-height:140px;resize:vertical;line-height:1.65}
+.em-row{display:flex;gap:.8rem;justify-content:flex-end;margin-top:.4rem}
+.em-btn{padding:.65rem 1.4rem;border-radius:10px;font-size:.84rem;font-weight:600;letter-spacing:.04em;transition:all .2s;cursor:pointer}
+.em-btn-cancel{background:transparent;border:1px solid var(--rule-faint);color:var(--muted)}
+.em-btn-cancel:hover{border-color:var(--ghost);color:var(--text)}
+.em-btn-send{background:rgba(239,126,25,.1);border:1px solid rgba(239,126,25,.3);color:var(--orange)}
+.em-btn-send:hover{background:rgba(239,126,25,.2);border-color:var(--orange)}
+
+/* ── BULK ACTION BAR ─────────────────────────────────── */
+#bulk-bar{position:fixed;bottom:0;left:0;right:0;z-index:400;padding:1rem 2rem;background:rgba(20,16,12,.97);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.07);display:none;align-items:center;justify-content:space-between;gap:1rem;box-shadow:0 -8px 32px rgba(0,0,0,.4)}
+#bulk-bar.show{display:flex}
+.bulk-left{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.bulk-count{font-size:.82rem;font-weight:600;color:var(--text);white-space:nowrap}
+.bulk-btn{padding:.52rem 1rem;border-radius:9px;font-size:.78rem;font-weight:600;letter-spacing:.04em;transition:all .18s;cursor:pointer}
+.bulk-status-btn{background:rgba(239,126,25,.08);border:1px solid rgba(239,126,25,.22);color:var(--orange)}
+.bulk-status-btn:hover{background:rgba(239,126,25,.16)}
+.bulk-csv-btn{background:rgba(79,211,154,.08);border:1px solid rgba(79,211,154,.22);color:var(--green)}
+.bulk-csv-btn:hover{background:rgba(79,211,154,.15)}
+.bulk-del-btn{background:rgba(239,111,111,.08);border:1px solid rgba(239,111,111,.22);color:var(--red)}
+.bulk-del-btn:hover{background:rgba(239,111,111,.15)}
+.bulk-clear{background:transparent;border:1px solid var(--rule-faint);color:var(--muted);padding:.52rem .9rem;border-radius:9px;font-size:.78rem;cursor:pointer}
+.bulk-status-drop{position:absolute;bottom:64px;left:0;background:#1d1813;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.35rem;box-shadow:0 20px 50px rgba(0,0,0,.7);z-index:410;display:none;min-width:160px}
+.bulk-status-drop.open{display:block}
+
+/* ── SAVED FILTER CHIPS ──────────────────────────────── */
+.saved-filters-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+.sf-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .75rem;border-radius:999px;font-size:.72rem;font-weight:600;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--muted);cursor:pointer;transition:all .18s}
+.sf-chip:hover{border-color:var(--orange);color:var(--orange)}
+.sf-chip.active{background:rgba(239,126,25,.1);border-color:rgba(239,126,25,.3);color:var(--orange)}
+.sf-chip-x{margin-left:.2rem;font-size:.75rem;opacity:.55;cursor:pointer}
+.sf-chip-x:hover{opacity:1;color:var(--red)}
+.btn-save-filter{padding:.3rem .8rem;border-radius:999px;font-size:.72rem;font-weight:600;background:transparent;border:1px dashed rgba(255,255,255,.15);color:var(--ghost);transition:all .18s;cursor:pointer}
+.btn-save-filter:hover{border-color:var(--orange);color:var(--orange)}
+
+/* ── DATE RANGE ──────────────────────────────────────── */
+.date-range-wrap{display:flex;align-items:center;gap:.4rem}
+.dr-input{padding:.48rem .7rem;background:rgba(30,24,19,.95);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:var(--text);font-size:.78rem;outline:none;cursor:pointer;transition:border-color .2s}
+.dr-input:focus{border-color:rgba(239,126,25,.4)}
+.dr-label{font-size:.7rem;color:var(--ghost)}
+
+/* ── FOLLOW-UP / TODAY PANEL ─────────────────────────── */
+.today-panel{background:linear-gradient(180deg,rgba(30,24,19,.98),rgba(21,17,13,.98));border:1px solid rgba(255,255,255,.05);border-radius:22px;padding:1.4rem 1.6rem;margin-bottom:1.4rem;display:none}
+.today-panel.show{display:block}
+.tp-title{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:.9rem;display:flex;justify-content:space-between;align-items:center}
+.tp-list{display:flex;flex-direction:column;gap:.5rem}
+.tp-item{display:flex;align-items:center;gap:.9rem;padding:.65rem .9rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.04);border-radius:10px;cursor:pointer;transition:all .18s}
+.tp-item:hover{background:rgba(255,255,255,.045);border-color:rgba(239,126,25,.15)}
+.tp-item.overdue{border-color:rgba(239,111,111,.2);background:rgba(239,111,111,.04)}
+.tp-name{font-size:.85rem;font-weight:600;color:#fff;flex:1}
+.tp-note{font-size:.72rem;color:var(--muted)}
+.tp-time{font-size:.68rem;color:var(--ghost);white-space:nowrap}
+.tp-time.overdue{color:var(--red)}
+
+/* ── FOLLOW-UP FORM in drawer ─────────────────────────── */
+.fu-form{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:1rem;display:flex;flex-direction:column;gap:.7rem}
+.fu-row{display:flex;gap:.6rem;align-items:center}
+.fu-input{flex:1;padding:.6rem .8rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:9px;color:var(--text);font-size:.83rem;outline:none;transition:border-color .2s;font-family:var(--font-body)}
+.fu-input:focus{border-color:var(--orange)}
+.btn-add-fu{padding:.6rem 1rem;border-radius:9px;font-size:.8rem;font-weight:600;background:rgba(239,126,25,.08);border:1px solid rgba(239,126,25,.25);color:var(--orange);transition:all .18s;cursor:pointer}
+.btn-add-fu:hover{background:rgba(239,126,25,.18)}
+.fu-list{display:flex;flex-direction:column;gap:.4rem;margin-top:.2rem}
+.fu-item{display:flex;align-items:center;gap:.7rem;padding:.5rem .7rem;background:rgba(255,255,255,.025);border-radius:8px;font-size:.78rem}
+.fu-item.done-item .fu-note{text-decoration:line-through;opacity:.45}
+.fu-check{width:14px;height:14px;accent-color:var(--orange);cursor:pointer;flex-shrink:0}
+.fu-time{font-size:.65rem;color:var(--ghost);white-space:nowrap}
+.fu-note{flex:1;color:var(--text)}
+
+/* ── REVENUE FIELDS ──────────────────────────────────── */
+.rev-row{display:flex;gap:.8rem;margin-top:.4rem}
+.rev-field{flex:1;display:flex;flex-direction:column;gap:.3rem}
+.rev-lbl{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38)}
+.rev-input{padding:.6rem .8rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:9px;color:var(--text);font-size:.88rem;outline:none;transition:border-color .2s;font-family:var(--font-body)}
+.rev-input:focus{border-color:var(--orange)}
+
+/* ── CHECKBOX COL ────────────────────────────────────── */
+.cb-lead{width:14px;height:14px;accent-color:var(--orange);cursor:pointer}
+
+/* ── ADD INTERACTION ─────────────────────────────────── */
+.add-int-form{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1rem;display:flex;flex-direction:column;gap:.65rem;margin-top:.4rem}
+.ai-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.ai-select{padding:.6rem .8rem;background:rgba(30,24,19,.9);border:1px solid rgba(255,255,255,.1);border-radius:9px;color:var(--text);font-size:.82rem;outline:none;-webkit-appearance:none;cursor:pointer;font-family:var(--font-body)}
+.ai-note-input{flex:1;min-width:120px;padding:.6rem .8rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:9px;color:var(--text);font-size:.82rem;outline:none;transition:border-color .2s;font-family:var(--font-body)}
+.ai-note-input:focus{border-color:var(--orange)}
+.btn-log-int{padding:.6rem 1rem;border-radius:9px;font-size:.8rem;font-weight:600;background:rgba(119,174,248,.08);border:1px solid rgba(119,174,248,.22);color:var(--blue);transition:all .18s;cursor:pointer;white-space:nowrap}
+.btn-log-int:hover{background:rgba(119,174,248,.18)}
+.int-type-icon{font-size:.85rem}
 </style>
 </head>
 <body>
@@ -1351,6 +1476,10 @@ box-shadow:
     </div>
     <div class="header-title">AlpenGlow Global Dashboard</div>
     <div class="header-right">
+      <div class="view-toggle">
+        <button class="vt-btn active" id="btn-list-view" onclick="setView('list')">☰ List</button>
+        <button class="vt-btn" id="btn-kanban-view" onclick="setView('kanban')">⊞ Kanban</button>
+      </div>
       <span id="live-clock"></span>
       <button class="btn-logout" onclick="logout()">Logout</button>
     </div>
@@ -1505,7 +1634,56 @@ Converted
 
 </div>
 
+
+<div class="stat-card">
+<div class="stat-glow"></div>
+<div class="stat-top">
+<div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+<div class="stat-change">Pipeline</div>
 </div>
+<div class="stat-value" id="s-pipeline">—</div>
+<div class="stat-label">Pipeline Value</div>
+<div class="stat-divider"></div>
+<div class="stat-footer"><span>Quoted leads</span><strong id="s-pipeline-count">0</strong></div>
+</div>
+
+<div class="stat-card">
+<div class="stat-glow"></div>
+<div class="stat-top">
+<div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+<div class="stat-change" style="background:rgba(79,211,154,.09);border-color:rgba(79,211,154,.15);color:var(--green)">Revenue</div>
+</div>
+<div class="stat-value" id="s-revenue">—</div>
+<div class="stat-label">Revenue Closed</div>
+<div class="stat-divider"></div>
+<div class="stat-footer"><span>Booked + paid</span><strong id="s-revenue-count">0</strong></div>
+</div>
+
+<div class="stat-card">
+<div class="stat-glow"></div>
+<div class="stat-top">
+<div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+<div class="stat-change" style="background:rgba(239,111,111,.09);border-color:rgba(239,111,111,.15);color:var(--red)" id="s-overdue-badge">Due Today</div>
+</div>
+<div class="stat-value" id="s-overdue">—</div>
+<div class="stat-label">Overdue Follow-ups</div>
+<div class="stat-divider"></div>
+<div class="stat-footer"><span>Needs action</span><strong>Today</strong></div>
+</div>
+
+</div>
+
+    <!-- Today's Follow-ups Panel -->
+    <div class="today-panel" id="today-panel">
+      <div class="tp-title">
+        <span>Today's Follow-ups</span>
+        <button class="bulk-clear" onclick="document.getElementById('today-panel').classList.remove('show')" style="font-size:.7rem">Dismiss</button>
+      </div>
+      <div class="tp-list" id="tp-list"></div>
+    </div>
+
+    <!-- Saved Filter Chips -->
+    <div class="saved-filters-row" id="saved-filters-row" style="display:none"></div>
 
     <!-- Filters -->
     <div class="filter-bar">
@@ -1538,6 +1716,14 @@ Converted
         <button class="date-pill" onclick="setDays(30,this)">30d</button>
         <button class="date-pill active" onclick="setDays(0,this)">All</button>
       </div>
+      <div class="date-range-wrap">
+        <span class="dr-label">From</span>
+        <input type="date" class="dr-input" id="f-date-from" onchange="applyFilters()">
+        <span class="dr-label">To</span>
+        <input type="date" class="dr-input" id="f-date-to" onchange="applyFilters()">
+      </div>
+      <button class="btn-save-filter" onclick="saveCurrentFilter()" title="Save this filter combination">+ Save Filter</button>
+      <button class="bulk-csv-btn bulk-btn" onclick="exportCSV()" title="Export current view to CSV">↓ CSV</button>
     </div>
 
     <!-- Table -->
@@ -1545,6 +1731,7 @@ Converted
       <table id="leads-table">
         <thead>
           <tr>
+            <th><input type="checkbox" class="cb-lead" id="cb-all" onchange="toggleAll(this.checked)" title="Select all"></th>
             <th>#</th><th>Name</th><th>Phone</th><th>Email</th>
             <th>Source</th><th>Package / Message</th><th>Status</th>
             <th>Received</th><th>Actions</th>
@@ -1578,8 +1765,37 @@ Converted
   </main>
 </div>
 
+<!-- KANBAN BOARD -->
+<div class="dash-main" id="kanban-section" style="display:none;padding-top:82px">
+  <div class="kanban-board active" id="kanban-board">
+    <div class="kanban-col" id="kcol-new" ondragover="kDragOver(event,'new')" ondrop="kDrop(event,'new')" ondragleave="kDragLeave(event)">
+      <div class="kanban-col-head"><span>New</span><span class="kanban-col-count" id="kcount-new">0</span></div>
+      <div class="kanban-drop-zone" id="kdz-new">Drop here</div>
+    </div>
+    <div class="kanban-col" id="kcol-contacted" ondragover="kDragOver(event,'contacted')" ondrop="kDrop(event,'contacted')" ondragleave="kDragLeave(event)">
+      <div class="kanban-col-head"><span>Contacted</span><span class="kanban-col-count" id="kcount-contacted">0</span></div>
+      <div class="kanban-drop-zone" id="kdz-contacted">Drop here</div>
+    </div>
+    <div class="kanban-col" id="kcol-quoted" ondragover="kDragOver(event,'quoted')" ondrop="kDrop(event,'quoted')" ondragleave="kDragLeave(event)">
+      <div class="kanban-col-head"><span>Quoted</span><span class="kanban-col-count" id="kcount-quoted">0</span></div>
+      <div class="kanban-drop-zone" id="kdz-quoted">Drop here</div>
+    </div>
+    <div class="kanban-col" id="kcol-booked" ondragover="kDragOver(event,'booked')" ondrop="kDrop(event,'booked')" ondragleave="kDragLeave(event)">
+      <div class="kanban-col-head"><span>Booked</span><span class="kanban-col-count" id="kcount-booked">0</span></div>
+      <div class="kanban-drop-zone" id="kdz-booked">Drop here</div>
+    </div>
+    <div class="kanban-col" id="kcol-cancelled" ondragover="kDragOver(event,'cancelled')" ondrop="kDrop(event,'cancelled')" ondragleave="kDragLeave(event)">
+      <div class="kanban-col-head"><span>Cancelled</span><span class="kanban-col-count" id="kcount-cancelled">0</span></div>
+      <div class="kanban-drop-zone" id="kdz-cancelled">Drop here</div>
+    </div>
+  </div>
+</div>
+
 <!-- GLOBAL STATUS DROPDOWN -->
 <div id="s-global-drop" class="s-drop"></div>
+
+<!-- BULK STATUS DROPDOWN (attached to bulk bar) -->
+<div id="bulk-status-drop" class="bulk-status-drop"></div>
 
 <!-- DETAIL DRAWER -->
 <div id="drw-overlay" onclick="closeDrawer()"></div>
@@ -1595,18 +1811,89 @@ Converted
   <div class="drw-actions" id="drw-actions"></div>
 </div>
 
+<!-- EMAIL COMPOSE MODAL -->
+<div id="email-modal-backdrop" onclick="if(event.target===this)closeEmailModal()">
+  <div class="email-modal">
+    <h3>Send Email</h3>
+    <div class="em-field">
+      <label class="em-lbl">To</label>
+      <input class="em-input" id="em-to" type="email" placeholder="recipient@email.com">
+    </div>
+    <div class="em-field">
+      <label class="em-lbl">Subject</label>
+      <input class="em-input" id="em-subject" type="text" placeholder="Subject line…">
+    </div>
+    <div class="em-field">
+      <label class="em-lbl">Message</label>
+      <textarea class="em-textarea" id="em-body" placeholder="Your message…"></textarea>
+    </div>
+    <div class="em-row">
+      <button class="em-btn em-btn-cancel" onclick="closeEmailModal()">Cancel</button>
+      <button class="em-btn em-btn-send" onclick="sendEmail()">Send Email ✈</button>
+    </div>
+  </div>
+</div>
+
+<!-- BULK ACTION BAR -->
+<div id="bulk-bar">
+  <div class="bulk-left">
+    <span class="bulk-count" id="bulk-count-label">0 selected</span>
+    <div style="position:relative">
+      <button class="bulk-btn bulk-status-btn" onclick="toggleBulkStatusDrop(event)">Set Status ▾</button>
+      <div id="bulk-status-drop" class="bulk-status-drop"></div>
+    </div>
+    <button class="bulk-btn bulk-csv-btn" onclick="exportCSV(true)">↓ Export CSV</button>
+    <button class="bulk-btn bulk-del-btn" onclick="bulkDelete()">🗑 Delete</button>
+  </div>
+  <button class="bulk-clear" onclick="clearSelection()">✕ Clear</button>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container"></div>
+
 <script>
+/*
+  SQL Setup (run once in Supabase SQL editor):
+
+  -- Activity log table
+  CREATE TABLE IF NOT EXISTS lead_activities (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    lead_id uuid REFERENCES leads(id) ON DELETE CASCADE,
+    type text NOT NULL,       -- 'note','call','email','whatsapp','status_change'
+    note text,
+    created_at timestamptz DEFAULT now()
+  );
+
+  -- Follow-up tasks table
+  CREATE TABLE IF NOT EXISTS follow_ups (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    lead_id uuid REFERENCES leads(id) ON DELETE CASCADE,
+    due_at timestamptz NOT NULL,
+    note text,
+    done boolean DEFAULT false,
+    created_at timestamptz DEFAULT now()
+  );
+
+  -- Add revenue columns to leads (if not already present)
+  ALTER TABLE leads
+    ADD COLUMN IF NOT EXISTS quoted_amount numeric,
+    ADD COLUMN IF NOT EXISTS final_amount numeric;
+*/
+
 // ── CONFIG ─────────────────────────────────────────────
-const PWD = 'alpenglow2025'   // ← change this password
+const PWD = 'alpenglow2025'
 const SB_URL = 'https://yexrmmhadfscormovskn.supabase.co'
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlleHJtbWhhZGZzY29ybW92c2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNjg0NzYsImV4cCI6MjA5Nzk0NDQ3Nn0.vxkcZDdTfE0qDxW8YwsnbGsLaaSUfwgZ78nQicq2Uoc'
 const H = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
 
 // ── STATE ──────────────────────────────────────────────
 let ALL = [], FILTERED = [], DAY_FILTER = 0, ACTIVE_LEAD = null
-let PAGE = 0
+let PAGE = 0, CURRENT_VIEW = 'list'
 const PER_PAGE = 10
 let volChart = null, srcChart = null, sourcesChart = null, delTarget = null
+let SELECTED = new Set()
+let _autoRefreshTimer = null
+let _dragLeadId = null
 
 // ── AUTH ───────────────────────────────────────────────
 function login() {
@@ -1634,20 +1921,50 @@ if (sessionStorage.getItem('ag_auth') === '1') {
   init()
 }
 
-function init() { startClock(); loadLeads() }
+function init() {
+  startClock()
+  loadLeads()
+  loadSavedFilters()
+  startAutoRefresh()
+}
+
+// ── TOAST ──────────────────────────────────────────────
+function showToast(msg, type='info', duration=3200) {
+  const c = document.getElementById('toast-container')
+  const t = document.createElement('div')
+  t.className = 'toast ' + type
+  t.textContent = msg
+  c.appendChild(t)
+  setTimeout(() => { t.style.opacity='0'; t.style.transform='translateX(20px)'; setTimeout(()=>t.remove(), 350) }, duration)
+}
+
+// ── AUTO REFRESH ───────────────────────────────────────
+function startAutoRefresh() {
+  if (_autoRefreshTimer) clearInterval(_autoRefreshTimer)
+  _autoRefreshTimer = setInterval(silentRefresh, 60000)
+}
+async function silentRefresh() {
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/leads?select=*&order=created_at.desc`, { headers: H })
+    if (!r.ok) return
+    const fresh = await r.json()
+    if (fresh.length !== ALL.length) {
+      const diff = fresh.length - ALL.length
+      ALL = fresh
+      applyFilters(); renderStats(); renderCharts()
+      if (CURRENT_VIEW === 'kanban') renderKanban()
+      loadTodayFollowUps()
+      if (diff > 0) showToast(`${diff} new lead${diff>1?'s':''} arrived`, 'ok')
+    }
+  } catch(e) { /* silent */ }
+}
 
 // ── CLOCK ──────────────────────────────────────────────
 function startClock() {
   const tick = () => {
     document.getElementById('live-clock').textContent =
-      new Date()
-    .toLocaleString('en-IN',{
-        timeZone:'Asia/Kolkata',
-        dateStyle:'medium',
-        timeStyle:'short'
-    })
-    .replace('am','AM')
-    .replace('pm','PM')
+      new Date().toLocaleString('en-IN',{ timeZone:'Asia/Kolkata', dateStyle:'medium', timeStyle:'short' })
+      .replace('am','AM').replace('pm','PM')
   }
   tick(); setInterval(tick, 1000)
 }
@@ -1660,6 +1977,7 @@ async function loadLeads() {
     if (!r.ok) throw new Error(r.status)
     ALL = await r.json()
     applyFilters(); renderStats(); renderCharts()
+    loadTodayFollowUps()
   } catch(e) {
     console.error(e)
     document.getElementById('err-banner').classList.add('show')
@@ -1680,12 +1998,16 @@ async function patch(id, fields) {
 async function remove(id) {
   await fetch(`${SB_URL}/rest/v1/leads?id=eq.${id}`, { method: 'DELETE', headers: H })
   ALL = ALL.filter(l => l.id !== id)
+  SELECTED.delete(id)
   applyFilters(); renderStats(); renderCharts()
+  if (CURRENT_VIEW === 'kanban') renderKanban()
 }
 
 // ── FILTERS ────────────────────────────────────────────
 function setDays(d, el) {
   DAY_FILTER = d
+  document.getElementById('f-date-from').value = ''
+  document.getElementById('f-date-to').value = ''
   document.querySelectorAll('.date-pill').forEach(p => p.classList.remove('active'))
   el.classList.add('active')
   applyFilters()
@@ -1695,10 +2017,17 @@ function applyFilters() {
   const q = document.getElementById('f-search').value.toLowerCase()
   const st = document.getElementById('f-status').value
   const src = document.getElementById('f-source').value
+  const fromVal = document.getElementById('f-date-from').value
+  const toVal = document.getElementById('f-date-to').value
+  const fromDate = fromVal ? new Date(fromVal) : null
+  const toDate = toVal ? new Date(toVal + 'T23:59:59') : null
   const cutoff = DAY_FILTER ? new Date(Date.now() - DAY_FILTER * 86400000) : null
 
   FILTERED = ALL.filter(l => {
-    if (cutoff && new Date(l.created_at) < cutoff) return false
+    const created = new Date(l.created_at)
+    if (cutoff && created < cutoff) return false
+    if (fromDate && created < fromDate) return false
+    if (toDate && created > toDate) return false
     if (st && (l.status || 'new') !== st) return false
     if (src && l.source !== src) return false
     if (q) {
@@ -1709,59 +2038,81 @@ function applyFilters() {
   })
   PAGE = 0
   renderTable()
+  if (CURRENT_VIEW === 'kanban') renderKanban()
 }
 
 // ── STATS ──────────────────────────────────────────────
 function renderStats() {
+  const today = new Date().toDateString()
+  const total = ALL.length
+  const todayCount = ALL.filter(l => new Date(l.created_at).toDateString() === today).length
+  const pending = ALL.filter(l => !l.status || l.status === 'new' || l.status === 'contacted').length
+  const booked = ALL.filter(l => l.status === 'booked').length
 
-    const today = new Date().toDateString();
+  document.getElementById('s-total').textContent = total
+  document.getElementById('s-today').textContent = todayCount
+  document.getElementById('s-pending').textContent = pending
+  document.getElementById('s-booked').textContent = booked
 
-    const total = ALL.length;
-    const todayCount = ALL.filter(l =>
-        new Date(l.created_at).toDateString() === today
-    ).length;
+  // Pipeline value (sum of quoted_amount on quoted leads)
+  const quotedLeads = ALL.filter(l => l.status === 'quoted' && l.quoted_amount)
+  const pipeline = quotedLeads.reduce((s, l) => s + (parseFloat(l.quoted_amount) || 0), 0)
+  document.getElementById('s-pipeline').textContent = pipeline ? '₹' + pipeline.toLocaleString('en-IN') : '₹0'
+  document.getElementById('s-pipeline-count').textContent = quotedLeads.length
 
-    const pending = ALL.filter(l =>
-        !l.status ||
-        l.status === "new" ||
-        l.status === "contacted"
-    ).length;
+  // Revenue closed (sum of final_amount on booked leads)
+  const revLeads = ALL.filter(l => l.status === 'booked' && l.final_amount)
+  const revenue = revLeads.reduce((s, l) => s + (parseFloat(l.final_amount) || 0), 0)
+  document.getElementById('s-revenue').textContent = revenue ? '₹' + revenue.toLocaleString('en-IN') : '₹0'
+  document.getElementById('s-revenue-count').textContent = revLeads.length
+}
 
-    const booked = ALL.filter(l =>
-        l.status === "booked"
-    ).length;
-
-    document.getElementById("s-total").textContent = total;
-    document.getElementById("s-today").textContent = todayCount;
-    document.getElementById("s-pending").textContent = pending;
-    document.getElementById("s-booked").textContent = booked;
-
-    /* Optional metrics */
-
-    const conv = document.getElementById("s-conversion");
-    if(conv){
-        conv.textContent =
-            total
-            ? Math.round(booked/total*100)+"%"
-            : "0%";
+// ── TODAY'S FOLLOW-UPS ────────────────────────────────
+async function loadTodayFollowUps() {
+  try {
+    const todayStart = new Date(); todayStart.setHours(0,0,0,0)
+    const todayEnd = new Date(); todayEnd.setHours(23,59,59,999)
+    const r = await fetch(
+      `${SB_URL}/rest/v1/follow_ups?done=eq.false&due_at=gte.${todayStart.toISOString()}&due_at=lte.${todayEnd.toISOString()}&select=*,leads(name)&order=due_at.asc`,
+      { headers: H }
+    )
+    if (!r.ok) {
+      // Table may not exist yet
+      document.getElementById('s-overdue').textContent = '—'
+      return
     }
-
-    const follow = document.getElementById("s-followup");
-    if(follow){
-        follow.textContent = pending;
-    }
-
+    const fus = await r.json()
+    // Also get overdue (past due, not done)
+    const ro = await fetch(
+      `${SB_URL}/rest/v1/follow_ups?done=eq.false&due_at=lt.${todayStart.toISOString()}&select=*,leads(name)&order=due_at.asc`,
+      { headers: H }
+    )
+    const overdue = ro.ok ? await ro.json() : []
+    const allDue = [...overdue, ...fus]
+    document.getElementById('s-overdue').textContent = overdue.length
+    document.getElementById('s-overdue-badge').textContent = overdue.length > 0 ? `${overdue.length} Overdue` : 'Due Today'
+    const panel = document.getElementById('today-panel')
+    const list = document.getElementById('tp-list')
+    if (allDue.length === 0) { panel.classList.remove('show'); return }
+    panel.classList.add('show')
+    list.innerHTML = allDue.map(f => {
+      const isOverdue = new Date(f.due_at) < todayStart
+      const name = (f.leads && f.leads.name) ? f.leads.name : 'Lead'
+      const timeStr = new Date(f.due_at).toLocaleString('en-IN', { hour:'2-digit', minute:'2-digit', day:'numeric', month:'short' })
+      return `<div class="tp-item${isOverdue?' overdue':''}" onclick="openDrawer('${f.lead_id}')">
+        <div class="tp-name">${e(name)}</div>
+        <div class="tp-note">${e(f.note||'Follow up')}</div>
+        <div class="tp-time${isOverdue?' overdue':''}">${isOverdue?'⚠ ':''} ${timeStr}</div>
+      </div>`
+    }).join('')
+  } catch(err) {
+    document.getElementById('s-overdue').textContent = '—'
+  }
 }
 
 // ── TABLE ──────────────────────────────────────────────
 const SL = { new:'New', contacted:'Contacted', quoted:'Quoted', booked:'Booked', cancelled:'Cancelled' }
-const SC = {
-    new:'s-new',
-    contacted:'s-contacted',
-    quoted:'s-contacted',
-    booked:'s-booked',
-    cancelled:'s-cancelled'
-}
+const SC = { new:'s-new', contacted:'s-contacted', quoted:'s-contacted', booked:'s-booked', cancelled:'s-cancelled' }
 const SRC = { contact_form:'Contact Form', package_unlock:'Package Page', offer_otp:'Offer OTP', blog_unlock:'Blog Gate', trip_planner:'Trip Planner' }
 
 function e(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
@@ -1788,7 +2139,9 @@ function renderTable() {
     const fresh = now - new Date(l.created_at).getTime() < 86400000
     const dt = new Date(l.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
     const pkg = e(l.package_name || l.message || '—')
+    const checked = SELECTED.has(l.id) ? 'checked' : ''
     return `<tr>
+      <td><input type="checkbox" class="cb-lead" ${checked} onchange="toggleCheck('${l.id}',this.checked)"></td>
       <td data-label="#">${globalIdx}</td>
       <td data-label="Name"><div class="td-name-wrap">${fresh?'<span class="new-ring"></span>':''}<span>${e(l.name||'—')}</span></div></td>
       <td data-label="Phone">${e(l.phone||'—')}</td>
@@ -1796,35 +2149,26 @@ function renderTable() {
       <td data-label="Source">${e(SRC[l.source]||l.source||'—')}</td>
       <td data-label="Package"><span class="td-clip" title="${pkg}">${pkg}</span></td>
       <td data-label="Status">
-        <span class="s-pill ${SC[st]}" onclick="toggleDrop(event,'${l.id}')">
-          <span>${SL[st]}</span>
-        </span>
+        <span class="s-pill ${SC[st]}" onclick="toggleDrop(event,'${l.id}')"><span>${SL[st]}</span></span>
       </td>
       <td data-label="Received">${dt}</td>
       <td data-label="Actions">
         <div class="act-wrap">
-          <button class="act-btn" title="View details" onclick="openDrawer('${l.id}')">
-<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/>
-<circle cx="12" cy="12" r="3"/>
-</svg>
-</button>
-          ${l.phone?`<button class="act-btn wa" title="WhatsApp" onclick="waLink('${e(l.phone)}','${e(l.name||'')}','${e(l.package_name||'')}')"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-<path d="M20 3.5A11 11 0 003.5 20L2 22l2.6-.7A11 11 0 1020 3.5z"/>
-</svg></button>`:''}
-          <button class="act-btn del" title="Delete" onclick="confirmDel('${l.id}',this)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-<polyline points="3 6 5 6 21 6"/>
-<path d="M19 6l-1 14H6L5 6"/>
-<path d="M10 11v6"/>
-<path d="M14 11v6"/>
-<path d="M9 6V4h6v2"/>
-</svg></button>
+          <button class="act-btn" title="View details" onclick="openDrawer('${l.id}')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          ${l.phone?`<button class="act-btn wa" title="WhatsApp" onclick="waLink('${e(l.phone)}','${e(l.name||'')}','${e(l.package_name||'')}')"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20 3.5A11 11 0 003.5 20L2 22l2.6-.7A11 11 0 1020 3.5z"/></svg></button>`:''}
+          <button class="act-btn del" title="Delete" onclick="confirmDel('${l.id}',this)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
         </div>
       </td>
     </tr>`
   }).join('')
 
-  /* Pagination controls */
+  const cbAll = document.getElementById('cb-all')
+  if (cbAll) {
+    const allChecked = pageData.length > 0 && pageData.every(l => SELECTED.has(l.id))
+    cbAll.checked = allChecked
+    cbAll.indeterminate = !allChecked && pageData.some(l => SELECTED.has(l.id))
+  }
+
   if (totalPages <= 1) {
     pag.style.display = 'none'
   } else {
@@ -1837,8 +2181,159 @@ function renderTable() {
   }
 }
 
+// ── BULK SELECTION ─────────────────────────────────────
+function toggleCheck(id, checked) {
+  if (checked) SELECTED.add(id)
+  else SELECTED.delete(id)
+  updateBulkBar()
+  const cbAll = document.getElementById('cb-all')
+  if (cbAll) {
+    const pageData = FILTERED.slice(PAGE * PER_PAGE, (PAGE + 1) * PER_PAGE)
+    const allChecked = pageData.length > 0 && pageData.every(l => SELECTED.has(l.id))
+    cbAll.checked = allChecked
+    cbAll.indeterminate = !allChecked && pageData.some(l => SELECTED.has(l.id))
+  }
+}
+function toggleAll(checked) {
+  const pageData = FILTERED.slice(PAGE * PER_PAGE, (PAGE + 1) * PER_PAGE)
+  pageData.forEach(l => checked ? SELECTED.add(l.id) : SELECTED.delete(l.id))
+  document.querySelectorAll('.cb-lead:not(#cb-all)').forEach(cb => cb.checked = checked)
+  updateBulkBar()
+}
+function updateBulkBar() {
+  const bar = document.getElementById('bulk-bar')
+  const lbl = document.getElementById('bulk-count-label')
+  if (SELECTED.size > 0) {
+    bar.classList.add('show')
+    lbl.textContent = `${SELECTED.size} lead${SELECTED.size > 1 ? 's' : ''} selected`
+  } else {
+    bar.classList.remove('show')
+  }
+}
+function clearSelection() {
+  SELECTED.clear()
+  document.querySelectorAll('.cb-lead').forEach(cb => { cb.checked = false; cb.indeterminate = false })
+  updateBulkBar()
+}
+
+// ── BULK STATUS ────────────────────────────────────────
+function toggleBulkStatusDrop(ev) {
+  ev.stopPropagation()
+  const drop = document.getElementById('bulk-status-drop')
+  const rect = ev.currentTarget.getBoundingClientRect()
+  if (drop.classList.contains('open')) { drop.classList.remove('open'); return }
+  drop.innerHTML = Object.entries(SL).map(([k,v]) =>
+    `<div class="s-opt" onclick="bulkSetStatus('${k}')">${v}</div>`
+  ).join('')
+  drop.style.bottom = (window.innerHeight - rect.top + 6) + 'px'
+  drop.style.left = rect.left + 'px'
+  drop.style.position = 'fixed'
+  drop.classList.add('open')
+}
+document.addEventListener('click', () => {
+  document.getElementById('s-global-drop').classList.remove('open')
+  document.getElementById('bulk-status-drop').classList.remove('open')
+})
+async function bulkSetStatus(st) {
+  document.getElementById('bulk-status-drop').classList.remove('open')
+  const ids = [...SELECTED]
+  await Promise.all(ids.map(id => patch(id, { status: st })))
+  showToast(`${ids.length} lead${ids.length>1?'s':''} → ${SL[st]}`, 'ok')
+  clearSelection()
+  applyFilters(); renderStats()
+  if (CURRENT_VIEW === 'kanban') renderKanban()
+}
+async function bulkDelete() {
+  if (!SELECTED.size) return
+  if (!confirm(`Delete ${SELECTED.size} lead${SELECTED.size>1?'s':''}? This cannot be undone.`)) return
+  const ids = [...SELECTED]
+  await Promise.all(ids.map(id => fetch(`${SB_URL}/rest/v1/leads?id=eq.${id}`, { method: 'DELETE', headers: H })))
+  ALL = ALL.filter(l => !ids.includes(l.id))
+  clearSelection()
+  applyFilters(); renderStats(); renderCharts()
+  if (CURRENT_VIEW === 'kanban') renderKanban()
+  showToast(`${ids.length} lead${ids.length>1?'s':''} deleted`, 'err')
+}
+
+// ── CSV EXPORT ─────────────────────────────────────────
+function exportCSV(useSelected) {
+  const data = useSelected && SELECTED.size > 0
+    ? ALL.filter(l => SELECTED.has(l.id))
+    : FILTERED
+  if (!data.length) { showToast('No leads to export', 'info'); return }
+  const cols = ['name','email','phone','source','package_name','status','message','notes','quoted_amount','final_amount','created_at']
+  const hdr = ['Name','Email','Phone','Source','Package','Status','Message','Notes','Quoted (₹)','Final (₹)','Received']
+  const rows = data.map(l => cols.map(c => {
+    const v = String(l[c]||'').replace(/"/g,'""')
+    return `"${v}"`
+  }).join(','))
+  const csv = [hdr.join(','), ...rows].join('\r\n')
+  const blob = new Blob([csv], { type: 'text/csv' })
+  const a = document.createElement('a')
+  a.href = URL.createObjectURL(blob)
+  a.download = `alpenglow-leads-${new Date().toISOString().slice(0,10)}.csv`
+  a.click()
+  showToast(`Exported ${data.length} leads`, 'ok')
+}
+
+// ── SAVED FILTERS ──────────────────────────────────────
+function loadSavedFilters() {
+  const saved = JSON.parse(localStorage.getItem('ag_saved_filters') || '[]')
+  const row = document.getElementById('saved-filters-row')
+  if (!saved.length) { row.style.display = 'none'; return }
+  row.style.display = 'flex'
+  row.innerHTML = '<span style="font-size:.7rem;color:var(--ghost);white-space:nowrap">Saved:</span>' +
+    saved.map((f, i) => `
+      <span class="sf-chip" onclick="applySavedFilter(${i})">
+        ${e(f.label)}
+        <span class="sf-chip-x" onclick="event.stopPropagation();removeSavedFilter(${i})">✕</span>
+      </span>
+    `).join('')
+}
+function saveCurrentFilter() {
+  const q = document.getElementById('f-search').value
+  const st = document.getElementById('f-status').value
+  const src = document.getElementById('f-source').value
+  const fromVal = document.getElementById('f-date-from').value
+  const toVal = document.getElementById('f-date-to').value
+  if (!q && !st && !src && !fromVal && !toVal && !DAY_FILTER) { showToast('No active filter to save', 'info'); return }
+  const parts = []
+  if (q) parts.push(`"${q}"`)
+  if (st) parts.push(SL[st] || st)
+  if (src) parts.push(SRC[src] || src)
+  if (DAY_FILTER) parts.push(`${DAY_FILTER}d`)
+  if (fromVal || toVal) parts.push(`${fromVal||''}→${toVal||''}`)
+  const label = parts.join(' · ') || 'Filter'
+  const saved = JSON.parse(localStorage.getItem('ag_saved_filters') || '[]')
+  saved.push({ label, q, st, src, days: DAY_FILTER, from: fromVal, to: toVal })
+  localStorage.setItem('ag_saved_filters', JSON.stringify(saved))
+  loadSavedFilters()
+  showToast(`Filter saved: ${label}`, 'ok')
+}
+function applySavedFilter(idx) {
+  const saved = JSON.parse(localStorage.getItem('ag_saved_filters') || '[]')
+  const f = saved[idx]
+  if (!f) return
+  document.getElementById('f-search').value = f.q || ''
+  document.getElementById('f-status').value = f.st || ''
+  document.getElementById('f-source').value = f.src || ''
+  document.getElementById('f-date-from').value = f.from || ''
+  document.getElementById('f-date-to').value = f.to || ''
+  DAY_FILTER = f.days || 0
+  document.querySelectorAll('.date-pill').forEach(p => {
+    p.classList.toggle('active', Number(p.textContent) === DAY_FILTER || (DAY_FILTER === 0 && p.textContent === 'All'))
+  })
+  applyFilters()
+  showToast(`Filter applied: ${f.label}`, 'info')
+}
+function removeSavedFilter(idx) {
+  const saved = JSON.parse(localStorage.getItem('ag_saved_filters') || '[]')
+  saved.splice(idx, 1)
+  localStorage.setItem('ag_saved_filters', JSON.stringify(saved))
+  loadSavedFilters()
+}
+
 // ── STATUS DROPDOWN ────────────────────────────────────
-document.addEventListener('click', () => { document.getElementById('s-global-drop').classList.remove('open') })
 window.addEventListener('scroll', () => { document.getElementById('s-global-drop').classList.remove('open') }, { passive: true })
 function toggleDrop(ev, id) {
   ev.stopPropagation()
@@ -1859,8 +2354,14 @@ function toggleDrop(ev, id) {
 async function chStatus(ev, id, st) {
   ev.stopPropagation()
   document.getElementById('s-global-drop').classList.remove('open')
+  const lead = ALL.find(l => String(l.id) === String(id))
+  const oldSt = lead ? (lead.status || 'new') : ''
   await patch(id, { status: st })
+  if (oldSt !== st) {
+    await logActivity(id, 'status_change', `Status changed: ${SL[oldSt]||oldSt} → ${SL[st]}`)
+  }
   applyFilters(); renderStats()
+  if (CURRENT_VIEW === 'kanban') renderKanban()
   if (ACTIVE_LEAD && ACTIVE_LEAD.id === id) openDrawer(id)
 }
 
@@ -1874,25 +2375,107 @@ function confirmDel(id, btn) {
 }
 
 // ── WHATSAPP ───────────────────────────────────────────
-function waLink(phone, name, pkg) {
+function waLink(phone, name, pkg, leadId) {
   const clean = phone.replace(/\D/g, '')
   const msg = encodeURIComponent(`Hi ${name}, this is AlpenGlow Global — following up on your enquiry${pkg ? ` about ${pkg}` : ''}. How can we help you?`)
   window.open(`https://wa.me/${clean}?text=${msg}`, '_blank')
+  if (leadId) logActivity(leadId, 'whatsapp', `WhatsApp message sent to ${phone}`)
+}
+
+// ── ACTIVITY LOG ───────────────────────────────────────
+async function logActivity(leadId, type, note) {
+  try {
+    await fetch(`${SB_URL}/rest/v1/lead_activities`, {
+      method: 'POST',
+      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ lead_id: leadId, type, note })
+    })
+  } catch(e) { /* non-critical */ }
+}
+async function loadActivities(leadId) {
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/lead_activities?lead_id=eq.${leadId}&order=created_at.desc&limit=20`, { headers: H })
+    if (!r.ok) return []
+    return await r.json()
+  } catch(e) { return [] }
+}
+const ACT_ICON = { note:'📝', call:'📞', email:'✉', whatsapp:'💬', status_change:'🔄' }
+function renderActivityTimeline(activities, lead) {
+  const dt = new Date(lead.created_at).toLocaleString('en-IN', { dateStyle:'medium', timeStyle:'short' })
+  const st = lead.status || 'new'
+  let html = `<div class="tl-item"><div class="tl-dot">✦</div><div><div class="tl-txt">Lead received</div><div class="tl-time">${dt}</div></div></div>`
+  activities.forEach(a => {
+    const atime = new Date(a.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
+    html += `<div class="tl-item"><div class="tl-dot">${ACT_ICON[a.type]||'◦'}</div><div><div class="tl-txt">${e(a.note||a.type)}</div><div class="tl-time">${atime}</div></div></div>`
+  })
+  return html
+}
+
+// ── FOLLOW-UPS (Drawer) ────────────────────────────────
+async function loadFollowUpsForLead(leadId) {
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/follow_ups?lead_id=eq.${leadId}&order=due_at.asc`, { headers: H })
+    if (!r.ok) return []
+    return await r.json()
+  } catch(e) { return [] }
+}
+function renderFollowUpList(fus, leadId) {
+  if (!fus.length) return '<div style="font-size:.75rem;color:var(--ghost);padding:.4rem 0">No follow-ups scheduled.</div>'
+  return fus.map(f => {
+    const timeStr = new Date(f.due_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
+    return `<div class="fu-item${f.done?' done-item':''}">
+      <input type="checkbox" class="fu-check" ${f.done?'checked':''} onchange="toggleFollowUp('${f.id}','${leadId}',this.checked)">
+      <span class="fu-note">${e(f.note||'Follow up')}</span>
+      <span class="fu-time">${timeStr}</span>
+    </div>`
+  }).join('')
+}
+async function addFollowUp(leadId) {
+  const note = document.getElementById('fu-note-'+leadId).value.trim()
+  const due = document.getElementById('fu-due-'+leadId).value
+  if (!due) { showToast('Please select a date/time', 'err'); return }
+  try {
+    await fetch(`${SB_URL}/rest/v1/follow_ups`, {
+      method: 'POST',
+      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ lead_id: leadId, note: note||'Follow up', due_at: new Date(due).toISOString() })
+    })
+    showToast('Follow-up scheduled', 'ok')
+    await logActivity(leadId, 'note', `Follow-up scheduled for ${due}`)
+    openDrawer(leadId)
+  } catch(e) { showToast('Failed to save follow-up', 'err') }
+}
+async function toggleFollowUp(fuId, leadId, done) {
+  try {
+    await fetch(`${SB_URL}/rest/v1/follow_ups?id=eq.${fuId}`, {
+      method: 'PATCH',
+      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ done })
+    })
+    loadTodayFollowUps()
+  } catch(e) { showToast('Failed to update follow-up', 'err') }
+}
+
+// ── REVENUE SAVE ───────────────────────────────────────
+async function saveRevenue(leadId) {
+  const quoted = parseFloat(document.getElementById('rev-quoted-'+leadId).value) || null
+  const final = parseFloat(document.getElementById('rev-final-'+leadId).value) || null
+  await patch(leadId, { quoted_amount: quoted, final_amount: final })
+  renderStats()
+  showToast('Revenue saved', 'ok')
 }
 
 // ── DRAWER ─────────────────────────────────────────────
-function openDrawer(id) {
+async function openDrawer(id) {
   const lead = ALL.find(l => String(l.id) === String(id))
   if (!lead) return
   ACTIVE_LEAD = lead
   const st = lead.status || 'new'
-  const dt = new Date(lead.created_at).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })
   document.getElementById('drw-name').textContent = lead.name || '—'
   document.getElementById('drw-sub').textContent = lead.email || '—'
-  // Build info grid fields (2-column)
   const isTripPlanner = lead.source === 'trip_planner'
   let infoFields = `
-    <div class="drw-field"><div class="drw-lbl">Status</div><span class="s-pill ${SC[st]}">${SL[st]}</span></div>
+    <div class="drw-field"><div class="drw-lbl">Status</div><span class="s-pill ${SC[st]}" onclick="toggleDrop(event,'${lead.id}')" style="cursor:pointer">${SL[st]} ▾</span></div>
     <div class="drw-field"><div class="drw-lbl">Source</div><div class="drw-val">${e(SRC[lead.source]||lead.source||'—')}</div></div>
     <div class="drw-field"><div class="drw-lbl">Phone</div><div class="drw-val">${e(lead.phone||'—')}</div></div>
     <div class="drw-field"><div class="drw-lbl">Email</div><div class="drw-val">${e(lead.email||'—')}</div></div>
@@ -1900,21 +2483,38 @@ function openDrawer(id) {
     ${!isTripPlanner&&lead.package_name?`<div class="drw-field"><div class="drw-lbl">Package</div><div class="drw-val">${e(lead.package_name)}</div></div>`:''}
     <div class="drw-field"><div class="drw-lbl">Verified</div><div class="drw-val">${lead.verified_phone?'✓ WhatsApp':'✗ WhatsApp'}&nbsp;&nbsp;${lead.verified_email?'✓ Email':'✗ Email'}</div></div>
   `
-  // Trip planner details go into the info grid
   if (isTripPlanner && lead.message) {
     infoFields += lead.message.split('|').map(part => {
       const [lbl,...rest] = part.trim().split(':')
       return `<div class="drw-field"><div class="drw-lbl">${e(lbl.trim())}</div><div class="drw-val">${e(rest.join(':').trim())}</div></div>`
     }).join('')
   }
-  // Regular message (full-width block, rendered outside the info grid)
   const msgBlock = (!isTripPlanner && lead.message)
     ? `<div class="drw-hr"></div><div class="drw-field"><div class="drw-lbl">Message</div><div class="drw-val" style="white-space:pre-wrap;line-height:1.7">${e(lead.message)}</div></div>`
     : ''
 
+  // Load activities and follow-ups in parallel
+  const [activities, followUps] = await Promise.all([
+    loadActivities(lead.id),
+    loadFollowUpsForLead(lead.id)
+  ])
+
   document.getElementById('drw-body').innerHTML = `
     <div class="drw-info-grid">${infoFields}</div>
     ${msgBlock}
+    <div class="drw-hr"></div>
+    <div class="drw-lbl" style="margin-bottom:.5rem">Quote & Revenue</div>
+    <div class="rev-row">
+      <div class="rev-field">
+        <label class="rev-lbl">Quoted Amount (₹)</label>
+        <input class="rev-input" id="rev-quoted-${lead.id}" type="number" placeholder="0" value="${lead.quoted_amount||''}">
+      </div>
+      <div class="rev-field">
+        <label class="rev-lbl">Final Amount (₹)</label>
+        <input class="rev-input" id="rev-final-${lead.id}" type="number" placeholder="0" value="${lead.final_amount||''}">
+      </div>
+    </div>
+    <button class="btn-save" style="margin-top:.6rem" onclick="saveRevenue('${lead.id}')">Save Revenue</button>
     <div class="drw-hr"></div>
     <div class="drw-notes-section">
       <div class="drw-lbl">Internal Notes</div>
@@ -1922,22 +2522,62 @@ function openDrawer(id) {
       <button class="btn-save" onclick="saveNotes('${lead.id}')">Save Notes</button>
     </div>
     <div class="drw-hr"></div>
-    <div class="drw-timeline-section">
-      <div class="drw-lbl">Timeline</div>
-      <div class="tl">
-        <div class="tl-item"><div class="tl-dot">✦</div><div><div class="tl-txt">Lead received</div><div class="tl-time">${dt}</div></div></div>
-        ${st!=='new'?`<div class="tl-item"><div class="tl-dot">◦</div><div><div class="tl-txt">Status → ${SL[st]}</div><div class="tl-time">Manually updated</div></div></div>`:''}
+    <div class="drw-lbl" style="margin-bottom:.6rem">Add Interaction</div>
+    <div class="add-int-form">
+      <div class="ai-row">
+        <select class="ai-select" id="ai-type-${lead.id}">
+          <option value="note">📝 Note</option>
+          <option value="call">📞 Call</option>
+          <option value="email">✉ Email</option>
+          <option value="whatsapp">💬 WhatsApp</option>
+        </select>
+        <input class="ai-note-input" id="ai-note-${lead.id}" placeholder="What happened?…">
+        <button class="btn-log-int" onclick="logInteraction('${lead.id}')">Log</button>
       </div>
     </div>
+    <div class="drw-hr"></div>
+    <div class="drw-timeline-section">
+      <div class="drw-lbl">Activity Timeline</div>
+      <div class="tl" id="tl-${lead.id}">
+        ${renderActivityTimeline(activities, lead)}
+      </div>
+    </div>
+    <div class="drw-hr"></div>
+    <div class="drw-lbl" style="margin-bottom:.6rem">Follow-up Tasks</div>
+    <div class="fu-form">
+      <div class="fu-row">
+        <input type="datetime-local" class="fu-input" id="fu-due-${lead.id}">
+        <input type="text" class="fu-input" id="fu-note-${lead.id}" placeholder="What to do?">
+        <button class="btn-add-fu" onclick="addFollowUp('${lead.id}')">+ Add</button>
+      </div>
+    </div>
+    <div class="fu-list" id="fu-list-${lead.id}">${renderFollowUpList(followUps, lead.id)}</div>
   `
   document.getElementById('drw-actions').innerHTML = `
-    ${lead.phone?`<button class="drw-btn drw-wa" onclick="waLink('${e(lead.phone)}','${e(lead.name||'')}','${e(lead.package_name||'')}')">💬 WhatsApp</button>`:''}
+    ${lead.phone?`<button class="drw-btn drw-wa" onclick="waLink('${e(lead.phone)}','${e(lead.name||'')}','${e(lead.package_name||'')}','${lead.id}')">💬 WhatsApp</button>`:''}
+    ${lead.email?`<button class="drw-btn drw-book" style="background:rgba(119,174,248,.07);border-color:rgba(119,174,248,.22);color:var(--blue)" onclick="openEmailModal('${lead.id}')">✉ Email</button>`:''}
     <button class="drw-btn drw-book" onclick="chStatus(event,'${lead.id}','booked')">✓ Mark Booked</button>
     <button class="drw-btn drw-arch" onclick="chStatus(event,'${lead.id}','cancelled')">Cancel</button>
   `
   document.getElementById('drw-overlay').classList.add('open')
   document.getElementById('drw').classList.add('open')
 }
+
+async function logInteraction(leadId) {
+  const type = document.getElementById('ai-type-'+leadId).value
+  const note = document.getElementById('ai-note-'+leadId).value.trim()
+  if (!note) { showToast('Enter a note', 'info'); return }
+  await logActivity(leadId, type, note)
+  document.getElementById('ai-note-'+leadId).value = ''
+  showToast('Interaction logged', 'ok')
+  const activities = await loadActivities(leadId)
+  const lead = ALL.find(l => String(l.id) === String(leadId))
+  if (lead) {
+    const tl = document.getElementById('tl-'+leadId)
+    if (tl) tl.innerHTML = renderActivityTimeline(activities, lead)
+  }
+}
+
 function closeDrawer() {
   document.getElementById('drw-overlay').classList.remove('open')
   document.getElementById('drw').classList.remove('open')
@@ -1946,9 +2586,119 @@ function closeDrawer() {
 async function saveNotes(id) {
   const notes = document.getElementById('drw-notes-ta').value
   await patch(id, { notes })
+  await logActivity(id, 'note', 'Notes updated')
   const btn = document.querySelector('.btn-save')
   btn.textContent = 'Saved ✓'
   setTimeout(() => btn.textContent = 'Save Notes', 1600)
+}
+
+// ── EMAIL MODAL ─────────────────────────────────────────
+function openEmailModal(leadId) {
+  const lead = ALL.find(l => String(l.id) === String(leadId))
+  if (!lead) return
+  document.getElementById('em-to').value = lead.email || ''
+  document.getElementById('em-subject').value = `Your AlpenGlow Global Enquiry${lead.package_name?' — '+lead.package_name:''}`
+  document.getElementById('em-body').value = `Hi ${lead.name||''},\n\nThank you for reaching out to AlpenGlow Global. We received your enquiry${lead.package_name?' about '+lead.package_name:''} and our team will get back to you shortly.\n\nWarm regards,\nAlpenGlow Global Team`
+  document.getElementById('email-modal-backdrop').classList.add('open')
+  document.getElementById('email-modal-backdrop').dataset.leadId = leadId
+}
+function closeEmailModal() {
+  document.getElementById('email-modal-backdrop').classList.remove('open')
+}
+async function sendEmail() {
+  const to = document.getElementById('em-to').value.trim()
+  const subject = document.getElementById('em-subject').value.trim()
+  const body = document.getElementById('em-body').value.trim()
+  const leadId = document.getElementById('email-modal-backdrop').dataset.leadId
+  if (!to || !subject || !body) { showToast('Please fill all fields', 'err'); return }
+  try {
+    const r = await fetch(`${SB_URL}/functions/v1/send-lead-email`, {
+      method: 'POST',
+      headers: { ...H, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to, subject, body })
+    })
+    if (r.ok) {
+      showToast('Email sent', 'ok')
+      if (leadId) await logActivity(leadId, 'email', `Email sent to ${to}: ${subject}`)
+      closeEmailModal()
+    } else {
+      showToast('Email send failed — check Edge Function', 'err')
+    }
+  } catch(e) {
+    showToast('Email send failed: ' + (e.message||e), 'err')
+  }
+}
+
+// ── VIEW TOGGLE ─────────────────────────────────────────
+function setView(view) {
+  CURRENT_VIEW = view
+  document.getElementById('btn-list-view').classList.toggle('active', view === 'list')
+  document.getElementById('btn-kanban-view').classList.toggle('active', view === 'kanban')
+  const mainSection = document.querySelector('.dash-main:not(#kanban-section)')
+  const kanbanSection = document.getElementById('kanban-section')
+  if (view === 'kanban') {
+    mainSection.style.display = 'none'
+    kanbanSection.style.display = 'block'
+    renderKanban()
+  } else {
+    mainSection.style.display = ''
+    kanbanSection.style.display = 'none'
+  }
+}
+
+// ── KANBAN ──────────────────────────────────────────────
+function renderKanban() {
+  const statuses = ['new','contacted','quoted','booked','cancelled']
+  statuses.forEach(st => {
+    const col = document.getElementById('kcol-'+st)
+    const dz = document.getElementById('kdz-'+st)
+    const cnt = document.getElementById('kcount-'+st)
+    if (!col || !dz || !cnt) return
+    const leads = ALL.filter(l => (l.status||'new') === st)
+    cnt.textContent = leads.length
+    // Remove old cards (keep drop zone and header)
+    col.querySelectorAll('.kanban-card').forEach(c => c.remove())
+    if (!leads.length) {
+      dz.style.display = 'flex'
+    } else {
+      dz.style.display = 'none'
+      leads.forEach(l => {
+        const card = document.createElement('div')
+        card.className = 'kanban-card'
+        card.draggable = true
+        card.dataset.id = l.id
+        const dt = new Date(l.created_at).toLocaleDateString('en-IN', { day:'numeric', month:'short' })
+        card.innerHTML = `<div class="kc-name">${e(l.name||'—')}</div><div class="kc-pkg">${e(l.package_name||l.source||'—')}</div><div class="kc-meta">${dt}</div>`
+        card.addEventListener('dragstart', ev => { ev.dataTransfer.setData('text/plain', l.id); _dragLeadId = l.id; card.style.opacity = '.5' })
+        card.addEventListener('dragend', () => { _dragLeadId = null; card.style.opacity = '' })
+        card.addEventListener('click', () => openDrawer(l.id))
+        col.appendChild(card)
+      })
+    }
+  })
+}
+function kDragOver(ev, st) {
+  ev.preventDefault()
+  document.getElementById('kdz-'+st).classList.add('drag-target')
+}
+function kDragLeave(ev) {
+  const col = ev.currentTarget
+  const dz = col.querySelector('.kanban-drop-zone')
+  if (dz) dz.classList.remove('drag-target')
+}
+async function kDrop(ev, newSt) {
+  ev.preventDefault()
+  const id = ev.dataTransfer.getData('text/plain') || _dragLeadId
+  document.querySelectorAll('.kanban-drop-zone').forEach(dz => dz.classList.remove('drag-target'))
+  if (!id) return
+  const lead = ALL.find(l => String(l.id) === String(id))
+  if (!lead || (lead.status||'new') === newSt) return
+  const oldSt = lead.status || 'new'
+  await patch(id, { status: newSt })
+  await logActivity(id, 'status_change', `Status changed: ${SL[oldSt]} → ${SL[newSt]}`)
+  renderKanban()
+  renderStats()
+  showToast(`${lead.name} → ${SL[newSt]}`, 'ok')
 }
 
 

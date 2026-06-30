@@ -98,7 +98,7 @@ window.ALPEN_DATA = {
           "link": "packages/srilanka.html"
         }
       ],
-      "id": "dest_mqwg8iab"
+      "id": "dest_mr0hdkjv"
     },
     {
       "slug": "longhaul",
@@ -142,7 +142,7 @@ window.ALPEN_DATA = {
           "link": "packages/southkorea.html"
         }
       ],
-      "id": "dest_mqwg8iac"
+      "id": "dest_mr0hdkjw"
     },
     {
       "slug": "islands",
@@ -180,7 +180,7 @@ window.ALPEN_DATA = {
           "link": "packages/bali.html"
         }
       ],
-      "id": "dest_mqwg8iad"
+      "id": "dest_mr0hdkjx"
     },
     {
       "slug": "cruises",
@@ -212,7 +212,7 @@ window.ALPEN_DATA = {
           "link": "packages/resortsworld.html"
         }
       ],
-      "id": "dest_mqwg8iae"
+      "id": "dest_mr0hdkjy"
     }
   ],
   "packages": [
@@ -431,6 +431,7 @@ window.ALPEN_DATA = {
       "slug": "australia",
       "page_title": "Australia - Sydney, the Reef and the Outback | Alpen Glow Tours and Travels",
       "hero_image_url": "australia1.jpg",
+      "bg_image_url": "",
       "location": "High-Value Long Haul - Australia",
       "duration": "9 Days / 8 Nights",
       "title": "Australia - Sydney, the Reef and the Outback",
@@ -439,7 +440,7 @@ window.ALPEN_DATA = {
         "Australia rewards travelers willing to cover real distance: Sydney's harbour energy, the otherworldly red of the Outback, and the living reef just off the Queensland coast are three completely different countries packed into one. This itinerary doesn't try to rush all of it — it picks the three icons worth the long flight and gives each one proper time.",
         "Best suited to travelers who want the bucket-list sights (Opera House, Uluru, Great Barrier Reef) without a packed-bus-tour pace."
       ],
-      "places_heading": "",
+      "places_heading": "Explore the Cities",
       "places": [],
       "inclusions_heading": "What's Included",
       "inclusions": [
@@ -455,6 +456,7 @@ window.ALPEN_DATA = {
       "slug": "bali",
       "page_title": "Bali — Island of the Gods | Alpen Glow Tours and Travels",
       "hero_image_url": "balihor.jpg",
+      "bg_image_url": "",
       "location": "Indonesia · Bali",
       "duration": "7 Days / 6 Nights",
       "title": "Bali — Island of the Gods",
@@ -463,7 +465,7 @@ window.ALPEN_DATA = {
         "Bali earns its reputation as Indonesia's spiritual heart without ever feeling like a museum — rice terraces still get farmed the old way, temple ceremonies happen because the village needs them to, not because tourists are watching. This trip moves between the cultural hill town of Ubud and the beach energy of the south coast.",
         "Paced for travelers who want both quiet, contemplative mornings and a proper beach-club afternoon."
       ],
-      "places_heading": "",
+      "places_heading": "Explore the Cities",
       "places": [],
       "inclusions_heading": "What's Included",
       "inclusions": [
@@ -503,6 +505,7 @@ window.ALPEN_DATA = {
       "slug": "india",
       "page_title": "The Golden Triangle & Beyond | Alpen Glow Tours and Travels",
       "hero_image_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1600&q=80",
+      "bg_image_url": "",
       "location": "Sub-Continent · India",
       "duration": "8 Days / 7 Nights",
       "title": "The Golden Triangle & Beyond",
@@ -511,7 +514,7 @@ window.ALPEN_DATA = {
         "The Golden Triangle - Delhi, Agra, Jaipur - earns its name as India's most-travelled circuit for good reason: it's the most efficient way to see Mughal grandeur, royal Rajasthan, and the chaos-and-calm of the capital in a single trip. This itinerary extends the classic triangle with extra time built in so nothing feels like a drive-by photo stop.",
         "Suited to first-time visitors to India who want the unmissable monuments without sacrificing depth."
       ],
-      "places_heading": "",
+      "places_heading": "Explore the Cities",
       "places": [],
       "inclusions_heading": "What's Included",
       "inclusions": [

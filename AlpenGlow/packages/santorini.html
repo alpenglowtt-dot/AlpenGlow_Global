@@ -49,10 +49,15 @@
       <button class="btn-scroll-verify" onclick="document.getElementById('gateCard').scrollIntoView({behavior:'smooth',block:'start'})">Verify &amp; Unlock Now</button>
     </div>
     <div class="overview-free">
-    <h2>Overview</h2>
-    <p>Santorini's whitewashed villages cascading down a volcanic caldera are the single most photographed view in Greece, and seeing it in person still manages to exceed the pictures. This trip is built around the island's famous sunset, its black- and red-sand beaches, and a day sailing the caldera that produced the whole dramatic landscape.</p>
-    <p>Best for couples and honeymooners, or anyone wanting a few days of pure, unhurried island time.</p>
+      <div class="overview-card-float">
+        <h2>Overview</h2>
+        <div class="o-rule"></div>
+        <p>Santorini's whitewashed villages cascading down a volcanic caldera are the single most photographed view in Greece, and seeing it in person still manages to exceed the pictures. This trip is built around the island's famous sunset, its black- and red-sand beaches, and a day sailing the caldera that produced the whole dramatic landscape.</p>
+        <p>Best for couples and honeymooners, or anyone wanting a few days of pure, unhurried island time.</p>
+      </div>
     </div>
+    <h2 id="placesHeading">Explore the Cities</h2>
+    <div class="city-showcase"></div>
 <h2>Itinerary</h2>
     <div class="itinerary-day">
       <div class="itinerary-day-num">Day 1-2</div>
@@ -74,7 +79,7 @@
       <div class="itinerary-day-num">Day 6</div>
       <div class="itinerary-day-content"><h4>Departure</h4><p>Transfer to Santorini Airport for your onward journey.</p></div>
     </div>
-    <h2>What's Included</h2>
+    <h2 id="inclusionsHeading">What's Included</h2>
     <div class="tag-row">
       <span class="tag-pill">5 nights accommodation</span>
       <span class="tag-pill">Caldera catamaran cruise with lunch</span>
@@ -125,6 +130,19 @@
         <button class="btn-verify" id="gateBtn4" onclick="gateVerifyEmail()">Verify &amp; Unlock</button>
         <p class="gate-note">Step 2 of 2 — Email verification</p>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- CITY DETAIL MODAL -->
+<div class="city-modal-backdrop" id="cityModalBackdrop" onclick="if(event.target===this) closeCityModal()">
+  <div class="city-modal">
+    <button class="city-modal-close" onclick="closeCityModal()">✕</button>
+    <div class="city-modal-img"><img id="cityModalImg" src="" alt=""></div>
+    <div class="city-modal-body">
+      <h3 id="cityModalName"></h3>
+      <div class="city-modal-tagline" id="cityModalTagline"></div>
+      <p id="cityModalDesc"></p>
     </div>
   </div>
 </div>
@@ -207,6 +225,22 @@ function gateVerifyEmail() {
     })
     .catch((err) => { btn.textContent = "Verify & Unlock"; btn.disabled = false; alert(err?.message || "Invalid code. Please try again."); });
 }
+var cityData = {};
+function openCityModal(key) {
+  const data = cityData[key];
+  if (!data) return;
+  document.getElementById('cityModalImg').src = data.img;
+  document.getElementById('cityModalImg').alt = data.name;
+  document.getElementById('cityModalName').textContent = data.name;
+  document.getElementById('cityModalTagline').textContent = data.tagline;
+  document.getElementById('cityModalDesc').textContent = data.desc;
+  document.getElementById('cityModalBackdrop').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeCityModal() {
+  document.getElementById('cityModalBackdrop').classList.remove('active');
+  document.body.style.overflow = '';
+}
 const mobileToggle = document.getElementById("mobileToggle");
 const navLinks = document.getElementById("navLinks");
 mobileToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
@@ -221,6 +255,7 @@ mobileToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
     document.body.classList.add('dev-preview-active');
     document.body.insertBefore(bar, document.body.firstChild);
   } else if (typeof AlpenAPI !== "undefined" && AlpenAPI.isVerified()) unlockContent();
+if (typeof AlpenAPI !== "undefined" && AlpenAPI.loadPackagePage) AlpenAPI.loadPackagePage('santorini');
 })();
 </script>
 <script src="../trip-planner.js"></script>
