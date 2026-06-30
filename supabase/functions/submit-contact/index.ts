@@ -38,7 +38,7 @@ serve(async (req) => {
     // Same secret as send-email-otp — keep both functions in sync so only
     // one domain ever needs to be configured/verified in Resend.
     const fromDomain  = Deno.env.get('EMAIL_FROM_DOMAIN') ?? ''
-    const fromEmail   = fromDomain ? `noreply@${fromDomain}` : 'onboarding@resend.dev'
+    const fromEmail   = fromDomain ? `info@${fromDomain}` : 'onboarding@resend.dev'
 
     const now = new Date().toLocaleString('en-IN', {
       timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short'
