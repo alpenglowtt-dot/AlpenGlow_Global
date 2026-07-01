@@ -71,6 +71,7 @@
 
   // Dev mode: auto-unlock gates and hide blur overlays on page load
   if (DEV_MODE) {
+    markVerified()   // ensure ag_verified is set so compass.html + compass.js see it
     document.addEventListener('DOMContentLoaded', function () {
       var main = document.getElementById('detailMain')
       if (main) main.classList.remove('locked')
