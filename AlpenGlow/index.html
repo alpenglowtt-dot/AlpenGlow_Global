@@ -234,7 +234,7 @@ nav.scrolled .nav-cta {
 #offers .section-title { color: var(--white); }
 #offers .section-title em { color: var(--orange); }
 .offers-carousel { position: relative; max-width: 1200px; margin: 0 auto; }
-.offers-track { display: flex; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
+.offers-track { display: flex; gap: 2rem; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
 .offers-track::-webkit-scrollbar { display: none; }
 .offers-nav { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
 .offers-nav button { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.22); color: var(--white); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all .3s var(--ease-out); cursor: pointer; }
@@ -253,7 +253,7 @@ nav.scrolled .nav-cta {
 /* === BLOG === */
 #blog { padding: 7rem 3rem; background: var(--warm-gray); }
 .blog-carousel { position: relative; max-width: 1200px; margin: 0 auto; }
-.blog-track { display: flex; gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
+.blog-track { display: flex; gap: 2rem; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
 .blog-track::-webkit-scrollbar { display: none; }
 .blog-nav { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
 .blog-nav button { width: 44px; height: 44px; border-radius: 50%; background: var(--white); border: 1.5px solid var(--dark); color: var(--dark); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all .3s var(--ease-out); cursor: pointer; }
@@ -275,7 +275,7 @@ nav.scrolled .nav-cta {
 
 /* === REVIEWS === */
 #reviews { padding: 7rem 3rem; background: var(--cream); position: relative; overflow: hidden; }
-.reviews-track { display: flex; gap: 2rem; max-width: 1200px; margin: 0 auto; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
+.reviews-track { display: flex; gap: 2rem; max-width: 1200px; margin: 0 auto; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
 .reviews-track::-webkit-scrollbar { display: none; }
 .review-card { flex: 0 0 380px; scroll-snap-align: start; background: var(--white); border-radius: 20px; padding: 2.2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.04); position: relative; transition: all 0.4s var(--ease-out); }
 .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(0,0,0,0.07); }
@@ -438,13 +438,32 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
   .destinations-track { padding: 0 1.5rem; }
 }
 @media (max-width: 600px) {
-  .hero-title { font-size: 2.5rem; }
-  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-title { font-size: 2.2rem; }
+  .hero-sub { font-size: 0.9rem; padding: 0 0.5rem; }
+  .hero-actions { flex-direction: column; align-items: stretch; padding: 0 1rem; }
   .btn-primary, .btn-outline { width: 100%; text-align: center; }
   .review-card { flex: 0 0 280px; padding: 1.5rem; }
-  .offer-card { flex: 0 0 280px; height: 260px; }
-  .blog-card { flex: 0 0 280px; }
-  .dest-card { flex: 0 0 320px; height: 380px; }
+  .offer-card { flex: 0 0 82vw; height: 260px; }
+  .blog-card { flex: 0 0 82vw; }
+  .dest-card { flex: 0 0 78vw !important; height: 340px !important; }
+
+  /* Nav */
+  nav { padding: 0.7rem 1.2rem; }
+  .nav-logo img { height: 60px; }
+
+  /* Section padding */
+  #packages, #offers, #blog, #reviews, #contact { padding: 3rem 1rem; }
+
+  /* Recognitions section */
+  #recognitions { padding: 3rem 1rem !important; }
+  #recognitions img { height: 70px !important; }
+
+  /* Footer */
+  footer { padding: 2rem 1rem; }
+  .footer-logo { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+  .footer-logo img:first-child { height: 60px !important; }
+  .footer-logo img:last-child { height: 44px !important; }
+  .footer-links { gap: 1rem; font-size: 0.75rem; }
 }
 #reviews {
   padding: 7rem 3rem; position: relative;

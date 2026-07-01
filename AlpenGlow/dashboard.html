@@ -625,9 +625,9 @@ table colgroup col:nth-child(5){ width:16% }    /* email */
 table colgroup col:nth-child(6){ width:10% }    /* source */
 table colgroup col:nth-child(7){ width:12% }    /* package */
 table colgroup col:nth-child(8){ width:11% }    /* budget */
-table colgroup col:nth-child(9){ width:110px }  /* status */
-table colgroup col:nth-child(10){ width:110px } /* received */
-table colgroup col:nth-child(11){ width:100px } /* actions */
+table colgroup col:nth-child(9){ width:136px }  /* status */
+table colgroup col:nth-child(10){ width:140px } /* received */
+table colgroup col:nth-child(11){ width:110px } /* actions */
 
 thead{
 
@@ -760,12 +760,15 @@ tbody td:nth-child(9),
 tbody td:nth-child(10){
   overflow:visible;
   white-space:nowrap;
+  padding-left:.75rem;
+  padding-right:.75rem;
 }
 
 /* actions cell — right-align */
-tbody td:nth-child(10){
+tbody td:nth-child(11){
   text-align:right;
-  padding-right:1.3rem;
+  padding-right:1.1rem;
+  padding-left:.5rem;
 }
 
 /* Truncatable cells show tooltip on hover */
@@ -780,9 +783,13 @@ tbody td:nth-child(7){
 }
 
 tbody tr+tr td{
-
-border-top:1px solid rgba(255,255,255,.055);
-
+  border-top:1px solid rgba(255,255,255,.042);
+}
+tbody tr{
+  transition:background .18s;
+}
+tbody tr:hover td{
+  border-top-color:transparent;
 }
 
 
@@ -796,9 +803,9 @@ display:inline-flex;
 align-items:center;
 justify-content:center;
 
-min-width:120px;
+min-width:108px;
 
-padding:.55rem .9rem;
+padding:.48rem .9rem;
 
 border-radius:999px;
 
@@ -1281,9 +1288,35 @@ cursor:pointer;
   .header-title{display:none}
   .dash-main{padding:74px 1rem 3rem}
   thead{display:none}
-  tbody tr{display:block;margin-bottom:.75rem;border:1px solid var(--rule-faint);padding:.85rem}
-  tbody td{display:flex;justify-content:space-between;align-items:center;padding:.3rem 0;font-size:.78rem;border:none}
-  tbody td::before{content:attr(data-label);font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);flex-shrink:0;margin-right:.8rem}
+  tbody tr{display:block;margin-bottom:.75rem;border:1px solid var(--rule-faint);border-radius:12px;padding:.85rem}
+  tbody td{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:.35rem 0;font-size:.82rem;border:none;
+    max-width:none;overflow:visible;white-space:normal;text-overflow:clip;
+    width:100%;min-height:1.6rem;
+  }
+  /* Override the higher-specificity desktop nth-child rules for text columns */
+  tbody td:nth-child(3),
+  tbody td:nth-child(4),
+  tbody td:nth-child(5),
+  tbody td:nth-child(6),
+  tbody td:nth-child(7){
+    overflow:visible;white-space:normal;text-overflow:clip;
+  }
+  /* Reset inner wrappers that also clip text */
+  .td-name-wrap{overflow:visible;flex-wrap:wrap}
+  .td-name-wrap span,.td-clip{overflow:visible;white-space:normal;text-overflow:clip;word-break:break-word}
+  /* Reset right-align on actions cell */
+  tbody td:nth-child(10){text-align:left;padding-right:0}
+  tbody td:empty{display:none}
+  tbody td::before{
+    content:attr(data-label);
+    font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);flex-shrink:0;margin-right:.75rem;white-space:nowrap;
+  }
+  /* Hide checkbox col on mobile */
+  tbody td:first-child{display:none}
+  .table-wrap{overflow-x:hidden}
   #drw{
 
 width:95vw;
@@ -1296,6 +1329,41 @@ max-height:94vh;
   .stats-ledger{grid-template-columns:1fr}
   .stat-cell:nth-child(n){border-right:none;border-bottom:1px solid var(--rule)}
   .stat-num{font-size:2.4rem}
+
+  /* Header — hide clock, shrink logo text */
+  #live-clock{display:none}
+  .header-logo span{display:none}
+  .dash-header{padding:0 1rem}
+  .btn-logout{font-size:.6rem;padding:.38rem .7rem}
+
+  /* Main */
+  .dash-main{padding:70px .75rem 3rem}
+
+  /* Filter bar — allow wrapping and shrink search */
+  .search-wrap{min-width:0}
+  .filter-bar{gap:.4rem}
+  .filter-input{font-size:.82rem;padding:.7rem .8rem .7rem 2.2rem}
+  .select-wrap select,.dr-input{font-size:.8rem}
+
+  /* Date range — stack below pills */
+  .date-range-wrap{flex-wrap:wrap;gap:.3rem}
+
+  /* KPI cards */
+  .stats-row{gap:.7rem}
+  .stat-card{padding:1rem 1.1rem;border-radius:16px}
+
+  /* Kanban — horizontal scroll */
+  #kanban-section{padding:70px .75rem 2rem}
+  .kanban-board{display:flex;gap:.75rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .kanban-col{min-width:78vw;flex-shrink:0}
+
+  /* Drawer */
+  #drw{width:100vw;max-height:92vh;border-radius:18px 18px 0 0;bottom:0;top:auto;transform:translateY(100%)}
+  #drw.open{transform:translateY(0)}
+
+  /* Pagination */
+  .leads-pagination{flex-wrap:wrap;gap:.5rem}
+  .pag-info{font-size:.7rem}
 }
 /* ===== Premium Table Typography Overrides ===== */
 
@@ -1646,7 +1714,12 @@ box-shadow:
     <img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global">
     <h2>Owner Dashboard</h2>
     <p>Enter your password to access lead data</p>
-    <input type="password" id="pw" class="login-input" placeholder="Password" onkeydown="if(event.key==='Enter')login()">
+    <div style="position:relative;width:100%;margin-bottom:1.8rem">
+      <input type="password" id="pw" class="login-input" placeholder="Password" onkeydown="if(event.key==='Enter')login()" style="padding-right:2.8rem;margin-bottom:0;width:100%">
+      <button id="pw-toggle" onclick="(function(){var i=document.getElementById('pw'),b=document.getElementById('pw-toggle');var show=i.type==='password';i.type=show?'text':'password';b.innerHTML=show?'<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94\'/><path d=\'M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19\'/><line x1=\'1\' y1=\'1\' x2=\'23\' y2=\'23\'/></svg>':'<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z\'/><circle cx=\'12\' cy=\'12\' r=\'3\'/></svg>'})()" type="button" aria-label="Toggle password visibility" style="position:absolute;right:.5rem;top:calc(50% - 3px);transform:translateY(-50%);background:none;border:none;cursor:pointer;color:rgba(255,255,255,.35);width:22px;height:22px;display:flex;align-items:center;justify-content:center;padding:0;transition:color .2s" onmouseover="this.style.color='rgba(239,126,25,.8)'" onmouseout="this.style.color='rgba(255,255,255,.35)'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
     <button class="btn-login" onclick="login()">Enter Dashboard</button>
     <div class="login-err" id="login-err"></div>
   </div>
