@@ -98,9 +98,14 @@ body{
   padding:24px 0;
   display:flex;flex-direction:column;
   gap:0;
-  scrollbar-width:none;-ms-overflow-style:none;
+  scrollbar-width:thin;
+  scrollbar-color:transparent transparent;
 }
-.chat-body::-webkit-scrollbar{display:none}
+.chat-body::-webkit-scrollbar{width:3px}
+.chat-body::-webkit-scrollbar-track{background:transparent}
+.chat-body::-webkit-scrollbar-thumb{background:transparent;border-radius:3px;transition:background .2s}
+.chat-body:hover::-webkit-scrollbar-thumb{background:rgba(0,0,0,.5)}
+.chat-body:hover::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.75)}
 
 .chat-inner{
   width:100%;max-width:740px;
@@ -195,7 +200,9 @@ body{
   color:var(--text);font-family:var(--font-body);font-size:.88rem;
   resize:none;outline:none;line-height:1.55;
   transition:border-color .2s;
+  scrollbar-width:none;-ms-overflow-style:none;
 }
+#msg-input::-webkit-scrollbar{display:none}
 #msg-input::placeholder{color:var(--muted)}
 #msg-input:focus{border-color:rgba(239,126,25,.45)}
 #send-btn{
@@ -297,58 +304,72 @@ body{
       </svg>
     </button>
   </div>
-  <div class="powered">AlpenGlow Global</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+    <div class="powered">AlpenGlow Global</div>
+    <div id="q-counter" style="font-size:.62rem;letter-spacing:.04em;color:rgba(255,255,255,.25);font-family:var(--font-body)"></div>
+  </div>
 </div>
 
 <script>
 ;(function(){
   'use strict'
 
-  /* ── Verification check ─────────────────────────────── */
+  /* ── Verification gate ──────────────────────────────── */
   if (!sessionStorage.getItem('ag_verified')) {
     document.getElementById('unverified-gate').style.display = 'flex'
-    // Hide main UI until verified
     document.querySelector('.topbar').style.display = 'none'
     document.getElementById('chat-body').style.display = 'none'
     document.querySelector('.input-bar').style.display = 'none'
     return
   }
 
-  /* ── Constants ──────────────────────────────────────── */
-  var SB_URL = 'https://yexrmmhadfscormovskn.supabase.co'
-  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlleHJtbWhhZGZzY29ybW92c2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNjg0NzYsImV4cCI6MjA5Nzk0NDQ3Nn0.vxkcZDdTfE0qDxW8YwsnbGsLaaSUfwgZ78nQicq2Uoc'
-  var FN_URL = SB_URL + '/functions/v1/chat-compass'
-  var H      = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' }
+  /* ── Config ─────────────────────────────────────────── */
+  var SB_URL  = 'https://yexrmmhadfscormovskn.supabase.co'
+  var SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlleHJtbWhhZGZzY29ybW92c2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNjg0NzYsImV4cCI6MjA5Nzk0NDQ3Nn0.vxkcZDdTfE0qDxW8YwsnbGsLaaSUfwgZ78nQicq2Uoc'
+  var FN_URL  = SB_URL + '/functions/v1/chat-compass'
+  var H       = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' }
+  var MAX_Q   = 5
 
+  /* ── State ──────────────────────────────────────────── */
   var _messages  = []
   var _typing    = false
-  var _optionsEl = null   // current MCQ options row element
+  var _optionsEl = null
+  var _state     = 'collecting'   // 'collecting' | 'chatting' | 'done'
+  var _userName  = sessionStorage.getItem('compass_name')  || ''
+  var _userPhone = sessionStorage.getItem('compass_phone') || ''
+  var _leadSaved = !!sessionStorage.getItem('compass_lead_saved')
+  var _leadId    = sessionStorage.getItem('compass_lead_id') || ''
 
   var chatInner = document.getElementById('chat-inner')
   var chatBody  = document.getElementById('chat-body')
   var input     = document.getElementById('msg-input')
   var sendBtn   = document.getElementById('send-btn')
 
-  /* ── Scroll to bottom ───────────────────────────────── */
-  function _scroll() {
-    chatBody.scrollTop = chatBody.scrollHeight
+  /* ── Daily usage tracking (localStorage, keyed by phone+date) ── */
+  function _dayKey()           { return new Date().toISOString().slice(0,10) }
+  function _usageKey(ph)       { return 'cmp_qs_' + ph + '_' + _dayKey() }
+  function _getUsed(ph)        { return parseInt(localStorage.getItem(_usageKey(ph)) || '0', 10) }
+  function _incUsed(ph)        { var n = _getUsed(ph)+1; localStorage.setItem(_usageKey(ph), String(n)); _updateCounter(); return n }
+
+  function _updateCounter() {
+    var el = document.getElementById('q-counter')
+    if (!el || !_userPhone) return
+    var left = Math.max(0, MAX_Q - _getUsed(_userPhone))
+    el.textContent = left + ' / ' + MAX_Q + ' questions remaining today'
+    el.style.color  = left <= 1 ? 'rgba(239,111,111,.75)' : 'rgba(255,255,255,.25)'
   }
 
-  /* ── Render a message bubble ────────────────────────── */
+  /* ── DOM helpers ─────────────────────────────────────── */
+  function _scroll() { chatBody.scrollTop = chatBody.scrollHeight }
+
   function _appendMessage(role, html) {
     _clearOptions()
-    var wrap   = document.createElement('div')
-    wrap.className = 'msg ' + role
-    var bubble = document.createElement('div')
-    bubble.className = 'bubble'
-    bubble.innerHTML = html
-    wrap.appendChild(bubble)
-    chatInner.appendChild(wrap)
-    _scroll()
+    var wrap = document.createElement('div'); wrap.className = 'msg ' + role
+    var bub  = document.createElement('div'); bub.className  = 'bubble'; bub.innerHTML = html
+    wrap.appendChild(bub); chatInner.appendChild(wrap); _scroll()
     return wrap
   }
 
-  /* ── Format raw text → safe HTML ───────────────────── */
   function _fmt(text) {
     return text
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
@@ -357,137 +378,271 @@ body{
       .replace(/\n/g,'<br>')
   }
 
-  /* ── Render MCQ option buttons ──────────────────────── */
   function _renderOptions(opts) {
     _clearOptions()
-    var row = document.createElement('div')
-    row.className = 'options-row'
-    opts.forEach(function(opt) {
-      var btn = document.createElement('button')
-      btn.className = 'opt-btn'
-      btn.textContent = opt.trim()
-      btn.addEventListener('click', function() {
-        _selectOption(opt.trim())
-      })
+    var row = document.createElement('div'); row.className = 'options-row'
+    opts.forEach(function(opt){
+      var btn = document.createElement('button'); btn.className = 'opt-btn'; btn.textContent = opt.trim()
+      btn.addEventListener('click', function(){ _selectOption(opt.trim()) })
       row.appendChild(btn)
     })
-    // Append the options row to chat-inner (outside the message wraps)
-    chatInner.appendChild(row)
-    _optionsEl = row
-    _scroll()
+    chatInner.appendChild(row); _optionsEl = row; _scroll()
   }
-
   function _clearOptions() {
-    if (_optionsEl && _optionsEl.parentNode) {
-      _optionsEl.parentNode.removeChild(_optionsEl)
-    }
+    if (_optionsEl && _optionsEl.parentNode) _optionsEl.parentNode.removeChild(_optionsEl)
     _optionsEl = null
   }
+  function _selectOption(text) { _clearOptions(); input.value = ''; _doSend(text) }
 
-  function _selectOption(text) {
-    _clearOptions()
-    input.value = ''
-    _doSend(text)
-  }
-
-  /* ── Typing indicator ───────────────────────────────── */
   function _showTyping() {
     _typing = true
-    var wrap = document.createElement('div')
-    wrap.className = 'msg assistant'
-    wrap.id = 'typing-row'
-    var bubble = document.createElement('div')
-    bubble.className = 'typing-bubble'
-    bubble.innerHTML = '<span></span><span></span><span></span>'
-    wrap.appendChild(bubble)
-    chatInner.appendChild(wrap)
-    _scroll()
+    var wrap = document.createElement('div'); wrap.className = 'msg assistant'; wrap.id = 'typing-row'
+    var bub  = document.createElement('div'); bub.className = 'typing-bubble'; bub.innerHTML = '<span></span><span></span><span></span>'
+    wrap.appendChild(bub); chatInner.appendChild(wrap); _scroll()
   }
-  function _hideTyping() {
-    _typing = false
-    var el = document.getElementById('typing-row')
-    if (el) el.remove()
-  }
+  function _hideTyping() { _typing = false; var el = document.getElementById('typing-row'); if (el) el.remove() }
 
-  /* ── Parse assistant response ───────────────────────── */
+  /* ── Response parser ────────────────────────────────── */
   function _parseResponse(raw) {
-    // Extract [OPTIONS]...[/OPTIONS]
-    var opts     = null
-    var optMatch = raw.match(/\[OPTIONS\]([\s\S]*?)\[\/OPTIONS\]/)
-    if (optMatch) {
-      opts = optMatch[1].split('|').map(function(s){ return s.trim() }).filter(Boolean)
-    }
-    // Strip [OPTIONS] block from display text
-    var display = raw.replace(/\[OPTIONS\][\s\S]*?\[\/OPTIONS\]/g, '').trim()
-    return { display: display, opts: opts }
+    var opts = null
+    var m = raw.match(/\[OPTIONS\]([\s\S]*?)\[\/OPTIONS\]/)
+    if (m) opts = m[1].split('|').map(function(s){ return s.trim() }).filter(Boolean)
+    var display = raw
+      .replace(/\[OPTIONS\][\s\S]*?\[\/OPTIONS\]/g, '')   // strip option blocks
+      .replace(/\[[A-Z_]+\][\s\S]*?\[\/[A-Z_]+\]/g, '')  // strip any other tag blocks (e.g. [LEAD_CAPTURE])
+      .replace(/\[[A-Z_]+\]/g, '')                        // strip lone opening/closing tags
+      .trim()
+    var offTopic = display.indexOf('[OFF_TOPIC]') === 0
+    if (offTopic) display = display.replace('[OFF_TOPIC]','').trim()
+    return { display: display, opts: opts, offTopic: offTopic }
   }
 
-  /* ── Send a message ─────────────────────────────────── */
-  function _doSend(text) {
-    if (!text || _typing) return
-    _appendMessage('user', _fmt(text))
-    _messages.push({ role: 'user', content: text })
-    _showTyping()
-    sendBtn.disabled = true
+  /* ── Contact info parser ─────────────────────────────── */
+  function _parseContact(text) {
+    var phoneMatch = text.match(/(?:(?:\+?91|0)[\s\-]?)?([6-9]\d{9})/)
+    var phone = phoneMatch ? phoneMatch[1] : ''
+    var noNum = text.replace(/[\+\d][\d\s\-]{8,}/g,'').trim()
+    var cleaned = noNum.replace(/\b(my|name|is|and|phone|number|whatsapp|hi|hello|sure|okay|ok|im|i'm|this|it)\b/gi,' ').replace(/\s+/g,' ').trim()
+    var nameMatch = cleaned.match(/[A-Za-z][A-Za-z\s]{1,40}/)
+    var name = nameMatch ? nameMatch[0].replace(/\s+/g,' ').trim() : ''
+    return { name: name, phone: phone }
+  }
 
-    fetch(FN_URL, {
+  /* ── Field extraction from conversation ─────────────── */
+  var DESTINATIONS = ['Japan','Bali','Switzerland','Santorini','Norway','Italy','Maldives','Seychelles','Mauritius','India','Nepal','Bhutan','Sri Lanka','New Zealand','Australia','South Korea']
+  var OCCASIONS    = ['Honeymoon','Family','Solo','Friends','Anniversary']
+  var MONTHS       = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
+  function _extractFields() {
+    var userText = _messages.filter(function(m){ return m.role==='user' }).map(function(m){ return m.content }).join(' ')
+    var allText  = _messages.map(function(m){ return m.content }).join(' ')
+    var f = { destination:'', occasion:'', budget:'', duration:'', month:'', from:'', travelers:'', email:'' }
+
+    // Destination — check user messages first, then assistant (recommendation)
+    for (var i=0;i<DESTINATIONS.length;i++) {
+      if (new RegExp('\\b'+DESTINATIONS[i]+'\\b','i').test(userText)) { f.destination=DESTINATIONS[i]; break }
+    }
+    if (!f.destination) for (var j=0;j<DESTINATIONS.length;j++) {
+      if (new RegExp('\\b'+DESTINATIONS[j]+'\\b','i').test(allText)) { f.destination=DESTINATIONS[j]; break }
+    }
+
+    // Occasion
+    for (var k=0;k<OCCASIONS.length;k++) {
+      if (new RegExp('\\b'+OCCASIONS[k]+'\\b','i').test(userText)) { f.occasion=OCCASIONS[k]; break }
+    }
+
+    // Budget tier
+    if (/premium/i.test(userText))             f.budget = 'Premium'
+    else if (/mid.range/i.test(userText))      f.budget = 'Mid-range'
+    else if (/budget.friendly/i.test(userText))f.budget = 'Budget-friendly'
+    else if (/flexible/i.test(userText))       f.budget = 'Flexible'
+
+    // Duration
+    var dm = userText.match(/(\d+)[\s\-–]+(\d+)\s*(?:nights?|days?)/i) || userText.match(/(\d+)\s*(?:nights?|days?)/i)
+    if (dm) f.duration = dm[0].trim()
+    else if (/5[\s\-]7/i.test(userText)) f.duration='5-7 days'
+    else if (/8[\s\-]10/i.test(userText)) f.duration='8-10 days'
+    else if (/11[\s\-]14/i.test(userText)) f.duration='11-14 days'
+    else if (/2\+\s*weeks?/i.test(userText)) f.duration='2+ weeks'
+
+    // Month
+    for (var m=0;m<MONTHS.length;m++) {
+      if (new RegExp('\\b'+MONTHS[m]+'\\b','i').test(userText)) { f.month=MONTHS[m]; break }
+    }
+
+    // Travelers (pax)
+    var tx = userText.match(/(\d+)\s*(?:adults?|persons?|people|pax|of\s+us)/i)
+    if (tx) f.travelers = tx[0]
+
+    // Email in user messages
+    var em = userText.match(/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/)
+    if (em) f.email = em[0]
+
+    return f
+  }
+
+  function _buildMessage(fields) {
+    // Pipe-separated format — rendered by dashboard just like trip_planner
+    var parts = []
+    if (fields.destination) parts.push('Destination: ' + fields.destination)
+    if (fields.occasion)    parts.push('Type: ' + fields.occasion)
+    if (fields.budget)      parts.push('Budget: ' + fields.budget)
+    if (fields.duration)    parts.push('Duration: ' + fields.duration)
+    if (fields.month)       parts.push('Month: ' + fields.month)
+    if (fields.travelers)   parts.push('Travelers: ' + fields.travelers)
+    // Append a trimmed conversation log after the metadata
+    var log = _messages.slice(0,20).map(function(m){
+      var clean = m.content.replace(/\[OPTIONS\][\s\S]*?\[\/OPTIONS\]/g,'').replace(/\[OFF_TOPIC\]/g,'').trim()
+      return (m.role==='user'?'You':'COMPASS') + ': ' + clean.slice(0,300)
+    }).filter(function(l){ return l.length > 7 }).join('\n')
+    return parts.join(' | ') + (parts.length ? '\n---\n' : '') + log
+  }
+
+  /* ── Lead capture ───────────────────────────────────── */
+  function _saveLead() {
+    if (_leadSaved || !_userPhone) return
+    _leadSaved = true
+    sessionStorage.setItem('compass_lead_saved', '1')
+    var fields = _extractFields()
+    fetch(SB_URL + '/rest/v1/leads', {
       method: 'POST',
-      headers: H,
-      body: JSON.stringify({ messages: _messages })
+      headers: Object.assign({}, H, { 'Prefer': 'return=representation' }),
+      body: JSON.stringify({
+        name:         _userName || 'COMPASS User',
+        phone:        _userPhone,
+        email:        fields.email || null,
+        source:       'compass_bot',
+        package_name: fields.destination || null,
+        message:      _buildMessage(fields),
+        status:       'new'
+      })
     })
     .then(function(r){ return r.json() })
     .then(function(data){
-      _hideTyping()
-      sendBtn.disabled = false
-      if (data.error) {
-        _appendMessage('assistant', 'Sorry, something went wrong. Please try again.')
+      if (Array.isArray(data) && data[0] && data[0].id) {
+        _leadId = String(data[0].id)
+        sessionStorage.setItem('compass_lead_id', _leadId)
+      }
+    })
+    .catch(function(){})
+  }
+
+  function _updateLead() {
+    if (!_leadId) return
+    var fields = _extractFields()
+    fetch(SB_URL + '/rest/v1/leads?id=eq.' + _leadId, {
+      method: 'PATCH',
+      headers: Object.assign({}, H, { 'Prefer': 'return=minimal' }),
+      body: JSON.stringify({
+        email:        fields.email || null,
+        package_name: fields.destination || null,
+        message:      _buildMessage(fields)
+      })
+    }).catch(function(){})
+  }
+
+  /* ── Limit reached UI ───────────────────────────────── */
+  function _showLimitReached() {
+    _state = 'done'; _clearOptions()
+    _appendMessage('assistant', 'You&rsquo;ve used all <strong>' + MAX_Q + ' questions</strong> for today &#9200;<br><br>Your limit resets at midnight. Browse our packages at <a href="https://alpenglow-global.pages.dev" target="_blank">alpenglow-global.pages.dev</a> or contact the team directly.')
+    input.disabled = true; sendBtn.disabled = true
+    input.placeholder = 'Daily limit reached — come back tomorrow'
+    var el = document.getElementById('q-counter')
+    if (el) { el.textContent = '0 / ' + MAX_Q + ' questions remaining today'; el.style.color = 'rgba(239,111,111,.75)' }
+  }
+
+  /* ── Start main conversation ─────────────────────────── */
+  function _startChat(firstName) {
+    _state = 'chatting'; _updateCounter()
+    var g = 'Lovely to meet you, ' + firstName + '! ✈️ I’m COMPASS, AlpenGlow’s trip planning assistant. Are you dreaming of somewhere specific, or would you like help figuring out where to go?'
+    _appendMessage('assistant', _fmt(g))
+    _messages.push({ role: 'assistant', content: g })
+    _renderOptions(['I have a destination in mind', 'Help me decide', 'Tell me about your packages', 'Current offers & deals'])
+  }
+
+  /* ── Main send ──────────────────────────────────────── */
+  function _doSend(text) {
+    if (!text || _typing || _state === 'done') return
+
+    /* Contact collection phase */
+    if (_state === 'collecting') {
+      _appendMessage('user', _fmt(text))
+      var c = _parseContact(text)
+      if (!c.phone) {
+        _appendMessage('assistant', 'I couldn&rsquo;t catch your phone number &mdash; could you type it again? (e.g. 98765 43210)')
         return
       }
-      var raw = data.content || ''
-      _messages.push({ role: 'assistant', content: raw })
+      _userName  = c.name || 'Traveller'
+      _userPhone = c.phone
+      sessionStorage.setItem('compass_name',  _userName)
+      sessionStorage.setItem('compass_phone', _userPhone)
+      if (_getUsed(_userPhone) >= MAX_Q) { _showLimitReached(); return }
+      _saveLead()
+      _startChat(_userName.split(' ')[0])
+      return
+    }
 
+    /* Normal chat phase — check limit first */
+    if (_getUsed(_userPhone) >= MAX_Q) { _showLimitReached(); return }
+
+    _appendMessage('user', _fmt(text))
+    _messages.push({ role: 'user', content: text })
+    _showTyping(); sendBtn.disabled = true
+
+    fetch(FN_URL, { method:'POST', headers:H, body:JSON.stringify({ messages:_messages }) })
+    .then(function(r){ return r.json() })
+    .then(function(data){
+      _hideTyping(); sendBtn.disabled = false
+      if (data.error) { _appendMessage('assistant','Sorry, something went wrong. Please try again.'); return }
+      var raw    = data.content || ''
       var parsed = _parseResponse(raw)
-      if (parsed.display) _appendMessage('assistant', _fmt(parsed.display))
-      if (parsed.opts && parsed.opts.length) _renderOptions(parsed.opts)
+      _messages.push({ role:'assistant', content: raw })
+
+      if (!parsed.offTopic) {
+        var used = _incUsed(_userPhone)
+        if (parsed.display) _appendMessage('assistant', _fmt(parsed.display))
+        if (parsed.opts && parsed.opts.length) _renderOptions(parsed.opts)
+        // Save lead on 2nd question (enough context); update on every subsequent one
+        if (used === 2 && !_leadSaved) { _saveLead() }
+        else if (used > 2 && _leadId)  { _updateLead() }
+        if (used >= MAX_Q) setTimeout(_showLimitReached, 600)
+      } else {
+        // Off-topic: show reply but do NOT count the question
+        if (parsed.display) _appendMessage('assistant', _fmt(parsed.display))
+        if (parsed.opts && parsed.opts.length) _renderOptions(parsed.opts)
+      }
     })
     .catch(function(){
-      _hideTyping()
-      sendBtn.disabled = false
-      _appendMessage('assistant', 'Connection error — please check your internet and try again.')
+      _hideTyping(); sendBtn.disabled = false
+      _appendMessage('assistant','Connection error &mdash; please check your internet and try again.')
     })
   }
 
-  /* ── Input event handlers ───────────────────────────── */
+  /* ── Input handlers ─────────────────────────────────── */
   sendBtn.addEventListener('click', function(){
-    var text = input.value.trim()
-    if (!text) return
-    input.value = ''
-    input.style.height = 'auto'
-    _doSend(text)
+    var t = input.value.trim(); if (!t) return
+    input.value = ''; input.style.height = 'auto'; _doSend(t)
   })
-
   input.addEventListener('keydown', function(e){
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      var text = input.value.trim()
-      if (!text) return
-      input.value = ''
-      input.style.height = 'auto'
-      _doSend(text)
+    if (e.key==='Enter' && !e.shiftKey) {
+      e.preventDefault(); var t = input.value.trim(); if (!t) return
+      input.value = ''; input.style.height = 'auto'; _doSend(t)
     }
   })
+  input.addEventListener('input', function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,110)+'px' })
 
-  input.addEventListener('input', function(){
-    this.style.height = 'auto'
-    this.style.height = Math.min(this.scrollHeight, 110) + 'px'
-  })
-
-  /* ── Greeting ───────────────────────────────────────── */
-  var greeting = "Hi! I'm COMPASS, AlpenGlow's trip planner. Are you dreaming of somewhere specific, or would you like help figuring out where to go?"
-  _appendMessage('assistant', _fmt(greeting))
-  _messages.push({ role: 'assistant', content: greeting })
-  // Show initial quick-start options
-  _renderOptions(['I have a destination in mind', 'Help me decide', 'Tell me about your packages', 'Current offers & deals'])
+  /* ── Init ───────────────────────────────────────────── */
+  if (_userPhone) {
+    // Returning user in this session — skip contact collection
+    if (_getUsed(_userPhone) >= MAX_Q) {
+      _showLimitReached()
+    } else {
+      _startChat(_userName.split(' ')[0] || 'there')
+    }
+  } else {
+    // New session — ask for contact info
+    _appendMessage('assistant', 'Hi! I&rsquo;m <strong>COMPASS</strong>, AlpenGlow&rsquo;s trip planning assistant. &#127757;<br><br>To get started and save your personalised trip plan, could you share your <strong>name</strong> and <strong>WhatsApp number</strong>?')
+  }
 
 })()
 </script>

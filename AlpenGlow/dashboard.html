@@ -1606,6 +1606,41 @@ box-shadow:
 .sf-chip.active{background:rgba(239,126,25,.1);border-color:rgba(239,126,25,.3);color:var(--orange)}
 .sf-chip-x{margin-left:.2rem;font-size:.75rem;opacity:.55;cursor:pointer}
 .sf-chip-x:hover{opacity:1;color:var(--red)}
+/* ── DUPLICATE DETECTION ── */
+#dup-chip{display:none;align-items:center;gap:.35rem;padding:.3rem .8rem;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.03em;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.28);color:#f5a623;cursor:pointer;transition:all .18s;white-space:nowrap}
+#dup-chip:hover,#dup-chip.active{background:rgba(245,158,11,.18);border-color:#f5a623}
+.dup-row td:first-child{border-left:3px solid #f5a623 !important}
+.dup-row{background:rgba(245,158,11,.025) !important}
+/* merge button in actions */
+.act-btn.merge-btn{color:#f5a623 !important;border-color:rgba(245,158,11,.3) !important}
+.act-btn.merge-btn:hover{background:rgba(245,158,11,.12) !important;border-color:#f5a623 !important}
+/* merge modal */
+#merge-modal-backdrop{position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center}
+#merge-modal-backdrop.open{display:flex}
+#merge-modal{width:560px;max-width:94vw;max-height:88vh;overflow-y:auto;background:linear-gradient(180deg,#211b16,#18130f);border:1px solid rgba(255,255,255,.07);border-radius:22px;box-shadow:0 40px 100px rgba(0,0,0,.6);padding:2rem 2.2rem;display:flex;flex-direction:column;gap:1rem}
+#merge-modal h3{font-family:var(--font-display);font-size:1.35rem;font-weight:400;font-style:italic;color:#fff;margin-bottom:.2rem}
+.merge-card{display:flex;align-items:flex-start;gap:.9rem;padding:1rem 1.1rem;border-radius:14px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.025);cursor:pointer;transition:border-color .18s,background .18s;margin-bottom:.6rem}
+.merge-card:hover{border-color:rgba(239,126,25,.3);background:rgba(239,126,25,.04)}
+.merge-card.suggested{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.04)}
+.merge-card input[type=radio]{margin-top:.25rem;accent-color:var(--orange);flex-shrink:0}
+.merge-card-info{flex:1;min-width:0}
+.merge-card-name{font-size:.95rem;font-weight:600;color:#fff;margin-bottom:.2rem}
+.merge-card-meta{font-size:.75rem;color:var(--muted);margin-bottom:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.merge-badge{display:inline-block;margin-top:.45rem;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .55rem;border-radius:999px;background:rgba(245,158,11,.15);color:#f5a623;border:1px solid rgba(245,158,11,.3)}
+/* ── DRAWER MERGE TABS ── */
+.drw-tabs{display:flex;gap:0;padding:0 2.2rem;overflow-x:auto;scrollbar-width:none}
+.drw-tabs::-webkit-scrollbar{display:none}
+.drw-tab{flex-shrink:0;padding:.6rem 1.1rem;font-size:.74rem;font-weight:600;letter-spacing:.03em;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .18s,border-color .18s;white-space:nowrap}
+.drw-tab:hover{color:var(--text)}
+.drw-tab.active{color:var(--orange);border-bottom-color:var(--orange)}
+.drw-tab-badge{display:inline-block;margin-left:.35rem;font-size:.6rem;font-weight:700;padding:.1rem .35rem;border-radius:999px;background:rgba(245,158,11,.15);color:#f5a623;border:1px solid rgba(245,158,11,.25);vertical-align:middle}
+.drw-panel{display:none}.drw-panel.active{display:block}
+.snap-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem 1.2rem;margin-bottom:.8rem}
+.snap-field{display:flex;flex-direction:column;gap:.2rem}
+.snap-lbl{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.snap-val{font-size:.85rem;color:var(--text);line-height:1.45}
+.snap-msg{background:rgba(255,255,255,.025);border:1px solid var(--rule-faint);border-radius:10px;padding:.75rem 1rem;font-size:.82rem;color:var(--muted);line-height:1.65;white-space:pre-wrap;margin-top:.5rem}
+.snap-notice{font-size:.72rem;color:rgba(245,158,11,.7);background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:8px;padding:.5rem .75rem;margin-bottom:1rem}
 .btn-save-filter{padding:.3rem .8rem;border-radius:999px;font-size:.72rem;font-weight:600;background:transparent;border:1px dashed rgba(255,255,255,.15);color:var(--ghost);transition:all .18s;cursor:pointer}
 .btn-save-filter:hover{border-color:var(--orange);color:var(--orange)}
 
@@ -1944,8 +1979,11 @@ Converted
       <div class="tp-list" id="tp-list"></div>
     </div>
 
-    <!-- Saved Filter Chips -->
-    <div class="saved-filters-row" id="saved-filters-row" style="display:none"></div>
+    <!-- Saved Filter Chips + Duplicate chip -->
+    <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem">
+      <div class="saved-filters-row" id="saved-filters-row" style="display:none;margin-bottom:0"></div>
+      <button id="dup-chip" onclick="toggleDupFilter()">⚠ Duplicates (0)</button>
+    </div>
 
     <!-- Filters Row 1: search + dropdowns -->
     <div class="filter-bar" style="margin-bottom:.6rem;border-bottom:none;padding-bottom:0">
@@ -1967,6 +2005,7 @@ Converted
         <select class="filter-select" id="f-source" onchange="applyFilters()">
           <option value="">All Sources</option>
           <option value="trip_planner">Trip Planner</option>
+          <option value="compass_bot">COMPASS Bot</option>
           <option value="contact_form">Contact Form</option>
           <option value="package_unlock">Package Page</option>
           <option value="offer_otp">Offer OTP</option>
@@ -2074,11 +2113,23 @@ Converted
     </div>
     <button class="drw-close" onclick="closeDrawer()">×</button>
   </div>
+  <div id="drw-tabs-slot" style="display:none;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(0,0,0,.18);overflow-x:auto;scrollbar-width:none"></div>
   <div class="drw-body" id="drw-body"></div>
   <div class="drw-actions" id="drw-actions"></div>
 </div>
 
 <!-- EMAIL COMPOSE MODAL -->
+<div id="merge-modal-backdrop" onclick="if(event.target===this)closeMergeModal()">
+  <div id="merge-modal">
+    <h3>Merge Duplicate Leads</h3>
+    <div id="merge-modal-body"></div>
+    <div class="em-row">
+      <button class="em-btn em-btn-cancel" onclick="closeMergeModal()">Cancel</button>
+      <button class="em-btn em-btn-send" id="merge-confirm-btn" onclick="confirmMerge()">Confirm Merge</button>
+    </div>
+  </div>
+</div>
+
 <div id="email-modal-backdrop" onclick="if(event.target===this)closeEmailModal()">
   <div class="email-modal">
     <h3>Send Email</h3>
@@ -2160,6 +2211,7 @@ const PER_PAGE = 10
 let volChart = null, srcChart = null, sourcesChart = null, delTarget = null
 let SELECTED = new Set()
 let _dragLeadId = null
+let DUP_MODE = false, DUP_GROUPS = [], DUP_IDS = new Set()
 
 // ── AUTH ───────────────────────────────────────────────
 function login() {
@@ -2215,12 +2267,167 @@ function startClock() {
 }
 
 // ── SUPABASE ───────────────────────────────────────────
+// ── DUPLICATE DETECTION ────────────────────────────────
+function normalizePhone(phone) {
+  if (!phone) return ''
+  return phone.replace(/\D/g, '').slice(-10)
+}
+
+function _dupKey(lead) {
+  const ph = normalizePhone(lead.phone)
+  return ph || (lead.email ? lead.email.toLowerCase().trim() : '')
+}
+
+function findDuplicateGroups(leads) {
+  const map = new Map()
+  leads.forEach(l => {
+    const key = _dupKey(l)
+    if (!key) return
+    if (!map.has(key)) map.set(key, [])
+    map.get(key).push(l)
+  })
+  return [...map.values()]
+    .filter(g => g.length > 1)
+    .sort((a, b) => b.length - a.length)
+}
+
+function updateDupChip() {
+  DUP_GROUPS = findDuplicateGroups(ALL)
+  DUP_IDS = new Set(DUP_GROUPS.flat().map(l => l.id))
+  const chip = document.getElementById('dup-chip')
+  if (!chip) return
+  const count = DUP_IDS.size
+  chip.textContent = `⚠ Duplicates (${count})`
+  chip.style.display = count > 0 ? 'inline-flex' : 'none'
+  if (DUP_MODE && count === 0) { DUP_MODE = false; chip.classList.remove('active') }
+}
+
+function toggleDupFilter() {
+  DUP_MODE = !DUP_MODE
+  const chip = document.getElementById('dup-chip')
+  chip.classList.toggle('active', DUP_MODE)
+  if (DUP_MODE) {
+    // Sort dup leads so same-group members appear adjacent
+    const ordered = DUP_GROUPS.flat()
+    const dupIdOrder = new Map(ordered.map((l, i) => [l.id, i]))
+    FILTERED = ALL.filter(l => DUP_IDS.has(l.id))
+      .sort((a, b) => (dupIdOrder.get(a.id) ?? 999) - (dupIdOrder.get(b.id) ?? 999))
+    PAGE = 0
+    renderTable()
+  } else {
+    applyFilters()
+  }
+}
+
+// ── MERGE MODAL ────────────────────────────────────────
+const STATUS_RANK = { cancelled: -1, new: 0, contacted: 1, quoted: 2, booked: 3 }
+
+function openMergeModal(leadId) {
+  const group = DUP_GROUPS.find(g => g.some(l => l.id === leadId))
+  if (!group) return
+  const suggested = group.reduce((best, l) => {
+    const br = STATUS_RANK[l.status || 'new'] ?? 0
+    const cr = STATUS_RANK[best.status || 'new'] ?? 0
+    return br > cr ? l : best
+  }, group[0])
+  const modal = document.getElementById('merge-modal')
+  modal.dataset.groupKey = _dupKey(group[0])
+  document.getElementById('merge-modal-body').innerHTML =
+    `<p style="font-size:.82rem;color:var(--muted);margin-bottom:.8rem">Select the <strong style="color:var(--text)">primary</strong> record to keep. Others will be merged into it and deleted.</p>` +
+    group.map(l => {
+      const dt = new Date(l.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
+      const isSuggested = l.id === suggested.id
+      return `<label class="merge-card${isSuggested?' suggested':''}" for="mr-${l.id}">
+        <input type="radio" id="mr-${l.id}" name="merge-primary" value="${l.id}"${isSuggested?' checked':''}>
+        <div class="merge-card-info">
+          <div class="merge-card-name">${e(l.name||'—')}</div>
+          <div class="merge-card-meta">${e(l.phone||'')}${l.phone&&l.email?' · ':''}${e(l.email||'')}</div>
+          <div class="merge-card-meta">${e(SRC[l.source]||l.source||'—')} · ${dt}</div>
+          <span class="s-pill ${SC[l.status||'new']}" style="margin-top:.5rem;display:inline-flex"><span>${SL[l.status||'new']}</span></span>
+          ${isSuggested?'<span class="merge-badge">Suggested primary</span>':''}
+        </div>
+      </label>`
+    }).join('')
+  document.getElementById('merge-modal-backdrop').classList.add('open')
+}
+
+function closeMergeModal() {
+  document.getElementById('merge-modal-backdrop').classList.remove('open')
+  document.getElementById('merge-modal-body').innerHTML = ''
+  const btn = document.getElementById('merge-confirm-btn')
+  btn.disabled = false; btn.textContent = 'Confirm Merge'
+}
+
+async function confirmMerge() {
+  const primaryId = document.querySelector('input[name="merge-primary"]:checked')?.value
+  if (!primaryId) { showToast('Select a primary record', 'info'); return }
+  const groupKey = document.getElementById('merge-modal').dataset.groupKey
+  const group = DUP_GROUPS.find(g => _dupKey(g[0]) === groupKey || g.some(l => l.id === primaryId))
+  if (!group) return
+  const primary = group.find(l => l.id === primaryId)
+  const others  = group.filter(l => l.id !== primaryId)
+
+  // Best status (ignore cancelled when better exists)
+  const nonCancelledBest = group
+    .filter(l => (l.status||'new') !== 'cancelled')
+    .sort((a,b) => (STATUS_RANK[b.status||'new']??0) - (STATUS_RANK[a.status||'new']??0))[0]
+  const bestStatus = nonCancelledBest ? nonCancelledBest.status||'new' : 'cancelled'
+
+  // Earliest created_at
+  const earliest = group.reduce((d, l) => {
+    const t = new Date(l.created_at)
+    return t < d ? t : d
+  }, new Date(primary.created_at))
+
+  // Merge notes (unique, non-empty)
+  const notesParts = [primary, ...others].map(l => (l.notes||'').trim()).filter(Boolean)
+  const uniqueNotes = [...new Set(notesParts)].join('\n---\n')
+
+  const allSources = group.map(l => SRC[l.source]||l.source||'unknown').filter(Boolean)
+  const actNote = `Merged ${group.length} duplicate enquiries (sources: ${[...new Set(allSources)].join(', ')}) on ${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}`
+
+  const btn = document.getElementById('merge-confirm-btn')
+  btn.disabled = true; btn.textContent = 'Merging…'
+
+  try {
+    await patch(primaryId, {
+      status: bestStatus,
+      notes: uniqueNotes || primary.notes || null,
+      message: primary.message || null,
+      created_at: earliest.toISOString(),
+    })
+    await logActivity(primaryId, 'note', actNote)
+    // Store a snapshot of each merged lead so drawer tabs can show original data
+    await Promise.all(others.map(l => logActivity(primaryId, 'merged_snapshot', JSON.stringify({
+      name: l.name, phone: l.phone, email: l.email, source: l.source,
+      package_name: l.package_name, message: l.message, notes: l.notes,
+      status: l.status, created_at: l.created_at,
+      quoted_amount: l.quoted_amount, final_amount: l.final_amount,
+      verified_phone: l.verified_phone, verified_email: l.verified_email
+    }))))
+    await Promise.all(others.map(l => fetch(`${SB_URL}/rest/v1/leads?id=eq.${l.id}`, { method:'DELETE', headers:H })))
+    const deletedIds = others.map(l => l.id)
+    ALL = ALL.filter(l => !deletedIds.includes(l.id))
+    deletedIds.forEach(id => SELECTED.delete(id))
+    updateDupChip()
+    if (DUP_MODE) toggleDupFilter(); else applyFilters()
+    renderStats(); renderCharts()
+    closeMergeModal()
+    showToast(`Merged ${group.length} records into 1`, 'ok')
+  } catch(err) {
+    console.error(err)
+    showToast('Merge failed — see console', 'err')
+    btn.disabled = false; btn.textContent = 'Confirm Merge'
+  }
+}
+
 async function loadLeads() {
   document.getElementById('err-banner').classList.remove('show')
   try {
     const r = await fetch(`${SB_URL}/rest/v1/leads?select=*&order=created_at.desc`, { headers: H })
     if (!r.ok) throw new Error(r.status)
     ALL = await r.json()
+    updateDupChip()
     applyFilters(); renderStats(); renderCharts()
     loadTodayFollowUps()
   } catch(e) {
@@ -2244,6 +2451,7 @@ async function remove(id) {
   await fetch(`${SB_URL}/rest/v1/leads?id=eq.${id}`, { method: 'DELETE', headers: H })
   ALL = ALL.filter(l => l.id !== id)
   SELECTED.delete(id)
+  updateDupChip()
   applyFilters(); renderStats(); renderCharts()
   if (CURRENT_VIEW === 'kanban') renderKanban()
 }
@@ -2358,7 +2566,7 @@ async function loadTodayFollowUps() {
 // ── TABLE ──────────────────────────────────────────────
 const SL = { new:'New', contacted:'Contacted', quoted:'Quoted', booked:'Booked', cancelled:'Cancelled' }
 const SC = { new:'s-new', contacted:'s-contacted', quoted:'s-contacted', booked:'s-booked', cancelled:'s-cancelled' }
-const SRC = { contact_form:'Contact Form', package_unlock:'Package Page', offer_otp:'Offer OTP', blog_unlock:'Blog Gate', trip_planner:'Trip Planner' }
+const SRC = { contact_form:'Contact Form', package_unlock:'Package Page', offer_otp:'Offer OTP', blog_unlock:'Blog Gate', trip_planner:'Trip Planner', compass_bot:'COMPASS Bot' }
 
 function e(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') }
 
@@ -2378,11 +2586,13 @@ function renderTable() {
   const totalPages = Math.ceil(FILTERED.length / PER_PAGE)
   function _extractBudget(msg) {
     if (!msg) return { tier: null, price: null }
+    // Only parse the metadata line (before the first ---)
+    var meta = msg.split(/\n---\n/)[0]
     var tier = null, price = null
-    msg.split('|').forEach(function(part) {
+    meta.split('|').forEach(function(part) {
       var kv = part.trim().split(':'), k = kv[0].trim().toLowerCase(), v = kv.slice(1).join(':').trim()
       if (k === 'budget') tier = v
-      if (k === 'expected price') price = v
+      if (k === 'expected price') { price = v.split('---')[0].trim() }
     })
     return { tier, price }
   }
@@ -2394,9 +2604,10 @@ function renderTable() {
     const st = l.status || 'new'
     const fresh = now - new Date(l.created_at).getTime() < 86400000
     const dt = new Date(l.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
-    const pkg = e(l.package_name || l.message || '—')
+    const pkg = e(l.package_name || ((l.source === 'trip_planner' || l.source === 'compass_bot') ? _leadTabLabel(l) : (l.message || '—')))
     const checked = SELECTED.has(l.id) ? 'checked' : ''
-    return `<tr>
+    const isDup = DUP_IDS.has(l.id)
+    return `<tr class="${isDup?'dup-row':''}">
       <td><input type="checkbox" class="cb-lead" ${checked} onchange="toggleCheck('${l.id}',this.checked)"></td>
       <td data-label="#">${globalIdx}</td>
       <td data-label="Name"><div class="td-name-wrap">${fresh?'<span class="new-ring"></span>':''}<span>${e(l.name||'—')}</span></div></td>
@@ -2412,6 +2623,7 @@ function renderTable() {
       <td data-label="Actions">
         <div class="act-wrap">
           <button class="act-btn" title="View details" onclick="openDrawer('${l.id}')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          ${isDup?`<button class="act-btn merge-btn" title="Merge duplicates" onclick="openMergeModal('${l.id}')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 6H5a2 2 0 00-2 2v8a2 2 0 002 2h3"/><path d="M16 6h3a2 2 0 012 2v8a2 2 0 01-2 2h-3"/><line x1="12" y1="3" x2="12" y2="21"/></svg></button>`:''}
           ${l.phone?`<button class="act-btn wa" title="WhatsApp" onclick="waLink('${e(l.phone)}','${e(l.name||'')}','${e(l.package_name||'')}')"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20 3.5A11 11 0 003.5 20L2 22l2.6-.7A11 11 0 1020 3.5z"/></svg></button>`:''}
           <button class="act-btn del" title="Delete" onclick="confirmDel('${l.id}',this)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>
         </div>
@@ -2503,6 +2715,7 @@ async function bulkDelete() {
   await Promise.all(ids.map(id => fetch(`${SB_URL}/rest/v1/leads?id=eq.${id}`, { method: 'DELETE', headers: H })))
   ALL = ALL.filter(l => !ids.includes(l.id))
   clearSelection()
+  updateDupChip()
   applyFilters(); renderStats(); renderCharts()
   if (CURRENT_VIEW === 'kanban') renderKanban()
   showToast(`${ids.length} lead${ids.length>1?'s':''} deleted`, 'err')
@@ -2656,7 +2869,7 @@ const ACT_ICON = { note:'📝', call:'📞', email:'✉', whatsapp:'💬', statu
 function renderActivityTimeline(activities, lead) {
   const dt = new Date(lead.created_at).toLocaleString('en-IN', { dateStyle:'medium', timeStyle:'short' })
   let html = `<div class="tl-item"><div class="tl-dot">✦</div><div><div class="tl-txt">Lead received</div><div class="tl-time">${dt}</div></div></div>`
-  activities.forEach(a => {
+  activities.filter(a => a.type !== 'merged_snapshot').forEach(a => {
     const atime = new Date(a.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
     html += `<div class="tl-item"><div class="tl-dot">${ACT_ICON[a.type]||'◦'}</div><div><div class="tl-txt">${e(a.note||a.type)}</div><div class="tl-time">${atime}</div></div></div>`
   })
@@ -2725,7 +2938,7 @@ async function openDrawer(id) {
   const st = lead.status || 'new'
   document.getElementById('drw-name').textContent = lead.name || '—'
   document.getElementById('drw-sub').textContent = lead.email || '—'
-  const isTripPlanner = lead.source === 'trip_planner'
+  const isTripPlanner = lead.source === 'trip_planner' || lead.source === 'compass_bot'
   let infoFields = `
     <div class="drw-field"><div class="drw-lbl">Status</div><span class="s-pill ${SC[st]}" onclick="toggleDrop(event,'${lead.id}')" style="cursor:pointer">${SL[st]} ▾</span></div>
     <div class="drw-field"><div class="drw-lbl">Source</div><div class="drw-val">${e(SRC[lead.source]||lead.source||'—')}</div></div>
@@ -2736,10 +2949,21 @@ async function openDrawer(id) {
     <div class="drw-field"><div class="drw-lbl">Verified</div><div class="drw-val">${lead.verified_phone?'✓ WhatsApp':'✗ WhatsApp'}&nbsp;&nbsp;${lead.verified_email?'✓ Email':'✗ Email'}</div></div>
   `
   if (isTripPlanner && lead.message) {
-    infoFields += lead.message.split('|').map(part => {
+    // Only parse the metadata line (before ---); for compass_bot the rest is the convo log
+    const metaLine = lead.message.split(/\n---\n/)[0]
+    const convoLog = lead.message.includes('\n---\n') ? lead.message.split(/\n---\n/).slice(1).join('\n---\n').trim() : ''
+    infoFields += metaLine.split('|').map(part => {
       const [lbl,...rest] = part.trim().split(':')
-      return `<div class="drw-field"><div class="drw-lbl">${e(lbl.trim())}</div><div class="drw-val">${e(rest.join(':').trim())}</div></div>`
+      const key = lbl.trim()
+      let val = rest.join(':').trim()
+      if (key.toLowerCase() === 'expected price') val = val.split('---')[0].trim()
+      if (!val) return ''
+      return `<div class="drw-field"><div class="drw-lbl">${e(key)}</div><div class="drw-val">${e(val)}</div></div>`
     }).join('')
+    // For compass_bot: show conversation log as a collapsible section
+    if (lead.source === 'compass_bot' && convoLog) {
+      infoFields += `<div class="drw-field" style="grid-column:1/-1"><div class="drw-lbl">Chat Log</div><div class="drw-val" style="white-space:pre-wrap;line-height:1.7;font-size:.8rem;color:var(--muted);max-height:200px;overflow-y:auto;background:rgba(0,0,0,.18);border-radius:8px;padding:.6rem .8rem">${e(convoLog)}</div></div>`
+    }
   }
   const msgBlock = (!isTripPlanner && lead.message)
     ? `<div class="drw-hr"></div><div class="drw-field"><div class="drw-lbl">Message</div><div class="drw-val" style="white-space:pre-wrap;line-height:1.7">${e(lead.message)}</div></div>`
@@ -2751,7 +2975,15 @@ async function openDrawer(id) {
     loadFollowUpsForLead(lead.id)
   ])
 
-  document.getElementById('drw-body').innerHTML = `
+  // Separate snapshot records from real activities
+  const snapshots = activities
+    .filter(a => a.type === 'merged_snapshot')
+    .map(a => { try { return { ...JSON.parse(a.note), _mergedAt: a.created_at } } catch { return null } })
+    .filter(Boolean)
+    .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+  const realActivities = activities.filter(a => a.type !== 'merged_snapshot')
+
+  const primaryPanelHTML = `
     <div class="drw-info-grid">${infoFields}</div>
     ${msgBlock}
     <div class="drw-hr"></div>
@@ -2791,7 +3023,7 @@ async function openDrawer(id) {
     <div class="drw-timeline-section">
       <div class="drw-lbl">Activity Timeline</div>
       <div class="tl" id="tl-${lead.id}">
-        ${renderActivityTimeline(activities, lead)}
+        ${renderActivityTimeline(realActivities, lead)}
       </div>
     </div>
     <div class="drw-hr"></div>
@@ -2805,6 +3037,71 @@ async function openDrawer(id) {
     </div>
     <div class="fu-list" id="fu-list-${lead.id}">${renderFollowUpList(followUps, lead.id)}</div>
   `
+
+  // Build live-duplicate tab bar into dedicated slot (outside overflow container)
+  const _freshGroups = findDuplicateGroups(ALL)
+  const liveDupGroup = _freshGroups.find(g => g.some(l => String(l.id) === String(id)))
+  const tabsSlot = document.getElementById('drw-tabs-slot')
+  if (liveDupGroup && liveDupGroup.length > 1) {
+    const _tbBtns = liveDupGroup.slice().sort((a,b) => new Date(a.created_at)-new Date(b.created_at)).map(gl => {
+      const label = _leadTabLabel(gl)
+      const isActive = String(gl.id) === String(id)
+      const dt = new Date(gl.created_at).toLocaleDateString('en-IN',{day:'numeric',month:'short'})
+      return `<button class="drw-tab${isActive?' active':''}" onclick="openDrawer('${gl.id}')" title="${e(gl.name||'')} · ${e(SRC[gl.source]||gl.source||'')} · ${dt}">${e(label)}</button>`
+    }).join('')
+    tabsSlot.innerHTML = `<div class="drw-tabs">${_tbBtns}</div>`
+    tabsSlot.style.display = 'block'
+  } else {
+    tabsSlot.innerHTML = ''; tabsSlot.style.display = 'none'
+  }
+  if (snapshots.length === 0) {
+    document.getElementById('drw-body').innerHTML = primaryPanelHTML
+  } else {
+    // Inject snapshot tabs into slot (outside overflow container)
+    const _snapBtns = snapshots.map((s, i) => {
+      const lbl = _leadTabLabel(s) !== 'Enquiry' ? _leadTabLabel(s) : (s.name || SRC[s.source] || s.source || `Enquiry ${i + 1}`)
+      return `<button class="drw-tab" id="drw-snap-tab-${i+1}" onclick="switchMergeTab(${i+1})">${e(lbl)}</button>`
+    }).join('')
+    tabsSlot.innerHTML = `<div class="drw-tabs" id="drw-snap-tabs"><button class="drw-tab active" id="drw-snap-tab-0" onclick="switchMergeTab(0)">Primary <span class="drw-tab-badge">&#10003;</span></button>${_snapBtns}</div>`
+    tabsSlot.style.display = 'block'
+
+    const snapshotPanels = snapshots.map((s, i) => {
+      const mergedAt = new Date(s._mergedAt).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
+      const origDate = s.created_at ? new Date(s.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—'
+      const st = s.status || 'new'
+      const isTripPlanner = s.source === 'trip_planner' || s.source === 'compass_bot'
+      let msgSection = ''
+      if (isTripPlanner && s.message) {
+        const fields = s.message.split('|').map(part => {
+          const [lbl,...rest] = part.trim().split(':')
+          return `<div class="snap-field"><div class="snap-lbl">${e(lbl.trim())}</div><div class="snap-val">${e(rest.join(':').trim())}</div></div>`
+        }).join('')
+        msgSection = `<div class="snap-info-grid">${fields}</div>`
+      } else if (s.message) {
+        msgSection = `<div class="snap-lbl" style="margin-bottom:.35rem">Message</div><div class="snap-msg">${e(s.message)}</div>`
+      }
+      return `<div class="drw-panel" id="drw-panel-${i + 1}">
+        <div class="snap-notice">⚠ This is a read-only snapshot of an original enquiry merged on ${mergedAt}</div>
+        <div class="snap-info-grid">
+          <div class="snap-field"><div class="snap-lbl">Name</div><div class="snap-val">${e(s.name||'—')}</div></div>
+          <div class="snap-field"><div class="snap-lbl">Status at merge</div><span class="s-pill ${SC[st]}" style="display:inline-flex;margin-top:.2rem"><span>${SL[st]}</span></span></div>
+          <div class="snap-field"><div class="snap-lbl">Phone</div><div class="snap-val">${e(s.phone||'—')}</div></div>
+          <div class="snap-field"><div class="snap-lbl">Email</div><div class="snap-val">${e(s.email||'—')}</div></div>
+          <div class="snap-field"><div class="snap-lbl">Source</div><div class="snap-val">${e(SRC[s.source]||s.source||'—')}</div></div>
+          ${s.package_name?`<div class="snap-field"><div class="snap-lbl">Package</div><div class="snap-val">${e(s.package_name)}</div></div>`:''}
+          <div class="snap-field"><div class="snap-lbl">Received</div><div class="snap-val">${origDate}</div></div>
+          <div class="snap-field"><div class="snap-lbl">Verified</div><div class="snap-val">${s.verified_phone?'✓ WhatsApp':'✗ WhatsApp'} ${s.verified_email?'✓ Email':'✗ Email'}</div></div>
+          ${s.quoted_amount?`<div class="snap-field"><div class="snap-lbl">Quoted (₹)</div><div class="snap-val">${e(String(s.quoted_amount))}</div></div>`:''}
+        </div>
+        ${msgSection}
+        ${s.notes?`<div class="drw-hr"></div><div class="snap-lbl" style="margin-bottom:.35rem">Notes at merge</div><div class="snap-msg">${e(s.notes)}</div>`:''}
+      </div>`
+    }).join('')
+
+    document.getElementById('drw-body').innerHTML =
+      `<div class="drw-panel active" id="drw-panel-0">${primaryPanelHTML}</div>` +
+      snapshotPanels
+  }
   document.getElementById('drw-actions').innerHTML = `
     ${lead.phone?`<button class="drw-btn drw-wa" onclick="waLink('${e(lead.phone)}','${e(lead.name||'')}','${e(lead.package_name||'')}','${lead.id}')">💬 WhatsApp</button>`:''}
     ${lead.email?`<button class="drw-btn drw-book" style="background:rgba(119,174,248,.07);border-color:rgba(119,174,248,.22);color:var(--blue)" onclick="openEmailModal('${lead.id}')">✉ Email</button>`:''}
@@ -2833,7 +3130,32 @@ async function logInteraction(leadId) {
 function closeDrawer() {
   document.getElementById('drw-overlay').classList.remove('open')
   document.getElementById('drw').classList.remove('open')
+  const slot = document.getElementById('drw-tabs-slot')
+  if (slot) { slot.innerHTML = ''; slot.style.display = 'none' }
   ACTIVE_LEAD = null
+}
+
+// Extract a short destination label from a lead for drawer tabs
+function _leadTabLabel(lead) {
+  if (lead.message) {
+    for (const part of lead.message.split('|')) {
+      const idx = part.indexOf(':')
+      if (idx === -1) continue
+      const k = part.slice(0, idx).trim().toLowerCase()
+      const v = part.slice(idx + 1).trim()
+      if ((k === 'destination' || k === 'package') && v) return v
+    }
+  }
+  return lead.package_name || SRC[lead.source] || lead.source || 'Enquiry'
+}
+
+function switchMergeTab(index) {
+  document.querySelectorAll('#drw-snap-tabs .drw-tab').forEach((t, i) => t.classList.toggle('active', i === index))
+  document.querySelectorAll('#drw-body .drw-panel').forEach((p, i) => p.classList.toggle('active', i === index))
+  const drwBody = document.getElementById('drw-body')
+  if (drwBody) drwBody.scrollTop = 0
+  const drwTabsSlot = document.getElementById('drw-tabs-slot')
+  if (drwTabsSlot) drwTabsSlot.scrollTop = 0
 }
 async function saveNotes(id) {
   const notes = document.getElementById('drw-notes-ta').value

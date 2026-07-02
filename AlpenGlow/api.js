@@ -69,6 +69,19 @@
     sessionStorage.setItem('ag_verified', '1')
   }
 
+  // Inject thin global scrollbar style on every page
+  ;(function () {
+    var s = document.createElement('style')
+    s.textContent =
+      'html::-webkit-scrollbar{width:4px}' +
+      'html::-webkit-scrollbar-track{background:transparent}' +
+      'html::-webkit-scrollbar-thumb{background:transparent;border-radius:4px;transition:background .2s}' +
+      'html:hover::-webkit-scrollbar-thumb{background:rgba(0,0,0,.55)}' +
+      'html:hover::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.8)}' +
+      'html{scrollbar-width:thin;scrollbar-color:transparent transparent}'
+    document.head.appendChild(s)
+  })()
+
   // Dev mode: auto-unlock gates and hide blur overlays on page load
   if (DEV_MODE) {
     markVerified()   // ensure ag_verified is set so compass.html + compass.js see it
