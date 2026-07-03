@@ -41,7 +41,7 @@
     { id:'mountains', label:'Mountains',             sub:'Peaks & crisp air',            img: UNS('photo-1506905925346-21bda4d32df4') },
     { id:'cultural',  label:'Cultural / Heritage',  sub:'History & traditions',         img: UNS('photo-1524492412937-b28074a5d7da') },
     { id:'adventure', label:'Adventure & Wildlife',  sub:'Thrills, nature & the wild',  img: UNS('photo-1551632811-561732d1e306') },
-    { id:'honeymoon', label:'Honeymoon / Romantic',  sub:'Just the two of you',         img: UNS('photo-1530103862676-de8c9debad1d') },
+    { id:'honeymoon', label:'Honeymoon / Romantic',  sub:'Just the two of you',         img: UNS('photo-1519307212971-dd9561667ffb') },
   ];
 
   /* Vibe backgrounds — full-screen hero on hover / select */
@@ -50,7 +50,7 @@
     mountains: UNS('photo-1506905925346-21bda4d32df4', 1920),
     cultural:  UNS('photo-1524492412937-b28074a5d7da', 1920),
     adventure: UNS('photo-1551632811-561732d1e306',    1920),
-    honeymoon: UNS('photo-1530103862676-de8c9debad1d', 1920),
+    honeymoon: UNS('photo-1519307212971-dd9561667ffb', 1920),
   };
 
   /* Destinations — vibes[] drives ordering in step 2
@@ -382,6 +382,7 @@
   <div id="tp-bg-a" class="tp-bg tp-bg-visible"></div>
   <div id="tp-bg-b" class="tp-bg tp-bg-hidden"></div>
   <div id="tp-veil"></div>
+  <div id="tp-glow"></div>
 
   <div id="tp-progress"><div id="tp-progress-fill"></div></div>
   <button id="tp-close" aria-label="Close trip planner" onclick="window.__tpClose&&window.__tpClose()">✕</button>
@@ -433,6 +434,20 @@
     _confirm.querySelector('.tp-confirm-close').onclick = _close;
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && _root && _root.classList.contains('tp-open')) _close();
+    });
+    _bindMouseGlow();
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     MOUSE-FOLLOWING AMBIENT GLOW
+     ───────────────────────────────────────────────────────────── */
+  function _bindMouseGlow() {
+    var glow = document.getElementById('tp-glow');
+    if (!glow || !_root) return;
+    _root.addEventListener('mousemove', function (e) {
+      var rect = _root.getBoundingClientRect();
+      _root.style.setProperty('--gx', (e.clientX - rect.left) + 'px');
+      _root.style.setProperty('--gy', (e.clientY - rect.top) + 'px');
     });
   }
 
