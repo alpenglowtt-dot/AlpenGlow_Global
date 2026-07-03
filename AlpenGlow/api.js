@@ -73,12 +73,8 @@
   ;(function () {
     var s = document.createElement('style')
     s.textContent =
-      'html::-webkit-scrollbar{width:4px}' +
-      'html::-webkit-scrollbar-track{background:transparent}' +
-      'html::-webkit-scrollbar-thumb{background:transparent;border-radius:4px;transition:background .2s}' +
-      'html:hover::-webkit-scrollbar-thumb{background:rgba(0,0,0,.55)}' +
-      'html:hover::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.8)}' +
-      'html{scrollbar-width:thin;scrollbar-color:transparent transparent}'
+      'html::-webkit-scrollbar{width:0;background:transparent}' +
+      'html{scrollbar-width:none}'
     document.head.appendChild(s)
   })()
 

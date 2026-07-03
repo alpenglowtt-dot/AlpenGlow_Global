@@ -2525,32 +2525,37 @@ async function loadTodayFollowUps() {
   try {
     const todayStart = new Date(); todayStart.setHours(0,0,0,0)
     const todayEnd = new Date(); todayEnd.setHours(23,59,59,999)
-    const r = await fetch(
-      `${SB_URL}/rest/v1/follow_ups?done=eq.false&due_at=gte.${todayStart.toISOString()}&due_at=lte.${todayEnd.toISOString()}&select=*,leads(name)&order=due_at.asc`,
-      { headers: H }
-    )
-    if (!r.ok) {
-      // Table may not exist yet
+
+    // Fetch today's and overdue follow-ups without a join — look up lead names from ALL
+    const [rToday, rOver] = await Promise.all([
+      fetch(`${SB_URL}/rest/v1/follow_ups?done=eq.false&due_at=gte.${todayStart.toISOString()}&due_at=lte.${todayEnd.toISOString()}&select=*&order=due_at.asc`, { headers: H }),
+      fetch(`${SB_URL}/rest/v1/follow_ups?done=eq.false&due_at=lt.${todayStart.toISOString()}&select=*&order=due_at.asc`, { headers: H })
+    ])
+
+    if (!rToday.ok && !rOver.ok) {
       document.getElementById('s-overdue').textContent = '—'
       return
     }
-    const fus = await r.json()
-    // Also get overdue (past due, not done)
-    const ro = await fetch(
-      `${SB_URL}/rest/v1/follow_ups?done=eq.false&due_at=lt.${todayStart.toISOString()}&select=*,leads(name)&order=due_at.asc`,
-      { headers: H }
-    )
-    const overdue = ro.ok ? await ro.json() : []
-    const allDue = [...overdue, ...fus]
+
+    const fus     = rToday.ok ? await rToday.json() : []
+    const overdue = rOver.ok  ? await rOver.json()  : []
+    const allDue  = [...overdue, ...fus]
+
     document.getElementById('s-overdue').textContent = overdue.length
     document.getElementById('s-overdue-badge').textContent = overdue.length > 0 ? `${overdue.length} Overdue` : 'Due Today'
+
     const panel = document.getElementById('today-panel')
-    const list = document.getElementById('tp-list')
+    const list  = document.getElementById('tp-list')
     if (allDue.length === 0) { panel.classList.remove('show'); return }
     panel.classList.add('show')
+
+    // Build a quick lookup from already-loaded leads
+    const leadMap = {}
+    ALL.forEach(l => { leadMap[String(l.id)] = l.name || 'Lead' })
+
     list.innerHTML = allDue.map(f => {
       const isOverdue = new Date(f.due_at) < todayStart
-      const name = (f.leads && f.leads.name) ? f.leads.name : 'Lead'
+      const name    = leadMap[String(f.lead_id)] || 'Lead'
       const timeStr = new Date(f.due_at).toLocaleString('en-IN', { hour:'2-digit', minute:'2-digit', day:'numeric', month:'short' })
       return `<div class="tp-item${isOverdue?' overdue':''}" onclick="openDrawer('${f.lead_id}')">
         <div class="tp-name">${e(name)}</div>
@@ -2559,6 +2564,7 @@ async function loadTodayFollowUps() {
       </div>`
     }).join('')
   } catch(err) {
+    console.error('[follow-ups]', err)
     document.getElementById('s-overdue').textContent = '—'
   }
 }
@@ -2896,19 +2902,34 @@ function renderFollowUpList(fus, leadId) {
   }).join('')
 }
 async function addFollowUp(leadId) {
-  const note = document.getElementById('fu-note-'+leadId).value.trim()
-  const due = document.getElementById('fu-due-'+leadId).value
+  const noteEl = document.getElementById('fu-note-'+leadId)
+  const dueEl  = document.getElementById('fu-due-'+leadId)
+  const note   = noteEl.value.trim()
+  const due    = dueEl.value
   if (!due) { showToast('Please select a date/time', 'err'); return }
   try {
-    await fetch(`${SB_URL}/rest/v1/follow_ups`, {
+    const r = await fetch(`${SB_URL}/rest/v1/follow_ups`, {
       method: 'POST',
       headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
       body: JSON.stringify({ lead_id: leadId, note: note||'Follow up', due_at: new Date(due).toISOString() })
     })
+    if (!r.ok) { const err = await r.text(); throw new Error(err) }
     showToast('Follow-up scheduled', 'ok')
+    // Clear inputs
+    noteEl.value = ''; dueEl.value = ''
+    // Refresh just the follow-up list in place — no full drawer re-open
+    const fus = await loadFollowUpsForLead(leadId)
+    const listEl = document.getElementById('fu-list-'+leadId)
+    if (listEl) listEl.innerHTML = renderFollowUpList(fus, leadId)
+    // Refresh the today panel + stats
+    loadTodayFollowUps()
     await logActivity(leadId, 'note', `Follow-up scheduled for ${due}`)
-    openDrawer(leadId)
-  } catch(e) { showToast('Failed to save follow-up', 'err') }
+    // Refresh timeline in place
+    const updatedActs = await loadActivities(leadId)
+    const tlEl = document.getElementById('tl-'+leadId)
+    const lead = ALL.find(l => String(l.id) === String(leadId))
+    if (tlEl && lead) tlEl.innerHTML = renderActivityTimeline(updatedActs.filter(a => a.type !== 'merged_snapshot'), lead)
+  } catch(e) { showToast('Failed to save follow-up: ' + (e.message||''), 'err') }
 }
 async function toggleFollowUp(fuId, leadId, done) {
   try {

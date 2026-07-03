@@ -291,6 +291,66 @@ nav.scrolled .nav-cta {
 .reviews-nav button { width: 48px; height: 48px; border-radius: 50%; background: var(--white); border: 1.5px solid var(--dark); color: var(--dark); font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s var(--ease-out); }
 .reviews-nav button:hover { background: var(--dark); color: var(--white); }
 
+/* === COMPASS CTA === */
+#compass-cta {
+  padding: 6rem 3rem;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+#compass-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(239,126,25,.13), transparent 70%);
+  pointer-events: none;
+}
+.compass-cta-icon {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: rgba(239,126,25,.12);
+  border: 1.5px solid rgba(239,126,25,.3);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin: 0 auto 2rem;
+  color: var(--orange);
+  box-shadow: 0 0 32px rgba(239,126,25,.18);
+}
+.compass-cta-icon svg { width: 32px; height: 32px; }
+.compass-cta-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--orange-light); margin-bottom: 1.2rem;
+}
+.compass-cta-tag::before, .compass-cta-tag::after {
+  content: ''; display: block; width: 28px; height: 1px; background: var(--orange-light); opacity: .5;
+}
+.compass-cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500; color: var(--white);
+  line-height: 1.2; margin-bottom: 1.1rem;
+}
+.compass-cta-title em { color: var(--orange); font-style: italic; }
+.compass-cta-sub {
+  font-size: .95rem; color: rgba(255,255,255,.55);
+  max-width: 520px; margin: 0 auto 2.8rem; line-height: 1.7;
+}
+.compass-cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 36px;
+  background: var(--orange);
+  color: #181818; font-weight: 700; font-size: .95rem; letter-spacing: .02em;
+  border-radius: 50px; text-decoration: none;
+  box-shadow: 0 6px 28px rgba(239,126,25,.38);
+  transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+}
+.compass-cta-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 36px rgba(239,126,25,.55);
+}
+.compass-cta-btn svg { width: 18px; height: 18px; }
+
 /* === CONTACT === */
 #contact { padding: 7rem 3rem; background: var(--dark); position: relative; }
 #contact .section-tag { color: var(--orange-light); }
@@ -318,9 +378,9 @@ nav.scrolled .nav-cta {
 .form-success .check { font-size: 3rem; margin-bottom: 1rem; display: block; }
 
 /* === FOOTER === */
-footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255,255,255,0.35); font-size: 0.78rem; }
+footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 3rem; text-align: center; color: rgba(255,255,255,0.35); font-size: 0.78rem; }
 .footer-logo { display: flex; justify-content: center; align-items: center; gap: 2rem; margin-bottom: 1rem; }
-.footer-logo img { width: auto; opacity: 0.7; }
+.footer-logo img { width: auto; opacity: 1; }
 .footer-logo img:first-child { height: 100px; }
 .footer-logo img:last-child { height: 70px; }
 .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
@@ -426,7 +486,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
   .nav-links.open { display: flex; }
   .nav-links a { font-size: 1.05rem; }
   .mobile-toggle { display: flex; z-index: 1001; }
-  #packages, #offers, #blog, #reviews, #contact { padding: 4rem 1.5rem; }
+  #packages, #offers, #blog, #reviews, #compass-cta, #contact { padding: 4rem 1.5rem; }
   .packages-grid { grid-template-columns: 1fr; }
   .offer-card { flex: 0 0 300px; }
   .blog-card { flex: 0 0 300px; }
@@ -452,7 +512,7 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
   .nav-logo img { height: 60px; }
 
   /* Section padding */
-  #packages, #offers, #blog, #reviews, #contact { padding: 3rem 1rem; }
+  #packages, #offers, #blog, #reviews, #compass-cta, #contact { padding: 3rem 1rem; }
 
   /* Recognitions section */
   #recognitions { padding: 3rem 1rem !important; }
@@ -815,6 +875,24 @@ footer { background: #0f0f0f; padding: 3rem; text-align: center; color: rgba(255
     <button onclick="scrollReviews(-1)" aria-label="Previous">←</button>
     <button onclick="scrollReviews(1)" aria-label="Next">→</button>
   </div>
+</section>
+
+<!-- COMPASS CTA -->
+<section id="compass-cta" class="reveal">
+  <div class="compass-cta-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+    </svg>
+  </div>
+  <div class="compass-cta-tag">AI Trip Planner</div>
+  <h2 class="compass-cta-title">Not Sure Where to <em>Begin?</em></h2>
+  <p class="compass-cta-sub">COMPASS is AlpenGlow's intelligent travel assistant — answer a few quick questions and get a personalised destination and package recommendation instantly.</p>
+  <a href="compass.html" class="compass-cta-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+    </svg>
+    Plan My Trip with COMPASS
+  </a>
 </section>
 
 <!-- CONTACT -->

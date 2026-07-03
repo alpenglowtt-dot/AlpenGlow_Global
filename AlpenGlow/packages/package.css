@@ -1,11 +1,7 @@
 /* === RESET & VARIABLES (shared with main site) === */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html::-webkit-scrollbar{width:4px}
-html::-webkit-scrollbar-track{background:transparent}
-html::-webkit-scrollbar-thumb{background:transparent;border-radius:4px;transition:background .2s}
-html:hover::-webkit-scrollbar-thumb{background:rgba(0,0,0,.55)}
-html:hover::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.8)}
-html{scrollbar-width:thin;scrollbar-color:transparent transparent}
+html::-webkit-scrollbar{width:0;background:transparent}
+html{scrollbar-width:none}
 :root {
   --red: #9d2420;
   --red-dark: #7a1c19;
