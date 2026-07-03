@@ -264,6 +264,37 @@ html, body { height: 100%; background: var(--dark); color: var(--white); font-fa
   .dev-header { padding: .75rem 1rem }
   .dev-main { padding: 1.4rem 1rem }
 }
+
+/* ── FEATURE FLAGS SECTION ── */
+.ff-section-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.6rem }
+.ff-section-title { font-family:var(--font-display); font-size:1.2rem; font-weight:400; color:var(--white) }
+.ff-section-sub { font-size:.75rem; color:rgba(255,255,255,.35); margin-top:.2rem }
+.ff-group { margin-bottom:1.4rem }
+.ff-group-label { font-size:.65rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--orange); margin-bottom:.7rem; padding-bottom:.4rem;
+  border-bottom:1px solid rgba(239,126,25,.15) }
+.ff-item { display:flex; align-items:center; gap:.9rem; padding:.6rem .8rem;
+  border-radius:10px; border:1px solid rgba(255,255,255,.04); background:rgba(255,255,255,.02);
+  margin-bottom:.35rem; transition:background .15s }
+.ff-item:hover { background:rgba(255,255,255,.04) }
+.ff-item-info { flex:1; min-width:0 }
+.ff-item-label { font-size:.84rem; color:var(--white); font-weight:500 }
+.ff-item-sub { font-size:.7rem; color:rgba(255,255,255,.38); margin-top:.1rem }
+.ff-toggle { width:36px; height:20px; border-radius:10px; border:none; cursor:pointer;
+  position:relative; transition:background .2s; flex-shrink:0 }
+.ff-toggle.on  { background:rgba(79,211,154,.5) }
+.ff-toggle.off { background:rgba(255,255,255,.12) }
+.ff-toggle::after { content:''; position:absolute; top:2px; width:16px; height:16px;
+  border-radius:50%; background:var(--white); transition:left .2s }
+.ff-toggle.on::after  { left:18px }
+.ff-toggle.off::after { left:2px }
+.ff-reset-btn { font-size:.72rem; color:rgba(255,255,255,.35); background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08); border-radius:8px; padding:.35rem .75rem; cursor:pointer; transition:all .2s }
+.ff-reset-btn:hover { color:var(--white); background:rgba(255,255,255,.1) }
+.ff-saved-badge { font-size:.65rem; color:rgba(79,211,154,.8); background:rgba(79,211,154,.08);
+  border:1px solid rgba(79,211,154,.2); border-radius:6px; padding:.15rem .5rem;
+  opacity:0; transition:opacity .3s; margin-left:.5rem }
+.ff-saved-badge.show { opacity:1 }
 </style>
 </head>
 <body>
@@ -361,6 +392,21 @@ html, body { height: 100%; background: var(--dark); color: var(--white); font-fa
         Slug must match the HTML filename — e.g. <strong style="color:rgba(255,255,255,.4)">"japan"</strong> for packages/japan.html
       </div>
       <div id="pages-list"><div class="empty-note">Loading…</div></div>
+    </div>
+
+    <!-- FEATURE FLAGS -->
+    <div class="content-block">
+      <div class="ff-section-head">
+        <div>
+          <div class="ff-section-title">Dashboard Features</div>
+          <div class="ff-section-sub">Toggle which features are visible and active in the Owner Dashboard. Saved instantly to this browser.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.7rem">
+          <span class="ff-saved-badge" id="ff-saved-badge">✓ Saved</span>
+          <button class="ff-reset-btn" onclick="ffResetAll()">Reset All</button>
+        </div>
+      </div>
+      <div id="ff-body"></div>
     </div>
 
   </main>
@@ -549,6 +595,7 @@ async function loadAll() {
   renderDests()
   renderPkgs()
   renderPages()
+  ffRender()
   setSaveStatus('saving', 'Writing files…')
   const justOpened = _isFirstLoad
   _isFirstLoad = false
@@ -1780,6 +1827,125 @@ function setSaveStatus(state, text) {
 
 // ── BOOT ─────────────────────────────────────────────────────
 // Auth re-check on DOMContentLoaded is now handled in the login() function above
+
+// ── FEATURE FLAGS ─────────────────────────────────────────────
+const FF_KEY = 'ag_ff'
+
+const FF_GROUPS = [
+  { group: 'Stats & Overview', items: [
+    { key: 'total_leads',          label: 'Total Leads',          sub: 'count of all leads' },
+    { key: 'todays_leads',         label: "Today's Leads",        sub: 'leads received today' },
+    { key: 'pending',              label: 'Pending',              sub: 'leads not yet contacted/closed' },
+    { key: 'booked',               label: 'Booked',               sub: 'confirmed bookings count' },
+    { key: 'pipeline_value',       label: 'Pipeline Value',       sub: 'total quoted amount across quoted leads' },
+    { key: 'revenue',              label: 'Revenue',              sub: 'total final amount from booked + paid leads' },
+    { key: 'overdue_followups',    label: 'Overdue Follow-ups',   sub: 'count of missed follow-up tasks' },
+    { key: 'live_clock',           label: 'Live Clock',           sub: 'real-time clock in the header' },
+  ]},
+  { group: 'Lead Table (List View)', items: [
+    { key: 'search',                   label: 'Search',                   sub: 'by name, email, phone, source' },
+    { key: 'status_filter',            label: 'Status Filter',            sub: 'New / Contacted / Quoted / Booked / Cancelled' },
+    { key: 'source_filter',            label: 'Source Filter',            sub: 'Contact Form / Package Page / Offer OTP / Blog Gate / Trip Planner / COMPASS Bot' },
+    { key: 'date_range_filter',        label: 'Date Range Filter',        sub: 'From / To date picker' },
+    { key: 'quick_date_presets',       label: 'Quick Date Presets',       sub: 'Today / 7 days / 30 days / 90 days' },
+    { key: 'pagination',               label: 'Pagination',               sub: 'page-by-page navigation' },
+    { key: 'inline_status_dropdown',   label: 'Inline Status Dropdown',   sub: 'change lead status directly from the row' },
+    { key: 'whatsapp_button',          label: 'WhatsApp Button',          sub: 'opens pre-filled WhatsApp chat for the lead' },
+    { key: 'duplicate_detection_chip', label: 'Duplicate Detection Chip', sub: 'highlights leads with matching phone numbers' },
+  ]},
+  { group: 'Kanban Board (Grid View)', items: [
+    { key: 'kanban_board',       label: 'Drag-and-drop cards across columns', sub: 'New → Contacted → Quoted → Booked → Cancelled' },
+    { key: 'column_lead_counts', label: 'Column lead counts per status',      sub: '' },
+    { key: 'view_toggle',        label: 'Toggle between List and Kanban views', sub: '' },
+  ]},
+  { group: 'Bulk Actions', items: [
+    { key: 'bulk_select',        label: 'Select All / individual checkboxes',      sub: '' },
+    { key: 'bulk_status_change', label: 'Bulk Status Change',                      sub: 'set status on multiple leads at once' },
+    { key: 'bulk_delete',        label: 'Bulk Delete',                             sub: '' },
+    { key: 'csv_export',         label: 'CSV Export',                              sub: 'export selected or all filtered leads' },
+  ]},
+  { group: 'Duplicate Management', items: [
+    { key: 'auto_detect_duplicates', label: 'Auto-detect duplicates by phone number', sub: '' },
+    { key: 'merge_modal',            label: 'Merge Modal',                             sub: 'pick a primary lead, merge duplicates into it, stores deleted leads as snapshots' },
+  ]},
+  { group: 'Lead Detail Drawer', items: [
+    { key: 'full_lead_info',       label: 'Full lead info',         sub: 'name, phone, email, source, package, status, date, expected price' },
+    { key: 'duplicate_tabs',       label: 'Duplicate tabs',         sub: 'if the lead has duplicates, each shows as a separate tab' },
+    { key: 'merged_snapshot_tabs', label: 'Merged snapshot tabs',   sub: 'after merging, each absorbed lead has its own read-only tab' },
+    { key: 'notes',                label: 'Notes',                  sub: 'private freetext notes with save button' },
+    { key: 'quote_revenue',        label: 'Quote & Revenue fields', sub: 'Quoted Amount + Final Amount with save' },
+    { key: 'add_interaction',      label: 'Add Interaction',        sub: 'log a call/email/meeting/WhatsApp with a note' },
+    { key: 'activity_timeline',    label: 'Activity Timeline',      sub: 'full history of all interactions and status changes' },
+    { key: 'followup_tasks',       label: 'Follow-up Tasks',        sub: 'add tasks with due date + description, mark done/undone' },
+    { key: 'send_email',           label: 'Send Email',             sub: 'compose and send an email to the lead from within the drawer' },
+    { key: 'chat_log',             label: 'Chat Log (COMPASS Bot leads)', sub: 'shows the full conversation transcript' },
+  ]},
+  { group: 'Saved Filters', items: [
+    { key: 'save_filter',         label: 'Save current filter',  sub: 'name and store any combination of filters' },
+    { key: 'apply_saved_filter',  label: 'Apply saved filter',   sub: 'one-click chips to restore a saved filter' },
+    { key: 'delete_saved_filter', label: 'Delete saved filter',  sub: '' },
+  ]},
+  { group: 'Charts', items: [
+    { key: 'lead_volume_chart',      label: 'Lead Volume chart',      sub: 'leads over time (bar/line)' },
+    { key: 'source_breakdown_chart', label: 'Source Breakdown chart', sub: 'leads by source (pie/doughnut)' },
+  ]},
+  { group: "Today's Follow-ups Panel", items: [
+    { key: 'todays_followups_panel', label: "Today's Follow-ups Panel", sub: 'pinned panel at the top showing all follow-up tasks due today across all leads, with quick navigation to the relevant lead' },
+  ]},
+  { group: 'Other', items: [
+    { key: 'login_gate',          label: 'Login gate',          sub: 'password-protected access' },
+    { key: 'logout',              label: 'Logout',              sub: '' },
+    { key: 'toast_notifications', label: 'Toast notifications', sub: 'success/error/info feedback for all actions' },
+    { key: 'email_modal',         label: 'Email compose modal', sub: 'send emails directly to leads' },
+  ]},
+]
+
+function ffLoad() {
+  try { return JSON.parse(localStorage.getItem(FF_KEY) || '{}') } catch { return {} }
+}
+function ffSave(flags) {
+  localStorage.setItem(FF_KEY, JSON.stringify(flags))
+  const badge = document.getElementById('ff-saved-badge')
+  if (badge) { badge.classList.add('show'); setTimeout(() => badge.classList.remove('show'), 1800) }
+}
+function ffRender() {
+  const flags = ffLoad()
+  const body = document.getElementById('ff-body')
+  if (!body) return
+  body.innerHTML = FF_GROUPS.map(({ group, items }) => `
+    <div class="ff-group">
+      <div class="ff-group-label">${group}</div>
+      ${items.map(({ key, label, sub }) => {
+        const on = flags[key] !== false
+        return `<div class="ff-item">
+          <div class="ff-item-info">
+            <div class="ff-item-label">${label}</div>
+            ${sub ? `<div class="ff-item-sub">${sub}</div>` : ''}
+          </div>
+          <button class="ff-toggle ${on?'on':'off'}" onclick="ffToggle('${key}')" title="${on?'Active — click to disable':'Inactive — click to enable'}"></button>
+        </div>`
+      }).join('')}
+    </div>
+  `).join('')
+}
+function ffToggle(key) {
+  const flags = ffLoad()
+  flags[key] = flags[key] === false ? true : false
+  ffSave(flags)
+  ffRender()
+}
+function ffResetAll() {
+  const flags = {}
+  FF_GROUPS.forEach(g => g.items.forEach(i => { flags[i.key] = true }))
+  ffSave(flags)
+  ffRender()
+}
+
+// Render on load (called after login in the existing loadAll flow)
+document.addEventListener('DOMContentLoaded', () => {
+  // Render FF section — it might not be visible yet (before login), that's fine
+  ffRender()
+})
 </script>
 <div id="dev-toast"></div>
 </body>

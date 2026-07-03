@@ -1739,6 +1739,44 @@ box-shadow:
 .btn-log-int{padding:.6rem 1rem;border-radius:9px;font-size:.8rem;font-weight:600;background:rgba(119,174,248,.08);border:1px solid rgba(119,174,248,.22);color:var(--blue);transition:all .18s;cursor:pointer;white-space:nowrap}
 .btn-log-int:hover{background:rgba(119,174,248,.18)}
 .int-type-icon{font-size:.85rem}
+
+/* ── FEATURE FLAGS ─────────────────────────────────────────── */
+body.ff-off-total_leads      .stat-card:has(#s-total)    {display:none!important}
+body.ff-off-todays_leads     .stat-card:has(#s-today)    {display:none!important}
+body.ff-off-pending          .stat-card:has(#s-pending)  {display:none!important}
+body.ff-off-booked           .stat-card:has(#s-booked)   {display:none!important}
+body.ff-off-pipeline_value   .stat-card:has(#s-pipeline) {display:none!important}
+body.ff-off-revenue          .stat-card:has(#s-revenue)  {display:none!important}
+body.ff-off-overdue_followups .stat-card:has(#s-overdue) {display:none!important}
+body.ff-off-live_clock       #live-clock                 {display:none!important}
+body.ff-off-search           .search-wrap                {display:none!important}
+body.ff-off-status_filter    .select-wrap:has(#f-status) {display:none!important}
+body.ff-off-source_filter    .select-wrap:has(#f-source) {display:none!important}
+body.ff-off-date_range_filter .date-range-wrap           {display:none!important}
+body.ff-off-quick_date_presets .date-pills               {display:none!important}
+body.ff-off-pagination       #leads-pagination           {display:none!important}
+body.ff-off-view_toggle      .view-toggle                {display:none!important}
+body.ff-off-kanban_board     #btn-kanban-view            {display:none!important}
+body.ff-off-kanban_board     #kanban-section             {display:none!important}
+body.ff-off-column_lead_counts .kanban-col-count         {display:none!important}
+body.ff-off-duplicate_detection_chip #dup-chip           {display:none!important}
+body.ff-off-auto_detect_duplicates   #dup-chip           {display:none!important}
+body.ff-off-merge_modal      .btn-merge-lead             {display:none!important}
+body.ff-off-bulk_select      .cb-lead                    {display:none!important}
+body.ff-off-bulk_select      #leads-table th:first-child {display:none!important}
+body.ff-off-bulk_select      #leads-table td:first-child {display:none!important}
+body.ff-off-bulk_status_change .bulk-status-btn          {display:none!important}
+body.ff-off-bulk_delete      .bulk-del-btn               {display:none!important}
+body.ff-off-csv_export       .bulk-csv-btn               {display:none!important}
+body.ff-off-save_filter      .btn-save-filter            {display:none!important}
+body.ff-off-apply_saved_filter #saved-filters-row        {display:none!important}
+body.ff-off-delete_saved_filter .sf-del                  {display:none!important}
+body.ff-off-lead_volume_chart .chart-card:has(#chart-vol){display:none!important}
+body.ff-off-source_breakdown_chart .chart-card:has(#chart-src){display:none!important}
+body.ff-off-todays_followups_panel #today-panel          {display:none!important}
+body.ff-off-logout           .btn-logout                 {display:none!important}
+body.ff-off-toast_notifications #toast-container         {display:none!important}
+body.ff-off-email_modal      #email-modal-backdrop       {display:none!important}
 </style>
 </head>
 <body>
@@ -2204,6 +2242,18 @@ const SB_URL = 'https://yexrmmhadfscormovskn.supabase.co'
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlleHJtbWhhZGZzY29ybW92c2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNjg0NzYsImV4cCI6MjA5Nzk0NDQ3Nn0.vxkcZDdTfE0qDxW8YwsnbGsLaaSUfwgZ78nQicq2Uoc'
 const H = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
 
+// ── FEATURE FLAGS ──────────────────────────────────────
+let FLAGS = {}
+function loadFF() {
+  try { FLAGS = JSON.parse(localStorage.getItem('ag_ff') || '{}') } catch { FLAGS = {} }
+  // Remove all existing ff-off-* classes first
+  document.body.className = document.body.className.replace(/\bff-off-\S+/g, '').trim()
+  Object.keys(FLAGS).forEach(k => {
+    if (FLAGS[k] === false) document.body.classList.add('ff-off-' + k)
+  })
+}
+function flag(key) { return FLAGS[key] !== false }
+
 // ── STATE ──────────────────────────────────────────────
 let ALL = [], FILTERED = [], DAY_FILTER = 0, ACTIVE_LEAD = null
 let PAGE = 0, CURRENT_VIEW = 'list'
@@ -2240,6 +2290,7 @@ if (sessionStorage.getItem('ag_auth') === '1') {
 }
 
 function init() {
+  loadFF()
   startClock()
   loadLeads()
   loadSavedFilters()
@@ -2982,7 +3033,7 @@ async function openDrawer(id) {
       return `<div class="drw-field"><div class="drw-lbl">${e(key)}</div><div class="drw-val">${e(val)}</div></div>`
     }).join('')
     // For compass_bot: show conversation log as a collapsible section
-    if (lead.source === 'compass_bot' && convoLog) {
+    if (flag('chat_log') && lead.source === 'compass_bot' && convoLog) {
       infoFields += `<div class="drw-field" style="grid-column:1/-1"><div class="drw-lbl">Chat Log</div><div class="drw-val" style="white-space:pre-wrap;line-height:1.7;font-size:.8rem;color:var(--muted);max-height:200px;overflow-y:auto;background:rgba(0,0,0,.18);border-radius:8px;padding:.6rem .8rem">${e(convoLog)}</div></div>`
     }
   }
@@ -3004,9 +3055,7 @@ async function openDrawer(id) {
     .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
   const realActivities = activities.filter(a => a.type !== 'merged_snapshot')
 
-  const primaryPanelHTML = `
-    <div class="drw-info-grid">${infoFields}</div>
-    ${msgBlock}
+  const _secRevenue = flag('quote_revenue') ? `
     <div class="drw-hr"></div>
     <div class="drw-lbl" style="margin-bottom:.5rem">Quote & Revenue</div>
     <div class="rev-row">
@@ -3019,13 +3068,17 @@ async function openDrawer(id) {
         <input class="rev-input" id="rev-final-${lead.id}" type="number" placeholder="0" value="${lead.final_amount||''}">
       </div>
     </div>
-    <button class="btn-save" style="margin-top:.6rem" onclick="saveRevenue('${lead.id}')">Save Revenue</button>
+    <button class="btn-save" style="margin-top:.6rem" onclick="saveRevenue('${lead.id}')">Save Revenue</button>` : ''
+
+  const _secNotes = flag('notes') ? `
     <div class="drw-hr"></div>
     <div class="drw-notes-section">
       <div class="drw-lbl">Internal Notes</div>
       <textarea class="drw-notes" id="drw-notes-ta" placeholder="Add private notes about this lead…">${e(lead.notes||'')}</textarea>
       <button class="btn-save" onclick="saveNotes('${lead.id}')">Save Notes</button>
-    </div>
+    </div>` : ''
+
+  const _secInteraction = flag('add_interaction') ? `
     <div class="drw-hr"></div>
     <div class="drw-lbl" style="margin-bottom:.6rem">Add Interaction</div>
     <div class="add-int-form">
@@ -3039,14 +3092,16 @@ async function openDrawer(id) {
         <input class="ai-note-input" id="ai-note-${lead.id}" placeholder="What happened?…">
         <button class="btn-log-int" onclick="logInteraction('${lead.id}')">Log</button>
       </div>
-    </div>
+    </div>` : ''
+
+  const _secTimeline = flag('activity_timeline') ? `
     <div class="drw-hr"></div>
     <div class="drw-timeline-section">
       <div class="drw-lbl">Activity Timeline</div>
-      <div class="tl" id="tl-${lead.id}">
-        ${renderActivityTimeline(realActivities, lead)}
-      </div>
-    </div>
+      <div class="tl" id="tl-${lead.id}">${renderActivityTimeline(realActivities, lead)}</div>
+    </div>` : ''
+
+  const _secFollowups = flag('followup_tasks') ? `
     <div class="drw-hr"></div>
     <div class="drw-lbl" style="margin-bottom:.6rem">Follow-up Tasks</div>
     <div class="fu-form">
@@ -3056,14 +3111,23 @@ async function openDrawer(id) {
         <button class="btn-add-fu" onclick="addFollowUp('${lead.id}')">+ Add</button>
       </div>
     </div>
-    <div class="fu-list" id="fu-list-${lead.id}">${renderFollowUpList(followUps, lead.id)}</div>
+    <div class="fu-list" id="fu-list-${lead.id}">${renderFollowUpList(followUps, lead.id)}</div>` : ''
+
+  const primaryPanelHTML = `
+    <div class="drw-info-grid">${infoFields}</div>
+    ${msgBlock}
+    ${_secRevenue}
+    ${_secNotes}
+    ${_secInteraction}
+    ${_secTimeline}
+    ${_secFollowups}
   `
 
   // Build live-duplicate tab bar into dedicated slot (outside overflow container)
   const _freshGroups = findDuplicateGroups(ALL)
   const liveDupGroup = _freshGroups.find(g => g.some(l => String(l.id) === String(id)))
   const tabsSlot = document.getElementById('drw-tabs-slot')
-  if (liveDupGroup && liveDupGroup.length > 1) {
+  if (flag('duplicate_tabs') && liveDupGroup && liveDupGroup.length > 1) {
     const _tbBtns = liveDupGroup.slice().sort((a,b) => new Date(a.created_at)-new Date(b.created_at)).map(gl => {
       const label = _leadTabLabel(gl)
       const isActive = String(gl.id) === String(id)
@@ -3075,7 +3139,7 @@ async function openDrawer(id) {
   } else {
     tabsSlot.innerHTML = ''; tabsSlot.style.display = 'none'
   }
-  if (snapshots.length === 0) {
+  if (!flag('merged_snapshot_tabs') || snapshots.length === 0) {
     document.getElementById('drw-body').innerHTML = primaryPanelHTML
   } else {
     // Inject snapshot tabs into slot (outside overflow container)
@@ -3125,7 +3189,7 @@ async function openDrawer(id) {
   }
   document.getElementById('drw-actions').innerHTML = `
     ${lead.phone?`<button class="drw-btn drw-wa" onclick="waLink('${e(lead.phone)}','${e(lead.name||'')}','${e(lead.package_name||'')}','${lead.id}')">💬 WhatsApp</button>`:''}
-    ${lead.email?`<button class="drw-btn drw-book" style="background:rgba(119,174,248,.07);border-color:rgba(119,174,248,.22);color:var(--blue)" onclick="openEmailModal('${lead.id}')">✉ Email</button>`:''}
+    ${(flag('send_email') && lead.email)?`<button class="drw-btn drw-book" style="background:rgba(119,174,248,.07);border-color:rgba(119,174,248,.22);color:var(--blue)" onclick="openEmailModal('${lead.id}')">✉ Email</button>`:''}
     <button class="drw-btn drw-book" onclick="chStatus(event,'${lead.id}','booked')">✓ Mark Booked</button>
     <button class="drw-btn drw-arch" onclick="chStatus(event,'${lead.id}','cancelled')">Cancel</button>
   `
