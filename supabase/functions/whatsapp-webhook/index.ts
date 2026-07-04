@@ -6,7 +6,7 @@ const ALLOWED_ORIGINS = (
   Deno.env.get('ALLOWED_ORIGINS') ??
   'https://alpenglowglobal.com,https://www.alpenglowglobal.com'
 )
-  .split(',')
+  .split(/[,\s]+/)
   .map((s) => s.trim())
   .filter(Boolean)
 
