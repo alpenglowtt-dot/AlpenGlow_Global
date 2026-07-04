@@ -195,8 +195,11 @@ nav.scrolled .nav-cta {
 .subdest-panel-head h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; color: var(--white); }
 .subdest-close { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.1); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.3s; }
 .subdest-close:hover { background: var(--orange); color: var(--dark); }
-.subdest-scroll { display: flex; gap: 1rem; overflow-x: auto; flex: 1; padding-bottom: 0.5rem; scrollbar-width: none; }
-.subdest-scroll::-webkit-scrollbar { display: none; }
+.subdest-scroll { display: flex; gap: 1rem; overflow-x: auto; flex: 1; padding-bottom: 10px; scrollbar-width: thin; scrollbar-color: rgba(239,126,25,.55) rgba(255,255,255,.07); }
+.subdest-scroll::-webkit-scrollbar { height: 4px; }
+.subdest-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,.07); border-radius: 4px; }
+.subdest-scroll::-webkit-scrollbar-thumb { background: rgba(239,126,25,.55); border-radius: 4px; }
+.subdest-scroll::-webkit-scrollbar-thumb:hover { background: rgba(239,126,25,.85); }
 .subdest-card { flex: 0 0 220px; border-radius: 16px; overflow: hidden; position: relative; height: 100%; transition: transform 0.3s var(--ease-out); }
 .subdest-card:hover { transform: scale(1.03); }
 .subdest-card img { width: 100%; height: 100%; object-fit: cover; }
