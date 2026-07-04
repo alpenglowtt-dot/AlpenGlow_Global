@@ -1,9 +1,26 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+// ── CORS (inlined — dashboard single-file deploys can't resolve relative
+//    imports to _shared/, so this lives in every function instead) ──────
+const ALLOWED_ORIGINS = (
+  Deno.env.get('ALLOWED_ORIGINS') ??
+  'https://alpenglowglobal.com,https://www.alpenglowglobal.com'
+)
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
+
+function corsFor(req: Request): Record<string, string> {
+  const origin = req.headers.get('Origin')
+  const allow =
+    origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  return {
+    'Access-Control-Allow-Origin': allow,
+    'Vary': 'Origin',
+    'Access-Control-Allow-Headers':
+      'authorization, x-client-info, apikey, content-type, x-crm-token',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  }
 }
 
 const SYSTEM_PROMPT = `You are COMPASS, the trip planning assistant for AlpenGlow Global — a boutique luxury travel agency based in Coimbatore, India, specialising in handcrafted journeys through Scandinavia, Europe, South/Southeast Asia, island escapes, and cruise sailings.
@@ -212,6 +229,7 @@ After recommending, offer:
 - ALWAYS end qualifying questions with [OPTIONS]...[/OPTIONS] — never ask a qualifying question without offering clickable choices`
 
 serve(async (req) => {
+  const corsHeaders = corsFor(req)
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders })
 
   try {

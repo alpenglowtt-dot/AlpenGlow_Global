@@ -1,10 +1,46 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+// ── CORS (inlined — dashboard single-file deploys can't resolve relative
+//    imports to _shared/, so this lives in every function instead) ──────
+const ALLOWED_ORIGINS = (
+  Deno.env.get('ALLOWED_ORIGINS') ??
+  'https://alpenglowglobal.com,https://www.alpenglowglobal.com'
+)
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
+
+function corsFor(req: Request): Record<string, string> {
+  const origin = req.headers.get('Origin')
+  const allow =
+    origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  return {
+    'Access-Control-Allow-Origin': allow,
+    'Vary': 'Origin',
+    'Access-Control-Allow-Headers':
+      'authorization, x-client-info, apikey, content-type, x-crm-token',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  }
+}
+
+// ── OTP rate limiter (inlined for the same reason) ────────────────────
+// deno-lint-ignore no-explicit-any
+async function otpRateLimited(sb: any, contact: string, type: 'sms' | 'email'): Promise<string | null> {
+  const now = Date.now()
+  const { count: burst } = await sb
+    .from('otp_verifications').select('id', { count: 'exact', head: true })
+    .eq('contact', contact).eq('type', type)
+    .gte('created_at', new Date(now - 45_000).toISOString())
+  if ((burst ?? 0) >= 1) return 'Please wait a moment before requesting another code.'
+
+  const { count: hourly } = await sb
+    .from('otp_verifications').select('id', { count: 'exact', head: true })
+    .eq('contact', contact).eq('type', type)
+    .gte('created_at', new Date(now - 3_600_000).toISOString())
+  if ((hourly ?? 0) >= 5) return 'Too many codes requested. Please try again later.'
+
+  return null
 }
 
 // Normalise any phone format → 12-digit international (91XXXXXXXXXX)
@@ -18,6 +54,7 @@ function normalisePhone(raw: string): string {
 }
 
 serve(async (req) => {
+  const corsHeaders = corsFor(req)
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
@@ -55,16 +92,27 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     )
 
+    // ── Rate limit (anti-spam / anti-cost-abuse) ──────────────
+    const limited = await otpRateLimited(supabase, normPhone, 'sms')
+    if (limited) {
+      return new Response(
+        JSON.stringify({ error: limited }),
+        { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
     const code      = String(Math.floor(1000 + Math.random() * 9000))
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000).toISOString()
 
-    // Clear previous unverified OTPs for this number
+    // Clear only EXPIRED unverified OTPs (keep recent ones so the
+    // rate limiter above can still see them on the next request).
     await supabase
       .from('otp_verifications')
       .delete()
       .eq('contact', normPhone)
       .eq('type', 'sms')
       .eq('verified', false)
+      .lt('expires_at', new Date().toISOString())
 
     const { error: dbErr } = await supabase
       .from('otp_verifications')

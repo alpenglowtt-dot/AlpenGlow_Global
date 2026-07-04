@@ -191,16 +191,14 @@
         .then(arr => arr.filter(o => o.active !== false).sort((a,b) => (a.sort_order||0)-(b.sort_order||0))).catch(() => [])
     },
 
-    /** Returns true if this phone+code combo already claimed an offer */
+    /** Returns true if this phone+code combo already claimed an offer.
+     *  Goes through the submit-lead Edge Function (service-role) because the
+     *  leads table is not readable with the public anon key. */
     checkOfferClaimed: async (phone, code) => {
       if (DEV_MODE) return false
       try {
-        const r = await fetch(
-          `${SUPABASE_URL}/rest/v1/leads?phone=eq.${encodeURIComponent(phone)}&offer_code=eq.${encodeURIComponent(code)}&select=id`,
-          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
-        )
-        const data = await r.json()
-        return Array.isArray(data) && data.length > 0
+        const r = await callEdge('submit-lead', { action: 'check_offer', phone, offerCode: code })
+        return !!(r && r.claimed)
       } catch { return false }
     },
 

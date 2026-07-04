@@ -51,3 +51,15 @@ verify_jwt = false
 
 [functions.whatsapp-webhook]
 verify_jwt = false
+
+# CRM API — does its own auth via the x-crm-token header (CRM_PASSWORD secret),
+# so JWT verification stays off at the gateway.
+[functions.crm]
+verify_jwt = false
+
+# Staff-only email sender — also gated by the x-crm-token header.
+[functions.send-lead-email]
+verify_jwt = false
+
+[functions.chat-compass]
+verify_jwt = false

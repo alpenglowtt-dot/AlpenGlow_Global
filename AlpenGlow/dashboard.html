@@ -2237,10 +2237,39 @@ Converted
 */
 
 // ── CONFIG ─────────────────────────────────────────────
-const PWD = 'alpenglow2025'
+// Security note: lead/CRM data is NOT reachable with the anon key anymore.
+// All access goes through the authenticated `crm` Edge Function, which checks
+// the CRM password server-side (CRM_PASSWORD secret) and uses the service-role
+// key internally. The anon key below only identifies the project to the gateway.
 const SB_URL = 'https://yexrmmhadfscormovskn.supabase.co'
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlleHJtbWhhZGZzY29ybW92c2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNjg0NzYsImV4cCI6MjA5Nzk0NDQ3Nn0.vxkcZDdTfE0qDxW8YwsnbGsLaaSUfwgZ78nQicq2Uoc'
-const H = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+const CRM_FN = SB_URL + '/functions/v1/crm'
+let CRM_TOKEN = sessionStorage.getItem('ag_crm') || ''
+
+// Single entry point for every CRM data call. The password travels in the
+// x-crm-token header over HTTPS and is verified on the server, never in JS.
+async function crm(action, params = {}) {
+  const r = await fetch(CRM_FN, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SB_KEY,
+      'Authorization': 'Bearer ' + SB_KEY,
+      'x-crm-token': CRM_TOKEN,
+    },
+    body: JSON.stringify({ action, ...params }),
+  })
+  let data = {}
+  try { data = await r.json() } catch (_) {}
+  if (r.status === 401) {
+    CRM_TOKEN = ''
+    sessionStorage.removeItem('ag_crm')
+    sessionStorage.removeItem('ag_auth')
+    throw new Error('Session expired — please log in again')
+  }
+  if (!r.ok) throw new Error(data.error || ('CRM ' + action + ' failed'))
+  return data
+}
 
 // ── FEATURE FLAGS ──────────────────────────────────────
 let FLAGS = {}
@@ -2264,26 +2293,39 @@ let _dragLeadId = null
 let DUP_MODE = false, DUP_GROUPS = [], DUP_IDS = new Set()
 
 // ── AUTH ───────────────────────────────────────────────
-function login() {
+async function login() {
   const input = document.getElementById('pw')
   const err = document.getElementById('login-err')
-  if (input.value === PWD) {
+  const btn = document.querySelector('.btn-login')
+  const val = input.value
+  if (!val) return
+  err.textContent = ''
+  if (btn) { btn.disabled = true; btn.textContent = 'Checking…' }
+  CRM_TOKEN = val
+  try {
+    await crm('auth')                       // server verifies the password
+    sessionStorage.setItem('ag_crm', val)
     sessionStorage.setItem('ag_auth', '1')
     document.getElementById('login-gate').style.display = 'none'
     document.getElementById('dashboard').style.display = 'block'
     init()
-  } else {
+  } catch (e) {
+    CRM_TOKEN = ''
     input.classList.add('error')
     err.textContent = 'Incorrect password. Please try again.'
     setTimeout(() => input.classList.remove('error'), 500)
     input.value = ''; input.focus()
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Enter Dashboard' }
   }
 }
 function logout() {
   sessionStorage.removeItem('ag_auth')
+  sessionStorage.removeItem('ag_crm')
+  CRM_TOKEN = ''
   location.reload()
 }
-if (sessionStorage.getItem('ag_auth') === '1') {
+if (sessionStorage.getItem('ag_auth') === '1' && CRM_TOKEN) {
   document.getElementById('login-gate').style.display = 'none'
   document.getElementById('dashboard').style.display = 'block'
   init()
@@ -2456,8 +2498,8 @@ async function confirmMerge() {
       quoted_amount: l.quoted_amount, final_amount: l.final_amount,
       verified_phone: l.verified_phone, verified_email: l.verified_email
     }))))
-    await Promise.all(others.map(l => fetch(`${SB_URL}/rest/v1/leads?id=eq.${l.id}`, { method:'DELETE', headers:H })))
     const deletedIds = others.map(l => l.id)
+    await crm('delete_leads', { ids: deletedIds })
     ALL = ALL.filter(l => !deletedIds.includes(l.id))
     deletedIds.forEach(id => SELECTED.delete(id))
     updateDupChip()
@@ -2475,9 +2517,8 @@ async function confirmMerge() {
 async function loadLeads() {
   document.getElementById('err-banner').classList.remove('show')
   try {
-    const r = await fetch(`${SB_URL}/rest/v1/leads?select=*&order=created_at.desc`, { headers: H })
-    if (!r.ok) throw new Error(r.status)
-    ALL = await r.json()
+    const { data } = await crm('list_leads')
+    ALL = data || []
     updateDupChip()
     applyFilters(); renderStats(); renderCharts()
     loadTodayFollowUps()
@@ -2489,17 +2530,13 @@ async function loadLeads() {
 }
 
 async function patch(id, fields) {
-  await fetch(`${SB_URL}/rest/v1/leads?id=eq.${id}`, {
-    method: 'PATCH',
-    headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-    body: JSON.stringify(fields)
-  })
+  await crm('update_lead', { id, fields })
   const idx = ALL.findIndex(l => l.id === id)
   if (idx !== -1) Object.assign(ALL[idx], fields)
 }
 
 async function remove(id) {
-  await fetch(`${SB_URL}/rest/v1/leads?id=eq.${id}`, { method: 'DELETE', headers: H })
+  await crm('delete_leads', { id })
   ALL = ALL.filter(l => l.id !== id)
   SELECTED.delete(id)
   updateDupChip()
@@ -2577,19 +2614,13 @@ async function loadTodayFollowUps() {
     const todayStart = new Date(); todayStart.setHours(0,0,0,0)
     const todayEnd = new Date(); todayEnd.setHours(23,59,59,999)
 
-    // Fetch today's and overdue follow-ups without a join — look up lead names from ALL
-    const [rToday, rOver] = await Promise.all([
-      fetch(`${SB_URL}/rest/v1/follow_ups?done=eq.false&due_at=gte.${todayStart.toISOString()}&due_at=lte.${todayEnd.toISOString()}&select=*&order=due_at.asc`, { headers: H }),
-      fetch(`${SB_URL}/rest/v1/follow_ups?done=eq.false&due_at=lt.${todayStart.toISOString()}&select=*&order=due_at.asc`, { headers: H })
-    ])
-
-    if (!rToday.ok && !rOver.ok) {
-      document.getElementById('s-overdue').textContent = '—'
-      return
-    }
-
-    const fus     = rToday.ok ? await rToday.json() : []
-    const overdue = rOver.ok  ? await rOver.json()  : []
+    // Fetch all open follow-ups, then split today vs overdue client-side.
+    const { data } = await crm('followups_open')
+    const open = (data || []).filter(f => !f.done)
+    const overdue = open.filter(f => new Date(f.due_at) < todayStart)
+    const fus     = open.filter(f => {
+      const d = new Date(f.due_at); return d >= todayStart && d <= todayEnd
+    })
     const allDue  = [...overdue, ...fus]
 
     document.getElementById('s-overdue').textContent = overdue.length
@@ -2769,7 +2800,7 @@ async function bulkDelete() {
   if (!SELECTED.size) return
   if (!confirm(`Delete ${SELECTED.size} lead${SELECTED.size>1?'s':''}? This cannot be undone.`)) return
   const ids = [...SELECTED]
-  await Promise.all(ids.map(id => fetch(`${SB_URL}/rest/v1/leads?id=eq.${id}`, { method: 'DELETE', headers: H })))
+  await crm('delete_leads', { ids })
   ALL = ALL.filter(l => !ids.includes(l.id))
   clearSelection()
   updateDupChip()
@@ -2908,18 +2939,13 @@ function waLink(phone, name, pkg, leadId) {
 // ── ACTIVITY LOG ───────────────────────────────────────
 async function logActivity(leadId, type, note) {
   try {
-    await fetch(`${SB_URL}/rest/v1/lead_activities`, {
-      method: 'POST',
-      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ lead_id: leadId, type, note })
-    })
+    await crm('add_activity', { lead_id: leadId, type, note })
   } catch(e) { /* non-critical */ }
 }
 async function loadActivities(leadId) {
   try {
-    const r = await fetch(`${SB_URL}/rest/v1/lead_activities?lead_id=eq.${leadId}&order=created_at.desc&limit=20`, { headers: H })
-    if (!r.ok) return []
-    return await r.json()
+    const { data } = await crm('list_activities', { lead_id: leadId })
+    return data || []
   } catch(e) { return [] }
 }
 const ACT_ICON = { note:'📝', call:'📞', email:'✉', whatsapp:'💬', status_change:'🔄' }
@@ -2936,9 +2962,8 @@ function renderActivityTimeline(activities, lead) {
 // ── FOLLOW-UPS (Drawer) ────────────────────────────────
 async function loadFollowUpsForLead(leadId) {
   try {
-    const r = await fetch(`${SB_URL}/rest/v1/follow_ups?lead_id=eq.${leadId}&order=due_at.asc`, { headers: H })
-    if (!r.ok) return []
-    return await r.json()
+    const { data } = await crm('list_followups', { lead_id: leadId })
+    return data || []
   } catch(e) { return [] }
 }
 function renderFollowUpList(fus, leadId) {
@@ -2959,12 +2984,7 @@ async function addFollowUp(leadId) {
   const due    = dueEl.value
   if (!due) { showToast('Please select a date/time', 'err'); return }
   try {
-    const r = await fetch(`${SB_URL}/rest/v1/follow_ups`, {
-      method: 'POST',
-      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ lead_id: leadId, note: note||'Follow up', due_at: new Date(due).toISOString() })
-    })
-    if (!r.ok) { const err = await r.text(); throw new Error(err) }
+    await crm('add_followup', { lead_id: leadId, note: note||'Follow up', due_at: new Date(due).toISOString() })
     showToast('Follow-up scheduled', 'ok')
     // Clear inputs
     noteEl.value = ''; dueEl.value = ''
@@ -2984,11 +3004,7 @@ async function addFollowUp(leadId) {
 }
 async function toggleFollowUp(fuId, leadId, done) {
   try {
-    await fetch(`${SB_URL}/rest/v1/follow_ups?id=eq.${fuId}`, {
-      method: 'PATCH',
-      headers: { ...H, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ done })
-    })
+    await crm('update_followup', { id: fuId, fields: { done } })
     loadTodayFollowUps()
   } catch(e) { showToast('Failed to update follow-up', 'err') }
 }
@@ -3275,7 +3291,12 @@ async function sendEmail() {
   try {
     const r = await fetch(`${SB_URL}/functions/v1/send-lead-email`, {
       method: 'POST',
-      headers: { ...H, 'Content-Type': 'application/json' },
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+        'x-crm-token': CRM_TOKEN,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({ to, subject, body })
     })
     if (r.ok) {

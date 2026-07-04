@@ -515,23 +515,22 @@ body{
     _leadSaved = true
     sessionStorage.setItem('compass_lead_saved', '1')
     var fields = _extractFields()
-    fetch(SB_URL + '/rest/v1/leads', {
+    fetch(SB_URL + '/functions/v1/submit-lead', {
       method: 'POST',
-      headers: Object.assign({}, H, { 'Prefer': 'return=representation' }),
+      headers: Object.assign({}, H, { 'Content-Type': 'application/json' }),
       body: JSON.stringify({
         name:         _userName || 'COMPASS User',
         phone:        _userPhone,
         email:        fields.email || null,
         source:       'compass_bot',
-        package_name: fields.destination || null,
-        message:      _buildMessage(fields),
-        status:       'new'
+        packageName:  fields.destination || null,
+        message:      _buildMessage(fields)
       })
     })
     .then(function(r){ return r.json() })
     .then(function(data){
-      if (Array.isArray(data) && data[0] && data[0].id) {
-        _leadId = String(data[0].id)
+      if (data && data.id) {
+        _leadId = String(data.id)
         sessionStorage.setItem('compass_lead_id', _leadId)
       }
     })
@@ -541,13 +540,15 @@ body{
   function _updateLead() {
     if (!_leadId) return
     var fields = _extractFields()
-    fetch(SB_URL + '/rest/v1/leads?id=eq.' + _leadId, {
-      method: 'PATCH',
-      headers: Object.assign({}, H, { 'Prefer': 'return=minimal' }),
+    fetch(SB_URL + '/functions/v1/submit-lead', {
+      method: 'POST',
+      headers: Object.assign({}, H, { 'Content-Type': 'application/json' }),
       body: JSON.stringify({
-        email:        fields.email || null,
-        package_name: fields.destination || null,
-        message:      _buildMessage(fields)
+        action:      'update',
+        id:          _leadId,
+        email:       fields.email || null,
+        packageName: fields.destination || null,
+        message:     _buildMessage(fields)
       })
     }).catch(function(){})
   }

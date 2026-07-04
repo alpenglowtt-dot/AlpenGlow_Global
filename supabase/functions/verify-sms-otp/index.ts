@@ -1,10 +1,27 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+// ── CORS (inlined — dashboard single-file deploys can't resolve relative
+//    imports to _shared/, so this lives in every function instead) ──────
+const ALLOWED_ORIGINS = (
+  Deno.env.get('ALLOWED_ORIGINS') ??
+  'https://alpenglowglobal.com,https://www.alpenglowglobal.com'
+)
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
+
+function corsFor(req: Request): Record<string, string> {
+  const origin = req.headers.get('Origin')
+  const allow =
+    origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  return {
+    'Access-Control-Allow-Origin': allow,
+    'Vary': 'Origin',
+    'Access-Control-Allow-Headers':
+      'authorization, x-client-info, apikey, content-type, x-crm-token',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  }
 }
 
 // Must match the normalisation in send-sms-otp exactly
@@ -17,6 +34,7 @@ function normalisePhone(raw: string): string {
 }
 
 serve(async (req) => {
+  const corsHeaders = corsFor(req)
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
@@ -38,12 +56,14 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     )
 
+    // Look up the latest active code for this contact — WITHOUT filtering
+    // by the submitted code — so every wrong guess is counted and we can
+    // lock out brute-force attempts on the 4-digit code.
     const { data, error } = await supabase
       .from('otp_verifications')
-      .select('id, purpose, metadata, attempts')
+      .select('id, code, purpose, metadata, attempts')
       .eq('contact', normPhone)
       .eq('type', 'sms')
-      .eq('code', code)
       .eq('verified', false)
       .gte('expires_at', new Date().toISOString())
       .order('created_at', { ascending: false })
@@ -51,6 +71,25 @@ serve(async (req) => {
       .maybeSingle()
 
     if (error || !data) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid or expired code. Please try again.' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    const MAX_ATTEMPTS = 5
+    if ((data.attempts ?? 0) >= MAX_ATTEMPTS) {
+      return new Response(
+        JSON.stringify({ error: 'Too many attempts. Please request a new code.' }),
+        { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    if (String(data.code) !== String(code)) {
+      await supabase
+        .from('otp_verifications')
+        .update({ attempts: (data.attempts ?? 0) + 1 })
+        .eq('id', data.id)
       return new Response(
         JSON.stringify({ error: 'Invalid or expired code. Please try again.' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }

@@ -1,0 +1,17 @@
+# Security response headers for static hosting (Cloudflare Pages / Netlify).
+# These are safe defaults that don't change page behaviour.
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+
+# Never let the admin surfaces be embedded in a frame (clickjacking).
+/dashboard.html
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'
+/dev.html
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'

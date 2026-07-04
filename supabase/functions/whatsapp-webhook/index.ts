@@ -1,11 +1,30 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+// ── CORS (inlined — dashboard single-file deploys can't resolve relative
+//    imports to _shared/, so this lives in every function instead) ──────
+const ALLOWED_ORIGINS = (
+  Deno.env.get('ALLOWED_ORIGINS') ??
+  'https://alpenglowglobal.com,https://www.alpenglowglobal.com'
+)
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
+
+function corsFor(req: Request): Record<string, string> {
+  const origin = req.headers.get('Origin')
+  const allow =
+    origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  return {
+    'Access-Control-Allow-Origin': allow,
+    'Vary': 'Origin',
+    'Access-Control-Allow-Headers':
+      'authorization, x-client-info, apikey, content-type, x-crm-token',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  }
 }
 
 serve(async (req) => {
+  const corsHeaders = corsFor(req)
   const url = new URL(req.url)
 
   // Meta webhook verification (GET request)
