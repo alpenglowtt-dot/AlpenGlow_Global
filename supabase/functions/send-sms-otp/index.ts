@@ -81,6 +81,12 @@ serve(async (req) => {
     const phoneNumberId = Deno.env.get('WHATSAPP_PHONE_NUMBER_ID') ?? ''
     const accessToken   = Deno.env.get('WHATSAPP_ACCESS_TOKEN') ?? ''
     const templateName  = Deno.env.get('WHATSAPP_TEMPLATE_NAME') ?? ''
+    // Must match the template's approved language EXACTLY (check WhatsApp
+    // Manager → Message Templates → your template's Language column).
+    // Meta's plain "English" option is backed by the locale code 'en_US',
+    // not the bare code 'en' — sending the wrong one causes error #132018
+    // ("issue with the parameters in your template").
+    const templateLang  = Deno.env.get('WHATSAPP_TEMPLATE_LANG') || 'en_US'
 
     if (!phoneNumberId || !accessToken) {
       console.error('[send-sms-otp] WhatsApp credentials not set')
@@ -141,6 +147,12 @@ serve(async (req) => {
 
     let payload: object
 
+    // TEMP debug — confirms exactly what secrets this invocation actually
+    // sees, since Meta has rejected name/language combos that worked before.
+    console.log('[send-sms-otp] Using template:', JSON.stringify({
+      templateName, templateLang, phoneNumberId, hasToken: !!accessToken,
+    }))
+
     if (templateName) {
       // Approved authentication template
       // Template body must contain one variable {{1}} for the code.
@@ -152,13 +164,16 @@ serve(async (req) => {
         type: 'template',
         template: {
           name:     templateName,
-          language: { code: 'en' },
+          language: { code: templateLang },
           components: [
             {
               type: 'body',
               parameters: [{ type: 'text', text: code }],
             },
-            // ↓ Remove this block if your template has no Copy Code button
+            // OTP button — confirmed via Meta's own error response
+            // ("Button at index 0 must be of type Url") that the send-time
+            // sub_type is always 'url', regardless of whether the template
+            // was configured as Copy Code / One-tap / Zero-tap in the UI.
             {
               type:     'button',
               sub_type: 'url',
@@ -195,8 +210,13 @@ serve(async (req) => {
 
     if (!waRes.ok) {
       const err = await waRes.json()
+      console.error('[send-sms-otp] Meta API error (full):', JSON.stringify(err))
+      const details = err?.error?.error_data?.details
       const msg = err?.error?.message ?? JSON.stringify(err)
-      throw new Error(`WhatsApp API: ${msg}`)
+      // TEMP: surfacing error_data.details to the caller for debugging the
+      // template mismatch. Remove/trim before real production traffic —
+      // this is more detail than an end user should normally see.
+      throw new Error(`WhatsApp API: ${msg}${details ? ` — ${details}` : ''}`)
     }
 
     return new Response(
