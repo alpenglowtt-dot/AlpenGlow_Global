@@ -17,8 +17,10 @@
   const DEV_MODE = false
   // ─────────────────────────────────────────────────────────────
 
-  const SUPABASE_URL      = 'https://yexrmmhadfscormovskn.supabase.co'
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlleHJtbWhhZGZzY29ybW92c2tuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzNjg0NzYsImV4cCI6MjA5Nzk0NDQ3Nn0.vxkcZDdTfE0qDxW8YwsnbGsLaaSUfwgZ78nQicq2Uoc'
+  // Self-hosted Supabase (see deploy/README.md). Swap VPS_IP for a domain
+  // once you add one, and ANON_KEY for the value from generate-keys.js.
+  const SUPABASE_URL      = 'http://169.58.43.191:8000'
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzg0NDczMjU5LCJleHAiOjE5NDIxNTMyNTl9.Flq3Vf1QHQA23sieMT472T5tnKkhzhLcJxdxtbjIv-s'
 
   // Base path of api.js itself — used to resolve data/ paths correctly
   // regardless of whether the page is at root (index.html) or in a subdirectory (packages/japan.html)

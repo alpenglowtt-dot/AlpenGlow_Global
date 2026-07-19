@@ -1,0 +1,23 @@
+# Copy this file to /opt/supabase/docker-compose.override.yml — Docker Compose
+# automatically merges it with docker-compose.yml, adding the AlpenGlow-specific
+# secrets to the "functions" (edge-runtime) service's environment without you
+# having to hand-edit the generated docker-compose.yml.
+#
+# Usage: docker compose up -d   (compose picks up docker-compose.override.yml
+# automatically as long as it sits next to docker-compose.yml)
+
+services:
+  functions:
+    environment:
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      EMAIL_FROM_DOMAIN: ${EMAIL_FROM_DOMAIN}
+      AGENCY_EMAIL: ${AGENCY_EMAIL}
+      GOOGLE_SHEETS_WEBHOOK_URL: ${GOOGLE_SHEETS_WEBHOOK_URL}
+      CRM_PASSWORD: ${CRM_PASSWORD}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      WHATSAPP_PHONE_NUMBER_ID: ${WHATSAPP_PHONE_NUMBER_ID}
+      WHATSAPP_ACCESS_TOKEN: ${WHATSAPP_ACCESS_TOKEN}
+      WHATSAPP_TEMPLATE_NAME: ${WHATSAPP_TEMPLATE_NAME}
+      WHATSAPP_TEMPLATE_LANG: ${WHATSAPP_TEMPLATE_LANG}
+      WHATSAPP_WEBHOOK_TOKEN: ${WHATSAPP_WEBHOOK_TOKEN}
