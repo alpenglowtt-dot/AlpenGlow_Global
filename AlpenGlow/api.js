@@ -105,15 +105,22 @@
   // (isVerified() already returns true unconditionally in DEV_MODE for any
   // scope, so no flag needs to be set here — kept only for pages that read
   // sessionStorage directly instead of going through AlpenAPI.)
+  // Package pages: hide the sidebar (gate card) entirely once unlocked and
+  // widen the main content to fill the freed space, instead of leaving an
+  // "Already verified" / "DEV MODE" placeholder card behind.
+  function _hideGateSidebar() {
+    var main = document.getElementById('detailMain')
+    if (main) main.classList.remove('locked')
+    var sidebar = document.querySelector('.detail-sidebar')
+    if (sidebar) sidebar.style.display = 'none'
+    var wrap = document.querySelector('.detail-wrap')
+    if (wrap) wrap.classList.add('wrap-full')
+  }
+
   if (DEV_MODE) {
     markVerified()
     document.addEventListener('DOMContentLoaded', function () {
-      var main = document.getElementById('detailMain')
-      if (main) main.classList.remove('locked')
-
-      var gate = document.getElementById('gateCard')
-      if (gate) gate.innerHTML = '<div style="text-align:center;padding:1rem 0;"><div style="font-size:1.5rem;margin-bottom:.5rem;">🔓</div><p style="font-size:.8rem;color:rgba(255,255,255,.45);">DEV MODE — gate bypassed</p></div>'
-
+      _hideGateSidebar()
       document.querySelectorAll('.package-blur, .blog-blur').forEach(function (el) {
         el.style.display = 'none'
       })
@@ -124,11 +131,7 @@
   if (!DEV_MODE) {
     document.addEventListener('DOMContentLoaded', function () {
       if (!isVerified()) return
-      // Package pages: remove locked class and collapse gate card
-      var main = document.getElementById('detailMain')
-      if (main) main.classList.remove('locked')
-      var gate = document.getElementById('gateCard')
-      if (gate) gate.innerHTML = '<div style="text-align:center;padding:1rem 0;"><div style="font-size:1.5rem;margin-bottom:.5rem;">✓</div><p style="font-size:.8rem;color:rgba(255,255,255,.45);">Already verified</p></div>'
+      _hideGateSidebar()
       // Homepage: remove blur overlays so blog cards show fully
       document.querySelectorAll('.package-blur, .blog-blur').forEach(function (el) {
         el.style.display = 'none'

@@ -167,8 +167,10 @@ function unlockContent() {
   const overlay = document.getElementById("contentOverlay");
   if (main) main.classList.remove("locked");
   if (overlay) { overlay.style.opacity = "0"; setTimeout(() => overlay.remove(), 500); }
-  const card = document.getElementById("gateCard");
-  if (card) card.innerHTML = "<div style=\"text-align:center;padding:1rem 0;\"><div style=\"font-size:2rem;margin-bottom:.7rem;\">&#10003;</div><h3 style=\"font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);margin-bottom:.5rem;\">Itinerary Unlocked</h3><p style=\"font-size:.82rem;color:rgba(255,255,255,.55);\">Our team will be in touch within 24 hours.</p></div>";
+  const sidebar = document.querySelector(".detail-sidebar");
+  if (sidebar) sidebar.style.display = "none";
+  const wrap = document.querySelector(".detail-wrap");
+  if (wrap) wrap.classList.add("wrap-full");
 }
 function gateSendWhatsApp() {
   _gateName = document.getElementById("gateName").value.trim();

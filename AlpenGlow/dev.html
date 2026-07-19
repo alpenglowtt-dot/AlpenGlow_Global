@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dev — Content Editor · AlpenGlow Global</title>
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -1588,6 +1591,9 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${pkgName} | AlpenGlow Global</title>
+<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png">
+<link rel="icon" type="image/png" sizes="96x96" href="../favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="package.css">
@@ -1727,8 +1733,10 @@ function unlockContent() {
   const overlay = document.getElementById("contentOverlay");
   if (main) main.classList.remove("locked");
   if (overlay) { overlay.style.opacity = "0"; setTimeout(() => overlay.remove(), 500); }
-  const card = document.getElementById("gateCard");
-  if (card) card.innerHTML = "<div style=\\"text-align:center;padding:1rem 0;\\"><div style=\\"font-size:2rem;margin-bottom:.7rem;\\">&#10003;</div><h3 style=\\"font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--white);margin-bottom:.5rem;\\">Itinerary Unlocked</h3><p style=\\"font-size:.82rem;color:rgba(255,255,255,.55);\\">Our team will be in touch within 24 hours.</p></div>";
+  const sidebar = document.querySelector(".detail-sidebar");
+  if (sidebar) sidebar.style.display = "none";
+  const wrap = document.querySelector(".detail-wrap");
+  if (wrap) wrap.classList.add("wrap-full");
 }
 function gateSendWhatsApp() {
   _gateName = document.getElementById("gateName").value.trim();
