@@ -2246,6 +2246,32 @@ const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const CRM_FN = SB_URL + '/functions/v1/crm'
 let CRM_TOKEN = sessionStorage.getItem('ag_crm') || ''
 
+// ── IST TIME HELPERS ───────────────────────────────────
+// Every timestamp shown in the dashboard is forced to Asia/Kolkata,
+// regardless of the viewer's own browser/OS timezone — so staff always
+// see the same time whether they're in Coimbatore or travelling abroad.
+const IST_TZ = 'Asia/Kolkata'
+function fmtIST(date, opts) {
+  return new Date(date).toLocaleString('en-IN', Object.assign({ timeZone: IST_TZ }, opts))
+}
+function fmtISTDate(date, opts) {
+  return new Date(date).toLocaleDateString('en-IN', Object.assign({ timeZone: IST_TZ }, opts))
+}
+// 'YYYY-MM-DD' as seen in IST — safe for day-bucket equality checks
+// regardless of the viewer's local timezone (unlike toDateString()).
+function istDateKey(date) {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: IST_TZ, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(date))
+}
+// Midnight-to-midnight IST "today", as absolute instants — for filtering
+// today's/overdue follow-ups correctly no matter where the dashboard is viewed from.
+function istTodayBounds() {
+  const key = istDateKey(new Date())
+  return {
+    start: new Date(key + 'T00:00:00.000+05:30'),
+    end:   new Date(key + 'T23:59:59.999+05:30'),
+  }
+}
+
 // Single entry point for every CRM data call. The password travels in the
 // x-crm-token header over HTTPS and is verified on the server, never in JS.
 async function crm(action, params = {}) {
@@ -2353,7 +2379,7 @@ function showToast(msg, type='info', duration=3200) {
 function startClock() {
   const tick = () => {
     document.getElementById('live-clock').textContent =
-      new Date().toLocaleString('en-IN',{ timeZone:'Asia/Kolkata', dateStyle:'medium', timeStyle:'short' })
+      fmtIST(new Date(), { dateStyle:'medium', timeStyle:'short' })
       .replace('am','AM').replace('pm','PM')
   }
   tick(); setInterval(tick, 1000)
@@ -2428,7 +2454,7 @@ function openMergeModal(leadId) {
   document.getElementById('merge-modal-body').innerHTML =
     `<p style="font-size:.82rem;color:var(--muted);margin-bottom:.8rem">Select the <strong style="color:var(--text)">primary</strong> record to keep. Others will be merged into it and deleted.</p>` +
     group.map(l => {
-      const dt = new Date(l.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
+      const dt = fmtIST(l.created_at, { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
       const isSuggested = l.id === suggested.id
       return `<label class="merge-card${isSuggested?' suggested':''}" for="mr-${l.id}">
         <input type="radio" id="mr-${l.id}" name="merge-primary" value="${l.id}"${isSuggested?' checked':''}>
@@ -2477,7 +2503,7 @@ async function confirmMerge() {
   const uniqueNotes = [...new Set(notesParts)].join('\n---\n')
 
   const allSources = group.map(l => SRC[l.source]||l.source||'unknown').filter(Boolean)
-  const actNote = `Merged ${group.length} duplicate enquiries (sources: ${[...new Set(allSources)].join(', ')}) on ${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}`
+  const actNote = `Merged ${group.length} duplicate enquiries (sources: ${[...new Set(allSources)].join(', ')}) on ${fmtISTDate(new Date(),{day:'numeric',month:'short',year:'numeric'})}`
 
   const btn = document.getElementById('merge-confirm-btn')
   btn.disabled = true; btn.textContent = 'Merging…'
@@ -2584,9 +2610,9 @@ function applyFilters() {
 
 // ── STATS ──────────────────────────────────────────────
 function renderStats() {
-  const today = new Date().toDateString()
+  const today = istDateKey(new Date())
   const total = ALL.length
-  const todayCount = ALL.filter(l => new Date(l.created_at).toDateString() === today).length
+  const todayCount = ALL.filter(l => istDateKey(l.created_at) === today).length
   const pending = ALL.filter(l => !l.status || l.status === 'new' || l.status === 'contacted').length
   const booked = ALL.filter(l => l.status === 'booked').length
 
@@ -2611,8 +2637,7 @@ function renderStats() {
 // ── TODAY'S FOLLOW-UPS ────────────────────────────────
 async function loadTodayFollowUps() {
   try {
-    const todayStart = new Date(); todayStart.setHours(0,0,0,0)
-    const todayEnd = new Date(); todayEnd.setHours(23,59,59,999)
+    const { start: todayStart, end: todayEnd } = istTodayBounds()
 
     // Fetch all open follow-ups, then split today vs overdue client-side.
     const { data } = await crm('followups_open')
@@ -2638,7 +2663,7 @@ async function loadTodayFollowUps() {
     list.innerHTML = allDue.map(f => {
       const isOverdue = new Date(f.due_at) < todayStart
       const name    = leadMap[String(f.lead_id)] || 'Lead'
-      const timeStr = new Date(f.due_at).toLocaleString('en-IN', { hour:'2-digit', minute:'2-digit', day:'numeric', month:'short' })
+      const timeStr = fmtIST(f.due_at, { hour:'2-digit', minute:'2-digit', day:'numeric', month:'short' })
       return `<div class="tp-item${isOverdue?' overdue':''}" onclick="openDrawer('${f.lead_id}')">
         <div class="tp-name">${e(name)}</div>
         <div class="tp-note">${e(f.note||'Follow up')}</div>
@@ -2691,7 +2716,7 @@ function renderTable() {
     const globalIdx = PAGE * PER_PAGE + i + 1
     const st = l.status || 'new'
     const fresh = now - new Date(l.created_at).getTime() < 86400000
-    const dt = new Date(l.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
+    const dt = fmtIST(l.created_at, { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
     const pkg = e(l.package_name || ((l.source === 'trip_planner' || l.source === 'compass_bot') ? _leadTabLabel(l) : (l.message || '—')))
     const checked = SELECTED.has(l.id) ? 'checked' : ''
     const isDup = DUP_IDS.has(l.id)
@@ -2950,10 +2975,10 @@ async function loadActivities(leadId) {
 }
 const ACT_ICON = { note:'📝', call:'📞', email:'✉', whatsapp:'💬', status_change:'🔄' }
 function renderActivityTimeline(activities, lead) {
-  const dt = new Date(lead.created_at).toLocaleString('en-IN', { dateStyle:'medium', timeStyle:'short' })
+  const dt = fmtIST(lead.created_at, { dateStyle:'medium', timeStyle:'short' })
   let html = `<div class="tl-item"><div class="tl-dot">✦</div><div><div class="tl-txt">Lead received</div><div class="tl-time">${dt}</div></div></div>`
   activities.filter(a => a.type !== 'merged_snapshot').forEach(a => {
-    const atime = new Date(a.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
+    const atime = fmtIST(a.created_at, { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
     html += `<div class="tl-item"><div class="tl-dot">${ACT_ICON[a.type]||'◦'}</div><div><div class="tl-txt">${e(a.note||a.type)}</div><div class="tl-time">${atime}</div></div></div>`
   })
   return html
@@ -2969,7 +2994,7 @@ async function loadFollowUpsForLead(leadId) {
 function renderFollowUpList(fus, leadId) {
   if (!fus.length) return '<div style="font-size:.75rem;color:var(--ghost);padding:.4rem 0">No follow-ups scheduled.</div>'
   return fus.map(f => {
-    const timeStr = new Date(f.due_at).toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
+    const timeStr = fmtIST(f.due_at, { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
     return `<div class="fu-item${f.done?' done-item':''}">
       <input type="checkbox" class="fu-check" ${f.done?'checked':''} onchange="toggleFollowUp('${f.id}','${leadId}',this.checked)">
       <span class="fu-note">${e(f.note||'Follow up')}</span>
@@ -3147,7 +3172,7 @@ async function openDrawer(id) {
     const _tbBtns = liveDupGroup.slice().sort((a,b) => new Date(a.created_at)-new Date(b.created_at)).map(gl => {
       const label = _leadTabLabel(gl)
       const isActive = String(gl.id) === String(id)
-      const dt = new Date(gl.created_at).toLocaleDateString('en-IN',{day:'numeric',month:'short'})
+      const dt = fmtISTDate(gl.created_at,{day:'numeric',month:'short'})
       return `<button class="drw-tab${isActive?' active':''}" onclick="openDrawer('${gl.id}')" title="${e(gl.name||'')} · ${e(SRC[gl.source]||gl.source||'')} · ${dt}">${e(label)}</button>`
     }).join('')
     tabsSlot.innerHTML = `<div class="drw-tabs">${_tbBtns}</div>`
@@ -3167,8 +3192,8 @@ async function openDrawer(id) {
     tabsSlot.style.display = 'block'
 
     const snapshotPanels = snapshots.map((s, i) => {
-      const mergedAt = new Date(s._mergedAt).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
-      const origDate = s.created_at ? new Date(s.created_at).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—'
+      const mergedAt = fmtIST(s._mergedAt, { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
+      const origDate = s.created_at ? fmtIST(s.created_at, { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' }) : '—'
       const st = s.status || 'new'
       const isTripPlanner = s.source === 'trip_planner' || s.source === 'compass_bot'
       let msgSection = ''
@@ -3369,7 +3394,7 @@ function renderKanban() {
         card.className = 'kanban-card'
         card.draggable = true
         card.dataset.id = l.id
-        const dt = new Date(l.created_at).toLocaleDateString('en-IN', { day:'numeric', month:'short' })
+        const dt = fmtISTDate(l.created_at, { day:'numeric', month:'short' })
         card.innerHTML = `<div class="kc-name">${e(l.name||'—')}</div><div class="kc-pkg">${e(l.package_name||l.source||'—')}</div><div class="kc-meta">${dt}</div>`
         card.addEventListener('dragstart', ev => { ev.dataTransfer.setData('text/plain', l.id); _dragLeadId = l.id; card.style.opacity = '.5' })
         card.addEventListener('dragend', () => { _dragLeadId = null; card.style.opacity = '' })
@@ -3411,21 +3436,18 @@ function renderCharts() {
   const labels = [];
   const counts = [];
 
+  // Anchored to IST midnight-today, then shifted by whole days — IST has
+  // no DST, so subtracting exact 24h blocks always lands on the correct
+  // IST calendar day regardless of the viewer's own timezone.
+  const _todayIST = istTodayBounds().start;
   for (let i = 29; i >= 0; i--) {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
+    const d = new Date(_todayIST.getTime() - i * 86400000);
+    const dKey = istDateKey(d);
 
-    labels.push(
-      d.toLocaleDateString('en-IN', {
-        day: 'numeric',
-        month: 'short'
-      })
-    );
+    labels.push(fmtISTDate(d, { day: 'numeric', month: 'short' }));
 
     counts.push(
-      ALL.filter(
-        l => new Date(l.created_at).toDateString() === d.toDateString()
-      ).length
+      ALL.filter(l => istDateKey(l.created_at) === dKey).length
     );
   }
 

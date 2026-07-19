@@ -111,7 +111,10 @@ serve(async (req) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          timestamp:    new Date().toISOString(),
+          // IST, not raw UTC — the sheet is read by India-based staff.
+          timestamp: new Date().toLocaleString('en-IN', {
+            timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short',
+          }),
           source,
           name,
           email,

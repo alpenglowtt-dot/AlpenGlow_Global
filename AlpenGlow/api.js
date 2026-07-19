@@ -59,14 +59,37 @@
 
   // ─── SESSION VERIFICATION ─────────────────────────────────────
   // Once a visitor completes OTP verification, we store that in
-  // sessionStorage. It persists while the tab stays open and is
-  // cleared automatically when the tab is closed — so they only
-  // verify once per browsing session, not on every page.
-  function isVerified() {
-    return DEV_MODE || sessionStorage.getItem('ag_verified') === '1'
+  // sessionStorage along with a timestamp. It's valid for
+  // VERIFY_SESSION_MS (10 minutes) from that moment — any gate checked
+  // via isVerified() during that window is skipped automatically.
+  //
+  // Two independent scopes:
+  //  - 'site'    (default) — package pages, blog/article unlock, offer claim
+  //  - 'planner' — the "Plan Your Trip" wizard AND the COMPASS chatbot,
+  //                which intentionally do NOT share verification with the
+  //                rest of the site (or with each other's opposite scope).
+  var VERIFY_SESSION_MS = 10 * 60 * 1000
+  var _VERIFY_KEYS = {
+    site:    { flag: 'ag_verified',         at: 'ag_verified_at' },
+    planner: { flag: 'ag_verified_planner', at: 'ag_verified_planner_at' },
   }
-  function markVerified() {
-    sessionStorage.setItem('ag_verified', '1')
+
+  function isVerified(scope) {
+    if (DEV_MODE) return true
+    var k = _VERIFY_KEYS[scope] || _VERIFY_KEYS.site
+    if (sessionStorage.getItem(k.flag) !== '1') return false
+    var verifiedAt = parseInt(sessionStorage.getItem(k.at) || '0', 10)
+    if (!verifiedAt || (Date.now() - verifiedAt) > VERIFY_SESSION_MS) {
+      sessionStorage.removeItem(k.flag)
+      sessionStorage.removeItem(k.at)
+      return false
+    }
+    return true
+  }
+  function markVerified(scope) {
+    var k = _VERIFY_KEYS[scope] || _VERIFY_KEYS.site
+    sessionStorage.setItem(k.flag, '1')
+    sessionStorage.setItem(k.at, String(Date.now()))
   }
 
   // Inject thin global scrollbar style on every page
@@ -78,9 +101,12 @@
     document.head.appendChild(s)
   })()
 
-  // Dev mode: auto-unlock gates and hide blur overlays on page load
+  // Dev mode: auto-unlock gates and hide blur overlays on page load.
+  // (isVerified() already returns true unconditionally in DEV_MODE for any
+  // scope, so no flag needs to be set here — kept only for pages that read
+  // sessionStorage directly instead of going through AlpenAPI.)
   if (DEV_MODE) {
-    markVerified()   // ensure ag_verified is set so compass.html + compass.js see it
+    markVerified()
     document.addEventListener('DOMContentLoaded', function () {
       var main = document.getElementById('detailMain')
       if (main) main.classList.remove('locked')
@@ -139,11 +165,12 @@
       return callEdge('send-email-otp', { email, purpose, metadata })
     },
 
-    /** Verify a submitted email OTP code */
-    verifyEmailOTP: async (email, code) => {
+    /** Verify a submitted email OTP code.
+     *  scope: 'site' (default) or 'planner' — see markVerified/isVerified above. */
+    verifyEmailOTP: async (email, code, scope) => {
       if (DEV_MODE) return { verified: true }
       const r = await callEdge('verify-email-otp', { email, code })
-      markVerified()
+      markVerified(scope)
       return r
     },
 

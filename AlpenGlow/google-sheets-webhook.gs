@@ -32,7 +32,7 @@ function doPost(e) {
 
     // Append new lead row
     sheet.appendRow([
-      data.timestamp   || new Date().toISOString(),
+      data.timestamp   || Utilities.formatDate(new Date(), 'Asia/Kolkata', 'dd MMM yyyy, hh:mm a'),
       data.source      || '',
       data.name        || '',
       data.email       || '',
@@ -62,7 +62,7 @@ function testWebhook() {
   const fakeEvent = {
     postData: {
       contents: JSON.stringify({
-        timestamp:    new Date().toISOString(),
+        timestamp:    Utilities.formatDate(new Date(), 'Asia/Kolkata', 'dd MMM yyyy, hh:mm a'),
         source:       'contact_form',
         name:         'Test User',
         email:        'test@example.com',

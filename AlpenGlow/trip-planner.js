@@ -1053,11 +1053,14 @@
     _s.answers.phoneCC   = ccEl.value;
     _s.answers.fullPhone = ccEl.value + phoneEl.value.trim();
 
-    // DEV MODE: skip OTP entirely, auto-mark phone as verified
-    if (window.AlpenAPI && window.AlpenAPI.isDevMode && window.AlpenAPI.isDevMode()) {
+    // DEV MODE, or already verified within the planner's own 10-min
+    // session (separate from the rest of the site) — skip OTP entirely.
+    var _devSkip    = window.AlpenAPI && window.AlpenAPI.isDevMode && window.AlpenAPI.isDevMode();
+    var _plannerSkip = !_devSkip && window.AlpenAPI && window.AlpenAPI.isVerified && window.AlpenAPI.isVerified('planner');
+    if (_devSkip || _plannerSkip) {
       _s.answers.phoneVerified = true;
       var sendBtn = document.getElementById('tp-phone-send-btn');
-      sendBtn.textContent = '✓ Verified (dev)'; sendBtn.disabled = true;
+      sendBtn.textContent = _devSkip ? '✓ Verified (dev)' : '✓ Verified'; sendBtn.disabled = true;
       sendBtn.classList.remove('tp-otp-sent'); sendBtn.classList.add('tp-otp-ok');
       document.getElementById('tp-cphone').readOnly = true;
       document.getElementById('tp-cphone-cc').disabled = true;
@@ -1110,11 +1113,14 @@
 
     _s.answers.email = emailEl.value.trim();
 
-    // DEV MODE: skip OTP entirely, auto-mark email as verified
-    if (window.AlpenAPI && window.AlpenAPI.isDevMode && window.AlpenAPI.isDevMode()) {
+    // DEV MODE, or already verified within the planner's own 10-min
+    // session (separate from the rest of the site) — skip OTP entirely.
+    var _devSkipE    = window.AlpenAPI && window.AlpenAPI.isDevMode && window.AlpenAPI.isDevMode();
+    var _plannerSkipE = !_devSkipE && window.AlpenAPI && window.AlpenAPI.isVerified && window.AlpenAPI.isVerified('planner');
+    if (_devSkipE || _plannerSkipE) {
       _s.answers.emailVerified = true;
       var sendBtn = document.getElementById('tp-email-send-btn');
-      sendBtn.textContent = '✓ Verified (dev)'; sendBtn.disabled = true;
+      sendBtn.textContent = _devSkipE ? '✓ Verified (dev)' : '✓ Verified'; sendBtn.disabled = true;
       sendBtn.classList.remove('tp-otp-sent'); sendBtn.classList.add('tp-otp-ok');
       document.getElementById('tp-cemail').readOnly = true;
       _tpCheckBothVerified();
@@ -1144,7 +1150,7 @@
     var btn = document.getElementById('tp-email-confirm-btn');
     btn.disabled = true; btn.textContent = 'Verifying…';
 
-    AlpenAPI.verifyEmailOTP(_s.answers.email, code).then(function() {
+    AlpenAPI.verifyEmailOTP(_s.answers.email, code, 'planner').then(function() {
       _s.answers.emailVerified = true;
       document.getElementById('tp-email-otp-block').classList.remove('tp-open');
       var sendBtn = document.getElementById('tp-email-send-btn');
@@ -1160,6 +1166,9 @@
 
   function _tpCheckBothVerified() {
     if (_s.answers.phoneVerified && _s.answers.emailVerified) {
+      // Starts/refreshes the planner-scope 10-min window — separate from
+      // the rest of the site and shared only with the COMPASS chatbot.
+      if (window.AlpenAPI && window.AlpenAPI.markVerified) window.AlpenAPI.markVerified('planner');
       var submitBtn = document.getElementById('tp-final-submit-btn');
       submitBtn.style.display = 'block';
       setTimeout(function() { submitBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
