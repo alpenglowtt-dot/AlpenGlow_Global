@@ -9,7 +9,7 @@
 
   /* ─── Supabase JS client (CDN: @supabase/supabase-js v2) ─── */
   // Self-hosted Supabase (see deploy/README.md).
-  const SB_URL = 'http://169.58.43.191:8000';
+  const SB_URL = 'https://api.alpenglowglobal.com';
   const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzg0NDczMjU5LCJleHAiOjE5NDIxNTMyNTl9.Flq3Vf1QHQA23sieMT472T5tnKkhzhLcJxdxtbjIv-s';
 
   /* Lazy-init the client once (window.supabase is set by the CDN script) */

@@ -2242,7 +2242,7 @@ Converted
 // the CRM password server-side (CRM_PASSWORD secret) and uses the service-role
 // key internally. The anon key below only identifies the project to the gateway.
 // Self-hosted Supabase (see deploy/README.md).
-const SB_URL = 'http://169.58.43.191:8000'
+const SB_URL = 'https://api.alpenglowglobal.com'
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzg0NDczMjU5LCJleHAiOjE5NDIxNTMyNTl9.Flq3Vf1QHQA23sieMT472T5tnKkhzhLcJxdxtbjIv-s'
 const CRM_FN = SB_URL + '/functions/v1/crm'
 let CRM_TOKEN = sessionStorage.getItem('ag_crm') || ''
