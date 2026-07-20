@@ -211,7 +211,7 @@ After recommending, offer:
 - Location: 1078, Big Bazaar Street, Coimbatore - 1
 - Recognition: Ministry of Tourism registered · TAAC · Skål International · ETA
 - Response promise: The team replies within 24 hours of any enquiry
-- Website: alpenglow-global.pages.dev (never paste this as a link in chat — just say "the AlpenGlow website")
+- Website: alpenglowglobal.com (never paste this as a link in chat — just say "the AlpenGlow website")
 
 ---
 

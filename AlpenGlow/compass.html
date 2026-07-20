@@ -561,7 +561,7 @@ body{
   /* ── Limit reached UI ───────────────────────────────── */
   function _showLimitReached() {
     _state = 'done'; _clearOptions()
-    _appendMessage('assistant', 'You&rsquo;ve used all <strong>' + MAX_Q + ' questions</strong> for today &#9200;<br><br>Your limit resets at midnight. Browse our packages at <a href="https://alpenglow-global.pages.dev" target="_blank">alpenglow-global.pages.dev</a> or contact the team directly.')
+    _appendMessage('assistant', 'You&rsquo;ve used all <strong>' + MAX_Q + ' questions</strong> for today &#9200;<br><br>Your limit resets at midnight. Browse our packages at <a href="https://alpenglowglobal.com" target="_blank">alpenglowglobal.com</a> or contact the team directly.')
     input.disabled = true; sendBtn.disabled = true
     input.placeholder = 'Daily limit reached — come back tomorrow'
     var el = document.getElementById('q-counter')
@@ -591,15 +591,18 @@ body{
       })
     }
 
+    // _profile values are already Title Case (set by trip-planner.js) —
+    // keep the destination as-is, but lowercase the descriptive words so
+    // they read naturally mid-sentence ("a solo trip", not "a Solo trip").
     var displayBits = []
     if (_profile.destination)  displayBits.push(_profile.destination)
-    if (_profile.travelerType) displayBits.push('a ' + _profile.travelerType + ' trip')
+    if (_profile.travelerType) displayBits.push('a ' + _profile.travelerType.toLowerCase() + ' trip')
     if (_profile.duration)     displayBits.push(_profile.duration)
     if (_profile.month)        displayBits.push('around ' + _profile.month)
     if (_profile.budget)       displayBits.push('a ' + _profile.budget.toLowerCase() + ' budget')
 
     var g = hasTripContext
-      ? 'Lovely to meet you, ' + firstName + '! ✈️ I see from your Plan Your Trip answers you&rsquo;re looking at ' + displayBits.join(', ') + '. Want me to tell you more about that, help refine it, or explore something else entirely?'
+      ? 'Lovely to meet you, ' + firstName + '! ✈️ I see from your Plan Your Trip answers you’re looking at ' + displayBits.join(', ') + '. Want me to tell you more about that, help refine it, or explore something else entirely?'
       : 'Lovely to meet you, ' + firstName + '! ✈️ I’m COMPASS, AlpenGlow’s trip planning assistant. Are you dreaming of somewhere specific, or would you like help figuring out where to go?'
 
     _appendMessage('assistant', _fmt(g))

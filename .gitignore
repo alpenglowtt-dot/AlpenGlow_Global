@@ -43,3 +43,8 @@ coverage/
 
 # typescript
 *.tsbuildinfo
+
+# graphify — regenerated locally per-machine via the post-commit/post-checkout
+# hooks (free, AST-only, no LLM cost). Committing it would just create a
+# throwaway diff after every commit, since the hook rewrites it right after.
+graphify-out/

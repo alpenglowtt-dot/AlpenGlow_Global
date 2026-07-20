@@ -1173,17 +1173,25 @@
 
       // Share the verified contact + trip context with COMPASS, so it never
       // has to ask for name/phone/email again and can reference what the
-      // visitor already told the planner.
+      // visitor already told the planner. Values are pre-formatted for
+      // display here (Title Case, "N – M Days") so every place that reads
+      // this profile shows it consistently, matching the planner's own
+      // confirmation screen.
       var a = _s.answers;
+      var _cap = function (s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; };
+      var _durLabel = (function () {
+        var d = DURATIONS.filter(function (x) { return x.id === a.duration; })[0];
+        return d ? d.label : (a.duration || '');
+      })();
       try {
         sessionStorage.setItem('ag_planner_profile', JSON.stringify({
           name:         a.name || '',
           phone:        a.fullPhone || '',
           email:        a.email || '',
-          destination:  a.destination || '',
-          travelerType: a.travelerType || '',
-          duration:     a.duration || '',
-          budget:       a.budget || '',
+          destination:  _cap(a.destination),
+          travelerType: _cap(a.travelerType),
+          duration:     _durLabel,
+          budget:       _cap(a.budget),
           month:        (a.month !== undefined && MONTHS[a.month]) ? MONTHS[a.month].full : '',
         }));
       } catch (e) {}

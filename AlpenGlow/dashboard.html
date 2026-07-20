@@ -3074,9 +3074,32 @@ async function openDrawer(id) {
       if (!val) return ''
       return `<div class="drw-field"><div class="drw-lbl">${e(key)}</div><div class="drw-val">${e(val)}</div></div>`
     }).join('')
-    // For compass_bot: show conversation log as a collapsible section
+    // For compass_bot: show conversation log as styled chat turns rather
+    // than one raw text blob. Each stored line is "You: ..." or "COMPASS:
+    // ..." (see compass.html's _buildMessage) — split on a lookahead so a
+    // reply's own internal line breaks don't get mistaken for new turns.
+    // The internal [COMPASS_CONTEXT] priming line (used to give the bot
+    // the visitor's Trip Planner answers) is skipped from display only —
+    // it's still present in the underlying lead.message data untouched.
     if (flag('chat_log') && lead.source === 'compass_bot' && convoLog) {
-      infoFields += `<div class="drw-field" style="grid-column:1/-1"><div class="drw-lbl">Chat Log</div><div class="drw-val" style="white-space:pre-wrap;line-height:1.7;font-size:.8rem;color:var(--muted);max-height:200px;overflow-y:auto;background:rgba(0,0,0,.18);border-radius:8px;padding:.6rem .8rem">${e(convoLog)}</div></div>`
+      const turnsHtml = convoLog
+        .split(/\n(?=(?:You|COMPASS):\s)/)
+        .map(t => t.trim())
+        .filter(t => t && !/^You:\s*\[COMPASS_CONTEXT\]/.test(t))
+        .map(t => {
+          const isUser = /^You:/.test(t)
+          const text = t.replace(/^(?:You|COMPASS):\s*/, '')
+          return `<div style="display:flex;${isUser ? 'justify-content:flex-end' : ''};margin-bottom:.45rem">
+            <div style="max-width:82%;padding:.45rem .7rem;border-radius:10px;font-size:.78rem;line-height:1.55;
+              background:${isUser ? 'rgba(239,126,25,.14)' : 'rgba(255,255,255,.05)'};
+              border:1px solid ${isUser ? 'rgba(239,126,25,.25)' : 'rgba(255,255,255,.08)'};
+              color:${isUser ? 'var(--white)' : 'var(--muted)'}">
+              <div style="font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;opacity:.5;margin-bottom:.2rem">${isUser ? 'Visitor' : 'COMPASS'}</div>
+              ${e(text)}
+            </div>
+          </div>`
+        }).join('')
+      infoFields += `<div class="drw-field" style="grid-column:1/-1"><div class="drw-lbl">Chat Log</div><div style="max-height:260px;overflow-y:auto;background:rgba(0,0,0,.18);border-radius:8px;padding:.7rem .8rem">${turnsHtml || '<span style="color:var(--ghost);font-size:.78rem">No conversation recorded.</span>'}</div></div>`
     }
   }
   const msgBlock = (!isTripPlanner && lead.message)
