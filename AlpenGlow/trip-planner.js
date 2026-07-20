@@ -1170,6 +1170,24 @@
       // Starts/refreshes the planner-scope 10-min window — separate from
       // the rest of the site and shared only with the COMPASS chatbot.
       if (window.AlpenAPI && window.AlpenAPI.markVerified) window.AlpenAPI.markVerified('planner');
+
+      // Share the verified contact + trip context with COMPASS, so it never
+      // has to ask for name/phone/email again and can reference what the
+      // visitor already told the planner.
+      var a = _s.answers;
+      try {
+        sessionStorage.setItem('ag_planner_profile', JSON.stringify({
+          name:         a.name || '',
+          phone:        a.fullPhone || '',
+          email:        a.email || '',
+          destination:  a.destination || '',
+          travelerType: a.travelerType || '',
+          duration:     a.duration || '',
+          budget:       a.budget || '',
+          month:        (a.month !== undefined && MONTHS[a.month]) ? MONTHS[a.month].full : '',
+        }));
+      } catch (e) {}
+
       var submitBtn = document.getElementById('tp-final-submit-btn');
       submitBtn.style.display = 'block';
       setTimeout(function() { submitBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
@@ -1191,6 +1209,13 @@
       ].filter(Boolean);
       var el = document.getElementById('tp-confirm-summary');
       if (el) el.innerHTML = bits.map(function(b){ return '<span class="tp-sum-pill">'+b+'</span>'; }).join('');
+
+      // If the visitor arrived here via COMPASS's "verify first" redirect,
+      // send them back to COMPASS now that verification + trip data are done.
+      if (sessionStorage.getItem('ag_return_to_compass') === '1') {
+        sessionStorage.removeItem('ag_return_to_compass');
+        setTimeout(function() { window.location.href = 'compass.html'; }, 1600);
+      }
     }).catch(function(e) {
       btn.disabled = false; btn.textContent = 'Submit Enquiry →';
       alert((e && e.message) || 'Something went wrong. Please try again.');
@@ -1263,20 +1288,26 @@
     if (a.budget)       parts.push('Budget: ' + a.budget.charAt(0).toUpperCase() + a.budget.slice(1));
     if (a.exactBudget)  parts.push('Expected Price: ₹' + Number(a.exactBudget).toLocaleString('en-IN'));
 
-    return sb.from('leads')
-      .insert({
+    // Goes through the submit-lead Edge Function (service-role) — the
+    // `leads` table is not writable with the anon key (see migration 007),
+    // so a direct sb.from('leads').insert() here would silently fail.
+    return fetch(SB_URL + '/functions/v1/submit-lead', {
+      method: 'POST',
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
         name:         a.name         || null,
         phone:        a.phone        || null,
         email:        a.email        || null,
         source:       'trip_planner',
-        package_name: a.destination  ? a.destination.charAt(0).toUpperCase() + a.destination.slice(1) : null,
+        packageName:  a.destination  ? a.destination.charAt(0).toUpperCase() + a.destination.slice(1) : null,
         message:      parts.join(' | ') || null,
-        status:       'new',
-      })
+      }),
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, data: d }; }); })
       .then(function (res) {
-        if (res.error) console.warn('[TripPlanner] leads sync error:', res.error.message);
+        if (!res.ok) console.warn('[TripPlanner] leads sync error:', res.data && res.data.error);
       })
-      .catch(function () {});
+      .catch(function (e) { console.warn('[TripPlanner] leads sync error:', e); });
   }
 
   /* ─────────────────────────────────────────────────────────────

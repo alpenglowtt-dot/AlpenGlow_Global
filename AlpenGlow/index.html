@@ -1117,6 +1117,7 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
 ;(function () {
   if (new URLSearchParams(location.search).get('startPlanner') === '1') {
     history.replaceState(null, '', location.pathname + location.hash)
+    sessionStorage.setItem('ag_return_to_compass', '1')
     window.addEventListener('load', function () {
       if (typeof initTripPlanner === 'function') initTripPlanner()
     })

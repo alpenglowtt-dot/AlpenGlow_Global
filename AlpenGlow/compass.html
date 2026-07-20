@@ -348,14 +348,24 @@ body{
   var MAX_Q   = 5
 
   /* ── State ──────────────────────────────────────────── */
+  // Name/phone/email come from the Trip Planner's verified profile — the
+  // 'planner' gate above guarantees that flow already ran before COMPASS
+  // could load, so there's no separate contact-collection step in here.
+  var _profile = (function () {
+    try { return JSON.parse(sessionStorage.getItem('ag_planner_profile') || '{}') } catch (e) { return {} }
+  })()
+
   var _messages  = []
   var _typing    = false
   var _optionsEl = null
-  var _state     = 'collecting'   // 'collecting' | 'chatting' | 'done'
-  var _userName  = sessionStorage.getItem('compass_name')  || ''
-  var _userPhone = sessionStorage.getItem('compass_phone') || ''
+  var _state     = 'chatting'   // 'chatting' | 'done'
+  var _userName  = _profile.name  || sessionStorage.getItem('compass_name')  || 'Traveller'
+  var _userPhone = _profile.phone || sessionStorage.getItem('compass_phone') || ''
+  var _userEmail = _profile.email || ''
   var _leadSaved = !!sessionStorage.getItem('compass_lead_saved')
   var _leadId    = sessionStorage.getItem('compass_lead_id') || ''
+  if (_userPhone) sessionStorage.setItem('compass_phone', _userPhone)
+  if (_userName)  sessionStorage.setItem('compass_name',  _userName)
 
   var chatInner = document.getElementById('chat-inner')
   var chatBody  = document.getElementById('chat-body')
@@ -432,17 +442,6 @@ body{
     var offTopic = display.indexOf('[OFF_TOPIC]') === 0
     if (offTopic) display = display.replace('[OFF_TOPIC]','').trim()
     return { display: display, opts: opts, offTopic: offTopic }
-  }
-
-  /* ── Contact info parser ─────────────────────────────── */
-  function _parseContact(text) {
-    var phoneMatch = text.match(/(?:(?:\+?91|0)[\s\-]?)?([6-9]\d{9})/)
-    var phone = phoneMatch ? phoneMatch[1] : ''
-    var noNum = text.replace(/[\+\d][\d\s\-]{8,}/g,'').trim()
-    var cleaned = noNum.replace(/\b(my|name|is|and|phone|number|whatsapp|hi|hello|sure|okay|ok|im|i'm|this|it)\b/gi,' ').replace(/\s+/g,' ').trim()
-    var nameMatch = cleaned.match(/[A-Za-z][A-Za-z\s]{1,40}/)
-    var name = nameMatch ? nameMatch[0].replace(/\s+/g,' ').trim() : ''
-    return { name: name, phone: phone }
   }
 
   /* ── Field extraction from conversation ─────────────── */
@@ -527,9 +526,9 @@ body{
       body: JSON.stringify({
         name:         _userName || 'COMPASS User',
         phone:        _userPhone,
-        email:        fields.email || null,
+        email:        _userEmail || fields.email || null,
         source:       'compass_bot',
-        packageName:  fields.destination || null,
+        packageName:  fields.destination || _profile.destination || null,
         message:      _buildMessage(fields)
       })
     })
@@ -552,8 +551,8 @@ body{
       body: JSON.stringify({
         action:      'update',
         id:          _leadId,
-        email:       fields.email || null,
-        packageName: fields.destination || null,
+        email:       _userEmail || fields.email || null,
+        packageName: fields.destination || _profile.destination || null,
         message:     _buildMessage(fields)
       })
     }).catch(function(){})
@@ -572,35 +571,49 @@ body{
   /* ── Start main conversation ─────────────────────────── */
   function _startChat(firstName) {
     _state = 'chatting'; _updateCounter()
-    var g = 'Lovely to meet you, ' + firstName + '! ✈️ I’m COMPASS, AlpenGlow’s trip planning assistant. Are you dreaming of somewhere specific, or would you like help figuring out where to go?'
+
+    var hasTripContext = !!(_profile.destination || _profile.budget || _profile.duration || _profile.travelerType)
+
+    if (hasTripContext) {
+      // Hidden context turn — informs the LLM of the visitor's Trip Planner
+      // answers without showing a bubble for it. Sent along on the first
+      // real API call (the greeting itself below is scripted, not an LLM call).
+      var ctxBits = []
+      if (_profile.destination)  ctxBits.push('Destination: ' + _profile.destination)
+      if (_profile.travelerType) ctxBits.push('Trip type: ' + _profile.travelerType)
+      if (_profile.duration)     ctxBits.push('Duration: ' + _profile.duration)
+      if (_profile.month)        ctxBits.push('Month: ' + _profile.month)
+      if (_profile.budget)       ctxBits.push('Budget: ' + _profile.budget)
+      _messages.push({
+        role: 'user',
+        content: '[COMPASS_CONTEXT] I already used the Plan Your Trip tool before this chat. My answers there: ' +
+          ctxBits.join(', ') + '. Please use this naturally in our conversation and don\'t ask me to repeat it unless I want to change something.'
+      })
+    }
+
+    var displayBits = []
+    if (_profile.destination)  displayBits.push(_profile.destination)
+    if (_profile.travelerType) displayBits.push('a ' + _profile.travelerType + ' trip')
+    if (_profile.duration)     displayBits.push(_profile.duration)
+    if (_profile.month)        displayBits.push('around ' + _profile.month)
+    if (_profile.budget)       displayBits.push('a ' + _profile.budget.toLowerCase() + ' budget')
+
+    var g = hasTripContext
+      ? 'Lovely to meet you, ' + firstName + '! ✈️ I see from your Plan Your Trip answers you&rsquo;re looking at ' + displayBits.join(', ') + '. Want me to tell you more about that, help refine it, or explore something else entirely?'
+      : 'Lovely to meet you, ' + firstName + '! ✈️ I’m COMPASS, AlpenGlow’s trip planning assistant. Are you dreaming of somewhere specific, or would you like help figuring out where to go?'
+
     _appendMessage('assistant', _fmt(g))
     _messages.push({ role: 'assistant', content: g })
-    _renderOptions(['I have a destination in mind', 'Help me decide', 'Tell me about your packages', 'Current offers & deals'])
+    _renderOptions(hasTripContext
+      ? ['Tell me more about that', 'Help me refine this', 'Show me something else', 'Current offers & deals']
+      : ['I have a destination in mind', 'Help me decide', 'Tell me about your packages', 'Current offers & deals'])
   }
 
   /* ── Main send ──────────────────────────────────────── */
   function _doSend(text) {
     if (!text || _typing || _state === 'done') return
 
-    /* Contact collection phase */
-    if (_state === 'collecting') {
-      _appendMessage('user', _fmt(text))
-      var c = _parseContact(text)
-      if (!c.phone) {
-        _appendMessage('assistant', 'I couldn&rsquo;t catch your phone number &mdash; could you type it again? (e.g. 98765 43210)')
-        return
-      }
-      _userName  = c.name || 'Traveller'
-      _userPhone = c.phone
-      sessionStorage.setItem('compass_name',  _userName)
-      sessionStorage.setItem('compass_phone', _userPhone)
-      if (_getUsed(_userPhone) >= MAX_Q) { _showLimitReached(); return }
-      _saveLead()
-      _startChat(_userName.split(' ')[0])
-      return
-    }
-
-    /* Normal chat phase — check limit first */
+    /* Check limit first */
     if (_getUsed(_userPhone) >= MAX_Q) { _showLimitReached(); return }
 
     _appendMessage('user', _fmt(text))
@@ -650,16 +663,13 @@ body{
   input.addEventListener('input', function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,110)+'px' })
 
   /* ── Init ───────────────────────────────────────────── */
-  if (_userPhone) {
-    // Returning user in this session — skip contact collection
-    if (_getUsed(_userPhone) >= MAX_Q) {
-      _showLimitReached()
-    } else {
-      _startChat(_userName.split(' ')[0] || 'there')
-    }
+  // Contact info always comes from the verified Trip Planner profile (the
+  // 'planner' gate above guarantees it exists before COMPASS can load), so
+  // the chat can start immediately — no in-chat contact collection needed.
+  if (_getUsed(_userPhone) >= MAX_Q) {
+    _showLimitReached()
   } else {
-    // New session — ask for contact info
-    _appendMessage('assistant', 'Hi! I&rsquo;m <strong>COMPASS</strong>, AlpenGlow&rsquo;s trip planning assistant. &#127757;<br><br>To get started and save your personalised trip plan, could you share your <strong>name</strong> and <strong>WhatsApp number</strong>?')
+    _startChat((_userName || 'there').split(' ')[0])
   }
 
 })()
