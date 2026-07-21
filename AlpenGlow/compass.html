@@ -524,12 +524,17 @@ body{
       method: 'POST',
       headers: Object.assign({}, H, { 'Content-Type': 'application/json' }),
       body: JSON.stringify({
-        name:         _userName || 'COMPASS User',
-        phone:        _userPhone,
-        email:        _userEmail || fields.email || null,
-        source:       'compass_bot',
-        packageName:  fields.destination || _profile.destination || null,
-        message:      _buildMessage(fields)
+        name:          _userName || 'COMPASS User',
+        phone:         _userPhone,
+        email:         _userEmail || fields.email || null,
+        source:        'compass_bot',
+        packageName:   fields.destination || _profile.destination || null,
+        message:       _buildMessage(fields),
+        // COMPASS is only reachable after Trip Planner's phone+email OTP
+        // verification (see the isVerified('planner') gate at the top of
+        // this file) — so any lead created here is verified by definition.
+        verifiedPhone: true,
+        verifiedEmail: true
       })
     })
     .then(function(r){ return r.json() })
