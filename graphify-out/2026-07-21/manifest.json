@@ -290,8 +290,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/compass.html": {
-    "mtime": 1784620857.0749931,
-    "ast_hash": "e4ab499157ebc443f5d4bfc7ab964c3f",
+    "mtime": 1784568330.384718,
+    "ast_hash": "bd0432a874181f6f798367ab624f7451",
     "semantic_hash": ""
   },
   "AlpenGlow/dashboard.html": {
@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1784623195.1639931,
-    "ast_hash": "a60ab01a6c713037a29b3d7015818e15",
+    "mtime": 1784571961.6743474,
+    "ast_hash": "2beb3adbb87348c77010d1dc478454e8",
     "semantic_hash": ""
   },
   "PRODUCTION_SECURITY.md": {
@@ -717,36 +717,6 @@
   "AlpenGlow/transparent.png": {
     "mtime": 1782457755.196764,
     "ast_hash": "2375ada15195876f69b266836a8f49e8",
-    "semantic_hash": ""
-  },
-  "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md": {
-    "mtime": 1784622749.8562222,
-    "ast_hash": "1c7ac471d915f36d863e33bd4c66cb25",
-    "semantic_hash": ""
-  },
-  "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md": {
-    "mtime": 1784622772.538186,
-    "ast_hash": "01f8551685f1672492462e57481aa67b",
-    "semantic_hash": ""
-  },
-  "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md": {
-    "mtime": 1784622772.974328,
-    "ast_hash": "31b38ea70b6bc4ec138f7ef398e5ad91",
-    "semantic_hash": ""
-  },
-  "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md": {
-    "mtime": 1784622798.729428,
-    "ast_hash": "e0c7f21ebb8be325f9ffe1eab785fd5f",
-    "semantic_hash": ""
-  },
-  "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md": {
-    "mtime": 1784622799.1520283,
-    "ast_hash": "6c99354a224d862c95a8ec2085b91119",
-    "semantic_hash": ""
-  },
-  "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md": {
-    "mtime": 1784622817.3081093,
-    "ast_hash": "70617c7495aa793e1698ab23b45a01a5",
     "semantic_hash": ""
   }
 }

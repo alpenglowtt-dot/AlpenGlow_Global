@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T08:33:52.822177+00:00",
+  "generated_at": "2026-07-21T08:41:02.502055+00:00",
   "nodes": {
     "alpenglow_compass": {
       "code_fingerprint": "a2257bdc5ff0b8f224411ef5d914ff8fd6e14100ec5a654899f8204fa68dfcbb",
@@ -18,7 +18,7 @@
           "q": "What are the two verification scopes and where do they apply?"
         }
       ],
-      "score": -1.1972e-05,
+      "score": -1.1971e-05,
       "source_file": "AlpenGlow/compass.js",
       "status": "contested",
       "uses": 1,
@@ -35,7 +35,7 @@
           "q": "What are the two verification scopes and where do they apply?"
         }
       ],
-      "score": 0.999983879,
+      "score": 0.999868983,
       "source_file": "AlpenGlow/trip-planner.js",
       "status": "tentative",
       "uses": 1
@@ -85,7 +85,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 0.999997176,
+      "score": 0.999882279,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "contested",
       "uses": 2,
@@ -102,7 +102,7 @@
           "q": "What is the RLS security model for the CRM tables?"
         }
       ],
-      "score": 0.999983994,
+      "score": 0.999869098,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "tentative",
       "uses": 1
@@ -124,7 +124,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 6.181e-06,
+      "score": 6.18e-06,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "contested",
       "uses": 1,
@@ -141,7 +141,7 @@
           "q": "What is the RLS security model for the CRM tables?"
         }
       ],
-      "score": 0.999983994,
+      "score": 0.999869098,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "tentative",
       "uses": 1
@@ -163,7 +163,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 1.3182e-05,
+      "score": 1.3181e-05,
       "source_file": "supabase/functions/submit-lead/index.ts",
       "status": "contested",
       "uses": 1,
