@@ -44,7 +44,10 @@ coverage/
 # typescript
 *.tsbuildinfo
 
-# graphify — regenerated locally per-machine via the post-commit/post-checkout
-# hooks (free, AST-only, no LLM cost). Committing it would just create a
-# throwaway diff after every commit, since the hook rewrites it right after.
-graphify-out/
+# graphify — graph.json/GRAPH_REPORT.md/memory/reflections ARE committed
+# (see below) so a fresh clone on any laptop has the full graph + all
+# accumulated session knowledge immediately, without waiting for a first
+# commit there to trigger the rebuild hook. Only the per-file extraction
+# cache is ignored — pure performance optimization, safe to lose, not
+# useful to read.
+graphify-out/cache/

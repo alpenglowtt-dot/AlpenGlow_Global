@@ -1,0 +1,174 @@
+{
+  "generated_at": "2026-07-21T08:33:52.822177+00:00",
+  "nodes": {
+    "alpenglow_compass": {
+      "code_fingerprint": "a2257bdc5ff0b8f224411ef5d914ff8fd6e14100ec5a654899f8204fa68dfcbb",
+      "label": "compass.js",
+      "last": "2026-07-21T08:33:37.307106+00:00",
+      "neg": 1,
+      "provenance": [
+        {
+          "date": "2026-07-21T08:33:37.307106+00:00",
+          "outcome": "corrected",
+          "q": "Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?"
+        },
+        {
+          "date": "2026-07-21T08:32:52.537186+00:00",
+          "outcome": "useful",
+          "q": "What are the two verification scopes and where do they apply?"
+        }
+      ],
+      "score": -1.1972e-05,
+      "source_file": "AlpenGlow/compass.js",
+      "status": "contested",
+      "uses": 1,
+      "verdict": "dead end"
+    },
+    "alpenglow_trip_planner_inittripplanner": {
+      "code_fingerprint": "fe1553f65e904f137cff446872ac27a7fe42ac124b7e5177ac895a1af5fe9b3e",
+      "label": "initTripPlanner()",
+      "last": "2026-07-21T08:32:52.537186+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-21T08:32:52.537186+00:00",
+          "outcome": "useful",
+          "q": "What are the two verification scopes and where do they apply?"
+        }
+      ],
+      "score": 0.999983879,
+      "source_file": "AlpenGlow/trip-planner.js",
+      "status": "tentative",
+      "uses": 1
+    },
+    "alpenglow_trip_planner_tpcheckbothverified": {
+      "code_fingerprint": "fe1553f65e904f137cff446872ac27a7fe42ac124b7e5177ac895a1af5fe9b3e",
+      "label": "_tpCheckBothVerified()",
+      "last": "2026-07-21T08:32:52.537186+00:00",
+      "neg": 1,
+      "provenance": [
+        {
+          "date": "2026-07-21T08:32:52.537186+00:00",
+          "outcome": "useful",
+          "q": "What are the two verification scopes and where do they apply?"
+        },
+        {
+          "date": "2026-07-21T08:32:29.855222+00:00",
+          "outcome": "corrected",
+          "q": "How does OTP verification connect to CRM lead creation?"
+        }
+      ],
+      "score": 6.065e-06,
+      "source_file": "AlpenGlow/trip-planner.js",
+      "status": "contested",
+      "uses": 1,
+      "verdict": "useful"
+    },
+    "supabase_functions_crm_index": {
+      "code_fingerprint": "2a8eca5b0d1604f2ba3add41a9c12979b2d835efdde6c09fcb8d210fe2d23f2d",
+      "label": "crm/index.ts",
+      "last": "2026-07-21T08:33:19.151028+00:00",
+      "neg": 1,
+      "provenance": [
+        {
+          "date": "2026-07-21T08:33:19.151028+00:00",
+          "outcome": "useful",
+          "q": "How does deploying a code change actually reach production?"
+        },
+        {
+          "date": "2026-07-21T08:32:52.968227+00:00",
+          "outcome": "useful",
+          "q": "What is the RLS security model for the CRM tables?"
+        },
+        {
+          "date": "2026-07-21T08:32:29.855222+00:00",
+          "outcome": "corrected",
+          "q": "How does OTP verification connect to CRM lead creation?"
+        }
+      ],
+      "score": 0.999997176,
+      "source_file": "supabase/functions/crm/index.ts",
+      "status": "contested",
+      "uses": 2,
+      "verdict": "useful"
+    },
+    "supabase_functions_crm_index_followup_writable": {
+      "code_fingerprint": "2a8eca5b0d1604f2ba3add41a9c12979b2d835efdde6c09fcb8d210fe2d23f2d",
+      "label": "FOLLOWUP_WRITABLE",
+      "last": "2026-07-21T08:32:52.968227+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-21T08:32:52.968227+00:00",
+          "outcome": "useful",
+          "q": "What is the RLS security model for the CRM tables?"
+        }
+      ],
+      "score": 0.999983994,
+      "source_file": "supabase/functions/crm/index.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "supabase_functions_crm_index_lead_writable": {
+      "code_fingerprint": "2a8eca5b0d1604f2ba3add41a9c12979b2d835efdde6c09fcb8d210fe2d23f2d",
+      "label": "LEAD_WRITABLE",
+      "last": "2026-07-21T08:32:52.968227+00:00",
+      "neg": 1,
+      "provenance": [
+        {
+          "date": "2026-07-21T08:32:52.968227+00:00",
+          "outcome": "useful",
+          "q": "What is the RLS security model for the CRM tables?"
+        },
+        {
+          "date": "2026-07-21T08:32:29.855222+00:00",
+          "outcome": "corrected",
+          "q": "How does OTP verification connect to CRM lead creation?"
+        }
+      ],
+      "score": 6.181e-06,
+      "source_file": "supabase/functions/crm/index.ts",
+      "status": "contested",
+      "uses": 1,
+      "verdict": "useful"
+    },
+    "supabase_functions_crm_index_safeequal": {
+      "code_fingerprint": "2a8eca5b0d1604f2ba3add41a9c12979b2d835efdde6c09fcb8d210fe2d23f2d",
+      "label": "safeEqual()",
+      "last": "2026-07-21T08:32:52.968227+00:00",
+      "provenance": [
+        {
+          "date": "2026-07-21T08:32:52.968227+00:00",
+          "outcome": "useful",
+          "q": "What is the RLS security model for the CRM tables?"
+        }
+      ],
+      "score": 0.999983994,
+      "source_file": "supabase/functions/crm/index.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "supabase_functions_submit_lead_index": {
+      "code_fingerprint": "a066c10af9e5de0f31c32810dfbbaf71cb5a643a545c49293823d7f5ae3356f0",
+      "label": "submit-lead/index.ts",
+      "last": "2026-07-21T08:33:19.151028+00:00",
+      "neg": 1,
+      "provenance": [
+        {
+          "date": "2026-07-21T08:33:19.151028+00:00",
+          "outcome": "useful",
+          "q": "How does deploying a code change actually reach production?"
+        },
+        {
+          "date": "2026-07-21T08:32:29.855222+00:00",
+          "outcome": "corrected",
+          "q": "How does OTP verification connect to CRM lead creation?"
+        }
+      ],
+      "score": 1.3182e-05,
+      "source_file": "supabase/functions/submit-lead/index.ts",
+      "status": "contested",
+      "uses": 1,
+      "verdict": "useful"
+    }
+  },
+  "version": 1
+}
