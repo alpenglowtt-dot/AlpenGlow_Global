@@ -1,16 +1,16 @@
-# Graph Report - AlpenGlow work  (2026-07-26)
+# Graph Report - AlpenGlow work  (2026-07-21)
 
 ## Corpus Check
-- 69 files · ~525,214 words
+- 67 files · ~523,351 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 173 nodes · 229 edges · 33 communities (16 shown, 17 thin omitted)
+- 165 nodes · 221 edges · 32 communities (15 shown, 17 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `aeceaf1c`
+- Built from commit: `9006bff7`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -43,7 +43,6 @@
 - Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?
 - Q: How does deploying a code change actually reach production?
 - Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?
-- billing/index.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `_bindStep()` - 11 edges
@@ -66,7 +65,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (33 total, 17 thin omitted)
+## Communities (32 total, 17 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.13
@@ -112,12 +111,8 @@ Nodes (4): Answer, Outcome, Q: How does deploying a code change actually reach p
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?, Source Nodes
 
-### Community 32 - "billing/index.ts"
-Cohesion: 0.29
-Nodes (4): ALLOWED_ORIGINS, corsFor(), CUSTOMER_WRITABLE, INVOICE_WRITABLE
-
 ## Knowledge Gaps
-- **48 isolated node(s):** `CUSTOMER_WRITABLE`, `INVOICE_WRITABLE`, `Deploy workflow`, `graphify`, `Answer` (+43 more)
+- **46 isolated node(s):** `Deploy workflow`, `graphify`, `Answer`, `Outcome`, `Source Nodes` (+41 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -128,7 +123,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
 - **Why does `_renderStep()` connect `Community 0` to `Community 2`?**
   _High betweenness centrality (0.001) - this node is a cross-community bridge._
-- **What connects `CUSTOMER_WRITABLE`, `INVOICE_WRITABLE`, `Deploy workflow` to the rest of the system?**
-  _48 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `Deploy workflow`, `graphify`, `Answer` to the rest of the system?**
+  _46 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.12773109243697478 - nodes in this community are weakly interconnected._

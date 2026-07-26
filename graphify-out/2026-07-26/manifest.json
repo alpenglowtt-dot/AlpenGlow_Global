@@ -420,8 +420,8 @@
     "semantic_hash": ""
   },
   "deploy/docker-compose.override.yml": {
-    "mtime": 1785082257.9700797,
-    "ast_hash": "68b7e9e115a149a1946b2b76af14ec41",
+    "mtime": 1784561494.9460807,
+    "ast_hash": "29514853f736f87a9182b261852e5965",
     "semantic_hash": ""
   },
   "AlpenGlow/AlpenGlow_Logo_Finalised/Alpenglow_BusinessCard_Inspiration (1).png": {
@@ -747,16 +747,6 @@
   "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md": {
     "mtime": 1784622817.3081093,
     "ast_hash": "70617c7495aa793e1698ab23b45a01a5",
-    "semantic_hash": ""
-  },
-  "supabase/functions/billing/index.ts": {
-    "mtime": 1785082216.2526371,
-    "ast_hash": "e93ab5a406f3be80e1b63d3f7f2d8f00",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/010_billing.sql": {
-    "mtime": 1785082160.069666,
-    "ast_hash": "d9859bbcfc701bc3f34c14bb1eae6010",
     "semantic_hash": ""
   }
 }

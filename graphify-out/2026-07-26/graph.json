@@ -4,103 +4,15 @@
   "graph": {},
   "nodes": [
     {
-      "label": "billing/index.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_billing_index",
-      "community": 32,
-      "community_name": "billing/index.ts",
-      "norm_label": "billing/index.ts"
-    },
-    {
-      "label": "ALLOWED_ORIGINS",
-      "file_type": "code",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L25",
-      "_origin": "ast",
-      "id": "supabase_functions_billing_index_allowed_origins",
-      "community": 32,
-      "community_name": "billing/index.ts",
-      "norm_label": "allowed_origins"
-    },
-    {
-      "label": "corsFor()",
-      "file_type": "code",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L33",
-      "_origin": "ast",
-      "id": "supabase_functions_billing_index_corsfor",
-      "community": 32,
-      "community_name": "billing/index.ts",
-      "norm_label": "corsfor()"
-    },
-    {
-      "label": "CUSTOMER_WRITABLE",
-      "file_type": "code",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L50",
-      "_origin": "ast",
-      "id": "supabase_functions_billing_index_customer_writable",
-      "community": 32,
-      "community_name": "billing/index.ts",
-      "norm_label": "customer_writable"
-    },
-    {
-      "label": "INVOICE_WRITABLE",
-      "file_type": "code",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L55",
-      "_origin": "ast",
-      "id": "supabase_functions_billing_index_invoice_writable",
-      "community": 32,
-      "community_name": "billing/index.ts",
-      "norm_label": "invoice_writable"
-    },
-    {
-      "label": "pick()",
-      "file_type": "code",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L63",
-      "_origin": "ast",
-      "id": "supabase_functions_billing_index_pick",
-      "community": 32,
-      "community_name": "billing/index.ts",
-      "norm_label": "pick()"
-    },
-    {
-      "label": "blankToNull()",
-      "file_type": "code",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L70",
-      "_origin": "ast",
-      "id": "supabase_functions_billing_index_blanktonull",
-      "community": 32,
-      "community_name": "billing/index.ts",
-      "norm_label": "blanktonull()"
-    },
-    {
-      "label": "safeEqual()",
-      "file_type": "code",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L78",
-      "_origin": "ast",
-      "id": "supabase_functions_billing_index_safeequal",
-      "community": 32,
-      "community_name": "billing/index.ts",
-      "norm_label": "safeequal()"
-    },
-    {
       "label": "CLAUDE.md",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "claude",
       "community": 26,
       "community_name": "CLAUDE.md",
-      "norm_label": "claude.md",
-      "id": "claude"
+      "norm_label": "claude.md"
     },
     {
       "label": "Deploy workflow",
@@ -108,10 +20,10 @@
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "claude_deploy_workflow",
       "community": 26,
       "community_name": "CLAUDE.md",
-      "norm_label": "deploy workflow",
-      "id": "claude_deploy_workflow"
+      "norm_label": "deploy workflow"
     },
     {
       "label": "graphify",
@@ -119,10 +31,10 @@
       "source_file": "CLAUDE.md",
       "source_location": "L23",
       "_origin": "ast",
+      "id": "claude_graphify",
       "community": 26,
       "community_name": "CLAUDE.md",
-      "norm_label": "graphify",
-      "id": "claude_graphify"
+      "norm_label": "graphify"
     },
     {
       "label": "query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
@@ -130,10 +42,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea",
       "community": 1,
       "community_name": "Community 1",
-      "norm_label": "query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea"
+      "norm_label": "query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md"
     },
     {
       "label": "Q: How does OTP verification connect to CRM lead creation?",
@@ -141,10 +53,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L11",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
       "community": 1,
       "community_name": "Community 1",
-      "norm_label": "q: how does otp verification connect to crm lead creation?",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation"
+      "norm_label": "q: how does otp verification connect to crm lead creation?"
     },
     {
       "label": "Answer",
@@ -152,10 +64,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L13",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_answer",
       "community": 1,
       "community_name": "Community 1",
-      "norm_label": "answer",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_answer"
+      "norm_label": "answer"
     },
     {
       "label": "Outcome",
@@ -163,10 +75,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L17",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_outcome",
       "community": 1,
       "community_name": "Community 1",
-      "norm_label": "outcome",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_outcome"
+      "norm_label": "outcome"
     },
     {
       "label": "Source Nodes",
@@ -174,10 +86,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L22",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_source_nodes",
       "community": 1,
       "community_name": "Community 1",
-      "norm_label": "source nodes",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_source_nodes"
+      "norm_label": "source nodes"
     },
     {
       "label": "query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
@@ -185,10 +97,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do",
       "community": 25,
       "community_name": "_sbSubmit",
-      "norm_label": "query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do"
+      "norm_label": "query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md"
     },
     {
       "label": "Q: What are the two verification scopes and where do they apply?",
@@ -196,10 +108,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L10",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
       "community": 25,
       "community_name": "_sbSubmit",
-      "norm_label": "q: what are the two verification scopes and where do they apply?",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply"
+      "norm_label": "q: what are the two verification scopes and where do they apply?"
     },
     {
       "label": "Answer",
@@ -207,10 +119,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L12",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_answer",
       "community": 25,
       "community_name": "_sbSubmit",
-      "norm_label": "answer",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_answer"
+      "norm_label": "answer"
     },
     {
       "label": "Outcome",
@@ -218,10 +130,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L16",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_outcome",
       "community": 25,
       "community_name": "_sbSubmit",
-      "norm_label": "outcome",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_outcome"
+      "norm_label": "outcome"
     },
     {
       "label": "Source Nodes",
@@ -229,10 +141,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L20",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_source_nodes",
       "community": 25,
       "community_name": "_sbSubmit",
-      "norm_label": "source nodes",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_source_nodes"
+      "norm_label": "source nodes"
     },
     {
       "label": "query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
@@ -240,10 +152,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables"
+      "norm_label": "query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md"
     },
     {
       "label": "Q: What is the RLS security model for the CRM tables?",
@@ -251,10 +163,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L10",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "q: what is the rls security model for the crm tables?",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables"
+      "norm_label": "q: what is the rls security model for the crm tables?"
     },
     {
       "label": "Answer",
@@ -262,10 +174,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L12",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_answer",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "answer",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_answer"
+      "norm_label": "answer"
     },
     {
       "label": "Outcome",
@@ -273,10 +185,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L16",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_outcome",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "outcome",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_outcome"
+      "norm_label": "outcome"
     },
     {
       "label": "Source Nodes",
@@ -284,10 +196,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L20",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_source_nodes",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "source nodes",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_source_nodes"
+      "norm_label": "source nodes"
     },
     {
       "label": "query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
@@ -295,10 +207,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit"
+      "norm_label": "query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md"
     },
     {
       "label": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
@@ -306,10 +218,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L11",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "q: why did the whatsapp otp template keep failing with meta api errors 132001 and 132018?",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018"
+      "norm_label": "q: why did the whatsapp otp template keep failing with meta api errors 132001 and 132018?"
     },
     {
       "label": "Answer",
@@ -317,10 +229,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L13",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_answer",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "answer",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_answer"
+      "norm_label": "answer"
     },
     {
       "label": "Outcome",
@@ -328,10 +240,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L17",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_outcome",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "outcome",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_outcome"
+      "norm_label": "outcome"
     },
     {
       "label": "Source Nodes",
@@ -339,10 +251,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L22",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_source_nodes",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "source nodes",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_source_nodes"
+      "norm_label": "source nodes"
     },
     {
       "label": "query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
@@ -350,10 +262,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr"
+      "norm_label": "query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md"
     },
     {
       "label": "Q: How does deploying a code change actually reach production?",
@@ -361,10 +273,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L10",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "q: how does deploying a code change actually reach production?",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production"
+      "norm_label": "q: how does deploying a code change actually reach production?"
     },
     {
       "label": "Answer",
@@ -372,10 +284,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L12",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_answer",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "answer",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_answer"
+      "norm_label": "answer"
     },
     {
       "label": "Outcome",
@@ -383,10 +295,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L16",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_outcome",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "outcome",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_outcome"
+      "norm_label": "outcome"
     },
     {
       "label": "Source Nodes",
@@ -394,10 +306,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L20",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_source_nodes",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "source nodes",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_source_nodes"
+      "norm_label": "source nodes"
     },
     {
       "label": "query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
@@ -405,10 +317,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e"
+      "norm_label": "query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md"
     },
     {
       "label": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
@@ -416,10 +328,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L11",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "q: why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic"
+      "norm_label": "q: why does the graph barely represent compass.html even though it has hundreds of lines of real logic?"
     },
     {
       "label": "Answer",
@@ -427,10 +339,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L13",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_answer",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "answer",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_answer"
+      "norm_label": "answer"
     },
     {
       "label": "Outcome",
@@ -438,10 +350,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L17",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_outcome",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "outcome",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_outcome"
+      "norm_label": "outcome"
     },
     {
       "label": "Source Nodes",
@@ -449,10 +361,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L22",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_source_nodes",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "source nodes",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_source_nodes"
+      "norm_label": "source nodes"
     },
     {
       "label": "trip-planner.js",
@@ -1959,102 +1871,13 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L25",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_billing_index",
-      "target": "supabase_functions_billing_index_allowed_origins",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L70",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_billing_index",
-      "target": "supabase_functions_billing_index_blanktonull",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L33",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_billing_index",
-      "target": "supabase_functions_billing_index_corsfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L50",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_billing_index",
-      "target": "supabase_functions_billing_index_customer_writable",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L55",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_billing_index",
-      "target": "supabase_functions_billing_index_invoice_writable",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L63",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_billing_index",
-      "target": "supabase_functions_billing_index_pick",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L78",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_billing_index",
-      "target": "supabase_functions_billing_index_safeequal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "supabase/functions/billing/index.ts",
-      "source_location": "L39",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_billing_index_corsfor",
-      "target": "supabase_functions_billing_index_allowed_origins"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "claude",
-      "target": "claude_deploy_workflow"
+      "target": "claude_deploy_workflow",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2063,9 +1886,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "claude",
-      "target": "claude_graphify"
+      "target": "claude_graphify",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2074,9 +1897,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea",
-      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation"
+      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2085,9 +1908,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
-      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_answer"
+      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_answer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2096,9 +1919,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
-      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_outcome"
+      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_outcome",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2107,9 +1930,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
-      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_source_nodes"
+      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_source_nodes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2118,9 +1941,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do",
-      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply"
+      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2129,9 +1952,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
-      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_answer"
+      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_answer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2140,9 +1963,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
-      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_outcome"
+      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_outcome",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2151,9 +1974,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
-      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_source_nodes"
+      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_source_nodes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2162,9 +1985,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables",
-      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables"
+      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2173,9 +1996,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
-      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_answer"
+      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_answer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2184,9 +2007,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
-      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_outcome"
+      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_outcome",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2195,9 +2018,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
-      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_source_nodes"
+      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_source_nodes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2206,9 +2029,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit",
-      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018"
+      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2217,9 +2040,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
-      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_answer"
+      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_answer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2228,9 +2051,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
-      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_outcome"
+      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_outcome",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2239,9 +2062,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
-      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_source_nodes"
+      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_source_nodes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2250,9 +2073,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr",
-      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production"
+      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2261,9 +2084,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
-      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_answer"
+      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_answer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2272,9 +2095,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
-      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_outcome"
+      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_outcome",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2283,9 +2106,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
-      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_source_nodes"
+      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_source_nodes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2294,9 +2117,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e",
-      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic"
+      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2305,9 +2128,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
-      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_answer"
+      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_answer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2316,9 +2139,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
-      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_outcome"
+      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_outcome",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2327,9 +2150,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
-      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_source_nodes"
+      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_source_nodes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4564,5 +4387,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "aeceaf1c9b4539d01553694ce1e7020a50d207bb"
+  "built_at_commit": "9006bff7d97c7cccbc3d676382e0c26eb1d721c4"
 }
