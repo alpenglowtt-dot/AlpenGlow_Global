@@ -29,15 +29,24 @@ echo "==> [1/3] Syncing edge functions..."
 tar czf - -C "$LOCAL_ROOT/supabase/functions" . | \
   ssh "$VPS_HOST" "rm -rf $REMOTE_REPO_DIR/functions && mkdir -p $REMOTE_REPO_DIR/functions && tar xzf - -C $REMOTE_REPO_DIR/functions"
 # Copy each function folder from the reference copy into the LIVE copy the
-# containers actually mount. Done per-folder (not a wipe-and-replace of the
-# whole directory) so the 'main' folder — which exists only in
+# containers actually mount, THEN remove any live folder that no longer has a
+# matching folder in the reference copy — so deleting a function from the repo
+# actually removes it from the running stack instead of leaving stale code
+# behind. The 'main' folder is the one exception: it exists only in
 # volumes/functions (Kong/edge-runtime routing entrypoint, not part of our
-# repo) — is never touched or deleted.
+# repo) and must never be touched or deleted.
 ssh "$VPS_HOST" '
   for d in '"$REMOTE_REPO_DIR"'/functions/*/; do
     name=$(basename "$d")
     rm -rf "'"$REMOTE_BACKEND_DIR"'/volumes/functions/$name"
     cp -r "$d" "'"$REMOTE_BACKEND_DIR"'/volumes/functions/$name"
+  done
+  for d in '"$REMOTE_BACKEND_DIR"'/volumes/functions/*/; do
+    name=$(basename "$d")
+    if [ "$name" != "main" ] && [ ! -d "'"$REMOTE_REPO_DIR"'/functions/$name" ]; then
+      echo "  - removing stale function: $name"
+      rm -rf "$d"
+    fi
   done
 '
 
