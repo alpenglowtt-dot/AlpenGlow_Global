@@ -4,34 +4,92 @@
   "graph": {},
   "nodes": [
     {
-      "label": "vps-deploy.sh",
+      "label": "billing/index.ts",
       "file_type": "code",
-      "source_file": "deploy/vps-deploy.sh",
+      "source_file": "supabase/functions/billing/index.ts",
       "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
       "_origin": "ast",
-      "id": "deploy_vps_deploy",
-      "community": 21,
-      "community_name": "Community 21",
-      "norm_label": "vps-deploy.sh"
+      "id": "supabase_functions_billing_index",
+      "community": 32,
+      "community_name": "billing/index.ts",
+      "norm_label": "billing/index.ts"
     },
     {
-      "label": "vps-deploy.sh script",
+      "label": "ALLOWED_ORIGINS",
       "file_type": "code",
-      "source_file": "deploy/vps-deploy.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L25",
       "_origin": "ast",
-      "id": "deploy_vps_deploy_sh__entry",
-      "community": 21,
-      "community_name": "Community 21",
-      "norm_label": "vps-deploy.sh script"
+      "id": "supabase_functions_billing_index_allowed_origins",
+      "community": 32,
+      "community_name": "billing/index.ts",
+      "norm_label": "allowed_origins"
+    },
+    {
+      "label": "corsFor()",
+      "file_type": "code",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "supabase_functions_billing_index_corsfor",
+      "community": 32,
+      "community_name": "billing/index.ts",
+      "norm_label": "corsfor()"
+    },
+    {
+      "label": "CUSTOMER_WRITABLE",
+      "file_type": "code",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "supabase_functions_billing_index_customer_writable",
+      "community": 32,
+      "community_name": "billing/index.ts",
+      "norm_label": "customer_writable"
+    },
+    {
+      "label": "INVOICE_WRITABLE",
+      "file_type": "code",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "supabase_functions_billing_index_invoice_writable",
+      "community": 32,
+      "community_name": "billing/index.ts",
+      "norm_label": "invoice_writable"
+    },
+    {
+      "label": "pick()",
+      "file_type": "code",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "supabase_functions_billing_index_pick",
+      "community": 32,
+      "community_name": "billing/index.ts",
+      "norm_label": "pick()"
+    },
+    {
+      "label": "blankToNull()",
+      "file_type": "code",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L70",
+      "_origin": "ast",
+      "id": "supabase_functions_billing_index_blanktonull",
+      "community": 32,
+      "community_name": "billing/index.ts",
+      "norm_label": "blanktonull()"
+    },
+    {
+      "label": "safeEqual()",
+      "file_type": "code",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L78",
+      "_origin": "ast",
+      "id": "supabase_functions_billing_index_safeequal",
+      "community": 32,
+      "community_name": "billing/index.ts",
+      "norm_label": "safeequal()"
     },
     {
       "label": "CLAUDE.md",
@@ -1024,6 +1082,36 @@
       "id": "alpenglow_trip_planner_uuid"
     },
     {
+      "label": "vps-deploy.sh",
+      "file_type": "code",
+      "source_file": "deploy/vps-deploy.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "Community 21",
+      "norm_label": "vps-deploy.sh",
+      "id": "deploy_vps_deploy"
+    },
+    {
+      "label": "vps-deploy.sh script",
+      "file_type": "code",
+      "source_file": "deploy/vps-deploy.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "Community 21",
+      "norm_label": "vps-deploy.sh script",
+      "id": "deploy_vps_deploy_sh__entry"
+    },
+    {
       "label": "setup-new-laptop.sh",
       "file_type": "code",
       "source_file": "scripts/setup-new-laptop.sh",
@@ -1871,13 +1959,91 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "deploy/vps-deploy.sh",
-      "source_location": "L1",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "deploy_vps_deploy",
-      "target": "deploy_vps_deploy_sh__entry",
+      "source": "supabase_functions_billing_index",
+      "target": "supabase_functions_billing_index_allowed_origins",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "supabase_functions_billing_index",
+      "target": "supabase_functions_billing_index_blanktonull",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "supabase_functions_billing_index",
+      "target": "supabase_functions_billing_index_corsfor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "supabase_functions_billing_index",
+      "target": "supabase_functions_billing_index_customer_writable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "supabase_functions_billing_index",
+      "target": "supabase_functions_billing_index_invoice_writable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "supabase_functions_billing_index",
+      "target": "supabase_functions_billing_index_pick",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "supabase_functions_billing_index",
+      "target": "supabase_functions_billing_index_safeequal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "supabase/functions/billing/index.ts",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "supabase_functions_billing_index_corsfor",
+      "target": "supabase_functions_billing_index_allowed_origins"
     },
     {
       "relation": "contains",
@@ -3792,6 +3958,17 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "deploy/vps-deploy.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_vps_deploy",
+      "target": "deploy_vps_deploy_sh__entry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "scripts/setup-new-laptop.sh",
       "source_location": "L1",
       "weight": 1.0,
@@ -4387,5 +4564,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "14e0719b6b00199d8a3709aa2738847cf4e51c1c"
+  "built_at_commit": "aeceaf1c9b4539d01553694ce1e7020a50d207bb"
 }

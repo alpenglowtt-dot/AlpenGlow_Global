@@ -20,9 +20,9 @@
     "semantic_hash": "b55f369e340f94bc76f4f8bd49386b85"
   },
   "AlpenGlow/data/destinations.json": {
-    "mtime": 1785222435.8566523,
-    "ast_hash": "f9acb3f897e343bd479453252603643d",
-    "semantic_hash": ""
+    "mtime": 1782496340.7234607,
+    "ast_hash": "d3af582d05536cb33db7020d75b3108f",
+    "semantic_hash": "d3af582d05536cb33db7020d75b3108f"
   },
   "AlpenGlow/data/offers.json": {
     "mtime": 1782495437.8753755,
@@ -30,9 +30,9 @@
     "semantic_hash": "f339106b4d54c54f9e903fa037b55999"
   },
   "AlpenGlow/data/packages.json": {
-    "mtime": 1785222404.9601934,
-    "ast_hash": "a6d02dc6cfd139c4818c4ad07b98e9cb",
-    "semantic_hash": ""
+    "mtime": 1782568565.2923222,
+    "ast_hash": "0ba350dc14c2e558e5af75186d526fb3",
+    "semantic_hash": "0ba350dc14c2e558e5af75186d526fb3"
   },
   "AlpenGlow/data/pages/australia.json": {
     "mtime": 1782812394.5429413,
@@ -160,9 +160,9 @@
     "semantic_hash": "008fb76a90461193091acb956afbb761"
   },
   "deploy/vps-deploy.sh": {
-    "mtime": 1785136253.0835054,
-    "ast_hash": "1d29867ae263fc54b5724a5ba0d89a2f",
-    "semantic_hash": ""
+    "mtime": 1784568804.5846446,
+    "ast_hash": "112cc220037eab10d60b5275c6921a12",
+    "semantic_hash": "112cc220037eab10d60b5275c6921a12"
   },
   "supabase/.temp/linked-project.json": {
     "mtime": 1782457756.3936706,
@@ -305,8 +305,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/index.html": {
-    "mtime": 1785223193.2035592,
-    "ast_hash": "d52e375d489cc622126eb0cabdb2cbfb",
+    "mtime": 1784564937.8403103,
+    "ast_hash": "dabe4892ba08ff86d027fc8d38a24ad5",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/australia.html": {
@@ -749,14 +749,14 @@
     "ast_hash": "70617c7495aa793e1698ab23b45a01a5",
     "semantic_hash": ""
   },
+  "supabase/functions/billing/index.ts": {
+    "mtime": 1785082216.2526371,
+    "ast_hash": "e93ab5a406f3be80e1b63d3f7f2d8f00",
+    "semantic_hash": ""
+  },
   "supabase/migrations/010_billing.sql": {
     "mtime": 1785082160.069666,
     "ast_hash": "d9859bbcfc701bc3f34c14bb1eae6010",
-    "semantic_hash": ""
-  },
-  "supabase/migrations/011_retire_billing.sql": {
-    "mtime": 1785135609.8761117,
-    "ast_hash": "00a920edd9c0938d1e3d6915ae924547",
     "semantic_hash": ""
   }
 }
