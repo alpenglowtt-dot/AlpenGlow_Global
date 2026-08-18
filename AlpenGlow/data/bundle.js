@@ -98,13 +98,13 @@ window.ALPEN_DATA = {
           "link": "packages/srilanka.html"
         }
       ],
-      "id": "dest_msxiz8ic"
+      "id": "dest_msxiz8is"
     },
     {
       "slug": "longhaul",
       "number": "5 destinations",
       "name": "Once-in-a-Lifetime",
-      "countries": "Scandinavia · Japan · NZ · Australia · S. Korea",
+      "countries": "Scandinavia · NZ · Australia · S. Korea",
       "description": "Bucket-list journeys built for travelers who plan years, not weekends, ahead.",
       "image_url": "aurora.jpg",
       "panel_title": "The High-Value Long Haul",
@@ -116,12 +116,6 @@ window.ALPEN_DATA = {
           "desc": "Fjords carved by glaciers, and cities that shut down for the midnight sun.",
           "image_url": "norway.jpg",
           "link": "packages/norway.html"
-        },
-        {
-          "name": "Japan",
-          "desc": "Neon and shrines, sometimes on the same block, ten minutes apart by train.",
-          "image_url": "japan.png",
-          "link": "packages/japan.html"
         },
         {
           "name": "New Zealand",
@@ -142,7 +136,7 @@ window.ALPEN_DATA = {
           "link": "packages/southkorea.html"
         }
       ],
-      "id": "dest_msxiz8id"
+      "id": "dest_msxiz8it"
     },
     {
       "slug": "islands",
@@ -180,7 +174,7 @@ window.ALPEN_DATA = {
           "link": "packages/bali.html"
         }
       ],
-      "id": "dest_msxiz8ie"
+      "id": "dest_msxiz8iu"
     },
     {
       "slug": "cruises",
@@ -212,7 +206,7 @@ window.ALPEN_DATA = {
           "link": "packages/resortsworld.html"
         }
       ],
-      "id": "dest_msxiz8if"
+      "id": "dest_msxiz8iv"
     }
   ],
   "packages": [
@@ -225,7 +219,7 @@ window.ALPEN_DATA = {
       "image_url": "norway.jpg",
       "link": "packages/norway.html",
       "sort_order": 1,
-      "active": true
+      "active": false
     },
     {
       "id": "2",
@@ -258,7 +252,7 @@ window.ALPEN_DATA = {
       "image_url": "swissalps.jpg",
       "link": "packages/switzerland.html",
       "sort_order": 4,
-      "active": true
+      "active": false
     },
     {
       "id": "5",
@@ -269,7 +263,7 @@ window.ALPEN_DATA = {
       "image_url": "japan.jpg",
       "link": "packages/japan.html",
       "sort_order": 5,
-      "active": true
+      "active": false
     },
     {
       "id": "6",
@@ -648,8 +642,8 @@ window.ALPEN_DATA = {
       "page_title": "Japan — Land of Contrasts | Alpen Glow Tours and Travels",
       "hero_image_url": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1600&q=80",
       "bg_image_url": "pagoda.jpg",
-      "duration": "9 Days / 8 Nights",
       "location": "Japan",
+      "duration": "9 Days / 8 Nights",
       "title": "Japan — Land of Contrasts",
       "overview_heading": "Overview",
       "overview_paragraphs": [

@@ -34,13 +34,14 @@
         "image_url": "srilanka.jpg",
         "link": "packages/srilanka.html"
       }
-    ]
+    ],
+    "id": "dest_msxiz8is"
   },
   {
     "slug": "longhaul",
     "number": "5 destinations",
     "name": "Once-in-a-Lifetime",
-    "countries": "Scandinavia · Japan · NZ · Australia · S. Korea",
+    "countries": "Scandinavia · NZ · Australia · S. Korea",
     "description": "Bucket-list journeys built for travelers who plan years, not weekends, ahead.",
     "image_url": "aurora.jpg",
     "panel_title": "The High-Value Long Haul",
@@ -52,12 +53,6 @@
         "desc": "Fjords carved by glaciers, and cities that shut down for the midnight sun.",
         "image_url": "norway.jpg",
         "link": "packages/norway.html"
-      },
-      {
-        "name": "Japan",
-        "desc": "Neon and shrines, sometimes on the same block, ten minutes apart by train.",
-        "image_url": "japan.png",
-        "link": "packages/japan.html"
       },
       {
         "name": "New Zealand",
@@ -77,7 +72,8 @@
         "image_url": "southkorea.jpg",
         "link": "packages/southkorea.html"
       }
-    ]
+    ],
+    "id": "dest_msxiz8it"
   },
   {
     "slug": "islands",
@@ -114,7 +110,8 @@
         "image_url": "bali.jpg",
         "link": "packages/bali.html"
       }
-    ]
+    ],
+    "id": "dest_msxiz8iu"
   },
   {
     "slug": "cruises",
@@ -145,6 +142,7 @@
         "image_url": "resortsworld.jpg",
         "link": "packages/resortsworld.html"
       }
-    ]
+    ],
+    "id": "dest_msxiz8iv"
   }
 ]
