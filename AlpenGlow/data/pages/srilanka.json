@@ -1,24 +1,98 @@
 {
   "slug": "srilanka",
-  "page_title": "Sri Lanka - Ancient Kingdoms and Coastline | Alpen Glow Tours and Travels",
+  "page_title": "Sri Lanka - Ramayana Trail | Alpen Glow Tours and Travels",
   "hero_image_url": "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1600&q=80",
+  "bg_image_url": "https://images.unsplash.com/photo-1574611122955-5baa61496637?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "location": "Sub-Continent - Sri Lanka",
-  "duration": "7 Days / 6 Nights",
-  "title": "Sri Lanka - Ancient Kingdoms and Coastline",
+  "duration": "8 Days / 7 Nights.",
+  "title": "Sri Lanka - Ramayana Trail",
   "overview_heading": "Overview",
   "overview_paragraphs": [
-    "Sri Lanka fits an unreasonable amount of variety into a small island — ancient rock fortresses, tea-country hill stations, wildlife safaris, and a south coast of palm-lined beaches, all reachable within a few hours' drive of each other. This trip threads through the cultural triangle before winding down on the coast.",
+    "This trip traces Sri Lanka along two threads at once: the Ramayana trail linking ancient temples across the island's west, north, and east, and the cultural triangle's UNESCO landmarks at Sigiriya, Dambulla, and Kandy. It runs coast to coast and up into hill country, closing in Colombo's colonial-era streets.\n\nBest for travelers who want mythology and pilgrimage sites alongside Sri Lanka's most famous ruins, temples, and tea country.",
     "Good for travelers who want history, hill-country scenery, and beach time all in one trip."
   ],
-  "places_heading": "",
-  "places": [],
+  "places_heading": "Explore the Cities",
+  "places": [
+    {
+      "key": "anuradhapura",
+      "name": "Anuradhapura",
+      "tagline": "Where Rama is said to have installed the island's first Shiva lingam.",
+      "card_image_url": "https://images.unsplash.com/photo-1637557056625-c133d59dc460?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1659244352464-75e539618056?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "THE FIRST STOP ON THE RAMAYANA TRAIL",
+      "desc": "Anuradhapura anchors the start of the trail west of Colombo, built around Munneshwaram Temple, one of Sri Lanka's five major Shiva Ishvarams, and the nearby Manavari Temple, where legend holds Rama installed a lingam as penance after killing Ravana."
+    },
+    {
+      "key": "jaffna",
+      "name": "Jaffna",
+      "tagline": "A fortified peninsula city with a bottomless well tied to Sita's thirst.",
+      "card_image_url": "https://images.unsplash.com/photo-1591410448119-1b49cbb3b83e?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1725680968792-c8dce6d6cf18?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "THE NORTH'S COLONIAL PORT AND ANCIENT KINGDOM",
+      "desc": "Once the seat of a four-century medieval kingdom, Jaffna carries Portuguese and Dutch fortifications alongside Hindu shrines: the Dutch-renovated Jaffna Fort, Nallur Kandaswamy Kovil, and the Nilavarai Bottomless Well, said to have sprung from an arrow Rama fired to find Sita water."
+    },
+    {
+      "key": "trincomalee",
+      "name": "Trincomalee",
+      "tagline": "An ancient seaport temple town on Sri Lanka's east coast.",
+      "card_image_url": "https://images.unsplash.com/photo-1552055568-f8c4fb8c6320?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://plus.unsplash.com/premium_photo-1712226714269-4b4d55f040c0?q=80&w=705&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "A HARBOR CITY BUILT AROUND ONE OF THE ISHVARAMS",
+      "desc": "Trincomalee has drawn traders and pilgrims for centuries around Koneshwaram Temple, one of the five Ishvarams, alongside Pathrakali Amman Temple and the naturally warm Kanniya Hot Springs."
+    },
+    {
+      "key": "sigiriya",
+      "name": "Sigiriya & Dambulla",
+      "tagline": "A 5th-century rock fortress and a cave temple carved into the hillside.",
+      "card_image_url": "https://images.unsplash.com/photo-1580794749460-76f97b7180d8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1612862862126-865765df2ded?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "THE CULTURAL TRIANGLE'S TWO UNESCO LANDMARKS",
+      "desc": "Sigiriya Rock rises 200 meters out of the jungle, its summit ringed by ancient water gardens and the famous frescoes of the Heavenly Maidens. Nearby, Dambulla's cave temple complex holds over 2,000 square meters of painted walls and more than 150 Buddha images carved into five rock chambers."
+    },
+    {
+      "key": "kandy",
+      "name": "Kandy",
+      "tagline": "The last of Sri Lanka's independent kingdoms, held in a ring of mountains.",
+      "card_image_url": "https://images.unsplash.com/photo-1619974643633-12acfdcedd16?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1656497107000-d0859a4017ee?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "A UNESCO HILL CAPITAL AND HOME TO THE TOOTH RELIC",
+      "desc": "Kandy survived two centuries of colonial pressure before falling to the British, and still centers on the Temple of the Tooth, alongside the Royal Botanical Gardens and an evening of traditional Kandyan dance."
+    },
+    {
+      "key": "nuwaraeliya",
+      "name": "Nuwara Eliya",
+      "tagline": "Sri Lanka's tea country, cool enough to be called \"Little England.\"",
+      "card_image_url": "https://images.unsplash.com/photo-1610017810004-a6f3c531df34?q=80&w=1722&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1706769731521-578e98e221bc?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "THE ISLAND'S HIGHEST TOWN, BUILT BY THE BRITISH",
+      "desc": "Sitting near 2,000 meters, Nuwara Eliya keeps its colonial-era bungalows and hedgerows alongside tea plantations and the Hakgala Botanical Garden, with a detour to Sita Amman Temple, believed to mark where Sita was held captive."
+    },
+    {
+      "key": "kataragama",
+      "name": "Kataragama",
+      "tagline": "A multi-faith pilgrimage town shared by Hindus, Buddhists, and Muslims.",
+      "card_image_url": "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1651264042769-ef84e30f4ac8?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "WHERE THREE FAITHS CONVERGE ON ONE SHRINE",
+      "desc": "Kataragama Murugan Temple has drawn pilgrims since the 5th century, its riverside setting also holding Divurumpola, where legend says Sita underwent her trial by fire."
+    },
+    {
+      "key": "colombo",
+      "name": "Colombo",
+      "tagline": "A commercial capital blending colonial streets with modern shopping.",
+      "card_image_url": "https://images.unsplash.com/photo-1653885118612-2659288dc503?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1623595289196-007a22dd8560?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "THE TRIP'S FINAL STOP, EAST MEETS WEST",
+      "desc": "Colombo closes the journey with Galle Face Green facing the Indian Ocean, the historic Old Parliament, and Gangarama Temple, a fitting mix of colonial heritage and everyday city life."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
-    "6 nights accommodation",
-    "Sigiriya rock fortress entry",
-    "Yala National Park jeep safari",
-    "Tea estate tour & tasting",
-    "Daily breakfast"
+    "7 nights accommodation",
+    "Daily breakfast & dinner",
+    "Private tour guide throughout",
+    "All temple & site entry fees",
+    "Airport transfers"
   ],
   "active": true
 }

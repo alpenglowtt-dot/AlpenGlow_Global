@@ -2,24 +2,63 @@
   "slug": "southkorea",
   "page_title": "South Korea - Seoul, Tradition and Trend | Alpen Glow Tours and Travels",
   "hero_image_url": "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1600&q=80",
+  "bg_image_url": "https://images.unsplash.com/photo-1630135199928-55a43e87350d?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "location": "High-Value Long Haul - South Korea",
   "duration": "8 Days / 7 Nights",
   "title": "South Korea - Seoul, Tradition and Trend",
   "overview_heading": "Overview",
   "overview_paragraphs": [
-    "South Korea has become the top trending destination among Indian Gen Z and millennial travelers, and it earns the attention - palace courtyards sit a short walk from K-pop districts, and centuries-old tea houses share streets with some of the world's most photographed skylines.",
+    "South Korea moves between two speeds: the packed, neon rhythm of Seoul and the slower pace of the southeast, where Joseon-era villages, royal tombs, and coastal fish markets set the tone. This trip runs Seoul to the DMZ, then south through Andong and Gyeongju's temple towns, ending on the harbor in Busan, tied together by the KTX bullet train so a five-hour distance feels like a short hop.\n\nBest for travelers who want the capital's scale and street life alongside Korea's older, quieter historical core.",
     "Paced for travelers who want both the Instagram moments and the historical depth behind them."
   ],
-  "places_heading": "",
-  "places": [],
+  "places_heading": "Explore the Cities",
+  "places": [
+    {
+      "key": "Seoul",
+      "name": "Seoul",
+      "tagline": "Palace gates, market gates and a skyline that never settles",
+      "card_image_url": "https://images.unsplash.com/photo-1506816561089-5cc37b3aa9b0?q=80&w=1275&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://plus.unsplash.com/premium_photo-1661886333708-877148b43ae1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "WHERE THE PALACE AND THE MARKET SHARE A BLOCK",
+      "desc": "Seoul opens and closes the trip. Gyeongbokgung's stone courtyards sit a short walk from Insadong's antique lanes, and Namdaemun Market runs late into the night under the glow of N Seoul Tower. A five-minute subway ride can drop you from a guarded palace gate into a street market that's been trading since the 1400s, and by the last night you'll return here again, this time for a farewell dinner with a traditional performance at Korea House."
+    },
+    {
+      "key": "dmz",
+      "name": "The DMZ",
+      "tagline": "The border that split a country, seen from an observation deck and a tunnel underground.",
+      "card_image_url": "https://plus.unsplash.com/premium_photo-1661948404806-391a240d6d40?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1672862333651-803e82a38167?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "THE BORDER SEEN UP CLOSE",
+      "desc": "An hour north of Seoul, the Demilitarized Zone is still one of the most heavily fortified borders on earth. Dora Observatory looks straight across into North Korea, the Third Tunnel drops underground into a passage dug for a surprise crossing, and Freedom Bridge marks the last stretch of track before the line. It's a half-day trip, and one of the few places where the country's division is something you can actually stand in front of."
+    },
+    {
+      "key": "andong",
+      "name": "Andong",
+      "tagline": "A Confucian folk village that never rebuilt itself for anyone else.",
+      "card_image_url": "https://images.unsplash.com/photo-1687359409609-95510ed5bc45?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1601631735852-6c59c99dc687?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "KOREA'S CONFUCIAN HEARTLAND",
+      "desc": "Andong is where Korea kept its Joseon-era customs the longest. Byeongsan Seowon, a Confucian academy set against a river bend, and Hahoe Folk Village, still lived in and still thatched-roofed, show a version of Korea that industrialization mostly passed by. It's a quieter stop between Seoul's density and the temple towns further south, a half-day of clan shrines and courtyard houses before continuing on to Gyeongju."
+    },
+    {
+      "key": "gyeongju",
+      "name": "Gyeongju",
+      "tagline": "An open-air museum of a city, still built over a thousand years of Silla tombs.",
+      "card_image_url": "https://images.unsplash.com/photo-1669764372822-3cb8476d4f47?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1741311961567-da87b811faae?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "A CAPITAL BUILT OVER A THOUSAND YEARS AGO",
+      "desc": "Gyeongju was the capital of the Silla kingdom for close to a thousand years, and the city never fully moved on from it. Grass-covered royal tombs rise straight out of Tumuli Park, Bulguksa Temple and the Seokguram Grotto sit carved into the hillside above, and Donggung Palace's lotus pond lights up after dark. Locals sometimes call it 'a museum without walls,' since the historical sites aren't cordoned off from the rest of the city; they're woven straight into it."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
-    "7 nights accommodation",
+    "6 nights accommodation",
+    "Private tour guide throughout",
     "KTX high-speed train ticket",
     "DMZ guided day trip",
-    "Palace entry tickets",
-    "Daily breakfast",
-    "Airport transfers"
+    "Palace & temple entry tickets",
+    "Meals per itinerary (B/L/D)",
+    "Airport transfers and Inter-city transfers"
   ],
   "active": true
 }

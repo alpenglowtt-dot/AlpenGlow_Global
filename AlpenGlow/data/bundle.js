@@ -64,7 +64,7 @@ window.ALPEN_DATA = {
   "destinations": [
     {
       "slug": "subcontinent",
-      "number": "01",
+      "number": "4 countries",
       "name": "The Cultural Soul",
       "countries": "India · Nepal · Bhutan · Sri Lanka",
       "description": "Seamless border-crossing trails through the subcontinent's sacred and scenic core.",
@@ -75,34 +75,34 @@ window.ALPEN_DATA = {
       "sub_destinations": [
         {
           "name": "India",
-          "desc": "Discover the vibrant culture and breathtaking landscapes of India.",
+          "desc": "A Ganges sunrise in Varanasi, and a thali that's a different meal in every state you cross.",
           "image_url": "india.jpg",
           "link": "packages/india.html"
         },
         {
           "name": "Nepal",
-          "desc": "Explore the majestic mountains and rich cultural heritage of Nepal.",
+          "desc": "A sunrise flight past Everest's south face, and a Kathmandu backstreet temple older than most countries.",
           "image_url": "nepal.jpg",
           "link": "packages/nepal.html"
         },
         {
           "name": "Bhutan",
-          "desc": "Discover the unique culture and pristine landscapes of Bhutan.",
+          "desc": "Tiger's Nest clinging to a cliff face, and a kingdom that measures progress in happiness and means it.",
           "image_url": "bhutan.jpg",
           "link": "packages/bhutan.html"
         },
         {
           "name": "Sri Lanka",
-          "desc": "Explore the tropical beaches and ancient temples of Sri Lanka.",
+          "desc": "A train through tea country with the door left open, and beaches that haven't made it onto anyone's feed yet.",
           "image_url": "srilanka.jpg",
           "link": "packages/srilanka.html"
         }
       ],
-      "id": "dest_mr4m8yup"
+      "id": "dest_msxiz8ic"
     },
     {
       "slug": "longhaul",
-      "number": "02",
+      "number": "5 destinations",
       "name": "Once-in-a-Lifetime",
       "countries": "Scandinavia · Japan · NZ · Australia · S. Korea",
       "description": "Bucket-list journeys built for travelers who plan years, not weekends, ahead.",
@@ -113,40 +113,40 @@ window.ALPEN_DATA = {
       "sub_destinations": [
         {
           "name": "Scandinavia",
-          "desc": "Discover the stunning fjords and vibrant cities of Scandinavia.",
+          "desc": "Fjords carved by glaciers, and cities that shut down for the midnight sun.",
           "image_url": "norway.jpg",
           "link": "packages/norway.html"
         },
         {
           "name": "Japan",
-          "desc": "Experience the perfect blend of traditional culture and modern innovation in Japan.",
+          "desc": "Neon and shrines, sometimes on the same block, ten minutes apart by train.",
           "image_url": "japan.png",
           "link": "packages/japan.html"
         },
         {
           "name": "New Zealand",
-          "desc": "Discover the natural beauty and unique culture of New Zealand.",
+          "desc": "Glaciers, geysers, and a drive where every turn is the postcard.",
           "image_url": "newzealand.jpg",
           "link": "packages/newzealand.html"
         },
         {
           "name": "Australia",
-          "desc": "Explore the diverse landscapes and vibrant cities of Australia.",
+          "desc": "Reef to red desert on one itinerary, and a coastline longer than most countries' borders.",
           "image_url": "australia.jpg",
           "link": "packages/australia.html"
         },
         {
           "name": "South Korea",
-          "desc": "Discover the dynamic culture and delicious cuisine of South Korea.",
+          "desc": "Palace rooftops against glass towers, and street food stalls that stay open past the last subway.",
           "image_url": "southkorea.jpg",
           "link": "packages/southkorea.html"
         }
       ],
-      "id": "dest_mr4m8yuq"
+      "id": "dest_msxiz8id"
     },
     {
       "slug": "islands",
-      "number": "03",
+      "number": "4 countries",
       "name": "Glowcations & Honeymoons",
       "countries": "Maldives · Seychelles · Mauritius · Bali",
       "description": "Pure isolation or culture-plus-luxury, curated for couples and wellness escapes.",
@@ -157,34 +157,34 @@ window.ALPEN_DATA = {
       "sub_destinations": [
         {
           "name": "Maldives",
-          "desc": "Experience the crystal-clear waters and overwater bungalows of the Maldives.",
+          "desc": "A bungalow with the ocean floor visible through your own floorboards.",
           "image_url": "maldives.jpg",
           "link": "packages/maldives.html"
         },
         {
           "name": "Seychelles",
-          "desc": "Discover the pristine beaches and unique wildlife of the Seychelles.",
+          "desc": "Granite boulders older than the dinosaurs, framing a beach with nobody else on it.",
           "image_url": "seychelles.jpg",
           "link": "packages/seychelles.html"
         },
         {
           "name": "Mauritius",
-          "desc": "Explore the tropical paradise of Mauritius with its stunning beaches and vibrant culture.",
+          "desc": "A lagoon calm enough to read in, and a Creole kitchen that's the actual reason to come back.",
           "image_url": "mauritius.jpg",
           "link": "packages/mauritius.html"
         },
         {
           "name": "Bali",
-          "desc": "Discover the spiritual and cultural richness of Bali.",
+          "desc": "Rice terraces before the tour buses, and a temple ceremony that isn't staged for anyone.",
           "image_url": "bali.jpg",
           "link": "packages/bali.html"
         }
       ],
-      "id": "dest_mr4m8yur"
+      "id": "dest_msxiz8ie"
     },
     {
       "slug": "cruises",
-      "number": "04",
+      "number": "3 sailings",
       "name": "Family & MICE Sailings",
       "countries": "River Cruises · Large Liners",
       "description": "The volume engine — European river cruising and large-liner departures across Asia.",
@@ -195,24 +195,24 @@ window.ALPEN_DATA = {
       "sub_destinations": [
         {
           "name": "European River Cruise",
-          "desc": "Experience the charm of Europe's great rivers aboard luxury cruise ships.",
+          "desc": "A different country through your cabin window every morning, and no luggage to repack in between.",
           "image_url": "europeanrivercruise.jpg",
           "link": "packages/rivercruise-europe.html"
         },
         {
           "name": "Royal Caribbean",
-          "desc": "Set sail on a luxury cruise through the Caribbean and beyond.",
+          "desc": "A different island every other day, and a ship big enough to forget you're at sea.",
           "image_url": "royalcaribbean.jpg",
           "link": "packages/royalcaribbean.html"
         },
         {
           "name": "Resorts World",
-          "desc": "Explore the luxurious amenities and stunning locations of Resorts World.",
+          "desc": "One check-in, and a week where nobody asks you to decide anything.",
           "image_url": "resortsworld.jpg",
           "link": "packages/resortsworld.html"
         }
       ],
-      "id": "dest_mr4m8yus"
+      "id": "dest_msxiz8if"
     }
   ],
   "packages": [
@@ -243,7 +243,7 @@ window.ALPEN_DATA = {
       "name": "Italian Grand Tour",
       "location": "Italy",
       "duration": "10 Days / 9 Nights",
-      "description": "Discover the rich culture and stunning landscapes of Italy on this unforgettable journey.",
+      "description": "Rome's ruins at golden hour, a Tuscan hill town where the wine list is the neighbour's vineyard, and an Amalfi coast road that makes you grip the seat and not regret it. Ten days built around what Italy actually tastes and feels like.",
       "image_url": "italy.jpg",
       "link": "packages/italy.html",
       "sort_order": 3,
@@ -265,7 +265,7 @@ window.ALPEN_DATA = {
       "name": "Japan – Land of Contrasts",
       "location": "Japan",
       "duration": "9 Days / 8 Nights",
-      "description": "Experience the perfect blend of traditional culture and modern innovation in Japan.",
+      "description": "Asakusa's temple bells before the crowds arrive, a bullet train that turns Kyoto into Tokyo's next-door neighbour, and a Fukuoka yatai stall that isn't in any guidebook. Nine days paced to what Japan is actually like.",
       "image_url": "japan.jpg",
       "link": "packages/japan.html",
       "sort_order": 5,
@@ -276,7 +276,7 @@ window.ALPEN_DATA = {
       "name": "Bali – Island of the Gods",
       "location": "Indonesia",
       "duration": "7 Days / 6 Nights",
-      "description": "Immerse yourself in the vibrant culture and breathtaking scenery of Bali, where ancient traditions meet modern luxury.",
+      "description": "Rice terraces at sunrise before the tour buses arrive, a family temple ceremony you're invited into rather than photographing from outside, and a coastline built for doing absolutely nothing well.",
       "image_url": "baligods.jpg",
       "link": "packages/bali.html",
       "sort_order": 6,
@@ -455,18 +455,82 @@ window.ALPEN_DATA = {
     "bali": {
       "slug": "bali",
       "page_title": "Bali — Island of the Gods | Alpen Glow Tours and Travels",
-      "hero_image_url": "balihor.jpg",
-      "bg_image_url": "",
+      "hero_image_url": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "bg_image_url": "https://images.unsplash.com/photo-1720519610178-141f9777e9de?q=80&w=677&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Indonesia · Bali",
       "duration": "7 Days / 6 Nights",
       "title": "Bali — Island of the Gods",
       "overview_heading": "Overview",
       "overview_paragraphs": [
-        "Bali earns its reputation as Indonesia's spiritual heart without ever feeling like a museum — rice terraces still get farmed the old way, temple ceremonies happen because the village needs them to, not because tourists are watching. This trip moves between the cultural hill town of Ubud and the beach energy of the south coast.",
+        "Bali packs jungle temples, volcanic highlands, and reef-lined coastline into one island small enough to cross in a few hours. This trip moves between Ubud's rice-terrace interior, the cliff temples of the south coast, the crater lakes of the highlands, and a day out on Nusa Penida's turquoise water, with detours to some of the island's oldest Hindu temples along the way.\n\nBest for travelers who want temple culture, volcanic scenery, and beach time all inside one trip.",
         "Paced for travelers who want both quiet, contemplative mornings and a proper beach-club afternoon."
       ],
       "places_heading": "Explore the Cities",
-      "places": [],
+      "places": [
+        {
+          "key": "ubud",
+          "name": "Ubud",
+          "tagline": "Rice terraces, wood carvers, and a forest full of sacred monkeys.",
+          "card_image_url": "https://images.unsplash.com/photo-1643346173514-74a489cedccf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1592364395653-83e648b20cc2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "BALI'S CULTURAL AND CRAFT CENTER",
+          "desc": "Ubud anchors the island's artistic heart. Celuk's gold and silversmiths, Mas village's wood carvers, and Ubud's own painters and markets sit within a short drive of each other, while the Sacred Monkey Forest Sanctuary holds around 600 long-tailed macaques across five territorial troops. It's as much a working craft town as a tourist stop, still shaping the traditional and modern art Bali is known for."
+        },
+        {
+          "key": "kintamani",
+          "name": "Kintamani & The Highlands",
+          "tagline": "A smoking volcano crater seen across its own lake.",
+          "card_image_url": "https://images.unsplash.com/photo-1640089061537-8fd7983395c5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1711609110590-5ad5c4599e56?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE BALI'S INTERIOR CLIMBS INTO THE CLOUDS",
+          "desc": "Kintamani looks straight across Mount Batur's crater and Lake Batur, ringed by green highland scenery. The route up passes Tegalalang's terraced rice fields and the Holy Water Spring Temple at Sebatu, and further north, Bedugul's flower and vegetable plantations sit beside Lake Beratan and the lake temple of Ulun Danu."
+        },
+        {
+          "key": "uluwatu",
+          "name": "Uluwatu & The South Coast",
+          "tagline": "A cliffside temple, a monkey dance, and Bali's most famous sunset.",
+          "card_image_url": "https://images.unsplash.com/photo-1720518816836-e351848c5357?q=80&w=1185&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1659962527151-aa55a27f604c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE THE ISLAND MEETS THE INDIAN OCEAN",
+          "desc": "Uluwatu Temple sits on top of a sea cliff hundreds of meters above the Indian Ocean, one of Bali's oldest and most dramatically placed shrines. Evenings here often mean the Kecak dance, Bali's \"monkey dance,\" performed by a circle of over 100 men retelling scenes from the Ramayana, followed by a beachside seafood dinner in Jimbaran. Nearby, Nusa Dua and Tanjung Benoa add water sports and Turtle Island boat trips into the mix."
+        },
+        {
+          "key": "tanahlot",
+          "name": "Tanah Lot & The Royal Temples",
+          "tagline": "A temple standing on its own rock platform in the sea.",
+          "card_image_url": "https://images.unsplash.com/photo-1588625232507-a337a3bd2e43?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1624935851312-845758a99160?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "BALI'S MOST PHOTOGRAPHED SUNSET",
+          "desc": "Tanah Lot's temple rises straight out of the ocean on a rock outcrop, one of Bali's most recognizable sights and best seen at sunset. The road there usually runs through Taman Ayun, the walled temple of Bali's former royal family, giving a quieter, more formal counterpoint to Tanah Lot's dramatic coastal setting."
+        },
+        {
+          "key": "eastbali",
+          "name": "East Bali: Besakih & Karangasem",
+          "tagline": "The mother temple of Bali, set on the slopes of a sacred volcano.",
+          "card_image_url": "https://images.unsplash.com/photo-1593938637471-cb705e42d533?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1655289112205-d3b56c6b61f8?q=80&w=1205&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE SPIRITUAL CENTER OF BALINESE HINDUISM",
+          "desc": "Besakih Temple sits on Mount Agung's slopes as the largest and holiest temple complex in Bali, a sprawling collection of shrines dedicated to the Hindu trinity. The road east passes Kertha Gosha's historic Hall of Justice, Goa Lawah's bat cave temple, and Kusamba's traditional salt-making villages, ending at Karangasem's Tirta Gangga, the bathing pools of Bali's former kings."
+        },
+        {
+          "key": "nusapeninda",
+          "name": "Nusa Peninda",
+          "tagline": "Cliffs, hidden lagoons, and some of Bali's clearest water.",
+          "card_image_url": "https://plus.unsplash.com/premium_photo-1661962878782-8841a385019d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1604560929658-bbc3c2ba6a36?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "A DAY TRIP TO BALI'S WILDEST ISLAND",
+          "desc": "A short fast-boat ride from Sanur, Nusa Penida holds some of Bali's most striking coastal scenery: Angel Billabong's natural infinity pool, the collapsed sea cave at Broken Beach, and Kelingking Beach's cliff viewpoint shaped like a dinosaur. Crystal Bay closes the day with some of the island's best snorkeling."
+        },
+        {
+          "key": "kuta",
+          "name": "Kuta & The Beaches",
+          "tagline": "Bali's original tourist strip, still running day and night.",
+          "card_image_url": "https://images.unsplash.com/photo-1707744576094-f5e6aca68456?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1622916543251-2d24985ffcb4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "SURF, SHOPPING, AND NIGHTLIFE ON THE WEST COAST",
+          "desc": "Kuta's long stretch of sand draws swimmers and surfers by day and fills with bars, restaurants, and shopping by night. It's often paired with the Barong Dance at Batubulan, a performance of Bali's mythic fight between good and evil, before heading down to the coast."
+        }
+      ],
       "inclusions_heading": "What's Included",
       "inclusions": [
         "6 nights accommodation",
@@ -530,22 +594,51 @@ window.ALPEN_DATA = {
       "slug": "italy",
       "page_title": "Italian Grand Tour | Alpen Glow Tours and Travels",
       "hero_image_url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1600&q=80",
+      "bg_image_url": "https://images.unsplash.com/photo-1553342385-111fd6bc6ab3?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Italy",
-      "duration": "10 Days / 9 Nights",
-      "title": "Italian Grand Tour",
+      "duration": "5 Days / 4 Nights",
+      "title": "Italian Renaissance Tour",
       "overview_heading": "Overview",
       "overview_paragraphs": [
-        "Italy's grand tour route exists because it works — Rome's ruins, Florence's Renaissance art, and Venice's canals are each worth a trip on their own, and seeing all three in sequence shows how dramatically the country changes character every few hundred kilometres. This itinerary builds in proper time in each city rather than treating them as checkpoints.",
+        "This trip runs through three of Italy's defining cities in five days, moving north from Florence's Renaissance core to the marble squares of Pisa and finally into Venice's canals, tied together by train so the transitions are as easy as the destinations are different.\n\nBest for travelers who want art, architecture, and history without long transit days eating into the sightseeing.",
         "Ideal for travelers who want history, art, and food in roughly equal measure, with a relaxed Tuscan countryside stop to slow things down."
       ],
-      "places_heading": "",
-      "places": [],
+      "places_heading": "Explore the Cities",
+      "places": [
+        {
+          "key": "florence",
+          "name": "Florence",
+          "tagline": "The cradle of the Renaissance, built around a red-domed cathedral.",
+          "card_image_url": "https://images.unsplash.com/photo-1526216538347-8a69e894ae24?q=80&w=1113&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://plus.unsplash.com/premium_photo-1697730051190-efa453f9c0c1?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE THE RENAISSANCE BEGAN",
+          "desc": "Florence centers on the Duomo, its bell tower by Giotto, and a Baptistery famous for Ghiberti's bronze doors, all within a few minutes' walk of each other. The Uffizi Gallery holds one of the world's great collections of Renaissance art, and Piazza della Signoria anchors the city's open-air sculpture and civic life. Florence also serves as a base for day trips further into Tuscany."
+        },
+        {
+          "key": "pisa",
+          "name": "Pisa",
+          "tagline": "One tower, tilted for eight centuries, still standing.",
+          "card_image_url": "https://images.unsplash.com/photo-1705066402031-07053d50793b?q=80&w=1168&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1694710301522-16d7c81432d0?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "A DAY TRIP TO THE FIELD OF MIRACLES",
+          "desc": "Piazza dei Miracoli brings together Pisa's three defining monuments in one green square: the Leaning Tower, the Cathedral, and the Baptistery. The tilt itself dates back to soft subsoil issues during construction in the 12th century, and it's remained one of Italy's most recognizable sights ever since, easily seen as a half-day trip from Florence."
+        },
+        {
+          "key": "venice",
+          "name": "Venice",
+          "tagline": "A city built on water, with no roads at all.",
+          "card_image_url": "https://images.unsplash.com/photo-1558271736-cd043ef2e855?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?q=80&w=1167&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE CITY OF CANALS AND BRIDGES",
+          "desc": "Venice opens at St. Mark's Square, where the sheer scale of the Piazza and the Cathedral sets the tone for the rest of the city. Next door, the Doge's Palace once housed the seat of government and the Court of Justice, connected to the old prisons by the Bridge of Sighs. Beyond the main sights, Venice rewards slow, unplanned walking through its canals and backstreets."
+        }
+      ],
       "inclusions_heading": "What's Included",
       "inclusions": [
-        "9 nights accommodation",
-        "High-speed train tickets between cities",
-        "Vatican Museums skip-the-line entry",
-        "Gondola ride in Venice",
+        "4 nights accommodation",
+        "Inter-city train tickets (Florence, Pisa, Venice)",
+        "Uffizi Gallery skip-the-line entry",
+        "Guided walking tours (Florence, Pisa, Venice)",
         "Daily breakfast"
       ],
       "active": true
@@ -815,25 +908,54 @@ window.ALPEN_DATA = {
     },
     "santorini": {
       "slug": "santorini",
-      "page_title": "Santorini — Aegean Dreams | Alpen Glow Tours and Travels",
-      "hero_image_url": "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=600&q=80",
-      "location": "Greece · Cyclades",
-      "duration": "6 Days / 5 Nights",
-      "title": "Santorini — Aegean Dreams",
+      "page_title": "Santorini - Aegean Dreams | Alpen Glow Tours and Travels",
+      "hero_image_url": "https://images.unsplash.com/photo-1716573120993-8f3719fcd486?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "bg_image_url": "https://plus.unsplash.com/premium_photo-1661962663771-e096c9ffccbb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "location": "Athens · Santorini · Rhodes",
+      "duration": "8 Days / 7 Nights",
+      "title": "Santorini - Aegean Dreams",
       "overview_heading": "Overview",
       "overview_paragraphs": [
-        "Santorini's whitewashed villages cascading down a volcanic caldera are the single most photographed view in Greece, and seeing it in person still manages to exceed the pictures. This trip is built around the island's famous sunset, its black- and red-sand beaches, and a day sailing the caldera that produced the whole dramatic landscape.",
+        "Greece's most classic combination pairs a capital built on 5,000 years of history with two islands that couldn't look more different from each other. This trip moves from Athens' marble ruins and ancient agora, to Santorini's caldera views and whitewashed clifftop villages, to Rhodes' walled medieval old town and Aegean beaches, tied together by ferry and short island-hop flights.\n\nBest for travelers who want mainland history, caldera views, and a Crusader-era old town in a single trip.",
         "Best for couples and honeymooners, or anyone wanting a few days of pure, unhurried island time."
       ],
-      "places_heading": "",
-      "places": [],
+      "places_heading": "Explore the Cities",
+      "places": [
+        {
+          "key": "athens",
+          "name": "Athens",
+          "tagline": "Ancient marble ruins standing in the middle of a living, modern capital.",
+          "card_image_url": "https://plus.unsplash.com/premium_photo-1661915766202-cb0f84490206?q=80&w=2085&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://plus.unsplash.com/premium_photo-1661964068107-6d7f6f4fea51?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE 2,500 YEARS OF HISTORY SHARE ONE SKYLINE",
+          "desc": "Athens is built around the Acropolis, and everything else in the city seems to orient itself around that hill. The Parthenon, Erechtheion, and Propylaea sit at the top; the New Acropolis Museum holds the artifacts pulled from it. Below, Plaka and Monastiraki keep a village-like maze of lanes at the foot of the rock, while Syntagma Square, Panathenaic Stadium (the only stadium built entirely of marble), and the Temple of Olympian Zeus round out a city where ancient and modern Athens sit a few minutes' walk apart."
+        },
+        {
+          "key": "santorini",
+          "name": "Santorini",
+          "tagline": "Whitewashed villages balanced on the rim of a volcanic caldera.",
+          "card_image_url": "https://plus.unsplash.com/premium_photo-1697730112614-f798011ebe42?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1618500031461-a5fc01e96763?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE VIEW EVERYONE PICTURES WHEN THEY THINK OF GREECE",
+          "desc": "Santorini's whole geography was shaped by one of the largest volcanic eruptions in recorded history, and the island still wears the scar as its defining feature: a sheer caldera wall lined with blue-domed churches and cliffside villages. Fira anchors the island with cable cars and caldera-edge walking paths, Oia holds the famous sunset view, and Pyrgos and Emporio keep a quieter, older character. Add in the black sand of Perissa Beach and a working vineyard or two, and the island covers both its postcard side and its working, everyday one."
+        },
+        {
+          "key": "rhodes",
+          "name": "Rhodes",
+          "tagline": "A walled medieval old town facing the Aegean toward Turkey.",
+          "card_image_url": "https://images.unsplash.com/photo-1587974136998-4fcc253b6183?q=80&w=1155&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1588796503044-0a7c50edbd12?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE CRUSADER WALLS MEET THE OPEN SEA",
+          "desc": "Rhodes' Old Town is one of the best-preserved medieval walled cities in Europe, built up by the Knights of St. John and still fully inhabited inside its fortifications. The Palace of the Grand Master anchors the old town, while Kallithea Springs and Filerimos give a quieter, greener counterpoint outside the walls. A short boat ride away, Simi Island adds a Venetian-era detour of pastel houses stacked up a steep hillside, best explored on foot through its harbor-front lanes and sponge shops."
+        }
+      ],
       "inclusions_heading": "What's Included",
       "inclusions": [
-        "5 nights accommodation",
-        "Caldera catamaran cruise with lunch",
-        "Akrotiri archaeological site entry",
-        "Wine tasting at a local vineyard",
-        "Daily breakfast"
+        "7 nights accommodation",
+        "Athens–Santorini ferry ticket",
+        "Santorini–Rhodes flight",
+        "Daily breakfast",
+        "Airport & port transfers"
       ],
       "active": true
     },
@@ -865,48 +987,161 @@ window.ALPEN_DATA = {
       "slug": "southkorea",
       "page_title": "South Korea - Seoul, Tradition and Trend | Alpen Glow Tours and Travels",
       "hero_image_url": "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1600&q=80",
+      "bg_image_url": "https://images.unsplash.com/photo-1630135199928-55a43e87350d?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "High-Value Long Haul - South Korea",
       "duration": "8 Days / 7 Nights",
       "title": "South Korea - Seoul, Tradition and Trend",
       "overview_heading": "Overview",
       "overview_paragraphs": [
-        "South Korea has become the top trending destination among Indian Gen Z and millennial travelers, and it earns the attention - palace courtyards sit a short walk from K-pop districts, and centuries-old tea houses share streets with some of the world's most photographed skylines.",
+        "South Korea moves between two speeds: the packed, neon rhythm of Seoul and the slower pace of the southeast, where Joseon-era villages, royal tombs, and coastal fish markets set the tone. This trip runs Seoul to the DMZ, then south through Andong and Gyeongju's temple towns, ending on the harbor in Busan, tied together by the KTX bullet train so a five-hour distance feels like a short hop.\n\nBest for travelers who want the capital's scale and street life alongside Korea's older, quieter historical core.",
         "Paced for travelers who want both the Instagram moments and the historical depth behind them."
       ],
-      "places_heading": "",
-      "places": [],
+      "places_heading": "Explore the Cities",
+      "places": [
+        {
+          "key": "Seoul",
+          "name": "Seoul",
+          "tagline": "Palace gates, market gates and a skyline that never settles",
+          "card_image_url": "https://images.unsplash.com/photo-1506816561089-5cc37b3aa9b0?q=80&w=1275&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://plus.unsplash.com/premium_photo-1661886333708-877148b43ae1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE THE PALACE AND THE MARKET SHARE A BLOCK",
+          "desc": "Seoul opens and closes the trip. Gyeongbokgung's stone courtyards sit a short walk from Insadong's antique lanes, and Namdaemun Market runs late into the night under the glow of N Seoul Tower. A five-minute subway ride can drop you from a guarded palace gate into a street market that's been trading since the 1400s, and by the last night you'll return here again, this time for a farewell dinner with a traditional performance at Korea House."
+        },
+        {
+          "key": "dmz",
+          "name": "The DMZ",
+          "tagline": "The border that split a country, seen from an observation deck and a tunnel underground.",
+          "card_image_url": "https://plus.unsplash.com/premium_photo-1661948404806-391a240d6d40?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1672862333651-803e82a38167?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE BORDER SEEN UP CLOSE",
+          "desc": "An hour north of Seoul, the Demilitarized Zone is still one of the most heavily fortified borders on earth. Dora Observatory looks straight across into North Korea, the Third Tunnel drops underground into a passage dug for a surprise crossing, and Freedom Bridge marks the last stretch of track before the line. It's a half-day trip, and one of the few places where the country's division is something you can actually stand in front of."
+        },
+        {
+          "key": "andong",
+          "name": "Andong",
+          "tagline": "A Confucian folk village that never rebuilt itself for anyone else.",
+          "card_image_url": "https://images.unsplash.com/photo-1687359409609-95510ed5bc45?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1601631735852-6c59c99dc687?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "KOREA'S CONFUCIAN HEARTLAND",
+          "desc": "Andong is where Korea kept its Joseon-era customs the longest. Byeongsan Seowon, a Confucian academy set against a river bend, and Hahoe Folk Village, still lived in and still thatched-roofed, show a version of Korea that industrialization mostly passed by. It's a quieter stop between Seoul's density and the temple towns further south, a half-day of clan shrines and courtyard houses before continuing on to Gyeongju."
+        },
+        {
+          "key": "gyeongju",
+          "name": "Gyeongju",
+          "tagline": "An open-air museum of a city, still built over a thousand years of Silla tombs.",
+          "card_image_url": "https://images.unsplash.com/photo-1669764372822-3cb8476d4f47?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1741311961567-da87b811faae?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "A CAPITAL BUILT OVER A THOUSAND YEARS AGO",
+          "desc": "Gyeongju was the capital of the Silla kingdom for close to a thousand years, and the city never fully moved on from it. Grass-covered royal tombs rise straight out of Tumuli Park, Bulguksa Temple and the Seokguram Grotto sit carved into the hillside above, and Donggung Palace's lotus pond lights up after dark. Locals sometimes call it 'a museum without walls,' since the historical sites aren't cordoned off from the rest of the city; they're woven straight into it."
+        }
+      ],
       "inclusions_heading": "What's Included",
       "inclusions": [
-        "7 nights accommodation",
+        "6 nights accommodation",
+        "Private tour guide throughout",
         "KTX high-speed train ticket",
         "DMZ guided day trip",
-        "Palace entry tickets",
-        "Daily breakfast",
-        "Airport transfers"
+        "Palace & temple entry tickets",
+        "Meals per itinerary (B/L/D)",
+        "Airport transfers and Inter-city transfers"
       ],
       "active": true
     },
     "srilanka": {
       "slug": "srilanka",
-      "page_title": "Sri Lanka - Ancient Kingdoms and Coastline | Alpen Glow Tours and Travels",
+      "page_title": "Sri Lanka - Ramayana Trail | Alpen Glow Tours and Travels",
       "hero_image_url": "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1600&q=80",
+      "bg_image_url": "https://images.unsplash.com/photo-1574611122955-5baa61496637?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Sub-Continent - Sri Lanka",
-      "duration": "7 Days / 6 Nights",
-      "title": "Sri Lanka - Ancient Kingdoms and Coastline",
+      "duration": "8 Days / 7 Nights.",
+      "title": "Sri Lanka - Ramayana Trail",
       "overview_heading": "Overview",
       "overview_paragraphs": [
-        "Sri Lanka fits an unreasonable amount of variety into a small island — ancient rock fortresses, tea-country hill stations, wildlife safaris, and a south coast of palm-lined beaches, all reachable within a few hours' drive of each other. This trip threads through the cultural triangle before winding down on the coast.",
+        "This trip traces Sri Lanka along two threads at once: the Ramayana trail linking ancient temples across the island's west, north, and east, and the cultural triangle's UNESCO landmarks at Sigiriya, Dambulla, and Kandy. It runs coast to coast and up into hill country, closing in Colombo's colonial-era streets.\n\nBest for travelers who want mythology and pilgrimage sites alongside Sri Lanka's most famous ruins, temples, and tea country.",
         "Good for travelers who want history, hill-country scenery, and beach time all in one trip."
       ],
-      "places_heading": "",
-      "places": [],
+      "places_heading": "Explore the Cities",
+      "places": [
+        {
+          "key": "anuradhapura",
+          "name": "Anuradhapura",
+          "tagline": "Where Rama is said to have installed the island's first Shiva lingam.",
+          "card_image_url": "https://images.unsplash.com/photo-1637557056625-c133d59dc460?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1659244352464-75e539618056?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE FIRST STOP ON THE RAMAYANA TRAIL",
+          "desc": "Anuradhapura anchors the start of the trail west of Colombo, built around Munneshwaram Temple, one of Sri Lanka's five major Shiva Ishvarams, and the nearby Manavari Temple, where legend holds Rama installed a lingam as penance after killing Ravana."
+        },
+        {
+          "key": "jaffna",
+          "name": "Jaffna",
+          "tagline": "A fortified peninsula city with a bottomless well tied to Sita's thirst.",
+          "card_image_url": "https://images.unsplash.com/photo-1591410448119-1b49cbb3b83e?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1725680968792-c8dce6d6cf18?q=80&w=736&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE NORTH'S COLONIAL PORT AND ANCIENT KINGDOM",
+          "desc": "Once the seat of a four-century medieval kingdom, Jaffna carries Portuguese and Dutch fortifications alongside Hindu shrines: the Dutch-renovated Jaffna Fort, Nallur Kandaswamy Kovil, and the Nilavarai Bottomless Well, said to have sprung from an arrow Rama fired to find Sita water."
+        },
+        {
+          "key": "trincomalee",
+          "name": "Trincomalee",
+          "tagline": "An ancient seaport temple town on Sri Lanka's east coast.",
+          "card_image_url": "https://images.unsplash.com/photo-1552055568-f8c4fb8c6320?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://plus.unsplash.com/premium_photo-1712226714269-4b4d55f040c0?q=80&w=705&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "A HARBOR CITY BUILT AROUND ONE OF THE ISHVARAMS",
+          "desc": "Trincomalee has drawn traders and pilgrims for centuries around Koneshwaram Temple, one of the five Ishvarams, alongside Pathrakali Amman Temple and the naturally warm Kanniya Hot Springs."
+        },
+        {
+          "key": "sigiriya",
+          "name": "Sigiriya & Dambulla",
+          "tagline": "A 5th-century rock fortress and a cave temple carved into the hillside.",
+          "card_image_url": "https://images.unsplash.com/photo-1580794749460-76f97b7180d8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1612862862126-865765df2ded?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE CULTURAL TRIANGLE'S TWO UNESCO LANDMARKS",
+          "desc": "Sigiriya Rock rises 200 meters out of the jungle, its summit ringed by ancient water gardens and the famous frescoes of the Heavenly Maidens. Nearby, Dambulla's cave temple complex holds over 2,000 square meters of painted walls and more than 150 Buddha images carved into five rock chambers."
+        },
+        {
+          "key": "kandy",
+          "name": "Kandy",
+          "tagline": "The last of Sri Lanka's independent kingdoms, held in a ring of mountains.",
+          "card_image_url": "https://images.unsplash.com/photo-1619974643633-12acfdcedd16?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1656497107000-d0859a4017ee?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "A UNESCO HILL CAPITAL AND HOME TO THE TOOTH RELIC",
+          "desc": "Kandy survived two centuries of colonial pressure before falling to the British, and still centers on the Temple of the Tooth, alongside the Royal Botanical Gardens and an evening of traditional Kandyan dance."
+        },
+        {
+          "key": "nuwaraeliya",
+          "name": "Nuwara Eliya",
+          "tagline": "Sri Lanka's tea country, cool enough to be called \"Little England.\"",
+          "card_image_url": "https://images.unsplash.com/photo-1610017810004-a6f3c531df34?q=80&w=1722&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1706769731521-578e98e221bc?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE ISLAND'S HIGHEST TOWN, BUILT BY THE BRITISH",
+          "desc": "Sitting near 2,000 meters, Nuwara Eliya keeps its colonial-era bungalows and hedgerows alongside tea plantations and the Hakgala Botanical Garden, with a detour to Sita Amman Temple, believed to mark where Sita was held captive."
+        },
+        {
+          "key": "kataragama",
+          "name": "Kataragama",
+          "tagline": "A multi-faith pilgrimage town shared by Hindus, Buddhists, and Muslims.",
+          "card_image_url": "https://images.unsplash.com/photo-1566296314736-6eaac1ca0cb9?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1651264042769-ef84e30f4ac8?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE THREE FAITHS CONVERGE ON ONE SHRINE",
+          "desc": "Kataragama Murugan Temple has drawn pilgrims since the 5th century, its riverside setting also holding Divurumpola, where legend says Sita underwent her trial by fire."
+        },
+        {
+          "key": "colombo",
+          "name": "Colombo",
+          "tagline": "A commercial capital blending colonial streets with modern shopping.",
+          "card_image_url": "https://images.unsplash.com/photo-1653885118612-2659288dc503?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1623595289196-007a22dd8560?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE TRIP'S FINAL STOP, EAST MEETS WEST",
+          "desc": "Colombo closes the journey with Galle Face Green facing the Indian Ocean, the historic Old Parliament, and Gangarama Temple, a fitting mix of colonial heritage and everyday city life."
+        }
+      ],
       "inclusions_heading": "What's Included",
       "inclusions": [
-        "6 nights accommodation",
-        "Sigiriya rock fortress entry",
-        "Yala National Park jeep safari",
-        "Tea estate tour & tasting",
-        "Daily breakfast"
+        "7 nights accommodation",
+        "Daily breakfast & dinner",
+        "Private tour guide throughout",
+        "All temple & site entry fees",
+        "Airport transfers"
       ],
       "active": true
     },

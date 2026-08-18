@@ -1,18 +1,82 @@
 {
   "slug": "bali",
   "page_title": "Bali — Island of the Gods | Alpen Glow Tours and Travels",
-  "hero_image_url": "balihor.jpg",
-  "bg_image_url": "",
+  "hero_image_url": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "bg_image_url": "https://images.unsplash.com/photo-1720519610178-141f9777e9de?q=80&w=677&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "location": "Indonesia · Bali",
   "duration": "7 Days / 6 Nights",
   "title": "Bali — Island of the Gods",
   "overview_heading": "Overview",
   "overview_paragraphs": [
-    "Bali earns its reputation as Indonesia's spiritual heart without ever feeling like a museum — rice terraces still get farmed the old way, temple ceremonies happen because the village needs them to, not because tourists are watching. This trip moves between the cultural hill town of Ubud and the beach energy of the south coast.",
+    "Bali packs jungle temples, volcanic highlands, and reef-lined coastline into one island small enough to cross in a few hours. This trip moves between Ubud's rice-terrace interior, the cliff temples of the south coast, the crater lakes of the highlands, and a day out on Nusa Penida's turquoise water, with detours to some of the island's oldest Hindu temples along the way.\n\nBest for travelers who want temple culture, volcanic scenery, and beach time all inside one trip.",
     "Paced for travelers who want both quiet, contemplative mornings and a proper beach-club afternoon."
   ],
   "places_heading": "Explore the Cities",
-  "places": [],
+  "places": [
+    {
+      "key": "ubud",
+      "name": "Ubud",
+      "tagline": "Rice terraces, wood carvers, and a forest full of sacred monkeys.",
+      "card_image_url": "https://images.unsplash.com/photo-1643346173514-74a489cedccf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1592364395653-83e648b20cc2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "BALI'S CULTURAL AND CRAFT CENTER",
+      "desc": "Ubud anchors the island's artistic heart. Celuk's gold and silversmiths, Mas village's wood carvers, and Ubud's own painters and markets sit within a short drive of each other, while the Sacred Monkey Forest Sanctuary holds around 600 long-tailed macaques across five territorial troops. It's as much a working craft town as a tourist stop, still shaping the traditional and modern art Bali is known for."
+    },
+    {
+      "key": "kintamani",
+      "name": "Kintamani & The Highlands",
+      "tagline": "A smoking volcano crater seen across its own lake.",
+      "card_image_url": "https://images.unsplash.com/photo-1640089061537-8fd7983395c5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1711609110590-5ad5c4599e56?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "WHERE BALI'S INTERIOR CLIMBS INTO THE CLOUDS",
+      "desc": "Kintamani looks straight across Mount Batur's crater and Lake Batur, ringed by green highland scenery. The route up passes Tegalalang's terraced rice fields and the Holy Water Spring Temple at Sebatu, and further north, Bedugul's flower and vegetable plantations sit beside Lake Beratan and the lake temple of Ulun Danu."
+    },
+    {
+      "key": "uluwatu",
+      "name": "Uluwatu & The South Coast",
+      "tagline": "A cliffside temple, a monkey dance, and Bali's most famous sunset.",
+      "card_image_url": "https://images.unsplash.com/photo-1720518816836-e351848c5357?q=80&w=1185&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1659962527151-aa55a27f604c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "WHERE THE ISLAND MEETS THE INDIAN OCEAN",
+      "desc": "Uluwatu Temple sits on top of a sea cliff hundreds of meters above the Indian Ocean, one of Bali's oldest and most dramatically placed shrines. Evenings here often mean the Kecak dance, Bali's \"monkey dance,\" performed by a circle of over 100 men retelling scenes from the Ramayana, followed by a beachside seafood dinner in Jimbaran. Nearby, Nusa Dua and Tanjung Benoa add water sports and Turtle Island boat trips into the mix."
+    },
+    {
+      "key": "tanahlot",
+      "name": "Tanah Lot & The Royal Temples",
+      "tagline": "A temple standing on its own rock platform in the sea.",
+      "card_image_url": "https://images.unsplash.com/photo-1588625232507-a337a3bd2e43?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1624935851312-845758a99160?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "BALI'S MOST PHOTOGRAPHED SUNSET",
+      "desc": "Tanah Lot's temple rises straight out of the ocean on a rock outcrop, one of Bali's most recognizable sights and best seen at sunset. The road there usually runs through Taman Ayun, the walled temple of Bali's former royal family, giving a quieter, more formal counterpoint to Tanah Lot's dramatic coastal setting."
+    },
+    {
+      "key": "eastbali",
+      "name": "East Bali: Besakih & Karangasem",
+      "tagline": "The mother temple of Bali, set on the slopes of a sacred volcano.",
+      "card_image_url": "https://images.unsplash.com/photo-1593938637471-cb705e42d533?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1655289112205-d3b56c6b61f8?q=80&w=1205&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "THE SPIRITUAL CENTER OF BALINESE HINDUISM",
+      "desc": "Besakih Temple sits on Mount Agung's slopes as the largest and holiest temple complex in Bali, a sprawling collection of shrines dedicated to the Hindu trinity. The road east passes Kertha Gosha's historic Hall of Justice, Goa Lawah's bat cave temple, and Kusamba's traditional salt-making villages, ending at Karangasem's Tirta Gangga, the bathing pools of Bali's former kings."
+    },
+    {
+      "key": "nusapeninda",
+      "name": "Nusa Peninda",
+      "tagline": "Cliffs, hidden lagoons, and some of Bali's clearest water.",
+      "card_image_url": "https://plus.unsplash.com/premium_photo-1661962878782-8841a385019d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1604560929658-bbc3c2ba6a36?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "A DAY TRIP TO BALI'S WILDEST ISLAND",
+      "desc": "A short fast-boat ride from Sanur, Nusa Penida holds some of Bali's most striking coastal scenery: Angel Billabong's natural infinity pool, the collapsed sea cave at Broken Beach, and Kelingking Beach's cliff viewpoint shaped like a dinosaur. Crystal Bay closes the day with some of the island's best snorkeling."
+    },
+    {
+      "key": "kuta",
+      "name": "Kuta & The Beaches",
+      "tagline": "Bali's original tourist strip, still running day and night.",
+      "card_image_url": "https://images.unsplash.com/photo-1707744576094-f5e6aca68456?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1622916543251-2d24985ffcb4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "SURF, SHOPPING, AND NIGHTLIFE ON THE WEST COAST",
+      "desc": "Kuta's long stretch of sand draws swimmers and surfers by day and fills with bars, restaurants, and shopping by night. It's often paired with the Barong Dance at Batubulan, a performance of Bali's mythic fight between good and evil, before heading down to the coast."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "6 nights accommodation",

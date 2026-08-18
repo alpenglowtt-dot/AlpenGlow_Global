@@ -2,22 +2,51 @@
   "slug": "italy",
   "page_title": "Italian Grand Tour | Alpen Glow Tours and Travels",
   "hero_image_url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1600&q=80",
+  "bg_image_url": "https://images.unsplash.com/photo-1553342385-111fd6bc6ab3?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "location": "Italy",
-  "duration": "10 Days / 9 Nights",
-  "title": "Italian Grand Tour",
+  "duration": "5 Days / 4 Nights",
+  "title": "Italian Renaissance Tour",
   "overview_heading": "Overview",
   "overview_paragraphs": [
-    "Italy's grand tour route exists because it works — Rome's ruins, Florence's Renaissance art, and Venice's canals are each worth a trip on their own, and seeing all three in sequence shows how dramatically the country changes character every few hundred kilometres. This itinerary builds in proper time in each city rather than treating them as checkpoints.",
+    "This trip runs through three of Italy's defining cities in five days, moving north from Florence's Renaissance core to the marble squares of Pisa and finally into Venice's canals, tied together by train so the transitions are as easy as the destinations are different.\n\nBest for travelers who want art, architecture, and history without long transit days eating into the sightseeing.",
     "Ideal for travelers who want history, art, and food in roughly equal measure, with a relaxed Tuscan countryside stop to slow things down."
   ],
-  "places_heading": "",
-  "places": [],
+  "places_heading": "Explore the Cities",
+  "places": [
+    {
+      "key": "florence",
+      "name": "Florence",
+      "tagline": "The cradle of the Renaissance, built around a red-domed cathedral.",
+      "card_image_url": "https://images.unsplash.com/photo-1526216538347-8a69e894ae24?q=80&w=1113&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://plus.unsplash.com/premium_photo-1697730051190-efa453f9c0c1?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "WHERE THE RENAISSANCE BEGAN",
+      "desc": "Florence centers on the Duomo, its bell tower by Giotto, and a Baptistery famous for Ghiberti's bronze doors, all within a few minutes' walk of each other. The Uffizi Gallery holds one of the world's great collections of Renaissance art, and Piazza della Signoria anchors the city's open-air sculpture and civic life. Florence also serves as a base for day trips further into Tuscany."
+    },
+    {
+      "key": "pisa",
+      "name": "Pisa",
+      "tagline": "One tower, tilted for eight centuries, still standing.",
+      "card_image_url": "https://images.unsplash.com/photo-1705066402031-07053d50793b?q=80&w=1168&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1694710301522-16d7c81432d0?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "A DAY TRIP TO THE FIELD OF MIRACLES",
+      "desc": "Piazza dei Miracoli brings together Pisa's three defining monuments in one green square: the Leaning Tower, the Cathedral, and the Baptistery. The tilt itself dates back to soft subsoil issues during construction in the 12th century, and it's remained one of Italy's most recognizable sights ever since, easily seen as a half-day trip from Florence."
+    },
+    {
+      "key": "venice",
+      "name": "Venice",
+      "tagline": "A city built on water, with no roads at all.",
+      "card_image_url": "https://images.unsplash.com/photo-1558271736-cd043ef2e855?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?q=80&w=1167&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "THE CITY OF CANALS AND BRIDGES",
+      "desc": "Venice opens at St. Mark's Square, where the sheer scale of the Piazza and the Cathedral sets the tone for the rest of the city. Next door, the Doge's Palace once housed the seat of government and the Court of Justice, connected to the old prisons by the Bridge of Sighs. Beyond the main sights, Venice rewards slow, unplanned walking through its canals and backstreets."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
-    "9 nights accommodation",
-    "High-speed train tickets between cities",
-    "Vatican Museums skip-the-line entry",
-    "Gondola ride in Venice",
+    "4 nights accommodation",
+    "Inter-city train tickets (Florence, Pisa, Venice)",
+    "Uffizi Gallery skip-the-line entry",
+    "Guided walking tours (Florence, Pisa, Venice)",
     "Daily breakfast"
   ],
   "active": true

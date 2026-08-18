@@ -1,24 +1,53 @@
 {
   "slug": "santorini",
-  "page_title": "Santorini — Aegean Dreams | Alpen Glow Tours and Travels",
-  "hero_image_url": "https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=600&q=80",
-  "location": "Greece · Cyclades",
-  "duration": "6 Days / 5 Nights",
-  "title": "Santorini — Aegean Dreams",
+  "page_title": "Santorini - Aegean Dreams | Alpen Glow Tours and Travels",
+  "hero_image_url": "https://images.unsplash.com/photo-1716573120993-8f3719fcd486?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "bg_image_url": "https://plus.unsplash.com/premium_photo-1661962663771-e096c9ffccbb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "location": "Athens · Santorini · Rhodes",
+  "duration": "8 Days / 7 Nights",
+  "title": "Santorini - Aegean Dreams",
   "overview_heading": "Overview",
   "overview_paragraphs": [
-    "Santorini's whitewashed villages cascading down a volcanic caldera are the single most photographed view in Greece, and seeing it in person still manages to exceed the pictures. This trip is built around the island's famous sunset, its black- and red-sand beaches, and a day sailing the caldera that produced the whole dramatic landscape.",
+    "Greece's most classic combination pairs a capital built on 5,000 years of history with two islands that couldn't look more different from each other. This trip moves from Athens' marble ruins and ancient agora, to Santorini's caldera views and whitewashed clifftop villages, to Rhodes' walled medieval old town and Aegean beaches, tied together by ferry and short island-hop flights.\n\nBest for travelers who want mainland history, caldera views, and a Crusader-era old town in a single trip.",
     "Best for couples and honeymooners, or anyone wanting a few days of pure, unhurried island time."
   ],
-  "places_heading": "",
-  "places": [],
+  "places_heading": "Explore the Cities",
+  "places": [
+    {
+      "key": "athens",
+      "name": "Athens",
+      "tagline": "Ancient marble ruins standing in the middle of a living, modern capital.",
+      "card_image_url": "https://plus.unsplash.com/premium_photo-1661915766202-cb0f84490206?q=80&w=2085&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://plus.unsplash.com/premium_photo-1661964068107-6d7f6f4fea51?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "WHERE 2,500 YEARS OF HISTORY SHARE ONE SKYLINE",
+      "desc": "Athens is built around the Acropolis, and everything else in the city seems to orient itself around that hill. The Parthenon, Erechtheion, and Propylaea sit at the top; the New Acropolis Museum holds the artifacts pulled from it. Below, Plaka and Monastiraki keep a village-like maze of lanes at the foot of the rock, while Syntagma Square, Panathenaic Stadium (the only stadium built entirely of marble), and the Temple of Olympian Zeus round out a city where ancient and modern Athens sit a few minutes' walk apart."
+    },
+    {
+      "key": "santorini",
+      "name": "Santorini",
+      "tagline": "Whitewashed villages balanced on the rim of a volcanic caldera.",
+      "card_image_url": "https://plus.unsplash.com/premium_photo-1697730112614-f798011ebe42?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1618500031461-a5fc01e96763?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "THE VIEW EVERYONE PICTURES WHEN THEY THINK OF GREECE",
+      "desc": "Santorini's whole geography was shaped by one of the largest volcanic eruptions in recorded history, and the island still wears the scar as its defining feature: a sheer caldera wall lined with blue-domed churches and cliffside villages. Fira anchors the island with cable cars and caldera-edge walking paths, Oia holds the famous sunset view, and Pyrgos and Emporio keep a quieter, older character. Add in the black sand of Perissa Beach and a working vineyard or two, and the island covers both its postcard side and its working, everyday one."
+    },
+    {
+      "key": "rhodes",
+      "name": "Rhodes",
+      "tagline": "A walled medieval old town facing the Aegean toward Turkey.",
+      "card_image_url": "https://images.unsplash.com/photo-1587974136998-4fcc253b6183?q=80&w=1155&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1588796503044-0a7c50edbd12?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "modal_tagline": "WHERE CRUSADER WALLS MEET THE OPEN SEA",
+      "desc": "Rhodes' Old Town is one of the best-preserved medieval walled cities in Europe, built up by the Knights of St. John and still fully inhabited inside its fortifications. The Palace of the Grand Master anchors the old town, while Kallithea Springs and Filerimos give a quieter, greener counterpoint outside the walls. A short boat ride away, Simi Island adds a Venetian-era detour of pastel houses stacked up a steep hillside, best explored on foot through its harbor-front lanes and sponge shops."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
-    "5 nights accommodation",
-    "Caldera catamaran cruise with lunch",
-    "Akrotiri archaeological site entry",
-    "Wine tasting at a local vineyard",
-    "Daily breakfast"
+    "7 nights accommodation",
+    "Athens–Santorini ferry ticket",
+    "Santorini–Rhodes flight",
+    "Daily breakfast",
+    "Airport & port transfers"
   ],
   "active": true
 }
