@@ -332,6 +332,33 @@
           }
         }
 
+        // ── Itinerary heading ─────────────────────────────────
+        const itinHeadingEl = document.getElementById('itineraryHeading')
+        if (itinHeadingEl && d.itinerary_heading) itinHeadingEl.textContent = d.itinerary_heading
+
+        // ── Itinerary days ─────────────────────────────────────
+        const itinerary = Array.isArray(d.itinerary) ? d.itinerary
+          : (typeof d.itinerary === 'string' ? JSON.parse(d.itinerary || '[]') : [])
+        const itinList = document.getElementById('itineraryList')
+        if (itinList) {
+          if (itinerary.length) {
+            itinList.innerHTML = itinerary.map(function(day) {
+              return `<div class="itinerary-day">
+                <div class="itinerary-day-num">${day.range || ''}</div>
+                <div class="itinerary-day-content"><h4>${day.title || ''}</h4><p>${day.desc || ''}</p></div>
+              </div>`
+            }).join('')
+            itinList.style.display = ''
+            if (itinHeadingEl) itinHeadingEl.style.display = ''
+          } else if (Array.isArray(d.itinerary)) {
+            // Explicit empty array (not "field absent") means the admin removed
+            // the itinerary for this page — hide the section instead of leaving
+            // stale hardcoded days visible.
+            itinList.style.display = 'none'
+            if (itinHeadingEl) itinHeadingEl.style.display = 'none'
+          }
+        }
+
         // ── Inclusions heading ────────────────────────────────
         const inclH = document.getElementById('inclusionsHeading')
         if (inclH && d.inclusions_heading) inclH.textContent = d.inclusions_heading

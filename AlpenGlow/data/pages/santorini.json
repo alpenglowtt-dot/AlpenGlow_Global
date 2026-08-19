@@ -41,6 +41,34 @@
       "desc": "Rhodes' Old Town is one of the best-preserved medieval walled cities in Europe, built up by the Knights of St. John and still fully inhabited inside its fortifications. The Palace of the Grand Master anchors the old town, while Kallithea Springs and Filerimos give a quieter, greener counterpoint outside the walls. A short boat ride away, Simi Island adds a Venetian-era detour of pastel houses stacked up a steep hillside, best explored on foot through its harbor-front lanes and sponge shops."
     }
   ],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Oia & Fira",
+      "desc": "Settle in along the caldera rim — wander Oia's blue-domed churches and watch the famous sunset, then explore Fira's clifftop cafés and shops."
+    },
+    {
+      "range": "Day 3",
+      "title": "Caldera Sailing Cruise",
+      "desc": "A half-day catamaran cruise around the caldera, with stops to swim at the volcanic hot springs and Red Beach."
+    },
+    {
+      "range": "Day 4",
+      "title": "Akrotiri & Wine Tasting",
+      "desc": "Visit the excavated Bronze Age ruins at Akrotiri, followed by a wine tasting at a clifftop vineyard known for its volcanic-soil wines."
+    },
+    {
+      "range": "Day 5",
+      "title": "Beach Day",
+      "desc": "Free day at Perissa or Kamari's black-sand beaches, or simply more time in Oia."
+    },
+    {
+      "range": "Day 6",
+      "title": "Departure",
+      "desc": "Transfer to Santorini Airport for your onward journey."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "7 nights accommodation",

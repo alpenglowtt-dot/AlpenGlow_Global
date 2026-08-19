@@ -12,6 +12,34 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-3",
+      "title": "Auckland & Rotorua",
+      "desc": "Arrive in Auckland, then continue to Rotorua for geothermal geysers, mud pools, and a traditional Maori cultural performance and hangi feast."
+    },
+    {
+      "range": "Day 4-5",
+      "title": "Queenstown",
+      "desc": "Fly south to Queenstown, the adventure capital, with a Milford Sound or Doubtful Sound cruise through fjords and waterfalls."
+    },
+    {
+      "range": "Day 6-7",
+      "title": "Wanaka & Fox Glacier",
+      "desc": "Scenic drive to Lake Wanaka and on to Fox Glacier for a guided glacier valley walk."
+    },
+    {
+      "range": "Day 8-9",
+      "title": "Christchurch",
+      "desc": "Continue to Christchurch for the Botanic Gardens and a punting trip on the Avon River before your onward journey."
+    },
+    {
+      "range": "Day 10",
+      "title": "Departure",
+      "desc": "Transfer to Christchurch Airport for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "9 nights accommodation",

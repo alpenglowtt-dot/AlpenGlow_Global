@@ -12,6 +12,29 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Paro & Tiger's Nest",
+      "desc": "Arrive at Paro's dramatic mountain-ringed airport, then hike to Paro Taktsang — the legendary Tiger's Nest Monastery perched on a cliff 900 metres above the valley."
+    },
+    {
+      "range": "Day 3-4",
+      "title": "Thimphu",
+      "desc": "Drive to the capital, Thimphu, for the Buddha Dordenma statue, the weekend market, and a visit to the Centenary Farmers' Market and Tashichho Dzong fortress."
+    },
+    {
+      "range": "Day 5",
+      "title": "Punakha",
+      "desc": "Cross the Dochula Pass (108 chortens, Himalayan views permitting) en route to Punakha Dzong, set dramatically between two rivers."
+    },
+    {
+      "range": "Day 6",
+      "title": "Departure",
+      "desc": "Drive back to Paro for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "5 nights accommodation",

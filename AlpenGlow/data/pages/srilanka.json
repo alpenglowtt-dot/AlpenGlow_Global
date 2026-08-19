@@ -86,6 +86,34 @@
       "desc": "Colombo closes the journey with Galle Face Green facing the Indian Ocean, the historic Old Parliament, and Gangarama Temple, a fitting mix of colonial heritage and everyday city life."
     }
   ],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Sigiriya & Dambulla",
+      "desc": "Climb the ancient Sigiriya rock fortress at sunrise, then explore the cave temples of Dambulla."
+    },
+    {
+      "range": "Day 3",
+      "title": "Kandy",
+      "desc": "Drive to Kandy for the Temple of the Sacred Tooth Relic and a visit to the Royal Botanical Gardens at Peradeniya."
+    },
+    {
+      "range": "Day 4",
+      "title": "Nuwara Eliya — Tea Country",
+      "desc": "Scenic drive into the hill country, with a working tea estate tour and tasting in Nuwara Eliya."
+    },
+    {
+      "range": "Day 5",
+      "title": "Yala Safari",
+      "desc": "Transfer to Yala National Park for a jeep safari in search of leopards, elephants, and sloth bears."
+    },
+    {
+      "range": "Day 6-7",
+      "title": "South Coast",
+      "desc": "Relax on the south coast at Mirissa or Bentota's beaches, with an optional whale-watching excursion."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "7 nights accommodation",

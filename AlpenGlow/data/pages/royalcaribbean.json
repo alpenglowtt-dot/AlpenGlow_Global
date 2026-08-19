@@ -12,6 +12,39 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1",
+      "title": "Embarkation — Singapore",
+      "desc": "Board in Singapore in the afternoon, with an evening sail-away from Marina Bay Cruise Centre."
+    },
+    {
+      "range": "Day 2",
+      "title": "Day at Sea",
+      "desc": "A full day onboard to explore the ship's pools, rock climbing wall, and entertainment shows."
+    },
+    {
+      "range": "Day 3-4",
+      "title": "Penang, Malaysia",
+      "desc": "Dock in Penang for George Town's UNESCO-listed street art and colonial architecture, with free time for the hawker food scene."
+    },
+    {
+      "range": "Day 5",
+      "title": "Phuket, Thailand",
+      "desc": "A day in Phuket — optional excursions to Phang Nga Bay or simply time on Patong Beach."
+    },
+    {
+      "range": "Day 6",
+      "title": "Day at Sea",
+      "desc": "A relaxed sea day before returning to Singapore."
+    },
+    {
+      "range": "Day 7",
+      "title": "Disembarkation",
+      "desc": "Return to Singapore and disembark for your onward journey."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "6 nights cabin accommodation",

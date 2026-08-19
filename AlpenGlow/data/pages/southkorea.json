@@ -50,6 +50,34 @@
       "desc": "Gyeongju was the capital of the Silla kingdom for close to a thousand years, and the city never fully moved on from it. Grass-covered royal tombs rise straight out of Tumuli Park, Bulguksa Temple and the Seokguram Grotto sit carved into the hillside above, and Donggung Palace's lotus pond lights up after dark. Locals sometimes call it 'a museum without walls,' since the historical sites aren't cordoned off from the rest of the city; they're woven straight into it."
     }
   ],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Seoul - Palaces and Hanok",
+      "desc": "Walk Gyeongbokgung Palace during the changing-of-the-guard ceremony, then wander the traditional hanok houses of Bukchon Village."
+    },
+    {
+      "range": "Day 3-4",
+      "title": "Seoul - Modern Districts",
+      "desc": "Explore Myeongdong for street food and shopping, Hongdae for its youth culture, and the Han River at sunset."
+    },
+    {
+      "range": "Day 5",
+      "title": "DMZ Day Trip",
+      "desc": "Visit the Demilitarized Zone separating North and South Korea, including the observation deck and a briefing on one of the world's most fortified borders."
+    },
+    {
+      "range": "Day 6-7",
+      "title": "Busan",
+      "desc": "High-speed train to the coastal city of Busan for Gamcheon Culture Village's painted hillside houses, Haeundae Beach, and the Jagalchi fish market."
+    },
+    {
+      "range": "Day 8",
+      "title": "Departure",
+      "desc": "Return to Seoul for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "6 nights accommodation",

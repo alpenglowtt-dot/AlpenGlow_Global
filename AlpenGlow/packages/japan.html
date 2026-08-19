@@ -195,6 +195,13 @@ function unlockContent() {
   if (sidebar) sidebar.style.display = "none";
   const wrap = document.querySelector(".detail-wrap");
   if (wrap) wrap.classList.add("wrap-full");
+  // On mobile, the gate card sits in normal flow (not sticky) and can end up
+  // far down the page by the time verification finishes — jump back up to
+  // the top, where the Overview section lives, instead of leaving the user
+  // stranded mid-page.
+  if (window.matchMedia("(max-width: 900px)").matches) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }
 function gateSendWhatsApp() {
   _gateName = document.getElementById("gateName").value.trim();

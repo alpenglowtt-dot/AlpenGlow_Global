@@ -12,6 +12,29 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Kathmandu",
+      "desc": "Explore Kathmandu Durbar Square, the Boudhanath Stupa, and Swayambhunath (the Monkey Temple) overlooking the valley."
+    },
+    {
+      "range": "Day 3-5",
+      "title": "Pokhara",
+      "desc": "Drive or fly to Pokhara — sunrise over the Annapurna range from Sarangkot, a boat ride on Phewa Lake, and a visit to the World Peace Pagoda."
+    },
+    {
+      "range": "Day 6",
+      "title": "Mountain Flight",
+      "desc": "An early-morning scenic mountain flight along the Himalayan range, weather permitting, with close-up views of Everest and Annapurna."
+    },
+    {
+      "range": "Day 7",
+      "title": "Departure",
+      "desc": "Transfer to Kathmandu for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "6 nights accommodation",

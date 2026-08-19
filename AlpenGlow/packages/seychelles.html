@@ -51,8 +51,9 @@
     </div>
     <h2 id="placesHeading">Explore the Cities</h2>
     <div class="city-showcase"></div>
-<h2>Itinerary</h2>
-    <div class="itinerary-day">
+<h2 id="itineraryHeading">Itinerary</h2>
+    <div class="itinerary-list" id="itineraryList">
+<div class="itinerary-day">
       <div class="itinerary-day-num">Day 1-2</div>
       <div class="itinerary-day-content"><h4>Mahe</h4><p>Settle into Mahe, the largest island, with time at Beau Vallon Beach and a scenic drive through the Morne Seychellois National Park.</p></div>
     </div>
@@ -64,7 +65,8 @@
       <div class="itinerary-day-num">Day 6</div>
       <div class="itinerary-day-content"><h4>Departure</h4><p>Return ferry to Mahe for your international departure.</p></div>
     </div>
-    <h2 id="inclusionsHeading">What's Included</h2>
+        </div>
+<h2 id="inclusionsHeading">What's Included</h2>
     <div class="tag-row">
       <span class="tag-pill">5 nights accommodation</span>
       <span class="tag-pill">Inter-island ferry transfers</span>
@@ -156,6 +158,13 @@ function unlockContent() {
   if (sidebar) sidebar.style.display = "none";
   const wrap = document.querySelector(".detail-wrap");
   if (wrap) wrap.classList.add("wrap-full");
+  // On mobile, the gate card sits in normal flow (not sticky) and can end up
+  // far down the page by the time verification finishes — jump back up to
+  // the top, where the Overview section lives, instead of leaving the user
+  // stranded mid-page.
+  if (window.matchMedia("(max-width: 900px)").matches) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }
 function gateSendWhatsApp() {
   _gateName = document.getElementById("gateName").value.trim();

@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   ".claude-flow/policy/state.json": {
-    "mtime": 1787081186.1467257,
-    "ast_hash": "0143a3ad8943f574d72a6bfc4edc0ddf",
+    "mtime": 1787149336.5881877,
+    "ast_hash": "f3a0e64bdc564f7ef2fb9a47611e2c8b",
     "semantic_hash": ""
   },
   ".claude/proven-config.json": {
@@ -782,6 +782,16 @@
   "AlpenGlow/images/Screenshot 2026-08-18 174943.png": {
     "mtime": 1787063842.4514277,
     "ast_hash": "ca006aa0594eb75fccde6956b7ea1692",
+    "semantic_hash": ""
+  },
+  ".claude-flow/neural/stats.json": {
+    "mtime": 1787149339.4604018,
+    "ast_hash": "7075f164aff11af53f11d67790e6df73",
+    "semantic_hash": ""
+  },
+  "AlpenGlow/robots.txt": {
+    "mtime": 1787147736.3523412,
+    "ast_hash": "80cc55651c4efbaaa220abf5589c86e8",
     "semantic_hash": ""
   }
 }

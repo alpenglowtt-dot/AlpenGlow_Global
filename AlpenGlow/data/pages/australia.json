@@ -13,6 +13,29 @@
   ],
   "places_heading": "Explore the Cities",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-3",
+      "title": "Sydney",
+      "desc": "Land in Sydney and settle in with a harbour cruise past the Opera House and Harbour Bridge, a coastal walk from Bondi to Coogee, and a free evening to explore The Rocks and Darling Harbour."
+    },
+    {
+      "range": "Day 4-6",
+      "title": "Red Centre — Uluru",
+      "desc": "Fly to Ayers Rock for sunset and sunrise viewing of Uluru, a guided walk around its base learning Anangu culture and Dreamtime stories, and a night under some of the clearest stargazing skies in the world."
+    },
+    {
+      "range": "Day 7-8",
+      "title": "Cairns & The Great Barrier Reef",
+      "desc": "Fly to Cairns for a full-day reef cruise with snorkelling or diving over the world's largest coral reef system, followed by a relaxed evening in the Cairns Esplanade."
+    },
+    {
+      "range": "Day 9",
+      "title": "Departure",
+      "desc": "Transfer to Cairns airport for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "8 nights accommodation",

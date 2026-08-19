@@ -265,6 +265,11 @@ footer {
   .detail-wrap { grid-template-columns: 1fr; padding: 2.5rem 1.5rem 3rem; gap: 2rem; }
   .breadcrumb { padding: 0 1.5rem; }
   .gate-card { position: static; }
+  footer { padding: 2rem 1rem; }
+  .footer-logo { gap: 1.2rem; flex-wrap: wrap; }
+  .footer-logo img:first-child { height: 60px; }
+  .footer-logo img:last-child { height: 44px; }
+  .footer-links { gap: 1rem; font-size: 0.75rem; }
 }
 
 /* === ARTICLE PREVIEW BLUR (Santorini-style content gate) === */

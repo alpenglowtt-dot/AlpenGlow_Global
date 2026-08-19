@@ -12,6 +12,24 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Mahe",
+      "desc": "Settle into Mahe, the largest island, with time at Beau Vallon Beach and a scenic drive through the Morne Seychellois National Park."
+    },
+    {
+      "range": "Day 3-5",
+      "title": "Praslin",
+      "desc": "Ferry to Praslin for the granite boulders of Anse Source d'Argent, regularly ranked among the world's most beautiful beaches, and a visit to the Vallee de Mai to see the rare coco de mer palm."
+    },
+    {
+      "range": "Day 6",
+      "title": "Departure",
+      "desc": "Return ferry to Mahe for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "5 nights accommodation",

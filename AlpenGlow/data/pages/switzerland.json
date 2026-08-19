@@ -12,6 +12,29 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Zurich & Lucerne",
+      "desc": "Arrive in Zurich, then continue to Lucerne for the Chapel Bridge, Lake Lucerne, and a cable car up Mount Pilatus."
+    },
+    {
+      "range": "Day 3-4",
+      "title": "Interlaken & Jungfraujoch",
+      "desc": "Scenic train to Interlaken, gateway to the Jungfrau region, with a ride to Jungfraujoch — the 'Top of Europe' — for views over the Aletsch Glacier."
+    },
+    {
+      "range": "Day 5-6",
+      "title": "Zermatt & the Matterhorn",
+      "desc": "Continue by train to Zermatt for unobstructed views of the iconic Matterhorn, with a ride up the Gornergrat railway."
+    },
+    {
+      "range": "Day 7",
+      "title": "Departure",
+      "desc": "Scenic train back to Zurich or Geneva for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "6 nights accommodation",

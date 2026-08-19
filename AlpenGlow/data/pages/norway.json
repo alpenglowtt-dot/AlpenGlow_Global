@@ -12,6 +12,34 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Oslo",
+      "desc": "Arrive in Oslo — the Vigeland sculpture park, the Viking Ship Museum, and an evening stroll along the Aker Brygge waterfront."
+    },
+    {
+      "range": "Day 3-4",
+      "title": "Bergen",
+      "desc": "Scenic Bergen Railway through fjords and mountains, then the colourful Bryggen waterfront and the Fløyen funicular for panoramic harbour views."
+    },
+    {
+      "range": "Day 5-6",
+      "title": "The Fjords",
+      "desc": "The full Norway in a Nutshell route — train, fjord cruise on the Nærøyfjord, and bus through hairpin mountain passes."
+    },
+    {
+      "range": "Day 7",
+      "title": "Geirangerfjord",
+      "desc": "A cruise along Geirangerfjord, one of Norway's most photographed fjords, past the Seven Sisters waterfall."
+    },
+    {
+      "range": "Day 8",
+      "title": "Departure",
+      "desc": "Transfer to the nearest airport for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "7 nights accommodation",

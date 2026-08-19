@@ -12,6 +12,29 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1",
+      "title": "Embarkation — Singapore",
+      "desc": "Board your ship from Singapore's Marina Bay Cruise Centre in the afternoon, with an evening sail-away party on the pool deck."
+    },
+    {
+      "range": "Day 2",
+      "title": "Day at Sea",
+      "desc": "A full day to enjoy the ship's pools, spa, casino, and onboard entertainment shows."
+    },
+    {
+      "range": "Day 3",
+      "title": "Port Call",
+      "desc": "A short stop at a nearby port (Malaysia or international waters cruise, depending on sailing schedule) for a few hours ashore or onboard relaxation."
+    },
+    {
+      "range": "Day 4",
+      "title": "Disembarkation",
+      "desc": "Return to Singapore in the morning and disembark for your onward journey."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "3 nights cabin accommodation",

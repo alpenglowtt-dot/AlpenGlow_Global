@@ -12,6 +12,29 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1",
+      "title": "Arrival",
+      "desc": "Speedboat or seaplane transfer from Male to your overwater villa resort, with the rest of the day free to settle in."
+    },
+    {
+      "range": "Day 2-3",
+      "title": "Resort Days",
+      "desc": "Snorkelling over the house reef, a sunset dolphin cruise, and an optional sandbank picnic on a deserted sandbar nearby."
+    },
+    {
+      "range": "Day 4",
+      "title": "Spa & Free Day",
+      "desc": "A couples spa treatment and a free day to swim, paddleboard, or simply do nothing at all."
+    },
+    {
+      "range": "Day 5",
+      "title": "Departure",
+      "desc": "Speedboat or seaplane transfer back to Male for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "4 nights overwater villa",

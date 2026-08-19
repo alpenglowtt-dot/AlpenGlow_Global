@@ -12,6 +12,39 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Budapest",
+      "desc": "Embark in Budapest — an evening cruise past the illuminated Parliament Building, followed by a guided walking tour of Buda Castle and Fisherman's Bastion."
+    },
+    {
+      "range": "Day 3",
+      "title": "Bratislava",
+      "desc": "Dock in Bratislava for a walking tour of the compact old town and its hilltop castle."
+    },
+    {
+      "range": "Day 4-5",
+      "title": "Vienna",
+      "desc": "Two days in Vienna — Schönbrunn Palace, the State Opera House, and free time for coffeehouse culture and the Naschmarkt."
+    },
+    {
+      "range": "Day 6",
+      "title": "Melk & Wachau Valley",
+      "desc": "Cruise through the Wachau Valley's vineyard-lined banks, with a stop at Melk Abbey perched above the Danube."
+    },
+    {
+      "range": "Day 7",
+      "title": "Passau",
+      "desc": "Arrive in the Bavarian town of Passau, where three rivers meet, for a guided tour of its baroque old town."
+    },
+    {
+      "range": "Day 8",
+      "title": "Disembarkation",
+      "desc": "Disembark in Passau for your onward journey or flight home."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "7 nights cabin accommodation",

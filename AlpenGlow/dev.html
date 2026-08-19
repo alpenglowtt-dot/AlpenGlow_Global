@@ -498,6 +498,47 @@ async function writeTextFile(path, text) {
   await w.close()
 }
 
+// ── SEO SYNC ────────────────────────────────────────────────────
+// sitemap.xml is hand-maintained content, but it must always reflect
+// exactly which package pages are actually live. Regenerated (not
+// hand-edited) every time a package is created, edited, toggled
+// active/inactive, or deleted — see saveCE/toggleItem/deleteItem.
+const SITE_ORIGIN = 'https://alpenglowglobal.com'
+async function regenerateSitemap() {
+  try {
+    const today = new Date().toISOString().slice(0, 10)
+    const urls = [
+      { loc: SITE_ORIGIN + '/', changefreq: 'weekly', priority: '1.0' },
+      { loc: SITE_ORIGIN + '/compass.html', changefreq: 'monthly', priority: '0.9' },
+    ]
+    ALL_PKGS
+      .filter((p) => p.active !== false && p.link)
+      .forEach((p) => {
+        urls.push({ loc: SITE_ORIGIN + '/' + p.link, changefreq: 'monthly', priority: '0.8' })
+      })
+    const body = urls
+      .map(
+        (u) =>
+          '  <url>\n' +
+          '    <loc>' + u.loc + '</loc>\n' +
+          '    <lastmod>' + today + '</lastmod>\n' +
+          '    <changefreq>' + u.changefreq + '</changefreq>\n' +
+          '    <priority>' + u.priority + '</priority>\n' +
+          '  </url>',
+      )
+      .join('\n')
+    const xml =
+      '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+      body +
+      '\n</urlset>\n'
+    await writeTextFile('sitemap.xml', xml)
+  } catch (e) {
+    console.error('[sitemap] regeneration failed', e)
+    showToast('Package saved, but sitemap.xml could not be updated: ' + (e.message || e), 'err')
+  }
+}
+
 
 async function listJSONDir(path) {
   try {
@@ -972,12 +1013,14 @@ function openCE(type, id) {
     const _title     = item?.title      || _pkg?.name      || ''
     const _ovHead    = item?.overview_heading  || 'Overview'
     const _plHead    = item?.places_heading    || 'Explore the Cities'
+    const _itinHead  = item?.itinerary_heading || 'Itinerary'
     const _inclHead  = item?.inclusions_heading || "What's Included"
     // Pre-fill overview paragraphs from page JSON; fall back to package description
     const paras = (Array.isArray(item?.overview_paragraphs) && item.overview_paragraphs.length)
       ? item.overview_paragraphs
       : (_pkg?.description ? [_pkg.description] : [])
     const places     = Array.isArray(item?.places)     ? item.places     : []
+    const itinerary  = Array.isArray(item?.itinerary)  ? item.itinerary  : []
     const inclusions = Array.isArray(item?.inclusions) ? item.inclusions : []
     html = `
       <div class="ce-field">
@@ -989,8 +1032,8 @@ function openCE(type, id) {
         <input class="ce-input" id="ce-page-title" placeholder="Japan — Land of Contrasts | AlpenGlow Global" value="${e(_pageTitle)}">
       </div>
       <div class="ce-section-lbl">Hero Section</div>
-      ${ceImgField('ce-img','ce-img-preview',_heroImg,'Hero Image URL','../images/')}
-      ${ceImgField('ce-bg-img','ce-bg-img-preview',item?.bg_image_url||'','Side Background Image (decorative left-edge image, optional)','../images/')}
+      ${ceImgField('ce-img','ce-img-preview',_heroImg,'Hero Image URL','images/')}
+      ${ceImgField('ce-bg-img','ce-bg-img-preview',item?.bg_image_url||'','Side Background Image (decorative left-edge image, optional)','images/')}
       <div class="ce-row">
         <div class="ce-field">
           <label class="ce-lbl">Location</label>
@@ -1021,6 +1064,17 @@ function openCE(type, id) {
       <div class="ce-lbl" style="margin-bottom:.4rem">Place Cards</div>
       <div id="ce-places"></div>
       <button class="btn-add-sd" onclick="addPlaceRow(document.getElementById('ce-places'))">+ Add Place / City</button>
+      <div class="ce-section-lbl" style="display:flex;align-items:center;justify-content:space-between;gap:.6rem">
+        <span>Itinerary <span style="font-weight:400;text-transform:none;letter-spacing:0;opacity:.6">(optional)</span></span>
+        <button type="button" class="sd-remove" style="position:static;flex-shrink:0" onclick="removeItinerarySection()" title="Remove this section">✕</button>
+      </div>
+      <div class="ce-field">
+        <label class="ce-lbl">Section Heading</label>
+        <input class="ce-input" id="ce-itinerary-heading" placeholder="Itinerary" value="${e(_itinHead)}">
+      </div>
+      <div class="ce-lbl" style="margin-bottom:.4rem">Day-by-Day Entries</div>
+      <div id="ce-itinerary"></div>
+      <button class="btn-add-sd" onclick="addItineraryRow(document.getElementById('ce-itinerary'))">+ Add Day</button>
       <div class="ce-section-lbl">What's Included</div>
       <div class="ce-field">
         <label class="ce-lbl">Section Heading</label>
@@ -1037,6 +1091,7 @@ function openCE(type, id) {
     document.getElementById('ce-body').innerHTML = html
     paras.forEach(p => addOverviewParaRow(document.getElementById('ce-overview-paras'), p))
     places.forEach(p => addPlaceRow(document.getElementById('ce-places'), p))
+    itinerary.forEach(d => addItineraryRow(document.getElementById('ce-itinerary'), d))
     inclusions.forEach(i => addInclusionRow(document.getElementById('ce-inclusions'), i))
     document.getElementById('ce-overlay').classList.add('open')
     document.getElementById('ce-drw').classList.add('open')
@@ -1132,7 +1187,7 @@ function addPlaceRow(container, p) {
         <span class="ce-lbl" style="display:block;margin-bottom:.3rem">Card Image</span>
         <div style="display:flex;gap:.4rem;align-items:center">
           <input class="ce-input place-card-img" id="${cardId}" placeholder="Card image URL" value="${e(p.card_image_url||'')}" oninput="previewImg(this.value,'${cardPrevId}')" style="flex:1;min-width:0">
-          <button type="button" class="btn-upload-local" onclick="uploadLocalImage('${cardId}','${cardPrevId}','../images/')">📁 Upload</button>
+          <button type="button" class="btn-upload-local" onclick="uploadLocalImage('${cardId}','${cardPrevId}','images/')">📁 Upload</button>
         </div>
         <img id="${cardPrevId}" class="ce-img-preview${cardShow}" src="${e(p.card_image_url||'')}" alt="">
       </div>
@@ -1140,7 +1195,7 @@ function addPlaceRow(container, p) {
         <span class="ce-lbl" style="display:block;margin-bottom:.3rem">Modal Image (leave blank to reuse card image)</span>
         <div style="display:flex;gap:.4rem;align-items:center">
           <input class="ce-input place-modal-img" id="${modalId}" placeholder="Modal image URL" value="${e(p.modal_image_url||'')}" oninput="previewImg(this.value,'${modalPrevId}')" style="flex:1;min-width:0">
-          <button type="button" class="btn-upload-local" onclick="uploadLocalImage('${modalId}','${modalPrevId}','../images/')">📁 Upload</button>
+          <button type="button" class="btn-upload-local" onclick="uploadLocalImage('${modalId}','${modalPrevId}','images/')">📁 Upload</button>
         </div>
         <img id="${modalPrevId}" class="ce-img-preview${modalShow}" src="${e(p.modal_image_url||'')}" alt="">
       </div>
@@ -1157,6 +1212,21 @@ function addInclusionRow(container, text) {
   row.innerHTML = `
     <input class="ce-input incl-text" placeholder="e.g. 8 nights accommodation" value="${e(text||'')}">
     <button class="sd-remove" style="position:static;flex-shrink:0" onclick="this.parentElement.remove()">✕</button>
+  `
+  container.appendChild(row)
+}
+
+function addItineraryRow(container, day) {
+  day = day || {}
+  const row = document.createElement('div')
+  row.className = 'itin-row'
+  row.innerHTML = `
+    <button class="sd-remove" onclick="this.parentElement.remove()" title="Remove">✕</button>
+    <div class="place-row-grid">
+      <input class="ce-input itin-range" placeholder="Day range (e.g. Day 1-3)" value="${e(day.range||'')}">
+      <input class="ce-input itin-title" placeholder="Title (e.g. Rome)" value="${e(day.title||'')}">
+      <textarea class="ce-textarea itin-desc full" placeholder="What happens on these days…">${e(day.desc||'')}</textarea>
+    </div>
   `
   container.appendChild(row)
 }
@@ -1179,6 +1249,20 @@ function collectPlaces() {
 function collectInclusions() {
   return Array.from(document.querySelectorAll('#ce-inclusions .incl-text'))
     .map(i => i.value.trim()).filter(Boolean)
+}
+function removeItinerarySection() {
+  const list = document.getElementById('ce-itinerary')
+  if (list) list.innerHTML = ''
+  const heading = document.getElementById('ce-itinerary-heading')
+  if (heading) heading.value = ''
+  showToast('Itinerary section will be removed on save', 'ok')
+}
+function collectItinerary() {
+  return Array.from(document.querySelectorAll('#ce-itinerary .itin-row')).map(row => ({
+    range: row.querySelector('.itin-range').value.trim(),
+    title: row.querySelector('.itin-title').value.trim(),
+    desc:  row.querySelector('.itin-desc').value.trim(),
+  })).filter(d => d.range || d.title || d.desc)
 }
 
 function ceImgField(inputId, previewId, value, labelText, prefix) {
@@ -1217,6 +1301,8 @@ async function saveCE() {
       overview_paragraphs: collectOverviewParas(),
       places_heading:      document.getElementById('ce-places-heading').value.trim() || 'Explore the Cities',
       places:              collectPlaces(),
+      itinerary_heading:   document.getElementById('ce-itinerary-heading').value.trim() || 'Itinerary',
+      itinerary:           collectItinerary(),
       inclusions_heading:  document.getElementById('ce-inclusions-heading').value.trim() || "What's Included",
       inclusions:          collectInclusions(),
       active:              document.getElementById('ce-active-toggle').classList.contains('on'),
@@ -1304,6 +1390,7 @@ async function saveCE() {
       }
       await writeJSON(file, arr)
       closeCE(); await loadAll()
+      if (!isDest) await regenerateSitemap()
     } catch(err) { alert('Save failed: ' + err.message)
     } finally { btn.textContent = 'Save'; btn.disabled = false }
     return
@@ -1373,6 +1460,7 @@ async function toggleItem(table, id, newActive) {
     return
   }
   await loadAll()
+  if (table === 'packages') await regenerateSitemap()
 }
 
 // ── DELETE (double-click confirm) ─────────────────────────────
@@ -1409,6 +1497,7 @@ async function deleteItem(table, id, btn) {
     }
     _delTarget = null
     await loadAll()
+    if (table === 'packages') await regenerateSitemap()
     return
   }
   _delTarget = id
@@ -1647,6 +1736,8 @@ function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
     </div>
     <h2 id="placesHeading">Explore the Highlights</h2>
     <div class="city-showcase"></div>
+    <h2 id="itineraryHeading" style="display:none">Itinerary</h2>
+    <div class="itinerary-list" id="itineraryList" style="display:none"></div>
     <h2 id="inclusionsHeading">What's Included</h2>
     <div class="tag-row">
       <span class="tag-pill">To be updated</span>
@@ -1737,6 +1828,13 @@ function unlockContent() {
   if (sidebar) sidebar.style.display = "none";
   const wrap = document.querySelector(".detail-wrap");
   if (wrap) wrap.classList.add("wrap-full");
+  // On mobile, the gate card sits in normal flow (not sticky) and can end up
+  // far down the page by the time verification finishes — jump back up to
+  // the top, where the Overview section lives, instead of leaving the user
+  // stranded mid-page.
+  if (window.matchMedia("(max-width: 900px)").matches) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 }
 function gateSendWhatsApp() {
   _gateName = document.getElementById("gateName").value.trim();

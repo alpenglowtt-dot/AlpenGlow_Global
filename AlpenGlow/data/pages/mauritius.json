@@ -12,6 +12,34 @@
   ],
   "places_heading": "",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "North Coast",
+      "desc": "Arrive and settle into the north coast — time at Grand Baie's beaches and markets, with a catamaran cruise to the offshore islets."
+    },
+    {
+      "range": "Day 3",
+      "title": "Chamarel & the South",
+      "desc": "Day trip to the Seven Coloured Earths at Chamarel, the nearby waterfall, and a rum tasting at a local distillery."
+    },
+    {
+      "range": "Day 4",
+      "title": "Black River Gorges",
+      "desc": "A guided walk through Black River Gorges National Park, followed by an afternoon at Tamarin Bay."
+    },
+    {
+      "range": "Day 5",
+      "title": "Île aux Cerfs",
+      "desc": "Boat excursion to Île aux Cerfs for white-sand beaches and optional water sports."
+    },
+    {
+      "range": "Day 6",
+      "title": "Departure",
+      "desc": "Free morning before transfer to the airport for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "5 nights accommodation",

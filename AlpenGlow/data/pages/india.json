@@ -13,6 +13,29 @@
   ],
   "places_heading": "Explore the Cities",
   "places": [],
+  "itinerary_heading": "Itinerary",
+  "itinerary": [
+    {
+      "range": "Day 1-2",
+      "title": "Delhi",
+      "desc": "Explore Old Delhi's Jama Masjid and Chandni Chowk by rickshaw, then New Delhi's India Gate, Humayun's Tomb, and Qutub Minar."
+    },
+    {
+      "range": "Day 3-4",
+      "title": "Agra",
+      "desc": "Drive to Agra for sunrise at the Taj Mahal, followed by Agra Fort and the abandoned Mughal city of Fatehpur Sikri."
+    },
+    {
+      "range": "Day 5-7",
+      "title": "Jaipur",
+      "desc": "Continue to the Pink City — Amber Fort by jeep, the City Palace, Hawa Mahal, and an evening at a rooftop restaurant overlooking the old city walls."
+    },
+    {
+      "range": "Day 8",
+      "title": "Departure",
+      "desc": "Drive back to Delhi for your international departure."
+    }
+  ],
   "inclusions_heading": "What's Included",
   "inclusions": [
     "7 nights accommodation",
