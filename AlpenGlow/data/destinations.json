@@ -5,7 +5,7 @@
     "name": "The Cultural Soul",
     "countries": "India · Nepal · Bhutan · Sri Lanka",
     "description": "Seamless border-crossing trails through the subcontinent's sacred and scenic core.",
-    "image_url": "tajmahal.jpg",
+    "image_url": "https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "panel_title": "The Sub-Continent Expert",
     "sort_order": 1,
     "active": true,
@@ -144,5 +144,43 @@
       }
     ],
     "id": "dest_msxiz8iv"
+  },
+  {
+    "slug": "india",
+    "number": "4 PACKAGES",
+    "name": "One Country, Every Journey",
+    "countries": "PILGRIM · BEACHES · HERITAGE · WILDLIFE & NATURE",
+    "description": "From temple towns to tiger reserves, coastlines to hill forts, a single country holding four entirely different kinds of trips.",
+    "panel_title": "Incredible, All at Once",
+    "image_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "sort_order": 0,
+    "sub_destinations": [
+      {
+        "name": "Pilgrim",
+        "desc": "Varanasi's ghats, Amritsar's Golden Temple, Char Dham, and the temple towns of the south, journeys built around India's oldest living traditions.",
+        "image_url": "https://images.unsplash.com/photo-1784916356582-19f336a3526b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": ""
+      },
+      {
+        "name": "Beaches",
+        "desc": "Palm-lined shores, houseboats, and sunset coves along two very different coasts.",
+        "image_url": "https://images.unsplash.com/photo-1646748019366-3f1c922bfe3b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": ""
+      },
+      {
+        "name": "Heritage",
+        "desc": "Rajasthan's desert forts, Mughal monuments, and colonial hill stations, India's history told through what it left standing.",
+        "image_url": "https://images.unsplash.com/photo-1663513844814-5f2fd51e957a?q=80&w=697&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": ""
+      },
+      {
+        "name": "Wildlife & Nature",
+        "desc": "Ranthambore's tigers, the Western Ghats, and national parks where the country's wilder side takes over.",
+        "image_url": "https://plus.unsplash.com/premium_photo-1694270553677-22680efa4d56?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": ""
+      }
+    ],
+    "active": true,
+    "id": "1787391078574"
   }
 ]

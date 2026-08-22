@@ -68,7 +68,7 @@ window.ALPEN_DATA = {
       "name": "The Cultural Soul",
       "countries": "India · Nepal · Bhutan · Sri Lanka",
       "description": "Seamless border-crossing trails through the subcontinent's sacred and scenic core.",
-      "image_url": "tajmahal.jpg",
+      "image_url": "https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "panel_title": "The Sub-Continent Expert",
       "sort_order": 1,
       "active": true,
@@ -207,6 +207,44 @@ window.ALPEN_DATA = {
         }
       ],
       "id": "dest_msxiz8iv"
+    },
+    {
+      "slug": "india",
+      "number": "4 PACKAGES",
+      "name": "One Country, Every Journey",
+      "countries": "PILGRIM · BEACHES · HERITAGE · WILDLIFE & NATURE",
+      "description": "From temple towns to tiger reserves, coastlines to hill forts, a single country holding four entirely different kinds of trips.",
+      "panel_title": "Incredible, All at Once",
+      "image_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "sort_order": 0,
+      "sub_destinations": [
+        {
+          "name": "Pilgrim",
+          "desc": "Varanasi's ghats, Amritsar's Golden Temple, Char Dham, and the temple towns of the south, journeys built around India's oldest living traditions.",
+          "image_url": "https://images.unsplash.com/photo-1784916356582-19f336a3526b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "link": ""
+        },
+        {
+          "name": "Beaches",
+          "desc": "Palm-lined shores, houseboats, and sunset coves along two very different coasts.",
+          "image_url": "https://images.unsplash.com/photo-1646748019366-3f1c922bfe3b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "link": ""
+        },
+        {
+          "name": "Heritage",
+          "desc": "Rajasthan's desert forts, Mughal monuments, and colonial hill stations, India's history told through what it left standing.",
+          "image_url": "https://images.unsplash.com/photo-1663513844814-5f2fd51e957a?q=80&w=697&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "link": ""
+        },
+        {
+          "name": "Wildlife & Nature",
+          "desc": "Ranthambore's tigers, the Western Ghats, and national parks where the country's wilder side takes over.",
+          "image_url": "https://plus.unsplash.com/premium_photo-1694270553677-22680efa4d56?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "link": ""
+        }
+      ],
+      "active": true,
+      "id": "1787391078574"
     }
   ],
   "packages": [
@@ -981,53 +1019,74 @@ window.ALPEN_DATA = {
     },
     "norway": {
       "slug": "norway",
-      "page_title": "Norwegian Fjords Expedition | Alpen Glow Tours and Travels",
-      "hero_image_url": "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1600&q=80",
-      "location": "Scandinavia · Norway",
-      "duration": "8 Days / 7 Nights",
-      "title": "Norwegian Fjords Expedition",
+      "page_title": "Scandinavian Expedition | Alpen Glow Tours and Travels",
+      "hero_image_url": "https://images.unsplash.com/photo-1488415032361-b7e238421f1b?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "bg_image_url": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "location": "Scandinavia",
+      "duration": "11 Days / 10 Nights",
+      "title": "Scandinavian Expedition",
       "overview_heading": "Overview",
       "overview_paragraphs": [
-        "Norway's fjords look manufactured until you're actually inside one — cliffs rising vertically out of water so still it mirrors them perfectly, with waterfalls that seem to fall from nowhere. This expedition is built around the country's most scenic rail and ferry routes, designed to put you inside the landscape rather than just looking at it from a bus window.",
+        "This trip runs through the Arctic Circle across two countries, from Helsinki's capital polish to Rovaniemi's official Santa Claus territory, the wilderness of Saariselkä, Tromsø's fjords above the Arctic Circle, and Oslo to close it out. Eleven days built around Northern Lights hunts, husky and reindeer safaris, snowmobiling, and glass igloo stays, connected by short flights and private transfers.\n\nBest for travelers chasing the Northern Lights and snow-country experiences across Finland and Norway in one trip.",
         "Built for travelers who want dramatic natural scenery delivered comfortably, via train and boat rather than long hikes."
       ],
-      "places_heading": "",
-      "places": [],
-      "itinerary_heading": "Itinerary",
-      "itinerary": [
+      "places_heading": "Explore the Cities",
+      "places": [
         {
-          "range": "Day 1-2",
-          "title": "Oslo",
-          "desc": "Arrive in Oslo — the Vigeland sculpture park, the Viking Ship Museum, and an evening stroll along the Aker Brygge waterfront."
+          "key": "helsinki",
+          "name": "Helsinki",
+          "tagline": "Finland's capital, dressed for winter.",
+          "card_image_url": "https://images.unsplash.com/photo-1548188500-ab08449b26d7?q=80&w=1164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1538332576228-eb5b4c4de6f5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE THE TRIP BEGINS AND EASES IN",
+          "desc": "Helsinki opens the journey with a private airport transfer and a panoramic city tour taking in Senate Square, the red-brick Uspenski Cathedral, and the rest of the capital's central sights, a gentle two-night introduction before heading north into the Arctic."
         },
         {
-          "range": "Day 3-4",
-          "title": "Bergen",
-          "desc": "Scenic Bergen Railway through fjords and mountains, then the colourful Bryggen waterfront and the Fløyen funicular for panoramic harbour views."
+          "key": "rovaniemi",
+          "name": "Rovaniemi",
+          "tagline": "The official hometown of Santa Claus, built on the Arctic Circle.",
+          "card_image_url": "https://images.unsplash.com/photo-1588065368260-e674feeaaafd?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1735646915790-6071fecfb369?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE THE ARCTIC CIRCLE RUNS THROUGH THE CITY",
+          "desc": "Rovaniemi sits directly on the Arctic Circle, and the trip leans into it fully: a Northern Lights hunt out into the Finnish wilderness with hot berry juice and folk stories by the campfire, a crossing of the Arctic Circle line itself (with a certificate to prove it), a visit to Santa Claus Village and its post office, and a husky farm sled ride through the snow."
         },
         {
-          "range": "Day 5-6",
-          "title": "The Fjords",
-          "desc": "The full Norway in a Nutshell route — train, fjord cruise on the Nærøyfjord, and bus through hairpin mountain passes."
+          "key": "saariselka",
+          "name": "Saariselkä",
+          "tagline": "Snowmobiles, reindeer, and a night under a glass roof.",
+          "card_image_url": "https://images.unsplash.com/photo-1779116811668-4900668e9ff9?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1613476775431-f085e65e9605?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "DEEP WILDERNESS AND A GLASS IGLOO STAY",
+          "desc": "Saariselkä trades city sightseeing for open wilderness, staying in a glass igloo built for watching the sky overhead. Days here run through a snowmobile safari across the snowfields and a reindeer safari, Lapland's two classic winter experiences, both set against Kakslauttanen's Arctic backdrop."
         },
         {
-          "range": "Day 7",
-          "title": "Geirangerfjord",
-          "desc": "A cruise along Geirangerfjord, one of Norway's most photographed fjords, past the Seven Sisters waterfall."
+          "key": "tromso",
+          "name": "Tromsø",
+          "tagline": "A Norwegian fjord city built for chasing the Northern Lights.",
+          "card_image_url": "https://images.unsplash.com/photo-1641299868381-42c07960306c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1531366599837-ce0c0e17657c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "NORWAY'S ARCTIC CAPITAL",
+          "desc": "Tromsø sits well above the Arctic Circle on the Norwegian coast, with the Fjellheisen cable car climbing 421 meters above the city for a panoramic view over the surrounding islands, mountains, and fjords, one of the easiest vantage points in town for spotting the Northern Lights. An evening electric cruise heads out onto the water for a closer Aurora hunt over 3 to 4 hours."
         },
         {
-          "range": "Day 8",
-          "title": "Departure",
-          "desc": "Transfer to the nearest airport for your international departure."
+          "key": "oslo",
+          "name": "Oslo",
+          "tagline": "Norway's capital, closing out the trip at sea level.",
+          "card_image_url": "https://images.unsplash.com/photo-1712009509758-dff926710413?q=80&w=1630&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1614517409437-2e25e4f5dbed?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "FINAL STOP, BACK IN THE CITY",
+          "desc": "Oslo brings the trip back to city pace with a hop-on-hop-off tour covering the Royal Palace and the Vigeland Sculpture Park, before a final private transfer to the airport closes out the eleven days."
         }
       ],
+      "itinerary_heading": "Itinerary",
+      "itinerary": [],
       "inclusions_heading": "What's Included",
       "inclusions": [
-        "7 nights accommodation",
-        "Norway in a Nutshell rail & fjord route",
-        "Nærøyfjord cruise",
-        "Geirangerfjord cruise",
-        "Daily breakfast"
+        "10 nights accommodation",
+        "Daily breakfast",
+        "Northern Lights hunt & Aurora cruise",
+        "Husky, reindeer & snowmobile safaris",
+        "Airport & intercity private transfers"
       ],
       "active": true
     },
