@@ -206,40 +206,44 @@ nav.scrolled .nav-cta {
 .dest-modal-head { padding: 0 0.8rem 1.2rem; }
 .dest-modal-head h4 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; color: var(--white); }
 
-/* ── Coverflow carousel — driven by *real* native horizontal scroll,
-   not a click/drag-threshold state machine. Center card upright and
-   large; flanking cards recede in 3D (scaled down, rotated, faded)
-   purely as a function of each card's live position relative to the
-   track's center — read continuously off actual scrollLeft. This is
-   what native touch/trackpad/wheel scrolling, scroll-snap, and
-   clicking a card to scrollIntoView() all drive in the same way, so
-   there's one source of truth instead of competing input handlers. */
-.subdest-coverflow { position: relative; flex: 1; perspective: 1400px; }
+/* ── Paged card carousel — driven by *real* native horizontal scroll,
+   not a click/drag-threshold state machine. Every card renders flat and
+   fully opaque: a whole page of cards is equally readable, rather than
+   one "focused" card with its neighbours dimmed and rotated away. A page
+   is however many cards fit the track at once (3 on desktop, 1 on
+   mobile) and the arrows step a full page at a time. Native
+   touch/trackpad/wheel scrolling, scroll-snap and cfGoToPage() all drive
+   the same scrollLeft, so there's one source of truth instead of
+   competing input handlers. */
+.subdest-coverflow { position: relative; flex: 1; min-height: 0; padding: 0 3rem 1.5rem; }
 .cf-track {
   position: relative; width: 100%; height: 100%;
-  display: flex; align-items: center;
+  display: flex; align-items: stretch; gap: var(--cf-gap);
   overflow-x: auto; overflow-y: hidden;
   scroll-snap-type: x mandatory; scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  --cf-gap: 1rem;
+  --cf-per-view: 3;
 }
 .cf-track::-webkit-scrollbar { display: none; }
-.cf-track::before, .cf-track::after { content: ''; flex: 0 0 calc(50% - 130px); }
 .cf-card {
-  position: relative; flex: 0 0 260px; height: 100%; scroll-snap-align: center;
+  position: relative; height: 100%; scroll-snap-align: start;
+  flex: 0 0 calc((100% - (var(--cf-per-view) - 1) * var(--cf-gap)) / var(--cf-per-view));
   border-radius: 16px; overflow: hidden; cursor: pointer;
-  transition: opacity 0.15s linear;
-  will-change: transform, opacity;
 }
 .cf-card img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 .subdest-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; pointer-events: none; }
 .subdest-card-name { font-family: var(--font-display); font-size: 1.1rem; color: var(--white); margin-bottom: 0.2rem; }
 .subdest-card-desc { font-size: 0.72rem; color: rgba(255,255,255,0.6); line-height: 1.4; }
-.cf-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.12); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.2); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; z-index: 60; transition: all .3s var(--ease-out); }
+.cf-nav { position: absolute; top: calc(50% - 0.75rem); transform: translateY(-50%); width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.12); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.2); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; z-index: 60; transition: all .3s var(--ease-out); }
 .cf-nav:hover { background: var(--orange); border-color: var(--orange); color: var(--dark); }
-.cf-prev { left: 0.5rem; }
-.cf-next { right: 0.5rem; }
-.cf-dots { position: absolute; bottom: 0.6rem; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 60; }
+/* At either end of the track the matching arrow would be a dead control,
+   so it is taken out of the layout rather than left there inert. */
+.cf-nav[hidden] { display: none; }
+.cf-prev { left: 0.2rem; }
+.cf-next { right: 0.2rem; }
+.cf-dots { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 60; }
 .cf-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.3); cursor: pointer; transition: all .3s var(--ease-out); }
 .cf-dot.active { background: var(--orange); width: 18px; border-radius: 3px; }
 
@@ -596,11 +600,10 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
   .dest-modal-head { padding: 0 0.6rem 0.8rem; }
   .dest-modal-head h4 { font-size: 1.05rem; }
   .dest-modal-close { top: 0.7rem; right: 0.7rem; width: 30px; height: 30px; }
-  .cf-track::before, .cf-track::after { flex: 0 0 calc(50% - 78px); }
-  .cf-card { flex: 0 0 156px; }
+  /* One card per page on a phone — three would be ~100px wide each. */
+  .subdest-coverflow { padding: 0 0 1.3rem; }
+  .cf-track { --cf-per-view: 1; --cf-gap: 0.7rem; }
   .cf-nav { width: 32px; height: 32px; font-size: 1rem; }
-  .cf-prev { left: 0.2rem; }
-  .cf-next { right: 0.2rem; }
 
   /* Nav */
   nav { padding: 0.7rem 1.2rem; }
@@ -1190,14 +1193,14 @@ function openDestModal(dest) {
   document.getElementById('destModalTrack').innerHTML = subs.map((s, i) =>
     `<a href="${s.link || '#'}" class="cf-card" onclick="return cfCardClick(event,this,${i})"><img src="${s.image_url || ''}" alt="${s.name || ''}"><div class="subdest-card-overlay"><div class="subdest-card-name">${s.name || ''}</div><div class="subdest-card-desc">${s.desc || ''}</div></div></a>`
   ).join('');
-  document.getElementById('destModalDots').innerHTML = subs.map((s, i) =>
-    `<span class="cf-dot" onclick="cfGoTo(${i})"></span>`
-  ).join('');
+  document.getElementById('destModalDots').innerHTML = '';
   document.getElementById('destModalBackdrop').classList.add('active');
   document.body.style.overflow = 'hidden';
   const track = document.getElementById('destModalTrack');
   track.scrollLeft = 0;
-  requestAnimationFrame(() => { track.scrollLeft = 0; layoutCoverflow(); });
+  // The dots can only be counted once the cards have actually been laid
+  // out, since the page size is measured off their rendered width.
+  requestAnimationFrame(() => { track.scrollLeft = 0; cfRenderDots(); cfSync(); });
 }
 function closeDestModal() {
   document.getElementById('destModalBackdrop').classList.remove('active');
@@ -1210,46 +1213,53 @@ document.addEventListener('keydown', (e) => {
   else if (e.key === 'ArrowLeft') cfMove(-1);
 });
 
-// === COVERFLOW CAROUSEL — driven by real native horizontal scroll ===
-// Center card upright/large; side cards recede in 3D (scaled down,
-// rotated, faded). Transform is a continuous function of each card's
-// *actual* position relative to the track's center, read straight off
-// scrollLeft — the same value native touch/trackpad/wheel scrolling,
-// scroll-snap, and scrollIntoView() all drive. One source of truth,
-// so there's nothing left to go out of sync (the earlier click/drag
-// index state machine was the source of the reported glitches).
-let CF_CURRENT_INDEX = 0;
-function layoutCoverflow() {
+// === PAGED CARD CAROUSEL — driven by real native horizontal scroll ===
+// Every card renders flat and fully opaque; navigation moves a whole page
+// (however many cards fit at once) rather than shuffling a single focused
+// card through the middle. Page position is read straight off scrollLeft
+// — the same value native touch/trackpad/wheel scrolling, scroll-snap and
+// cfGoToPage() all drive. One source of truth, so there's nothing left to
+// go out of sync (the earlier click/drag index state machine was the
+// source of the reported glitches).
+let CF_CURRENT_PAGE = 0;
+
+// Page geometry is *measured*, never hardcoded: --cf-per-view, the gap and
+// the resulting card width all live in CSS (and differ under the mobile
+// media query), so reading them back off the DOM is what keeps JS from
+// silently disagreeing with the stylesheet.
+function cfMetrics(track) {
+  const cards = Array.from(track.querySelectorAll('.cf-card'));
+  if (!cards.length) return null;
+  const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+  const stride = cards[0].getBoundingClientRect().width + gap;
+  const perView = Math.max(1, Math.round((track.clientWidth + gap) / stride));
+  return { cards, stride, perView, pages: Math.max(1, Math.ceil(cards.length / perView)) };
+}
+
+function cfSync() {
   const track = document.getElementById('destModalTrack');
   if (!track) return;
-  const trackRect = track.getBoundingClientRect();
-  const centerX = trackRect.left + trackRect.width / 2;
-  const cards = Array.from(track.querySelectorAll('.cf-card'));
-  // Read the real card width off the DOM instead of a hardcoded constant —
-  // a media query can (and does, on mobile) set a different width via CSS,
-  // and a fixed JS number would silently fall out of sync with it.
-  const cardWidth = cards[0] ? cards[0].getBoundingClientRect().width : 260;
-  let nearestIdx = 0, nearestDist = Infinity;
-  cards.forEach((card, i) => {
-    const r = card.getBoundingClientRect();
-    const cardCenter = r.left + r.width / 2;
-    const dist = cardCenter - centerX;
-    const absDist = Math.abs(dist);
-    if (absDist < nearestDist) { nearestDist = absDist; nearestIdx = i; }
-    const norm = dist / cardWidth;
-    const clamped = Math.max(-3, Math.min(3, norm));
-    const rot = Math.max(-1, Math.min(1, norm)) * -42;
-    const tz = -Math.abs(clamped) * 90;
-    const scale = Math.max(1 - Math.abs(clamped) * 0.14, 0.6);
-    const opacity = Math.max(1 - Math.abs(norm) * 0.3, 0);
-    card.style.transform = `translateZ(${tz}px) rotateY(${rot}deg) scale(${scale})`;
-    card.style.opacity = opacity;
-    card.style.zIndex = String(1000 - Math.round(Math.abs(norm) * 10));
-  });
-  CF_CURRENT_INDEX = nearestIdx;
+  const m = cfMetrics(track);
+  if (!m) return;
+  const page = Math.max(0, Math.min(Math.round(track.scrollLeft / (m.stride * m.perView)), m.pages - 1));
+  CF_CURRENT_PAGE = page;
   document.querySelectorAll('#destModalDots .cf-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === nearestIdx);
+    dot.classList.toggle('active', i === page);
   });
+  const prev = document.querySelector('.cf-prev'), next = document.querySelector('.cf-next');
+  if (prev) prev.hidden = page <= 0;
+  if (next) next.hidden = page >= m.pages - 1;
+}
+
+// Dots count *pages*, not cards, so they agree with what the arrows do.
+function cfRenderDots() {
+  const track = document.getElementById('destModalTrack');
+  const dots = document.getElementById('destModalDots');
+  if (!track || !dots) return;
+  const m = cfMetrics(track);
+  const pages = m ? m.pages : 1;
+  dots.innerHTML = Array.from({ length: pages },
+    (_, i) => `<span class="cf-dot" onclick="cfGoToPage(${i})"></span>`).join('');
 }
 let CF_DRAG_MOVED = false;
 (function () {
@@ -1258,10 +1268,12 @@ let CF_DRAG_MOVED = false;
   if (!track) return;
   track.addEventListener('scroll', () => {
     if (raf) return;
-    raf = requestAnimationFrame(() => { layoutCoverflow(); raf = null; });
+    raf = requestAnimationFrame(() => { cfSync(); raf = null; });
   }, { passive: true });
   window.addEventListener('resize', () => {
-    if (document.getElementById('destModalBackdrop').classList.contains('active')) layoutCoverflow();
+    if (!document.getElementById('destModalBackdrop').classList.contains('active')) return;
+    cfRenderDots(); // a resize can change how many cards fit, i.e. the page count
+    cfSync();
   });
 
   // Click-and-drag with the mouse — native overflow-x:auto only supports
@@ -1314,33 +1326,22 @@ let CF_DRAG_MOVED = false;
     }
   }, { passive: false });
 })();
-function cfGoTo(index) {
-  const track = document.getElementById('destModalTrack');
-  const card = track?.querySelectorAll('.cf-card')[index];
-  if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-}
-function cfMove(dir) {
+function cfGoToPage(page) {
   const track = document.getElementById('destModalTrack');
   if (!track) return;
-  const cards = Array.from(track.querySelectorAll('.cf-card'));
-  const trackRect = track.getBoundingClientRect();
-  const centerX = trackRect.left + trackRect.width / 2;
-  let nearestIdx = 0, nearestDist = Infinity;
-  cards.forEach((card, i) => {
-    const r = card.getBoundingClientRect();
-    const d = Math.abs((r.left + r.width / 2) - centerX);
-    if (d < nearestDist) { nearestDist = d; nearestIdx = i; }
-  });
-  cfGoTo(Math.max(0, Math.min(nearestIdx + dir, cards.length - 1)));
+  const m = cfMetrics(track);
+  if (!m) return;
+  const target = Math.max(0, Math.min(page, m.pages - 1));
+  track.scrollTo({ left: target * m.stride * m.perView, behavior: 'smooth' });
+}
+function cfMove(dir) {
+  cfGoToPage(CF_CURRENT_PAGE + dir);
 }
 function cfCardClick(event, el, index) {
+  // Every card on screen is fully legible now, so a click on any of them is
+  // a real click-through — the only thing left to suppress is the tail end
+  // of a drag, which the browser would otherwise deliver as a click.
   if (CF_DRAG_MOVED) { event.preventDefault(); CF_DRAG_MOVED = false; return false; }
-  if (index !== CF_CURRENT_INDEX) {
-    event.preventDefault();
-    cfGoTo(index);
-    return false;
-  }
-  // Already centered — let the <a> navigate to the package page normally.
 }
 
 // === PARALLAX ===
