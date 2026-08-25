@@ -696,6 +696,21 @@ function replaceMarker(html, key, content) {
   if (si === -1 || ei === -1) return html
   return html.slice(0, si + start.length) + '\n' + content + '\n' + html.slice(ei)
 }
+// Same idea as replaceMarker, but for the FALLBACK_* JS arrays (which sit
+// inside <script>, so they're wrapped in /* ... */ comments instead of
+// HTML comments). Regenerating these on every save is what keeps the
+// last-resort fallback (used only if both data/bundle.js and the live
+// data/*.json fetch fail) from silently drifting out of sync with the
+// real content — exactly the gap that caused the "India" destination
+// bug earlier.
+function replaceJSMarker(html, key, arrJson) {
+  const start = `/* ALPEN:${key}:START */`
+  const end   = `/* ALPEN:${key}:END */`
+  const si = html.indexOf(start)
+  const ei = html.indexOf(end)
+  if (si === -1 || ei === -1) return html
+  return html.slice(0, si + start.length) + '\nconst ' + key + ' = ' + arrJson + '\n' + html.slice(ei)
+}
 
 async function writeIndexHTML() {
   if (!dirHandle) return
@@ -727,9 +742,13 @@ async function writeIndexHTML() {
     </div>`).join('')
 
     // ── Destinations HTML ────────────────────────────────────────
+    // Sub-destination content is NOT baked into this static markup — it's
+    // rendered on demand into the single shared #destModalBackdrop/coverflow
+    // (see index.html's toggleDest/openDestModal). This must stay a plain
+    // dest-card with no nested panel — that's what keeps a "Regenerate"
+    // (or any save, which triggers this automatically via loadAll()) from
+    // silently reverting the coverflow modal back to the old accordion.
     const destsHTML = activeDests.map(d => {
-      const subs = Array.isArray(d.sub_destinations) ? d.sub_destinations
-        : (typeof d.sub_destinations === 'string' ? (JSON.parse(d.sub_destinations || '[]') || []) : [])
       return `<div class="dest-card" data-dest="${e(d.slug)}" onclick="toggleDest(this, event)">
       <img src="${e(d.image_url||'')}" alt="${e(d.name||'')}">
       <div class="dest-overlay">
@@ -739,17 +758,6 @@ async function writeIndexHTML() {
         <div class="dest-countries">${e(d.countries||'')}</div>
         <p class="dest-desc">${e(d.description||'')}</p>
         <div class="dest-tap-hint">Tap to explore →</div>
-      </div>
-      <div class="subdest-panel" id="panel-${e(d.slug)}">
-        <div class="subdest-panel-inner">
-          <div class="subdest-panel-head">
-            <h4>${e(d.panel_title||d.name||'')}</h4>
-            <button class="subdest-close" onclick="event.stopPropagation(); closeDest('${ej(d.slug)}')">×</button>
-          </div>
-          <div class="subdest-scroll">
-            ${subs.map(s => `<a href="${e(s.link||'#')}" class="subdest-card"><img src="${e(s.image_url||'')}" alt="${e(s.name||'')}"><div class="subdest-card-overlay"><div class="subdest-card-name">${e(s.name||'')}</div><div class="subdest-card-desc">${e(s.desc||'')}</div></div></a>`).join('')}
-          </div>
-        </div>
       </div>
     </div>`
     }).join('')
@@ -790,6 +798,15 @@ async function writeIndexHTML() {
     html = replaceMarker(html, 'OFFERS', offersHTML)
     html = replaceMarker(html, 'BLOG', blogHTML)
     html = replaceMarker(html, 'BLOG_DATA', blogDataScript)
+
+    // Keep the last-resort FALLBACK_* JS arrays exactly in sync with the
+    // real, currently-active data — same content the site actually shows,
+    // just serialized for the case where both bundle.js and the live fetch
+    // are unavailable.
+    html = replaceJSMarker(html, 'FALLBACK_DESTINATIONS', JSON.stringify(activeDests, null, 2))
+    html = replaceJSMarker(html, 'FALLBACK_PACKAGES', JSON.stringify(activePkgs, null, 2))
+    html = replaceJSMarker(html, 'FALLBACK_OFFERS', JSON.stringify(activeOffers, null, 2))
+    html = replaceJSMarker(html, 'FALLBACK_ARTICLES', JSON.stringify(activeBlogs, null, 2))
 
   await writeTextFile('index.html', html)
 }

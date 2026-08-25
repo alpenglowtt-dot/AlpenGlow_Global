@@ -193,24 +193,55 @@ nav.scrolled .nav-cta {
 .dest-countries { font-size: 0.75rem; font-weight: 500; color: var(--orange); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
 .dest-desc { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.6; max-width: 320px; }
 .dest-tap-hint { margin-top: 1rem; font-size: 0.72rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
-.subdest-panel { position: absolute; left: 0; right: 0; bottom: 0; height: 0; overflow: hidden; background: rgba(10,10,10,0.97); backdrop-filter: blur(16px); transition: height 0.5s var(--ease-out); z-index: 20; }
-.subdest-panel.open { height: 100%; }
-.subdest-panel-inner { padding: 1.6rem 1.8rem; height: 100%; display: flex; flex-direction: column; }
-.subdest-panel-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
-.subdest-panel-head h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; color: var(--white); }
-.subdest-close { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,0.1); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.3s; }
-.subdest-close:hover { background: var(--orange); color: var(--dark); }
-.subdest-scroll { display: flex; gap: 1rem; overflow-x: auto; flex: 1; padding-bottom: 10px; scrollbar-width: thin; scrollbar-color: rgba(239,126,25,.55) rgba(255,255,255,.07); }
-.subdest-scroll::-webkit-scrollbar { height: 4px; }
-.subdest-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,.07); border-radius: 4px; }
-.subdest-scroll::-webkit-scrollbar-thumb { background: rgba(239,126,25,.55); border-radius: 4px; }
-.subdest-scroll::-webkit-scrollbar-thumb:hover { background: rgba(239,126,25,.85); }
-.subdest-card { flex: 0 0 220px; border-radius: 16px; overflow: hidden; position: relative; height: 100%; transition: transform 0.3s var(--ease-out); }
-.subdest-card:hover { transform: scale(1.03); }
-.subdest-card img { width: 100%; height: 100%; object-fit: cover; }
-.subdest-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; }
+/* ── Destination modal (pop-out over a tinted backdrop) ──────────
+   Replaces the old in-card accordion panel: clicking a destination
+   now opens a single shared modal above a dimmed, blurred backdrop,
+   matching the same pattern already used by #lead-modal/#offer-modal
+   elsewhere on this page. */
+.dest-modal-backdrop { display: none; position: fixed; inset: 0; z-index: 2000; align-items: center; justify-content: center; background: rgba(8,8,8,0.86); backdrop-filter: blur(10px); }
+.dest-modal-backdrop.active { display: flex; }
+.dest-modal { background: rgba(20,20,20,0.55); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 2rem 1.6rem 1.8rem; width: min(920px, 94vw); height: min(560px, 78vh); position: relative; display: flex; flex-direction: column; box-shadow: 0 30px 80px rgba(0,0,0,0.55); animation: modalIn 0.4s var(--ease-out); }
+.dest-modal-close { position: absolute; top: 1.1rem; right: 1.1rem; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.1); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all 0.3s; z-index: 10; }
+.dest-modal-close:hover { background: var(--orange); color: var(--dark); }
+.dest-modal-head { padding: 0 0.8rem 1.2rem; }
+.dest-modal-head h4 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; color: var(--white); }
+
+/* ── Coverflow carousel — driven by *real* native horizontal scroll,
+   not a click/drag-threshold state machine. Center card upright and
+   large; flanking cards recede in 3D (scaled down, rotated, faded)
+   purely as a function of each card's live position relative to the
+   track's center — read continuously off actual scrollLeft. This is
+   what native touch/trackpad/wheel scrolling, scroll-snap, and
+   clicking a card to scrollIntoView() all drive in the same way, so
+   there's one source of truth instead of competing input handlers. */
+.subdest-coverflow { position: relative; flex: 1; perspective: 1400px; }
+.cf-track {
+  position: relative; width: 100%; height: 100%;
+  display: flex; align-items: center;
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.cf-track::-webkit-scrollbar { display: none; }
+.cf-track::before, .cf-track::after { content: ''; flex: 0 0 calc(50% - 130px); }
+.cf-card {
+  position: relative; flex: 0 0 260px; height: 100%; scroll-snap-align: center;
+  border-radius: 16px; overflow: hidden; cursor: pointer;
+  transition: opacity 0.15s linear;
+  will-change: transform, opacity;
+}
+.cf-card img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.subdest-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; pointer-events: none; }
 .subdest-card-name { font-family: var(--font-display); font-size: 1.1rem; color: var(--white); margin-bottom: 0.2rem; }
 .subdest-card-desc { font-size: 0.72rem; color: rgba(255,255,255,0.6); line-height: 1.4; }
+.cf-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.12); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.2); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; z-index: 60; transition: all .3s var(--ease-out); }
+.cf-nav:hover { background: var(--orange); border-color: var(--orange); color: var(--dark); }
+.cf-prev { left: 0.5rem; }
+.cf-next { right: 0.5rem; }
+.cf-dots { position: absolute; bottom: 0.6rem; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 60; }
+.cf-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.3); cursor: pointer; transition: all .3s var(--ease-out); }
+.cf-dot.active { background: var(--orange); width: 18px; border-radius: 3px; }
 
 /* === PACKAGES === */
 #packages { padding: 7rem 3rem; background: var(--cream); }
@@ -560,6 +591,17 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
   .blog-card { flex: 0 0 82vw; }
   .dest-card { flex: 0 0 78vw !important; height: 340px !important; }
 
+  /* Destination coverflow modal */
+  .dest-modal { width: 96vw; height: 82vh; padding: 1.3rem 0.4rem 1.2rem; border-radius: 18px; }
+  .dest-modal-head { padding: 0 0.6rem 0.8rem; }
+  .dest-modal-head h4 { font-size: 1.05rem; }
+  .dest-modal-close { top: 0.7rem; right: 0.7rem; width: 30px; height: 30px; }
+  .cf-track::before, .cf-track::after { flex: 0 0 calc(50% - 78px); }
+  .cf-card { flex: 0 0 156px; }
+  .cf-nav { width: 32px; height: 32px; font-size: 1rem; }
+  .cf-prev { left: 0.2rem; }
+  .cf-next { right: 0.2rem; }
+
   /* Nav */
   nav { padding: 0.7rem 1.2rem; }
   .nav-logo img { height: 60px; }
@@ -644,17 +686,6 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
         <p class="dest-desc">From temple towns to tiger reserves, coastlines to hill forts, a single country holding four entirely different kinds of trips.</p>
         <div class="dest-tap-hint">Tap to explore →</div>
       </div>
-      <div class="subdest-panel" id="panel-india">
-        <div class="subdest-panel-inner">
-          <div class="subdest-panel-head">
-            <h4>Incredible, All at Once</h4>
-            <button class="subdest-close" onclick="event.stopPropagation(); closeDest('india')">×</button>
-          </div>
-          <div class="subdest-scroll">
-            <a href="#" class="subdest-card"><img src="https://images.unsplash.com/photo-1784916356582-19f336a3526b?q=80&amp;w=687&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Pilgrim"><div class="subdest-card-overlay"><div class="subdest-card-name">Pilgrim</div><div class="subdest-card-desc">Varanasi's ghats, Amritsar's Golden Temple, Char Dham, and the temple towns of the south, journeys built around India's oldest living traditions.</div></div></a><a href="#" class="subdest-card"><img src="https://images.unsplash.com/photo-1646748019366-3f1c922bfe3b?q=80&amp;w=687&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Beaches"><div class="subdest-card-overlay"><div class="subdest-card-name">Beaches</div><div class="subdest-card-desc">Palm-lined shores, houseboats, and sunset coves along two very different coasts.</div></div></a><a href="#" class="subdest-card"><img src="https://images.unsplash.com/photo-1663513844814-5f2fd51e957a?q=80&amp;w=697&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Heritage"><div class="subdest-card-overlay"><div class="subdest-card-name">Heritage</div><div class="subdest-card-desc">Rajasthan's desert forts, Mughal monuments, and colonial hill stations, India's history told through what it left standing.</div></div></a><a href="#" class="subdest-card"><img src="https://plus.unsplash.com/premium_photo-1694270553677-22680efa4d56?q=80&amp;w=687&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Wildlife &amp; Nature"><div class="subdest-card-overlay"><div class="subdest-card-name">Wildlife &amp; Nature</div><div class="subdest-card-desc">Ranthambore's tigers, the Western Ghats, and national parks where the country's wilder side takes over.</div></div></a>
-          </div>
-        </div>
-      </div>
     </div><div class="dest-card" data-dest="subcontinent" onclick="toggleDest(this, event)">
       <img src="https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?q=80&amp;w=687&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.1.0&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="The Cultural Soul">
       <div class="dest-overlay">
@@ -664,17 +695,6 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
         <div class="dest-countries">India · Nepal · Bhutan · Sri Lanka</div>
         <p class="dest-desc">Seamless border-crossing trails through the subcontinent's sacred and scenic core.</p>
         <div class="dest-tap-hint">Tap to explore →</div>
-      </div>
-      <div class="subdest-panel" id="panel-subcontinent">
-        <div class="subdest-panel-inner">
-          <div class="subdest-panel-head">
-            <h4>The Sub-Continent Expert</h4>
-            <button class="subdest-close" onclick="event.stopPropagation(); closeDest('subcontinent')">×</button>
-          </div>
-          <div class="subdest-scroll">
-            <a href="packages/india.html" class="subdest-card"><img src="india.jpg" alt="India"><div class="subdest-card-overlay"><div class="subdest-card-name">India</div><div class="subdest-card-desc">A Ganges sunrise in Varanasi, and a thali that's a different meal in every state you cross.</div></div></a><a href="packages/nepal.html" class="subdest-card"><img src="nepal.jpg" alt="Nepal"><div class="subdest-card-overlay"><div class="subdest-card-name">Nepal</div><div class="subdest-card-desc">A sunrise flight past Everest's south face, and a Kathmandu backstreet temple older than most countries.</div></div></a><a href="packages/bhutan.html" class="subdest-card"><img src="bhutan.jpg" alt="Bhutan"><div class="subdest-card-overlay"><div class="subdest-card-name">Bhutan</div><div class="subdest-card-desc">Tiger's Nest clinging to a cliff face, and a kingdom that measures progress in happiness and means it.</div></div></a><a href="packages/srilanka.html" class="subdest-card"><img src="srilanka.jpg" alt="Sri Lanka"><div class="subdest-card-overlay"><div class="subdest-card-name">Sri Lanka</div><div class="subdest-card-desc">A train through tea country with the door left open, and beaches that haven't made it onto anyone's feed yet.</div></div></a>
-          </div>
-        </div>
       </div>
     </div><div class="dest-card" data-dest="longhaul" onclick="toggleDest(this, event)">
       <img src="aurora.jpg" alt="Once-in-a-Lifetime">
@@ -686,17 +706,6 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
         <p class="dest-desc">Bucket-list journeys built for travelers who plan years, not weekends, ahead.</p>
         <div class="dest-tap-hint">Tap to explore →</div>
       </div>
-      <div class="subdest-panel" id="panel-longhaul">
-        <div class="subdest-panel-inner">
-          <div class="subdest-panel-head">
-            <h4>The High-Value Long Haul</h4>
-            <button class="subdest-close" onclick="event.stopPropagation(); closeDest('longhaul')">×</button>
-          </div>
-          <div class="subdest-scroll">
-            <a href="packages/norway.html" class="subdest-card"><img src="norway.jpg" alt="Scandinavia"><div class="subdest-card-overlay"><div class="subdest-card-name">Scandinavia</div><div class="subdest-card-desc">Fjords carved by glaciers, and cities that shut down for the midnight sun.</div></div></a><a href="packages/newzealand.html" class="subdest-card"><img src="newzealand.jpg" alt="New Zealand"><div class="subdest-card-overlay"><div class="subdest-card-name">New Zealand</div><div class="subdest-card-desc">Glaciers, geysers, and a drive where every turn is the postcard.</div></div></a><a href="packages/australia.html" class="subdest-card"><img src="australia.jpg" alt="Australia"><div class="subdest-card-overlay"><div class="subdest-card-name">Australia</div><div class="subdest-card-desc">Reef to red desert on one itinerary, and a coastline longer than most countries' borders.</div></div></a><a href="packages/southkorea.html" class="subdest-card"><img src="southkorea.jpg" alt="South Korea"><div class="subdest-card-overlay"><div class="subdest-card-name">South Korea</div><div class="subdest-card-desc">Palace rooftops against glass towers, and street food stalls that stay open past the last subway.</div></div></a>
-          </div>
-        </div>
-      </div>
     </div><div class="dest-card" data-dest="islands" onclick="toggleDest(this, event)">
       <img src="honeymoon.jpg" alt="Glowcations &amp; Honeymoons">
       <div class="dest-overlay">
@@ -707,17 +716,6 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
         <p class="dest-desc">Pure isolation or culture-plus-luxury, curated for couples and wellness escapes.</p>
         <div class="dest-tap-hint">Tap to explore →</div>
       </div>
-      <div class="subdest-panel" id="panel-islands">
-        <div class="subdest-panel-inner">
-          <div class="subdest-panel-head">
-            <h4>The Island &amp; Beach Specialist</h4>
-            <button class="subdest-close" onclick="event.stopPropagation(); closeDest('islands')">×</button>
-          </div>
-          <div class="subdest-scroll">
-            <a href="packages/maldives.html" class="subdest-card"><img src="maldives.jpg" alt="Maldives"><div class="subdest-card-overlay"><div class="subdest-card-name">Maldives</div><div class="subdest-card-desc">A bungalow with the ocean floor visible through your own floorboards.</div></div></a><a href="packages/seychelles.html" class="subdest-card"><img src="seychelles.jpg" alt="Seychelles"><div class="subdest-card-overlay"><div class="subdest-card-name">Seychelles</div><div class="subdest-card-desc">Granite boulders older than the dinosaurs, framing a beach with nobody else on it.</div></div></a><a href="packages/mauritius.html" class="subdest-card"><img src="mauritius.jpg" alt="Mauritius"><div class="subdest-card-overlay"><div class="subdest-card-name">Mauritius</div><div class="subdest-card-desc">A lagoon calm enough to read in, and a Creole kitchen that's the actual reason to come back.</div></div></a><a href="packages/bali.html" class="subdest-card"><img src="bali.jpg" alt="Bali"><div class="subdest-card-overlay"><div class="subdest-card-name">Bali</div><div class="subdest-card-desc">Rice terraces before the tour buses, and a temple ceremony that isn't staged for anyone.</div></div></a>
-          </div>
-        </div>
-      </div>
     </div><div class="dest-card" data-dest="cruises" onclick="toggleDest(this, event)">
       <img src="cruise.jpg" alt="Family &amp; MICE Sailings">
       <div class="dest-overlay">
@@ -727,17 +725,6 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
         <div class="dest-countries">River Cruises · Large Liners</div>
         <p class="dest-desc">The volume engine — European river cruising and large-liner departures across Asia.</p>
         <div class="dest-tap-hint">Tap to explore →</div>
-      </div>
-      <div class="subdest-panel" id="panel-cruises">
-        <div class="subdest-panel-inner">
-          <div class="subdest-panel-head">
-            <h4>The Volume Driver: Cruise Sailings</h4>
-            <button class="subdest-close" onclick="event.stopPropagation(); closeDest('cruises')">×</button>
-          </div>
-          <div class="subdest-scroll">
-            <a href="packages/rivercruise-europe.html" class="subdest-card"><img src="europeanrivercruise.jpg" alt="European River Cruise"><div class="subdest-card-overlay"><div class="subdest-card-name">European River Cruise</div><div class="subdest-card-desc">A different country through your cabin window every morning, and no luggage to repack in between.</div></div></a><a href="packages/royalcaribbean.html" class="subdest-card"><img src="royalcaribbean.jpg" alt="Royal Caribbean"><div class="subdest-card-overlay"><div class="subdest-card-name">Royal Caribbean</div><div class="subdest-card-desc">A different island every other day, and a ship big enough to forget you're at sea.</div></div></a><a href="packages/resortsworld.html" class="subdest-card"><img src="resortsworld.jpg" alt="Resorts World"><div class="subdest-card-overlay"><div class="subdest-card-name">Resorts World</div><div class="subdest-card-desc">One check-in, and a week where nobody asks you to decide anything.</div></div></a>
-          </div>
-        </div>
       </div>
     </div>
 <!-- ALPEN:DESTINATIONS:END --></div>
@@ -985,6 +972,20 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
   <p>Made by Batore.</p>
 </footer>
 
+<!-- DESTINATION COVERFLOW MODAL -->
+<div class="dest-modal-backdrop" id="destModalBackdrop" onclick="if(event.target===this) closeDestModal()">
+  <div class="dest-modal">
+    <button class="dest-modal-close" onclick="closeDestModal()">✕</button>
+    <div class="dest-modal-head"><h4 id="destModalTitle"></h4></div>
+    <div class="subdest-coverflow">
+      <div class="cf-track" id="destModalTrack"></div>
+      <button class="cf-nav cf-prev" onclick="cfMove(-1)" aria-label="Previous">‹</button>
+      <button class="cf-nav cf-next" onclick="cfMove(1)" aria-label="Next">›</button>
+      <div class="cf-dots" id="destModalDots"></div>
+    </div>
+  </div>
+</div>
+
 <!-- OTP OFFER MODAL -->
 <div id="offer-modal">
   <div class="offer-modal-box">
@@ -1175,19 +1176,171 @@ function handleHorizontalScroll() {
   destTrack.style.transform = `translateX(${-scrollProgress * maxTranslate}px)`;
 }
 
-// === CATEGORY ACCORDION ===
+// === DESTINATION MODAL (pop-out over a tinted backdrop) ===
 function toggleDest(cardEl, event) {
-  if (event && event.target.closest('.subdest-panel')) return;
   const key = cardEl.getAttribute('data-dest');
-  const panel = document.getElementById('panel-' + key);
-  const isOpen = panel.classList.contains('open');
-  document.querySelectorAll('.subdest-panel.open').forEach(p => p.classList.remove('open'));
-  document.querySelectorAll('.dest-card.active').forEach(c => c.classList.remove('active'));
-  if (!isOpen) { panel.classList.add('open'); cardEl.classList.add('active'); }
+  const dest = LAST_DESTINATIONS.find(d => d.slug === key);
+  if (!dest) return;
+  openDestModal(dest);
 }
-function closeDest(key) {
-  document.getElementById('panel-' + key).classList.remove('open');
-  document.querySelector('.dest-card[data-dest="' + key + '"]').classList.remove('active');
+function openDestModal(dest) {
+  const subs = Array.isArray(dest.sub_destinations) ? dest.sub_destinations
+    : (typeof dest.sub_destinations === 'string' ? JSON.parse(dest.sub_destinations || '[]') : []);
+  document.getElementById('destModalTitle').textContent = dest.panel_title || dest.name || '';
+  document.getElementById('destModalTrack').innerHTML = subs.map((s, i) =>
+    `<a href="${s.link || '#'}" class="cf-card" onclick="return cfCardClick(event,this,${i})"><img src="${s.image_url || ''}" alt="${s.name || ''}"><div class="subdest-card-overlay"><div class="subdest-card-name">${s.name || ''}</div><div class="subdest-card-desc">${s.desc || ''}</div></div></a>`
+  ).join('');
+  document.getElementById('destModalDots').innerHTML = subs.map((s, i) =>
+    `<span class="cf-dot" onclick="cfGoTo(${i})"></span>`
+  ).join('');
+  document.getElementById('destModalBackdrop').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  const track = document.getElementById('destModalTrack');
+  track.scrollLeft = 0;
+  requestAnimationFrame(() => { track.scrollLeft = 0; layoutCoverflow(); });
+}
+function closeDestModal() {
+  document.getElementById('destModalBackdrop').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('destModalBackdrop').classList.contains('active')) return;
+  if (e.key === 'Escape') closeDestModal();
+  else if (e.key === 'ArrowRight') cfMove(1);
+  else if (e.key === 'ArrowLeft') cfMove(-1);
+});
+
+// === COVERFLOW CAROUSEL — driven by real native horizontal scroll ===
+// Center card upright/large; side cards recede in 3D (scaled down,
+// rotated, faded). Transform is a continuous function of each card's
+// *actual* position relative to the track's center, read straight off
+// scrollLeft — the same value native touch/trackpad/wheel scrolling,
+// scroll-snap, and scrollIntoView() all drive. One source of truth,
+// so there's nothing left to go out of sync (the earlier click/drag
+// index state machine was the source of the reported glitches).
+let CF_CURRENT_INDEX = 0;
+function layoutCoverflow() {
+  const track = document.getElementById('destModalTrack');
+  if (!track) return;
+  const trackRect = track.getBoundingClientRect();
+  const centerX = trackRect.left + trackRect.width / 2;
+  const cards = Array.from(track.querySelectorAll('.cf-card'));
+  // Read the real card width off the DOM instead of a hardcoded constant —
+  // a media query can (and does, on mobile) set a different width via CSS,
+  // and a fixed JS number would silently fall out of sync with it.
+  const cardWidth = cards[0] ? cards[0].getBoundingClientRect().width : 260;
+  let nearestIdx = 0, nearestDist = Infinity;
+  cards.forEach((card, i) => {
+    const r = card.getBoundingClientRect();
+    const cardCenter = r.left + r.width / 2;
+    const dist = cardCenter - centerX;
+    const absDist = Math.abs(dist);
+    if (absDist < nearestDist) { nearestDist = absDist; nearestIdx = i; }
+    const norm = dist / cardWidth;
+    const clamped = Math.max(-3, Math.min(3, norm));
+    const rot = Math.max(-1, Math.min(1, norm)) * -42;
+    const tz = -Math.abs(clamped) * 90;
+    const scale = Math.max(1 - Math.abs(clamped) * 0.14, 0.6);
+    const opacity = Math.max(1 - Math.abs(norm) * 0.3, 0);
+    card.style.transform = `translateZ(${tz}px) rotateY(${rot}deg) scale(${scale})`;
+    card.style.opacity = opacity;
+    card.style.zIndex = String(1000 - Math.round(Math.abs(norm) * 10));
+  });
+  CF_CURRENT_INDEX = nearestIdx;
+  document.querySelectorAll('#destModalDots .cf-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === nearestIdx);
+  });
+}
+let CF_DRAG_MOVED = false;
+(function () {
+  let raf = null;
+  const track = document.getElementById('destModalTrack');
+  if (!track) return;
+  track.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => { layoutCoverflow(); raf = null; });
+  }, { passive: true });
+  window.addEventListener('resize', () => {
+    if (document.getElementById('destModalBackdrop').classList.contains('active')) layoutCoverflow();
+  });
+
+  // Click-and-drag with the mouse — native overflow-x:auto only supports
+  // touch-drag and scrollbar-drag, not cursor-drag, so desktop mouse users
+  // had no way to scroll this at all (the scrollbar itself is hidden).
+  // Gated to mouse/pen only: on touch devices the browser's own native
+  // touch-scroll already handles this (with proper momentum), and running
+  // this custom logic there too meant both were fighting over scrollLeft
+  // at once — that's what was causing the mobile stutter/glitches.
+  // Pointer capture is deliberately NOT taken on pointerdown — doing so
+  // eagerly (even for a plain click with zero movement) interfered with
+  // the browser's own click-to-navigate sequence on the card link, which
+  // was the actual cause of clicks silently doing nothing. Capture (and
+  // all the drag machinery) is only engaged once real movement past a
+  // small threshold confirms this is an actual drag, not a click.
+  let dragging = false, startX = 0, startScroll = 0, pointerId = null;
+  track.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'touch') return;
+    dragging = true; CF_DRAG_MOVED = false;
+    startX = e.clientX; startScroll = track.scrollLeft;
+    pointerId = e.pointerId;
+  });
+  track.addEventListener('pointermove', (e) => {
+    if (!dragging || e.pointerType === 'touch') return;
+    const dx = e.clientX - startX;
+    if (!CF_DRAG_MOVED && Math.abs(dx) > 5) {
+      CF_DRAG_MOVED = true;
+      track.style.scrollSnapType = 'none'; // free-follow the cursor while held
+      track.style.cursor = 'grabbing';
+      try { track.setPointerCapture(pointerId); } catch (err) {}
+    }
+    if (CF_DRAG_MOVED) track.scrollLeft = startScroll - dx;
+  });
+  function endDrag(e) {
+    if (!dragging || (e && e.pointerType === 'touch')) return;
+    dragging = false;
+    track.style.scrollSnapType = 'x mandatory'; // browser settles to the nearest card
+    track.style.cursor = 'grab';
+  }
+  track.addEventListener('pointerup', endDrag);
+  track.addEventListener('pointercancel', endDrag);
+  track.style.cursor = 'grab';
+
+  // A plain mouse wheel only reports vertical delta — convert it to
+  // horizontal scroll so wheel users can navigate the carousel too.
+  track.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      track.scrollLeft += e.deltaY;
+      e.preventDefault();
+    }
+  }, { passive: false });
+})();
+function cfGoTo(index) {
+  const track = document.getElementById('destModalTrack');
+  const card = track?.querySelectorAll('.cf-card')[index];
+  if (card) card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+}
+function cfMove(dir) {
+  const track = document.getElementById('destModalTrack');
+  if (!track) return;
+  const cards = Array.from(track.querySelectorAll('.cf-card'));
+  const trackRect = track.getBoundingClientRect();
+  const centerX = trackRect.left + trackRect.width / 2;
+  let nearestIdx = 0, nearestDist = Infinity;
+  cards.forEach((card, i) => {
+    const r = card.getBoundingClientRect();
+    const d = Math.abs((r.left + r.width / 2) - centerX);
+    if (d < nearestDist) { nearestDist = d; nearestIdx = i; }
+  });
+  cfGoTo(Math.max(0, Math.min(nearestIdx + dir, cards.length - 1)));
+}
+function cfCardClick(event, el, index) {
+  if (CF_DRAG_MOVED) { event.preventDefault(); CF_DRAG_MOVED = false; return false; }
+  if (index !== CF_CURRENT_INDEX) {
+    event.preventDefault();
+    cfGoTo(index);
+    return false;
+  }
+  // Already centered — let the <a> navigate to the package page normally.
 }
 
 // === PARALLAX ===
@@ -1345,61 +1498,37 @@ async function verifyOfferOTP() {
 // === LEAD MODAL — 4-STEP DUAL VERIFICATION ===
 // BLOG_POSTS is populated dynamically from Supabase; fallback used if fetch fails or tables not yet set up
 let BLOG_POSTS = []
+/* ALPEN:FALLBACK_ARTICLES:START */
 const FALLBACK_ARTICLES = [
   {
-    title: '10 Hidden Beaches You\'ve Never Heard Of',
-    content: `<p>Beyond the crowded tourist shores lie some of the world's most breathtaking coastal secrets. We spent months researching and visiting each location to bring you this definitive guide.</p>
-    <h4>1. El Nido Secret Beach, Philippines</h4>
-    <p>Accessible only by swimming through a narrow limestone crevice, this hidden lagoon near Palawan rewards the adventurous with impossibly clear turquoise water and absolute solitude. Visit at sunrise when the light turns everything gold.</p>
-    <h4>2. Praia do Camilo, Portugal</h4>
-    <p>Carved into dramatic ochre cliffs on the Algarve coast, reached by a wooden staircase cut into the rock face. Two sea arches frame the small cove and make for unforgettable photographs.</p>
-    <h4>3. Furuzamami Beach, Japan</h4>
-    <p>On the tiny Zamami Island of Okinawa, this beach consistently ranks among Asia's finest yet sees a fraction of the crowds of the main island. Coral reefs teeming with tropical fish lie just metres from shore.</p>
-    <h4>4. Anse Source d'Argent, Seychelles</h4>
-    <p>Famous for its granite boulders and shallow calm waters on La Digue Island. The warm Indian Ocean water barely reaches waist height for hundreds of metres — perfect for families and couples alike.</p>
-    <h4>5. Whitehaven Beach, Australia</h4>
-    <p>Seven kilometres of 98% pure silica sand that stays cool to the touch even in peak summer. The swirling tidal flats at Hill Inlet create ever-changing patterns of white, cream, and turquoise visible from the hilltop lookout.</p>
-    <h4>6. Navagio Beach, Greece</h4>
-    <p>Zakynthos's famous shipwreck beach sits in a limestone cove accessible only by boat. The rusting hull of the MV Panagiotis has been here since 1980, half-buried in white sand, surrounded by vertical cliffs that dwarf everything below.</p>
-    <h4>7. Pfeiffer Beach, California</h4>
-    <p>Purple-tinged sand — colored by manganese garnet deposits — and a sea arch through which the setting sun perfectly frames. A well-kept secret on the Big Sur coast that rewards those who seek it out.</p>
-    <p><em>Planning a beach escape? Our travel team specialises in crafting bespoke itineraries to destinations like these. Get in touch for a personalised quote.</em></p>`
+    "id": "1",
+    "title": "10 Hidden Beaches You've Never Heard Of",
+    "meta": "Travel Tips — June 2026",
+    "excerpt": "Beyond the crowded tourist shores lie some of the world's most breathtaking coastal secrets. We spent months researching each location.",
+    "image_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+    "content": "<p>Beyond the crowded tourist shores lie some of the world's most breathtaking coastal secrets. We spent months researching and visiting each location to bring you this definitive guide.</p><h4>1. El Nido Secret Beach, Philippines</h4><p>Accessible only by swimming through a narrow limestone crevice, this hidden lagoon near Palawan rewards the adventurous with impossibly clear turquoise water and absolute solitude. Visit at sunrise when the light turns everything gold.</p><h4>2. Praia do Camilo, Portugal</h4><p>Carved into dramatic ochre cliffs on the Algarve coast, reached by a wooden staircase cut into the rock face. Two sea arches frame the small cove and make for unforgettable photographs.</p><h4>3. Furuzamami Beach, Japan</h4><p>On the tiny Zamami Island of Okinawa, this beach consistently ranks among Asia's finest yet sees a fraction of the crowds of the main island. Coral reefs teeming with tropical fish lie just metres from shore.</p><h4>4. Anse Source d'Argent, Seychelles</h4><p>Famous for its granite boulders and shallow calm waters on La Digue Island. The warm Indian Ocean water barely reaches waist height for hundreds of metres.</p><h4>5. Whitehaven Beach, Australia</h4><p>Seven kilometres of 98% pure silica sand that stays cool to the touch even in peak summer. The swirling tidal flats at Hill Inlet create ever-changing patterns of white, cream, and turquoise visible from the hilltop lookout.</p><p><em>Planning a beach escape? Our travel team specialises in crafting bespoke itineraries to destinations like these.</em></p>",
+    "active": true
   },
   {
-    title: 'Packing Like a Pro: The Ultimate Carry-On Guide',
-    content: `<p>Master the art of traveling light without sacrificing style or comfort. These are the strategies used by flight crews and veteran globetrotters who live out of a single bag.</p>
-    <h4>The Golden Rule: One Week, One Bag</h4>
-    <p>Every item you pack should serve at least two purposes. A merino wool sweater works as a layering piece, a pillow substitute, and a light blanket on cold flights. Dark-wash jeans go from hiking to a restaurant without looking out of place.</p>
-    <h4>The Fabric Hierarchy</h4>
-    <p>Merino wool is unbeatable for travel — it resists odour for days, wicks moisture, and packs down small. Synthetic blends dry overnight when hand-washed. Pure cotton is the enemy of the light packer: it wrinkles, holds moisture, and takes forever to dry.</p>
-    <h4>The Roll vs. Fold Debate</h4>
-    <p>Roll casual items (t-shirts, jeans, knitwear) to save space and reduce wrinkles. Fold structured pieces (blazers, dress shirts) to maintain their shape. Place rolled items vertically in rows so you can see everything at a glance without unpacking.</p>
-    <h4>The Capsule Wardrobe Formula</h4>
-    <p>For a two-week trip: 3 tops, 2 bottoms, 1 dress or smart option, 1 layer, 2 pairs of shoes. Everything should mix and match. Stick to a three-colour palette — navy, white, and one accent colour works universally across climates and occasions.</p>
-    <h4>The Gadget Edit</h4>
-    <p>A universal adaptor with USB-A and USB-C ports replaces four separate chargers. Noise-cancelling earbuds are non-negotiable on long-haul flights. A portable battery bank of at least 10,000mAh keeps everything charged through a full day of sightseeing.</p>
-    <h4>Toiletry Rules</h4>
-    <p>Solid toiletries — shampoo bars, solid conditioner, soap — take up a fraction of the space of liquids and never trigger airport security. Decant everything else into matching 30ml bottles and label them. You never actually use full-sized products on a trip.</p>
-    <p><em>AlpenGlow Global's travel team provides destination-specific packing lists with every itinerary. Ask us when you book.</em></p>`
+    "id": "2",
+    "title": "Packing Like a Pro: The Ultimate Carry-On Guide",
+    "meta": "Travel Tips — May 2026",
+    "excerpt": "Master the art of traveling light without sacrificing style or comfort — strategies used by flight crews and veteran globetrotters.",
+    "image_url": "https://images.unsplash.com/photo-1553531889-56cc480ac5cb?w=600&q=80",
+    "content": "<p>Master the art of traveling light without sacrificing style or comfort. These are the strategies used by flight crews and veteran globetrotters who live out of a single bag.</p><h4>The Golden Rule: One Week, One Bag</h4><p>Every item you pack should serve at least two purposes. A merino wool sweater works as a layering piece, a pillow substitute, and a light blanket on cold flights. Dark-wash jeans go from hiking to a restaurant without looking out of place.</p><h4>The Fabric Hierarchy</h4><p>Merino wool is unbeatable for travel — it resists odour for days, wicks moisture, and packs down small. Synthetic blends dry overnight when hand-washed. Pure cotton is the enemy of the light packer: it wrinkles, holds moisture, and takes forever to dry.</p><h4>The Capsule Wardrobe Formula</h4><p>For a two-week trip: 3 tops, 2 bottoms, 1 dress or smart option, 1 layer, 2 pairs of shoes. Everything should mix and match. Stick to a three-colour palette.</p><p><em>Alpen Glow's travel team provides destination-specific packing lists with every itinerary. Ask us when you book.</em></p>",
+    "active": true
   },
   {
-    title: 'Why Slow Travel Is the Future of Exploration',
-    content: `<p>In a world obsessed with bucket lists, a growing movement of travellers is choosing depth over distance. Slow travel isn't a trend — it's a correction to decades of rushed tourism.</p>
-    <h4>What Slow Travel Actually Means</h4>
-    <p>Slow travel doesn't mean travelling slowly — it means staying long enough in each place to develop a relationship with it. It means returning to the same café twice so the owner remembers your order. It means learning three words of the local language and watching how people's faces change when you use them.</p>
-    <h4>The Problem With Seven Cities in Ten Days</h4>
-    <p>The traditional European highlights tour — Paris, Rome, Barcelona, Amsterdam, Prague, Vienna, Budapest in ten days — creates a blur. You've technically been to seven countries but your memories are airport lounges, coach windows, and hotel lobbies.</p>
-    <h4>The Tuscan Village Argument</h4>
-    <p>Spend a week in a single village in the Chianti region of Tuscany. Walk the same road to the market every morning. Find out which vineyard the locals actually buy from. Get lost twice and find something better both times. You'll remember that week more vividly in ten years than you'll remember any sprint across multiple capitals.</p>
-    <h4>The Environmental Case</h4>
-    <p>Frequent short-haul flights have an outsized carbon footprint relative to the experience they deliver. One longer trip with fewer flights and more time in each destination is significantly more sustainable without giving up exploration altogether.</p>
-    <h4>How to Start</h4>
-    <p>Your next trip: halve the number of destinations and double the time in each one. If you were planning four cities in eight days, try two cities in eight days instead. You'll spend less time in transit, save money on internal travel, and come back with a story rather than a highlight reel.</p>
-    <h4>AlpenGlow Global's Approach</h4>
-    <p>Every itinerary we build is designed around this philosophy — fewer stops, more time, better experiences. We build in unscheduled afternoons, second visits to places worth returning to, and room for spontaneity that only comes when you're not racing to the next train.</p>
-    <p><em>Talk to our team about building a slow travel itinerary. We specialise in giving you the feeling that you actually lived somewhere, even briefly.</em></p>`
+    "id": "3",
+    "title": "Why Slow Travel Is the Future of Exploration",
+    "meta": "Inspiration — April 2026",
+    "excerpt": "In a world obsessed with bucket lists, a growing movement of travellers is choosing depth over distance — and coming back with better stories.",
+    "image_url": "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80",
+    "content": "<p>In a world obsessed with bucket lists, a growing movement of travellers is choosing depth over distance. Slow travel isn't a trend — it's a correction to decades of rushed tourism.</p><h4>What Slow Travel Actually Means</h4><p>Slow travel doesn't mean travelling slowly — it means staying long enough in each place to develop a relationship with it. It means returning to the same café twice so the owner remembers your order. It means learning three words of the local language and watching how people's faces change when you use them.</p><h4>The Problem With Seven Cities in Ten Days</h4><p>The traditional European highlights tour — Paris, Rome, Barcelona, Amsterdam, Prague in ten days — creates a blur. You've technically been to five countries but your memories are airport lounges and hotel lobbies.</p><h4>The Tuscan Village Argument</h4><p>Spend a week in a single village in the Chianti region of Tuscany. Walk the same road to the market every morning. Find out which vineyard the locals actually buy from. Get lost twice and find something better both times.</p><h4>Alpen Glow's Approach</h4><p>Every itinerary we build is designed around this philosophy — fewer stops, more time, better experiences. We build in unscheduled afternoons and room for spontaneity that only comes when you're not racing to the next train.</p><p><em>Talk to our team about building a slow travel itinerary.</em></p>",
+    "active": true
   }
 ]
+/* ALPEN:FALLBACK_ARTICLES:END */
 
 let _leadName = '', _leadPhone = '', _leadEmail = '', _currentArticle = 0;
 
@@ -1533,47 +1662,267 @@ async function leadVerifyEmail() {
 }
 
 // === DYNAMIC CONTENT LOADING ===
+/* ALPEN:FALLBACK_DESTINATIONS:START */
 const FALLBACK_DESTINATIONS = [
-  { slug:'subcontinent', number:'4 countries', name:'The Cultural Soul', countries:'India · Nepal · Bhutan · Sri Lanka', description:"Seamless border-crossing trails through the subcontinent's sacred and scenic core.", image_url:'tajmahal.jpg', panel_title:'The Sub-Continent Expert', sub_destinations:[
-    {name:'India',     desc:"A Ganges sunrise in Varanasi, and a thali that's a different meal in every state you cross.",         image_url:'india.jpg',    link:'packages/india.html'},
-    {name:'Nepal',     desc:"A sunrise flight past Everest's south face, and a Kathmandu backstreet temple older than most countries.",        image_url:'nepal.jpg',    link:'packages/nepal.html'},
-    {name:'Bhutan',    desc:"Tiger's Nest clinging to a cliff face, and a kingdom that measures progress in happiness and means it.",             image_url:'bhutan.jpg',   link:'packages/bhutan.html'},
-    {name:'Sri Lanka', desc:"A train through tea country with the door left open, and beaches that haven't made it onto anyone's feed yet.",             image_url:'srilanka.jpg', link:'packages/srilanka.html'},
-  ]},
-  { slug:'longhaul', number:'5 destinations', name:'Once-in-a-Lifetime', countries:'Scandinavia · Japan · NZ · Australia · S. Korea', description:'Bucket-list journeys built for travelers who plan years, not weekends, ahead.', image_url:'aurora.jpg', panel_title:'The High-Value Long Haul', sub_destinations:[
-    {name:'Scandinavia',  desc:'Fjords carved by glaciers, and cities that shut down for the midnight sun.',                          image_url:'norway.jpg',      link:'packages/norway.html'},
-    {name:'Japan',        desc:'Neon and shrines, sometimes on the same block, ten minutes apart by train.',       image_url:'japan.png',       link:'packages/japan.html'},
-    {name:'New Zealand',  desc:'Glaciers, geysers, and a drive where every turn is the postcard.',                           image_url:'newzealand.jpg',  link:'packages/newzealand.html'},
-    {name:'Australia',    desc:"Reef to red desert on one itinerary, and a coastline longer than most countries' borders.",                          image_url:'australia.jpg',   link:'packages/australia.html'},
-    {name:'South Korea',  desc:'Palace rooftops against glass towers, and street food stalls that stay open past the last subway.',                       image_url:'southkorea.jpg',  link:'packages/southkorea.html'},
-  ]},
-  { slug:'islands', number:'4 countries', name:'Glowcations & Honeymoons', countries:'Maldives · Seychelles · Mauritius · Bali', description:'Pure isolation or culture-plus-luxury, curated for couples and wellness escapes.', image_url:'honeymoon.jpg', panel_title:'The Island & Beach Specialist', sub_destinations:[
-    {name:'Maldives',   desc:'A bungalow with the ocean floor visible through your own floorboards.',  image_url:'maldives.jpg',   link:'packages/maldives.html'},
-    {name:'Seychelles', desc:'Granite boulders older than the dinosaurs, framing a beach with nobody else on it.',          image_url:'seychelles.jpg', link:'packages/seychelles.html'},
-    {name:'Mauritius',  desc:"A lagoon calm enough to read in, and a Creole kitchen that's the actual reason to come back.", image_url:'mauritius.jpg', link:'packages/mauritius.html'},
-    {name:'Bali',       desc:"Rice terraces before the tour buses, and a temple ceremony that isn't staged for anyone.",                         image_url:'bali.jpg',       link:'packages/bali.html'},
-  ]},
-  { slug:'cruises', number:'3 sailings', name:'Family & MICE Sailings', countries:'River Cruises · Large Liners', description:'The volume engine — European river cruising and large-liner departures across Asia.', image_url:'cruise.jpg', panel_title:'The Volume Driver: Cruise Sailings', sub_destinations:[
-    {name:'European River Cruise', desc:"A different country through your cabin window every morning, and no luggage to repack in between.", image_url:'europeanrivercruise.jpg', link:'packages/rivercruise-europe.html'},
-    {name:'Royal Caribbean',       desc:"A different island every other day, and a ship big enough to forget you're at sea.",              image_url:'royalcaribbean.jpg',       link:'packages/royalcaribbean.html'},
-    {name:'Resorts World',         desc:'One check-in, and a week where nobody asks you to decide anything.',   image_url:'resortsworld.jpg',         link:'packages/resortsworld.html'},
-  ]},
+  {
+    "slug": "india",
+    "number": "4 PACKAGES",
+    "name": "One Country, Every Journey",
+    "countries": "PILGRIM · BEACHES · HERITAGE · WILDLIFE & NATURE",
+    "description": "From temple towns to tiger reserves, coastlines to hill forts, a single country holding four entirely different kinds of trips.",
+    "panel_title": "Incredible, All at Once",
+    "image_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "sort_order": 0,
+    "sub_destinations": [
+      {
+        "name": "Pilgrim",
+        "desc": "Varanasi's ghats, Amritsar's Golden Temple, Char Dham, and the temple towns of the south, journeys built around India's oldest living traditions.",
+        "image_url": "https://images.unsplash.com/photo-1784916356582-19f336a3526b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": ""
+      },
+      {
+        "name": "Beaches",
+        "desc": "Palm-lined shores, houseboats, and sunset coves along two very different coasts.",
+        "image_url": "https://images.unsplash.com/photo-1646748019366-3f1c922bfe3b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": ""
+      },
+      {
+        "name": "Heritage",
+        "desc": "Rajasthan's desert forts, Mughal monuments, and colonial hill stations, India's history told through what it left standing.",
+        "image_url": "https://images.unsplash.com/photo-1663513844814-5f2fd51e957a?q=80&w=697&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": ""
+      },
+      {
+        "name": "Wildlife & Nature",
+        "desc": "Ranthambore's tigers, the Western Ghats, and national parks where the country's wilder side takes over.",
+        "image_url": "https://plus.unsplash.com/premium_photo-1694270553677-22680efa4d56?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "link": ""
+      }
+    ],
+    "active": true,
+    "id": "1787391078574"
+  },
+  {
+    "slug": "subcontinent",
+    "number": "4 countries",
+    "name": "The Cultural Soul",
+    "countries": "India · Nepal · Bhutan · Sri Lanka",
+    "description": "Seamless border-crossing trails through the subcontinent's sacred and scenic core.",
+    "image_url": "https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "panel_title": "The Sub-Continent Expert",
+    "sort_order": 1,
+    "active": true,
+    "sub_destinations": [
+      {
+        "name": "India",
+        "desc": "A Ganges sunrise in Varanasi, and a thali that's a different meal in every state you cross.",
+        "image_url": "india.jpg",
+        "link": "packages/india.html"
+      },
+      {
+        "name": "Nepal",
+        "desc": "A sunrise flight past Everest's south face, and a Kathmandu backstreet temple older than most countries.",
+        "image_url": "nepal.jpg",
+        "link": "packages/nepal.html"
+      },
+      {
+        "name": "Bhutan",
+        "desc": "Tiger's Nest clinging to a cliff face, and a kingdom that measures progress in happiness and means it.",
+        "image_url": "bhutan.jpg",
+        "link": "packages/bhutan.html"
+      },
+      {
+        "name": "Sri Lanka",
+        "desc": "A train through tea country with the door left open, and beaches that haven't made it onto anyone's feed yet.",
+        "image_url": "srilanka.jpg",
+        "link": "packages/srilanka.html"
+      }
+    ],
+    "id": "dest_msxiz8is"
+  },
+  {
+    "slug": "longhaul",
+    "number": "5 destinations",
+    "name": "Once-in-a-Lifetime",
+    "countries": "Scandinavia · NZ · Australia · S. Korea",
+    "description": "Bucket-list journeys built for travelers who plan years, not weekends, ahead.",
+    "image_url": "aurora.jpg",
+    "panel_title": "The High-Value Long Haul",
+    "sort_order": 2,
+    "active": true,
+    "sub_destinations": [
+      {
+        "name": "Scandinavia",
+        "desc": "Fjords carved by glaciers, and cities that shut down for the midnight sun.",
+        "image_url": "norway.jpg",
+        "link": "packages/norway.html"
+      },
+      {
+        "name": "New Zealand",
+        "desc": "Glaciers, geysers, and a drive where every turn is the postcard.",
+        "image_url": "newzealand.jpg",
+        "link": "packages/newzealand.html"
+      },
+      {
+        "name": "Australia",
+        "desc": "Reef to red desert on one itinerary, and a coastline longer than most countries' borders.",
+        "image_url": "australia.jpg",
+        "link": "packages/australia.html"
+      },
+      {
+        "name": "South Korea",
+        "desc": "Palace rooftops against glass towers, and street food stalls that stay open past the last subway.",
+        "image_url": "southkorea.jpg",
+        "link": "packages/southkorea.html"
+      }
+    ],
+    "id": "dest_msxiz8it"
+  },
+  {
+    "slug": "islands",
+    "number": "4 countries",
+    "name": "Glowcations & Honeymoons",
+    "countries": "Maldives · Seychelles · Mauritius · Bali",
+    "description": "Pure isolation or culture-plus-luxury, curated for couples and wellness escapes.",
+    "image_url": "honeymoon.jpg",
+    "panel_title": "The Island & Beach Specialist",
+    "sort_order": 3,
+    "active": true,
+    "sub_destinations": [
+      {
+        "name": "Maldives",
+        "desc": "A bungalow with the ocean floor visible through your own floorboards.",
+        "image_url": "maldives.jpg",
+        "link": "packages/maldives.html"
+      },
+      {
+        "name": "Seychelles",
+        "desc": "Granite boulders older than the dinosaurs, framing a beach with nobody else on it.",
+        "image_url": "seychelles.jpg",
+        "link": "packages/seychelles.html"
+      },
+      {
+        "name": "Mauritius",
+        "desc": "A lagoon calm enough to read in, and a Creole kitchen that's the actual reason to come back.",
+        "image_url": "mauritius.jpg",
+        "link": "packages/mauritius.html"
+      },
+      {
+        "name": "Bali",
+        "desc": "Rice terraces before the tour buses, and a temple ceremony that isn't staged for anyone.",
+        "image_url": "bali.jpg",
+        "link": "packages/bali.html"
+      }
+    ],
+    "id": "dest_msxiz8iu"
+  },
+  {
+    "slug": "cruises",
+    "number": "3 sailings",
+    "name": "Family & MICE Sailings",
+    "countries": "River Cruises · Large Liners",
+    "description": "The volume engine — European river cruising and large-liner departures across Asia.",
+    "image_url": "cruise.jpg",
+    "panel_title": "The Volume Driver: Cruise Sailings",
+    "sort_order": 4,
+    "active": true,
+    "sub_destinations": [
+      {
+        "name": "European River Cruise",
+        "desc": "A different country through your cabin window every morning, and no luggage to repack in between.",
+        "image_url": "europeanrivercruise.jpg",
+        "link": "packages/rivercruise-europe.html"
+      },
+      {
+        "name": "Royal Caribbean",
+        "desc": "A different island every other day, and a ship big enough to forget you're at sea.",
+        "image_url": "royalcaribbean.jpg",
+        "link": "packages/royalcaribbean.html"
+      },
+      {
+        "name": "Resorts World",
+        "desc": "One check-in, and a week where nobody asks you to decide anything.",
+        "image_url": "resortsworld.jpg",
+        "link": "packages/resortsworld.html"
+      }
+    ],
+    "id": "dest_msxiz8iv"
+  }
 ]
+/* ALPEN:FALLBACK_DESTINATIONS:END */
 
+/* ALPEN:FALLBACK_PACKAGES:START */
 const FALLBACK_PACKAGES = [
-  { name:'Norwegian Fjords Expedition', location:'Scandinavia', duration:'8 Days / 7 Nights',  description:"Towering cliffs and crystal waters carve nature's masterpiece. Cruise through breathtaking fjords beneath snow-capped peaks. Discover charming Nordic villages steeped in timeless traditions. An unforgettable journey into the heart of Scandinavia's wilderness.", image_url:'norway.jpg',    link:'packages/norway.html' },
-  { name:'Santorini – Aegean Dreams',   location:'Greece',      duration:'6 Days / 5 Nights',  description:'Whitewashed villages cascading down volcanic cliffs above the Aegean Sea. World-famous sunsets paint the horizon in shades of gold and crimson. Luxury, romance, and timeless Greek charm at every turn.',                                                            image_url:'santorini.jpg', link:'packages/santorini.html' },
-  { name:'Italian Grand Tour',          location:'Italy',       duration:'10 Days / 9 Nights', description:"Rome's ruins at golden hour, a Tuscan hill town where the wine list is the neighbour's vineyard, and an Amalfi coast road that makes you grip the seat and not regret it. Ten days built around what Italy actually tastes and feels like.",                                                                                                                                                                           image_url:'italy.jpg',     link:'packages/italy.html' },
-  { name:'Swiss Alpine Wonderland',     location:'Switzerland', duration:'7 Days / 6 Nights',  description:'Towering peaks and emerald valleys frame every moment. Ride legendary mountain railways through clouds and into the heart of the Alps. A journey built for wonder.',                                                                                                   image_url:'swissalps.jpg', link:'packages/switzerland.html' },
-  { name:'Japan – Land of Contrasts',   location:'Japan',       duration:'9 Days / 8 Nights',  description:"Asakusa's temple bells before the crowds arrive, a bullet train that turns Kyoto into Tokyo's next-door neighbour, and a Fukuoka yatai stall that isn't in any guidebook. Nine days paced to what Japan is actually like.",                                                                                                                                                                                 image_url:'japan.jpg',     link:'packages/japan.html' },
-  { name:'Bali – Island of the Gods',   location:'Indonesia',   duration:'7 Days / 6 Nights',  description:"Rice terraces at sunrise before the tour buses arrive, a family temple ceremony you're invited into rather than photographing from outside, and a coastline built for doing absolutely nothing well.",                                                                                                                                              image_url:'baligods.jpg',  link:'packages/bali.html' },
+  {
+    "id": "2",
+    "name": "Santorini – Aegean Dreams",
+    "location": "Greece",
+    "duration": "6 Days / 5 Nights",
+    "description": "Whitewashed villages cascading down volcanic cliffs above the Aegean Sea. World-famous sunsets paint the horizon in shades of gold and crimson. Luxury, romance, and timeless Greek charm at every turn.",
+    "image_url": "santorini.jpg",
+    "link": "packages/santorini.html",
+    "sort_order": 2,
+    "active": true
+  },
+  {
+    "id": "3",
+    "name": "Italian Grand Tour",
+    "location": "Italy",
+    "duration": "10 Days / 9 Nights",
+    "description": "Rome's ruins at golden hour, a Tuscan hill town where the wine list is the neighbour's vineyard, and an Amalfi coast road that makes you grip the seat and not regret it. Ten days built around what Italy actually tastes and feels like.",
+    "image_url": "italy.jpg",
+    "link": "packages/italy.html",
+    "sort_order": 3,
+    "active": true
+  },
+  {
+    "id": "6",
+    "name": "Bali – Island of the Gods",
+    "location": "Indonesia",
+    "duration": "7 Days / 6 Nights",
+    "description": "Rice terraces at sunrise before the tour buses arrive, a family temple ceremony you're invited into rather than photographing from outside, and a coastline built for doing absolutely nothing well.",
+    "image_url": "baligods.jpg",
+    "link": "packages/bali.html",
+    "sort_order": 6,
+    "active": true
+  }
 ]
+/* ALPEN:FALLBACK_PACKAGES:END */
 
+/* ALPEN:FALLBACK_OFFERS:START */
 const FALLBACK_OFFERS = [
-  { id:'f1', title:'Summer Beach Escape', badge:'30% OFF', code:'SUMMER30', description:'Book any beach destination — Maldives, Bali, Santorini — before July 31 and save 30% on your total package price.', image_url:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80', cta_text:'Claim Offer →' },
-  { id:'f2', title:'Plan Ahead & Save', badge:'EARLY BIRD 20%', code:'EARLY2027', description:'Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all AlpenGlow Global packages.', image_url:'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80', cta_text:'Learn More →' },
-  { id:'f3', title:'Honeymoon Special', badge:'25% Off + Upgrades', code:'HONEY25', description:'Celebrate your love in paradise. Applies to all couple packages with complimentary room upgrades and a welcome amenity.', image_url:'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80', cta_text:'View Packages →' }
+  {
+    "id": "1",
+    "title": "Summer Beach Escape",
+    "badge": "30% OFF",
+    "code": "SUMMER30",
+    "description": "Book any beach destination — Maldives, Bali, Santorini — before July 31 and save 30% on your total package price.",
+    "image_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+    "cta_text": "Claim Offer →",
+    "active": true
+  },
+  {
+    "id": "2",
+    "title": "Plan Ahead & Save",
+    "badge": "EARLY BIRD 20%",
+    "code": "EARLY2027",
+    "description": "Book your 2027 holiday before September and enjoy exclusive early-bird pricing across all Alpen Glow packages.",
+    "image_url": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80",
+    "cta_text": "Learn More →",
+    "active": true
+  },
+  {
+    "id": "3",
+    "title": "Honeymoon Special",
+    "badge": "25% Off + Upgrades",
+    "code": "HONEY25",
+    "description": "Celebrate your love in paradise. Applies to all couple packages with complimentary room upgrades and a welcome amenity.",
+    "image_url": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80",
+    "cta_text": "View Packages →",
+    "active": true
+  }
 ]
+/* ALPEN:FALLBACK_OFFERS:END */
 
 function renderOffers(offers) {
   const track = document.getElementById('offers-track')
@@ -1626,13 +1975,19 @@ function renderBlogPosts(posts) {
   }
 }
 
+// Seeded synchronously (not []) so a click that happens before the async
+// fetch resolves still has real data to look up — the static markup shown
+// immediately on load already has matching data-dest cards, but the old
+// empty-array start meant toggleDest() would silently find nothing and do
+// nothing until the fetch finished. This was the actual "click does
+// nothing" bug.
+let LAST_DESTINATIONS = FALLBACK_DESTINATIONS
 function renderDestinations(destinations) {
   const track = document.getElementById('destTrack')
   if (!track) return
+  LAST_DESTINATIONS = destinations || []
   if (!destinations || !destinations.length) { track.innerHTML = ''; return }
   track.innerHTML = destinations.map(d => {
-    const subs = Array.isArray(d.sub_destinations) ? d.sub_destinations
-      : (typeof d.sub_destinations === 'string' ? JSON.parse(d.sub_destinations || '[]') : [])
     return `<div class="dest-card" data-dest="${d.slug}" onclick="toggleDest(this, event)">
       <img src="${d.image_url || ''}" alt="${d.name || ''}">
       <div class="dest-overlay">
@@ -1642,17 +1997,6 @@ function renderDestinations(destinations) {
         <div class="dest-countries">${d.countries || ''}</div>
         <p class="dest-desc">${d.description || ''}</p>
         <div class="dest-tap-hint">Tap to explore →</div>
-      </div>
-      <div class="subdest-panel" id="panel-${d.slug}">
-        <div class="subdest-panel-inner">
-          <div class="subdest-panel-head">
-            <h4>${d.panel_title || d.name}</h4>
-            <button class="subdest-close" onclick="event.stopPropagation(); closeDest('${d.slug}')">×</button>
-          </div>
-          <div class="subdest-scroll">
-            ${subs.map(s => `<a href="${s.link||'#'}" class="subdest-card"><img src="${s.image_url||''}" alt="${s.name||''}"><div class="subdest-card-overlay"><div class="subdest-card-name">${s.name||''}</div><div class="subdest-card-desc">${s.desc||''}</div></div></a>`).join('')}
-          </div>
-        </div>
       </div>
     </div>`
   }).join('')
