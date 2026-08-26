@@ -185,14 +185,28 @@ nav.scrolled .nav-cta {
 .dest-card.active { transform: scale(1.02); }
 .dest-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease-out); }
 .dest-card:hover img { transform: scale(1.08); }
-.dest-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(24,24,24,0.85) 0%, rgba(24,24,24,0.1) 50%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem; }
+/* Two stacked gradients rather than one, because the text block is anchored
+   bottom-LEFT while the photography needs to stay bright: a long vertical
+   ramp that is fully clear by ~90% of the height, plus a gentler left-to-
+   right wash that has died out by ~72% of the width. Where they overlap —
+   exactly where the copy sits — they compound to ~0.9 without either one
+   ever being a visible black layer on its own, and the top-right quadrant
+   of the image is left essentially untouched. The many stops are what keeps
+   the falloff reading as light rather than as a hard edge. */
+.dest-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(10,10,12,0.42) 0%, rgba(10,10,12,0.30) 24%, rgba(10,10,12,0.14) 48%, rgba(10,10,12,0.04) 64%, transparent 74%),
+    linear-gradient(to top, rgba(10,10,12,0.88) 0%, rgba(10,10,12,0.78) 16%, rgba(10,10,12,0.60) 34%, rgba(10,10,12,0.38) 52%, rgba(10,10,12,0.18) 70%, rgba(10,10,12,0.06) 82%, transparent 92%);
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem;
+}
 .dest-number { position: absolute; top: 1.5rem; left: 1.5rem; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); background: rgba(24,24,24,0.4); backdrop-filter: blur(8px); padding: 0.4rem 0.9rem; border-radius: 50px; line-height: 1; }
 .dest-expand-icon { position: absolute; top: 1.5rem; right: 1.5rem; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 1.1rem; font-weight: 300; transition: all 0.3s var(--ease-out); }
 .dest-card.active .dest-expand-icon { background: var(--orange); border-color: var(--orange); color: var(--dark); transform: rotate(45deg); }
-.dest-name { font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: var(--white); margin-bottom: 0.4rem; }
-.dest-countries { font-size: 0.75rem; font-weight: 500; color: var(--orange); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
-.dest-desc { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.6; max-width: 320px; }
-.dest-tap-hint { margin-top: 1rem; font-size: 0.72rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
+.dest-name { font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: var(--white); margin-bottom: 0.4rem; text-shadow: 0 1px 12px rgba(0,0,0,0.45); }
+.dest-countries { font-size: 0.75rem; font-weight: 600; color: var(--orange-light); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
+.dest-desc { font-size: 0.85rem; color: rgba(255,255,255,0.93); line-height: 1.6; max-width: 320px; text-shadow: 0 1px 10px rgba(0,0,0,0.5); }
+.dest-tap-hint { margin-top: 1rem; font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.96); letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; text-shadow: 0 1px 10px rgba(0,0,0,0.5); }
 /* ── Destination modal (pop-out over a tinted backdrop) ──────────
    Replaces the old in-card accordion panel: clicking a destination
    now opens a single shared modal above a dimmed, blurred backdrop,
@@ -595,11 +609,16 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
   .blog-card { flex: 0 0 82vw; }
   .dest-card { flex: 0 0 78vw !important; height: 340px !important; }
 
-  /* Destination coverflow modal */
-  .dest-modal { width: 96vw; height: 82vh; padding: 1.3rem 0.4rem 1.2rem; border-radius: 18px; }
-  .dest-modal-head { padding: 0 0.6rem 0.8rem; }
-  .dest-modal-head h4 { font-size: 1.05rem; }
-  .dest-modal-close { top: 0.7rem; right: 0.7rem; width: 30px; height: 30px; }
+  /* Destination modal — at 96vw/82vh this read as a takeover of the whole
+     page rather than a panel on top of it. Inset it to a floating card:
+     the band of dimmed, blurred page left visible around all four edges is
+     what gives it depth, so the backdrop is eased off from near-opaque to
+     a tint you can still read the page through. */
+  .dest-modal-backdrop { background: rgba(8,8,8,0.74); backdrop-filter: blur(14px); }
+  .dest-modal { width: 88vw; height: min(620px, 72vh); padding: 1.15rem 0.85rem 1.35rem; border-radius: 22px; box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+  .dest-modal-head { padding: 0 0.35rem 0.75rem; }
+  .dest-modal-head h4 { font-size: 1.02rem; }
+  .dest-modal-close { top: 0.62rem; right: 0.62rem; width: 30px; height: 30px; }
   /* One card per page on a phone — three would be ~100px wide each. */
   .subdest-coverflow { padding: 0 0 1.3rem; }
   .cf-track { --cf-per-view: 1; --cf-gap: 0.7rem; }
