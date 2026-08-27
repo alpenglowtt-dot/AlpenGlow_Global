@@ -1216,6 +1216,7 @@ function openDestModal(dest) {
   document.getElementById('destModalBackdrop').classList.add('active');
   document.body.style.overflow = 'hidden';
   const track = document.getElementById('destModalTrack');
+  CF_SCROLL_TARGET = null; // a modal closed mid-scroll must not leave the guard set
   track.scrollLeft = 0;
   // The dots can only be counted once the cards have actually been laid
   // out, since the page size is measured off their rendered width.
@@ -1241,6 +1242,10 @@ document.addEventListener('keydown', (e) => {
 // go out of sync (the earlier click/drag index state machine was the
 // source of the reported glitches).
 let CF_CURRENT_PAGE = 0;
+// The page a cfGoToPage() smooth-scroll is travelling to, or null. It lets
+// the indicators be painted for that page straight away, without the scroll
+// events on the way there dragging them back to the page being left.
+let CF_SCROLL_TARGET = null;
 
 // Page geometry is *measured*, never hardcoded: --cf-per-view, the gap and
 // the resulting card width all live in CSS (and differ under the mobile
@@ -1252,7 +1257,32 @@ function cfMetrics(track) {
   const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
   const stride = cards[0].getBoundingClientRect().width + gap;
   const perView = Math.max(1, Math.round((track.clientWidth + gap) / stride));
-  return { cards, stride, perView, pages: Math.max(1, Math.ceil(cards.length / perView)) };
+  const pages = Math.max(1, Math.ceil(cards.length / perView));
+  // A trailing *partial* page has less than a full page of content left to
+  // scroll through, so its nominal offset (page * perView * stride) is past
+  // the end of the track and the browser silently clamps the scroll to the
+  // real maximum. Deriving the page back from an unclamped formula then
+  // disagreed with where the track had actually stopped — with 4 cards at 3
+  // per view the last page scrolled by one card but still computed as page
+  // 0, so the dot never moved off the first pill and the > arrow never
+  // retired. Clamping each page's offset to the scrollable range up front
+  // makes the offsets themselves the source of truth in both directions.
+  const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+  const offsets = Array.from({ length: pages },
+    (_, i) => Math.min(i * stride * perView, maxScroll));
+  return { cards, stride, perView, pages, offsets };
+}
+
+// Paint the indicators for a given page: the active dot, and the arrows,
+// which are removed at the ends rather than left visible and inert.
+function cfPaint(page, pages) {
+  CF_CURRENT_PAGE = page;
+  document.querySelectorAll('#destModalDots .cf-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === page);
+  });
+  const prev = document.querySelector('.cf-prev'), next = document.querySelector('.cf-next');
+  if (prev) prev.hidden = page <= 0;
+  if (next) next.hidden = page >= pages - 1;
 }
 
 function cfSync() {
@@ -1260,14 +1290,23 @@ function cfSync() {
   if (!track) return;
   const m = cfMetrics(track);
   if (!m) return;
-  const page = Math.max(0, Math.min(Math.round(track.scrollLeft / (m.stride * m.perView)), m.pages - 1));
-  CF_CURRENT_PAGE = page;
-  document.querySelectorAll('#destModalDots .cf-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === page);
+  // Nearest page offset rather than a division, so a partial last page and
+  // a half-finished swipe both resolve to the page they visually show.
+  let page = 0, best = Infinity;
+  m.offsets.forEach((offset, i) => {
+    const d = Math.abs(track.scrollLeft - offset);
+    if (d < best) { best = d; page = i; }
   });
-  const prev = document.querySelector('.cf-prev'), next = document.querySelector('.cf-next');
-  if (prev) prev.hidden = page <= 0;
-  if (next) next.hidden = page >= m.pages - 1;
+  // Mid-animation: leave the already-painted destination page alone until
+  // the track arrives, then hand control back to plain scroll position.
+  // Arrival is "the nearest page is now the target", not a pixel match —
+  // mandatory scroll-snap can settle a little off a clamped offset, and a
+  // tolerance tight enough to be meaningful would sometimes never trip.
+  if (CF_SCROLL_TARGET !== null) {
+    if (page !== CF_SCROLL_TARGET) return;
+    CF_SCROLL_TARGET = null;
+  }
+  cfPaint(page, m.pages);
 }
 
 // Dots count *pages*, not cards, so they agree with what the arrows do.
@@ -1285,6 +1324,7 @@ let CF_DRAG_MOVED = false;
   let raf = null;
   const track = document.getElementById('destModalTrack');
   if (!track) return;
+  track.addEventListener('touchstart', () => { CF_SCROLL_TARGET = null; }, { passive: true });
   track.addEventListener('scroll', () => {
     if (raf) return;
     raf = requestAnimationFrame(() => { cfSync(); raf = null; });
@@ -1310,6 +1350,7 @@ let CF_DRAG_MOVED = false;
   // small threshold confirms this is an actual drag, not a click.
   let dragging = false, startX = 0, startScroll = 0, pointerId = null;
   track.addEventListener('pointerdown', (e) => {
+    CF_SCROLL_TARGET = null; // the user is taking over from any in-flight scroll
     if (e.pointerType === 'touch') return;
     dragging = true; CF_DRAG_MOVED = false;
     startX = e.clientX; startScroll = track.scrollLeft;
@@ -1339,6 +1380,7 @@ let CF_DRAG_MOVED = false;
   // A plain mouse wheel only reports vertical delta — convert it to
   // horizontal scroll so wheel users can navigate the carousel too.
   track.addEventListener('wheel', (e) => {
+    CF_SCROLL_TARGET = null;
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       track.scrollLeft += e.deltaY;
       e.preventDefault();
@@ -1351,7 +1393,9 @@ function cfGoToPage(page) {
   const m = cfMetrics(track);
   if (!m) return;
   const target = Math.max(0, Math.min(page, m.pages - 1));
-  track.scrollTo({ left: target * m.stride * m.perView, behavior: 'smooth' });
+  CF_SCROLL_TARGET = target;
+  cfPaint(target, m.pages); // indicators lead the scroll instead of trailing it
+  track.scrollTo({ left: m.offsets[target], behavior: 'smooth' });
 }
 function cfMove(dir) {
   cfGoToPage(CF_CURRENT_PAGE + dir);
