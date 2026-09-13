@@ -461,7 +461,7 @@ window.ALPEN_DATA = {
   "pages": {
     "australia": {
       "slug": "australia",
-      "page_title": "Australia - Sydney, the Reef and the Outback | Alpen Glow Tours and Travels",
+      "page_title": "Australia Tour Packages - 9 Days from India | AlpenGlow",
       "hero_image_url": "australia1.jpg",
       "bg_image_url": "",
       "location": "High-Value Long Haul - Australia",
@@ -505,11 +505,12 @@ window.ALPEN_DATA = {
         "Uluru base walk with guide",
         "Daily breakfast"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 9-day Australia tour package covering Sydney harbour, the red Outback and the Great Barrier Reef, planned end to end by AlpenGlow Global for travellers from India."
     },
     "bali": {
       "slug": "bali",
-      "page_title": "Bali — Island of the Gods | Alpen Glow Tours and Travels",
+      "page_title": "Bali Tour Packages - 7 Days Ubud & Seminyak | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "bg_image_url": "https://images.unsplash.com/photo-1720519610178-141f9777e9de?q=80&w=677&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Indonesia · Bali",
@@ -596,11 +597,12 @@ window.ALPEN_DATA = {
         "Kecak fire dance entry",
         "Daily breakfast"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 7-day Bali tour package moving from the rice terraces and temples of Ubud to the beach clubs of the south coast, with a day-by-day itinerary and full inclusions."
     },
     "bhutan": {
       "slug": "bhutan",
-      "page_title": "Bhutan - High Value, Low Volume | Alpen Glow Tours and Travels",
+      "page_title": "Bhutan Tour Packages - 6 Days Paro & Thimphu | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1553856622216-cb6dd1ee6cd5?w=1600&q=80",
       "location": "Sub-Continent - Bhutan",
       "duration": "6 Days / 5 Nights",
@@ -643,11 +645,12 @@ window.ALPEN_DATA = {
         "All meals included",
         "Tiger's Nest Monastery hike"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 6-day Bhutan tour package through Paro, Thimphu and the Tiger’s Nest monastery, built around the country’s high-value low-volume tourism policy."
     },
     "india": {
       "slug": "india",
-      "page_title": "The Golden Triangle & Beyond | Alpen Glow Tours and Travels",
+      "page_title": "Golden Triangle Tour Package - 8 Days India | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1600&q=80",
       "bg_image_url": "",
       "location": "Sub-Continent · India",
@@ -691,11 +694,12 @@ window.ALPEN_DATA = {
         "Amber Fort jeep ride",
         "Daily breakfast"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "An 8-day Golden Triangle tour package covering Delhi, Agra and Jaipur, extended beyond the standard circuit with Mughal monuments and royal Rajasthan."
     },
     "italy": {
       "slug": "italy",
-      "page_title": "Italian Grand Tour | Alpen Glow Tours and Travels",
+      "page_title": "Italy Tour Packages - 10-Day Grand Tour | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1600&q=80",
       "bg_image_url": "https://images.unsplash.com/photo-1553342385-111fd6bc6ab3?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Italy",
@@ -746,11 +750,12 @@ window.ALPEN_DATA = {
         "Guided walking tours (Florence, Pisa, Venice)",
         "Daily breakfast"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 10-day Italy tour package through Rome, Florence and Venice - ruins, Renaissance art and canals in one sequence, with a full day-by-day itinerary."
     },
     "japan": {
       "slug": "japan",
-      "page_title": "Japan — Land of Contrasts | Alpen Glow Tours and Travels",
+      "page_title": "Japan Tour Packages - 9 Days Tokyo & Kyoto | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1600&q=80",
       "bg_image_url": "pagoda.jpg",
       "location": "Japan",
@@ -817,11 +822,12 @@ window.ALPEN_DATA = {
         "Fushimi Inari guided visit",
         "Daily breakfast"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 9-day Japan tour package from Tokyo’s neon districts to Kyoto’s temple gardens and the classic Mount Fuji viewpoints, planned by AlpenGlow Global."
     },
     "maldives": {
       "slug": "maldives",
-      "page_title": "Maldives - Pure Isolation | Alpen Glow Tours and Travels",
+      "page_title": "Maldives Honeymoon Packages - 5 Days | AlpenGlow Global",
       "hero_image_url": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1600&q=80",
       "location": "Islands and Beach - Maldives",
       "duration": "5 Days / 4 Nights",
@@ -864,11 +870,12 @@ window.ALPEN_DATA = {
         "Daily breakfast & dinner",
         "Snorkelling gear included"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 5-day Maldives honeymoon package with an overwater villa, a private sandbank and a lagoon clear enough to watch reef fish from bed. Short and unhurried."
     },
     "mauritius": {
       "slug": "mauritius",
-      "page_title": "Mauritius — Beaches & a Touch of Everything | Alpen Glow Tours and Travels",
+      "page_title": "Mauritius Honeymoon Packages - 6 Days | AlpenGlow Global",
       "hero_image_url": "https://images.unsplash.com/photo-1544550581-5f7ceaf7f992?w=1600&q=80",
       "location": "Islands & Beach · Mauritius",
       "duration": "6 Days / 5 Nights",
@@ -916,11 +923,12 @@ window.ALPEN_DATA = {
         "Chamarel & rum tasting tour",
         "Daily breakfast"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 6-day Mauritius honeymoon package mixing Indian Ocean beaches, volcanic mountain hikes and French-Indian-Creole culture across one compact island."
     },
     "nepal": {
       "slug": "nepal",
-      "page_title": "Kathmandu, Pokhara & the Himalayan Foothills | Alpen Glow Tours and Travels",
+      "page_title": "Nepal Tour Packages - 7 Days Kathmandu, Pokhara | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1600&q=80",
       "location": "Sub-Continent · Nepal",
       "duration": "7 Days / 6 Nights",
@@ -963,11 +971,12 @@ window.ALPEN_DATA = {
         "Himalayan mountain flight (optional)",
         "Daily breakfast"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 7-day Nepal tour package covering Kathmandu’s temple quarter, lakeside Pokhara under the Annapurna range and an early-morning Himalayan mountain flight."
     },
     "newzealand": {
       "slug": "newzealand",
-      "page_title": "New Zealand — North & South in One Trip | Alpen Glow Tours and Travels",
+      "page_title": "New Zealand Tour Packages - 10 Days | AlpenGlow Global",
       "hero_image_url": "https://images.unsplash.com/photo-1469521669194-babb45599def?w=1600&q=80",
       "location": "High-Value Long Haul · New Zealand",
       "duration": "10 Days / 9 Nights",
@@ -1015,11 +1024,12 @@ window.ALPEN_DATA = {
         "Maori cultural performance & hangi",
         "Daily breakfast"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 10-day New Zealand tour package covering both islands properly - geothermal valleys and Maori culture in the north, fjords and glacier peaks in the south."
     },
     "norway": {
       "slug": "norway",
-      "page_title": "Scandinavian Expedition | Alpen Glow Tours and Travels",
+      "page_title": "Norway Fjords Tour Packages - 8 Days | AlpenGlow Global",
       "hero_image_url": "https://images.unsplash.com/photo-1488415032361-b7e238421f1b?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "bg_image_url": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Scandinavia",
@@ -1088,11 +1098,12 @@ window.ALPEN_DATA = {
         "Husky, reindeer & snowmobile safaris",
         "Airport & intercity private transfers"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "An 8-day Norway fjords expedition built around the country’s most scenic rail and ferry routes, with vertical cliffs, mirror-still water and waterfall valleys."
     },
     "resortsworld": {
       "slug": "resortsworld",
-      "page_title": "Resorts World — Short Asian Getaway | Alpen Glow Tours and Travels",
+      "page_title": "Resorts World Cruise - 4-Day Singapore Sailing | AlpenGlow",
       "hero_image_url": "resortsworld1.jpg",
       "location": "Cruise Sailings · Large Liner",
       "duration": "4 Days / 3 Nights",
@@ -1135,11 +1146,12 @@ window.ALPEN_DATA = {
         "Pool deck & spa access",
         "Port taxes included"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 4-day Resorts World cruise from Singapore - casino floors, pool decks and a full entertainment lineup packed into a long weekend at sea."
     },
     "rivercruise-europe": {
       "slug": "rivercruise-europe",
-      "page_title": "The Danube — Budapest to Passau | Alpen Glow Tours and Travels",
+      "page_title": "Danube River Cruise - 8-Day Europe Package | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1471623432079-b009d30b6729?w=1600&q=80",
       "location": "Cruise Sailings · River Cruise",
       "duration": "8 Days / 7 Nights",
@@ -1192,11 +1204,12 @@ window.ALPEN_DATA = {
         "Wachau Valley scenic cruising",
         "Melk Abbey entry"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "An 8-day European river cruise along the Danube through three capitals - unpack once and step off the boat straight into each old town."
     },
     "royalcaribbean": {
       "slug": "royalcaribbean",
-      "page_title": "Royal Caribbean — Singapore & Southeast Asia | Alpen Glow Tours and Travels",
+      "page_title": "Royal Caribbean Cruise - 7 Days Singapore | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1548574169-47bbe03cb22f?w=1600&q=80",
       "location": "Cruise Sailings · Large Liner",
       "duration": "7 Days / 6 Nights",
@@ -1249,11 +1262,12 @@ window.ALPEN_DATA = {
         "Onboard entertainment & activities",
         "Port taxes included"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 7-day Royal Caribbean sailing from Singapore through Penang, Phuket and Langkawi - Southeast Asia without separate flights and hotels between stops."
     },
     "santorini": {
       "slug": "santorini",
-      "page_title": "Santorini - Aegean Dreams | Alpen Glow Tours and Travels",
+      "page_title": "Santorini Tour Packages - 6-Day Greece Trip | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1716573120993-8f3719fcd486?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "bg_image_url": "https://plus.unsplash.com/premium_photo-1661962663771-e096c9ffccbb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Athens · Santorini · Rhodes",
@@ -1330,11 +1344,12 @@ window.ALPEN_DATA = {
         "Daily breakfast",
         "Airport & port transfers"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 6-day Santorini tour package built around the caldera sunset, the whitewashed cliff villages and the island’s black- and red-sand beaches."
     },
     "seychelles": {
       "slug": "seychelles",
-      "page_title": "Seychelles - Granite Islands & Pure Isolation | Alpen Glow Tours and Travels",
+      "page_title": "Seychelles Honeymoon Packages - 6 Days | AlpenGlow Global",
       "hero_image_url": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1600&q=80",
       "location": "Islands & Beach - Seychelles",
       "duration": "6 Days / 5 Nights",
@@ -1372,11 +1387,12 @@ window.ALPEN_DATA = {
         "Daily breakfast",
         "Private airport transfers"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 6-day Seychelles honeymoon package - granite boulder beaches, giant tortoises and UNESCO-protected forest across the granitic inner islands."
     },
     "southkorea": {
       "slug": "southkorea",
-      "page_title": "South Korea - Seoul, Tradition and Trend | Alpen Glow Tours and Travels",
+      "page_title": "South Korea Tour Packages - 8 Days Seoul | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1600&q=80",
       "bg_image_url": "https://images.unsplash.com/photo-1630135199928-55a43e87350d?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "High-Value Long Haul - South Korea",
@@ -1464,11 +1480,12 @@ window.ALPEN_DATA = {
         "Meals per itinerary (B/L/D)",
         "Airport transfers and Inter-city transfers"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "An 8-day South Korea tour package through Seoul’s palace courtyards, K-pop districts and photogenic cafe streets - the trending pick for Indian travellers."
     },
     "srilanka": {
       "slug": "srilanka",
-      "page_title": "Sri Lanka - Ramayana Trail | Alpen Glow Tours and Travels",
+      "page_title": "Sri Lanka Tour Packages - 7 Days | AlpenGlow Global",
       "hero_image_url": "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1600&q=80",
       "bg_image_url": "https://images.unsplash.com/photo-1574611122955-5baa61496637?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Sub-Continent - Sri Lanka",
@@ -1590,11 +1607,12 @@ window.ALPEN_DATA = {
         "All temple & site entry fees",
         "Airport transfers"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 7-day Sri Lanka tour package threading ancient rock fortresses, tea-country hill stations, wildlife safaris and the palm-lined south coast."
     },
     "switzerland": {
       "slug": "switzerland",
-      "page_title": "Swiss Alpine Wonderland | Alpen Glow Tours and Travels",
+      "page_title": "Switzerland Tour Packages - 7-Day Alps Trip | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
       "location": "Switzerland",
       "duration": "7 Days / 6 Nights",
@@ -1637,7 +1655,8 @@ window.ALPEN_DATA = {
         "Gornergrat railway to the Matterhorn",
         "Daily breakfast"
       ],
-      "active": true
+      "active": true,
+      "meta_description": "A 7-day Switzerland tour package riding the country’s scenic mountain trains between snow-capped Alpine peaks, emerald valleys and lakeside towns."
     }
   }
-};
+}

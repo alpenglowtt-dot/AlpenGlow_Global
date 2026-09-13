@@ -1,6 +1,6 @@
 {
   "slug": "rivercruise-europe",
-  "page_title": "The Danube — Budapest to Passau | Alpen Glow Tours and Travels",
+  "page_title": "Danube River Cruise - 8-Day Europe Package | AlpenGlow",
   "hero_image_url": "https://images.unsplash.com/photo-1471623432079-b009d30b6729?w=1600&q=80",
   "location": "Cruise Sailings · River Cruise",
   "duration": "8 Days / 7 Nights",
@@ -53,5 +53,6 @@
     "Wachau Valley scenic cruising",
     "Melk Abbey entry"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "An 8-day European river cruise along the Danube through three capitals - unpack once and step off the boat straight into each old town."
 }

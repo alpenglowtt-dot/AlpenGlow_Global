@@ -1,6 +1,6 @@
 {
   "slug": "royalcaribbean",
-  "page_title": "Royal Caribbean — Singapore & Southeast Asia | Alpen Glow Tours and Travels",
+  "page_title": "Royal Caribbean Cruise - 7 Days Singapore | AlpenGlow",
   "hero_image_url": "https://images.unsplash.com/photo-1548574169-47bbe03cb22f?w=1600&q=80",
   "location": "Cruise Sailings · Large Liner",
   "duration": "7 Days / 6 Nights",
@@ -53,5 +53,6 @@
     "Onboard entertainment & activities",
     "Port taxes included"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "A 7-day Royal Caribbean sailing from Singapore through Penang, Phuket and Langkawi - Southeast Asia without separate flights and hotels between stops."
 }

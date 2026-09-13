@@ -1,6 +1,6 @@
 {
   "slug": "italy",
-  "page_title": "Italian Grand Tour | Alpen Glow Tours and Travels",
+  "page_title": "Italy Tour Packages - 10-Day Grand Tour | AlpenGlow",
   "hero_image_url": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1600&q=80",
   "bg_image_url": "https://images.unsplash.com/photo-1553342385-111fd6bc6ab3?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "location": "Italy",
@@ -51,5 +51,6 @@
     "Guided walking tours (Florence, Pisa, Venice)",
     "Daily breakfast"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "A 10-day Italy tour package through Rome, Florence and Venice - ruins, Renaissance art and canals in one sequence, with a full day-by-day itinerary."
 }

@@ -1,6 +1,6 @@
 {
   "slug": "norway",
-  "page_title": "Scandinavian Expedition | Alpen Glow Tours and Travels",
+  "page_title": "Norway Fjords Tour Packages - 8 Days | AlpenGlow Global",
   "hero_image_url": "https://images.unsplash.com/photo-1488415032361-b7e238421f1b?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "bg_image_url": "https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "location": "Scandinavia",
@@ -69,5 +69,6 @@
     "Husky, reindeer & snowmobile safaris",
     "Airport & intercity private transfers"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "An 8-day Norway fjords expedition built around the country’s most scenic rail and ferry routes, with vertical cliffs, mirror-still water and waterfall valleys."
 }

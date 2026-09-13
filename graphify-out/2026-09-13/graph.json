@@ -2860,7 +2860,7 @@
       "file_type": "code",
       "norm_label": "faqs",
       "source_file": "scripts/seo-homepage.js",
-      "source_location": "L49"
+      "source_location": "L46"
     },
     {
       "id": "scripts_seo_homepage_fs",
@@ -6356,7 +6356,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/seo-homepage.js",
-      "source_location": "L49",
+      "source_location": "L46",
       "weight": 1.0
     },
     {

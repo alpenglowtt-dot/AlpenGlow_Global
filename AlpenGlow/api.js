@@ -285,6 +285,29 @@
         if (d.location) { const el = document.querySelector('.detail-location'); if (el) el.textContent = d.location }
         if (d.page_title) document.title = d.page_title
 
+        // ── SEO meta kept in sync with CMS content ────────────
+        // Without this, a CMS title/description edit would leave the static
+        // <meta> tags in the HTML stale and contradicting the rendered page.
+        const setMeta = (sel, val) => {
+          if (!val) return
+          const el = document.head.querySelector(sel)
+          if (el) el.setAttribute('content', val)
+        }
+        if (d.meta_description) {
+          setMeta('meta[name="description"]', d.meta_description)
+          setMeta('meta[property="og:description"]', d.meta_description)
+          setMeta('meta[name="twitter:description"]', d.meta_description)
+        }
+        if (d.page_title) {
+          setMeta('meta[property="og:title"]', d.page_title)
+          setMeta('meta[name="twitter:title"]', d.page_title)
+        }
+        if (d.hero_image_url) {
+          const abs = new URL(resolveImg(d.hero_image_url), location.href).href
+          setMeta('meta[property="og:image"]', abs)
+          setMeta('meta[name="twitter:image"]', abs)
+        }
+
         // ── Overview ──────────────────────────────────────────
         const paras = Array.isArray(d.overview_paragraphs) ? d.overview_paragraphs
           : (typeof d.overview_paragraphs === 'string' ? JSON.parse(d.overview_paragraphs || '[]') : [])

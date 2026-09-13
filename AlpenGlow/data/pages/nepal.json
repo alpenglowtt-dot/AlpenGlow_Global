@@ -1,6 +1,6 @@
 {
   "slug": "nepal",
-  "page_title": "Kathmandu, Pokhara & the Himalayan Foothills | Alpen Glow Tours and Travels",
+  "page_title": "Nepal Tour Packages - 7 Days Kathmandu, Pokhara | AlpenGlow",
   "hero_image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1600&q=80",
   "location": "Sub-Continent · Nepal",
   "duration": "7 Days / 6 Nights",
@@ -43,5 +43,6 @@
     "Himalayan mountain flight (optional)",
     "Daily breakfast"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "A 7-day Nepal tour package covering Kathmandu’s temple quarter, lakeside Pokhara under the Annapurna range and an early-morning Himalayan mountain flight."
 }

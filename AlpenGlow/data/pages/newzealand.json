@@ -1,6 +1,6 @@
 {
   "slug": "newzealand",
-  "page_title": "New Zealand — North & South in One Trip | Alpen Glow Tours and Travels",
+  "page_title": "New Zealand Tour Packages - 10 Days | AlpenGlow Global",
   "hero_image_url": "https://images.unsplash.com/photo-1469521669194-babb45599def?w=1600&q=80",
   "location": "High-Value Long Haul · New Zealand",
   "duration": "10 Days / 9 Nights",
@@ -48,5 +48,6 @@
     "Maori cultural performance & hangi",
     "Daily breakfast"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "A 10-day New Zealand tour package covering both islands properly - geothermal valleys and Maori culture in the north, fjords and glacier peaks in the south."
 }

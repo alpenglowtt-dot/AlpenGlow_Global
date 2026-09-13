@@ -1,6 +1,6 @@
 {
   "slug": "southkorea",
-  "page_title": "South Korea - Seoul, Tradition and Trend | Alpen Glow Tours and Travels",
+  "page_title": "South Korea Tour Packages - 8 Days Seoul | AlpenGlow",
   "hero_image_url": "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1600&q=80",
   "bg_image_url": "https://images.unsplash.com/photo-1630135199928-55a43e87350d?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "location": "High-Value Long Haul - South Korea",
@@ -88,5 +88,6 @@
     "Meals per itinerary (B/L/D)",
     "Airport transfers and Inter-city transfers"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "An 8-day South Korea tour package through Seoul’s palace courtyards, K-pop districts and photogenic cafe streets - the trending pick for Indian travellers."
 }

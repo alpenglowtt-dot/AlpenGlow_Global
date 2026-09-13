@@ -32,3 +32,44 @@ Rules:
 - **Read graphify-out/reflections/LESSONS.md near the start of any nontrivial session** — it holds real judgment-call knowledge (security decisions, debugging dead ends, cross-boundary connections the AST graph itself cannot represent) that plain graph queries cannot surface.
 - **After genuinely significant work** (a real bug fully root-caused, a security decision, anything that took real back-and-forth to figure out — not routine edits), run `graphify save-result --question "..." --answer "..." --nodes <relevant node names> --outcome useful|corrected` to record it, then `graphify reflect --graph graphify-out/graph.json` to fold it into LESSONS.md. This is a judgment call, not something a hook can automate — the structural graph rebuilds itself, but deciding what was actually learned still needs a session to do it deliberately.
 - Since graphify-out/ is now tracked, **commit it in the same commit as the code change it documents** (`git add graphify-out/ ...`) — not as an afterthought — so the knowledge reaches GitHub, and every other laptop, in the same push.
+
+## SEO
+
+All public-page SEO (titles, meta descriptions, canonicals, Open Graph/Twitter
+cards, JSON-LD) is **generated**, not hand-edited:
+
+- `node scripts/seo-head.js` — rewrites the `<title>` and the
+  `<!-- SEO:BEGIN --> … <!-- SEO:END -->` block in `AlpenGlow/index.html`,
+  `compass.html` and every `AlpenGlow/packages/*.html`. Per-page titles and
+  descriptions live in the `pages`/`packs` tables at the top of that script.
+- `node scripts/seo-homepage.js` — rebuilds the homepage FAQ section, the
+  single crawlable footer link to `destinations.html`, the LCP preload and
+  the lazy-loading attributes (marked with
+  `SEOCONTENT`/`SEOFOOTER`/`SEOSTYLE`/`SEOPRELOAD`).
+
+`AlpenGlow/destinations.html` is a real, indexable page listing all 19
+package links grouped by region (`GROUPS` in `seo-head.js`), between
+`<!-- DESTLIST:BEGIN/END -->` markers that `seo-head.js` regenerates from the
+same `packs` table used for per-package titles/descriptions — it's the single
+source of truth, so a new package only needs adding to `packs` (and to a
+`GROUPS` entry) to appear everywhere. This page is *why* the homepage footer
+only needs one link ("View All Tour Packages & Cruises"): the crawl path is
+`index.html → destinations.html → each package page`, which is just as
+indexable as linking all 19 directly from the homepage, without the footer
+listing them all inline. `seo-head.js` also regenerates `sitemap.xml` from
+the same page list (skipping anything `noindex`).
+
+Both are idempotent — they strip their own previous block before re-inserting,
+so re-running them is always safe. Edit the script, not the HTML; a hand edit
+inside a generated block is lost on the next run.
+
+Two things that bite:
+
+- Package pages are CMS-hydrated at runtime by `api.js` from
+  `AlpenGlow/data/bundle.js` (which wins) and `AlpenGlow/data/pages/*.json`.
+  Those records carry `page_title` and `meta_description`, and `api.js`
+  overwrites the static tags with them, so a title changed only in the HTML
+  gets clobbered on load. Change it in **both** places.
+- `index.html` and `packages/package.css` both style bare `nav { position: … }`,
+  so any new `<nav>` (breadcrumbs, footer link hubs) needs an explicit
+  `position: static; display: block` override or it renders as a fixed overlay.

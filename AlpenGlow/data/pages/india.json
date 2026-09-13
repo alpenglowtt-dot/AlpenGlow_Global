@@ -1,6 +1,6 @@
 {
   "slug": "india",
-  "page_title": "The Golden Triangle & Beyond | Alpen Glow Tours and Travels",
+  "page_title": "Golden Triangle Tour Package - 8 Days India | AlpenGlow",
   "hero_image_url": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1600&q=80",
   "bg_image_url": "",
   "location": "Sub-Continent · India",
@@ -44,5 +44,6 @@
     "Amber Fort jeep ride",
     "Daily breakfast"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "An 8-day Golden Triangle tour package covering Delhi, Agra and Jaipur, extended beyond the standard circuit with Mughal monuments and royal Rajasthan."
 }

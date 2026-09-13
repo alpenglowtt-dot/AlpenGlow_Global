@@ -1,6 +1,6 @@
 {
   "slug": "maldives",
-  "page_title": "Maldives - Pure Isolation | Alpen Glow Tours and Travels",
+  "page_title": "Maldives Honeymoon Packages - 5 Days | AlpenGlow Global",
   "hero_image_url": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1600&q=80",
   "location": "Islands and Beach - Maldives",
   "duration": "5 Days / 4 Nights",
@@ -43,5 +43,6 @@
     "Daily breakfast & dinner",
     "Snorkelling gear included"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "A 5-day Maldives honeymoon package with an overwater villa, a private sandbank and a lagoon clear enough to watch reef fish from bed. Short and unhurried."
 }

@@ -1,6 +1,6 @@
 {
   "slug": "resortsworld",
-  "page_title": "Resorts World — Short Asian Getaway | Alpen Glow Tours and Travels",
+  "page_title": "Resorts World Cruise - 4-Day Singapore Sailing | AlpenGlow",
   "hero_image_url": "resortsworld1.jpg",
   "location": "Cruise Sailings · Large Liner",
   "duration": "4 Days / 3 Nights",
@@ -43,5 +43,6 @@
     "Pool deck & spa access",
     "Port taxes included"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "A 4-day Resorts World cruise from Singapore - casino floors, pool decks and a full entertainment lineup packed into a long weekend at sea."
 }

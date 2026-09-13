@@ -1,6 +1,6 @@
 {
   "slug": "switzerland",
-  "page_title": "Swiss Alpine Wonderland | Alpen Glow Tours and Travels",
+  "page_title": "Switzerland Tour Packages - 7-Day Alps Trip | AlpenGlow",
   "hero_image_url": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
   "location": "Switzerland",
   "duration": "7 Days / 6 Nights",
@@ -43,5 +43,6 @@
     "Gornergrat railway to the Matterhorn",
     "Daily breakfast"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "A 7-day Switzerland tour package riding the country’s scenic mountain trains between snow-capped Alpine peaks, emerald valleys and lakeside towns."
 }

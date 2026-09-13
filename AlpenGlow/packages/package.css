@@ -54,9 +54,11 @@ nav {
 
 /* === BREADCRUMB === */
 .breadcrumb {
+  position: static; display: block; width: auto; background: none; box-shadow: none;
   max-width: 1000px; margin: 2rem auto 0; padding: 0 3rem;
   font-size: 0.8rem; color: var(--text-light);
 }
+.breadcrumb span { color: var(--text-light); }
 .breadcrumb a { color: var(--red); font-weight: 600; }
 .breadcrumb a:hover { text-decoration: underline; }
 

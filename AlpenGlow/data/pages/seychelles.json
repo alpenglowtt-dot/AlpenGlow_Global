@@ -1,6 +1,6 @@
 {
   "slug": "seychelles",
-  "page_title": "Seychelles - Granite Islands & Pure Isolation | Alpen Glow Tours and Travels",
+  "page_title": "Seychelles Honeymoon Packages - 6 Days | AlpenGlow Global",
   "hero_image_url": "https://images.unsplash.com/photo-1573843981267-be1999ff37cd?w=1600&q=80",
   "location": "Islands & Beach - Seychelles",
   "duration": "6 Days / 5 Nights",
@@ -38,5 +38,6 @@
     "Daily breakfast",
     "Private airport transfers"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "A 6-day Seychelles honeymoon package - granite boulder beaches, giant tortoises and UNESCO-protected forest across the granitic inner islands."
 }

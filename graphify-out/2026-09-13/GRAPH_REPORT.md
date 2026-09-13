@@ -1,7 +1,7 @@
 # Graph Report - AlpenGlow_Global  (2026-09-13)
 
 ## Corpus Check
-- 82 files · ~589,227 words
+- 82 files · ~610,985 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary

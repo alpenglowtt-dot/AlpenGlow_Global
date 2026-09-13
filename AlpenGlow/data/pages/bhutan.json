@@ -1,6 +1,6 @@
 {
   "slug": "bhutan",
-  "page_title": "Bhutan - High Value, Low Volume | Alpen Glow Tours and Travels",
+  "page_title": "Bhutan Tour Packages - 6 Days Paro & Thimphu | AlpenGlow",
   "hero_image_url": "https://images.unsplash.com/photo-1553856622216-cb6dd1ee6cd5?w=1600&q=80",
   "location": "Sub-Continent - Bhutan",
   "duration": "6 Days / 5 Nights",
@@ -43,5 +43,6 @@
     "All meals included",
     "Tiger's Nest Monastery hike"
   ],
-  "active": true
+  "active": true,
+  "meta_description": "A 6-day Bhutan tour package through Paro, Thimphu and the Tiger’s Nest monastery, built around the country’s high-value low-volume tourism policy."
 }
