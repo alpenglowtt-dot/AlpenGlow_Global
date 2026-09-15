@@ -1,16 +1,16 @@
-# Graph Report - AlpenGlow work  (2026-09-15)
+# Graph Report - AlpenGlow_Global  (2026-09-13)
 
 ## Corpus Check
-- 84 files · ~722,596 words
+- 82 files · ~589,227 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 285 nodes · 332 edges · 54 communities (32 shown, 22 thin omitted)
+- 285 nodes · 332 edges · 54 communities (22 shown, 22 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b49725e4`
+- Built from commit: `8c8192bf`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -64,10 +64,10 @@
 1. `Alpen Glow Tours — Backend Setup Guide` - 14 edges
 2. `_bindStep()` - 11 edges
 3. `_sbUpsert()` - 11 edges
-4. `_heading()` - 10 edges
-5. `_enableNextBtn()` - 10 edges
-6. `_nextBtnHtml()` - 9 edges
-7. `_renderStep()` - 9 edges
+4. `_enableNextBtn()` - 10 edges
+5. `_heading()` - 10 edges
+6. `_renderStep()` - 9 edges
+7. `_nextBtnHtml()` - 9 edges
 8. `_bindContact()` - 8 edges
 9. `initTripPlanner()` - 7 edges
 10. `update_updated_at()` - 7 edges
@@ -178,14 +178,14 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?, Source Nodes
 
 ## Knowledge Gaps
-- **105 isolated node(s):** `Answer`, `Outcome`, `Source Nodes`, `ALLOWED_ORIGINS`, `ALLOWED_ORIGINS` (+100 more)
-  These have ≤1 connection - possible missing edges or undocumented components.
+- **105 isolated node(s):** `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script`, `04-apply-frontend-values.sh script`, `crypto` (+100 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 170 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What connects `Answer`, `Outcome`, `Source Nodes` to the rest of the system?**
+- **What connects `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script` to the rest of the system?**
   _105 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `trip-planner.js` be split into smaller, more focused modules?**
   _Cohesion score 0.1319073083778966 - nodes in this community are weakly interconnected._

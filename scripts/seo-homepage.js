@@ -57,6 +57,8 @@ const faqs = [
    'Honeymoons are one of the things we plan most: Maldives, Mauritius, Seychelles, Bali and Santorini all have dedicated packages with overwater villas, private transfers and beach-side stays.'],
   ['Do you arrange cruises as well as land trips?',
    'We book large-liner sailings out of Singapore with Royal Caribbean and Resorts World, and European river cruises along the Danube. Cruise packages include the sailing, transfers and the pre- or post-cruise city stay.'],
+  ['Do you handle hotel bookings?',
+   'Yes. Hotel bookings are part of every package we put together, from overwater villas for a Maldives honeymoon to city-centre stays on a Europe itinerary, and we also take standalone hotel bookings if you just need the stay sorted without a full package. Tell us your dates and preferences over <a href="compass.html">COMPASS</a> either way.'],
   ['How do I see the full itinerary and pricing?',
    'The overview of every package is free to read. Verifying your WhatsApp number and email on the package page unlocks the full day-by-day itinerary, the inclusions list and the pricing for your dates.'],
   ['How far in advance should I book an international trip?',
