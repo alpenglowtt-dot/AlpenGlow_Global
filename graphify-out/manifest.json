@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "AlpenGlow/index.html": {
-    "mtime": 1789482116.973651,
-    "seen": 1789482129.9867945,
-    "ast_hash": "8f1d29ee2d01bb0eee2c3b1cdf627f1c",
+    "mtime": 1789483749.9727964,
+    "seen": 1789483826.8267353,
+    "ast_hash": "08ede3d28ce9eacfd73823bc4ee97413",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/australia.html": {
@@ -990,9 +990,9 @@
     "semantic_hash": ""
   },
   "AlpenGlow/destinations.html": {
-    "mtime": 1789481998.74672,
-    "seen": 1789482129.986785,
-    "ast_hash": "11c0383b700561a9e03ce394d7d351dc",
+    "mtime": 1789483755.3481524,
+    "seen": 1789483826.826727,
+    "ast_hash": "de43fa4418e6e2d170d64f2f7b18e454",
     "semantic_hash": ""
   },
   "graphify-out/memory/query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md": {
@@ -1083,6 +1083,24 @@
     "mtime": 1789481961.444358,
     "seen": 1789482129.9871156,
     "ast_hash": "c511d175a70e56b43116a28a1f6c1d13",
+    "semantic_hash": ""
+  },
+  "nav-bali.png": {
+    "mtime": 1789483793.8118782,
+    "seen": 1789483826.8271735,
+    "ast_hash": "714387828ea1936501f32e7f290ccfc2",
+    "semantic_hash": ""
+  },
+  "nav-dest.png": {
+    "mtime": 1789483796.240604,
+    "seen": 1789483826.827177,
+    "ast_hash": "0d91aa3653702ff967abdfd9fc4a297a",
+    "semantic_hash": ""
+  },
+  "nav-home.png": {
+    "mtime": 1789483791.519447,
+    "seen": 1789483826.8271804,
+    "ast_hash": "b5fd78e0fea663c2773549f8e53ef24e",
     "semantic_hash": ""
   }
 }
