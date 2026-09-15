@@ -1,7 +1,7 @@
-# Graph Report - AlpenGlow_Global  (2026-09-13)
+# Graph Report - AlpenGlow_Global  (2026-09-15)
 
 ## Corpus Check
-- 82 files · ~589,227 words
+- 84 files · ~725,356 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8c8192bf`
+- Built from commit: `d758600a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 

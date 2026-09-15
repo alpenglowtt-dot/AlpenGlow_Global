@@ -269,7 +269,7 @@ nav {
 .page-head h1 em { font-style: italic; color: var(--red); }
 .page-head p { color: var(--text-light); font-size: 1rem; line-height: 1.8; }
 
-.dest-group { padding: 1rem 3rem 3.5rem; max-width: 1280px; margin: 0 auto; }
+.dest-group { padding: 1rem 3rem 3.5rem; max-width: 1280px; margin: 0 auto; scroll-margin-top: 90px; }
 .dest-group h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; color: var(--dark); margin-bottom: 1.5rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--warm-gray); }
 .dest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.6rem; }
 .dest-card { display: flex; flex-direction: column; background: var(--white); border-radius: 18px; overflow: hidden; box-shadow: 0 4px 20px rgba(24,24,24,0.06); transition: transform 0.3s var(--ease-out), box-shadow 0.3s; }
@@ -281,11 +281,46 @@ nav {
 .dest-card-link { align-self: flex-start; font-size: 0.78rem; font-weight: 600; color: var(--red); letter-spacing: 0.02em; margin-top: 0.3rem; }
 .dest-card-link::after { content: ' \2192'; }
 
-footer { background: rgba(24,24,24,0.96); padding: 3rem; text-align: center; color: rgba(255,255,255,0.35); font-size: 0.78rem; }
-.footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.footer-links a { color: rgba(255,255,255,0.55); transition: color 0.3s; font-size: 0.8rem; }
+footer { background: rgba(24,24,24,0.96); padding: 4.5rem 3rem 2.2rem; text-align: left; color: rgba(255,255,255,0.4); font-size: 0.78rem; }
+.footer-top { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 2.5rem; max-width: 1240px; margin: 0 auto; padding-bottom: 2.8rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-col-title { color: rgba(255,255,255,0.88); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.footer-logo { display: flex; flex-direction: column; align-items: stretch; gap: 1.5rem; width: max-content; max-width: 100%; }
+.footer-logo img { display: block; width: auto; opacity: 1; }
+.footer-logo > img { height: 67px; object-fit: contain; }
+.footer-logo-chip { display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.97); padding: 1.2rem 1rem; border-radius: 12px; box-shadow: 0 8px 22px rgba(0,0,0,0.35); }
+.footer-logo-chip img { height: 37px; }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+.footer-links a { color: rgba(255,255,255,0.55); transition: color 0.3s; font-size: 0.85rem; }
 .footer-links a:hover { color: var(--orange); }
-.footer-address { color: rgba(255,255,255,0.4); font-size: 0.78rem; margin-bottom: 0.4rem; }
+.footer-address { color: rgba(255,255,255,0.55); font-size: 0.85rem; line-height: 1.7; margin: 0; max-width: 260px; }
+.footer-cta { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.2rem; background: var(--orange); color: var(--dark); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.75rem 1.3rem; border-radius: 10px; transition: background 0.3s, transform 0.3s; }
+.footer-cta:hover { background: var(--orange-light); transform: translateY(-2px); }
+.footer-bottom { max-width: 1240px; margin: 1.8rem auto 0; text-align: center; }
+.footer-bottom p { margin: 0 auto; max-width: 720px; line-height: 1.6; }
+@media (max-width: 1279px) {
+  footer { padding-left: 2rem; padding-right: 2rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2.8rem 3rem; }
+}
+@media (max-width: 600px) {
+  footer { padding: 3rem 1.25rem 2rem; text-align: center; }
+  .footer-top { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto 1fr auto; grid-template-areas: "brand brand" "et cat" "el cat" "contact contact"; gap: 0 1rem; padding-bottom: 2.2rem; }
+  .footer-top .footer-col-title { align-self: start; }
+  .footer-brand { grid-area: brand; margin-bottom: 2.2rem; }
+  .footer-top .footer-col:nth-child(2) { display: contents; }
+  .footer-top .footer-col:nth-child(2) > .footer-col-title { grid-area: et; }
+  .footer-top .footer-col:nth-child(2) > .footer-links { grid-area: el; }
+  .footer-top .footer-col:nth-child(3) { grid-area: cat; }
+  .footer-top .footer-col:last-child { grid-area: contact; margin-top: 2.2rem; }
+  .footer-logo { gap: 1.25rem; margin: 0 auto; }
+  .footer-logo > img { height: 54px; }
+  .footer-logo-chip { padding: 1.1rem 1rem; }
+  .footer-logo-chip img { height: 31px; }
+  .footer-address { max-width: 320px; margin: 0 auto; }
+  .footer-col-title { margin-bottom: 0.9rem; }
+  .footer-links { align-items: center; gap: 0.7rem; }
+  .footer-links a { font-size: 0.8rem; }
+  .footer-bottom { margin-top: 1.5rem; text-align: center; }
+}
 
 @media (max-width: 768px) {
   nav, .page-head, .dest-group { padding-left: 1.2rem; padding-right: 1.2rem; }
@@ -318,7 +353,7 @@ footer { background: rgba(24,24,24,0.96); padding: 3rem; text-align: center; col
 </div>
 
 <!-- DESTLIST:BEGIN -->
-<section class="dest-group">
+<section class="dest-group" id="asia-subcontinent">
   <h2>Asia &amp; the Subcontinent</h2>
   <div class="dest-grid">
       <a class="dest-card" href="packages/japan.html">
@@ -371,7 +406,7 @@ footer { background: rgba(24,24,24,0.96); padding: 3rem; text-align: center; col
       </a>
   </div>
 </section>
-<section class="dest-group">
+<section class="dest-group" id="islands-honeymoons">
   <h2>Islands &amp; Honeymoons</h2>
   <div class="dest-grid">
       <a class="dest-card" href="packages/bali.html">
@@ -416,7 +451,7 @@ footer { background: rgba(24,24,24,0.96); padding: 3rem; text-align: center; col
       </a>
   </div>
 </section>
-<section class="dest-group">
+<section class="dest-group" id="europe">
   <h2>Europe</h2>
   <div class="dest-grid">
       <a class="dest-card" href="packages/italy.html">
@@ -445,7 +480,7 @@ footer { background: rgba(24,24,24,0.96); padding: 3rem; text-align: center; col
       </a>
   </div>
 </section>
-<section class="dest-group">
+<section class="dest-group" id="once-in-a-lifetime">
   <h2>Once-in-a-Lifetime</h2>
   <div class="dest-grid">
       <a class="dest-card" href="packages/australia.html">
@@ -466,7 +501,7 @@ footer { background: rgba(24,24,24,0.96); padding: 3rem; text-align: center; col
       </a>
   </div>
 </section>
-<section class="dest-group">
+<section class="dest-group" id="cruises">
   <h2>Cruises</h2>
   <div class="dest-grid">
       <a class="dest-card" href="packages/royalcaribbean.html">
@@ -498,16 +533,43 @@ footer { background: rgba(24,24,24,0.96); padding: 3rem; text-align: center; col
 <!-- DESTLIST:END -->
 
 <footer>
-  <div class="footer-links">
-    <a href="index.html#destinations">Destinations</a>
-    <a href="index.html#packages">Packages</a>
-    <a href="index.html#offers">Offers</a>
-    <a href="index.html#reviews">Reviews</a>
-    <a href="index.html#contact">Contact</a>
+  <div class="footer-top">
+    <div class="footer-col footer-brand">
+      <div class="footer-logo">
+        <img src="footer-logo-global.png" alt="AlpenGlow Global" loading="lazy" decoding="async">
+        <span class="footer-logo-chip"><img src="footer-logo-tours.png" alt="AlpenGlow Global" loading="lazy" decoding="async"></span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Explore</div>
+      <div class="footer-links">
+        <a href="index.html#destinations">Destinations</a>
+        <a href="index.html#packages">Packages</a>
+        <a href="index.html#offers">Offers</a>
+        <a href="index.html#reviews">Reviews</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Tour Categories</div>
+      <div class="footer-links">
+        <a href="#asia-subcontinent">Asia &amp; the Subcontinent</a>
+        <a href="#islands-honeymoons">Islands &amp; Honeymoons</a>
+        <a href="#europe">Europe</a>
+        <a href="#once-in-a-lifetime">Once-in-a-Lifetime</a>
+        <a href="#cruises">Cruises</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact Us</div>
+      <p class="footer-address">AlpenGlow Global, 1078, Big Bazaar Street, Coimbatore, 641001, Tamil Nadu, India</p>
+      <a href="index.html#contact" class="footer-cta">Plan My Trip &rarr;</a>
+    </div>
   </div>
-  <p class="footer-address">AlpenGlow Global, 1078, Big Bazaar Street, Coimbatore, 641001, Tamil Nadu, India</p>
   <span class="ag-origin-mark" aria-hidden="true" hidden data-origin="alpenglowglobal.com" data-sig="ag-d166974f995d"></span>
-  <p>&copy; 2026 AlpenGlow Global &mdash; A Unit of Alpenglow Tours &amp; Travels. All rights reserved. The text, images, itineraries and design of this site are original works and may not be reproduced without written permission.</p>
+  <div class="footer-bottom">
+    <p>&copy; 2026 AlpenGlow Global &mdash; A Unit of Alpenglow Tours &amp; Travels. All rights reserved. The text, images, itineraries and design of this site are original works and may not be reproduced without written permission.</p>
+  </div>
 </footer>
 
 </body>

@@ -2860,7 +2860,7 @@
       "file_type": "code",
       "norm_label": "faqs",
       "source_file": "scripts/seo-homepage.js",
-      "source_location": "L49"
+      "source_location": "L52"
     },
     {
       "id": "scripts_seo_homepage_fs",
@@ -6356,7 +6356,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "scripts/seo-homepage.js",
-      "source_location": "L49",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -7180,5 +7180,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "8c8192bf196b2417a0456056ace9acb205824e28"
+  "built_at_commit": "d758600a7d392be68ac263d8a087d99d5ac4590b"
 }

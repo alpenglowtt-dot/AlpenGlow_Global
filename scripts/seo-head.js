@@ -53,11 +53,11 @@ const pages = [
 // Which region-group each package belongs to on destinations.html, and the
 // display order of the groups themselves.
 const GROUPS = [
-  ['Asia & the Subcontinent', ['japan', 'southkorea', 'india', 'nepal', 'bhutan', 'srilanka']],
-  ['Islands & Honeymoons', ['bali', 'maldives', 'mauritius', 'seychelles', 'santorini']],
-  ['Europe', ['italy', 'switzerland', 'norway']],
-  ['Once-in-a-Lifetime', ['australia', 'newzealand']],
-  ['Cruises', ['royalcaribbean', 'resortsworld', 'rivercruise-europe']]
+  ['Asia & the Subcontinent', ['japan', 'southkorea', 'india', 'nepal', 'bhutan', 'srilanka'], 'asia-subcontinent'],
+  ['Islands & Honeymoons', ['bali', 'maldives', 'mauritius', 'seychelles', 'santorini'], 'islands-honeymoons'],
+  ['Europe', ['italy', 'switzerland', 'norway'], 'europe'],
+  ['Once-in-a-Lifetime', ['australia', 'newzealand'], 'once-in-a-lifetime'],
+  ['Cruises', ['royalcaribbean', 'resortsworld', 'rivercruise-europe'], 'cruises']
 ];
 
 const packs = [
@@ -246,7 +246,8 @@ let n = 0;
 for (const p of pages) {
   const f = path.join(ROOT, p.slug);
   let h = fs.readFileSync(f, 'utf8');
-  h = h.replace(/\n?<!-- SEO:BEGIN \(generated\) -->[\s\S]*?<!-- SEO:END -->/g, '');
+  // Match "\r?\n" so CRLF checkouts don't leave a lone "\r" behind on every run.
+  h = h.replace(/(?:\r?\n)?<!-- SEO:BEGIN \(generated\) -->[\s\S]*?<!-- SEO:END -->/g, '');
   if (!/<title>[\s\S]*?<\/title>/.test(h)) { console.log('NO TITLE: ' + p.slug); continue; }
   h = h.replace(/<title>[\s\S]*?<\/title>/, '<title>' + esc(p.title) + '</title>\n' + block(p));
   fs.writeFileSync(f, h, 'utf8');
@@ -273,8 +274,8 @@ const card = (k) => {
     '      </a>';
 };
 const destList = '<!-- DESTLIST:BEGIN -->\n' +
-  GROUPS.map(([label, slugs]) =>
-    '<section class="dest-group">\n  <h2>' + esc(label) + '</h2>\n  <div class="dest-grid">\n' +
+  GROUPS.map(([label, slugs, id]) =>
+    '<section class="dest-group" id="' + id + '">\n  <h2>' + esc(label) + '</h2>\n  <div class="dest-grid">\n' +
     slugs.filter(s => packBySlug[s]).map(s => card(packBySlug[s])).join('\n') +
     '\n  </div>\n</section>').join('\n') +
   '\n<!-- DESTLIST:END -->';

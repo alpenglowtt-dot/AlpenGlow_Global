@@ -127,6 +127,14 @@
     },
     {
      "@type": "Question",
+     "name": "Do you handle hotel bookings?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. Hotel bookings are part of every package we put together, from overwater villas for a Maldives honeymoon to city-centre stays on a Europe itinerary, and we also take standalone hotel bookings if you just need the stay sorted without a full package. Tell us your dates and preferences over COMPASS either way."
+     }
+    },
+    {
+     "@type": "Question",
      "name": "How do I see the full itinerary and pricing?",
      "acceptedAnswer": {
       "@type": "Answer",
@@ -286,14 +294,16 @@
 .faq-item .faq-a { padding: 0 1.6rem 1.4rem; color: var(--text-light); font-size: 0.9rem; line-height: 1.8; }
 .faq-item .faq-a a { color: var(--red); font-weight: 600; }
 .faq-item .faq-a a:hover { text-decoration: underline; }
-.footer-all-link { display: inline-block; color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.03em; margin-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 0.15rem; transition: color 0.3s, border-color 0.3s; }
-.footer-all-link:hover { color: var(--orange); border-color: var(--orange); }
+.footer-all-link { display: inline-block; color: var(--orange-light); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.01em; line-height: 1.5; margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); transition: color 0.3s; }
+.footer-all-link::after { content: '\2192'; display: inline-block; margin-left: 0.35rem; transition: transform 0.3s; }
+.footer-all-link:hover { color: var(--orange); }
+.footer-all-link:hover::after { transform: translateX(3px); }
 .footer-address { color: rgba(255,255,255,0.4); font-size: 0.78rem; margin-bottom: 0.4rem; }
 @media (max-width: 768px) {
   #faq { padding: 3.5rem 1.2rem; }
 }
 </style>
-<!-- SEOSTYLE:END -->
+<!-- SEOSTYLE:END -->
 <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -771,16 +781,34 @@ nav.scrolled .nav-cta {
 .form-success .check { font-size: 3rem; margin-bottom: 1rem; display: block; }
 
 /* === FOOTER === */
-footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 3rem; text-align: center; color: rgba(255,255,255,0.35); font-size: 0.78rem; }
-.footer-logo { display: flex; justify-content: center; align-items: center; gap: 2rem; margin-bottom: 1rem; }
-.footer-logo img { width: auto; opacity: 1; }
-.footer-logo img:first-child { height: 100px; }
-.footer-logo img:last-child { height: 70px; }
-.footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-.footer-links a { color: rgba(255,255,255,0.55); transition: color 0.3s; font-size: 0.8rem; }
+footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 4.5rem 3rem 7rem; text-align: left; color: rgba(255,255,255,0.4); font-size: 0.78rem; }
+.footer-top { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 2.5rem; max-width: 1240px; margin: 0 auto; padding-bottom: 2.8rem; }
+.footer-col-title { color: rgba(255,255,255,0.88); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.footer-logo { display: flex; flex-direction: column; align-items: stretch; gap: 1.5rem; width: max-content; max-width: 100%; }
+.footer-logo img { display: block; width: auto; opacity: 1; }
+.footer-logo > img { height: 67px; object-fit: contain; }
+.footer-logo-chip { display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.97); padding: 1.2rem 1rem; border-radius: 12px; box-shadow: 0 8px 22px rgba(0,0,0,0.35); }
+.footer-logo-chip img { height: 37px; }
+.footer-links { display: flex; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+.footer-links a { color: rgba(255,255,255,0.55); transition: color 0.3s; font-size: 0.85rem; }
 .footer-links a:hover { color: var(--orange); }
+.footer-address { color: rgba(255,255,255,0.55); font-size: 0.85rem; line-height: 1.7; margin: 0; max-width: 260px; }
+.footer-cta { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.2rem; background: var(--orange); color: var(--dark); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.03em; padding: 0.75rem 1.3rem; border-radius: 10px; transition: background 0.3s, transform 0.3s; }
+.footer-cta:hover { background: var(--orange-light); transform: translateY(-2px); }
+.footer-bottom { max-width: 1240px; margin: 1.8rem auto 0; text-align: center; }
+.footer-bottom p { margin: 0 auto; max-width: 720px; line-height: 1.6; }
+@media (max-width: 600px) {
+  .footer-top { grid-template-rows: auto auto 1fr auto auto; }
+  .footer-top .footer-col-title { align-self: start; }
+}
+@media (max-width: 1279px) {
+  footer { padding-left: 2rem; padding-right: 2rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 2.8rem 3rem; }
+}
 .footer-credit {
-  display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-top: 0.3rem;
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  max-width: 1240px; margin: 0 auto; padding-bottom: 1.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   font-family: 'Space Mono', ui-monospace, 'SF Mono', Consolas, monospace;
   text-transform: uppercase; letter-spacing: 0.06em;
 }
@@ -943,11 +971,26 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
   #recognitions img { height: 70px !important; }
 
   /* Footer */
-  footer { padding: 2rem 1rem; }
-  .footer-logo { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
-  .footer-logo img:first-child { height: 60px !important; }
-  .footer-logo img:last-child { height: 44px !important; }
-  .footer-links { gap: 1rem; font-size: 0.75rem; }
+  footer { padding: 3rem 1.25rem 6.5rem; text-align: center; }
+  .footer-top { grid-template-columns: 1fr 1fr; grid-template-areas: "brand brand" "et cat" "el cat" "va va" "contact contact"; gap: 0 1rem; padding-bottom: 2.2rem; }
+  .footer-brand { grid-area: brand; margin-bottom: 2.2rem; }
+  .footer-top .footer-col:nth-child(2) { display: contents; }
+  .footer-top .footer-col:nth-child(2) > .footer-col-title { grid-area: et; }
+  .footer-top .footer-col:nth-child(2) > .footer-links { grid-area: el; }
+  .footer-top .footer-col:nth-child(2) > .footer-all-link { grid-area: va; justify-self: center; margin-top: 1.8rem; }
+  .footer-top .footer-col:nth-child(3) { grid-area: cat; }
+  .footer-top .footer-col:last-child { grid-area: contact; margin-top: 2.2rem; }
+  .footer-logo { gap: 1.25rem; margin: 0 auto; }
+  .footer-logo > img { height: 54px; }
+  .footer-logo-chip { padding: 1.1rem 1rem; }
+  .footer-logo-chip img { height: 31px; }
+  .footer-address { max-width: 320px; margin: 0 auto; }
+  .footer-col-title { margin-bottom: 0.9rem; }
+  .footer-links { align-items: center; gap: 0.7rem; }
+  .footer-links a, .footer-all-link { font-size: 0.8rem; }
+  .footer-credit { padding-bottom: 1.5rem; }
+  .footer-bottom { margin-top: 1.5rem; }
+  .footer-bottom p { max-width: none; }
 }
 #reviews {
   padding: 7rem 3rem; position: relative;
@@ -1287,8 +1330,6 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
 </section>
 
 <!-- FOOTER -->
-
-
 <!-- SEOCONTENT:BEGIN -->
 <section id="faq">
   <div class="faq-head">
@@ -1334,22 +1375,48 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
 <!-- SEOCONTENT:END -->
 
 <footer id="footer">
-  <div class="footer-logo"><img src="alpenglow-removebg-preview.png" alt="AlpenGlow Global" id="footer-logo-secret" style="cursor:pointer"><img src="alpenglow-removebg-preview-removebg-preview.png" alt="AlpenGlow Global"></div>
-  <div class="footer-links">
-    <a href="#destinations">Destinations</a>
-    <a href="#packages">Packages</a>
-    <a href="#offers">Offers</a>
-    <a href="#blog">Blog</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#contact">Contact</a>
-  </div>
+  <div class="footer-top">
+    <div class="footer-col footer-brand">
+      <div class="footer-logo">
+        <img src="footer-logo-global.png" alt="AlpenGlow Global" id="footer-logo-secret" style="cursor:pointer" loading="lazy" decoding="async">
+        <span class="footer-logo-chip"><img src="footer-logo-tours.png" alt="AlpenGlow Global" loading="lazy" decoding="async"></span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Explore</div>
+      <div class="footer-links">
+        <a href="#destinations">Destinations</a>
+        <a href="#packages">Packages</a>
+        <a href="#offers">Offers</a>
+        <a href="#blog">Blog</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
 <!-- SEOFOOTER:BEGIN -->
-  <a class="footer-all-link" href="destinations.html">View All Tour Packages &amp; Cruises</a>
-  <p class="footer-address">AlpenGlow Global, 1078, Big Bazaar Street, Coimbatore, 641001, Tamil Nadu, India</p>
-<!-- SEOFOOTER:END -->
-  <span class="ag-origin-mark" aria-hidden="true" hidden data-origin="alpenglowglobal.com" data-sig="ag-1b2ce7971a07"></span>
-  <p>&copy; 2026 AlpenGlow Global &mdash; A Unit of Alpenglow Tours &amp; Travels. All rights reserved. The text, images, itineraries and design of this site are original works and may not be reproduced without written permission.</p>
+      <a class="footer-all-link" href="destinations.html">View All Tour Packages &amp; Cruises</a>
+<!-- SEOFOOTER:END -->
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Tour Categories</div>
+      <div class="footer-links">
+        <a href="destinations.html#asia-subcontinent">Asia &amp; the Subcontinent</a>
+        <a href="destinations.html#islands-honeymoons">Islands &amp; Honeymoons</a>
+        <a href="destinations.html#europe">Europe</a>
+        <a href="destinations.html#once-in-a-lifetime">Once-in-a-Lifetime</a>
+        <a href="destinations.html#cruises">Cruises</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact Us</div>
+      <p class="footer-address">AlpenGlow Global, 1078, Big Bazaar Street, Coimbatore, 641001, Tamil Nadu, India</p>
+      <a href="#contact" class="footer-cta">Plan My Trip &rarr;</a>
+    </div>
+  </div>
   <p class="footer-credit">Built by <a class="footer-credit-badge" href="https://www.linkedin.com/company/batore/" target="_blank" rel="noopener noreferrer">Batore</a></p>
+  <span class="ag-origin-mark" aria-hidden="true" hidden data-origin="alpenglowglobal.com" data-sig="ag-1b2ce7971a07"></span>
+  <div class="footer-bottom">
+    <p>&copy; 2026 AlpenGlow Global &mdash; A Unit of Alpenglow Tours &amp; Travels. All rights reserved. The text, images, itineraries and design of this site are original works and may not be reproduced without written permission.</p>
+  </div>
 </footer>
 
 <!-- DESTINATION COVERFLOW MODAL -->
