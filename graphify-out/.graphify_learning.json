@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-15T07:46:39.831818+00:00",
+  "generated_at": "2026-09-15T14:36:26.058751+00:00",
   "nodes": {
     "alpenglow_api": {
       "code_fingerprint": "986a86ad5e1f1eba6d5e981679967e00ccd843b2a699cbe01b9661ba3e80c512",
@@ -18,7 +18,7 @@
           "q": "How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?"
         }
       ],
-      "score": -0.062607584,
+      "score": -0.062197302,
       "source_file": "AlpenGlow/api.js",
       "status": "contested",
       "uses": 1,
@@ -41,7 +41,7 @@
           "q": "What are the two verification scopes and where do they apply?"
         }
       ],
-      "score": -3.285e-06,
+      "score": -3.264e-06,
       "source_file": "AlpenGlow/compass.js",
       "status": "contested",
       "uses": 1,
@@ -58,7 +58,7 @@
           "q": "What are the two verification scopes and where do they apply?"
         }
       ],
-      "score": 0.274409636,
+      "score": 0.272611367,
       "source_file": "AlpenGlow/trip-planner.js",
       "status": "tentative",
       "uses": 1
@@ -80,14 +80,14 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 1.664e-06,
+      "score": 1.654e-06,
       "source_file": "AlpenGlow/trip-planner.js",
       "status": "contested",
       "uses": 1,
       "verdict": "useful"
     },
     "supabase_functions_crm_index": {
-      "code_fingerprint": "2a8eca5b0d1604f2ba3add41a9c12979b2d835efdde6c09fcb8d210fe2d23f2d",
+      "code_fingerprint": "273741c51925e8f00c0e2360d2deeb2804924d343d6e819e7fe14ffbcd52655d",
       "label": "crm/index.ts",
       "last": "2026-07-21T08:33:19.151028+00:00",
       "neg": 1,
@@ -108,14 +108,14 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 0.274413285,
+      "score": 0.272614992,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "contested",
       "uses": 2,
       "verdict": "useful"
     },
     "supabase_functions_crm_index_followup_writable": {
-      "code_fingerprint": "2a8eca5b0d1604f2ba3add41a9c12979b2d835efdde6c09fcb8d210fe2d23f2d",
+      "code_fingerprint": "273741c51925e8f00c0e2360d2deeb2804924d343d6e819e7fe14ffbcd52655d",
       "label": "FOLLOWUP_WRITABLE",
       "last": "2026-07-21T08:32:52.968227+00:00",
       "provenance": [
@@ -125,13 +125,13 @@
           "q": "What is the RLS security model for the CRM tables?"
         }
       ],
-      "score": 0.274409668,
+      "score": 0.272611398,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "tentative",
       "uses": 1
     },
     "supabase_functions_crm_index_lead_writable": {
-      "code_fingerprint": "2a8eca5b0d1604f2ba3add41a9c12979b2d835efdde6c09fcb8d210fe2d23f2d",
+      "code_fingerprint": "273741c51925e8f00c0e2360d2deeb2804924d343d6e819e7fe14ffbcd52655d",
       "label": "LEAD_WRITABLE",
       "last": "2026-07-21T08:32:52.968227+00:00",
       "neg": 1,
@@ -147,14 +147,14 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 1.696e-06,
+      "score": 1.685e-06,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "contested",
       "uses": 1,
       "verdict": "useful"
     },
     "supabase_functions_crm_index_safeequal": {
-      "code_fingerprint": "2a8eca5b0d1604f2ba3add41a9c12979b2d835efdde6c09fcb8d210fe2d23f2d",
+      "code_fingerprint": "273741c51925e8f00c0e2360d2deeb2804924d343d6e819e7fe14ffbcd52655d",
       "label": "safeEqual()",
       "last": "2026-07-21T08:32:52.968227+00:00",
       "provenance": [
@@ -164,13 +164,13 @@
           "q": "What is the RLS security model for the CRM tables?"
         }
       ],
-      "score": 0.274409668,
+      "score": 0.272611398,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "tentative",
       "uses": 1
     },
     "supabase_functions_submit_lead_index": {
-      "code_fingerprint": "a066c10af9e5de0f31c32810dfbbaf71cb5a643a545c49293823d7f5ae3356f0",
+      "code_fingerprint": "d962324b50853cd788ee360584590fc76e1d54b5faa421191b405dc495301ba1",
       "label": "submit-lead/index.ts",
       "last": "2026-07-21T08:33:19.151028+00:00",
       "neg": 1,
@@ -186,7 +186,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 3.617e-06,
+      "score": 3.594e-06,
       "source_file": "supabase/functions/submit-lead/index.ts",
       "status": "contested",
       "uses": 1,

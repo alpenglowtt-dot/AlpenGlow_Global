@@ -1084,23 +1084,5 @@
     "seen": 1789482129.9871156,
     "ast_hash": "c511d175a70e56b43116a28a1f6c1d13",
     "semantic_hash": ""
-  },
-  "align-bali-768.png": {
-    "mtime": 1789482073.9109523,
-    "seen": 1789482129.987259,
-    "ast_hash": "766a8f28c06c7dd3cff0e51779d81561",
-    "semantic_hash": ""
-  },
-  "align-index-1366.png": {
-    "mtime": 1789482057.4483383,
-    "seen": 1789482129.9872625,
-    "ast_hash": "f7f9fcc4a6b285070a5147726a25a419",
-    "semantic_hash": ""
-  },
-  "align-index-390.png": {
-    "mtime": 1789482037.665364,
-    "seen": 1789482129.987266,
-    "ast_hash": "bad0f651bb7932a10d781106288e2c39",
-    "semantic_hash": ""
   }
 }
