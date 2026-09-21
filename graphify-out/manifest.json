@@ -1,8 +1,8 @@
 {
   "AlpenGlow/api.js": {
-    "mtime": 1789461023.6958039,
-    "seen": 1789473904.9697762,
-    "ast_hash": "1d88e89e268d3022aa1b9814cc448a16",
+    "mtime": 1790011842.2831316,
+    "seen": 1790012440.2336075,
+    "ast_hash": "78669304e4adb50f5e83d049a3956ed7",
     "semantic_hash": ""
   },
   "AlpenGlow/compass.js": {
@@ -216,9 +216,9 @@
     "semantic_hash": ""
   },
   "supabase/functions/chat-compass/index.ts": {
-    "mtime": 1784702004.0468216,
-    "seen": 1789473904.9698951,
-    "ast_hash": "7340699dbd59f3e3eaf0310858497cf2",
+    "mtime": 1790008730.1342082,
+    "seen": 1790012440.2340999,
+    "ast_hash": "70e8d52f9af592145d3401ffa90e9f1e",
     "semantic_hash": ""
   },
   "supabase/functions/crm/index.ts": {
@@ -366,9 +366,9 @@
     "semantic_hash": ""
   },
   "AlpenGlow/index.html": {
-    "mtime": 1789483749.9727964,
-    "seen": 1789483826.8267353,
-    "ast_hash": "08ede3d28ce9eacfd73823bc4ee97413",
+    "mtime": 1789535706.5729177,
+    "seen": 1790012440.234561,
+    "ast_hash": "67fbe65a8ba469cec37108470516f090",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/australia.html": {
@@ -1083,24 +1083,6 @@
     "mtime": 1789481961.444358,
     "seen": 1789482129.9871156,
     "ast_hash": "c511d175a70e56b43116a28a1f6c1d13",
-    "semantic_hash": ""
-  },
-  "nav-bali.png": {
-    "mtime": 1789483793.8118782,
-    "seen": 1789483826.8271735,
-    "ast_hash": "714387828ea1936501f32e7f290ccfc2",
-    "semantic_hash": ""
-  },
-  "nav-dest.png": {
-    "mtime": 1789483796.240604,
-    "seen": 1789483826.827177,
-    "ast_hash": "0d91aa3653702ff967abdfd9fc4a297a",
-    "semantic_hash": ""
-  },
-  "nav-home.png": {
-    "mtime": 1789483791.519447,
-    "seen": 1789483826.8271804,
-    "ast_hash": "b5fd78e0fea663c2773549f8e53ef24e",
     "semantic_hash": ""
   }
 }
