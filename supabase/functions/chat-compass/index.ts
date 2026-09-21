@@ -248,10 +248,14 @@ serve(async (req) => {
       })
     }
 
+    // meta-llama/llama-4-scout-17b-16e-instruct, llama-3.3-70b-versatile and
+    // llama-3.1-8b-instant were all retired by Groq (see
+    // console.groq.com/docs/deprecations) — every request was failing with
+    // "model does not exist" until this list was updated to their replacements.
     const MODEL_FALLBACKS = [
-      'meta-llama/llama-4-scout-17b-16e-instruct', // 30K TPM, 500K TPD
-      'llama-3.3-70b-versatile',                    // 12K TPM, 100K TPD
-      'llama-3.1-8b-instant',                       // 6K TPM, separate TPD
+      'openai/gpt-oss-120b', // higher quality, ~500 tok/s
+      'openai/gpt-oss-20b',  // faster, lighter fallback
+      'qwen/qwen3.8-27b',    // extra fallback if both gpt-oss models are rate-limited
     ]
 
     const payload = {
