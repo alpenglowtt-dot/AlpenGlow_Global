@@ -603,7 +603,7 @@
 .tp-submit:active:not(:disabled),
 .tp-next-btn:not(:disabled):active { transform: translateY(0); }
 .tp-submit:disabled,
-.tp-next-btn:disabled { opacity: 0.22; cursor: not-allowed; box-shadow: none; }
+.tp-next-btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
 .tp-next-wrap { display: flex; justify-content: center; margin-top: 32px; }
 
 /* ── Footer / back button ─────────────────────────────────── */

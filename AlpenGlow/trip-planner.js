@@ -769,7 +769,7 @@
           '<div class="tp-input-slot">' +
             '<input class="tp-input" id="tp-cphone" type="tel" placeholder=" " maxlength="10"' +
             ' value="'+_esc(a.phone||'')+'" oninput="this.value=this.value.replace(/\\D/g,\'\')" inputmode="numeric">' +
-            '<label class="tp-field-label tp-field-float" for="tp-cphone">Phone (10 digits)</label>' +
+            '<label class="tp-field-label tp-field-float" for="tp-cphone">Phone number</label>' +
           '</div>' +
           '<button class="tp-send-otp-btn" id="tp-phone-send-btn">Send OTP</button>' +
         '</div>' +
@@ -1026,6 +1026,7 @@
     }
     _bindOtpGroup('tp-otp-', 4);
     _bindOtpGroup('tp-eotp-', 4);
+    if (window.AlpenAPI && window.AlpenAPI.phone) window.AlpenAPI.phone.bind('tp-cphone-cc', 'tp-cphone', { placeholder: false });
 
     document.getElementById('tp-phone-send-btn').addEventListener('click', _tpSendPhoneOTP);
     document.getElementById('tp-phone-confirm-btn').addEventListener('click', _tpConfirmPhoneOTP);
@@ -1047,12 +1048,15 @@
     nameEl.classList.remove('tp-err');
     phoneEl.classList.remove('tp-err');
     if (!nameEl.value.trim()) { nameEl.classList.add('tp-err'); nameEl.focus(); return; }
-    if (phoneEl.value.replace(/\D/g,'').length !== 10) { phoneEl.classList.add('tp-err'); phoneEl.focus(); return; }
+    var pv = window.AlpenAPI && window.AlpenAPI.phone
+      ? window.AlpenAPI.phone.validate(ccEl.value, phoneEl.value)
+      : { ok: phoneEl.value.replace(/\D/g,'').length === 10, digits: phoneEl.value.replace(/\D/g,''), full: ccEl.value + phoneEl.value.replace(/\D/g,'') };
+    if (!pv.ok) { phoneEl.classList.add('tp-err'); phoneEl.focus(); return; }
 
     _s.answers.name      = nameEl.value.trim();
-    _s.answers.phone     = phoneEl.value.trim();
+    _s.answers.phone     = pv.digits;
     _s.answers.phoneCC   = ccEl.value;
-    _s.answers.fullPhone = ccEl.value + phoneEl.value.trim();
+    _s.answers.fullPhone = pv.full;
 
     // DEV MODE, or already verified within the planner's own 10-min
     // session (separate from the rest of the site) — skip OTP entirely.

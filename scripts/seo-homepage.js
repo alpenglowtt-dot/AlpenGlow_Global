@@ -63,7 +63,7 @@ const faqs = [
   ['Do you handle hotel bookings?',
    'Yes. Hotel bookings are part of every package we put together, from overwater villas for a Maldives honeymoon to city-centre stays on a Europe itinerary, and we also take standalone hotel bookings if you just need the stay sorted without a full package. Tell us your dates and preferences over <a href="compass.html">COMPASS</a> either way.'],
   ['How do I see the full itinerary and pricing?',
-   'The overview of every package is free to read. Verifying your WhatsApp number and email on the package page unlocks the full day-by-day itinerary, the inclusions list and the pricing for your dates.'],
+   'The overview of every package is free to read. Verifying your WhatsApp number or email on the package page unlocks the full day-by-day itinerary, the inclusions list and the pricing for your dates.'],
   ['How far in advance should I book an international trip?',
    'For peak season travel (December holidays, Japan\u2019s cherry blossom weeks, European summer) plan on three to five months ahead so flights, visas and the better rooms are still available. Shorter trips like the Maldives or a Singapore cruise can be put together in four to six weeks.']
 ];

@@ -225,6 +225,19 @@ nav {
 }
 .gate-card input::placeholder { color: rgba(255,255,255,0.3); }
 .gate-card input:focus { border-color: var(--orange); }
+/* Channel-choice toggle (verify via WhatsApp OR email) */
+.gate-channel-btn {
+  flex: 1; padding: 0.7rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6);
+  font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+}
+.gate-channel-btn.active { background: var(--orange); border-color: var(--orange); color: var(--dark); }
+.gate-back {
+  display: inline-block; margin-top: 0.9rem; padding: 0; background: none; border: none;
+  font-family: var(--font-body); font-size: 0.75rem; color: rgba(255,255,255,0.5); cursor: pointer;
+}
+.gate-back:hover { color: var(--white); }
 .btn-verify {
   width: 100%; padding: 0.9rem;
   background: var(--orange); color: var(--dark);
@@ -427,8 +440,13 @@ footer {
 /* ── Phone row with country code (gate card) ─────────────────── */
 .phone-cc-select {
   flex-shrink: 0;
-  padding: 0.65rem 0.5rem;
-  background: rgba(255,255,255,0.08);
+  padding: 0.65rem 1.7rem 0.65rem 0.7rem;
+  background-color: rgba(255,255,255,0.08);
+  /* appearance:none removes the native arrow, so draw one back in —
+     without it the country code didn't read as a dropdown at all. */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%23aaa'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
   border: 1.5px solid rgba(255,255,255,0.2);
   border-radius: 10px;
   color: var(--white, #fff);
@@ -439,11 +457,11 @@ footer {
   appearance: none;
   -webkit-appearance: none;
   transition: border-color 0.2s;
-  min-width: 80px;
+  min-width: 88px;
 }
 .phone-cc-select:focus {
   border-color: var(--orange, #ef7e19);
-  background: rgba(255,255,255,0.13);
+  background-color: rgba(255,255,255,0.13);
 }
 .phone-cc-select option { background: #1a1410; color: #fff; }
 /* ── OTP digit inputs (gate card) ────────────────────────────── */

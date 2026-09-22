@@ -138,7 +138,7 @@
      "name": "How do I see the full itinerary and pricing?",
      "acceptedAnswer": {
       "@type": "Answer",
-      "text": "The overview of every package is free to read. Verifying your WhatsApp number and email on the package page unlocks the full day-by-day itinerary, the inclusions list and the pricing for your dates."
+      "text": "The overview of every package is free to read. Verifying your WhatsApp number or email on the package page unlocks the full day-by-day itinerary, the inclusions list and the pricing for your dates."
      }
     },
     {
@@ -851,13 +851,23 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
 /* ── Phone row (country code + number) shared ── */
 .phone-input-row { display: flex; gap: 8px; margin-bottom: 1rem; }
 .phone-cc-select {
-  flex-shrink: 0; padding: 0.9rem 0.6rem; background: var(--cream);
+  flex-shrink: 0; padding: 0.9rem 1.8rem 0.9rem 0.8rem; background-color: var(--cream);
+  /* appearance:none drops the native arrow; draw one so it reads as a dropdown */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%23777'/></svg>");
+  background-repeat: no-repeat; background-position: right 0.7rem center;
   border: 1.5px solid transparent; border-radius: 12px;
   font-family: var(--font-body); font-size: 0.84rem; color: var(--text);
   outline: none; cursor: pointer; appearance: none; -webkit-appearance: none;
-  transition: all 0.3s; min-width: 88px;
+  transition: all 0.3s; min-width: 96px;
 }
-.phone-cc-select:focus { border-color: var(--orange); background: var(--white); box-shadow: 0 0 0 3px rgba(239,126,25,0.12); }
+.phone-cc-select:focus { border-color: var(--orange); background-color: var(--white); box-shadow: 0 0 0 3px rgba(239,126,25,0.12); }
+/* Channel-choice toggle (verify via WhatsApp OR email) — shared look
+   between the blog lead gate and the package-page gate. */
+.lead-channel-row { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.lead-channel-btn { flex: 1; padding: 0.7rem; border-radius: 12px; border: 1.5px solid transparent; background: var(--cream); color: var(--text-light); font-family: var(--font-body); font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+.lead-channel-btn.active { background: var(--dark); color: var(--white); }
+.modal-back { display: block; margin: 0.9rem auto 0; padding: 0; background: none; border: none; font-family: var(--font-body); font-size: 0.78rem; color: var(--text-light); cursor: pointer; }
+.modal-back:hover { color: var(--dark); }
 
 /* === LEAD MODAL === */
 #lead-modal { display: none; position: fixed; inset: 0; z-index: 2000; align-items: center; justify-content: center; background: rgba(24,24,24,0.75); backdrop-filter: blur(8px); }
@@ -894,6 +904,9 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
 .modal-form label { display: block; font-size: 0.7rem; font-weight: 600; color: var(--text-light); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
 .modal-form input { width: 100%; padding: 0.85rem 1.1rem; background: var(--cream); border: 1.5px solid transparent; border-radius: 12px; font-family: var(--font-body); font-size: 0.88rem; transition: all 0.3s; outline: none; color: var(--text); }
 .modal-form input:focus { border-color: var(--orange); background: var(--white); box-shadow: 0 0 0 3px rgba(239,126,25,0.12); }
+/* The contact section's white placeholder rule (.form-group input::placeholder)
+   also matched inside this light modal, making placeholders invisible. */
+.modal-form input::placeholder { color: rgba(0,0,0,0.35); }
 .modal-form .btn-primary { width: 100%; text-align: center; margin-top: 0.5rem; border: none; font-family: var(--font-body); }
 
 /* === PARALLAX === */
@@ -1362,7 +1375,7 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
     </details>
     <details class="faq-item">
       <summary><h3 style="font:inherit;margin:0;">How do I see the full itinerary and pricing?</h3></summary>
-      <div class="faq-a">The overview of every package is free to read. Verifying your WhatsApp number and email on the package page unlocks the full day-by-day itinerary, the inclusions list and the pricing for your dates.</div>
+      <div class="faq-a">The overview of every package is free to read. Verifying your WhatsApp number or email on the package page unlocks the full day-by-day itinerary, the inclusions list and the pricing for your dates.</div>
     </details>
     <details class="faq-item">
       <summary><h3 style="font:inherit;margin:0;">How far in advance should I book an international trip?</h3></summary>
@@ -1449,7 +1462,7 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
       <button class="btn-offer-action" onclick="sendOfferOTP()">Send WhatsApp Code</button>
     </div>
     <div class="offer-modal-step" id="offerStep2">
-      <p class="offer-modal-sub">Enter the 4-digit code sent to your WhatsApp.</p>
+      <p class="offer-modal-sub" id="offerStep2Sub">Enter the 4-digit code sent to your WhatsApp.</p>
       <div class="otp-input-row">
         <input type="tel" maxlength="1" class="otp-digit" oninput="otpMove(this,1)" id="otp0">
         <input type="tel" maxlength="1" class="otp-digit" oninput="otpMove(this,2)" id="otp1">
@@ -1458,6 +1471,7 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
       </div>
       <div class="otp-resend">Didn't receive it? <a onclick="resendOTP()">Resend</a></div>
       <button class="btn-offer-action" onclick="verifyOfferOTP()">Verify & Unlock</button>
+      <button type="button" class="modal-back" onclick="offerBack()">&larr; Change number</button>
     </div>
     <div class="offer-modal-step" id="offerStep3">
       <p class="offer-modal-sub">Your offer is unlocked! Use the code below when booking.</p>
@@ -1471,77 +1485,51 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
   </div>
 </div>
 
-<!-- LEAD CAPTURE MODAL — 4-step dual verification -->
+<!-- LEAD CAPTURE MODAL — 2-step verification (WhatsApp OR email) -->
 <div id="lead-modal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
 
     <!-- Progress indicator -->
     <div class="modal-progress" id="modalProgress">
-      <div class="mp-step active" id="mpS1"><div class="mp-dot">1</div><div class="mp-label">Phone</div></div>
+      <div class="mp-step active" id="mpS1"><div class="mp-dot">1</div><div class="mp-label">Verify</div></div>
       <div class="mp-line" id="mpL1"></div>
-      <div class="mp-step" id="mpS2"><div class="mp-dot">2</div><div class="mp-label">Verify</div></div>
-      <div class="mp-line" id="mpL2"></div>
-      <div class="mp-step" id="mpS3"><div class="mp-dot">3</div><div class="mp-label">Email</div></div>
-      <div class="mp-line" id="mpL3"></div>
-      <div class="mp-step" id="mpS4"><div class="mp-dot">4</div><div class="mp-label">Unlock</div></div>
+      <div class="mp-step" id="mpS2"><div class="mp-dot">2</div><div class="mp-label">Read</div></div>
     </div>
 
-    <!-- Step 1: Name + Phone -->
+    <!-- Step 1: Name + channel choice + contact field -->
     <div id="leadStep1">
       <h3 class="modal-title">Unlock Full Article</h3>
-      <p class="modal-sub">Verify via WhatsApp and email to read the complete article.</p>
+      <p class="modal-sub">Verify via WhatsApp or email to read the complete article.</p>
       <div class="modal-form">
         <div class="form-group"><label>Full Name</label><input type="text" id="modalName" placeholder="Your name"></div>
-        <div class="form-group"><label>WhatsApp Number</label><div class="phone-input-row" style="margin-bottom:0"><select class="phone-cc-select" id="modalPhoneCC"><option value="+91">🇮🇳 +91</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+61">🇦🇺 +61</option><option value="+65">🇸🇬 +65</option><option value="+971">🇦🇪 +971</option><option value="+60">🇲🇾 +60</option><option value="+64">🇳🇿 +64</option></select><input type="tel" id="modalPhone" placeholder="98765 43210" maxlength="10" oninput="this.value=this.value.replace(/\D/g,'')" inputmode="numeric" style="flex:1;"></div></div>
+        <div class="lead-channel-row">
+          <button type="button" class="lead-channel-btn active" id="leadChW" onclick="leadSelectChannel('whatsapp')">WhatsApp</button>
+          <button type="button" class="lead-channel-btn" id="leadChE" onclick="leadSelectChannel('email')">Email</button>
+        </div>
+        <div class="form-group" id="leadWaFields"><label>WhatsApp Number</label><div class="phone-input-row" style="margin-bottom:0"><select class="phone-cc-select" id="modalPhoneCC"><option value="+91">🇮🇳 +91</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+61">🇦🇺 +61</option><option value="+65">🇸🇬 +65</option><option value="+971">🇦🇪 +971</option><option value="+60">🇲🇾 +60</option><option value="+64">🇳🇿 +64</option></select><input type="tel" id="modalPhone" placeholder="98765 43210" maxlength="10" oninput="this.value=this.value.replace(/\D/g,'')" inputmode="numeric" style="flex:1;"></div></div>
+        <div class="form-group" id="leadEmailFields" style="display:none;"><label>Email Address</label><input type="email" id="modalEmail" placeholder="you@example.com"></div>
       </div>
       <button class="btn-primary" id="leadBtn1" onclick="leadSendWhatsApp()" style="width:100%;border:none;font-family:var(--font-body);">Send WhatsApp Code</button>
-      <p class="modal-note">Step 1 of 2 — WhatsApp verification</p>
     </div>
 
-    <!-- Step 2: WhatsApp OTP -->
+    <!-- Step 2: shared OTP entry for whichever channel was chosen -->
     <div id="leadStep2" style="display:none;">
-      <h3 class="modal-title">Enter WhatsApp Code</h3>
-      <p class="modal-sub">Enter the 4-digit code sent to your WhatsApp number.</p>
+      <h3 class="modal-title">Enter Your Code</h3>
+      <p class="modal-sub" id="leadStep2Sub">Enter the 4-digit code sent to your WhatsApp number.</p>
       <div class="otp-input-row">
-        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveW(this,1)" id="lWOtp0">
-        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveW(this,2)" id="lWOtp1">
-        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveW(this,3)" id="lWOtp2">
-        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveW(this,4)" id="lWOtp3">
+        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveOtp(this,1)" id="lOtp0">
+        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveOtp(this,2)" id="lOtp1">
+        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveOtp(this,3)" id="lOtp2">
+        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveOtp(this,4)" id="lOtp3">
       </div>
-      <div class="otp-resend">Didn't receive it? <a onclick="leadResendWhatsApp()">Resend</a></div>
-      <button class="btn-primary" id="leadBtn2" onclick="leadVerifyWhatsApp()" style="width:100%;border:none;font-family:var(--font-body);">Verify WhatsApp</button>
-      <p class="modal-note">Step 1 of 2 — WhatsApp verification</p>
+      <div class="otp-resend">Didn't receive it? <a onclick="leadResendOtp()">Resend</a></div>
+      <button class="btn-primary" id="leadBtn2" onclick="leadVerifyOtp()" style="width:100%;border:none;font-family:var(--font-body);">Verify &amp; Read Article</button>
+      <button type="button" class="modal-back" id="leadBackBtn" onclick="leadBack()">&larr; Change number</button>
     </div>
 
-    <!-- Step 3: Email -->
+    <!-- Step 3: Full Article -->
     <div id="leadStep3" style="display:none;">
-      <h3 class="modal-title">Verify Your Email</h3>
-      <p class="modal-sub">Enter your email address to receive a one-time code.</p>
-      <div class="modal-form">
-        <div class="form-group"><label>Email Address</label><input type="email" id="modalEmail" placeholder="you@example.com"></div>
-      </div>
-      <button class="btn-primary" id="leadBtn3" onclick="leadSendEmail()" style="width:100%;border:none;font-family:var(--font-body);">Send Email Code</button>
-      <p class="modal-note">Step 2 of 2 — Email verification</p>
-    </div>
-
-    <!-- Step 4: Email OTP -->
-    <div id="leadStep4" style="display:none;">
-      <h3 class="modal-title">Enter Email Code</h3>
-      <p class="modal-sub">Enter the 4-digit code sent to your email address.</p>
-      <div class="otp-input-row">
-        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveE(this,1)" id="lEOtp0">
-        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveE(this,2)" id="lEOtp1">
-        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveE(this,3)" id="lEOtp2">
-        <input type="tel" maxlength="1" class="otp-digit" oninput="leadMoveE(this,4)" id="lEOtp3">
-      </div>
-      <div class="otp-resend">Didn't receive it? <a onclick="leadResendEmail()">Resend</a></div>
-      <button class="btn-primary" id="leadBtn4" onclick="leadVerifyEmail()" style="width:100%;border:none;font-family:var(--font-body);">Verify &amp; Read Article</button>
-      <p class="modal-note">Step 2 of 2 — Email verification</p>
-    </div>
-
-    <!-- Step 5: Full Article -->
-    <div id="leadStep5" style="display:none;">
       <div class="article-unlocked-badge">✓ Article Unlocked</div>
       <h3 class="modal-title" id="articleTitle" style="margin-bottom:1.2rem;"></h3>
       <div class="article-content" id="articleContent"></div>
@@ -1916,13 +1904,17 @@ function openOfferModal(title, badge, code, desc) {
   document.getElementById('offerRevealDesc').textContent = desc;
   document.querySelectorAll('.offer-modal-step').forEach(s => s.classList.remove('active'));
   // Skip OTP steps if already verified this session
-  const startStep = AlpenAPI.isVerified() ? 'offerStep3' : 'offerStep1';
+  const startStep = AlpenAPI.isVerified('offer') ? 'offerStep3' : 'offerStep1';
   document.getElementById(startStep).classList.add('active');
-  if (!AlpenAPI.isVerified()) {
+  if (!AlpenAPI.isVerified('offer')) {
     document.getElementById('offerName').value = '';
     document.getElementById('offerPhone').value = '';
     for (let i = 0; i < 4; i++) document.getElementById('otp' + i).value = '';
   }
+  // Buttons are left disabled mid-flow ("Sending…"/"Verifying…"); without
+  // this, reopening the modal for another offer showed a dead button.
+  const b1 = document.querySelector('#offerStep1 .btn-offer-action'); b1.disabled = false; b1.textContent = 'Send WhatsApp Code';
+  const b2 = document.querySelector('#offerStep2 .btn-offer-action'); b2.disabled = false; b2.textContent = 'Verify & Unlock';
   document.getElementById('offer-modal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -1932,16 +1924,20 @@ function closeOfferModal() {
 }
 document.getElementById('offer-modal').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeOfferModal(); });
 
+// Full international number the code was actually sent to, plus the bare
+// national digits (the format older offer claims were stored under).
+let _offerPhone = '', _offerDigits = '';
 async function sendOfferOTP() {
   const name = document.getElementById('offerName').value.trim();
-  if (!name) { document.getElementById('offerName').focus(); return; }
-  const cc = document.getElementById('offerPhoneCC').value;
-  const phone = cc + document.getElementById('offerPhone').value.trim();
-  if (document.getElementById('offerPhone').value.trim().length !== 10) { document.getElementById('offerPhone').focus(); return; }
+  if (!name) { alert('Please enter your name.'); document.getElementById('offerName').focus(); return; }
+  const v = AlpenAPI.phone.validate(document.getElementById('offerPhoneCC').value, document.getElementById('offerPhone').value);
+  if (!v.ok) { alert(v.msg); document.getElementById('offerPhone').focus(); return; }
+  _offerPhone = v.full; _offerDigits = v.digits;
   const btn = document.querySelector('#offerStep1 .btn-offer-action');
   btn.textContent = 'Sending…'; btn.disabled = true;
   try {
-    await AlpenAPI.sendSMSOTP(phone, 'offer_unlock', { offer_code: currentOffer.code });
+    await AlpenAPI.sendSMSOTP(_offerPhone, 'offer_unlock', { offer_code: currentOffer.code });
+    document.getElementById('offerStep2Sub').textContent = 'Enter the 4-digit code sent to WhatsApp ' + _offerPhone + '.';
     document.getElementById('offerStep1').classList.remove('active');
     document.getElementById('offerStep2').classList.add('active');
     setTimeout(() => document.getElementById('otp0').focus(), 100);
@@ -1953,19 +1949,29 @@ async function sendOfferOTP() {
 function otpMove(el, next) { if (el.value.length === 1 && next <= 3) document.getElementById('otp' + next).focus(); }
 function resendOTP() {
   for (let i = 0; i < 4; i++) document.getElementById('otp' + i).value = '';
-  AlpenAPI.sendSMSOTP(document.getElementById('offerPhone').value.trim(), 'offer_unlock').catch(() => {});
+  AlpenAPI.sendSMSOTP(_offerPhone, 'offer_unlock').catch(() => {});
   document.getElementById('otp0').focus();
 }
+function offerBack() {
+  document.getElementById('offerStep2').classList.remove('active');
+  document.getElementById('offerStep1').classList.add('active');
+  const b1 = document.querySelector('#offerStep1 .btn-offer-action'); b1.disabled = false; b1.textContent = 'Send WhatsApp Code';
+  for (let i = 0; i < 4; i++) document.getElementById('otp' + i).value = '';
+  document.getElementById('offerPhone').focus();
+}
 async function verifyOfferOTP() {
-  const phone = document.getElementById('offerPhone').value.trim();
+  const phone = _offerPhone;
   const code = ['otp0','otp1','otp2','otp3'].map(id => document.getElementById(id).value).join('');
   if (code.length < 4) { document.getElementById('otp0').focus(); return; }
   const btn = document.querySelector('#offerStep2 .btn-offer-action');
+  if (btn.disabled) return;
   btn.textContent = 'Verifying…'; btn.disabled = true;
   try {
     await AlpenAPI.verifySMSOTP(phone, code);
-    // Check if this phone already claimed this offer — one code per number
-    const alreadyClaimed = await AlpenAPI.checkOfferClaimed(phone, currentOffer.code);
+    // One code per number. Older claims were stored as the bare national
+    // number, so check that format too or past claimants could re-claim.
+    const alreadyClaimed = await AlpenAPI.checkOfferClaimed(phone, currentOffer.code)
+      || await AlpenAPI.checkOfferClaimed(_offerDigits, currentOffer.code);
     if (alreadyClaimed) {
       btn.textContent = 'Verify & Unlock'; btn.disabled = false;
       alert('This offer has already been claimed with your WhatsApp number. Each number can only claim an offer code once.');
@@ -1973,7 +1979,7 @@ async function verifyOfferOTP() {
     }
     const name = document.getElementById('offerName').value.trim();
     await AlpenAPI.submitLead({ name, phone, source: 'offer_otp', offerCode: currentOffer.code, verifiedPhone: true }).catch(() => {});
-    AlpenAPI.markVerified(); // starts the 10-min site-wide grace window — no other gate asks again until it expires
+    AlpenAPI.markVerified('offer'); // starts the 10-min offer-scope grace window — independent of blog/package/planner
     document.getElementById('offerStep2').classList.remove('active');
     document.getElementById('offerStep3').classList.add('active');
   } catch (err) {
@@ -2020,34 +2026,49 @@ const FALLBACK_ARTICLES = [
 let _leadName = '', _leadPhone = '', _leadEmail = '', _currentArticle = 0;
 
 function leadProgress(step) {
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 2; i++) {
     const s = document.getElementById('mpS' + i);
     s.className = i < step ? 'mp-step done' : i === step ? 'mp-step active' : 'mp-step';
-    if (i < 4) document.getElementById('mpL' + i).className = i < step ? 'mp-line done' : 'mp-line';
+    if (i < 2) document.getElementById('mpL' + i).className = i < step ? 'mp-line done' : 'mp-line';
   }
+}
+
+let _leadChannel = 'whatsapp';
+function leadSelectChannel(ch) {
+  _leadChannel = ch;
+  document.getElementById('leadChW').classList.toggle('active', ch === 'whatsapp');
+  document.getElementById('leadChE').classList.toggle('active', ch === 'email');
+  document.getElementById('leadWaFields').style.display = ch === 'whatsapp' ? '' : 'none';
+  document.getElementById('leadEmailFields').style.display = ch === 'email' ? '' : 'none';
+  const btn = document.getElementById('leadBtn1');
+  btn.textContent = ch === 'whatsapp' ? 'Send WhatsApp Code' : 'Send Email Code';
+  btn.onclick = ch === 'whatsapp' ? leadSendWhatsApp : leadSendEmail;
 }
 
 function openModal(articleIdx) {
   _currentArticle = articleIdx || 0;
   // Already verified this session — show article immediately, skip all OTP steps
-  if (AlpenAPI.isVerified()) {
+  if (AlpenAPI.isVerified('blog')) {
     const art = BLOG_POSTS[_currentArticle];
     document.getElementById('articleTitle').textContent = art.title;
     document.getElementById('articleContent').innerHTML = art.content;
-    ['leadStep1','leadStep2','leadStep3','leadStep4'].forEach(id => document.getElementById(id).style.display = 'none');
-    document.getElementById('leadStep5').style.display = 'block';
+    ['leadStep1','leadStep2'].forEach(id => document.getElementById(id).style.display = 'none');
+    document.getElementById('leadStep3').style.display = 'block';
     document.getElementById('modalProgress').style.display = 'none';
     document.getElementById('lead-modal').classList.add('active');
     document.body.style.overflow = 'hidden';
     return;
   }
-  ['leadStep1','leadStep2','leadStep3','leadStep4','leadStep5'].forEach((id, i) => {
+  ['leadStep1','leadStep2','leadStep3'].forEach((id, i) => {
     document.getElementById(id).style.display = i === 0 ? 'block' : 'none';
   });
   document.getElementById('modalName').value = '';
   document.getElementById('modalPhone').value = '';
   document.getElementById('modalEmail').value = '';
-  ['lWOtp0','lWOtp1','lWOtp2','lWOtp3','lEOtp0','lEOtp1','lEOtp2','lEOtp3'].forEach(id => document.getElementById(id).value = '');
+  ['lOtp0','lOtp1','lOtp2','lOtp3'].forEach(id => document.getElementById(id).value = '');
+  leadSelectChannel('whatsapp');
+  document.getElementById('leadBtn1').disabled = false;
+  const _lb2 = document.getElementById('leadBtn2'); _lb2.disabled = false; _lb2.textContent = 'Verify & Read Article';
   document.getElementById('modalProgress').style.display = 'flex';
   leadProgress(1);
   document.getElementById('lead-modal').classList.add('active');
@@ -2061,85 +2082,95 @@ document.getElementById('lead-modal').addEventListener('click', (e) => { if (e.t
 
 async function leadSendWhatsApp() {
   _leadName  = document.getElementById('modalName').value.trim();
-  const _modalCC = document.getElementById('modalPhoneCC').value;
-  _leadPhone = _modalCC + document.getElementById('modalPhone').value.trim();
-  if (!_leadName || document.getElementById('modalPhone').value.trim().length !== 10) { alert('Please enter your name and a valid 10-digit WhatsApp number.'); return; }
+  if (!_leadName) { alert('Please enter your name.'); document.getElementById('modalName').focus(); return; }
+  const _pv = AlpenAPI.phone.validate(document.getElementById('modalPhoneCC').value, document.getElementById('modalPhone').value);
+  if (!_pv.ok) { alert(_pv.msg); document.getElementById('modalPhone').focus(); return; }
+  _leadPhone = _pv.full;
   const btn = document.getElementById('leadBtn1');
   btn.textContent = 'Sending…'; btn.disabled = true;
   try {
     await AlpenAPI.sendSMSOTP(_leadPhone, 'blog_unlock', { article: BLOG_POSTS[_currentArticle].title });
+    _leadChannel = 'whatsapp';
+    document.getElementById('leadStep2Sub').textContent = 'Enter the 4-digit code sent to WhatsApp ' + _leadPhone + '.';
+    document.getElementById('leadBackBtn').innerHTML = '&larr; Change number';
     document.getElementById('leadStep1').style.display = 'none';
     document.getElementById('leadStep2').style.display = 'block';
     leadProgress(2);
-    setTimeout(() => document.getElementById('lWOtp0').focus(), 100);
+    setTimeout(() => document.getElementById('lOtp0').focus(), 100);
   } catch (err) {
     btn.textContent = 'Send WhatsApp Code'; btn.disabled = false;
     alert(err?.message || 'Could not send WhatsApp code. Please check your number and try again.');
   }
 }
-function leadMoveW(el, next) { if (el.value.length === 1 && next <= 3) document.getElementById('lWOtp' + next).focus(); }
-function leadResendWhatsApp() {
-  ['lWOtp0','lWOtp1','lWOtp2','lWOtp3'].forEach(id => document.getElementById(id).value = '');
-  AlpenAPI.sendSMSOTP(_leadPhone, 'blog_unlock').catch(() => {});
-  document.getElementById('lWOtp0').focus();
-}
-
-async function leadVerifyWhatsApp() {
-  const code = ['lWOtp0','lWOtp1','lWOtp2','lWOtp3'].map(id => document.getElementById(id).value).join('');
-  if (code.length < 4) { document.getElementById('lWOtp0').focus(); return; }
-  const btn = document.getElementById('leadBtn2');
-  btn.textContent = 'Verifying…'; btn.disabled = true;
-  try {
-    await AlpenAPI.verifySMSOTP(_leadPhone, code);
-    document.getElementById('leadStep2').style.display = 'none';
-    document.getElementById('leadStep3').style.display = 'block';
-    leadProgress(3);
-    setTimeout(() => document.getElementById('modalEmail').focus(), 100);
-  } catch (err) {
-    btn.textContent = 'Verify WhatsApp'; btn.disabled = false;
-    alert(err?.message || 'Invalid code. Please try again.');
-  }
-}
 
 async function leadSendEmail() {
+  _leadName  = document.getElementById('modalName').value.trim();
   _leadEmail = document.getElementById('modalEmail').value.trim();
-  if (!_leadEmail) { document.getElementById('modalEmail').focus(); return; }
-  const btn = document.getElementById('leadBtn3');
+  if (!_leadName) { alert('Please enter your name.'); document.getElementById('modalName').focus(); return; }
+  if (!AlpenAPI.isValidEmail(_leadEmail)) { alert('Please enter a valid email address.'); document.getElementById('modalEmail').focus(); return; }
+  const btn = document.getElementById('leadBtn1');
   btn.textContent = 'Sending…'; btn.disabled = true;
   try {
     await AlpenAPI.sendEmailOTP(_leadEmail, 'blog_unlock', { article: BLOG_POSTS[_currentArticle].title });
-    document.getElementById('leadStep3').style.display = 'none';
-    document.getElementById('leadStep4').style.display = 'block';
-    leadProgress(4);
-    setTimeout(() => document.getElementById('lEOtp0').focus(), 100);
+    _leadChannel = 'email';
+    document.getElementById('leadStep2Sub').textContent = 'Enter the 4-digit code sent to ' + _leadEmail + '.';
+    document.getElementById('leadBackBtn').innerHTML = '&larr; Change email';
+    document.getElementById('leadStep1').style.display = 'none';
+    document.getElementById('leadStep2').style.display = 'block';
+    leadProgress(2);
+    setTimeout(() => document.getElementById('lOtp0').focus(), 100);
   } catch (err) {
     btn.textContent = 'Send Email Code'; btn.disabled = false;
     alert(err?.message || 'Could not send email code. Please check your email and try again.');
   }
 }
-function leadMoveE(el, next) { if (el.value.length === 1 && next <= 3) document.getElementById('lEOtp' + next).focus(); }
-function leadResendEmail() {
-  ['lEOtp0','lEOtp1','lEOtp2','lEOtp3'].forEach(id => document.getElementById(id).value = '');
-  AlpenAPI.sendEmailOTP(_leadEmail, 'blog_unlock').catch(() => {});
-  document.getElementById('lEOtp0').focus();
+function leadMoveOtp(el, next) { if (el.value.length === 1 && next <= 3) document.getElementById('lOtp' + next).focus(); }
+function leadBack() {
+  document.getElementById('leadStep2').style.display = 'none';
+  document.getElementById('leadStep1').style.display = 'block';
+  leadProgress(1);
+  leadSelectChannel(_leadChannel);
+  document.getElementById('leadBtn1').disabled = false;
+  const b2 = document.getElementById('leadBtn2'); b2.disabled = false; b2.textContent = 'Verify & Read Article';
+  ['lOtp0','lOtp1','lOtp2','lOtp3'].forEach(id => document.getElementById(id).value = '');
+}
+if (window.AlpenAPI && AlpenAPI.phone) {
+  AlpenAPI.phone.bind('modalPhoneCC', 'modalPhone');
+  AlpenAPI.phone.bind('offerPhoneCC', 'offerPhone');
+  AlpenAPI.bindOtpInputs(['lOtp0','lOtp1','lOtp2','lOtp3'], () => leadVerifyOtp());
+  AlpenAPI.bindOtpInputs(['otp0','otp1','otp2','otp3'], () => verifyOfferOTP());
+  ['modalName','modalPhone','modalEmail'].forEach(id => document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('leadBtn1').click(); } }));
+  ['offerName','offerPhone'].forEach(id => document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sendOfferOTP(); } }));
+}
+function leadResendOtp() {
+  ['lOtp0','lOtp1','lOtp2','lOtp3'].forEach(id => document.getElementById(id).value = '');
+  if (_leadChannel === 'whatsapp') AlpenAPI.sendSMSOTP(_leadPhone, 'blog_unlock').catch(() => {});
+  else AlpenAPI.sendEmailOTP(_leadEmail, 'blog_unlock').catch(() => {});
+  document.getElementById('lOtp0').focus();
 }
 
-async function leadVerifyEmail() {
-  const code = ['lEOtp0','lEOtp1','lEOtp2','lEOtp3'].map(id => document.getElementById(id).value).join('');
-  if (code.length < 4) { document.getElementById('lEOtp0').focus(); return; }
-  const btn = document.getElementById('leadBtn4');
+async function leadVerifyOtp() {
+  const code = ['lOtp0','lOtp1','lOtp2','lOtp3'].map(id => document.getElementById(id).value).join('');
+  if (code.length < 4) { document.getElementById('lOtp0').focus(); return; }
+  const btn = document.getElementById('leadBtn2');
+  if (btn.disabled) return;
   btn.textContent = 'Verifying…'; btn.disabled = true;
   try {
-    await AlpenAPI.verifyEmailOTP(_leadEmail, code);
+    if (_leadChannel === 'whatsapp') {
+      await AlpenAPI.verifySMSOTP(_leadPhone, code);
+      AlpenAPI.markVerified('blog');
+    } else {
+      await AlpenAPI.verifyEmailOTP(_leadEmail, code, 'blog');
+    }
     await AlpenAPI.submitLead({
-      name: _leadName, phone: _leadPhone, email: _leadEmail,
-      source: 'blog_unlock', verifiedPhone: true, verifiedEmail: true
+      name: _leadName, phone: _leadChannel === 'whatsapp' ? _leadPhone : '', email: _leadChannel === 'email' ? _leadEmail : '',
+      source: 'blog_unlock', verifiedPhone: _leadChannel === 'whatsapp', verifiedEmail: _leadChannel === 'email'
     }).catch(() => {});
     const art = BLOG_POSTS[_currentArticle];
     document.getElementById('articleTitle').textContent = art.title;
     document.getElementById('articleContent').innerHTML = art.content;
-    document.getElementById('leadStep4').style.display = 'none';
-    document.getElementById('leadStep5').style.display = 'block';
+    document.getElementById('leadStep2').style.display = 'none';
+    document.getElementById('leadStep3').style.display = 'block';
     document.getElementById('modalProgress').style.display = 'none';
     document.querySelector('#lead-modal .modal-box').scrollTop = 0;
   } catch (err) {
@@ -2457,7 +2488,7 @@ function renderBlogPosts(posts) {
   clearInterval(blogTimer)
   blogTimer = setInterval(() => scrollBlogs(1), 10000)
   // Re-apply DEV_MODE blur removal if active
-  if (typeof AlpenAPI !== 'undefined' && AlpenAPI.isVerified()) {
+  if (typeof AlpenAPI !== 'undefined' && AlpenAPI.isVerified('blog')) {
     document.querySelectorAll('.blog-blur').forEach(el => el.style.display = 'none')
   }
 }
@@ -2504,7 +2535,7 @@ function renderPackages(packages) {
       </div>
     </div>`).join('')
   grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el))
-  if (typeof AlpenAPI !== 'undefined' && AlpenAPI.isVerified()) {
+  if (typeof AlpenAPI !== 'undefined' && AlpenAPI.canViewPackages()) {
     grid.querySelectorAll('.package-blur').forEach(el => el.style.display = 'none')
   }
 }

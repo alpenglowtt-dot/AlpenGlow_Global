@@ -47,6 +47,10 @@ async function otpRateLimited(sb: any, contact: string, type: 'sms' | 'email'): 
 // Accepts: +91 98765 43210 / 9876543210 / 919876543210 / +919876543210
 function normalisePhone(raw: string): string {
   const digits = raw.replace(/[^\d]/g, '')
+  // An explicit "+" means the country code is already there. Without this,
+  // +65 8123 4567 (10 digits total) was treated as a bare Indian number and
+  // the OTP went to +91 6581234567.
+  if (raw.trim().startsWith('+')) return digits
   if (digits.length === 10)  return '91' + digits          // bare 10-digit
   if (digits.length === 12 && digits.startsWith('91')) return digits
   if (digits.length === 11 && digits.startsWith('0'))  return '91' + digits.slice(1)
