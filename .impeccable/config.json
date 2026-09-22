@@ -1,0 +1,48 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "AlpenGlow/dev.html"
+        ],
+        "createdAt": "2026-09-22T16:20:10.273Z"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "AlpenGlow/packages/*.html"
+        ],
+        "createdAt": "2026-09-22T16:20:33.361Z"
+      },
+      {
+        "rule": "bounce-easing",
+        "value": "bounce",
+        "files": [
+          "AlpenGlow/compass.html"
+        ],
+        "createdAt": "2026-09-22T16:20:51.528Z"
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [
+          "AlpenGlow/dev.html"
+        ],
+        "createdAt": "2026-09-22T16:21:45.700Z"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "AlpenGlow/compass.html"
+        ],
+        "createdAt": "2026-09-22T16:21:46.289Z"
+      }
+    ]
+  }
+}
