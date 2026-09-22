@@ -1,16 +1,16 @@
 # Graph Report - AlpenGlow work  (2026-09-22)
 
 ## Corpus Check
-- 84 files · ~738,341 words
+- 86 files · ~738,715 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 251 nodes · 320 edges · 39 communities (23 shown, 16 thin omitted)
+- 261 nodes · 328 edges · 41 communities (25 shown, 16 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 6 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6991acde`
+- Built from commit: `29414d2c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -18,6 +18,7 @@
 - trip-planner.js
 - Q: How does OTP verification connect to CRM lead creation?
 - _bindStep
+- Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?
 - generate-keys.js
 - api.js
 - crm/index.ts
@@ -43,6 +44,7 @@
 - Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?
 - Q: How does deploying a code change actually reach production?
 - Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?
+- Q: How is site verification scoped, and what does the 30s popup do?
 - AlpenGlow — Production Security & Go-Live Checklist
 - Alpen Glow Tours — Backend Setup Guide
 - seo-head.js
@@ -70,7 +72,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (39 total, 16 thin omitted)
+## Communities (41 total, 16 thin omitted)
 
 ### Community 0 - "trip-planner.js"
 Cohesion: 0.10
@@ -83,6 +85,10 @@ Nodes (4): Answer, Outcome, Q: How does OTP verification connect to CRM lead cre
 ### Community 2 - "_bindStep"
 Cohesion: 0.42
 Nodes (11): _bindBudget(), _bindCount(), _bindDestination(), _bindDuration(), _bindMonth(), _bindOrigin(), _bindStep(), _bindTravelers() (+3 more)
+
+### Community 3 - "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?, Source Nodes
 
 ### Community 4 - "generate-keys.js"
 Cohesion: 0.22
@@ -120,6 +126,10 @@ Nodes (4): Answer, Outcome, Q: How does deploying a code change actually reach p
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?, Source Nodes
 
+### Community 32 - "Q: How is site verification scoped, and what does the 30s popup do?"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: How is site verification scoped, and what does the 30s popup do?, Source Nodes
+
 ### Community 33 - "AlpenGlow — Production Security & Go-Live Checklist"
 Cohesion: 0.12
 Nodes (16): 1. What changed (and why), 2. Manual steps — REQUIRED before go-live, 3. DEV_MODE — do NOT flip blindly, 4. Post-deploy smoke test (crash prevention), 5. Residual risks / recommended follow-ups (not yet done), 6. Reality check on "unbreachable", a) Set Supabase secrets (Edge Functions → Secrets, or CLI), AlpenGlow — Production Security & Go-Live Checklist (+8 more)
@@ -149,15 +159,15 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?, Source Nodes
 
 ## Knowledge Gaps
-- **98 isolated node(s):** `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script`, `04-apply-frontend-values.sh script`, `crypto` (+93 more)
+- **104 isolated node(s):** `Answer`, `Outcome`, `Source Nodes`, `Answer`, `Outcome` (+99 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What connects `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script` to the rest of the system?**
-  _98 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `Answer`, `Outcome`, `Source Nodes` to the rest of the system?**
+  _104 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `trip-planner.js` be split into smaller, more focused modules?**
   _Cohesion score 0.09758454106280193 - nodes in this community are weakly interconnected._
 - **Should `AlpenGlow — Production Security & Go-Live Checklist` be split into smaller, more focused modules?**

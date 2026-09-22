@@ -235,28 +235,6 @@
       "norm_label": "_showsitepopup()"
     },
     {
-      "label": "compass.js",
-      "file_type": "code",
-      "source_file": "AlpenGlow/compass.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "alpenglow_compass",
-      "community": 23,
-      "community_name": "compass.js",
-      "norm_label": "compass.js"
-    },
-    {
-      "label": "AlpenGlow/data/bundle.js",
-      "file_type": "code",
-      "source_file": "AlpenGlow/data/bundle.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "alpenglow_data_bundle",
-      "community": 24,
-      "community_name": "AlpenGlow/data/bundle.js",
-      "norm_label": "alpenglow/data/bundle.js"
-    },
-    {
       "label": "trip-planner.js",
       "file_type": "code",
       "source_file": "AlpenGlow/trip-planner.js",
@@ -884,462 +862,114 @@
       "norm_label": "_uuid()"
     },
     {
-      "label": "data/bundle.js",
-      "file_type": "code",
-      "source_file": "data/bundle.js",
+      "label": "query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "data_bundle",
-      "community": 41,
-      "community_name": "data/bundle.js",
-      "norm_label": "data/bundle.js"
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr",
+      "community": 3,
+      "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
+      "norm_label": "query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md"
     },
     {
-      "label": "01-vps-setup.sh",
-      "file_type": "code",
-      "source_file": "deploy/01-vps-setup.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
+      "label": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
+      "source_location": "L10",
       "_origin": "ast",
-      "id": "deploy_01_vps_setup",
-      "community": 17,
-      "community_name": "01-vps-setup.sh",
-      "norm_label": "01-vps-setup.sh"
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
+      "community": 3,
+      "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
+      "norm_label": "q: why could otps for non-indian numbers go to the wrong person or fail to verify?"
     },
     {
-      "label": "01-vps-setup.sh script",
-      "file_type": "code",
-      "source_file": "deploy/01-vps-setup.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
+      "label": "Answer",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
+      "source_location": "L12",
       "_origin": "ast",
-      "id": "deploy_01_vps_setup_sh__entry",
-      "community": 17,
-      "community_name": "01-vps-setup.sh",
-      "norm_label": "01-vps-setup.sh script"
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_answer",
+      "community": 3,
+      "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
+      "norm_label": "answer"
     },
     {
-      "label": "02-migrate-data.sh",
-      "file_type": "code",
-      "source_file": "deploy/02-migrate-data.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
+      "label": "Outcome",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
+      "source_location": "L16",
       "_origin": "ast",
-      "id": "deploy_02_migrate_data",
-      "community": 18,
-      "community_name": "02-migrate-data.sh",
-      "norm_label": "02-migrate-data.sh"
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_outcome",
+      "community": 3,
+      "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
+      "norm_label": "outcome"
     },
     {
-      "label": "02-migrate-data.sh script",
-      "file_type": "code",
-      "source_file": "deploy/02-migrate-data.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
+      "label": "Source Nodes",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
+      "source_location": "L20",
       "_origin": "ast",
-      "id": "deploy_02_migrate_data_sh__entry",
-      "community": 18,
-      "community_name": "02-migrate-data.sh",
-      "norm_label": "02-migrate-data.sh script"
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_source_nodes",
+      "community": 3,
+      "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
+      "norm_label": "source nodes"
     },
     {
-      "label": "03-deploy-functions.sh",
-      "file_type": "code",
-      "source_file": "deploy/03-deploy-functions.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "_origin": "ast",
-      "id": "deploy_03_deploy_functions",
-      "community": 19,
-      "community_name": "03-deploy-functions.sh",
-      "norm_label": "03-deploy-functions.sh"
-    },
-    {
-      "label": "03-deploy-functions.sh script",
-      "file_type": "code",
-      "source_file": "deploy/03-deploy-functions.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "_origin": "ast",
-      "id": "deploy_03_deploy_functions_sh__entry",
-      "community": 19,
-      "community_name": "03-deploy-functions.sh",
-      "norm_label": "03-deploy-functions.sh script"
-    },
-    {
-      "label": "04-apply-frontend-values.sh",
-      "file_type": "code",
-      "source_file": "deploy/04-apply-frontend-values.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "_origin": "ast",
-      "id": "deploy_04_apply_frontend_values",
-      "community": 20,
-      "community_name": "04-apply-frontend-values.sh",
-      "norm_label": "04-apply-frontend-values.sh"
-    },
-    {
-      "label": "04-apply-frontend-values.sh script",
-      "file_type": "code",
-      "source_file": "deploy/04-apply-frontend-values.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "_origin": "ast",
-      "id": "deploy_04_apply_frontend_values_sh__entry",
-      "community": 20,
-      "community_name": "04-apply-frontend-values.sh",
-      "norm_label": "04-apply-frontend-values.sh script"
-    },
-    {
-      "label": "generate-keys.js",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
+      "label": "query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "deploy_generate_keys",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "generate-keys.js"
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the",
+      "community": 32,
+      "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
+      "norm_label": "query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md"
     },
     {
-      "label": "crypto",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L9",
+      "label": "Q: How is site verification scoped, and what does the 30s popup do?",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
+      "source_location": "L10",
       "_origin": "ast",
-      "id": "deploy_generate_keys_crypto",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "crypto"
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
+      "community": 32,
+      "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
+      "norm_label": "q: how is site verification scoped, and what does the 30s popup do?"
     },
     {
-      "label": "base64url()",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L11",
+      "label": "Answer",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
+      "source_location": "L12",
       "_origin": "ast",
-      "id": "deploy_generate_keys_base64url",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "base64url()"
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_answer",
+      "community": 32,
+      "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
+      "norm_label": "answer"
     },
     {
-      "label": "signJwt()",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L19",
+      "label": "Outcome",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
+      "source_location": "L16",
       "_origin": "ast",
-      "id": "deploy_generate_keys_signjwt",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "signjwt()"
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_outcome",
+      "community": 32,
+      "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
+      "norm_label": "outcome"
     },
     {
-      "label": "jwtSecret",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L33",
+      "label": "Source Nodes",
+      "file_type": "document",
+      "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
+      "source_location": "L20",
       "_origin": "ast",
-      "id": "deploy_generate_keys_jwtsecret",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "jwtsecret"
-    },
-    {
-      "label": "now",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L34",
-      "_origin": "ast",
-      "id": "deploy_generate_keys_now",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "now"
-    },
-    {
-      "label": "anonKey",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L37",
-      "_origin": "ast",
-      "id": "deploy_generate_keys_anonkey",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "anonkey"
-    },
-    {
-      "label": "serviceRoleKey",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L41",
-      "_origin": "ast",
-      "id": "deploy_generate_keys_servicerolekey",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "servicerolekey"
-    },
-    {
-      "label": "postgresPassword",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L45",
-      "_origin": "ast",
-      "id": "deploy_generate_keys_postgrespassword",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "postgrespassword"
-    },
-    {
-      "label": "dashboardPassword",
-      "file_type": "code",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L46",
-      "_origin": "ast",
-      "id": "deploy_generate_keys_dashboardpassword",
-      "community": 4,
-      "community_name": "generate-keys.js",
-      "norm_label": "dashboardpassword"
-    },
-    {
-      "label": "vps-deploy.sh",
-      "file_type": "code",
-      "source_file": "deploy/vps-deploy.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "_origin": "ast",
-      "id": "deploy_vps_deploy",
-      "community": 21,
-      "community_name": "vps-deploy.sh",
-      "norm_label": "vps-deploy.sh"
-    },
-    {
-      "label": "vps-deploy.sh script",
-      "file_type": "code",
-      "source_file": "deploy/vps-deploy.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "_origin": "ast",
-      "id": "deploy_vps_deploy_sh__entry",
-      "community": 21,
-      "community_name": "vps-deploy.sh",
-      "norm_label": "vps-deploy.sh script"
-    },
-    {
-      "label": "seo-head.js",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "scripts_seo_head",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "seo-head.js"
-    },
-    {
-      "label": "fs",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "scripts_seo_head_fs",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "fs"
-    },
-    {
-      "label": "path",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "scripts_seo_head_path",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "path"
-    },
-    {
-      "label": "ROOT",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L2",
-      "_origin": "ast",
-      "id": "scripts_seo_head_root",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "root"
-    },
-    {
-      "label": "BIZ",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "scripts_seo_head_biz",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "biz"
-    },
-    {
-      "label": "P()",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L22",
-      "_origin": "ast",
-      "id": "scripts_seo_head_p",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "p()"
-    },
-    {
-      "label": "pages",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L24",
-      "_origin": "ast",
-      "id": "scripts_seo_head_pages",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "pages"
-    },
-    {
-      "label": "GROUPS",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L55",
-      "_origin": "ast",
-      "id": "scripts_seo_head_groups",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "groups"
-    },
-    {
-      "label": "packs",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L63",
-      "_origin": "ast",
-      "id": "scripts_seo_head_packs",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "packs"
-    },
-    {
-      "label": "esc()",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L132",
-      "_origin": "ast",
-      "id": "scripts_seo_head_esc",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "esc()"
-    },
-    {
-      "label": "faqSchema()",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L135",
-      "_origin": "ast",
-      "id": "scripts_seo_head_faqschema",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "faqschema()"
-    },
-    {
-      "label": "jsonld()",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L149",
-      "_origin": "ast",
-      "id": "scripts_seo_head_jsonld",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "jsonld()"
-    },
-    {
-      "label": "block()",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L214",
-      "_origin": "ast",
-      "id": "scripts_seo_head_block",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "block()"
-    },
-    {
-      "label": "packBySlug",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L259",
-      "_origin": "ast",
-      "id": "scripts_seo_head_packbyslug",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "packbyslug"
-    },
-    {
-      "label": "groupedSlugs",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L260",
-      "_origin": "ast",
-      "id": "scripts_seo_head_groupedslugs",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "groupedslugs"
-    },
-    {
-      "label": "ungrouped",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L261",
-      "_origin": "ast",
-      "id": "scripts_seo_head_ungrouped",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "ungrouped"
-    },
-    {
-      "label": "card()",
-      "file_type": "code",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L264",
-      "_origin": "ast",
-      "id": "scripts_seo_head_card",
-      "community": 35,
-      "community_name": "seo-head.js",
-      "norm_label": "card()"
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_source_nodes",
+      "community": 32,
+      "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
+      "norm_label": "source nodes"
     },
     {
       "label": "seo-homepage.js",
@@ -1397,289 +1027,6 @@
       "norm_label": "faqs"
     },
     {
-      "label": "setup-new-laptop.sh",
-      "file_type": "code",
-      "source_file": "scripts/setup-new-laptop.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "_origin": "ast",
-      "id": "scripts_setup_new_laptop",
-      "community": 27,
-      "community_name": "setup-new-laptop.sh",
-      "norm_label": "setup-new-laptop.sh"
-    },
-    {
-      "label": "setup-new-laptop.sh script",
-      "file_type": "code",
-      "source_file": "scripts/setup-new-laptop.sh",
-      "source_location": "L1",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "_origin": "ast",
-      "id": "scripts_setup_new_laptop_sh__entry",
-      "community": 27,
-      "community_name": "setup-new-laptop.sh",
-      "norm_label": "setup-new-laptop.sh script"
-    },
-    {
-      "label": "cors.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/_shared/cors.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_shared_cors",
-      "community": 9,
-      "community_name": "cors.ts",
-      "norm_label": "cors.ts"
-    },
-    {
-      "label": "ALLOWED_ORIGINS",
-      "file_type": "code",
-      "source_file": "supabase/functions/_shared/cors.ts",
-      "source_location": "L9",
-      "_origin": "ast",
-      "id": "supabase_functions_shared_cors_allowed_origins",
-      "community": 9,
-      "community_name": "cors.ts",
-      "norm_label": "allowed_origins"
-    },
-    {
-      "label": "corsFor()",
-      "file_type": "code",
-      "source_file": "supabase/functions/_shared/cors.ts",
-      "source_location": "L17",
-      "_origin": "ast",
-      "id": "supabase_functions_shared_cors_corsfor",
-      "community": 9,
-      "community_name": "cors.ts",
-      "norm_label": "corsfor()"
-    },
-    {
-      "label": "corsHeaders",
-      "file_type": "code",
-      "source_file": "supabase/functions/_shared/cors.ts",
-      "source_location": "L31",
-      "_origin": "ast",
-      "id": "supabase_functions_shared_cors_corsheaders",
-      "community": 9,
-      "community_name": "cors.ts",
-      "norm_label": "corsheaders"
-    },
-    {
-      "label": "ratelimit.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/_shared/ratelimit.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_shared_ratelimit",
-      "community": 22,
-      "community_name": "ratelimit.ts",
-      "norm_label": "ratelimit.ts"
-    },
-    {
-      "label": "otpRateLimited()",
-      "file_type": "code",
-      "source_file": "supabase/functions/_shared/ratelimit.ts",
-      "source_location": "L11",
-      "_origin": "ast",
-      "id": "supabase_functions_shared_ratelimit_otpratelimited",
-      "community": 22,
-      "community_name": "ratelimit.ts",
-      "norm_label": "otpratelimited()"
-    },
-    {
-      "label": "chat-compass/index.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/chat-compass/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_chat_compass_index",
-      "community": 11,
-      "community_name": "chat-compass/index.ts",
-      "norm_label": "chat-compass/index.ts"
-    },
-    {
-      "label": "ALLOWED_ORIGINS",
-      "file_type": "code",
-      "source_file": "supabase/functions/chat-compass/index.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "supabase_functions_chat_compass_index_allowed_origins",
-      "community": 11,
-      "community_name": "chat-compass/index.ts",
-      "norm_label": "allowed_origins"
-    },
-    {
-      "label": "corsFor()",
-      "file_type": "code",
-      "source_file": "supabase/functions/chat-compass/index.ts",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "supabase_functions_chat_compass_index_corsfor",
-      "community": 11,
-      "community_name": "chat-compass/index.ts",
-      "norm_label": "corsfor()"
-    },
-    {
-      "label": "crm/index.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_crm_index",
-      "community": 6,
-      "community_name": "crm/index.ts",
-      "norm_label": "crm/index.ts"
-    },
-    {
-      "label": "ALLOWED_ORIGINS",
-      "file_type": "code",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L26",
-      "_origin": "ast",
-      "id": "supabase_functions_crm_index_allowed_origins",
-      "community": 6,
-      "community_name": "crm/index.ts",
-      "norm_label": "allowed_origins"
-    },
-    {
-      "label": "corsFor()",
-      "file_type": "code",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L34",
-      "_origin": "ast",
-      "id": "supabase_functions_crm_index_corsfor",
-      "community": 6,
-      "community_name": "crm/index.ts",
-      "norm_label": "corsfor()"
-    },
-    {
-      "label": "LEAD_WRITABLE",
-      "file_type": "code",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L48",
-      "_origin": "ast",
-      "id": "supabase_functions_crm_index_lead_writable",
-      "community": 6,
-      "community_name": "crm/index.ts",
-      "norm_label": "lead_writable"
-    },
-    {
-      "label": "FOLLOWUP_WRITABLE",
-      "file_type": "code",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L52",
-      "_origin": "ast",
-      "id": "supabase_functions_crm_index_followup_writable",
-      "community": 6,
-      "community_name": "crm/index.ts",
-      "norm_label": "followup_writable"
-    },
-    {
-      "label": "pick()",
-      "file_type": "code",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L54",
-      "_origin": "ast",
-      "id": "supabase_functions_crm_index_pick",
-      "community": 6,
-      "community_name": "crm/index.ts",
-      "norm_label": "pick()"
-    },
-    {
-      "label": "safeEqual()",
-      "file_type": "code",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L61",
-      "_origin": "ast",
-      "id": "supabase_functions_crm_index_safeequal",
-      "community": 6,
-      "community_name": "crm/index.ts",
-      "norm_label": "safeequal()"
-    },
-    {
-      "label": "send-email-otp/index.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/send-email-otp/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_send_email_otp_index",
-      "community": 8,
-      "community_name": "send-email-otp/index.ts",
-      "norm_label": "send-email-otp/index.ts"
-    },
-    {
-      "label": "ALLOWED_ORIGINS",
-      "file_type": "code",
-      "source_file": "supabase/functions/send-email-otp/index.ts",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "supabase_functions_send_email_otp_index_allowed_origins",
-      "community": 8,
-      "community_name": "send-email-otp/index.ts",
-      "norm_label": "allowed_origins"
-    },
-    {
-      "label": "corsFor()",
-      "file_type": "code",
-      "source_file": "supabase/functions/send-email-otp/index.ts",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "supabase_functions_send_email_otp_index_corsfor",
-      "community": 8,
-      "community_name": "send-email-otp/index.ts",
-      "norm_label": "corsfor()"
-    },
-    {
-      "label": "otpRateLimited()",
-      "file_type": "code",
-      "source_file": "supabase/functions/send-email-otp/index.ts",
-      "source_location": "L29",
-      "_origin": "ast",
-      "id": "supabase_functions_send_email_otp_index_otpratelimited",
-      "community": 8,
-      "community_name": "send-email-otp/index.ts",
-      "norm_label": "otpratelimited()"
-    },
-    {
-      "label": "send-lead-email/index.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/send-lead-email/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_send_lead_email_index",
-      "community": 12,
-      "community_name": "send-lead-email/index.ts",
-      "norm_label": "send-lead-email/index.ts"
-    },
-    {
-      "label": "ALLOWED_ORIGINS",
-      "file_type": "code",
-      "source_file": "supabase/functions/send-lead-email/index.ts",
-      "source_location": "L5",
-      "_origin": "ast",
-      "id": "supabase_functions_send_lead_email_index_allowed_origins",
-      "community": 12,
-      "community_name": "send-lead-email/index.ts",
-      "norm_label": "allowed_origins"
-    },
-    {
-      "label": "corsFor()",
-      "file_type": "code",
-      "source_file": "supabase/functions/send-lead-email/index.ts",
-      "source_location": "L13",
-      "_origin": "ast",
-      "id": "supabase_functions_send_lead_email_index_corsfor",
-      "community": 12,
-      "community_name": "send-lead-email/index.ts",
-      "norm_label": "corsfor()"
-    },
-    {
       "label": "send-sms-otp/index.ts",
       "file_type": "code",
       "source_file": "supabase/functions/send-sms-otp/index.ts",
@@ -1735,105 +1082,6 @@
       "norm_label": "normalisephone()"
     },
     {
-      "label": "submit-contact/index.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/submit-contact/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_submit_contact_index",
-      "community": 13,
-      "community_name": "submit-contact/index.ts",
-      "norm_label": "submit-contact/index.ts"
-    },
-    {
-      "label": "ALLOWED_ORIGINS",
-      "file_type": "code",
-      "source_file": "supabase/functions/submit-contact/index.ts",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "supabase_functions_submit_contact_index_allowed_origins",
-      "community": 13,
-      "community_name": "submit-contact/index.ts",
-      "norm_label": "allowed_origins"
-    },
-    {
-      "label": "corsFor()",
-      "file_type": "code",
-      "source_file": "supabase/functions/submit-contact/index.ts",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "supabase_functions_submit_contact_index_corsfor",
-      "community": 13,
-      "community_name": "submit-contact/index.ts",
-      "norm_label": "corsfor()"
-    },
-    {
-      "label": "submit-lead/index.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/submit-lead/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_submit_lead_index",
-      "community": 14,
-      "community_name": "submit-lead/index.ts",
-      "norm_label": "submit-lead/index.ts"
-    },
-    {
-      "label": "ALLOWED_ORIGINS",
-      "file_type": "code",
-      "source_file": "supabase/functions/submit-lead/index.ts",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "supabase_functions_submit_lead_index_allowed_origins",
-      "community": 14,
-      "community_name": "submit-lead/index.ts",
-      "norm_label": "allowed_origins"
-    },
-    {
-      "label": "corsFor()",
-      "file_type": "code",
-      "source_file": "supabase/functions/submit-lead/index.ts",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "supabase_functions_submit_lead_index_corsfor",
-      "community": 14,
-      "community_name": "submit-lead/index.ts",
-      "norm_label": "corsfor()"
-    },
-    {
-      "label": "verify-email-otp/index.ts",
-      "file_type": "code",
-      "source_file": "supabase/functions/verify-email-otp/index.ts",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "supabase_functions_verify_email_otp_index",
-      "community": 15,
-      "community_name": "verify-email-otp/index.ts",
-      "norm_label": "verify-email-otp/index.ts"
-    },
-    {
-      "label": "ALLOWED_ORIGINS",
-      "file_type": "code",
-      "source_file": "supabase/functions/verify-email-otp/index.ts",
-      "source_location": "L6",
-      "_origin": "ast",
-      "id": "supabase_functions_verify_email_otp_index_allowed_origins",
-      "community": 15,
-      "community_name": "verify-email-otp/index.ts",
-      "norm_label": "allowed_origins"
-    },
-    {
-      "label": "corsFor()",
-      "file_type": "code",
-      "source_file": "supabase/functions/verify-email-otp/index.ts",
-      "source_location": "L14",
-      "_origin": "ast",
-      "id": "supabase_functions_verify_email_otp_index_corsfor",
-      "community": 15,
-      "community_name": "verify-email-otp/index.ts",
-      "norm_label": "corsfor()"
-    },
-    {
       "label": "verify-sms-otp/index.ts",
       "file_type": "code",
       "source_file": "supabase/functions/verify-sms-otp/index.ts",
@@ -1878,15 +1126,877 @@
       "norm_label": "normalisephone()"
     },
     {
+      "label": "compass.js",
+      "file_type": "code",
+      "source_file": "AlpenGlow/compass.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "compass.js",
+      "norm_label": "compass.js",
+      "id": "alpenglow_compass"
+    },
+    {
+      "label": "AlpenGlow/data/bundle.js",
+      "file_type": "code",
+      "source_file": "AlpenGlow/data/bundle.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 24,
+      "community_name": "AlpenGlow/data/bundle.js",
+      "norm_label": "alpenglow/data/bundle.js",
+      "id": "alpenglow_data_bundle"
+    },
+    {
+      "label": "data/bundle.js",
+      "file_type": "code",
+      "source_file": "data/bundle.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 41,
+      "community_name": "data/bundle.js",
+      "norm_label": "data/bundle.js",
+      "id": "data_bundle"
+    },
+    {
+      "label": "01-vps-setup.sh",
+      "file_type": "code",
+      "source_file": "deploy/01-vps-setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "01-vps-setup.sh",
+      "norm_label": "01-vps-setup.sh",
+      "id": "deploy_01_vps_setup"
+    },
+    {
+      "label": "01-vps-setup.sh script",
+      "file_type": "code",
+      "source_file": "deploy/01-vps-setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "01-vps-setup.sh",
+      "norm_label": "01-vps-setup.sh script",
+      "id": "deploy_01_vps_setup_sh__entry"
+    },
+    {
+      "label": "02-migrate-data.sh",
+      "file_type": "code",
+      "source_file": "deploy/02-migrate-data.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "02-migrate-data.sh",
+      "norm_label": "02-migrate-data.sh",
+      "id": "deploy_02_migrate_data"
+    },
+    {
+      "label": "02-migrate-data.sh script",
+      "file_type": "code",
+      "source_file": "deploy/02-migrate-data.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "02-migrate-data.sh",
+      "norm_label": "02-migrate-data.sh script",
+      "id": "deploy_02_migrate_data_sh__entry"
+    },
+    {
+      "label": "03-deploy-functions.sh",
+      "file_type": "code",
+      "source_file": "deploy/03-deploy-functions.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "03-deploy-functions.sh",
+      "norm_label": "03-deploy-functions.sh",
+      "id": "deploy_03_deploy_functions"
+    },
+    {
+      "label": "03-deploy-functions.sh script",
+      "file_type": "code",
+      "source_file": "deploy/03-deploy-functions.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "03-deploy-functions.sh",
+      "norm_label": "03-deploy-functions.sh script",
+      "id": "deploy_03_deploy_functions_sh__entry"
+    },
+    {
+      "label": "04-apply-frontend-values.sh",
+      "file_type": "code",
+      "source_file": "deploy/04-apply-frontend-values.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "04-apply-frontend-values.sh",
+      "norm_label": "04-apply-frontend-values.sh",
+      "id": "deploy_04_apply_frontend_values"
+    },
+    {
+      "label": "04-apply-frontend-values.sh script",
+      "file_type": "code",
+      "source_file": "deploy/04-apply-frontend-values.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "04-apply-frontend-values.sh",
+      "norm_label": "04-apply-frontend-values.sh script",
+      "id": "deploy_04_apply_frontend_values_sh__entry"
+    },
+    {
+      "label": "generate-keys.js",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "generate-keys.js",
+      "id": "deploy_generate_keys"
+    },
+    {
+      "label": "crypto",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "crypto",
+      "id": "deploy_generate_keys_crypto"
+    },
+    {
+      "label": "base64url()",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "base64url()",
+      "id": "deploy_generate_keys_base64url"
+    },
+    {
+      "label": "signJwt()",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L19",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "signjwt()",
+      "id": "deploy_generate_keys_signjwt"
+    },
+    {
+      "label": "jwtSecret",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L33",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "jwtsecret",
+      "id": "deploy_generate_keys_jwtsecret"
+    },
+    {
+      "label": "now",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L34",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "now",
+      "id": "deploy_generate_keys_now"
+    },
+    {
+      "label": "anonKey",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L37",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "anonkey",
+      "id": "deploy_generate_keys_anonkey"
+    },
+    {
+      "label": "serviceRoleKey",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L41",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "servicerolekey",
+      "id": "deploy_generate_keys_servicerolekey"
+    },
+    {
+      "label": "postgresPassword",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L45",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "postgrespassword",
+      "id": "deploy_generate_keys_postgrespassword"
+    },
+    {
+      "label": "dashboardPassword",
+      "file_type": "code",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L46",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "generate-keys.js",
+      "norm_label": "dashboardpassword",
+      "id": "deploy_generate_keys_dashboardpassword"
+    },
+    {
+      "label": "vps-deploy.sh",
+      "file_type": "code",
+      "source_file": "deploy/vps-deploy.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "vps-deploy.sh",
+      "norm_label": "vps-deploy.sh",
+      "id": "deploy_vps_deploy"
+    },
+    {
+      "label": "vps-deploy.sh script",
+      "file_type": "code",
+      "source_file": "deploy/vps-deploy.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "community": 21,
+      "community_name": "vps-deploy.sh",
+      "norm_label": "vps-deploy.sh script",
+      "id": "deploy_vps_deploy_sh__entry"
+    },
+    {
+      "label": "seo-head.js",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "seo-head.js",
+      "id": "scripts_seo_head"
+    },
+    {
+      "label": "fs",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "fs",
+      "id": "scripts_seo_head_fs"
+    },
+    {
+      "label": "path",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "path",
+      "id": "scripts_seo_head_path"
+    },
+    {
+      "label": "ROOT",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L2",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "root",
+      "id": "scripts_seo_head_root"
+    },
+    {
+      "label": "BIZ",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "biz",
+      "id": "scripts_seo_head_biz"
+    },
+    {
+      "label": "P()",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L22",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "p()",
+      "id": "scripts_seo_head_p"
+    },
+    {
+      "label": "pages",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L24",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "pages",
+      "id": "scripts_seo_head_pages"
+    },
+    {
+      "label": "GROUPS",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L55",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "groups",
+      "id": "scripts_seo_head_groups"
+    },
+    {
+      "label": "packs",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L63",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "packs",
+      "id": "scripts_seo_head_packs"
+    },
+    {
+      "label": "esc()",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L132",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "esc()",
+      "id": "scripts_seo_head_esc"
+    },
+    {
+      "label": "faqSchema()",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L135",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "faqschema()",
+      "id": "scripts_seo_head_faqschema"
+    },
+    {
+      "label": "jsonld()",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L149",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "jsonld()",
+      "id": "scripts_seo_head_jsonld"
+    },
+    {
+      "label": "block()",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L214",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "block()",
+      "id": "scripts_seo_head_block"
+    },
+    {
+      "label": "packBySlug",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L259",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "packbyslug",
+      "id": "scripts_seo_head_packbyslug"
+    },
+    {
+      "label": "groupedSlugs",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L260",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "groupedslugs",
+      "id": "scripts_seo_head_groupedslugs"
+    },
+    {
+      "label": "ungrouped",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L261",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "ungrouped",
+      "id": "scripts_seo_head_ungrouped"
+    },
+    {
+      "label": "card()",
+      "file_type": "code",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L264",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "seo-head.js",
+      "norm_label": "card()",
+      "id": "scripts_seo_head_card"
+    },
+    {
+      "label": "setup-new-laptop.sh",
+      "file_type": "code",
+      "source_file": "scripts/setup-new-laptop.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "setup-new-laptop.sh",
+      "norm_label": "setup-new-laptop.sh",
+      "id": "scripts_setup_new_laptop"
+    },
+    {
+      "label": "setup-new-laptop.sh script",
+      "file_type": "code",
+      "source_file": "scripts/setup-new-laptop.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "community": 27,
+      "community_name": "setup-new-laptop.sh",
+      "norm_label": "setup-new-laptop.sh script",
+      "id": "scripts_setup_new_laptop_sh__entry"
+    },
+    {
+      "label": "cors.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/_shared/cors.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "cors.ts",
+      "norm_label": "cors.ts",
+      "id": "supabase_functions_shared_cors"
+    },
+    {
+      "label": "ALLOWED_ORIGINS",
+      "file_type": "code",
+      "source_file": "supabase/functions/_shared/cors.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "cors.ts",
+      "norm_label": "allowed_origins",
+      "id": "supabase_functions_shared_cors_allowed_origins"
+    },
+    {
+      "label": "corsFor()",
+      "file_type": "code",
+      "source_file": "supabase/functions/_shared/cors.ts",
+      "source_location": "L17",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "cors.ts",
+      "norm_label": "corsfor()",
+      "id": "supabase_functions_shared_cors_corsfor"
+    },
+    {
+      "label": "corsHeaders",
+      "file_type": "code",
+      "source_file": "supabase/functions/_shared/cors.ts",
+      "source_location": "L31",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "cors.ts",
+      "norm_label": "corsheaders",
+      "id": "supabase_functions_shared_cors_corsheaders"
+    },
+    {
+      "label": "ratelimit.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/_shared/ratelimit.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "ratelimit.ts",
+      "norm_label": "ratelimit.ts",
+      "id": "supabase_functions_shared_ratelimit"
+    },
+    {
+      "label": "otpRateLimited()",
+      "file_type": "code",
+      "source_file": "supabase/functions/_shared/ratelimit.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "ratelimit.ts",
+      "norm_label": "otpratelimited()",
+      "id": "supabase_functions_shared_ratelimit_otpratelimited"
+    },
+    {
+      "label": "chat-compass/index.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/chat-compass/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "chat-compass/index.ts",
+      "norm_label": "chat-compass/index.ts",
+      "id": "supabase_functions_chat_compass_index"
+    },
+    {
+      "label": "ALLOWED_ORIGINS",
+      "file_type": "code",
+      "source_file": "supabase/functions/chat-compass/index.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "chat-compass/index.ts",
+      "norm_label": "allowed_origins",
+      "id": "supabase_functions_chat_compass_index_allowed_origins"
+    },
+    {
+      "label": "corsFor()",
+      "file_type": "code",
+      "source_file": "supabase/functions/chat-compass/index.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "chat-compass/index.ts",
+      "norm_label": "corsfor()",
+      "id": "supabase_functions_chat_compass_index_corsfor"
+    },
+    {
+      "label": "crm/index.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "crm/index.ts",
+      "norm_label": "crm/index.ts",
+      "id": "supabase_functions_crm_index"
+    },
+    {
+      "label": "ALLOWED_ORIGINS",
+      "file_type": "code",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L26",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "crm/index.ts",
+      "norm_label": "allowed_origins",
+      "id": "supabase_functions_crm_index_allowed_origins"
+    },
+    {
+      "label": "corsFor()",
+      "file_type": "code",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L34",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "crm/index.ts",
+      "norm_label": "corsfor()",
+      "id": "supabase_functions_crm_index_corsfor"
+    },
+    {
+      "label": "LEAD_WRITABLE",
+      "file_type": "code",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L48",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "crm/index.ts",
+      "norm_label": "lead_writable",
+      "id": "supabase_functions_crm_index_lead_writable"
+    },
+    {
+      "label": "FOLLOWUP_WRITABLE",
+      "file_type": "code",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L52",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "crm/index.ts",
+      "norm_label": "followup_writable",
+      "id": "supabase_functions_crm_index_followup_writable"
+    },
+    {
+      "label": "pick()",
+      "file_type": "code",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L54",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "crm/index.ts",
+      "norm_label": "pick()",
+      "id": "supabase_functions_crm_index_pick"
+    },
+    {
+      "label": "safeEqual()",
+      "file_type": "code",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L61",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "crm/index.ts",
+      "norm_label": "safeequal()",
+      "id": "supabase_functions_crm_index_safeequal"
+    },
+    {
+      "label": "send-email-otp/index.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/send-email-otp/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "send-email-otp/index.ts",
+      "norm_label": "send-email-otp/index.ts",
+      "id": "supabase_functions_send_email_otp_index"
+    },
+    {
+      "label": "ALLOWED_ORIGINS",
+      "file_type": "code",
+      "source_file": "supabase/functions/send-email-otp/index.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "send-email-otp/index.ts",
+      "norm_label": "allowed_origins",
+      "id": "supabase_functions_send_email_otp_index_allowed_origins"
+    },
+    {
+      "label": "corsFor()",
+      "file_type": "code",
+      "source_file": "supabase/functions/send-email-otp/index.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "send-email-otp/index.ts",
+      "norm_label": "corsfor()",
+      "id": "supabase_functions_send_email_otp_index_corsfor"
+    },
+    {
+      "label": "otpRateLimited()",
+      "file_type": "code",
+      "source_file": "supabase/functions/send-email-otp/index.ts",
+      "source_location": "L29",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "send-email-otp/index.ts",
+      "norm_label": "otpratelimited()",
+      "id": "supabase_functions_send_email_otp_index_otpratelimited"
+    },
+    {
+      "label": "send-lead-email/index.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/send-lead-email/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "send-lead-email/index.ts",
+      "norm_label": "send-lead-email/index.ts",
+      "id": "supabase_functions_send_lead_email_index"
+    },
+    {
+      "label": "ALLOWED_ORIGINS",
+      "file_type": "code",
+      "source_file": "supabase/functions/send-lead-email/index.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "send-lead-email/index.ts",
+      "norm_label": "allowed_origins",
+      "id": "supabase_functions_send_lead_email_index_allowed_origins"
+    },
+    {
+      "label": "corsFor()",
+      "file_type": "code",
+      "source_file": "supabase/functions/send-lead-email/index.ts",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 12,
+      "community_name": "send-lead-email/index.ts",
+      "norm_label": "corsfor()",
+      "id": "supabase_functions_send_lead_email_index_corsfor"
+    },
+    {
+      "label": "submit-contact/index.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/submit-contact/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "submit-contact/index.ts",
+      "norm_label": "submit-contact/index.ts",
+      "id": "supabase_functions_submit_contact_index"
+    },
+    {
+      "label": "ALLOWED_ORIGINS",
+      "file_type": "code",
+      "source_file": "supabase/functions/submit-contact/index.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "submit-contact/index.ts",
+      "norm_label": "allowed_origins",
+      "id": "supabase_functions_submit_contact_index_allowed_origins"
+    },
+    {
+      "label": "corsFor()",
+      "file_type": "code",
+      "source_file": "supabase/functions/submit-contact/index.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "submit-contact/index.ts",
+      "norm_label": "corsfor()",
+      "id": "supabase_functions_submit_contact_index_corsfor"
+    },
+    {
+      "label": "submit-lead/index.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/submit-lead/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "submit-lead/index.ts",
+      "norm_label": "submit-lead/index.ts",
+      "id": "supabase_functions_submit_lead_index"
+    },
+    {
+      "label": "ALLOWED_ORIGINS",
+      "file_type": "code",
+      "source_file": "supabase/functions/submit-lead/index.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "submit-lead/index.ts",
+      "norm_label": "allowed_origins",
+      "id": "supabase_functions_submit_lead_index_allowed_origins"
+    },
+    {
+      "label": "corsFor()",
+      "file_type": "code",
+      "source_file": "supabase/functions/submit-lead/index.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "submit-lead/index.ts",
+      "norm_label": "corsfor()",
+      "id": "supabase_functions_submit_lead_index_corsfor"
+    },
+    {
+      "label": "verify-email-otp/index.ts",
+      "file_type": "code",
+      "source_file": "supabase/functions/verify-email-otp/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "verify-email-otp/index.ts",
+      "norm_label": "verify-email-otp/index.ts",
+      "id": "supabase_functions_verify_email_otp_index"
+    },
+    {
+      "label": "ALLOWED_ORIGINS",
+      "file_type": "code",
+      "source_file": "supabase/functions/verify-email-otp/index.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "verify-email-otp/index.ts",
+      "norm_label": "allowed_origins",
+      "id": "supabase_functions_verify_email_otp_index_allowed_origins"
+    },
+    {
+      "label": "corsFor()",
+      "file_type": "code",
+      "source_file": "supabase/functions/verify-email-otp/index.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "verify-email-otp/index.ts",
+      "norm_label": "corsfor()",
+      "id": "supabase_functions_verify_email_otp_index_corsfor"
+    },
+    {
       "label": "whatsapp-webhook/index.ts",
       "file_type": "code",
       "source_file": "supabase/functions/whatsapp-webhook/index.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "supabase_functions_whatsapp_webhook_index",
       "community": 16,
       "community_name": "whatsapp-webhook/index.ts",
-      "norm_label": "whatsapp-webhook/index.ts"
+      "norm_label": "whatsapp-webhook/index.ts",
+      "id": "supabase_functions_whatsapp_webhook_index"
     },
     {
       "label": "ALLOWED_ORIGINS",
@@ -1894,10 +2004,10 @@
       "source_file": "supabase/functions/whatsapp-webhook/index.ts",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "supabase_functions_whatsapp_webhook_index_allowed_origins",
       "community": 16,
       "community_name": "whatsapp-webhook/index.ts",
-      "norm_label": "allowed_origins"
+      "norm_label": "allowed_origins",
+      "id": "supabase_functions_whatsapp_webhook_index_allowed_origins"
     },
     {
       "label": "corsFor()",
@@ -1905,10 +2015,10 @@
       "source_file": "supabase/functions/whatsapp-webhook/index.ts",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "supabase_functions_whatsapp_webhook_index_corsfor",
       "community": 16,
       "community_name": "whatsapp-webhook/index.ts",
-      "norm_label": "corsfor()"
+      "norm_label": "corsfor()",
+      "id": "supabase_functions_whatsapp_webhook_index_corsfor"
     },
     {
       "label": "BACKEND_SETUP.md",
@@ -1916,10 +2026,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "backend_setup.md"
+      "norm_label": "backend_setup.md",
+      "id": "alpenglow_backend_setup"
     },
     {
       "label": "Alpen Glow Tours \u2014 Backend Setup Guide",
@@ -1927,10 +2037,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "alpen glow tours \u2014 backend setup guide"
+      "norm_label": "alpen glow tours \u2014 backend setup guide",
+      "id": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide"
     },
     {
       "label": "Architecture Overview",
@@ -1938,10 +2048,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_architecture_overview",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "architecture overview"
+      "norm_label": "architecture overview",
+      "id": "alpenglow_backend_setup_architecture_overview"
     },
     {
       "label": "Step 1 \u2014 Create a Supabase Project",
@@ -1949,10 +2059,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L23",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_step_1_create_a_supabase_project",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "step 1 \u2014 create a supabase project"
+      "norm_label": "step 1 \u2014 create a supabase project",
+      "id": "alpenglow_backend_setup_step_1_create_a_supabase_project"
     },
     {
       "label": "Step 2 \u2014 Run the Database Migration",
@@ -1960,10 +2070,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L32",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_step_2_run_the_database_migration",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "step 2 \u2014 run the database migration"
+      "norm_label": "step 2 \u2014 run the database migration",
+      "id": "alpenglow_backend_setup_step_2_run_the_database_migration"
     },
     {
       "label": "Step 3 \u2014 Set Up WhatsApp OTP (Meta Cloud API)",
@@ -1971,10 +2081,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L41",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_step_3_set_up_whatsapp_otp_meta_cloud_api",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "step 3 \u2014 set up whatsapp otp (meta cloud api)"
+      "norm_label": "step 3 \u2014 set up whatsapp otp (meta cloud api)",
+      "id": "alpenglow_backend_setup_step_3_set_up_whatsapp_otp_meta_cloud_api"
     },
     {
       "label": "Step 4 \u2014 Set Up Resend (Email OTP + Notifications)",
@@ -1982,10 +2092,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L73",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_step_4_set_up_resend_email_otp_notifications",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "step 4 \u2014 set up resend (email otp + notifications)"
+      "norm_label": "step 4 \u2014 set up resend (email otp + notifications)",
+      "id": "alpenglow_backend_setup_step_4_set_up_resend_email_otp_notifications"
     },
     {
       "label": "Step 5 \u2014 Set Edge Function Secrets",
@@ -1993,10 +2103,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L85",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_step_5_set_edge_function_secrets",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "step 5 \u2014 set edge function secrets"
+      "norm_label": "step 5 \u2014 set edge function secrets",
+      "id": "alpenglow_backend_setup_step_5_set_edge_function_secrets"
     },
     {
       "label": "Step 6 \u2014 Deploy the Edge Functions",
@@ -2004,10 +2114,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L104",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_step_6_deploy_the_edge_functions",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "step 6 \u2014 deploy the edge functions"
+      "norm_label": "step 6 \u2014 deploy the edge functions",
+      "id": "alpenglow_backend_setup_step_6_deploy_the_edge_functions"
     },
     {
       "label": "Step 7 \u2014 Configure the Frontend",
@@ -2015,10 +2125,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L133",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_step_7_configure_the_frontend",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "step 7 \u2014 configure the frontend"
+      "norm_label": "step 7 \u2014 configure the frontend",
+      "id": "alpenglow_backend_setup_step_7_configure_the_frontend"
     },
     {
       "label": "Step 8 \u2014 Optional: Google Sheets Integration",
@@ -2026,10 +2136,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L148",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_step_8_optional_google_sheets_integration",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "step 8 \u2014 optional: google sheets integration"
+      "norm_label": "step 8 \u2014 optional: google sheets integration",
+      "id": "alpenglow_backend_setup_step_8_optional_google_sheets_integration"
     },
     {
       "label": "Step 9 \u2014 Optional: Schedule OTP Cleanup",
@@ -2037,10 +2147,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L164",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_step_9_optional_schedule_otp_cleanup",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "step 9 \u2014 optional: schedule otp cleanup"
+      "norm_label": "step 9 \u2014 optional: schedule otp cleanup",
+      "id": "alpenglow_backend_setup_step_9_optional_schedule_otp_cleanup"
     },
     {
       "label": "File Reference",
@@ -2048,10 +2158,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L180",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_file_reference",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "file reference"
+      "norm_label": "file reference",
+      "id": "alpenglow_backend_setup_file_reference"
     },
     {
       "label": "What Each Flow Does Now",
@@ -2059,10 +2169,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L206",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_what_each_flow_does_now",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "what each flow does now"
+      "norm_label": "what each flow does now",
+      "id": "alpenglow_backend_setup_what_each_flow_does_now"
     },
     {
       "label": "Testing Checklist",
@@ -2070,10 +2180,10 @@
       "source_file": "AlpenGlow/BACKEND_SETUP.md",
       "source_location": "L218",
       "_origin": "ast",
-      "id": "alpenglow_backend_setup_testing_checklist",
       "community": 34,
       "community_name": "Alpen Glow Tours \u2014 Backend Setup Guide",
-      "norm_label": "testing checklist"
+      "norm_label": "testing checklist",
+      "id": "alpenglow_backend_setup_testing_checklist"
     },
     {
       "label": "CLAUDE.md",
@@ -2081,10 +2191,10 @@
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "claude",
       "community": 26,
       "community_name": "CLAUDE.md",
-      "norm_label": "claude.md"
+      "norm_label": "claude.md",
+      "id": "claude"
     },
     {
       "label": "Deploy workflow",
@@ -2092,10 +2202,10 @@
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "claude_deploy_workflow",
       "community": 26,
       "community_name": "CLAUDE.md",
-      "norm_label": "deploy workflow"
+      "norm_label": "deploy workflow",
+      "id": "claude_deploy_workflow"
     },
     {
       "label": "graphify",
@@ -2103,10 +2213,10 @@
       "source_file": "CLAUDE.md",
       "source_location": "L23",
       "_origin": "ast",
-      "id": "claude_graphify",
       "community": 26,
       "community_name": "CLAUDE.md",
-      "norm_label": "graphify"
+      "norm_label": "graphify",
+      "id": "claude_graphify"
     },
     {
       "label": "SEO",
@@ -2114,10 +2224,10 @@
       "source_file": "CLAUDE.md",
       "source_location": "L36",
       "_origin": "ast",
-      "id": "claude_seo",
       "community": 26,
       "community_name": "CLAUDE.md",
-      "norm_label": "seo"
+      "norm_label": "seo",
+      "id": "claude_seo"
     },
     {
       "label": "PRODUCTION_SECURITY.md",
@@ -2125,10 +2235,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "production_security",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "production_security.md"
+      "norm_label": "production_security.md",
+      "id": "production_security"
     },
     {
       "label": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
@@ -2136,10 +2246,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "production_security_alpenglow_production_security_go_live_checklist",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "alpenglow \u2014 production security & go-live checklist"
+      "norm_label": "alpenglow \u2014 production security & go-live checklist",
+      "id": "production_security_alpenglow_production_security_go_live_checklist"
     },
     {
       "label": "1. What changed (and why)",
@@ -2147,10 +2257,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "production_security_1_what_changed_and_why",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "1. what changed (and why)"
+      "norm_label": "1. what changed (and why)",
+      "id": "production_security_1_what_changed_and_why"
     },
     {
       "label": "\ud83d\udd34 Critical fix \u2014 customer/lead data was exposed",
@@ -2158,10 +2268,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "production_security_critical_fix_customer_lead_data_was_exposed",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "\ud83d\udd34 critical fix \u2014 customer/lead data was exposed"
+      "norm_label": "\ud83d\udd34 critical fix \u2014 customer/lead data was exposed",
+      "id": "production_security_critical_fix_customer_lead_data_was_exposed"
     },
     {
       "label": "\ud83d\udfe0 OTP hardening",
@@ -2169,10 +2279,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "production_security_otp_hardening",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "\ud83d\udfe0 otp hardening"
+      "norm_label": "\ud83d\udfe0 otp hardening",
+      "id": "production_security_otp_hardening"
     },
     {
       "label": "\ud83d\udfe1 CORS locked",
@@ -2180,10 +2290,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L35",
       "_origin": "ast",
-      "id": "production_security_cors_locked",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "\ud83d\udfe1 cors locked"
+      "norm_label": "\ud83d\udfe1 cors locked",
+      "id": "production_security_cors_locked"
     },
     {
       "label": "\ud83d\udfe1 Other",
@@ -2191,10 +2301,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L40",
       "_origin": "ast",
-      "id": "production_security_other",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "\ud83d\udfe1 other"
+      "norm_label": "\ud83d\udfe1 other",
+      "id": "production_security_other"
     },
     {
       "label": "2. Manual steps \u2014 REQUIRED before go-live",
@@ -2202,10 +2312,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L46",
       "_origin": "ast",
-      "id": "production_security_2_manual_steps_required_before_go_live",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "2. manual steps \u2014 required before go-live"
+      "norm_label": "2. manual steps \u2014 required before go-live",
+      "id": "production_security_2_manual_steps_required_before_go_live"
     },
     {
       "label": "a) Set Supabase secrets (Edge Functions \u2192 Secrets, or CLI)",
@@ -2213,10 +2323,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L48",
       "_origin": "ast",
-      "id": "production_security_a_set_supabase_secrets_edge_functions_secrets_or_cli",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "a) set supabase secrets (edge functions \u2192 secrets, or cli)"
+      "norm_label": "a) set supabase secrets (edge functions \u2192 secrets, or cli)",
+      "id": "production_security_a_set_supabase_secrets_edge_functions_secrets_or_cli"
     },
     {
       "label": "b) Apply the database migration",
@@ -2224,10 +2334,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L58",
       "_origin": "ast",
-      "id": "production_security_b_apply_the_database_migration",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "b) apply the database migration"
+      "norm_label": "b) apply the database migration",
+      "id": "production_security_b_apply_the_database_migration"
     },
     {
       "label": "c) Deploy the changed/new Edge Functions",
@@ -2235,10 +2345,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L65",
       "_origin": "ast",
-      "id": "production_security_c_deploy_the_changed_new_edge_functions",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "c) deploy the changed/new edge functions"
+      "norm_label": "c) deploy the changed/new edge functions",
+      "id": "production_security_c_deploy_the_changed_new_edge_functions"
     },
     {
       "label": "d) Deploy the updated frontend",
@@ -2246,10 +2356,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L77",
       "_origin": "ast",
-      "id": "production_security_d_deploy_the_updated_frontend",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "d) deploy the updated frontend"
+      "norm_label": "d) deploy the updated frontend",
+      "id": "production_security_d_deploy_the_updated_frontend"
     },
     {
       "label": "\u27a4 Deploy order",
@@ -2257,10 +2367,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L81",
       "_origin": "ast",
-      "id": "production_security_deploy_order",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "\u27a4 deploy order"
+      "norm_label": "\u27a4 deploy order",
+      "id": "production_security_deploy_order"
     },
     {
       "label": "3. DEV_MODE \u2014 do NOT flip blindly",
@@ -2268,10 +2378,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L88",
       "_origin": "ast",
-      "id": "production_security_3_dev_mode_do_not_flip_blindly",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "3. dev_mode \u2014 do not flip blindly"
+      "norm_label": "3. dev_mode \u2014 do not flip blindly",
+      "id": "production_security_3_dev_mode_do_not_flip_blindly"
     },
     {
       "label": "4. Post-deploy smoke test (crash prevention)",
@@ -2279,10 +2389,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L104",
       "_origin": "ast",
-      "id": "production_security_4_post_deploy_smoke_test_crash_prevention",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "4. post-deploy smoke test (crash prevention)"
+      "norm_label": "4. post-deploy smoke test (crash prevention)",
+      "id": "production_security_4_post_deploy_smoke_test_crash_prevention"
     },
     {
       "label": "5. Residual risks / recommended follow-ups (not yet done)",
@@ -2290,10 +2400,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L117",
       "_origin": "ast",
-      "id": "production_security_5_residual_risks_recommended_follow_ups_not_yet_done",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "5. residual risks / recommended follow-ups (not yet done)"
+      "norm_label": "5. residual risks / recommended follow-ups (not yet done)",
+      "id": "production_security_5_residual_risks_recommended_follow_ups_not_yet_done"
     },
     {
       "label": "6. Reality check on \"unbreachable\"",
@@ -2301,10 +2411,10 @@
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L137",
       "_origin": "ast",
-      "id": "production_security_6_reality_check_on_unbreachable",
       "community": 33,
       "community_name": "AlpenGlow \u2014 Production Security & Go-Live Checklist",
-      "norm_label": "6. reality check on \"unbreachable\""
+      "norm_label": "6. reality check on \"unbreachable\"",
+      "id": "production_security_6_reality_check_on_unbreachable"
     },
     {
       "label": "README.md",
@@ -2312,10 +2422,10 @@
       "source_file": "deploy/README.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "deploy_readme",
       "community": 37,
       "community_name": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
-      "norm_label": "readme.md"
+      "norm_label": "readme.md",
+      "id": "deploy_readme"
     },
     {
       "label": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
@@ -2323,10 +2433,10 @@
       "source_file": "deploy/README.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "deploy_readme_migrating_alpenglow_from_supabase_cloud_self_hosted_supabase_vps",
       "community": 37,
       "community_name": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
-      "norm_label": "migrating alpenglow from supabase cloud \u2192 self-hosted supabase (vps)"
+      "norm_label": "migrating alpenglow from supabase cloud \u2192 self-hosted supabase (vps)",
+      "id": "deploy_readme_migrating_alpenglow_from_supabase_cloud_self_hosted_supabase_vps"
     },
     {
       "label": "Order of operations",
@@ -2334,10 +2444,10 @@
       "source_file": "deploy/README.md",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "deploy_readme_order_of_operations",
       "community": 37,
       "community_name": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
-      "norm_label": "order of operations"
+      "norm_label": "order of operations",
+      "id": "deploy_readme_order_of_operations"
     },
     {
       "label": "What stays the same",
@@ -2345,10 +2455,10 @@
       "source_file": "deploy/README.md",
       "source_location": "L21",
       "_origin": "ast",
-      "id": "deploy_readme_what_stays_the_same",
       "community": 37,
       "community_name": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
-      "norm_label": "what stays the same"
+      "norm_label": "what stays the same",
+      "id": "deploy_readme_what_stays_the_same"
     },
     {
       "label": "What changes",
@@ -2356,10 +2466,10 @@
       "source_file": "deploy/README.md",
       "source_location": "L31",
       "_origin": "ast",
-      "id": "deploy_readme_what_changes",
       "community": 37,
       "community_name": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
-      "norm_label": "what changes"
+      "norm_label": "what changes",
+      "id": "deploy_readme_what_changes"
     },
     {
       "label": "Adding a domain + TLS later",
@@ -2367,10 +2477,10 @@
       "source_file": "deploy/README.md",
       "source_location": "L41",
       "_origin": "ast",
-      "id": "deploy_readme_adding_a_domain_tls_later",
       "community": 37,
       "community_name": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
-      "norm_label": "adding a domain + tls later"
+      "norm_label": "adding a domain + tls later",
+      "id": "deploy_readme_adding_a_domain_tls_later"
     },
     {
       "label": "query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
@@ -2378,10 +2488,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea",
       "community": 1,
       "community_name": "Q: How does OTP verification connect to CRM lead creation?",
-      "norm_label": "query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md"
+      "norm_label": "query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea"
     },
     {
       "label": "Q: How does OTP verification connect to CRM lead creation?",
@@ -2389,10 +2499,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
       "community": 1,
       "community_name": "Q: How does OTP verification connect to CRM lead creation?",
-      "norm_label": "q: how does otp verification connect to crm lead creation?"
+      "norm_label": "q: how does otp verification connect to crm lead creation?",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation"
     },
     {
       "label": "Answer",
@@ -2400,10 +2510,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_answer",
       "community": 1,
       "community_name": "Q: How does OTP verification connect to CRM lead creation?",
-      "norm_label": "answer"
+      "norm_label": "answer",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_answer"
     },
     {
       "label": "Outcome",
@@ -2411,10 +2521,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_outcome",
       "community": 1,
       "community_name": "Q: How does OTP verification connect to CRM lead creation?",
-      "norm_label": "outcome"
+      "norm_label": "outcome",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_outcome"
     },
     {
       "label": "Source Nodes",
@@ -2422,10 +2532,10 @@
       "source_file": "graphify-out/memory/query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_source_nodes",
       "community": 1,
       "community_name": "Q: How does OTP verification connect to CRM lead creation?",
-      "norm_label": "source nodes"
+      "norm_label": "source nodes",
+      "id": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_source_nodes"
     },
     {
       "label": "query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
@@ -2433,10 +2543,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do",
       "community": 25,
       "community_name": "Q: What are the two verification scopes and where do they apply?",
-      "norm_label": "query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md"
+      "norm_label": "query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do"
     },
     {
       "label": "Q: What are the two verification scopes and where do they apply?",
@@ -2444,10 +2554,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
       "community": 25,
       "community_name": "Q: What are the two verification scopes and where do they apply?",
-      "norm_label": "q: what are the two verification scopes and where do they apply?"
+      "norm_label": "q: what are the two verification scopes and where do they apply?",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply"
     },
     {
       "label": "Answer",
@@ -2455,10 +2565,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_answer",
       "community": 25,
       "community_name": "Q: What are the two verification scopes and where do they apply?",
-      "norm_label": "answer"
+      "norm_label": "answer",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_answer"
     },
     {
       "label": "Outcome",
@@ -2466,10 +2576,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_outcome",
       "community": 25,
       "community_name": "Q: What are the two verification scopes and where do they apply?",
-      "norm_label": "outcome"
+      "norm_label": "outcome",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_outcome"
     },
     {
       "label": "Source Nodes",
@@ -2477,10 +2587,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_are_the_two_verification_scopes_and_where_do.md",
       "source_location": "L20",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_source_nodes",
       "community": 25,
       "community_name": "Q: What are the two verification scopes and where do they apply?",
-      "norm_label": "source nodes"
+      "norm_label": "source nodes",
+      "id": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_source_nodes"
     },
     {
       "label": "query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
@@ -2488,10 +2598,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md"
+      "norm_label": "query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables"
     },
     {
       "label": "Q: What is the RLS security model for the CRM tables?",
@@ -2499,10 +2609,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "q: what is the rls security model for the crm tables?"
+      "norm_label": "q: what is the rls security model for the crm tables?",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables"
     },
     {
       "label": "Answer",
@@ -2510,10 +2620,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_answer",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "answer"
+      "norm_label": "answer",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_answer"
     },
     {
       "label": "Outcome",
@@ -2521,10 +2631,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_outcome",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "outcome"
+      "norm_label": "outcome",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_outcome"
     },
     {
       "label": "Source Nodes",
@@ -2532,10 +2642,10 @@
       "source_file": "graphify-out/memory/query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables.md",
       "source_location": "L20",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_source_nodes",
       "community": 28,
       "community_name": "Q: What is the RLS security model for the CRM tables?",
-      "norm_label": "source nodes"
+      "norm_label": "source nodes",
+      "id": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_source_nodes"
     },
     {
       "label": "query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
@@ -2543,10 +2653,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md"
+      "norm_label": "query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit"
     },
     {
       "label": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
@@ -2554,10 +2664,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "q: why did the whatsapp otp template keep failing with meta api errors 132001 and 132018?"
+      "norm_label": "q: why did the whatsapp otp template keep failing with meta api errors 132001 and 132018?",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018"
     },
     {
       "label": "Answer",
@@ -2565,10 +2675,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_answer",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "answer"
+      "norm_label": "answer",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_answer"
     },
     {
       "label": "Outcome",
@@ -2576,10 +2686,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_outcome",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "outcome"
+      "norm_label": "outcome",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_outcome"
     },
     {
       "label": "Source Nodes",
@@ -2587,10 +2697,10 @@
       "source_file": "graphify-out/memory/query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit.md",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_source_nodes",
       "community": 29,
       "community_name": "Q: Why did the WhatsApp OTP template keep failing with Meta API errors 132001 and 132018?",
-      "norm_label": "source nodes"
+      "norm_label": "source nodes",
+      "id": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_source_nodes"
     },
     {
       "label": "query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
@@ -2598,10 +2708,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md"
+      "norm_label": "query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr"
     },
     {
       "label": "Q: How does deploying a code change actually reach production?",
@@ -2609,10 +2719,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "q: how does deploying a code change actually reach production?"
+      "norm_label": "q: how does deploying a code change actually reach production?",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production"
     },
     {
       "label": "Answer",
@@ -2620,10 +2730,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_answer",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "answer"
+      "norm_label": "answer",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_answer"
     },
     {
       "label": "Outcome",
@@ -2631,10 +2741,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_outcome",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "outcome"
+      "norm_label": "outcome",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_outcome"
     },
     {
       "label": "Source Nodes",
@@ -2642,10 +2752,10 @@
       "source_file": "graphify-out/memory/query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr.md",
       "source_location": "L20",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_source_nodes",
       "community": 30,
       "community_name": "Q: How does deploying a code change actually reach production?",
-      "norm_label": "source nodes"
+      "norm_label": "source nodes",
+      "id": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_source_nodes"
     },
     {
       "label": "query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
@@ -2653,10 +2763,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md"
+      "norm_label": "query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e"
     },
     {
       "label": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
@@ -2664,10 +2774,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "q: why does the graph barely represent compass.html even though it has hundreds of lines of real logic?"
+      "norm_label": "q: why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic"
     },
     {
       "label": "Answer",
@@ -2675,10 +2785,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_answer",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "answer"
+      "norm_label": "answer",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_answer"
     },
     {
       "label": "Outcome",
@@ -2686,10 +2796,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L17",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_outcome",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "outcome"
+      "norm_label": "outcome",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_outcome"
     },
     {
       "label": "Source Nodes",
@@ -2697,10 +2807,10 @@
       "source_file": "graphify-out/memory/query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e.md",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_source_nodes",
       "community": 31,
       "community_name": "Q: Why does the graph barely represent compass.html even though it has hundreds of lines of real logic?",
-      "norm_label": "source nodes"
+      "norm_label": "source nodes",
+      "id": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_source_nodes"
     },
     {
       "label": "query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md",
@@ -2708,10 +2818,10 @@
       "source_file": "graphify-out/memory/query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and",
       "community": 52,
       "community_name": "Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?",
-      "norm_label": "query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md"
+      "norm_label": "query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md",
+      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and"
     },
     {
       "label": "Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?",
@@ -2719,10 +2829,10 @@
       "source_file": "graphify-out/memory/query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_q_how_is_seo_handled_across_the_alpenglow_site_and_what_silently_undoes_seo_edits",
       "community": 52,
       "community_name": "Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?",
-      "norm_label": "q: how is seo handled across the alpenglow site, and what silently undoes seo edits?"
+      "norm_label": "q: how is seo handled across the alpenglow site, and what silently undoes seo edits?",
+      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_q_how_is_seo_handled_across_the_alpenglow_site_and_what_silently_undoes_seo_edits"
     },
     {
       "label": "Answer",
@@ -2730,10 +2840,10 @@
       "source_file": "graphify-out/memory/query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_answer",
       "community": 52,
       "community_name": "Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?",
-      "norm_label": "answer"
+      "norm_label": "answer",
+      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_answer"
     },
     {
       "label": "Outcome",
@@ -2741,10 +2851,10 @@
       "source_file": "graphify-out/memory/query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_outcome",
       "community": 52,
       "community_name": "Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?",
-      "norm_label": "outcome"
+      "norm_label": "outcome",
+      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_outcome"
     },
     {
       "label": "Source Nodes",
@@ -2752,10 +2862,10 @@
       "source_file": "graphify-out/memory/query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md",
       "source_location": "L20",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_source_nodes",
       "community": 52,
       "community_name": "Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?",
-      "norm_label": "source nodes"
+      "norm_label": "source nodes",
+      "id": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_source_nodes"
     },
     {
       "label": "query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con.md",
@@ -2763,10 +2873,10 @@
       "source_file": "graphify-out/memory/query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con",
       "community": 53,
       "community_name": "Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?",
-      "norm_label": "query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con.md"
+      "norm_label": "query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con.md",
+      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con"
     },
     {
       "label": "Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?",
@@ -2774,10 +2884,10 @@
       "source_file": "graphify-out/memory/query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con.md",
       "source_location": "L10",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_q_how_were_the_em_en_dashes_in_the_generated_seo_content_fixed_and_what_s_the_escaping_pitfall",
       "community": 53,
       "community_name": "Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?",
-      "norm_label": "q: how were the em/en dashes in the generated seo content fixed, and what's the escaping pitfall?"
+      "norm_label": "q: how were the em/en dashes in the generated seo content fixed, and what's the escaping pitfall?",
+      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_q_how_were_the_em_en_dashes_in_the_generated_seo_content_fixed_and_what_s_the_escaping_pitfall"
     },
     {
       "label": "Answer",
@@ -2785,10 +2895,10 @@
       "source_file": "graphify-out/memory/query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con.md",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_answer",
       "community": 53,
       "community_name": "Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?",
-      "norm_label": "answer"
+      "norm_label": "answer",
+      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_answer"
     },
     {
       "label": "Outcome",
@@ -2796,10 +2906,10 @@
       "source_file": "graphify-out/memory/query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con.md",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_outcome",
       "community": 53,
       "community_name": "Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?",
-      "norm_label": "outcome"
+      "norm_label": "outcome",
+      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_outcome"
     },
     {
       "label": "Source Nodes",
@@ -2807,10 +2917,10 @@
       "source_file": "graphify-out/memory/query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con.md",
       "source_location": "L20",
       "_origin": "ast",
-      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_source_nodes",
       "community": 53,
       "community_name": "Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?",
-      "norm_label": "source nodes"
+      "norm_label": "source nodes",
+      "id": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_source_nodes"
     }
   ],
   "links": [
@@ -4877,391 +4987,89 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "deploy/01-vps-setup.sh",
-      "source_location": "L1",
+      "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "deploy_01_vps_setup",
-      "target": "deploy_01_vps_setup_sh__entry",
+      "source": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr",
+      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "deploy/02-migrate-data.sh",
-      "source_location": "L1",
+      "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "deploy_02_migrate_data",
-      "target": "deploy_02_migrate_data_sh__entry",
+      "source": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
+      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_answer",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "deploy/03-deploy-functions.sh",
-      "source_location": "L1",
+      "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "deploy_03_deploy_functions",
-      "target": "deploy_03_deploy_functions_sh__entry",
+      "source": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
+      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_outcome",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "deploy/04-apply-frontend-values.sh",
-      "source_location": "L1",
+      "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "deploy_04_apply_frontend_values",
-      "target": "deploy_04_apply_frontend_values_sh__entry",
+      "source": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
+      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_source_nodes",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L37",
+      "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "deploy_generate_keys",
-      "target": "deploy_generate_keys_anonkey",
+      "source": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the",
+      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L11",
+      "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "deploy_generate_keys",
-      "target": "deploy_generate_keys_base64url",
+      "source": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
+      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_answer",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L9",
+      "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "deploy_generate_keys",
-      "target": "deploy_generate_keys_crypto",
+      "source": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
+      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_outcome",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L46",
+      "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "deploy_generate_keys",
-      "target": "deploy_generate_keys_dashboardpassword",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L33",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "deploy_generate_keys",
-      "target": "deploy_generate_keys_jwtsecret",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L34",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "deploy_generate_keys",
-      "target": "deploy_generate_keys_now",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L45",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "deploy_generate_keys",
-      "target": "deploy_generate_keys_postgrespassword",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L41",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "deploy_generate_keys",
-      "target": "deploy_generate_keys_servicerolekey",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L19",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "deploy_generate_keys",
-      "target": "deploy_generate_keys_signjwt",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "deploy/generate-keys.js",
-      "source_location": "L21",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "deploy_generate_keys_signjwt",
-      "target": "deploy_generate_keys_base64url",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "deploy/vps-deploy.sh",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "deploy_vps_deploy",
-      "target": "deploy_vps_deploy_sh__entry",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_biz",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L214",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_block",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L264",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_card",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L132",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_esc",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L135",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_faqschema",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_fs",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L260",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_groupedslugs",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L55",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_groups",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L149",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_jsonld",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L22",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_p",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L259",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_packbyslug",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L63",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_packs",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L24",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_pages",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_path",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L2",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_root",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L261",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head",
-      "target": "scripts_seo_head_ungrouped",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L217",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head_block",
-      "target": "scripts_seo_head_esc",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L268",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head_card",
-      "target": "scripts_seo_head_esc",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L157",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head_jsonld",
-      "target": "scripts_seo_head_faqschema",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "scripts/seo-head.js",
-      "source_location": "L240",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_seo_head_block",
-      "target": "scripts_seo_head_jsonld",
+      "source": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
+      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_source_nodes",
       "confidence_score": 1.0
     },
     {
@@ -5311,204 +5119,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "scripts/setup-new-laptop.sh",
-      "source_location": "L1",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "scripts_setup_new_laptop",
-      "target": "scripts_setup_new_laptop_sh__entry",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/_shared/cors.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_shared_cors",
-      "target": "supabase_functions_shared_cors_allowed_origins",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/_shared/cors.ts",
-      "source_location": "L17",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_shared_cors",
-      "target": "supabase_functions_shared_cors_corsfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/_shared/cors.ts",
-      "source_location": "L31",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_shared_cors",
-      "target": "supabase_functions_shared_cors_corsheaders",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/_shared/ratelimit.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_shared_ratelimit",
-      "target": "supabase_functions_shared_ratelimit_otpratelimited",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/chat-compass/index.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_chat_compass_index",
-      "target": "supabase_functions_chat_compass_index_allowed_origins",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/chat-compass/index.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_chat_compass_index",
-      "target": "supabase_functions_chat_compass_index_corsfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L26",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_crm_index",
-      "target": "supabase_functions_crm_index_allowed_origins",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L34",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_crm_index",
-      "target": "supabase_functions_crm_index_corsfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L52",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_crm_index",
-      "target": "supabase_functions_crm_index_followup_writable",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L48",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_crm_index",
-      "target": "supabase_functions_crm_index_lead_writable",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L54",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_crm_index",
-      "target": "supabase_functions_crm_index_pick",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/crm/index.ts",
-      "source_location": "L61",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_crm_index",
-      "target": "supabase_functions_crm_index_safeequal",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/send-email-otp/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_send_email_otp_index",
-      "target": "supabase_functions_send_email_otp_index_allowed_origins",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/send-email-otp/index.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_send_email_otp_index",
-      "target": "supabase_functions_send_email_otp_index_corsfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/send-email-otp/index.ts",
-      "source_location": "L29",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_send_email_otp_index",
-      "target": "supabase_functions_send_email_otp_index_otpratelimited",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/send-lead-email/index.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_send_lead_email_index",
-      "target": "supabase_functions_send_lead_email_index_allowed_origins",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/send-lead-email/index.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_send_lead_email_index",
-      "target": "supabase_functions_send_lead_email_index_corsfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "supabase/functions/send-sms-otp/index.ts",
       "source_location": "L6",
       "weight": 1.0,
@@ -5553,72 +5163,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/submit-contact/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_submit_contact_index",
-      "target": "supabase_functions_submit_contact_index_allowed_origins",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/submit-contact/index.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_submit_contact_index",
-      "target": "supabase_functions_submit_contact_index_corsfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/submit-lead/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_submit_lead_index",
-      "target": "supabase_functions_submit_lead_index_allowed_origins",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/submit-lead/index.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_submit_lead_index",
-      "target": "supabase_functions_submit_lead_index_corsfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/verify-email-otp/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_verify_email_otp_index",
-      "target": "supabase_functions_verify_email_otp_index_allowed_origins",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "supabase/functions/verify-email-otp/index.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "supabase_functions_verify_email_otp_index",
-      "target": "supabase_functions_verify_email_otp_index_corsfor",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "supabase/functions/verify-sms-otp/index.ts",
       "source_location": "L6",
       "weight": 1.0,
@@ -5652,13 +5196,667 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "deploy/01-vps-setup.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_01_vps_setup",
+      "target": "deploy_01_vps_setup_sh__entry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/02-migrate-data.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_02_migrate_data",
+      "target": "deploy_02_migrate_data_sh__entry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/03-deploy-functions.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_03_deploy_functions",
+      "target": "deploy_03_deploy_functions_sh__entry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/04-apply-frontend-values.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_04_apply_frontend_values",
+      "target": "deploy_04_apply_frontend_values_sh__entry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys",
+      "target": "deploy_generate_keys_anonkey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys",
+      "target": "deploy_generate_keys_base64url"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys",
+      "target": "deploy_generate_keys_crypto"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys",
+      "target": "deploy_generate_keys_dashboardpassword"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys",
+      "target": "deploy_generate_keys_jwtsecret"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys",
+      "target": "deploy_generate_keys_now"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys",
+      "target": "deploy_generate_keys_postgrespassword"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys",
+      "target": "deploy_generate_keys_servicerolekey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys",
+      "target": "deploy_generate_keys_signjwt"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/generate-keys.js",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_generate_keys_signjwt",
+      "target": "deploy_generate_keys_base64url"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/vps-deploy.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "deploy_vps_deploy",
+      "target": "deploy_vps_deploy_sh__entry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_biz"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L214",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_block"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L264",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_card"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L132",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_esc"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L135",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_faqschema"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_fs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L260",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_groupedslugs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_groups"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_jsonld"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_p"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L259",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_packbyslug"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_packs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_pages"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_path"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_root"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L261",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head",
+      "target": "scripts_seo_head_ungrouped"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L217",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head_block",
+      "target": "scripts_seo_head_esc"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L268",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head_card",
+      "target": "scripts_seo_head_esc"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L157",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head_jsonld",
+      "target": "scripts_seo_head_faqschema"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/seo-head.js",
+      "source_location": "L240",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_seo_head_block",
+      "target": "scripts_seo_head_jsonld"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/setup-new-laptop.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "scripts_setup_new_laptop",
+      "target": "scripts_setup_new_laptop_sh__entry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/_shared/cors.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_shared_cors",
+      "target": "supabase_functions_shared_cors_allowed_origins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/_shared/cors.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_shared_cors",
+      "target": "supabase_functions_shared_cors_corsfor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/_shared/cors.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_shared_cors",
+      "target": "supabase_functions_shared_cors_corsheaders"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/_shared/ratelimit.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_shared_ratelimit",
+      "target": "supabase_functions_shared_ratelimit_otpratelimited"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/chat-compass/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_chat_compass_index",
+      "target": "supabase_functions_chat_compass_index_allowed_origins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/chat-compass/index.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_chat_compass_index",
+      "target": "supabase_functions_chat_compass_index_corsfor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_crm_index",
+      "target": "supabase_functions_crm_index_allowed_origins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_crm_index",
+      "target": "supabase_functions_crm_index_corsfor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_crm_index",
+      "target": "supabase_functions_crm_index_followup_writable"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_crm_index",
+      "target": "supabase_functions_crm_index_lead_writable"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_crm_index",
+      "target": "supabase_functions_crm_index_pick"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/crm/index.ts",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_crm_index",
+      "target": "supabase_functions_crm_index_safeequal"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/send-email-otp/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_send_email_otp_index",
+      "target": "supabase_functions_send_email_otp_index_allowed_origins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/send-email-otp/index.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_send_email_otp_index",
+      "target": "supabase_functions_send_email_otp_index_corsfor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/send-email-otp/index.ts",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_send_email_otp_index",
+      "target": "supabase_functions_send_email_otp_index_otpratelimited"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/send-lead-email/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_send_lead_email_index",
+      "target": "supabase_functions_send_lead_email_index_allowed_origins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/send-lead-email/index.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_send_lead_email_index",
+      "target": "supabase_functions_send_lead_email_index_corsfor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/submit-contact/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_submit_contact_index",
+      "target": "supabase_functions_submit_contact_index_allowed_origins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/submit-contact/index.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_submit_contact_index",
+      "target": "supabase_functions_submit_contact_index_corsfor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/submit-lead/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_submit_lead_index",
+      "target": "supabase_functions_submit_lead_index_allowed_origins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/submit-lead/index.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_submit_lead_index",
+      "target": "supabase_functions_submit_lead_index_corsfor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/verify-email-otp/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_verify_email_otp_index",
+      "target": "supabase_functions_verify_email_otp_index_allowed_origins"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "supabase/functions/verify-email-otp/index.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "confidence_score": 1.0,
+      "source": "supabase_functions_verify_email_otp_index",
+      "target": "supabase_functions_verify_email_otp_index_corsfor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "supabase/functions/whatsapp-webhook/index.ts",
       "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "supabase_functions_whatsapp_webhook_index",
-      "target": "supabase_functions_whatsapp_webhook_index_allowed_origins",
-      "confidence_score": 1.0
+      "target": "supabase_functions_whatsapp_webhook_index_allowed_origins"
     },
     {
       "relation": "contains",
@@ -5667,9 +5865,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "supabase_functions_whatsapp_webhook_index",
-      "target": "supabase_functions_whatsapp_webhook_index_corsfor",
-      "confidence_score": 1.0
+      "target": "supabase_functions_whatsapp_webhook_index_corsfor"
     },
     {
       "relation": "contains",
@@ -5678,9 +5876,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup",
-      "target": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide"
     },
     {
       "relation": "contains",
@@ -5689,9 +5887,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_architecture_overview",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_architecture_overview"
     },
     {
       "relation": "contains",
@@ -5700,9 +5898,9 @@
       "source_location": "L180",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_file_reference",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_file_reference"
     },
     {
       "relation": "contains",
@@ -5711,9 +5909,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_step_1_create_a_supabase_project",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_step_1_create_a_supabase_project"
     },
     {
       "relation": "contains",
@@ -5722,9 +5920,9 @@
       "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_step_2_run_the_database_migration",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_step_2_run_the_database_migration"
     },
     {
       "relation": "contains",
@@ -5733,9 +5931,9 @@
       "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_step_3_set_up_whatsapp_otp_meta_cloud_api",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_step_3_set_up_whatsapp_otp_meta_cloud_api"
     },
     {
       "relation": "contains",
@@ -5744,9 +5942,9 @@
       "source_location": "L73",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_step_4_set_up_resend_email_otp_notifications",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_step_4_set_up_resend_email_otp_notifications"
     },
     {
       "relation": "contains",
@@ -5755,9 +5953,9 @@
       "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_step_5_set_edge_function_secrets",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_step_5_set_edge_function_secrets"
     },
     {
       "relation": "contains",
@@ -5766,9 +5964,9 @@
       "source_location": "L104",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_step_6_deploy_the_edge_functions",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_step_6_deploy_the_edge_functions"
     },
     {
       "relation": "contains",
@@ -5777,9 +5975,9 @@
       "source_location": "L133",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_step_7_configure_the_frontend",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_step_7_configure_the_frontend"
     },
     {
       "relation": "contains",
@@ -5788,9 +5986,9 @@
       "source_location": "L148",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_step_8_optional_google_sheets_integration",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_step_8_optional_google_sheets_integration"
     },
     {
       "relation": "contains",
@@ -5799,9 +5997,9 @@
       "source_location": "L164",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_step_9_optional_schedule_otp_cleanup",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_step_9_optional_schedule_otp_cleanup"
     },
     {
       "relation": "contains",
@@ -5810,9 +6008,9 @@
       "source_location": "L218",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_testing_checklist",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_testing_checklist"
     },
     {
       "relation": "contains",
@@ -5821,9 +6019,9 @@
       "source_location": "L206",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "alpenglow_backend_setup_alpen_glow_tours_backend_setup_guide",
-      "target": "alpenglow_backend_setup_what_each_flow_does_now",
-      "confidence_score": 1.0
+      "target": "alpenglow_backend_setup_what_each_flow_does_now"
     },
     {
       "relation": "contains",
@@ -5832,9 +6030,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "claude",
-      "target": "claude_deploy_workflow",
-      "confidence_score": 1.0
+      "target": "claude_deploy_workflow"
     },
     {
       "relation": "contains",
@@ -5843,9 +6041,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "claude",
-      "target": "claude_graphify",
-      "confidence_score": 1.0
+      "target": "claude_graphify"
     },
     {
       "relation": "contains",
@@ -5854,9 +6052,9 @@
       "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "claude",
-      "target": "claude_seo",
-      "confidence_score": 1.0
+      "target": "claude_seo"
     },
     {
       "relation": "contains",
@@ -5865,9 +6063,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security",
-      "target": "production_security_alpenglow_production_security_go_live_checklist",
-      "confidence_score": 1.0
+      "target": "production_security_alpenglow_production_security_go_live_checklist"
     },
     {
       "relation": "contains",
@@ -5876,9 +6074,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_alpenglow_production_security_go_live_checklist",
-      "target": "production_security_1_what_changed_and_why",
-      "confidence_score": 1.0
+      "target": "production_security_1_what_changed_and_why"
     },
     {
       "relation": "contains",
@@ -5887,9 +6085,9 @@
       "source_location": "L46",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_alpenglow_production_security_go_live_checklist",
-      "target": "production_security_2_manual_steps_required_before_go_live",
-      "confidence_score": 1.0
+      "target": "production_security_2_manual_steps_required_before_go_live"
     },
     {
       "relation": "contains",
@@ -5898,9 +6096,9 @@
       "source_location": "L88",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_alpenglow_production_security_go_live_checklist",
-      "target": "production_security_3_dev_mode_do_not_flip_blindly",
-      "confidence_score": 1.0
+      "target": "production_security_3_dev_mode_do_not_flip_blindly"
     },
     {
       "relation": "contains",
@@ -5909,9 +6107,9 @@
       "source_location": "L104",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_alpenglow_production_security_go_live_checklist",
-      "target": "production_security_4_post_deploy_smoke_test_crash_prevention",
-      "confidence_score": 1.0
+      "target": "production_security_4_post_deploy_smoke_test_crash_prevention"
     },
     {
       "relation": "contains",
@@ -5920,9 +6118,9 @@
       "source_location": "L117",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_alpenglow_production_security_go_live_checklist",
-      "target": "production_security_5_residual_risks_recommended_follow_ups_not_yet_done",
-      "confidence_score": 1.0
+      "target": "production_security_5_residual_risks_recommended_follow_ups_not_yet_done"
     },
     {
       "relation": "contains",
@@ -5931,9 +6129,9 @@
       "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_alpenglow_production_security_go_live_checklist",
-      "target": "production_security_6_reality_check_on_unbreachable",
-      "confidence_score": 1.0
+      "target": "production_security_6_reality_check_on_unbreachable"
     },
     {
       "relation": "contains",
@@ -5942,9 +6140,9 @@
       "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_1_what_changed_and_why",
-      "target": "production_security_cors_locked",
-      "confidence_score": 1.0
+      "target": "production_security_cors_locked"
     },
     {
       "relation": "contains",
@@ -5953,9 +6151,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_1_what_changed_and_why",
-      "target": "production_security_critical_fix_customer_lead_data_was_exposed",
-      "confidence_score": 1.0
+      "target": "production_security_critical_fix_customer_lead_data_was_exposed"
     },
     {
       "relation": "contains",
@@ -5964,9 +6162,9 @@
       "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_1_what_changed_and_why",
-      "target": "production_security_other",
-      "confidence_score": 1.0
+      "target": "production_security_other"
     },
     {
       "relation": "contains",
@@ -5975,9 +6173,9 @@
       "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_1_what_changed_and_why",
-      "target": "production_security_otp_hardening",
-      "confidence_score": 1.0
+      "target": "production_security_otp_hardening"
     },
     {
       "relation": "contains",
@@ -5986,9 +6184,9 @@
       "source_location": "L48",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_2_manual_steps_required_before_go_live",
-      "target": "production_security_a_set_supabase_secrets_edge_functions_secrets_or_cli",
-      "confidence_score": 1.0
+      "target": "production_security_a_set_supabase_secrets_edge_functions_secrets_or_cli"
     },
     {
       "relation": "contains",
@@ -5997,9 +6195,9 @@
       "source_location": "L58",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_2_manual_steps_required_before_go_live",
-      "target": "production_security_b_apply_the_database_migration",
-      "confidence_score": 1.0
+      "target": "production_security_b_apply_the_database_migration"
     },
     {
       "relation": "contains",
@@ -6008,9 +6206,9 @@
       "source_location": "L65",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_2_manual_steps_required_before_go_live",
-      "target": "production_security_c_deploy_the_changed_new_edge_functions",
-      "confidence_score": 1.0
+      "target": "production_security_c_deploy_the_changed_new_edge_functions"
     },
     {
       "relation": "contains",
@@ -6019,9 +6217,9 @@
       "source_location": "L77",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_2_manual_steps_required_before_go_live",
-      "target": "production_security_d_deploy_the_updated_frontend",
-      "confidence_score": 1.0
+      "target": "production_security_d_deploy_the_updated_frontend"
     },
     {
       "relation": "contains",
@@ -6030,9 +6228,9 @@
       "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "production_security_2_manual_steps_required_before_go_live",
-      "target": "production_security_deploy_order",
-      "confidence_score": 1.0
+      "target": "production_security_deploy_order"
     },
     {
       "relation": "contains",
@@ -6041,9 +6239,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "deploy_readme",
-      "target": "deploy_readme_migrating_alpenglow_from_supabase_cloud_self_hosted_supabase_vps",
-      "confidence_score": 1.0
+      "target": "deploy_readme_migrating_alpenglow_from_supabase_cloud_self_hosted_supabase_vps"
     },
     {
       "relation": "contains",
@@ -6052,9 +6250,9 @@
       "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "deploy_readme_migrating_alpenglow_from_supabase_cloud_self_hosted_supabase_vps",
-      "target": "deploy_readme_adding_a_domain_tls_later",
-      "confidence_score": 1.0
+      "target": "deploy_readme_adding_a_domain_tls_later"
     },
     {
       "relation": "contains",
@@ -6063,9 +6261,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "deploy_readme_migrating_alpenglow_from_supabase_cloud_self_hosted_supabase_vps",
-      "target": "deploy_readme_order_of_operations",
-      "confidence_score": 1.0
+      "target": "deploy_readme_order_of_operations"
     },
     {
       "relation": "contains",
@@ -6074,9 +6272,9 @@
       "source_location": "L31",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "deploy_readme_migrating_alpenglow_from_supabase_cloud_self_hosted_supabase_vps",
-      "target": "deploy_readme_what_changes",
-      "confidence_score": 1.0
+      "target": "deploy_readme_what_changes"
     },
     {
       "relation": "contains",
@@ -6085,9 +6283,9 @@
       "source_location": "L21",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "deploy_readme_migrating_alpenglow_from_supabase_cloud_self_hosted_supabase_vps",
-      "target": "deploy_readme_what_stays_the_same",
-      "confidence_score": 1.0
+      "target": "deploy_readme_what_stays_the_same"
     },
     {
       "relation": "contains",
@@ -6096,9 +6294,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea",
-      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation"
     },
     {
       "relation": "contains",
@@ -6107,9 +6305,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
-      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_answer",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_answer"
     },
     {
       "relation": "contains",
@@ -6118,9 +6316,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
-      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_outcome",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_outcome"
     },
     {
       "relation": "contains",
@@ -6129,9 +6327,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_q_how_does_otp_verification_connect_to_crm_lead_creation",
-      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_source_nodes",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea_source_nodes"
     },
     {
       "relation": "contains",
@@ -6140,9 +6338,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do",
-      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply"
     },
     {
       "relation": "contains",
@@ -6151,9 +6349,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
-      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_answer",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_answer"
     },
     {
       "relation": "contains",
@@ -6162,9 +6360,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
-      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_outcome",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_outcome"
     },
     {
       "relation": "contains",
@@ -6173,9 +6371,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_q_what_are_the_two_verification_scopes_and_where_do_they_apply",
-      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_source_nodes",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083252_what_are_the_two_verification_scopes_and_where_do_source_nodes"
     },
     {
       "relation": "contains",
@@ -6184,9 +6382,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables",
-      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables"
     },
     {
       "relation": "contains",
@@ -6195,9 +6393,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
-      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_answer",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_answer"
     },
     {
       "relation": "contains",
@@ -6206,9 +6404,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
-      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_outcome",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_outcome"
     },
     {
       "relation": "contains",
@@ -6217,9 +6415,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_q_what_is_the_rls_security_model_for_the_crm_tables",
-      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_source_nodes",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083252_what_is_the_rls_security_model_for_the_crm_tables_source_nodes"
     },
     {
       "relation": "contains",
@@ -6228,9 +6426,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit",
-      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018"
     },
     {
       "relation": "contains",
@@ -6239,9 +6437,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
-      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_answer",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_answer"
     },
     {
       "relation": "contains",
@@ -6250,9 +6448,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
-      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_outcome",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_outcome"
     },
     {
       "relation": "contains",
@@ -6261,9 +6459,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_q_why_did_the_whatsapp_otp_template_keep_failing_with_meta_api_errors_132001_and_132018",
-      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_source_nodes",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083318_why_did_the_whatsapp_otp_template_keep_failing_wit_source_nodes"
     },
     {
       "relation": "contains",
@@ -6272,9 +6470,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr",
-      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production"
     },
     {
       "relation": "contains",
@@ -6283,9 +6481,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
-      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_answer",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_answer"
     },
     {
       "relation": "contains",
@@ -6294,9 +6492,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
-      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_outcome",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_outcome"
     },
     {
       "relation": "contains",
@@ -6305,9 +6503,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_q_how_does_deploying_a_code_change_actually_reach_production",
-      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_source_nodes",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083319_how_does_deploying_a_code_change_actually_reach_pr_source_nodes"
     },
     {
       "relation": "contains",
@@ -6316,9 +6514,9 @@
       "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e",
-      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic"
     },
     {
       "relation": "contains",
@@ -6327,9 +6525,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
-      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_answer",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_answer"
     },
     {
       "relation": "contains",
@@ -6338,9 +6536,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
-      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_outcome",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_outcome"
     },
     {
       "relation": "contains",
@@ -6349,9 +6547,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_q_why_does_the_graph_barely_represent_compass_html_even_though_it_has_hundreds_of_lines_of_real_logic",
-      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_source_nodes",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260721_083337_why_does_the_graph_barely_represent_compass_html_e_source_nodes"
     },
     {
       "relation": "contains",
@@ -6360,9 +6558,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and",
-      "target": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_q_how_is_seo_handled_across_the_alpenglow_site_and_what_silently_undoes_seo_edits",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_q_how_is_seo_handled_across_the_alpenglow_site_and_what_silently_undoes_seo_edits"
     },
     {
       "relation": "contains",
@@ -6371,9 +6569,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_q_how_is_seo_handled_across_the_alpenglow_site_and_what_silently_undoes_seo_edits",
-      "target": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_answer",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_answer"
     },
     {
       "relation": "contains",
@@ -6382,9 +6580,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_q_how_is_seo_handled_across_the_alpenglow_site_and_what_silently_undoes_seo_edits",
-      "target": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_outcome",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_outcome"
     },
     {
       "relation": "contains",
@@ -6393,9 +6591,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_q_how_is_seo_handled_across_the_alpenglow_site_and_what_silently_undoes_seo_edits",
-      "target": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_source_nodes",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site_and_source_nodes"
     },
     {
       "relation": "contains",
@@ -6404,9 +6602,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con",
-      "target": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_q_how_were_the_em_en_dashes_in_the_generated_seo_content_fixed_and_what_s_the_escaping_pitfall",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_q_how_were_the_em_en_dashes_in_the_generated_seo_content_fixed_and_what_s_the_escaping_pitfall"
     },
     {
       "relation": "contains",
@@ -6415,9 +6613,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_q_how_were_the_em_en_dashes_in_the_generated_seo_content_fixed_and_what_s_the_escaping_pitfall",
-      "target": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_answer",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_answer"
     },
     {
       "relation": "contains",
@@ -6426,9 +6624,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_q_how_were_the_em_en_dashes_in_the_generated_seo_content_fixed_and_what_s_the_escaping_pitfall",
-      "target": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_outcome",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_outcome"
     },
     {
       "relation": "contains",
@@ -6437,11 +6635,11 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_q_how_were_the_em_en_dashes_in_the_generated_seo_content_fixed_and_what_s_the_escaping_pitfall",
-      "target": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_source_nodes",
-      "confidence_score": 1.0
+      "target": "graphify_out_memory_query_20260913_125155_how_were_the_em_en_dashes_in_the_generated_seo_con_source_nodes"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "6991acdebd32e0b954edc36f12706372b6881c6a"
+  "built_at_commit": "29414d2c23811a52ed37a93e07c9275619ba6250"
 }
