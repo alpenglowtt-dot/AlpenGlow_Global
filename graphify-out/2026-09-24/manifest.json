@@ -1,7 +1,7 @@
 {
   "AlpenGlow/api.js": {
-    "mtime": 1790261416.6057475,
-    "ast_hash": "a53f6e0f47cf766f8136774bf8b32fec",
+    "mtime": 1790078149.684662,
+    "ast_hash": "fae4ddafaf9cf58016ac5ddedbc7fa23",
     "semantic_hash": ""
   },
   "AlpenGlow/compass.js": {
@@ -290,8 +290,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/compass.html": {
-    "mtime": 1790261377.6286528,
-    "ast_hash": "6d591352d30c9f2bbb8d7d703308910a",
+    "mtime": 1790078098.8046885,
+    "ast_hash": "3451dabf31ae04cd3e32f5388de21a03",
     "semantic_hash": ""
   },
   "AlpenGlow/dashboard.html": {

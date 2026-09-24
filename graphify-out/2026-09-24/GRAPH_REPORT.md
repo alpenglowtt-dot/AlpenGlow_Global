@@ -1,16 +1,16 @@
-# Graph Report - AlpenGlow work  (2026-09-24)
+# Graph Report - AlpenGlow work  (2026-09-22)
 
 ## Corpus Check
-- 87 files · ~739,276 words
+- 86 files · ~738,715 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 267 nodes · 340 edges · 41 communities (25 shown, 16 thin omitted)
+- 261 nodes · 328 edges · 41 communities (25 shown, 16 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 6 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `49abdb24`
+- Built from commit: `29414d2c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,7 +66,7 @@
 10. `_bindContact()` - 7 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `_bindContact()` --indirect_call--> `_tpFinalSubmit()`  [INFERRED]
+- `_sbUpsert()` --calls--> `_getSb()`  [EXTRACTED]
   AlpenGlow/trip-planner.js → AlpenGlow/trip-planner.js  _Bridges community 0 → community 2_
 
 ## Import Cycles
@@ -75,16 +75,16 @@
 ## Communities (41 total, 16 thin omitted)
 
 ### Community 0 - "trip-planner.js"
-Cohesion: 0.11
-Nodes (39): _advance(), _bindContact(), _bindGlobal(), _bindMouseGlow(), _bindNextBtn(), _ccOptions(), _cityRows(), _close() (+31 more)
+Cohesion: 0.10
+Nodes (44): _advance(), _bindContact(), _bindGlobal(), _bindMouseGlow(), _bindNextBtn(), _buildPayload(), _ccOptions(), _cityRows() (+36 more)
 
 ### Community 1 - "Q: How does OTP verification connect to CRM lead creation?"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How does OTP verification connect to CRM lead creation?, Source Nodes
 
 ### Community 2 - "_bindStep"
-Cohesion: 0.25
-Nodes (16): _bindBudget(), _bindCount(), _bindDestination(), _bindDuration(), _bindMonth(), _bindOrigin(), _bindStep(), _bindTravelers() (+8 more)
+Cohesion: 0.42
+Nodes (11): _bindBudget(), _bindCount(), _bindDestination(), _bindDuration(), _bindMonth(), _bindOrigin(), _bindStep(), _bindTravelers() (+3 more)
 
 ### Community 3 - "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?"
 Cohesion: 0.40
@@ -95,8 +95,8 @@ Cohesion: 0.22
 Nodes (9): anonKey, base64url(), crypto, dashboardPassword, jwtSecret, now, postgresPassword, serviceRoleKey (+1 more)
 
 ### Community 5 - "api.js"
-Cohesion: 0.14
-Nodes (22): activate(), applyNow(), bindOtpInputs(), bindPhoneField(), bypassOn(), canViewPackageContent(), cleanPhone(), devOn() (+14 more)
+Cohesion: 0.18
+Nodes (16): bindOtpInputs(), bindPhoneField(), canViewPackageContent(), cleanPhone(), _done(), isPackageUnlocked(), isValidEmail(), isVerified() (+8 more)
 
 ### Community 6 - "crm/index.ts"
 Cohesion: 0.29
@@ -169,9 +169,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **What connects `Answer`, `Outcome`, `Source Nodes` to the rest of the system?**
   _104 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `trip-planner.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.10975609756097561 - nodes in this community are weakly interconnected._
-- **Should `api.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.14245014245014245 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09758454106280193 - nodes in this community are weakly interconnected._
 - **Should `AlpenGlow — Production Security & Go-Live Checklist` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Should `Alpen Glow Tours — Backend Setup Guide` be split into smaller, more focused modules?**

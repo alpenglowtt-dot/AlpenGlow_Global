@@ -48,32 +48,10 @@
       "norm_label": "calledge()"
     },
     {
-      "label": "bypassOn()",
-      "file_type": "code",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L87",
-      "_origin": "ast",
-      "id": "alpenglow_api_bypasson",
-      "community": 5,
-      "community_name": "api.js",
-      "norm_label": "bypasson()"
-    },
-    {
-      "label": "devOn()",
-      "file_type": "code",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L90",
-      "_origin": "ast",
-      "id": "alpenglow_api_devon",
-      "community": 5,
-      "community_name": "api.js",
-      "norm_label": "devon()"
-    },
-    {
       "label": "isVerified()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L92",
+      "source_location": "L85",
       "_origin": "ast",
       "id": "alpenglow_api_isverified",
       "community": 5,
@@ -84,7 +62,7 @@
       "label": "markVerified()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L104",
+      "source_location": "L97",
       "_origin": "ast",
       "id": "alpenglow_api_markverified",
       "community": 5,
@@ -95,7 +73,7 @@
       "label": "isPackageUnlocked()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L120",
+      "source_location": "L113",
       "_origin": "ast",
       "id": "alpenglow_api_ispackageunlocked",
       "community": 5,
@@ -106,7 +84,7 @@
       "label": "_withinGracePeriod()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L135",
+      "source_location": "L128",
       "_origin": "ast",
       "id": "alpenglow_api_withingraceperiod",
       "community": 5,
@@ -117,7 +95,7 @@
       "label": "canViewPackageContent()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L147",
+      "source_location": "L140",
       "_origin": "ast",
       "id": "alpenglow_api_canviewpackagecontent",
       "community": 5,
@@ -128,7 +106,7 @@
       "label": "phoneRule()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L168",
+      "source_location": "L161",
       "_origin": "ast",
       "id": "alpenglow_api_phonerule",
       "community": 5,
@@ -139,7 +117,7 @@
       "label": "cleanPhone()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L171",
+      "source_location": "L164",
       "_origin": "ast",
       "id": "alpenglow_api_cleanphone",
       "community": 5,
@@ -150,7 +128,7 @@
       "label": "validatePhone()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L178",
+      "source_location": "L171",
       "_origin": "ast",
       "id": "alpenglow_api_validatephone",
       "community": 5,
@@ -161,7 +139,7 @@
       "label": "bindPhoneField()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L196",
+      "source_location": "L189",
       "_origin": "ast",
       "id": "alpenglow_api_bindphonefield",
       "community": 5,
@@ -172,7 +150,7 @@
       "label": "isValidEmail()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L216",
+      "source_location": "L209",
       "_origin": "ast",
       "id": "alpenglow_api_isvalidemail",
       "community": 5,
@@ -183,7 +161,7 @@
       "label": "bindOtpInputs()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L220",
+      "source_location": "L213",
       "_origin": "ast",
       "id": "alpenglow_api_bindotpinputs",
       "community": 5,
@@ -194,7 +172,7 @@
       "label": "_hideGateSidebar()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L266",
+      "source_location": "L259",
       "_origin": "ast",
       "id": "alpenglow_api_hidegatesidebar",
       "community": 5,
@@ -205,7 +183,7 @@
       "label": "_tpIsOpen()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L321",
+      "source_location": "L314",
       "_origin": "ast",
       "id": "alpenglow_api_tpisopen",
       "community": 5,
@@ -216,7 +194,7 @@
       "label": "_done()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L329",
+      "source_location": "L322",
       "_origin": "ast",
       "id": "alpenglow_api_done",
       "community": 5,
@@ -227,7 +205,7 @@
       "label": "_tryFire()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L333",
+      "source_location": "L326",
       "_origin": "ast",
       "id": "alpenglow_api_tryfire",
       "community": 5,
@@ -238,7 +216,7 @@
       "label": "_schedule()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L339",
+      "source_location": "L332",
       "_origin": "ast",
       "id": "alpenglow_api_schedule",
       "community": 5,
@@ -249,7 +227,7 @@
       "label": "_showSitePopup()",
       "file_type": "code",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L350",
+      "source_location": "L343",
       "_origin": "ast",
       "id": "alpenglow_api_showsitepopup",
       "community": 5,
@@ -257,59 +235,15 @@
       "norm_label": "_showsitepopup()"
     },
     {
-      "label": "reset()",
-      "file_type": "code",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L606",
-      "_origin": "ast",
-      "id": "alpenglow_api_reset",
-      "community": 5,
-      "community_name": "api.js",
-      "norm_label": "reset()"
-    },
-    {
-      "label": "toast()",
-      "file_type": "code",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L608",
-      "_origin": "ast",
-      "id": "alpenglow_api_toast",
-      "community": 5,
-      "community_name": "api.js",
-      "norm_label": "toast()"
-    },
-    {
-      "label": "applyNow()",
-      "file_type": "code",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L627",
-      "_origin": "ast",
-      "id": "alpenglow_api_applynow",
-      "community": 5,
-      "community_name": "api.js",
-      "norm_label": "applynow()"
-    },
-    {
-      "label": "activate()",
-      "file_type": "code",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L641",
-      "_origin": "ast",
-      "id": "alpenglow_api_activate",
-      "community": 5,
-      "community_name": "api.js",
-      "norm_label": "activate()"
-    },
-    {
       "label": "trip-planner.js",
       "file_type": "code",
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "trip-planner.js",
-      "id": "alpenglow_trip_planner"
+      "norm_label": "trip-planner.js"
     },
     {
       "label": "_getSb()",
@@ -317,10 +251,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "_bindStep",
-      "norm_label": "_getsb()",
-      "id": "alpenglow_trip_planner_getsb"
+      "id": "alpenglow_trip_planner_getsb",
+      "community": 0,
+      "community_name": "trip-planner.js",
+      "norm_label": "_getsb()"
     },
     {
       "label": "initTripPlanner()",
@@ -328,10 +262,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L361",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_inittripplanner",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "inittripplanner()",
-      "id": "alpenglow_trip_planner_inittripplanner"
+      "norm_label": "inittripplanner()"
     },
     {
       "label": "_inject()",
@@ -339,10 +273,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L379",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_inject",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_inject()",
-      "id": "alpenglow_trip_planner_inject"
+      "norm_label": "_inject()"
     },
     {
       "label": "_bindGlobal()",
@@ -350,10 +284,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L431",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindglobal",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_bindglobal()",
-      "id": "alpenglow_trip_planner_bindglobal"
+      "norm_label": "_bindglobal()"
     },
     {
       "label": "_bindMouseGlow()",
@@ -361,10 +295,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L445",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindmouseglow",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_bindmouseglow()",
-      "id": "alpenglow_trip_planner_bindmouseglow"
+      "norm_label": "_bindmouseglow()"
     },
     {
       "label": "_open()",
@@ -372,10 +306,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L458",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_open",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_open()",
-      "id": "alpenglow_trip_planner_open"
+      "norm_label": "_open()"
     },
     {
       "label": "_close()",
@@ -383,10 +317,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L463",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_close",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_close()",
-      "id": "alpenglow_trip_planner_close"
+      "norm_label": "_close()"
     },
     {
       "label": "_state_reset()",
@@ -394,10 +328,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L475",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_state_reset",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_state_reset()",
-      "id": "alpenglow_trip_planner_state_reset"
+      "norm_label": "_state_reset()"
     },
     {
       "label": "_setBg()",
@@ -405,10 +339,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L487",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_setbg",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_setbg()",
-      "id": "alpenglow_trip_planner_setbg"
+      "norm_label": "_setbg()"
     },
     {
       "label": "_goTo()",
@@ -416,10 +350,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L503",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_goto",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_goto()",
-      "id": "alpenglow_trip_planner_goto"
+      "norm_label": "_goto()"
     },
     {
       "label": "_goBack()",
@@ -427,10 +361,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L509",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_goback",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_goback()",
-      "id": "alpenglow_trip_planner_goback"
+      "norm_label": "_goback()"
     },
     {
       "label": "_advance()",
@@ -438,10 +372,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L518",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_advance",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_advance()",
-      "id": "alpenglow_trip_planner_advance"
+      "norm_label": "_advance()"
     },
     {
       "label": "_renderStep()",
@@ -449,10 +383,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L530",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_renderstep",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_renderstep()",
-      "id": "alpenglow_trip_planner_renderstep"
+      "norm_label": "_renderstep()"
     },
     {
       "label": "_updateBreadcrumb()",
@@ -460,10 +394,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L557",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_updatebreadcrumb",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_updatebreadcrumb()",
-      "id": "alpenglow_trip_planner_updatebreadcrumb"
+      "norm_label": "_updatebreadcrumb()"
     },
     {
       "label": "_updateProgress()",
@@ -471,10 +405,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L576",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_updateprogress",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_updateprogress()",
-      "id": "alpenglow_trip_planner_updateprogress"
+      "norm_label": "_updateprogress()"
     },
     {
       "label": "_nextBtnHtml()",
@@ -482,10 +416,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L581",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_nextbtnhtml",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_nextbtnhtml()",
-      "id": "alpenglow_trip_planner_nextbtnhtml"
+      "norm_label": "_nextbtnhtml()"
     },
     {
       "label": "_bindNextBtn()",
@@ -493,10 +427,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L584",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindnextbtn",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_bindnextbtn()",
-      "id": "alpenglow_trip_planner_bindnextbtn"
+      "norm_label": "_bindnextbtn()"
     },
     {
       "label": "_enableNextBtn()",
@@ -504,10 +438,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L588",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_enablenextbtn",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_enablenextbtn()",
-      "id": "alpenglow_trip_planner_enablenextbtn"
+      "norm_label": "_enablenextbtn()"
     },
     {
       "label": "renderVibe()",
@@ -515,10 +449,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L598",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_rendervibe",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "rendervibe()",
-      "id": "alpenglow_trip_planner_rendervibe"
+      "norm_label": "rendervibe()"
     },
     {
       "label": "renderDestination()",
@@ -526,10 +460,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L613",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_renderdestination",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "renderdestination()",
-      "id": "alpenglow_trip_planner_renderdestination"
+      "norm_label": "renderdestination()"
     },
     {
       "label": "renderTravelers()",
@@ -537,10 +471,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L642",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_rendertravelers",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "rendertravelers()",
-      "id": "alpenglow_trip_planner_rendertravelers"
+      "norm_label": "rendertravelers()"
     },
     {
       "label": "renderCount()",
@@ -548,10 +482,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L659",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_rendercount",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "rendercount()",
-      "id": "alpenglow_trip_planner_rendercount"
+      "norm_label": "rendercount()"
     },
     {
       "label": "renderMonth()",
@@ -559,10 +493,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L673",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_rendermonth",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "rendermonth()",
-      "id": "alpenglow_trip_planner_rendermonth"
+      "norm_label": "rendermonth()"
     },
     {
       "label": "renderOrigin()",
@@ -570,10 +504,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L686",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_renderorigin",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "renderorigin()",
-      "id": "alpenglow_trip_planner_renderorigin"
+      "norm_label": "renderorigin()"
     },
     {
       "label": "_cityRows()",
@@ -581,10 +515,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L697",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_cityrows",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_cityrows()",
-      "id": "alpenglow_trip_planner_cityrows"
+      "norm_label": "_cityrows()"
     },
     {
       "label": "renderDuration()",
@@ -592,10 +526,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L705",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_renderduration",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "renderduration()",
-      "id": "alpenglow_trip_planner_renderduration"
+      "norm_label": "renderduration()"
     },
     {
       "label": "renderBudget()",
@@ -603,10 +537,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L721",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_renderbudget",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "renderbudget()",
-      "id": "alpenglow_trip_planner_renderbudget"
+      "norm_label": "renderbudget()"
     },
     {
       "label": "_ccOptions()",
@@ -614,10 +548,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L750",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_ccoptions",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_ccoptions()",
-      "id": "alpenglow_trip_planner_ccoptions"
+      "norm_label": "_ccoptions()"
     },
     {
       "label": "renderContact()",
@@ -625,10 +559,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L756",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_rendercontact",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "rendercontact()",
-      "id": "alpenglow_trip_planner_rendercontact"
+      "norm_label": "rendercontact()"
     },
     {
       "label": "_bindStep()",
@@ -636,10 +570,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L818",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindstep",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_bindstep()",
-      "id": "alpenglow_trip_planner_bindstep"
+      "norm_label": "_bindstep()"
     },
     {
       "label": "_bindVibe()",
@@ -647,10 +581,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L832",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindvibe",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_bindvibe()",
-      "id": "alpenglow_trip_planner_bindvibe"
+      "norm_label": "_bindvibe()"
     },
     {
       "label": "_bindDestination()",
@@ -658,10 +592,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L855",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_binddestination",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_binddestination()",
-      "id": "alpenglow_trip_planner_binddestination"
+      "norm_label": "_binddestination()"
     },
     {
       "label": "_bindTravelers()",
@@ -669,10 +603,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L868",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindtravelers",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_bindtravelers()",
-      "id": "alpenglow_trip_planner_bindtravelers"
+      "norm_label": "_bindtravelers()"
     },
     {
       "label": "_bindCount()",
@@ -680,10 +614,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L885",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindcount",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_bindcount()",
-      "id": "alpenglow_trip_planner_bindcount"
+      "norm_label": "_bindcount()"
     },
     {
       "label": "_bindMonth()",
@@ -691,10 +625,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L924",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindmonth",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_bindmonth()",
-      "id": "alpenglow_trip_planner_bindmonth"
+      "norm_label": "_bindmonth()"
     },
     {
       "label": "_checkSeasonalWarning()",
@@ -702,10 +636,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L937",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_checkseasonalwarning",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_checkseasonalwarning()",
-      "id": "alpenglow_trip_planner_checkseasonalwarning"
+      "norm_label": "_checkseasonalwarning()"
     },
     {
       "label": "_bindOrigin()",
@@ -713,10 +647,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L954",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindorigin",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_bindorigin()",
-      "id": "alpenglow_trip_planner_bindorigin"
+      "norm_label": "_bindorigin()"
     },
     {
       "label": "_bindDuration()",
@@ -724,10 +658,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L981",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindduration",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_bindduration()",
-      "id": "alpenglow_trip_planner_bindduration"
+      "norm_label": "_bindduration()"
     },
     {
       "label": "_bindBudget()",
@@ -735,10 +669,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L993",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindbudget",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_bindbudget()",
-      "id": "alpenglow_trip_planner_bindbudget"
+      "norm_label": "_bindbudget()"
     },
     {
       "label": "_bindContact()",
@@ -746,10 +680,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1011",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_bindcontact",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_bindcontact()",
-      "id": "alpenglow_trip_planner_bindcontact"
+      "norm_label": "_bindcontact()"
     },
     {
       "label": "_tpSendPhoneOTP()",
@@ -757,10 +691,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1044",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_tpsendphoneotp",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_tpsendphoneotp()",
-      "id": "alpenglow_trip_planner_tpsendphoneotp"
+      "norm_label": "_tpsendphoneotp()"
     },
     {
       "label": "_tpConfirmPhoneOTP()",
@@ -768,10 +702,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1091",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_tpconfirmphoneotp",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_tpconfirmphoneotp()",
-      "id": "alpenglow_trip_planner_tpconfirmphoneotp"
+      "norm_label": "_tpconfirmphoneotp()"
     },
     {
       "label": "_tpSendEmailOTP()",
@@ -779,10 +713,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1114",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_tpsendemailotp",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_tpsendemailotp()",
-      "id": "alpenglow_trip_planner_tpsendemailotp"
+      "norm_label": "_tpsendemailotp()"
     },
     {
       "label": "_tpConfirmEmailOTP()",
@@ -790,10 +724,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1150",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_tpconfirmemailotp",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_tpconfirmemailotp()",
-      "id": "alpenglow_trip_planner_tpconfirmemailotp"
+      "norm_label": "_tpconfirmemailotp()"
     },
     {
       "label": "_tpCheckBothVerified()",
@@ -801,10 +735,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1172",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_tpcheckbothverified",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_tpcheckbothverified()",
-      "id": "alpenglow_trip_planner_tpcheckbothverified"
+      "norm_label": "_tpcheckbothverified()"
     },
     {
       "label": "_tpFinalSubmit()",
@@ -812,10 +746,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1209",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "_bindStep",
-      "norm_label": "_tpfinalsubmit()",
-      "id": "alpenglow_trip_planner_tpfinalsubmit"
+      "id": "alpenglow_trip_planner_tpfinalsubmit",
+      "community": 0,
+      "community_name": "trip-planner.js",
+      "norm_label": "_tpfinalsubmit()"
     },
     {
       "label": "_buildPayload()",
@@ -823,10 +757,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1240",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "_bindStep",
-      "norm_label": "_buildpayload()",
-      "id": "alpenglow_trip_planner_buildpayload"
+      "id": "alpenglow_trip_planner_buildpayload",
+      "community": 0,
+      "community_name": "trip-planner.js",
+      "norm_label": "_buildpayload()"
     },
     {
       "label": "_sbUpsert()",
@@ -834,10 +768,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1263",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_sbupsert",
       "community": 2,
       "community_name": "_bindStep",
-      "norm_label": "_sbupsert()",
-      "id": "alpenglow_trip_planner_sbupsert"
+      "norm_label": "_sbupsert()"
     },
     {
       "label": "_sbSubmit()",
@@ -845,10 +779,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1272",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "_bindStep",
-      "norm_label": "_sbsubmit()",
-      "id": "alpenglow_trip_planner_sbsubmit"
+      "id": "alpenglow_trip_planner_sbsubmit",
+      "community": 0,
+      "community_name": "trip-planner.js",
+      "norm_label": "_sbsubmit()"
     },
     {
       "label": "_insertLeadRecord()",
@@ -856,10 +790,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1283",
       "_origin": "ast",
-      "community": 2,
-      "community_name": "_bindStep",
-      "norm_label": "_insertleadrecord()",
-      "id": "alpenglow_trip_planner_insertleadrecord"
+      "id": "alpenglow_trip_planner_insertleadrecord",
+      "community": 0,
+      "community_name": "trip-planner.js",
+      "norm_label": "_insertleadrecord()"
     },
     {
       "label": "_heading()",
@@ -867,10 +801,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1328",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_heading",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_heading()",
-      "id": "alpenglow_trip_planner_heading"
+      "norm_label": "_heading()"
     },
     {
       "label": "_stepper()",
@@ -878,10 +812,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1334",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_stepper",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_stepper()",
-      "id": "alpenglow_trip_planner_stepper"
+      "norm_label": "_stepper()"
     },
     {
       "label": "_field()",
@@ -889,10 +823,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1345",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_field",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_field()",
-      "id": "alpenglow_trip_planner_field"
+      "norm_label": "_field()"
     },
     {
       "label": "_esc()",
@@ -900,10 +834,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1352",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_esc",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_esc()",
-      "id": "alpenglow_trip_planner_esc"
+      "norm_label": "_esc()"
     },
     {
       "label": "_fmt()",
@@ -911,10 +845,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1353",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_fmt",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_fmt()",
-      "id": "alpenglow_trip_planner_fmt"
+      "norm_label": "_fmt()"
     },
     {
       "label": "_uuid()",
@@ -922,10 +856,10 @@
       "source_file": "AlpenGlow/trip-planner.js",
       "source_location": "L1354",
       "_origin": "ast",
+      "id": "alpenglow_trip_planner_uuid",
       "community": 0,
       "community_name": "trip-planner.js",
-      "norm_label": "_uuid()",
-      "id": "alpenglow_trip_planner_uuid"
+      "norm_label": "_uuid()"
     },
     {
       "label": "query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
@@ -933,10 +867,10 @@
       "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr",
       "community": 3,
       "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
-      "norm_label": "query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
-      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr"
+      "norm_label": "query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md"
     },
     {
       "label": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
@@ -944,10 +878,10 @@
       "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
       "source_location": "L10",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
       "community": 3,
       "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
-      "norm_label": "q: why could otps for non-indian numbers go to the wrong person or fail to verify?",
-      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify"
+      "norm_label": "q: why could otps for non-indian numbers go to the wrong person or fail to verify?"
     },
     {
       "label": "Answer",
@@ -955,10 +889,10 @@
       "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
       "source_location": "L12",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_answer",
       "community": 3,
       "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
-      "norm_label": "answer",
-      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_answer"
+      "norm_label": "answer"
     },
     {
       "label": "Outcome",
@@ -966,10 +900,10 @@
       "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
       "source_location": "L16",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_outcome",
       "community": 3,
       "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
-      "norm_label": "outcome",
-      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_outcome"
+      "norm_label": "outcome"
     },
     {
       "label": "Source Nodes",
@@ -977,10 +911,10 @@
       "source_file": "graphify-out/memory/query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr.md",
       "source_location": "L20",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_source_nodes",
       "community": 3,
       "community_name": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
-      "norm_label": "source nodes",
-      "id": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_source_nodes"
+      "norm_label": "source nodes"
     },
     {
       "label": "query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
@@ -988,10 +922,10 @@
       "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the",
       "community": 32,
       "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
-      "norm_label": "query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
-      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the"
+      "norm_label": "query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md"
     },
     {
       "label": "Q: How is site verification scoped, and what does the 30s popup do?",
@@ -999,10 +933,10 @@
       "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
       "source_location": "L10",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
       "community": 32,
       "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
-      "norm_label": "q: how is site verification scoped, and what does the 30s popup do?",
-      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do"
+      "norm_label": "q: how is site verification scoped, and what does the 30s popup do?"
     },
     {
       "label": "Answer",
@@ -1010,10 +944,10 @@
       "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
       "source_location": "L12",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_answer",
       "community": 32,
       "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
-      "norm_label": "answer",
-      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_answer"
+      "norm_label": "answer"
     },
     {
       "label": "Outcome",
@@ -1021,10 +955,10 @@
       "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
       "source_location": "L16",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_outcome",
       "community": 32,
       "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
-      "norm_label": "outcome",
-      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_outcome"
+      "norm_label": "outcome"
     },
     {
       "label": "Source Nodes",
@@ -1032,10 +966,10 @@
       "source_file": "graphify-out/memory/query_20260922_121702_how_is_site_verification_scoped__and_what_does_the.md",
       "source_location": "L20",
       "_origin": "ast",
+      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_source_nodes",
       "community": 32,
       "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
-      "norm_label": "source nodes",
-      "id": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_source_nodes"
+      "norm_label": "source nodes"
     },
     {
       "label": "seo-homepage.js",
@@ -1043,10 +977,10 @@
       "source_file": "scripts/seo-homepage.js",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "scripts_seo_homepage",
       "community": 38,
       "community_name": "seo-homepage.js",
-      "norm_label": "seo-homepage.js",
-      "id": "scripts_seo_homepage"
+      "norm_label": "seo-homepage.js"
     },
     {
       "label": "fs",
@@ -1054,10 +988,10 @@
       "source_file": "scripts/seo-homepage.js",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "scripts_seo_homepage_fs",
       "community": 38,
       "community_name": "seo-homepage.js",
-      "norm_label": "fs",
-      "id": "scripts_seo_homepage_fs"
+      "norm_label": "fs"
     },
     {
       "label": "F",
@@ -1065,10 +999,10 @@
       "source_file": "scripts/seo-homepage.js",
       "source_location": "L2",
       "_origin": "ast",
+      "id": "scripts_seo_homepage_f",
       "community": 38,
       "community_name": "seo-homepage.js",
-      "norm_label": "f",
-      "id": "scripts_seo_homepage_f"
+      "norm_label": "f"
     },
     {
       "label": "h",
@@ -1076,10 +1010,10 @@
       "source_file": "scripts/seo-homepage.js",
       "source_location": "L3",
       "_origin": "ast",
+      "id": "scripts_seo_homepage_h",
       "community": 38,
       "community_name": "seo-homepage.js",
-      "norm_label": "h",
-      "id": "scripts_seo_homepage_h"
+      "norm_label": "h"
     },
     {
       "label": "faqs",
@@ -1087,10 +1021,10 @@
       "source_file": "scripts/seo-homepage.js",
       "source_location": "L52",
       "_origin": "ast",
+      "id": "scripts_seo_homepage_faqs",
       "community": 38,
       "community_name": "seo-homepage.js",
-      "norm_label": "faqs",
-      "id": "scripts_seo_homepage_faqs"
+      "norm_label": "faqs"
     },
     {
       "label": "send-sms-otp/index.ts",
@@ -1098,10 +1032,10 @@
       "source_file": "supabase/functions/send-sms-otp/index.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "supabase_functions_send_sms_otp_index",
       "community": 7,
       "community_name": "send-sms-otp/index.ts",
-      "norm_label": "send-sms-otp/index.ts",
-      "id": "supabase_functions_send_sms_otp_index"
+      "norm_label": "send-sms-otp/index.ts"
     },
     {
       "label": "ALLOWED_ORIGINS",
@@ -1109,10 +1043,10 @@
       "source_file": "supabase/functions/send-sms-otp/index.ts",
       "source_location": "L6",
       "_origin": "ast",
+      "id": "supabase_functions_send_sms_otp_index_allowed_origins",
       "community": 7,
       "community_name": "send-sms-otp/index.ts",
-      "norm_label": "allowed_origins",
-      "id": "supabase_functions_send_sms_otp_index_allowed_origins"
+      "norm_label": "allowed_origins"
     },
     {
       "label": "corsFor()",
@@ -1120,10 +1054,10 @@
       "source_file": "supabase/functions/send-sms-otp/index.ts",
       "source_location": "L14",
       "_origin": "ast",
+      "id": "supabase_functions_send_sms_otp_index_corsfor",
       "community": 7,
       "community_name": "send-sms-otp/index.ts",
-      "norm_label": "corsfor()",
-      "id": "supabase_functions_send_sms_otp_index_corsfor"
+      "norm_label": "corsfor()"
     },
     {
       "label": "otpRateLimited()",
@@ -1131,10 +1065,10 @@
       "source_file": "supabase/functions/send-sms-otp/index.ts",
       "source_location": "L29",
       "_origin": "ast",
+      "id": "supabase_functions_send_sms_otp_index_otpratelimited",
       "community": 7,
       "community_name": "send-sms-otp/index.ts",
-      "norm_label": "otpratelimited()",
-      "id": "supabase_functions_send_sms_otp_index_otpratelimited"
+      "norm_label": "otpratelimited()"
     },
     {
       "label": "normalisePhone()",
@@ -1142,10 +1076,10 @@
       "source_file": "supabase/functions/send-sms-otp/index.ts",
       "source_location": "L48",
       "_origin": "ast",
+      "id": "supabase_functions_send_sms_otp_index_normalisephone",
       "community": 7,
       "community_name": "send-sms-otp/index.ts",
-      "norm_label": "normalisephone()",
-      "id": "supabase_functions_send_sms_otp_index_normalisephone"
+      "norm_label": "normalisephone()"
     },
     {
       "label": "verify-sms-otp/index.ts",
@@ -1153,10 +1087,10 @@
       "source_file": "supabase/functions/verify-sms-otp/index.ts",
       "source_location": "L1",
       "_origin": "ast",
+      "id": "supabase_functions_verify_sms_otp_index",
       "community": 10,
       "community_name": "verify-sms-otp/index.ts",
-      "norm_label": "verify-sms-otp/index.ts",
-      "id": "supabase_functions_verify_sms_otp_index"
+      "norm_label": "verify-sms-otp/index.ts"
     },
     {
       "label": "ALLOWED_ORIGINS",
@@ -1164,10 +1098,10 @@
       "source_file": "supabase/functions/verify-sms-otp/index.ts",
       "source_location": "L6",
       "_origin": "ast",
+      "id": "supabase_functions_verify_sms_otp_index_allowed_origins",
       "community": 10,
       "community_name": "verify-sms-otp/index.ts",
-      "norm_label": "allowed_origins",
-      "id": "supabase_functions_verify_sms_otp_index_allowed_origins"
+      "norm_label": "allowed_origins"
     },
     {
       "label": "corsFor()",
@@ -1175,10 +1109,10 @@
       "source_file": "supabase/functions/verify-sms-otp/index.ts",
       "source_location": "L14",
       "_origin": "ast",
+      "id": "supabase_functions_verify_sms_otp_index_corsfor",
       "community": 10,
       "community_name": "verify-sms-otp/index.ts",
-      "norm_label": "corsfor()",
-      "id": "supabase_functions_verify_sms_otp_index_corsfor"
+      "norm_label": "corsfor()"
     },
     {
       "label": "normalisePhone()",
@@ -1186,10 +1120,10 @@
       "source_file": "supabase/functions/verify-sms-otp/index.ts",
       "source_location": "L28",
       "_origin": "ast",
+      "id": "supabase_functions_verify_sms_otp_index_normalisephone",
       "community": 10,
       "community_name": "verify-sms-otp/index.ts",
-      "norm_label": "normalisephone()",
-      "id": "supabase_functions_verify_sms_otp_index_normalisephone"
+      "norm_label": "normalisephone()"
     },
     {
       "label": "compass.js",
@@ -2994,29 +2928,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L641",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api",
-      "target": "alpenglow_api_activate",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L627",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api",
-      "target": "alpenglow_api_applynow",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L220",
+      "source_location": "L213",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3027,22 +2939,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L196",
+      "source_location": "L189",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
       "target": "alpenglow_api_bindphonefield",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L87",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api",
-      "target": "alpenglow_api_bypasson",
       "confidence_score": 1.0
     },
     {
@@ -3060,7 +2961,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L147",
+      "source_location": "L140",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3071,7 +2972,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L171",
+      "source_location": "L164",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3093,18 +2994,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L90",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api",
-      "target": "alpenglow_api_devon",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L329",
+      "source_location": "L322",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3115,7 +3005,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L266",
+      "source_location": "L259",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3126,7 +3016,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L120",
+      "source_location": "L113",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3137,7 +3027,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L216",
+      "source_location": "L209",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3148,7 +3038,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L92",
+      "source_location": "L85",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3159,7 +3049,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L104",
+      "source_location": "L97",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3170,22 +3060,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L168",
+      "source_location": "L161",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
       "target": "alpenglow_api_phonerule",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L606",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api",
-      "target": "alpenglow_api_reset",
       "confidence_score": 1.0
     },
     {
@@ -3203,7 +3082,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L339",
+      "source_location": "L332",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3214,7 +3093,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L350",
+      "source_location": "L343",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3225,18 +3104,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L608",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api",
-      "target": "alpenglow_api_toast",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L321",
+      "source_location": "L314",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3247,7 +3115,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L333",
+      "source_location": "L326",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3258,7 +3126,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L178",
+      "source_location": "L171",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3269,7 +3137,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L135",
+      "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api",
@@ -3281,43 +3149,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L642",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api_activate",
-      "target": "alpenglow_api_bypasson",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L90",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api_devon",
-      "target": "alpenglow_api_bypasson",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L93",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api_isverified",
-      "target": "alpenglow_api_devon",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L121",
+      "source_location": "L114",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_ispackageunlocked",
@@ -3329,7 +3161,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L581",
+      "source_location": "L574",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_showsitepopup",
@@ -3341,7 +3173,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L148",
+      "source_location": "L141",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_canviewpackagecontent",
@@ -3353,7 +3185,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L330",
+      "source_location": "L323",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_done",
@@ -3365,7 +3197,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L148",
+      "source_location": "L141",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_canviewpackagecontent",
@@ -3377,7 +3209,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L172",
+      "source_location": "L165",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_cleanphone",
@@ -3389,7 +3221,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L179",
+      "source_location": "L172",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_validatephone",
@@ -3401,7 +3233,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L209",
+      "source_location": "L202",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_bindphonefield",
@@ -3413,7 +3245,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L180",
+      "source_location": "L173",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_validatephone",
@@ -3425,7 +3257,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L528",
+      "source_location": "L521",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_showsitepopup",
@@ -3437,7 +3269,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L484",
+      "source_location": "L477",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_showsitepopup",
@@ -3449,7 +3281,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L534",
+      "source_location": "L527",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_showsitepopup",
@@ -3461,7 +3293,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L485",
+      "source_location": "L478",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_showsitepopup",
@@ -3473,19 +3305,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L635",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api_applynow",
-      "target": "alpenglow_api_hidegatesidebar",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L335",
+      "source_location": "L328",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_tryfire",
@@ -3497,7 +3317,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L340",
+      "source_location": "L333",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_schedule",
@@ -3509,7 +3329,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L334",
+      "source_location": "L327",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_tryfire",
@@ -3521,7 +3341,7 @@
       "context": "argument",
       "confidence": "INFERRED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L347",
+      "source_location": "L340",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_schedule",
@@ -3533,35 +3353,11 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "AlpenGlow/api.js",
-      "source_location": "L336",
+      "source_location": "L329",
       "weight": 1.0,
       "_origin": "ast",
       "source": "alpenglow_api_tryfire",
       "target": "alpenglow_api_showsitepopup",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L645",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api_activate",
-      "target": "alpenglow_api_toast",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "AlpenGlow/api.js",
-      "source_location": "L644",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "alpenglow_api_activate",
-      "target": "alpenglow_api_applynow",
       "confidence_score": 1.0
     },
     {
@@ -3571,9 +3367,9 @@
       "source_location": "L518",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_advance"
+      "target": "alpenglow_trip_planner_advance",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3582,9 +3378,9 @@
       "source_location": "L993",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindbudget"
+      "target": "alpenglow_trip_planner_bindbudget",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3593,9 +3389,9 @@
       "source_location": "L1011",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindcontact"
+      "target": "alpenglow_trip_planner_bindcontact",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3604,9 +3400,9 @@
       "source_location": "L885",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindcount"
+      "target": "alpenglow_trip_planner_bindcount",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3615,9 +3411,9 @@
       "source_location": "L855",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_binddestination"
+      "target": "alpenglow_trip_planner_binddestination",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3626,9 +3422,9 @@
       "source_location": "L981",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindduration"
+      "target": "alpenglow_trip_planner_bindduration",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3637,9 +3433,9 @@
       "source_location": "L431",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindglobal"
+      "target": "alpenglow_trip_planner_bindglobal",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3648,9 +3444,9 @@
       "source_location": "L924",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindmonth"
+      "target": "alpenglow_trip_planner_bindmonth",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3659,9 +3455,9 @@
       "source_location": "L445",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindmouseglow"
+      "target": "alpenglow_trip_planner_bindmouseglow",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3670,9 +3466,9 @@
       "source_location": "L584",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindnextbtn"
+      "target": "alpenglow_trip_planner_bindnextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3681,9 +3477,9 @@
       "source_location": "L954",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindorigin"
+      "target": "alpenglow_trip_planner_bindorigin",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3692,9 +3488,9 @@
       "source_location": "L818",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindstep"
+      "target": "alpenglow_trip_planner_bindstep",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3703,9 +3499,9 @@
       "source_location": "L868",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindtravelers"
+      "target": "alpenglow_trip_planner_bindtravelers",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3714,9 +3510,9 @@
       "source_location": "L832",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_bindvibe"
+      "target": "alpenglow_trip_planner_bindvibe",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3725,9 +3521,9 @@
       "source_location": "L1240",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_buildpayload"
+      "target": "alpenglow_trip_planner_buildpayload",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3736,9 +3532,9 @@
       "source_location": "L750",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_ccoptions"
+      "target": "alpenglow_trip_planner_ccoptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3747,9 +3543,9 @@
       "source_location": "L937",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_checkseasonalwarning"
+      "target": "alpenglow_trip_planner_checkseasonalwarning",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3758,9 +3554,9 @@
       "source_location": "L697",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_cityrows"
+      "target": "alpenglow_trip_planner_cityrows",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3769,9 +3565,9 @@
       "source_location": "L463",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_close"
+      "target": "alpenglow_trip_planner_close",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3780,9 +3576,9 @@
       "source_location": "L588",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_enablenextbtn"
+      "target": "alpenglow_trip_planner_enablenextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3791,9 +3587,9 @@
       "source_location": "L1352",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_esc"
+      "target": "alpenglow_trip_planner_esc",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3802,9 +3598,9 @@
       "source_location": "L1345",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_field"
+      "target": "alpenglow_trip_planner_field",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3813,9 +3609,9 @@
       "source_location": "L1353",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_fmt"
+      "target": "alpenglow_trip_planner_fmt",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3824,9 +3620,9 @@
       "source_location": "L17",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_getsb"
+      "target": "alpenglow_trip_planner_getsb",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3835,9 +3631,9 @@
       "source_location": "L509",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_goback"
+      "target": "alpenglow_trip_planner_goback",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3846,9 +3642,9 @@
       "source_location": "L503",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_goto"
+      "target": "alpenglow_trip_planner_goto",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3857,9 +3653,9 @@
       "source_location": "L1328",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3868,9 +3664,9 @@
       "source_location": "L361",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_inittripplanner"
+      "target": "alpenglow_trip_planner_inittripplanner",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3879,9 +3675,9 @@
       "source_location": "L379",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_inject"
+      "target": "alpenglow_trip_planner_inject",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3890,9 +3686,9 @@
       "source_location": "L1283",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_insertleadrecord"
+      "target": "alpenglow_trip_planner_insertleadrecord",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3901,9 +3697,9 @@
       "source_location": "L581",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_nextbtnhtml"
+      "target": "alpenglow_trip_planner_nextbtnhtml",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3912,9 +3708,9 @@
       "source_location": "L458",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_open"
+      "target": "alpenglow_trip_planner_open",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3923,9 +3719,9 @@
       "source_location": "L721",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_renderbudget"
+      "target": "alpenglow_trip_planner_renderbudget",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3934,9 +3730,9 @@
       "source_location": "L756",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_rendercontact"
+      "target": "alpenglow_trip_planner_rendercontact",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3945,9 +3741,9 @@
       "source_location": "L659",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_rendercount"
+      "target": "alpenglow_trip_planner_rendercount",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3956,9 +3752,9 @@
       "source_location": "L613",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_renderdestination"
+      "target": "alpenglow_trip_planner_renderdestination",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3967,9 +3763,9 @@
       "source_location": "L705",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_renderduration"
+      "target": "alpenglow_trip_planner_renderduration",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3978,9 +3774,9 @@
       "source_location": "L673",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_rendermonth"
+      "target": "alpenglow_trip_planner_rendermonth",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3989,9 +3785,9 @@
       "source_location": "L686",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_renderorigin"
+      "target": "alpenglow_trip_planner_renderorigin",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4000,9 +3796,9 @@
       "source_location": "L530",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_renderstep"
+      "target": "alpenglow_trip_planner_renderstep",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4011,9 +3807,9 @@
       "source_location": "L642",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_rendertravelers"
+      "target": "alpenglow_trip_planner_rendertravelers",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4022,9 +3818,9 @@
       "source_location": "L598",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_rendervibe"
+      "target": "alpenglow_trip_planner_rendervibe",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4033,9 +3829,9 @@
       "source_location": "L1272",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_sbsubmit"
+      "target": "alpenglow_trip_planner_sbsubmit",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4044,9 +3840,9 @@
       "source_location": "L1263",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_sbupsert"
+      "target": "alpenglow_trip_planner_sbupsert",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4055,9 +3851,9 @@
       "source_location": "L487",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_setbg"
+      "target": "alpenglow_trip_planner_setbg",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4066,9 +3862,9 @@
       "source_location": "L475",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_state_reset"
+      "target": "alpenglow_trip_planner_state_reset",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4077,9 +3873,9 @@
       "source_location": "L1334",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_stepper"
+      "target": "alpenglow_trip_planner_stepper",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4088,9 +3884,9 @@
       "source_location": "L1172",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_tpcheckbothverified"
+      "target": "alpenglow_trip_planner_tpcheckbothverified",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4099,9 +3895,9 @@
       "source_location": "L1150",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_tpconfirmemailotp"
+      "target": "alpenglow_trip_planner_tpconfirmemailotp",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4110,9 +3906,9 @@
       "source_location": "L1091",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_tpconfirmphoneotp"
+      "target": "alpenglow_trip_planner_tpconfirmphoneotp",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4121,9 +3917,9 @@
       "source_location": "L1209",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_tpfinalsubmit"
+      "target": "alpenglow_trip_planner_tpfinalsubmit",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4132,9 +3928,9 @@
       "source_location": "L1114",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_tpsendemailotp"
+      "target": "alpenglow_trip_planner_tpsendemailotp",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4143,9 +3939,9 @@
       "source_location": "L1044",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_tpsendphoneotp"
+      "target": "alpenglow_trip_planner_tpsendphoneotp",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4154,9 +3950,9 @@
       "source_location": "L557",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_updatebreadcrumb"
+      "target": "alpenglow_trip_planner_updatebreadcrumb",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4165,9 +3961,9 @@
       "source_location": "L576",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_updateprogress"
+      "target": "alpenglow_trip_planner_updateprogress",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4176,9 +3972,9 @@
       "source_location": "L1354",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner",
-      "target": "alpenglow_trip_planner_uuid"
+      "target": "alpenglow_trip_planner_uuid",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4188,9 +3984,9 @@
       "source_location": "L1284",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_insertleadrecord",
-      "target": "alpenglow_trip_planner_getsb"
+      "target": "alpenglow_trip_planner_getsb",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4200,9 +3996,9 @@
       "source_location": "L1273",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_sbsubmit",
-      "target": "alpenglow_trip_planner_getsb"
+      "target": "alpenglow_trip_planner_getsb",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4212,9 +4008,9 @@
       "source_location": "L1264",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_sbupsert",
-      "target": "alpenglow_trip_planner_getsb"
+      "target": "alpenglow_trip_planner_getsb",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4224,9 +4020,9 @@
       "source_location": "L371",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_inittripplanner",
-      "target": "alpenglow_trip_planner_bindglobal"
+      "target": "alpenglow_trip_planner_bindglobal",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4236,9 +4032,9 @@
       "source_location": "L370",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_inittripplanner",
-      "target": "alpenglow_trip_planner_inject"
+      "target": "alpenglow_trip_planner_inject",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4248,9 +4044,9 @@
       "source_location": "L365",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_inittripplanner",
-      "target": "alpenglow_trip_planner_open"
+      "target": "alpenglow_trip_planner_open",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4260,9 +4056,9 @@
       "source_location": "L372",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_inittripplanner",
-      "target": "alpenglow_trip_planner_renderstep"
+      "target": "alpenglow_trip_planner_renderstep",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4272,9 +4068,9 @@
       "source_location": "L364",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_inittripplanner",
-      "target": "alpenglow_trip_planner_state_reset"
+      "target": "alpenglow_trip_planner_state_reset",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4284,9 +4080,9 @@
       "source_location": "L368",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_inittripplanner",
-      "target": "alpenglow_trip_planner_uuid"
+      "target": "alpenglow_trip_planner_uuid",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4296,9 +4092,9 @@
       "source_location": "L439",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindglobal",
-      "target": "alpenglow_trip_planner_bindmouseglow"
+      "target": "alpenglow_trip_planner_bindmouseglow",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4308,9 +4104,9 @@
       "source_location": "L433",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindglobal",
-      "target": "alpenglow_trip_planner_close"
+      "target": "alpenglow_trip_planner_close",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4320,9 +4116,9 @@
       "source_location": "L481",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_state_reset",
-      "target": "alpenglow_trip_planner_renderstep"
+      "target": "alpenglow_trip_planner_renderstep",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4332,9 +4128,9 @@
       "source_location": "L479",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_state_reset",
-      "target": "alpenglow_trip_planner_uuid"
+      "target": "alpenglow_trip_planner_uuid",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4344,9 +4140,9 @@
       "source_location": "L840",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindvibe",
-      "target": "alpenglow_trip_planner_setbg"
+      "target": "alpenglow_trip_planner_setbg",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4356,9 +4152,9 @@
       "source_location": "L531",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderstep",
-      "target": "alpenglow_trip_planner_setbg"
+      "target": "alpenglow_trip_planner_setbg",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4368,9 +4164,9 @@
       "source_location": "L523",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_advance",
-      "target": "alpenglow_trip_planner_goto"
+      "target": "alpenglow_trip_planner_goto",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4380,9 +4176,9 @@
       "source_location": "L514",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_goback",
-      "target": "alpenglow_trip_planner_goto"
+      "target": "alpenglow_trip_planner_goto",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4392,9 +4188,9 @@
       "source_location": "L506",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_goto",
-      "target": "alpenglow_trip_planner_renderstep"
+      "target": "alpenglow_trip_planner_renderstep",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4404,9 +4200,9 @@
       "source_location": "L571",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_updatebreadcrumb",
-      "target": "alpenglow_trip_planner_goto"
+      "target": "alpenglow_trip_planner_goto",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4416,9 +4212,9 @@
       "source_location": "L547",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderstep",
-      "target": "alpenglow_trip_planner_bindnextbtn"
+      "target": "alpenglow_trip_planner_bindnextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4428,9 +4224,9 @@
       "source_location": "L546",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderstep",
-      "target": "alpenglow_trip_planner_bindstep"
+      "target": "alpenglow_trip_planner_bindstep",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4440,9 +4236,9 @@
       "source_location": "L532",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderstep",
-      "target": "alpenglow_trip_planner_updatebreadcrumb"
+      "target": "alpenglow_trip_planner_updatebreadcrumb",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4452,9 +4248,9 @@
       "source_location": "L533",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderstep",
-      "target": "alpenglow_trip_planner_updateprogress"
+      "target": "alpenglow_trip_planner_updateprogress",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4464,9 +4260,9 @@
       "source_location": "L741",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderbudget",
-      "target": "alpenglow_trip_planner_nextbtnhtml"
+      "target": "alpenglow_trip_planner_nextbtnhtml",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4476,9 +4272,9 @@
       "source_location": "L669",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendercount",
-      "target": "alpenglow_trip_planner_nextbtnhtml"
+      "target": "alpenglow_trip_planner_nextbtnhtml",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4488,9 +4284,9 @@
       "source_location": "L638",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderdestination",
-      "target": "alpenglow_trip_planner_nextbtnhtml"
+      "target": "alpenglow_trip_planner_nextbtnhtml",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4500,9 +4296,9 @@
       "source_location": "L717",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderduration",
-      "target": "alpenglow_trip_planner_nextbtnhtml"
+      "target": "alpenglow_trip_planner_nextbtnhtml",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4512,9 +4308,9 @@
       "source_location": "L682",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendermonth",
-      "target": "alpenglow_trip_planner_nextbtnhtml"
+      "target": "alpenglow_trip_planner_nextbtnhtml",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4524,9 +4320,9 @@
       "source_location": "L694",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderorigin",
-      "target": "alpenglow_trip_planner_nextbtnhtml"
+      "target": "alpenglow_trip_planner_nextbtnhtml",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4536,9 +4332,9 @@
       "source_location": "L655",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendertravelers",
-      "target": "alpenglow_trip_planner_nextbtnhtml"
+      "target": "alpenglow_trip_planner_nextbtnhtml",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4548,9 +4344,9 @@
       "source_location": "L609",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendervibe",
-      "target": "alpenglow_trip_planner_nextbtnhtml"
+      "target": "alpenglow_trip_planner_nextbtnhtml",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4560,9 +4356,9 @@
       "source_location": "L999",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindbudget",
-      "target": "alpenglow_trip_planner_enablenextbtn"
+      "target": "alpenglow_trip_planner_enablenextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4572,9 +4368,9 @@
       "source_location": "L921",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindcount",
-      "target": "alpenglow_trip_planner_enablenextbtn"
+      "target": "alpenglow_trip_planner_enablenextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4584,9 +4380,9 @@
       "source_location": "L862",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_binddestination",
-      "target": "alpenglow_trip_planner_enablenextbtn"
+      "target": "alpenglow_trip_planner_enablenextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4596,9 +4392,9 @@
       "source_location": "L987",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindduration",
-      "target": "alpenglow_trip_planner_enablenextbtn"
+      "target": "alpenglow_trip_planner_enablenextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4608,9 +4404,9 @@
       "source_location": "L931",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindmonth",
-      "target": "alpenglow_trip_planner_enablenextbtn"
+      "target": "alpenglow_trip_planner_enablenextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4620,9 +4416,9 @@
       "source_location": "L978",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindorigin",
-      "target": "alpenglow_trip_planner_enablenextbtn"
+      "target": "alpenglow_trip_planner_enablenextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4632,9 +4428,9 @@
       "source_location": "L879",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindtravelers",
-      "target": "alpenglow_trip_planner_enablenextbtn"
+      "target": "alpenglow_trip_planner_enablenextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4644,9 +4440,9 @@
       "source_location": "L843",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindvibe",
-      "target": "alpenglow_trip_planner_enablenextbtn"
+      "target": "alpenglow_trip_planner_enablenextbtn",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4656,9 +4452,9 @@
       "source_location": "L600",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendervibe",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4668,9 +4464,9 @@
       "source_location": "L626",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderdestination",
-      "target": "alpenglow_trip_planner_fmt"
+      "target": "alpenglow_trip_planner_fmt",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4680,9 +4476,9 @@
       "source_location": "L622",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderdestination",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4692,9 +4488,9 @@
       "source_location": "L644",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendertravelers",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4704,9 +4500,9 @@
       "source_location": "L663",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendercount",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4716,9 +4512,9 @@
       "source_location": "L665",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendercount",
-      "target": "alpenglow_trip_planner_stepper"
+      "target": "alpenglow_trip_planner_stepper",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4728,9 +4524,9 @@
       "source_location": "L675",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendermonth",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4740,9 +4536,9 @@
       "source_location": "L692",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderorigin",
-      "target": "alpenglow_trip_planner_cityrows"
+      "target": "alpenglow_trip_planner_cityrows",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4752,9 +4548,9 @@
       "source_location": "L688",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderorigin",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4764,9 +4560,9 @@
       "source_location": "L707",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderduration",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4776,9 +4572,9 @@
       "source_location": "L724",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_renderbudget",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4788,9 +4584,9 @@
       "source_location": "L768",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendercontact",
-      "target": "alpenglow_trip_planner_ccoptions"
+      "target": "alpenglow_trip_planner_ccoptions",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4800,9 +4596,9 @@
       "source_location": "L771",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendercontact",
-      "target": "alpenglow_trip_planner_esc"
+      "target": "alpenglow_trip_planner_esc",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4812,9 +4608,9 @@
       "source_location": "L763",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendercontact",
-      "target": "alpenglow_trip_planner_field"
+      "target": "alpenglow_trip_planner_field",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4824,9 +4620,9 @@
       "source_location": "L759",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_rendercontact",
-      "target": "alpenglow_trip_planner_heading"
+      "target": "alpenglow_trip_planner_heading",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4836,9 +4632,9 @@
       "source_location": "L827",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindstep",
-      "target": "alpenglow_trip_planner_bindbudget"
+      "target": "alpenglow_trip_planner_bindbudget",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4848,9 +4644,9 @@
       "source_location": "L828",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindstep",
-      "target": "alpenglow_trip_planner_bindcontact"
+      "target": "alpenglow_trip_planner_bindcontact",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4860,9 +4656,9 @@
       "source_location": "L823",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindstep",
-      "target": "alpenglow_trip_planner_bindcount"
+      "target": "alpenglow_trip_planner_bindcount",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4872,9 +4668,9 @@
       "source_location": "L821",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindstep",
-      "target": "alpenglow_trip_planner_binddestination"
+      "target": "alpenglow_trip_planner_binddestination",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4884,9 +4680,9 @@
       "source_location": "L826",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindstep",
-      "target": "alpenglow_trip_planner_bindduration"
+      "target": "alpenglow_trip_planner_bindduration",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4896,9 +4692,9 @@
       "source_location": "L824",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindstep",
-      "target": "alpenglow_trip_planner_bindmonth"
+      "target": "alpenglow_trip_planner_bindmonth",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4908,9 +4704,9 @@
       "source_location": "L825",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindstep",
-      "target": "alpenglow_trip_planner_bindorigin"
+      "target": "alpenglow_trip_planner_bindorigin",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4920,9 +4716,9 @@
       "source_location": "L822",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindstep",
-      "target": "alpenglow_trip_planner_bindtravelers"
+      "target": "alpenglow_trip_planner_bindtravelers",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4932,9 +4728,9 @@
       "source_location": "L820",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindstep",
-      "target": "alpenglow_trip_planner_bindvibe"
+      "target": "alpenglow_trip_planner_bindvibe",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4944,9 +4740,9 @@
       "source_location": "L842",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindvibe",
-      "target": "alpenglow_trip_planner_sbupsert"
+      "target": "alpenglow_trip_planner_sbupsert",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4956,9 +4752,9 @@
       "source_location": "L861",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_binddestination",
-      "target": "alpenglow_trip_planner_sbupsert"
+      "target": "alpenglow_trip_planner_sbupsert",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4968,9 +4764,9 @@
       "source_location": "L878",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindtravelers",
-      "target": "alpenglow_trip_planner_sbupsert"
+      "target": "alpenglow_trip_planner_sbupsert",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4980,9 +4776,9 @@
       "source_location": "L920",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindcount",
-      "target": "alpenglow_trip_planner_sbupsert"
+      "target": "alpenglow_trip_planner_sbupsert",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4992,9 +4788,9 @@
       "source_location": "L930",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindmonth",
-      "target": "alpenglow_trip_planner_sbupsert"
+      "target": "alpenglow_trip_planner_sbupsert",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5004,9 +4800,9 @@
       "source_location": "L986",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindduration",
-      "target": "alpenglow_trip_planner_sbupsert"
+      "target": "alpenglow_trip_planner_sbupsert",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5016,9 +4812,9 @@
       "source_location": "L998",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_bindbudget",
-      "target": "alpenglow_trip_planner_sbupsert"
+      "target": "alpenglow_trip_planner_sbupsert",
+      "confidence_score": 1.0
     },
     {
       "relation": "indirect_call",
@@ -5028,9 +4824,9 @@
       "source_location": "L1034",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 0.5,
       "source": "alpenglow_trip_planner_bindcontact",
-      "target": "alpenglow_trip_planner_tpconfirmemailotp"
+      "target": "alpenglow_trip_planner_tpconfirmemailotp",
+      "confidence_score": 0.5
     },
     {
       "relation": "indirect_call",
@@ -5040,9 +4836,9 @@
       "source_location": "L1032",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 0.5,
       "source": "alpenglow_trip_planner_bindcontact",
-      "target": "alpenglow_trip_planner_tpconfirmphoneotp"
+      "target": "alpenglow_trip_planner_tpconfirmphoneotp",
+      "confidence_score": 0.5
     },
     {
       "relation": "indirect_call",
@@ -5052,9 +4848,9 @@
       "source_location": "L1035",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 0.5,
       "source": "alpenglow_trip_planner_bindcontact",
-      "target": "alpenglow_trip_planner_tpfinalsubmit"
+      "target": "alpenglow_trip_planner_tpfinalsubmit",
+      "confidence_score": 0.5
     },
     {
       "relation": "indirect_call",
@@ -5064,9 +4860,9 @@
       "source_location": "L1033",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 0.5,
       "source": "alpenglow_trip_planner_bindcontact",
-      "target": "alpenglow_trip_planner_tpsendemailotp"
+      "target": "alpenglow_trip_planner_tpsendemailotp",
+      "confidence_score": 0.5
     },
     {
       "relation": "indirect_call",
@@ -5076,9 +4872,9 @@
       "source_location": "L1031",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 0.5,
       "source": "alpenglow_trip_planner_bindcontact",
-      "target": "alpenglow_trip_planner_tpsendphoneotp"
+      "target": "alpenglow_trip_planner_tpsendphoneotp",
+      "confidence_score": 0.5
     },
     {
       "relation": "calls",
@@ -5088,9 +4884,9 @@
       "source_location": "L1072",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_tpsendphoneotp",
-      "target": "alpenglow_trip_planner_tpcheckbothverified"
+      "target": "alpenglow_trip_planner_tpcheckbothverified",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5100,9 +4896,9 @@
       "source_location": "L1107",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_tpconfirmphoneotp",
-      "target": "alpenglow_trip_planner_tpcheckbothverified"
+      "target": "alpenglow_trip_planner_tpcheckbothverified",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5112,9 +4908,9 @@
       "source_location": "L1131",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_tpsendemailotp",
-      "target": "alpenglow_trip_planner_tpcheckbothverified"
+      "target": "alpenglow_trip_planner_tpcheckbothverified",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5124,9 +4920,9 @@
       "source_location": "L1165",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_tpconfirmemailotp",
-      "target": "alpenglow_trip_planner_tpcheckbothverified"
+      "target": "alpenglow_trip_planner_tpcheckbothverified",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5136,9 +4932,9 @@
       "source_location": "L1212",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_tpfinalsubmit",
-      "target": "alpenglow_trip_planner_sbsubmit"
+      "target": "alpenglow_trip_planner_sbsubmit",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5148,9 +4944,9 @@
       "source_location": "L1276",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_sbsubmit",
-      "target": "alpenglow_trip_planner_buildpayload"
+      "target": "alpenglow_trip_planner_buildpayload",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5160,9 +4956,9 @@
       "source_location": "L1267",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_sbupsert",
-      "target": "alpenglow_trip_planner_buildpayload"
+      "target": "alpenglow_trip_planner_buildpayload",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5172,9 +4968,9 @@
       "source_location": "L1279",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_sbsubmit",
-      "target": "alpenglow_trip_planner_insertleadrecord"
+      "target": "alpenglow_trip_planner_insertleadrecord",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -5184,9 +4980,9 @@
       "source_location": "L1347",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "alpenglow_trip_planner_field",
-      "target": "alpenglow_trip_planner_esc"
+      "target": "alpenglow_trip_planner_esc",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5195,9 +4991,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr",
-      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify"
+      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5206,9 +5002,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
-      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_answer"
+      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_answer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5217,9 +5013,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
-      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_outcome"
+      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_outcome",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5228,9 +5024,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_q_why_could_otps_for_non_indian_numbers_go_to_the_wrong_person_or_fail_to_verify",
-      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_source_nodes"
+      "target": "graphify_out_memory_query_20260922_121701_why_could_otps_for_non_indian_numbers_go_to_the_wr_source_nodes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5239,9 +5035,9 @@
       "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the",
-      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do"
+      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5250,9 +5046,9 @@
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
-      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_answer"
+      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_answer",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5261,9 +5057,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
-      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_outcome"
+      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_outcome",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5272,9 +5068,9 @@
       "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
-      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_source_nodes"
+      "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_source_nodes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5283,9 +5079,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "scripts_seo_homepage",
-      "target": "scripts_seo_homepage_f"
+      "target": "scripts_seo_homepage_f",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5294,9 +5090,9 @@
       "source_location": "L52",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "scripts_seo_homepage",
-      "target": "scripts_seo_homepage_faqs"
+      "target": "scripts_seo_homepage_faqs",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5305,9 +5101,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "scripts_seo_homepage",
-      "target": "scripts_seo_homepage_fs"
+      "target": "scripts_seo_homepage_fs",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5316,9 +5112,9 @@
       "source_location": "L3",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "scripts_seo_homepage",
-      "target": "scripts_seo_homepage_h"
+      "target": "scripts_seo_homepage_h",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5327,9 +5123,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "supabase_functions_send_sms_otp_index",
-      "target": "supabase_functions_send_sms_otp_index_allowed_origins"
+      "target": "supabase_functions_send_sms_otp_index_allowed_origins",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5338,9 +5134,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "supabase_functions_send_sms_otp_index",
-      "target": "supabase_functions_send_sms_otp_index_corsfor"
+      "target": "supabase_functions_send_sms_otp_index_corsfor",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5349,9 +5145,9 @@
       "source_location": "L48",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "supabase_functions_send_sms_otp_index",
-      "target": "supabase_functions_send_sms_otp_index_normalisephone"
+      "target": "supabase_functions_send_sms_otp_index_normalisephone",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5360,9 +5156,9 @@
       "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "supabase_functions_send_sms_otp_index",
-      "target": "supabase_functions_send_sms_otp_index_otpratelimited"
+      "target": "supabase_functions_send_sms_otp_index_otpratelimited",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5371,9 +5167,9 @@
       "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "supabase_functions_verify_sms_otp_index",
-      "target": "supabase_functions_verify_sms_otp_index_allowed_origins"
+      "target": "supabase_functions_verify_sms_otp_index_allowed_origins",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5382,9 +5178,9 @@
       "source_location": "L14",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "supabase_functions_verify_sms_otp_index",
-      "target": "supabase_functions_verify_sms_otp_index_corsfor"
+      "target": "supabase_functions_verify_sms_otp_index_corsfor",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5393,9 +5189,9 @@
       "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
-      "confidence_score": 1.0,
       "source": "supabase_functions_verify_sms_otp_index",
-      "target": "supabase_functions_verify_sms_otp_index_normalisephone"
+      "target": "supabase_functions_verify_sms_otp_index_normalisephone",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6845,5 +6641,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "49abdb24e1a4c5c0b9977d28296e709c50dd25d8"
+  "built_at_commit": "29414d2c23811a52ed37a93e07c9275619ba6250"
 }
