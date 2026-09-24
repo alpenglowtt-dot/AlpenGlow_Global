@@ -913,5 +913,10 @@
     "mtime": 1790079422.1619163,
     "ast_hash": "cd96fc14f17a89454ee73074428ae300",
     "semantic_hash": ""
+  },
+  ".impeccable/config.json": {
+    "mtime": 1790094106.2933629,
+    "ast_hash": "4b491e03f31a9d9826e43085a915c3e4",
+    "semantic_hash": ""
   }
 }

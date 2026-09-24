@@ -85,7 +85,7 @@
  ]
 }
 </script>
-<!-- SEO:END -->
+<!-- SEO:END -->
 <link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
@@ -615,8 +615,9 @@ body{
         // COMPASS is only reachable after Trip Planner's phone+email OTP
         // verification (see the isVerified('planner') gate at the top of
         // this file) — so any lead created here is verified by definition.
-        verifiedPhone: true,
-        verifiedEmail: true
+        // ...unless the session QA override skipped that OTP step.
+        verifiedPhone: !(window.AlpenAPI && AlpenAPI.bypassActive && AlpenAPI.bypassActive()),
+        verifiedEmail: !(window.AlpenAPI && AlpenAPI.bypassActive && AlpenAPI.bypassActive())
       })
     })
     .then(function(r){ return r.json() })

@@ -82,8 +82,15 @@
     planner: { flag: 'ag_verified_planner', at: 'ag_verified_planner_at' },
   }
 
+  // Session-scoped QA override (see the key-chord handler further down).
+  // sessionStorage only, so it dies with the tab; it never touches the backend.
+  function bypassOn() {
+    try { return sessionStorage.getItem('ag_qa_bypass') === '1' } catch (e) { return false }
+  }
+  function devOn() { return DEV_MODE || bypassOn() }
+
   function isVerified(scope) {
-    if (DEV_MODE) return true
+    if (devOn()) return true
     var k = _VERIFY_KEYS[scope] || _VERIFY_KEYS.package
     if (sessionStorage.getItem(k.flag) !== '1') return false
     var verifiedAt = parseInt(sessionStorage.getItem(k.at) || '0', 10)
@@ -584,9 +591,81 @@
     })()
   }
 
+  // ─── SESSION QA OVERRIDE (Alt+Shift+B+T+R+4) ────────────────────
+  // Hold Alt+Shift and press B, T, R and 4 (in any order, within 4s).
+  // Skips every OTP step for the rest of this tab's session: gates read as
+  // verified, OTP send/verify calls resolve locally without contacting the
+  // backend, and anything locked on the current page opens immediately.
+  // Client-side only — the gates were never a security boundary (the gated
+  // content is publicly fetchable), they exist for lead capture.
+  ;(function () {
+    var NEED = [['KeyB'], ['KeyT'], ['KeyR'], ['Digit4', 'Numpad4']]
+    var WINDOW_MS = 4000
+    var seen = {}
+
+    function reset() { seen = {} }
+
+    function toast(msg) {
+      var el = document.getElementById('agQaToast')
+      if (!el) {
+        el = document.createElement('div')
+        el.id = 'agQaToast'
+        el.setAttribute('role', 'status')
+        el.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:2147483647;' +
+          'background:#181818;color:#fff;border:1px solid rgba(239,126,25,.6);border-radius:999px;' +
+          'padding:.6rem 1.1rem;font:600 .8rem/1.2 system-ui,sans-serif;box-shadow:0 8px 30px rgba(0,0,0,.4);' +
+          'transition:opacity .4s;pointer-events:none;'
+        document.body.appendChild(el)
+      }
+      el.textContent = msg
+      el.style.opacity = '1'
+      clearTimeout(el.__t)
+      el.__t = setTimeout(function () { el.style.opacity = '0' }, 2600)
+    }
+
+    // Open whatever is locked on the page the visitor is looking at right now.
+    function applyNow() {
+      var pop = document.getElementById('agSitePopup')
+      if (pop) {
+        pop.remove()
+        Array.prototype.forEach.call(document.body.children, function (el) { el.removeAttribute('inert') })
+        document.body.style.overflow = ''
+      }
+      document.querySelectorAll('.package-blur, .blog-blur').forEach(function (el) { el.style.display = 'none' })
+      _hideGateSidebar()
+      var ov = document.getElementById('contentOverlay')
+      if (ov) ov.remove()
+      if (typeof window.unlockContent === 'function') { try { window.unlockContent() } catch (e) {} }
+    }
+
+    function activate() {
+      var already = bypassOn()
+      try { sessionStorage.setItem('ag_qa_bypass', '1') } catch (e) { return }
+      applyNow()
+      toast(already ? 'Verification bypass is already on for this session' : 'Verification bypass ON for this session')
+    }
+
+    window.addEventListener('keydown', function (e) {
+      if (!(e.altKey && e.shiftKey)) { reset(); return }
+      var idx = -1
+      for (var i = 0; i < NEED.length; i++) if (NEED[i].indexOf(e.code) !== -1) idx = i
+      if (idx === -1) return
+      e.preventDefault() // stop the browser's own Alt+Shift+letter shortcuts from grabbing focus
+      var now = Date.now()
+      seen[idx] = now
+      var complete = NEED.every(function (_, j) { return seen[j] && now - seen[j] < WINDOW_MS })
+      if (complete) { reset(); activate() }
+    }, true)
+    window.addEventListener('keyup', function (e) { if (e.key === 'Alt' || e.key === 'Shift') reset() }, true)
+    window.addEventListener('blur', reset)
+  })()
+
   window.AlpenAPI = {
-    /** Returns true if DEV_MODE is active (used by trip-planner.js to bypass OTP) */
-    isDevMode: function() { return DEV_MODE },
+    /** Returns true if DEV_MODE or the session QA override is active (used by trip-planner.js to bypass OTP) */
+    isDevMode: function() { return devOn() },
+
+    /** True only for the session QA override — lets callers record leads honestly as unverified. */
+    bypassActive: function() { return bypassOn() },
 
     /** Returns true if the visitor has already verified this session for the given scope */
     isVerified: isVerified,
@@ -612,26 +691,26 @@
 
     /** Send a 4-digit SMS OTP via Twilio */
     sendSMSOTP: (phone, purpose, metadata = {}) => {
-      if (DEV_MODE) return Promise.resolve({ ok: true })
+      if (devOn()) return Promise.resolve({ ok: true })
       return callEdge('send-sms-otp', { phone, purpose, metadata })
     },
 
     /** Verify a submitted SMS OTP code */
     verifySMSOTP: async (phone, code) => {
-      if (DEV_MODE) return { verified: true }
+      if (devOn()) return { verified: true }
       return callEdge('verify-sms-otp', { phone, code })
     },
 
     /** Send a 4-digit email OTP via Resend */
     sendEmailOTP: (email, purpose, metadata = {}) => {
-      if (DEV_MODE) return Promise.resolve({ ok: true })
+      if (devOn()) return Promise.resolve({ ok: true })
       return callEdge('send-email-otp', { email, purpose, metadata })
     },
 
     /** Verify a submitted email OTP code.
      *  scope: 'package' | 'blog' | 'offer' | 'planner' — see markVerified/isVerified above. */
     verifyEmailOTP: async (email, code, scope) => {
-      if (DEV_MODE) return { verified: true }
+      if (devOn()) return { verified: true }
       const r = await callEdge('verify-email-otp', { email, code })
       markVerified(scope)
       return r
@@ -643,7 +722,9 @@
 
     /** Store a generic lead (blog, package gate, offer) */
     submitLead: (data) =>
-      callEdge('submit-lead', data),
+      // A session with the QA override on never really verified anything, so
+      // never let its leads claim otherwise.
+      callEdge('submit-lead', bypassOn() ? Object.assign({}, data, { verifiedPhone: false, verifiedEmail: false }) : data),
 
     /** Fetch active offers from local data/offers.json */
     fetchOffers: () => {
@@ -685,7 +766,7 @@
      *  Goes through the submit-lead Edge Function (service-role) because the
      *  leads table is not readable with the public anon key. */
     checkOfferClaimed: async (phone, code) => {
-      if (DEV_MODE) return false
+      if (devOn()) return false
       try {
         const r = await callEdge('submit-lead', { action: 'check_offer', phone, offerCode: code })
         return !!(r && r.claimed)
