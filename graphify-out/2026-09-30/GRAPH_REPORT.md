@@ -1,11 +1,11 @@
 # Graph Report - AlpenGlow work  (2026-09-30)
 
 ## Corpus Check
-- 86 files · ~607,356 words
+- 85 files · ~607,237 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 279 nodes · 351 edges · 43 communities (27 shown, 16 thin omitted)
+- 274 nodes · 347 edges · 42 communities (26 shown, 16 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 6 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
@@ -51,7 +51,6 @@
 - _bindContact
 - Migrating AlpenGlow from Supabase Cloud → self-hosted Supabase (VPS)
 - seo-homepage.js
-- Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?
 - Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?
 - Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?
 
@@ -76,7 +75,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (43 total, 16 thin omitted)
+## Communities (42 total, 16 thin omitted)
 
 ### Community 0 - "trip-planner.js"
 Cohesion: 0.13
@@ -158,10 +157,6 @@ Nodes (5): Adding a domain + TLS later, Migrating AlpenGlow from Supabase Cloud 
 Cohesion: 0.40
 Nodes (4): F, faqs, fs, h
 
-### Community 39 - "Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?"
-Cohesion: 0.40
-Nodes (4): Answer, Outcome, Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?, Source Nodes
-
 ### Community 52 - "Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?, Source Nodes
@@ -171,7 +166,7 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?, Source Nodes
 
 ## Knowledge Gaps
-- **112 isolated node(s):** `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script`, `04-apply-frontend-values.sh script`, `crypto` (+107 more)
+- **109 isolated node(s):** `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script`, `04-apply-frontend-values.sh script`, `crypto` (+104 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -179,7 +174,7 @@ Nodes (4): Answer, Outcome, Q: How were the em/en dashes in the generated SEO co
 _Questions this graph is uniquely positioned to answer:_
 
 - **What connects `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script` to the rest of the system?**
-  _112 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _109 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `trip-planner.js` be split into smaller, more focused modules?**
   _Cohesion score 0.12773109243697478 - nodes in this community are weakly interconnected._
 - **Should `api.js` be split into smaller, more focused modules?**

@@ -120,14 +120,64 @@ const packs = [
     'switzerland.jpg', 'Swiss Alps with a mountain railway', 'Switzerland', 'P7D', 'Switzerland']
 ];
 
+const packagePageData = new Map();
+try {
+  for (const name of fs.readdirSync(path.join(ROOT, 'data/pages'))) {
+    if (!name.endsWith('.json')) continue;
+    const record = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/pages', name), 'utf8'));
+    if (record && record.slug) packagePageData.set(record.slug, record);
+  }
+} catch (_) {}
+let packageState = [];
+try { packageState = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/packages.json'), 'utf8')); } catch (_) {}
+if (!Array.isArray(packageState)) packageState = [];
+const packageBySlug = new Map(packageState.map(p => [String(p.link || '').replace(/^packages\//, '').replace(/\.html$/, ''), p]));
+const rootAssetURL = value => /^(https?:\/\/|\/)/i.test(value || '') ? value : SITE + '/' + String(value || '').replace(/^\.\//, '');
+const dynamicPackageSlugs = new Set();
+
+for (const [slug, pkg] of packageBySlug) {
+  if (!slug || packs.some(k => k[0] === slug) || !pkg.seo_group) continue;
+  const group = GROUPS.find(([, , id]) => id === pkg.seo_group);
+  const record = packagePageData.get(slug);
+  if (!group || !record || pkg.active === false || record.active === false || !fs.existsSync(path.join(ROOT, 'packages', slug + '.html'))) continue;
+  const title = record.page_title || record.title || pkg.name || '';
+  packs.push([slug, title, pkg.description || '', pkg.image_url || record.hero_image_url || '', record.hero_image_alt || '', record.location || pkg.location || '', '', '']);
+  group[1].push(slug);
+  dynamicPackageSlugs.add(slug);
+}
+
 packs.forEach(function (k) {
-  const slug = k[0], title = k[1], desc = k[2], img = k[3], alt = k[4], loc = k[5], iso = k[6], country = k[7];
+  const slug = k[0], legacyTitle = k[1], legacyDesc = k[2], legacyImg = k[3], legacyAlt = k[4], loc = k[5], iso = k[6], country = k[7];
+  const record = packagePageData.get(slug);
+  const pkg = packageBySlug.get(slug);
+  const title = record && (record.page_title || record.title) || legacyTitle;
+  const desc = record ? (record.meta_description || '') : legacyDesc;
+  const img = record && record.hero_image_url ? rootAssetURL(record.hero_image_url) : SITE + '/' + legacyImg;
+  const alt = record ? (record.hero_image_alt || '') : legacyAlt;
   pages.push(P('packages/' + slug + '.html', {
     url: SITE + '/packages/' + slug + '.html',
-    title: title, desc: desc, image: SITE + '/' + img, imageAlt: alt, type: 'article',
-    trip: { loc: loc, iso: iso, country: country, name: title.split(' - ')[0].split(' | ')[0] }
+    title: title, desc: desc, image: img, imageAlt: alt, type: 'article',
+    noindex: !!(record && record.active === false) || !!(pkg && pkg.active === false),
+    userPackage: dynamicPackageSlugs.has(slug),
+    location: dynamicPackageSlugs.has(slug) ? (record && record.location || loc || undefined) : undefined,
+    trip: dynamicPackageSlugs.has(slug) ? undefined : { loc: loc, iso: iso, country: country, name: title.split(' - ')[0].split(' | ')[0] }
   }));
 });
+
+const knownSlugs = new Set(packs.map(k => k[0]));
+for (const [slug, record] of packagePageData) {
+  if (knownSlugs.has(slug) || !fs.existsSync(path.join(ROOT, 'packages', slug + '.html'))) continue;
+  const pkg = packageBySlug.get(slug);
+  const title = record.page_title || record.title || '';
+  const image = record.hero_image_url ? rootAssetURL(record.hero_image_url) : '';
+  pages.push(P('packages/' + slug + '.html', {
+    url: SITE + '/packages/' + slug + '.html',
+    title, desc: record.meta_description || undefined, image: image || undefined,
+    imageAlt: record.hero_image_alt || undefined, type: 'article',
+    noindex: record.active === false || !!(pkg && pkg.active === false),
+    userPackage: true, location: record.location || undefined
+  }));
+}
 
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
@@ -181,6 +231,21 @@ function jsonld(p) {
       }
     });
     graph.push(BIZ);
+  } else if (p.userPackage) {
+    graph.push({
+      "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE + "/" },
+        { "@type": "ListItem", position: 2, name: "Tour Packages", item: SITE + "/#packages" },
+        { "@type": "ListItem", position: 3, name: p.title, item: p.url }
+      ]
+    });
+    graph.push({
+      "@type": "TouristTrip", "@id": p.url + "#trip", name: p.title,
+      description: p.desc, url: p.url, image: p.image,
+      arrivalLocation: p.location ? { "@type": "Place", name: p.location } : undefined,
+      provider: { "@id": ORG_ID }
+    });
+    graph.push(BIZ);
   } else if (p.trip) {
     graph.push({
       "@type": "BreadcrumbList", itemListElement: [
@@ -214,7 +279,7 @@ function jsonld(p) {
 function block(p) {
   const L = [];
   L.push('<!-- SEO:BEGIN (generated) -->');
-  L.push('<meta name="description" content="' + esc(p.desc) + '">');
+  if (p.desc) L.push('<meta name="description" content="' + esc(p.desc) + '">');
   L.push('<link rel="canonical" href="' + p.url + '">');
   L.push(p.noindex
     ? '<meta name="robots" content="noindex, follow">'
@@ -227,14 +292,14 @@ function block(p) {
   L.push('<meta property="og:site_name" content="AlpenGlow Global">');
   L.push('<meta property="og:locale" content="en_IN">');
   L.push('<meta property="og:title" content="' + esc(p.title) + '">');
-  L.push('<meta property="og:description" content="' + esc(p.desc) + '">');
+  if (p.desc) L.push('<meta property="og:description" content="' + esc(p.desc) + '">');
   L.push('<meta property="og:url" content="' + p.url + '">');
-  L.push('<meta property="og:image" content="' + p.image + '">');
-  L.push('<meta property="og:image:alt" content="' + esc(p.imageAlt) + '">');
+  if (p.image) L.push('<meta property="og:image" content="' + p.image + '">');
+  if (p.imageAlt) L.push('<meta property="og:image:alt" content="' + esc(p.imageAlt) + '">');
   L.push('<meta name="twitter:card" content="summary_large_image">');
   L.push('<meta name="twitter:title" content="' + esc(p.title) + '">');
-  L.push('<meta name="twitter:description" content="' + esc(p.desc) + '">');
-  L.push('<meta name="twitter:image" content="' + p.image + '">');
+  if (p.desc) L.push('<meta name="twitter:description" content="' + esc(p.desc) + '">');
+  if (p.image) L.push('<meta name="twitter:image" content="' + p.image + '">');
   L.push('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
   L.push('<link rel="preconnect" href="https://images.unsplash.com" crossorigin>');
   L.push('<script type="application/ld+json">\n' + jsonld(p) + '\n</script>');
@@ -264,7 +329,7 @@ if (ungrouped.length) console.log('WARNING: not in any GROUPS entry: ' + ungroup
 const card = (k) => {
   const [slug, title, desc, img] = k;
   const name = title.split(' - ')[0].split(' | ')[0];
-  return '      <a class="dest-card" href="packages/' + slug + '.html">\n' +
+  return '      <a class="dest-card" href="packages/' + slug + '.html"' + (dynamicPackageSlugs.has(slug) ? ' data-cms-package="true" data-package-slug="' + slug + '"' : '') + '>\n' +
     '        <img src="' + img + '" alt="' + esc(k[4]) + '" loading="lazy" decoding="async">\n' +
     '        <div class="dest-card-body">\n' +
     '          <h3>' + esc(name) + '</h3>\n' +

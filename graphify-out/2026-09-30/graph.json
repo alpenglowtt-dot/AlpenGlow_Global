@@ -3064,61 +3064,6 @@
       "community": 32,
       "community_name": "Q: How is site verification scoped, and what does the 30s popup do?",
       "norm_label": "source nodes"
-    },
-    {
-      "label": "query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page",
-      "community": 39,
-      "community_name": "Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?",
-      "norm_label": "query_20260930_140009_how_should_dev_html_generate_complete_package_page.md"
-    },
-    {
-      "label": "Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_q_how_should_dev_html_generate_complete_package_pages_and_keep_seo_and_sitemap_data_synchronized",
-      "community": 39,
-      "community_name": "Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?",
-      "norm_label": "q: how should dev.html generate complete package pages and keep seo and sitemap data synchronized?"
-    },
-    {
-      "label": "Answer",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_answer",
-      "community": 39,
-      "community_name": "Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?",
-      "norm_label": "answer"
-    },
-    {
-      "label": "Outcome",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_outcome",
-      "community": 39,
-      "community_name": "Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?",
-      "norm_label": "outcome"
-    },
-    {
-      "label": "Source Nodes",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "source_location": "L20",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_source_nodes",
-      "community": 39,
-      "community_name": "Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?",
-      "norm_label": "source nodes"
     }
   ],
   "links": [
@@ -7050,50 +6995,6 @@
       "_origin": "ast",
       "source": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_q_how_is_site_verification_scoped_and_what_does_the_30s_popup_do",
       "target": "graphify_out_memory_query_20260922_121702_how_is_site_verification_scoped_and_what_does_the_source_nodes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page",
-      "target": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_q_how_should_dev_html_generate_complete_package_pages_and_keep_seo_and_sitemap_data_synchronized",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_q_how_should_dev_html_generate_complete_package_pages_and_keep_seo_and_sitemap_data_synchronized",
-      "target": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_answer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_q_how_should_dev_html_generate_complete_package_pages_and_keep_seo_and_sitemap_data_synchronized",
-      "target": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_outcome",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md",
-      "source_location": "L20",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_q_how_should_dev_html_generate_complete_package_pages_and_keep_seo_and_sitemap_data_synchronized",
-      "target": "graphify_out_memory_query_20260930_140009_how_should_dev_html_generate_complete_package_page_source_nodes",
       "confidence_score": 1.0
     }
   ],

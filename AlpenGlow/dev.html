@@ -504,18 +504,90 @@ async function writeTextFile(path, text) {
 // hand-edited) every time a package is created, edited, toggled
 // active/inactive, or deleted — see saveCE/toggleItem/deleteItem.
 const SITE_ORIGIN = 'https://alpenglowglobal.com'
+const PACKAGE_GROUPS = [
+  { id: 'asia-subcontinent', label: 'Asia & the Subcontinent' },
+  { id: 'islands-honeymoons', label: 'Islands & Honeymoons' },
+  { id: 'europe', label: 'Europe' },
+  { id: 'once-in-a-lifetime', label: 'Once-in-a-Lifetime' },
+  { id: 'cruises', label: 'Cruises' },
+]
+
+async function syncDynamicDestinationCards() {
+  try {
+    const source = await readTextFile('destinations.html')
+    if (!source) return
+    const doc = new DOMParser().parseFromString(source, 'text/html')
+    doc.querySelectorAll('[data-cms-package="true"]').forEach(card => card.remove())
+    const groupIds = new Set(PACKAGE_GROUPS.map(group => group.id))
+    ALL_PKGS.forEach(pkg => {
+      const slug = String(pkg.link || '').replace(/^packages\//, '').replace(/\.html$/, '')
+      const page = ALL_PAGES.find(record => record.slug === slug)
+      if (!slug || !groupIds.has(pkg.seo_group) || pkg.active === false || !page || page.active === false || !ALL_PKG_FILES.includes(slug + '.html')) return
+      const grid = doc.querySelector('#' + CSS.escape(pkg.seo_group) + ' .dest-grid')
+      if (!grid) return
+      const card = doc.createElement('a')
+      card.className = 'dest-card'
+      card.href = 'packages/' + slug + '.html'
+      card.setAttribute('data-cms-package', 'true')
+      card.setAttribute('data-package-slug', slug)
+      if (pkg.image_url) {
+        const image = doc.createElement('img')
+        image.src = pkg.image_url
+        image.alt = page?.hero_image_alt || ''
+        image.loading = 'lazy'
+        image.decoding = 'async'
+        card.appendChild(image)
+      }
+      const body = doc.createElement('div')
+      body.className = 'dest-card-body'
+      const heading = doc.createElement('h3')
+      heading.textContent = pkg.name || page?.title || ''
+      body.appendChild(heading)
+      if (pkg.description) {
+        const description = doc.createElement('p')
+        description.textContent = pkg.description
+        body.appendChild(description)
+      }
+      const link = doc.createElement('span')
+      link.className = 'dest-card-link'
+      link.textContent = 'View package'
+      body.appendChild(link)
+      card.appendChild(body)
+      grid.appendChild(card)
+    })
+    await writeTextFile('destinations.html', '<!DOCTYPE html>\n' + doc.documentElement.outerHTML)
+  } catch (err) {
+    console.error('[destinations] update failed', err)
+    showToast('Package saved, but destinations.html could not be updated: ' + (err.message || err), 'err')
+  }
+}
+
 async function regenerateSitemap() {
   try {
     const today = new Date().toISOString().slice(0, 10)
     const urls = [
       { loc: SITE_ORIGIN + '/', changefreq: 'weekly', priority: '1.0' },
-      { loc: SITE_ORIGIN + '/compass.html', changefreq: 'monthly', priority: '0.9' },
+      { loc: SITE_ORIGIN + '/destinations.html', changefreq: 'monthly', priority: '0.9' },
     ]
-    ALL_PKGS
-      .filter((p) => p.active !== false && p.link)
-      .forEach((p) => {
-        urls.push({ loc: SITE_ORIGIN + '/' + p.link, changefreq: 'monthly', priority: '0.8' })
-      })
+    const packageBySlug = new Map(ALL_PKGS.map(p => [
+      String(p.link || '').replace(/^packages\//, '').replace(/\.html$/, ''), p
+    ]))
+    const pageSlugs = new Set()
+    ALL_PAGES.forEach(page => {
+      if (!page || !page.slug || page.active === false || !ALL_PKG_FILES.includes(page.slug + '.html')) return
+      const pkg = packageBySlug.get(page.slug)
+      if (pkg && pkg.active === false) return
+      pageSlugs.add(page.slug)
+    })
+    ALL_PKGS.forEach(pkg => {
+      const slug = String(pkg.link || '').replace(/^packages\//, '').replace(/\.html$/, '')
+      const page = ALL_PAGES.find(record => record.slug === slug)
+      if (slug && page && pkg.active !== false && page.active !== false && ALL_PKG_FILES.includes(slug + '.html')) pageSlugs.add(slug)
+    })
+    Array.from(pageSlugs).sort().forEach(slug => urls.push({
+      loc: SITE_ORIGIN + '/packages/' + encodeURIComponent(slug) + '.html',
+      changefreq: 'monthly', priority: '0.8'
+    }))
     const body = urls
       .map(
         (u) =>
@@ -597,7 +669,7 @@ function ej(s) {
 
 // ── DATA ─────────────────────────────────────────────────────
 let ALL_OFFERS = [], ALL_BLOGS = [], ALL_DESTS = [], ALL_PKGS = [], ALL_PAGES = [], ALL_PKG_FILES = []
-let CE_TYPE = null, CE_ID = null
+let CE_TYPE = null, CE_ID = null, CE_ORPHAN_SLUG = null
 let _isFirstLoad = true
 
 let _uidCounter = Date.now()
@@ -646,6 +718,8 @@ async function loadAll() {
   try {
     await generateBundle()
     await writeIndexHTML()
+    await syncDynamicDestinationCards()
+    await regenerateSitemap()
     setSaveStatus('ok', '✓ Saved')
     if (!justOpened) showToast('✓ Files updated — refresh the website tab to see changes', 'ok')
     else setSaveStatus('ok', '✓ Ready')
@@ -663,6 +737,8 @@ async function forceRegenerate() {
   try {
     await generateBundle()
     await writeIndexHTML()
+    await syncDynamicDestinationCards()
+    await regenerateSitemap()
     setSaveStatus('ok', '✓ Done')
     showToast('✓ bundle.js + index.html regenerated — refresh your website', 'ok')
     setTimeout(() => setSaveStatus('', ''), 5000)
@@ -853,7 +929,7 @@ function renderBlogs() {
 
 // ── OPEN EDITOR DRAWER (unified — handles all types) ─────────
 function openCE(type, id) {
-  CE_TYPE = type; CE_ID = id
+  CE_TYPE = type; CE_ID = id; CE_ORPHAN_SLUG = null
   let html = ''
 
   if (type === 'offer') {
@@ -975,7 +1051,7 @@ function openCE(type, id) {
     // id may be a real pkg id OR 'slug:xxx' for orphan HTML files not yet in packages.json
     const slugPrefill = (id && id.startsWith('slug:')) ? id.slice(5) : null
     const item = (!slugPrefill && id) ? ALL_PKGS.find(x => x.id === id) : null
-    if (slugPrefill) CE_ID = null   // treat as new entry so save() pushes instead of updating
+    if (slugPrefill) { CE_ID = null; CE_ORPHAN_SLUG = slugPrefill }
     document.getElementById('ce-drw-title').textContent = (item || !id) ? (item ? 'Edit Package' : 'New Package') : 'Add Package — ' + (slugPrefill || '')
     const prefillLink = slugPrefill ? 'packages/' + slugPrefill + '.html' : ''
     html = `
@@ -1004,6 +1080,13 @@ function openCE(type, id) {
         <input class="ce-input" id="ce-link" placeholder="packages/norway.html" value="${e(item?.link || prefillLink)}">
       </div>
       <div class="ce-field">
+        <label class="ce-lbl">Destinations Page Group (optional)</label>
+        <select class="ce-input" id="ce-seo-group">
+          <option value="">Do not add to a destination group</option>
+          ${PACKAGE_GROUPS.map(group => `<option value="${e(group.id)}"${item?.seo_group === group.id ? ' selected' : ''}>${e(group.label)}</option>`).join('')}
+        </select>
+      </div>
+      <div class="ce-field">
         <label class="ce-lbl">Sort Order</label>
         <input class="ce-input" id="ce-order" type="number" placeholder="1" value="${e(String(item?.sort_order??''))}">
       </div>
@@ -1023,19 +1106,16 @@ function openCE(type, id) {
     document.getElementById('ce-drw-title').textContent = id ? 'Edit Package Page' : 'New Package Page'
     // For each field: page JSON is authoritative; fall back to packages.json when blank
     const _slug      = item?.slug      || id          || ''
-    const _pageTitle = item?.page_title || (_pkg?.name ? _pkg.name + ' | AlpenGlow Global' : '')
+    const _pageTitle = item?.page_title || ''
     const _heroImg   = item?.hero_image_url || _pkg?.image_url  || ''
     const _loc       = item?.location   || _pkg?.location  || ''
     const _dur       = item?.duration   || _pkg?.duration  || ''
     const _title     = item?.title      || _pkg?.name      || ''
-    const _ovHead    = item?.overview_heading  || 'Overview'
-    const _plHead    = item?.places_heading    || 'Explore the Cities'
-    const _itinHead  = item?.itinerary_heading || 'Itinerary'
-    const _inclHead  = item?.inclusions_heading || "What's Included"
-    // Pre-fill overview paragraphs from page JSON; fall back to package description
-    const paras = (Array.isArray(item?.overview_paragraphs) && item.overview_paragraphs.length)
-      ? item.overview_paragraphs
-      : (_pkg?.description ? [_pkg.description] : [])
+    const _ovHead    = item?.overview_heading  || ''
+    const _plHead    = item?.places_heading    || ''
+    const _itinHead  = item?.itinerary_heading || ''
+    const _inclHead  = item?.inclusions_heading || ''
+    const paras = Array.isArray(item?.overview_paragraphs) ? item.overview_paragraphs : []
     const places     = Array.isArray(item?.places)     ? item.places     : []
     const itinerary  = Array.isArray(item?.itinerary)  ? item.itinerary  : []
     const inclusions = Array.isArray(item?.inclusions) ? item.inclusions : []
@@ -1048,8 +1128,16 @@ function openCE(type, id) {
         <label class="ce-lbl">Browser Tab Title</label>
         <input class="ce-input" id="ce-page-title" placeholder="Japan — Land of Contrasts | AlpenGlow Global" value="${e(_pageTitle)}">
       </div>
+      <div class="ce-field">
+        <label class="ce-lbl">SEO Description</label>
+        <textarea class="ce-textarea" id="ce-meta-description" placeholder="Enter the search and social description for this page">${e(item?.meta_description||'')}</textarea>
+      </div>
       <div class="ce-section-lbl">Hero Section</div>
       ${ceImgField('ce-img','ce-img-preview',_heroImg,'Hero Image URL','images/')}
+      <div class="ce-field">
+        <label class="ce-lbl">Hero Image Alt Text</label>
+        <input class="ce-input" id="ce-hero-alt" placeholder="Describe the hero image" value="${e(item?.hero_image_alt||'')}">
+      </div>
       ${ceImgField('ce-bg-img','ce-bg-img-preview',item?.bg_image_url||'','Side Background Image (decorative left-edge image, optional)','images/')}
       <div class="ce-row">
         <div class="ce-field">
@@ -1123,7 +1211,7 @@ function openCE(type, id) {
 function closeCE() {
   document.getElementById('ce-overlay').classList.remove('open')
   document.getElementById('ce-drw').classList.remove('open')
-  CE_TYPE = null; CE_ID = null
+  CE_TYPE = null; CE_ID = null; CE_ORPHAN_SLUG = null
 }
 
 function slugify(str) {
@@ -1135,7 +1223,7 @@ function slugify(str) {
 }
 
 function autoFillLink(nameInput) {
-  if (CE_ID) return  // editing existing — never overwrite the link
+  if (CE_ID || CE_ORPHAN_SLUG) return  // preserve links for existing entries and orphan files
   const linkInput = document.getElementById('ce-link')
   if (!linkInput) return
   const s = slugify(nameInput.value)
@@ -1318,16 +1406,21 @@ async function saveCE() {
       location:            document.getElementById('ce-location').value.trim(),
       duration:            document.getElementById('ce-duration').value.trim(),
       title:               document.getElementById('ce-title').value.trim(),
-      overview_heading:    document.getElementById('ce-overview-heading').value.trim() || 'Overview',
+      meta_description:    document.getElementById('ce-meta-description').value.trim(),
+      hero_image_alt:      document.getElementById('ce-hero-alt').value.trim(),
+      overview_heading:    document.getElementById('ce-overview-heading').value.trim(),
       overview_paragraphs: collectOverviewParas(),
-      places_heading:      document.getElementById('ce-places-heading').value.trim() || 'Explore the Cities',
+      places_heading:      document.getElementById('ce-places-heading').value.trim(),
       places:              collectPlaces(),
-      itinerary_heading:   document.getElementById('ce-itinerary-heading').value.trim() || 'Itinerary',
+      itinerary_heading:   document.getElementById('ce-itinerary-heading').value.trim(),
       itinerary:           collectItinerary(),
-      inclusions_heading:  document.getElementById('ce-inclusions-heading').value.trim() || "What's Included",
+      inclusions_heading:  document.getElementById('ce-inclusions-heading').value.trim(),
       inclusions:          collectInclusions(),
       active:              document.getElementById('ce-active-toggle').classList.contains('on'),
     }
+    if (!body.title) { alert('Page Title (h1) is required.'); return }
+    const previousPage = CE_ID ? ALL_PAGES.find(page => page.slug === CE_ID || page.id === CE_ID) : null
+    const pageRecord = { ...(previousPage || {}), ...body }
     btn.textContent = 'Saving…'; btn.disabled = true
     try {
       // If slug changed while editing, remove the old file
@@ -1337,16 +1430,10 @@ async function saveCE() {
           await pagesDir.removeEntry(CE_ID + '.json')
         } catch(e) {}
       }
-      await writeJSON('data/pages/' + slug + '.json', body)
-      // A page record alone cannot be opened from the Package Page Content
-      // list. Create the matching HTML shell when it does not exist; keep
-      // existing pages intact when their content JSON is edited.
-      if (!ALL_PKG_FILES.includes(slug + '.html')) {
-        const pageName = body.title || body.page_title || slug
-        const html = generatePackageHTML(slug, pageName, body.location, body.duration, body.hero_image_url)
-        await writeTextFile('packages/' + slug + '.html', html)
-      }
+      await writeJSON('data/pages/' + slug + '.json', pageRecord)
+      await syncPackageHTML(pageRecord)
       closeCE(); await loadAll()
+      await regenerateSitemap()
     } catch(err) { alert('Save failed: ' + err.message)
     } finally { btn.textContent = 'Save'; btn.disabled = false }
     return
@@ -1374,11 +1461,28 @@ async function saveCE() {
       description: document.getElementById('ce-desc').value.trim(),
       image_url:   document.getElementById('ce-img').value.trim(),
       link:        document.getElementById('ce-link').value.trim(),
+      seo_group:   document.getElementById('ce-seo-group').value,
       sort_order:  parseInt(document.getElementById('ce-order').value) || 0,
       active,
     }
     if (!body.name) { alert('Name is required.'); return }
     if (isDest && !body.slug) { alert('Slug is required (e.g. subcontinent).'); return }
+    if (isDest && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(body.slug)) {
+      alert('Use lowercase letters, numbers, and single hyphens in the destination slug.')
+      return
+    }
+    let packageSlug = ''
+    if (!isDest) {
+      if (!body.link) body.link = 'packages/' + slugify(body.name) + '.html'
+      const linkMatch = body.link.match(/^packages\/([a-z0-9]+(?:-[a-z0-9]+)*)\.html$/)
+      if (!linkMatch) { alert('Package link must be packages/<lowercase-slug>.html.'); return }
+      body.link = 'packages/' + linkMatch[1] + '.html'
+      packageSlug = linkMatch[1]
+      if (CE_ORPHAN_SLUG && linkMatch[1] !== CE_ORPHAN_SLUG) {
+        alert('This package is attached to an existing page. Keep its current page link.')
+        return
+      }
+    }
     btn.textContent = 'Saving…'; btn.disabled = true
     try {
       const arr = isDest ? [...ALL_DESTS] : [...ALL_PKGS]
@@ -1388,33 +1492,38 @@ async function saveCE() {
         if (idx >= 0) arr[idx] = { ...arr[idx], ...body }
       } else {
         body.id = Date.now().toString()
-        // Auto-generate link from name if not provided
-        if (!isDest && !body.link) {
-          body.link = 'packages/' + slugify(body.name) + '.html'
-        }
-        arr.push(body)
         if (!isDest) {
-          const slug = body.link.replace(/^packages\//, '').replace(/\.html$/, '') || slugify(body.name)
-          if (slug) {
-            const html = generatePackageHTML(slug, body.name, body.location, body.duration, body.image_url)
-            await writeTextFile('packages/' + slug + '.html', html)
-            const pageData = {
-              slug,
-              page_title:          body.name + ' | AlpenGlow Global',
-              hero_image_url:      body.image_url || '',
-              duration:            body.duration || '',
-              location:            body.location || '',
-              title:               body.name,
-              overview_heading:    'Overview',
-              overview_paragraphs: [body.description || ''],
-              places_heading:      'Explore the Highlights',
-              places:              [],
-              inclusions_heading:  "What's Included",
-              inclusions:          []
-            }
-            await writeJSON('data/pages/' + slug + '.json', pageData)
-            alert('✓ Created packages/' + slug + '.html\n✓ Created data/pages/' + slug + '.json\n\nNext: go to "Package Page Content" to add places and inclusions.')
+          const slug = packageSlug
+          const hasHTML = ALL_PKG_FILES.includes(slug + '.html')
+          const existingPage = ALL_PAGES.find(page => page.slug === slug)
+          if ((hasHTML || existingPage) && !CE_ORPHAN_SLUG) {
+            throw new Error('A package page with this slug already exists. Open that page from the list to edit it.')
           }
+          if (CE_ORPHAN_SLUG && !hasHTML) {
+            throw new Error('The existing package HTML file could not be found.')
+          }
+          const pageData = existingPage || {
+            slug,
+            page_title: '',
+            meta_description: '',
+            hero_image_url: body.image_url,
+            hero_image_alt: '',
+            duration: body.duration,
+            location: body.location,
+            title: body.name,
+            overview_heading: '', overview_paragraphs: [],
+            places_heading: '', places: [],
+            itinerary_heading: '', itinerary: [],
+            inclusions_heading: '', inclusions: [],
+            active: body.active,
+          }
+          if (!existingPage) await writeJSON('data/pages/' + slug + '.json', pageData)
+          if (!hasHTML) await writeTextFile('packages/' + slug + '.html', await generatePackageHTML(pageData))
+          else await syncPackageHTML(pageData)
+          arr.push(body)
+          alert('Package record saved. Only the package details you entered were added; add page sections in "Package Page Content" when ready.')
+        } else {
+          arr.push(body)
         }
       }
       await writeJSON(file, arr)
@@ -1667,8 +1776,13 @@ async function togglePage(slug, newActive) {
   const page = ALL_PAGES.find(p => p.slug === slug)
   if (!page) return
   page.active = newActive
-  await writeJSON('data/pages/' + slug + '.json', page).catch(() => {})
-  await loadAll()
+  try {
+    await writeJSON('data/pages/' + slug + '.json', page)
+    await syncPackageHTML(page)
+    await loadAll()
+  } catch (err) {
+    showToast('Page update failed: ' + (err.message || err), 'err')
+  }
 }
 
 // ── DESTINATION DRAWER HELPERS ────────────────────────────────
@@ -1701,268 +1815,236 @@ function collectSubDests() {
 
 
 // ── PACKAGE PAGE HTML TEMPLATE ────────────────────────────────
-function generatePackageHTML(slug, pkgName, location, duration, heroImg) {
-  const _img = heroImg || 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&q=80'
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${pkgName} | AlpenGlow Global</title>
-<link rel="icon" type="image/png" sizes="48x48" href="../favicon-48.png">
-<link rel="icon" type="image/png" sizes="96x96" href="../favicon-96.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="package.css">
-<link rel="stylesheet" href="../trip-planner.css">
-</head>
-<body data-verify-scope="package">
+function packageImagePath(value) {
+  if (!value) return ''
+  const path = String(value).trim()
+  if (/^(https?:\/\/|\/|data:|blob:)/i.test(path)) return path
+  return '../' + path.replace(/^\.\//, '')
+}
 
-<nav id="navbar">
-  <a href="../index.html" class="nav-logo">
-    <img src="../alpenglow-removebg-preview.png" alt="AlpenGlow Global">
-  </a>
-  <div class="nav-links" id="navLinks">
-    <a href="../index.html#destinations">Destinations</a>
-    <a href="../index.html#packages">Packages</a>
-    <a href="../index.html#offers">Offers</a>
-    <a href="../index.html#contact">Contact</a>
-    <a href="#" class="nav-cta" onclick="event.preventDefault();typeof initTripPlanner==='function'&&initTripPlanner()">Plan Your Trip</a>
-  </div>
-  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+function safeScriptJSON(value) {
+  return JSON.stringify(value)
+    .replace(/</g, '\\u003c')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029')
+}
 
-<div class="breadcrumb">
-  <a href="../index.html#packages">&larr; Back to Packages</a>
-</div>
-
-<section class="detail-hero">
-  <img src="${_img}" alt="${pkgName}">
-  <div class="detail-hero-overlay">
-    <span class="detail-duration">${duration || ''}</span>
-    <div class="detail-location">${location || ''}</div>
-    <h1 class="detail-title">${pkgName}</h1>
-  </div>
-</section>
-
-<div class="detail-wrap">
-  <div class="detail-main locked" id="detailMain">
-    <div class="content-overlay" id="contentOverlay">
-      <div class="co-lock">&#128274;</div>
-      <h3>Verify to Unlock Full Itinerary</h3>
-      <p>Read the overview below for free. Verify your WhatsApp or email to unlock the full day-by-day itinerary and pricing.</p>
-      <button class="btn-scroll-verify" onclick="document.getElementById('gateCard').scrollIntoView({behavior:'smooth',block:'start'})">Verify &amp; Unlock Now</button>
-    </div>
-    <div class="overview-free">
-      <div class="overview-card-float">
-        <h2>Overview</h2>
-        <div class="o-rule"></div>
-        <p>Overview content will be added here.</p>
-      </div>
-    </div>
-    <h2 id="placesHeading">Explore the Highlights</h2>
-    <div class="city-showcase"></div>
-    <h2 id="itineraryHeading" style="display:none">Itinerary</h2>
-    <div class="itinerary-list" id="itineraryList" style="display:none"></div>
-    <h2 id="inclusionsHeading">What's Included</h2>
-    <div class="tag-row">
-      <span class="tag-pill">To be updated</span>
-    </div>
-  </div>
-
-  <div class="detail-sidebar">
-    <div class="gate-card" id="gateCard">
-      <span class="gate-badge">Verification Required</span>
-      <h3>Unlock Full Itinerary</h3>
-      <div id="gateStep1">
-        <p>Enter your details to access the day-by-day itinerary, pricing, and a personal callback from our travel team.</p>
-        <div class="form-group"><label>Full Name</label><input type="text" id="gateName" placeholder="Your name"></div>
-        <div class="gate-channel-row" style="display:flex;gap:.5rem;margin-bottom:1rem;">
-          <button type="button" class="gate-channel-btn active" id="gateChW" onclick="gateSelectChannel('whatsapp')">WhatsApp</button>
-          <button type="button" class="gate-channel-btn" id="gateChE" onclick="gateSelectChannel('email')">Email</button>
-        </div>
-        <div class="form-group" id="gateWaFields"><label>WhatsApp Number</label><div style="display:flex;gap:8px;"><select id="gatePhoneCC" class="phone-cc-select"><option value="+91">+91 IN</option><option value="+1">+1 US</option><option value="+44">+44 UK</option><option value="+61">+61 AU</option><option value="+65">+65 SG</option><option value="+971">+971 AE</option><option value="+60">+60 MY</option><option value="+64">+64 NZ</option></select><input type="tel" id="gatePhone" placeholder="98765 43210" maxlength="10" oninput="this.value=this.value.replace(/\\D/g,'')" inputmode="numeric" style="flex:1;"></div></div>
-        <div class="form-group" id="gateEmailFields" style="display:none;"><label>Email Address</label><input type="email" id="gateEmail" placeholder="you@example.com"></div>
-        <button class="btn-verify" id="gateBtn1" onclick="gateSendWhatsApp()">Send WhatsApp Code</button>
-      </div>
-      <div id="gateStep2" style="display:none;">
-        <p id="gateStep2Desc" style="font-size:.84rem;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:1rem;">Enter the 4-digit code sent to your WhatsApp.</p>
-        <div style="display:flex;gap:.5rem;margin-bottom:.8rem;">
-          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveOtp(this,1)" id="gOtp0">
-          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveOtp(this,2)" id="gOtp1">
-          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveOtp(this,3)" id="gOtp2">
-          <input type="tel" maxlength="1" class="otp-digit" oninput="gateMoveOtp(this,4)" id="gOtp3">
-        </div>
-        <div style="font-size:.73rem;color:rgba(255,255,255,.4);margin-bottom:.9rem;">Didn't receive it? <a onclick="gateResendOtp()" style="color:var(--orange);cursor:pointer;font-weight:600;">Resend</a></div>
-        <button class="btn-verify" id="gateBtn2" onclick="gateVerifyOtp()">Verify &amp; Unlock</button>
-        <button type="button" class="gate-back" id="gateBackBtn" onclick="gateBack()">&larr; Change number</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="city-modal-backdrop" id="cityModalBackdrop" onclick="if(event.target===this) closeCityModal()">
-  <div class="city-modal">
-    <button class="city-modal-close" onclick="closeCityModal()">&#x2715;</button>
-    <div class="city-modal-img"><img id="cityModalImg" src="" alt=""></div>
-    <div class="city-modal-body">
-      <h3 id="cityModalName"></h3>
-      <div class="city-modal-tagline" id="cityModalTagline"></div>
-      <p id="cityModalDesc"></p>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <div class="footer-logo"><img src="../alpenglow-removebg-preview.png" alt="AlpenGlow Global"><img src="../alpenglow-removebg-preview-removebg-preview.png" alt="AlpenGlow Global"></div>
-  <div class="footer-links">
-    <a href="../index.html#destinations">Destinations</a>
-    <a href="../index.html#packages">Packages</a>
-    <a href="../index.html#offers">Offers</a>
-    <a href="../index.html#blog">Blog</a>
-    <a href="../index.html#reviews">Reviews</a>
-    <a href="../index.html#contact">Contact</a>
-  </div>
-  <p>&copy; 2026 AlpenGlow Global. All rights reserved.</p>
-</footer>
-
-<script src="../data/bundle.js">\x3c/script>
-<script src="../api.js">\x3c/script>
-<script src="../trip-planner.js">\x3c/script>
-<script>
-let _gateName = "", _gatePhone = "", _gateEmail = "";
-function unlockContent() {
-  const main = document.getElementById("detailMain");
-  const overlay = document.getElementById("contentOverlay");
-  if (main) main.classList.remove("locked");
-  if (overlay) { overlay.style.opacity = "0"; setTimeout(() => overlay.remove(), 500); }
-  const sidebar = document.querySelector(".detail-sidebar");
-  if (sidebar) sidebar.style.display = "none";
-  const wrap = document.querySelector(".detail-wrap");
-  if (wrap) wrap.classList.add("wrap-full");
-  // On mobile, the gate card sits in normal flow (not sticky) and can end up
-  // far down the page by the time verification finishes — jump back up to
-  // the top, where the Overview section lives, instead of leaving the user
-  // stranded mid-page.
-  if (window.matchMedia("(max-width: 900px)").matches) {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+function packageSEOBlock(page, slug) {
+  const pageTitle = page.page_title || page.title || ''
+  const schemaTitle = pageTitle || ''
+  const description = page.meta_description || ''
+  const canonical = SITE_ORIGIN + '/packages/' + encodeURIComponent(slug) + '.html'
+  const image = page.hero_image_url
+    ? new URL(page.hero_image_url, SITE_ORIGIN + '/').href
+    : ''
+  const graph = [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_ORIGIN + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Tour Packages', item: SITE_ORIGIN + '/#packages' },
+        { '@type': 'ListItem', position: 3, name: schemaTitle, item: canonical }
+      ]
+    },
+    {
+      '@type': 'TouristTrip',
+      '@id': canonical + '#trip',
+      name: schemaTitle,
+      description: description || undefined,
+      url: canonical,
+      image: image || undefined,
+      arrivalLocation: page.location ? { '@type': 'Place', name: page.location } : undefined,
+      provider: { '@id': SITE_ORIGIN + '/#organization' }
+    },
+    { '@type': ['TravelAgency', 'LocalBusiness'], '@id': SITE_ORIGIN + '/#organization', name: 'AlpenGlow Global', url: SITE_ORIGIN + '/' }
+  ]
+  const tags = [
+    '<!-- SEO:BEGIN (generated) -->'
+  ]
+  if (description) tags.push('<meta name="description" content="' + e(description) + '">')
+  tags.push('<link rel="canonical" href="' + e(canonical) + '">')
+  tags.push('<meta name="robots" content="' + (page.active === false ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1') + '">')
+  tags.push('<meta name="author" content="AlpenGlow Global">')
+  tags.push('<meta name="theme-color" content="#9d2420">')
+  tags.push('<meta name="geo.region" content="IN-TN">')
+  tags.push('<meta name="geo.placename" content="Coimbatore">')
+  tags.push('<meta property="og:type" content="article">')
+  tags.push('<meta property="og:site_name" content="AlpenGlow Global">')
+  tags.push('<meta property="og:locale" content="en_IN">')
+  if (pageTitle) {
+    tags.push('<meta property="og:title" content="' + e(pageTitle) + '">')
+    tags.push('<meta name="twitter:title" content="' + e(pageTitle) + '">')
   }
+  if (description) {
+    tags.push('<meta property="og:description" content="' + e(description) + '">')
+    tags.push('<meta name="twitter:description" content="' + e(description) + '">')
+  }
+  tags.push('<meta property="og:url" content="' + e(canonical) + '">')
+  if (image) {
+    tags.push('<meta property="og:image" content="' + e(image) + '">')
+    tags.push('<meta name="twitter:card" content="summary_large_image">')
+    tags.push('<meta name="twitter:image" content="' + e(image) + '">')
+    if (page.hero_image_alt) tags.push('<meta property="og:image:alt" content="' + e(page.hero_image_alt) + '">')
+  }
+  tags.push('<script type="application/ld+json">' + safeScriptJSON({
+    '@context': 'https://schema.org',
+    '@graph': graph
+  }) + '</script>')
+  tags.push('<!-- SEO:END -->')
+  return tags.join('\n')
 }
-let _gateChannel = "whatsapp";
-function gateSelectChannel(ch) {
-  _gateChannel = ch;
-  document.getElementById("gateChW").classList.toggle("active", ch === "whatsapp");
-  document.getElementById("gateChE").classList.toggle("active", ch === "email");
-  document.getElementById("gateWaFields").style.display = ch === "whatsapp" ? "" : "none";
-  document.getElementById("gateEmailFields").style.display = ch === "email" ? "" : "none";
-  const btn = document.getElementById("gateBtn1");
-  btn.textContent = ch === "whatsapp" ? "Send WhatsApp Code" : "Send Email Code";
-  btn.onclick = ch === "whatsapp" ? gateSendWhatsApp : gateSendEmail;
-}
-function gateSendWhatsApp() {
-  _gateName = document.getElementById("gateName").value.trim();
-  if (!_gateName) { alert("Please enter your name."); document.getElementById("gateName").focus(); return; }
-  const _pv = AlpenAPI.phone.validate(document.getElementById("gatePhoneCC").value, document.getElementById("gatePhone").value);
-  if (!_pv.ok) { alert(_pv.msg); document.getElementById("gatePhone").focus(); return; }
-  _gatePhone = _pv.full;
-  const btn = document.getElementById("gateBtn1");
-  btn.textContent = "Sending..."; btn.disabled = true;
-  AlpenAPI.sendSMSOTP(_gatePhone, "package_unlock", { name: _gateName })
-    .then(() => {
-      _gateChannel = "whatsapp";
-      document.getElementById("gateStep2Desc").textContent = "Enter the 4-digit code sent to WhatsApp " + _gatePhone + "."; document.getElementById("gateBackBtn").innerHTML = "&larr; Change number";
-      document.getElementById("gateStep1").style.display = "none"; document.getElementById("gateStep2").style.display = "block";
-      setTimeout(() => document.getElementById("gOtp0").focus(), 100);
-    })
-    .catch((err) => { btn.disabled = false; btn.textContent = "Send WhatsApp Code"; alert(err?.message || "Could not send code. Please check your number and try again."); });
-}
-function gateSendEmail() {
-  _gateName = document.getElementById("gateName").value.trim();
-  _gateEmail = document.getElementById("gateEmail").value.trim();
-  if (!_gateName) { alert("Please enter your name."); document.getElementById("gateName").focus(); return; }
-  if (!AlpenAPI.isValidEmail(_gateEmail)) { alert("Please enter a valid email address."); document.getElementById("gateEmail").focus(); return; }
-  const btn = document.getElementById("gateBtn1");
-  btn.textContent = "Sending..."; btn.disabled = true;
-  AlpenAPI.sendEmailOTP(_gateEmail, "package_unlock", { name: _gateName })
-    .then(() => {
-      _gateChannel = "email";
-      document.getElementById("gateStep2Desc").textContent = "Enter the 4-digit code sent to " + _gateEmail + "."; document.getElementById("gateBackBtn").innerHTML = "&larr; Change email";
-      document.getElementById("gateStep1").style.display = "none"; document.getElementById("gateStep2").style.display = "block";
-      setTimeout(() => document.getElementById("gOtp0").focus(), 100);
-    })
-    .catch((err) => { btn.disabled = false; btn.textContent = "Send Email Code"; alert(err?.message || "Could not send code. Please check your email and try again."); });
-}
-function gateMoveOtp(el, next) { if (el.value.length === 1 && next <= 3) document.getElementById("gOtp" + next).focus(); }
-function gateResendOtp() {
-  ["gOtp0","gOtp1","gOtp2","gOtp3"].forEach(id => document.getElementById(id).value = "");
-  if (_gateChannel === "whatsapp") AlpenAPI.sendSMSOTP(_gatePhone, "package_unlock").catch(() => {});
-  else AlpenAPI.sendEmailOTP(_gateEmail, "package_unlock").catch(() => {});
-  document.getElementById("gOtp0").focus();
-}
-function gateVerifyOtp() {
-  const code = ["gOtp0","gOtp1","gOtp2","gOtp3"].map(id => document.getElementById(id).value).join("");
-  if (code.length < 4) { document.getElementById("gOtp0").focus(); return; }
-  const btn = document.getElementById("gateBtn2");
-  if (btn.disabled) return;
-  btn.textContent = "Verifying..."; btn.disabled = true;
-  const done = () => {
-    AlpenAPI.submitLead({
-      name: _gateName, phone: _gateChannel === "whatsapp" ? _gatePhone : "", email: _gateChannel === "email" ? _gateEmail : "",
-      source: "package_unlock", verifiedPhone: _gateChannel === "whatsapp", verifiedEmail: _gateChannel === "email"
-    }).catch(() => {});
-    unlockContent();
-  };
-  if (_gateChannel === "whatsapp") {
-    AlpenAPI.verifySMSOTP(_gatePhone, code)
-      .then(() => { AlpenAPI.markVerified("package"); done(); })
-      .catch((err) => { btn.textContent = "Verify & Unlock"; btn.disabled = false; alert(err?.message || "Invalid code. Please try again."); });
+
+async function syncPackageHTML(page) {
+  const path = 'packages/' + page.slug + '.html'
+  const existing = await readTextFile(path)
+  const generated = !existing || existing.includes('ALPENGLOW:PACKAGE-TEMPLATE') ||
+    (existing.includes('Overview content will be added here.') && existing.includes('function openCityModal'))
+  if (generated) {
+    await writeTextFile(path, await generatePackageHTML(page))
+    return
+  }
+
+  const title = page.page_title || page.title || ''
+  let updated = existing.replace(/<title>[\s\S]*?<\/title>/i, '<title>' + e(title) + '</title>')
+  const seoBlock = packageSEOBlock(page, page.slug)
+  if (/<!-- SEO:BEGIN \(generated\) -->[\s\S]*?<!-- SEO:END -->/.test(updated)) {
+    updated = updated.replace(/<!-- SEO:BEGIN \(generated\) -->[\s\S]*?<!-- SEO:END -->/, seoBlock)
   } else {
-    AlpenAPI.verifyEmailOTP(_gateEmail, code, "package")
-      .then(done)
-      .catch((err) => { btn.textContent = "Verify & Unlock"; btn.disabled = false; alert(err?.message || "Invalid code. Please try again."); });
+    updated = updated.replace(/<\/title>/i, '</title>\n' + seoBlock)
   }
-}
-function gateBack() {
-  document.getElementById("gateStep2").style.display = "none";
-  document.getElementById("gateStep1").style.display = "block";
-  const b1 = document.getElementById("gateBtn1"); b1.disabled = false; b1.textContent = _gateChannel === "whatsapp" ? "Send WhatsApp Code" : "Send Email Code";
-  const b2 = document.getElementById("gateBtn2"); b2.disabled = false; b2.textContent = "Verify & Unlock";
-  ["gOtp0","gOtp1","gOtp2","gOtp3"].forEach(id => document.getElementById(id).value = "");
-}
-if (typeof AlpenAPI !== "undefined" && AlpenAPI.phone) {
-  AlpenAPI.phone.bind("gatePhoneCC", "gatePhone");
-  AlpenAPI.bindOtpInputs(["gOtp0","gOtp1","gOtp2","gOtp3"], gateVerifyOtp);
-  ["gateName","gatePhone","gateEmail"].forEach(id => document.getElementById(id).addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); document.getElementById("gateBtn1").click(); } }));
-}
-var cityData = {};
-function openCityModal(key) {
-  const data = cityData[key]; if (!data) return;
-  document.getElementById("cityModalImg").src = data.img;
-  document.getElementById("cityModalImg").alt = data.name;
-  document.getElementById("cityModalName").textContent = data.name;
-  document.getElementById("cityModalTagline").textContent = data.tagline;
-  document.getElementById("cityModalDesc").textContent = data.desc;
-  document.getElementById("cityModalBackdrop").classList.add("active");
-  document.body.style.overflow = "hidden";
-}
-function closeCityModal() {
-  document.getElementById("cityModalBackdrop").classList.remove("active");
-  document.body.style.overflow = "";
-}
-const mobileToggle = document.getElementById("mobileToggle");
-const navLinks = document.getElementById("navLinks");
-mobileToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
-if (typeof AlpenAPI !== "undefined" && AlpenAPI.canViewPackages()) unlockContent();
-if (typeof AlpenAPI !== "undefined" && AlpenAPI.loadPackagePage) AlpenAPI.loadPackagePage('${slug}');
-\x3c/script>
-</body>
-</html>`
+  await writeTextFile(path, updated)
 }
 
-// ── TOAST + STATUS ───────────────────────────────────────────
+async function generatePackageHTML(page) {
+  const slug = page.slug
+  const title = page.title || ''
+  const template = await readTextFile('packages/japan.html')
+  if (!template) throw new Error('packages/japan.html could not be read as the package page template')
+
+  let source = template.replace(/<title>[\s\S]*?<\/title>/i, '<title>' + e(page.page_title || title) + '</title>')
+  const seoBlock = packageSEOBlock(page, slug)
+  if (/<!-- SEO:BEGIN \(generated\) -->[\s\S]*?<!-- SEO:END -->/.test(source)) {
+    source = source.replace(/<!-- SEO:BEGIN \(generated\) -->[\s\S]*?<!-- SEO:END -->/, seoBlock)
+  } else {
+    source = source.replace(/<\/title>/i, '</title>\n' + seoBlock)
+  }
+
+  const doc = new DOMParser().parseFromString(source, 'text/html')
+  const head = doc.head
+  const breadcrumb = doc.querySelector('.breadcrumb')
+  if (breadcrumb) {
+    breadcrumb.innerHTML = '<a href="../index.html">Home</a> <span aria-hidden="true">/</span> <a href="../index.html#packages">Tour Packages</a>' +
+      (title ? ' <span aria-hidden="true">/</span> <span aria-current="page">' + e(title) + '</span>' : '')
+  }
+
+  const hero = doc.querySelector('.detail-hero')
+  const heroImage = hero && hero.querySelector('img')
+  if (heroImage) {
+    if (page.hero_image_url) {
+      heroImage.setAttribute('src', packageImagePath(page.hero_image_url))
+      if (page.hero_image_alt) heroImage.setAttribute('alt', page.hero_image_alt)
+      else heroImage.removeAttribute('alt')
+    } else {
+      heroImage.remove()
+    }
+  }
+  const heroTitle = doc.querySelector('.detail-title')
+  if (heroTitle) {
+    if (title) heroTitle.textContent = title
+    else heroTitle.remove()
+  }
+  const duration = doc.querySelector('.detail-duration')
+  if (duration) {
+    if (page.duration) duration.textContent = page.duration
+    else duration.remove()
+  }
+  const location = doc.querySelector('.detail-location')
+  if (location) {
+    if (page.location) location.textContent = page.location
+    else location.remove()
+  }
+
+  const paragraphs = Array.isArray(page.overview_paragraphs) ? page.overview_paragraphs.filter(Boolean) : []
+  const overview = doc.querySelector('.overview-free')
+  if (overview) {
+    if (paragraphs.length) {
+      const heading = page.overview_heading ? '<h2>' + e(page.overview_heading) + '</h2><div class="o-rule"></div>' : ''
+      overview.innerHTML = '<div class="overview-card-float">' + heading +
+        paragraphs.map(text => '<p>' + e(text) + '</p>').join('') + '</div>'
+    } else {
+      overview.remove()
+    }
+  }
+
+  const places = Array.isArray(page.places) ? page.places.filter(place => place && (place.name || place.key)) : []
+  const placesHeading = doc.getElementById('placesHeading')
+  const showcase = doc.querySelector('.city-showcase')
+  if (places.length && showcase) {
+    if (placesHeading) {
+      if (page.places_heading) placesHeading.textContent = page.places_heading
+      else placesHeading.remove()
+    }
+    showcase.innerHTML = places.map(place => {
+      const image = placeImage => placeImage ? '<img src="' + e(packageImagePath(placeImage)) + '" alt="' + e(place.name || '') + '" loading="lazy" decoding="async">' : ''
+      const tagline = place.tagline ? '<div class="city-card-tagline">' + e(place.tagline) + '</div>' : ''
+      return '<div class="city-card" data-place-key="' + e(place.key || '') + '">' + image(place.card_image_url) +
+        '<div class="city-card-overlay"><div class="city-card-name">' + e(place.name || '') + '</div>' + tagline + '</div></div>'
+    }).join('')
+  } else {
+    if (placesHeading) placesHeading.remove()
+    if (showcase) showcase.remove()
+  }
+
+  const inclusions = Array.isArray(page.inclusions) ? page.inclusions.filter(Boolean) : []
+  const inclusionHeading = doc.getElementById('inclusionsHeading')
+  const tagRow = doc.querySelector('.tag-row')
+  if (inclusions.length && tagRow) {
+    if (inclusionHeading) {
+      if (page.inclusions_heading) inclusionHeading.textContent = page.inclusions_heading
+      else inclusionHeading.remove()
+    }
+    tagRow.innerHTML = inclusions.map(item => '<span class="tag-pill">' + e(item) + '</span>').join('')
+  } else {
+    if (inclusionHeading) inclusionHeading.remove()
+    if (tagRow) tagRow.remove()
+  }
+
+  const itinerary = Array.isArray(page.itinerary)
+    ? page.itinerary.filter(day => day && (day.range || day.title || day.desc))
+    : []
+  if (itinerary.length) {
+    const itineraryHTML = (page.itinerary_heading ? '<h2 id="itineraryHeading">' + e(page.itinerary_heading) + '</h2>' : '') +
+      '<div class="itinerary-list" id="itineraryList">' + itinerary.map(day =>
+        '<div class="itinerary-day"><div class="itinerary-day-num">' + e(day.range || '') +
+        '</div><div class="itinerary-day-content">' + (day.title ? '<h4>' + e(day.title) + '</h4>' : '') +
+        (day.desc ? '<p>' + e(day.desc) + '</p>' : '') + '</div></div>'
+      ).join('') + '</div>'
+    const insertionPoint = [inclusionHeading, tagRow].find(node => node && node.isConnected)
+    if (insertionPoint) insertionPoint.insertAdjacentHTML('beforebegin', itineraryHTML)
+    else {
+      const main = doc.getElementById('detailMain')
+      if (main) main.insertAdjacentHTML('beforeend', itineraryHTML)
+    }
+  }
+
+  const scripts = Array.from(doc.querySelectorAll('script:not([src])'))
+  const runtime = scripts.find(script => script.textContent.includes('function openCityModal'))
+  if (runtime) {
+    runtime.textContent = runtime.textContent.replace(/var cityData = \{[\s\S]*?\};/, 'var cityData = {};')
+    runtime.textContent = runtime.textContent.replace(/loadPackagePage\(['"]japan['"]\)/, "loadPackagePage('" + slug + "')")
+    runtime.textContent = runtime.textContent.replace('const mobileToggle =', [
+      "document.querySelectorAll('.city-card[data-place-key]').forEach(function(card) {",
+      "  card.addEventListener('click', function() { openCityModal(card.getAttribute('data-place-key')); });",
+      '});',
+      'const mobileToggle ='
+    ].join('\n'))
+  }
+
+  if (head && !head.innerHTML.includes('ALPENGLOW:PACKAGE-TEMPLATE')) {
+    head.insertAdjacentHTML('beforeend', '\n<!-- ALPENGLOW:PACKAGE-TEMPLATE -->')
+  }
+  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML
+}// ── TOAST + STATUS ───────────────────────────────────────────
 let _toastTimer = null
 function showToast(msg, type) {
   const t = document.getElementById('dev-toast')

@@ -45,6 +45,12 @@
     return _apiBase + url
   }
 
+  function escapeHTML(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+  }
+
   async function callEdge(fnName, payload) {
     const res = await fetch(`${SUPABASE_URL}/functions/v1/${fnName}`, {
       method: 'POST',
@@ -815,13 +821,22 @@
         }
 
         // ── Hero ──────────────────────────────────────────────
-        if (d.hero_image_url) {
-          const hi = document.querySelector('.detail-hero img')
-          if (hi) hi.src = resolveImg(d.hero_image_url)
+        const heroImage = document.querySelector('.detail-hero img')
+        if (heroImage) {
+          if (d.hero_image_url) {
+            heroImage.src = resolveImg(d.hero_image_url)
+            heroImage.alt = d.hero_image_alt || ''
+          } else heroImage.remove()
         }
-        if (d.title)    { const el = document.querySelector('.detail-title');    if (el) el.textContent = d.title }
-        if (d.duration) { const el = document.querySelector('.detail-duration'); if (el) el.textContent = d.duration }
-        if (d.location) { const el = document.querySelector('.detail-location'); if (el) el.textContent = d.location }
+        if (d.title) { const el = document.querySelector('.detail-title'); if (el) el.textContent = d.title }
+        const setOptionalText = (selector, value) => {
+          const el = document.querySelector(selector)
+          if (!el) return
+          if (value) el.textContent = value
+          else el.remove()
+        }
+        setOptionalText('.detail-duration', d.duration)
+        setOptionalText('.detail-location', d.location)
         if (d.page_title) document.title = d.page_title
 
         // ── SEO meta kept in sync with CMS content ────────────
@@ -855,14 +870,24 @@
           /* Preserve overview-card-float wrapper if present in the page template */
           const cardFloat = overviewEl.querySelector('.overview-card-float')
           const target = cardFloat || overviewEl
-          target.innerHTML = `<h2>${d.overview_heading || 'Overview'}</h2>`
-            + (cardFloat ? '<div class="o-rule"></div>' : '')
-            + paras.map(p => `<p>${p}</p>`).join('')
+          target.innerHTML = (d.overview_heading ? `<h2>${escapeHTML(d.overview_heading)}</h2>` : '')
+            + (cardFloat && d.overview_heading ? '<div class="o-rule"></div>' : '')
+            + paras.map(p => `<p>${escapeHTML(p)}</p>`).join('')
+          overviewEl.style.display = ''
+        } else if (overviewEl && Array.isArray(d.overview_paragraphs)) {
+          overviewEl.style.display = 'none'
         }
 
         // ── Places section heading ────────────────────────────
         const placesH = document.getElementById('placesHeading')
-        if (placesH && d.places_heading) placesH.textContent = d.places_heading
+        if (placesH) {
+          if (d.places_heading) {
+            placesH.textContent = d.places_heading
+            placesH.style.display = ''
+          } else if (Array.isArray(d.places)) {
+            placesH.style.display = 'none'
+          }
+        }
 
         // ── Place cards + modal data ──────────────────────────
         const places = Array.isArray(d.places) ? d.places
@@ -883,20 +908,34 @@
           const showcase = document.querySelector('.city-showcase')
           if (showcase) {
             showcase.innerHTML = places.map(function(p) {
-              return `<div class="city-card" onclick="openCityModal('${p.key}')">
-                <img src="${resolveImg(p.card_image_url || '')}" alt="${p.name || ''}">
+              return `<div class="city-card" data-place-key="${escapeHTML(p.key || '')}">
+                ${p.card_image_url ? `<img src="${escapeHTML(resolveImg(p.card_image_url))}" alt="${escapeHTML(p.name || '')}" loading="lazy" decoding="async">` : ''}
                 <div class="city-card-overlay">
-                  <div class="city-card-name">${p.name || ''}</div>
-                  <div class="city-card-tagline">${p.tagline || ''}</div>
+                  <div class="city-card-name">${escapeHTML(p.name || '')}</div>
+                  ${p.tagline ? `<div class="city-card-tagline">${escapeHTML(p.tagline)}</div>` : ''}
                 </div>
               </div>`
             }).join('')
+            showcase.querySelectorAll('.city-card[data-place-key]').forEach(function(card) {
+              card.addEventListener('click', function() {
+                if (typeof window.openCityModal === 'function') window.openCityModal(card.getAttribute('data-place-key'))
+              })
+            })
           }
+        } else if (Array.isArray(d.places)) {
+          const showcase = document.querySelector('.city-showcase')
+          if (showcase) showcase.style.display = 'none'
+          if (placesH) placesH.style.display = 'none'
         }
 
         // ── Itinerary heading ─────────────────────────────────
         const itinHeadingEl = document.getElementById('itineraryHeading')
-        if (itinHeadingEl && d.itinerary_heading) itinHeadingEl.textContent = d.itinerary_heading
+        if (itinHeadingEl) {
+          if (d.itinerary_heading) {
+            itinHeadingEl.textContent = d.itinerary_heading
+            itinHeadingEl.style.display = ''
+          } else if (Array.isArray(d.itinerary)) itinHeadingEl.style.display = 'none'
+        }
 
         // ── Itinerary days ─────────────────────────────────────
         const itinerary = Array.isArray(d.itinerary) ? d.itinerary
@@ -906,12 +945,12 @@
           if (itinerary.length) {
             itinList.innerHTML = itinerary.map(function(day) {
               return `<div class="itinerary-day">
-                <div class="itinerary-day-num">${day.range || ''}</div>
-                <div class="itinerary-day-content"><h4>${day.title || ''}</h4><p>${day.desc || ''}</p></div>
+                <div class="itinerary-day-num">${escapeHTML(day.range || '')}</div>
+                <div class="itinerary-day-content">${day.title ? `<h4>${escapeHTML(day.title)}</h4>` : ''}${day.desc ? `<p>${escapeHTML(day.desc)}</p>` : ''}</div>
               </div>`
             }).join('')
             itinList.style.display = ''
-            if (itinHeadingEl) itinHeadingEl.style.display = ''
+            if (itinHeadingEl) itinHeadingEl.style.display = d.itinerary_heading ? '' : 'none'
           } else if (Array.isArray(d.itinerary)) {
             // Explicit empty array (not "field absent") means the admin removed
             // the itinerary for this page — hide the section instead of leaving
@@ -923,14 +962,28 @@
 
         // ── Inclusions heading ────────────────────────────────
         const inclH = document.getElementById('inclusionsHeading')
-        if (inclH && d.inclusions_heading) inclH.textContent = d.inclusions_heading
+        if (inclH) {
+          if (d.inclusions_heading) {
+            inclH.textContent = d.inclusions_heading
+            inclH.style.display = ''
+          } else if (Array.isArray(d.inclusions)) {
+            inclH.style.display = 'none'
+          }
+        }
 
         // ── Inclusions pills ──────────────────────────────────
         const inclusions = Array.isArray(d.inclusions) ? d.inclusions
           : (typeof d.inclusions === 'string' ? JSON.parse(d.inclusions || '[]') : [])
         if (inclusions.length) {
           const tagRow = document.querySelector('.tag-row')
-          if (tagRow) tagRow.innerHTML = inclusions.map(i => `<span class="tag-pill">${i}</span>`).join('')
+          if (tagRow) {
+            tagRow.innerHTML = inclusions.map(i => `<span class="tag-pill">${escapeHTML(i)}</span>`).join('')
+            tagRow.style.display = ''
+          }
+        } else if (Array.isArray(d.inclusions)) {
+          const tagRow = document.querySelector('.tag-row')
+          if (tagRow) tagRow.style.display = 'none'
+          if (inclH) inclH.style.display = 'none'
         }
       } catch(e) {
         console.error('[AlpenAPI] loadPackagePage error:', e)
