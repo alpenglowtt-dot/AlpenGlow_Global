@@ -14,7 +14,7 @@
   // ─── DEV MODE ────────────────────────────────────────────────
   // Set to true during development to bypass content blur/lock gates.
   // Set to false before going live / showing to client.
-  const DEV_MODE = false
+  const DEV_MODE = true
   // ─────────────────────────────────────────────────────────────
 
   // Self-hosted Supabase (see deploy/README.md). Swap VPS_IP for a domain

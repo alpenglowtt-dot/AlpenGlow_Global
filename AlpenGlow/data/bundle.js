@@ -1659,4 +1659,4 @@ window.ALPEN_DATA = {
       "meta_description": "A 7-day Switzerland tour package riding the country’s scenic mountain trains between snow-capped Alpine peaks, emerald valleys and lakeside towns."
     }
   }
-}
+};

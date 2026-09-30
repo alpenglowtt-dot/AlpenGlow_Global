@@ -1306,6 +1306,10 @@ async function saveCE() {
   if (CE_TYPE === 'page') {
     const slug = document.getElementById('ce-slug').value.trim()
     if (!slug) { alert('Slug is required (e.g. japan).'); return }
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+      alert('Use lowercase letters, numbers, and single hyphens in the slug (e.g. south-korea).')
+      return
+    }
     const body = {
       slug,
       page_title:          document.getElementById('ce-page-title').value.trim(),
@@ -1334,6 +1338,14 @@ async function saveCE() {
         } catch(e) {}
       }
       await writeJSON('data/pages/' + slug + '.json', body)
+      // A page record alone cannot be opened from the Package Page Content
+      // list. Create the matching HTML shell when it does not exist; keep
+      // existing pages intact when their content JSON is edited.
+      if (!ALL_PKG_FILES.includes(slug + '.html')) {
+        const pageName = body.title || body.page_title || slug
+        const html = generatePackageHTML(slug, pageName, body.location, body.duration, body.hero_image_url)
+        await writeTextFile('packages/' + slug + '.html', html)
+      }
       closeCE(); await loadAll()
     } catch(err) { alert('Save failed: ' + err.message)
     } finally { btn.textContent = 'Save'; btn.disabled = false }

@@ -1,7 +1,7 @@
 {
   "AlpenGlow/api.js": {
-    "mtime": 1790261416.6057475,
-    "ast_hash": "a53f6e0f47cf766f8136774bf8b32fec",
+    "mtime": 1790773604.8854458,
+    "ast_hash": "fc2bc5c423f65314e8591dea11e0792f",
     "semantic_hash": ""
   },
   "AlpenGlow/compass.js": {
@@ -15,8 +15,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/data/bundle.js": {
-    "mtime": 1789367039.2590222,
-    "ast_hash": "4a2cf487e62fb06501f8d1b2dc1de35c",
+    "mtime": 1790773645.6688626,
+    "ast_hash": "7784f4daf5405c933b2a2e4eb3e7fb2c",
     "semantic_hash": ""
   },
   "AlpenGlow/data/destinations.json": {
@@ -300,13 +300,13 @@
     "semantic_hash": ""
   },
   "AlpenGlow/dev.html": {
-    "mtime": 1790078066.1146042,
-    "ast_hash": "6d431332e306d453ae74930e920f2af8",
+    "mtime": 1790774055.5483456,
+    "ast_hash": "e2386602da200a977f279dfba58bde2d",
     "semantic_hash": ""
   },
   "AlpenGlow/index.html": {
-    "mtime": 1790078066.1206057,
-    "ast_hash": "ee70cbe136a605933dad2391ca862b59",
+    "mtime": 1790773647.4466212,
+    "ast_hash": "90c1390654dd9e2455cb3cc42120a7c4",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/australia.html": {
@@ -839,61 +839,6 @@
     "ast_hash": "fbfc1f32c6b2f716b5f234645c4f891e",
     "semantic_hash": ""
   },
-  ".gstack/browse.json": {
-    "mtime": 1787835412.2821968,
-    "ast_hash": "a1dc4ecb884e9ea2818ede77af89da74",
-    "semantic_hash": ""
-  },
-  ".gstack/claude-available.json": {
-    "mtime": 1787835476.0745437,
-    "ast_hash": "2152a9286e068cddfd8cb5b2d65a5fc2",
-    "semantic_hash": ""
-  },
-  ".gstack/qa-reports/screenshots/blog-unlock.png": {
-    "mtime": 1787836575.3933258,
-    "ast_hash": "7c5d494e46e926260fcf0917bdfa848c",
-    "semantic_hash": ""
-  },
-  ".gstack/qa-reports/screenshots/contact-form.png": {
-    "mtime": 1787836383.936299,
-    "ast_hash": "c93e515ab0ea61712ce1d28c1f18bd1b",
-    "semantic_hash": ""
-  },
-  ".gstack/qa-reports/screenshots/coverflow-mobile.png": {
-    "mtime": 1787835893.148301,
-    "ast_hash": "b67750dfb22c3ebdcc61711ea149a53a",
-    "semantic_hash": ""
-  },
-  ".gstack/qa-reports/screenshots/coverflow-open.png": {
-    "mtime": 1787835693.1166832,
-    "ast_hash": "238789b8ace6174e66c1523e9fc1c237",
-    "semantic_hash": ""
-  },
-  ".gstack/qa-reports/screenshots/coverflow-viewport.png": {
-    "mtime": 1787835737.8506446,
-    "ast_hash": "7497677ce2d04498b78931e4367d4fa1",
-    "semantic_hash": ""
-  },
-  ".gstack/qa-reports/screenshots/india-package.png": {
-    "mtime": 1787835839.7741244,
-    "ast_hash": "eea8be65b905c05267054d6bf1aed3ba",
-    "semantic_hash": ""
-  },
-  ".gstack/qa-reports/screenshots/initial-plain.png": {
-    "mtime": 1787835549.620383,
-    "ast_hash": "19e10126de9e788ba2c53855dea3f956",
-    "semantic_hash": ""
-  },
-  ".gstack/qa-reports/screenshots/islands-check.png": {
-    "mtime": 1787836065.6344318,
-    "ast_hash": "d14c9cb0251b2765b265bad2f2a88613",
-    "semantic_hash": ""
-  },
-  ".gstack/qa-reports/screenshots/offer-modal.png": {
-    "mtime": 1787836430.0517287,
-    "ast_hash": "d910a8981aa2622cd2868134d8a0dbbc",
-    "semantic_hash": ""
-  },
   "AlpenGlow/footer-logo-global.png": {
     "mtime": 1789565769.199076,
     "ast_hash": "c2151ae5f4605aa099680e918ac25bc8",
@@ -917,6 +862,11 @@
   ".impeccable/config.json": {
     "mtime": 1790094106.2933629,
     "ast_hash": "4b491e03f31a9d9826e43085a915c3e4",
+    "semantic_hash": ""
+  },
+  "AlpenGlow/data/pages/andaman.json": {
+    "mtime": 1790773641.8135135,
+    "ast_hash": "157ee199c970b14c5676a377677a0e5c",
     "semantic_hash": ""
   }
 }
