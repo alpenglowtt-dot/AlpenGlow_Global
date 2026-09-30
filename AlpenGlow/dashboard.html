@@ -2300,8 +2300,17 @@ async function crm(action, params = {}) {
 
 // ── FEATURE FLAGS ──────────────────────────────────────
 let FLAGS = {}
-function loadFF() {
-  try { FLAGS = JSON.parse(localStorage.getItem('ag_ff') || '{}') } catch { FLAGS = {} }
+async function loadFF() {
+  try {
+    const response = await fetch('data/feature_flags.json', { cache: 'no-store' })
+    if (!response.ok) throw new Error('No shared feature flag file')
+    const flags = await response.json()
+    if (!flags || typeof flags !== 'object' || Array.isArray(flags)) throw new Error('Invalid shared feature flags')
+    FLAGS = flags
+    try { localStorage.setItem('ag_ff', JSON.stringify(FLAGS)) } catch (_) {}
+  } catch {
+    try { FLAGS = JSON.parse(localStorage.getItem('ag_ff') || '{}') } catch { FLAGS = {} }
+  }
   // Remove all existing ff-off-* classes first
   document.body.className = document.body.className.replace(/\bff-off-\S+/g, '').trim()
   Object.keys(FLAGS).forEach(k => {
@@ -2358,8 +2367,8 @@ if (sessionStorage.getItem('ag_auth') === '1' && CRM_TOKEN) {
   init()
 }
 
-function init() {
-  loadFF()
+async function init() {
+  await loadFF()
   startClock()
   loadLeads()
   loadSavedFilters()

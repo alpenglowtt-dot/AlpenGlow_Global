@@ -1,0 +1,3 @@
+# Keep the local file-system admin editor out of public static hosting.
+/dev /index.html 404
+/dev.html /index.html 404

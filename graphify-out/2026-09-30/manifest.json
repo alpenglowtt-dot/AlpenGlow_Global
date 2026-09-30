@@ -1,7 +1,7 @@
 {
   "AlpenGlow/api.js": {
-    "mtime": 1790776097.9600089,
-    "ast_hash": "cb6d7bb7616bbdf4e05ffcd30e3c06de",
+    "mtime": 1790776915.2768269,
+    "ast_hash": "7f4f423c5c9b79687e279d0c4a8d45f4",
     "semantic_hash": ""
   },
   "AlpenGlow/compass.js": {
@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/dev.html": {
-    "mtime": 1790776731.3688672,
-    "ast_hash": "4e562c5d63f80b6cad6a729c65a155f6",
+    "mtime": 1790777652.7633877,
+    "ast_hash": "ec06ff7ac011d1ec4ba10914d1b8480c",
     "semantic_hash": ""
   },
   "AlpenGlow/index.html": {
@@ -862,6 +862,66 @@
   ".impeccable/config.json": {
     "mtime": 1790094106.2933629,
     "ast_hash": "4b491e03f31a9d9826e43085a915c3e4",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260930_140009_how_should_dev_html_generate_complete_package_page.md": {
+    "mtime": 1790776809.3441548,
+    "ast_hash": "67d29ac20a1b91ca52516425f9f013db",
+    "semantic_hash": ""
+  },
+  ".gstack/browse.json": {
+    "mtime": 1787835412.2821968,
+    "ast_hash": "a1dc4ecb884e9ea2818ede77af89da74",
+    "semantic_hash": ""
+  },
+  ".gstack/claude-available.json": {
+    "mtime": 1787835476.0745437,
+    "ast_hash": "2152a9286e068cddfd8cb5b2d65a5fc2",
+    "semantic_hash": ""
+  },
+  ".gstack/qa-reports/screenshots/blog-unlock.png": {
+    "mtime": 1787836575.3933258,
+    "ast_hash": "7c5d494e46e926260fcf0917bdfa848c",
+    "semantic_hash": ""
+  },
+  ".gstack/qa-reports/screenshots/contact-form.png": {
+    "mtime": 1787836383.936299,
+    "ast_hash": "c93e515ab0ea61712ce1d28c1f18bd1b",
+    "semantic_hash": ""
+  },
+  ".gstack/qa-reports/screenshots/coverflow-mobile.png": {
+    "mtime": 1787835893.148301,
+    "ast_hash": "b67750dfb22c3ebdcc61711ea149a53a",
+    "semantic_hash": ""
+  },
+  ".gstack/qa-reports/screenshots/coverflow-open.png": {
+    "mtime": 1787835693.1166832,
+    "ast_hash": "238789b8ace6174e66c1523e9fc1c237",
+    "semantic_hash": ""
+  },
+  ".gstack/qa-reports/screenshots/coverflow-viewport.png": {
+    "mtime": 1787835737.8506446,
+    "ast_hash": "7497677ce2d04498b78931e4367d4fa1",
+    "semantic_hash": ""
+  },
+  ".gstack/qa-reports/screenshots/india-package.png": {
+    "mtime": 1787835839.7741244,
+    "ast_hash": "eea8be65b905c05267054d6bf1aed3ba",
+    "semantic_hash": ""
+  },
+  ".gstack/qa-reports/screenshots/initial-plain.png": {
+    "mtime": 1787835549.620383,
+    "ast_hash": "19e10126de9e788ba2c53855dea3f956",
+    "semantic_hash": ""
+  },
+  ".gstack/qa-reports/screenshots/islands-check.png": {
+    "mtime": 1787836065.6344318,
+    "ast_hash": "d14c9cb0251b2765b265bad2f2a88613",
+    "semantic_hash": ""
+  },
+  ".gstack/qa-reports/screenshots/offer-modal.png": {
+    "mtime": 1787836430.0517287,
+    "ast_hash": "d910a8981aa2622cd2868134d8a0dbbc",
     "semantic_hash": ""
   }
 }

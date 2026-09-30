@@ -273,17 +273,25 @@ function jsonld(p) {
     });
     graph.push(BIZ);
   }
-  return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 1);
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 1)
+    .replace(/</g, '\\u003c')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
 }
 
 function block(p) {
   const L = [];
+  const inactivePackage = p.slug.startsWith('packages/') && p.noindex;
   L.push('<!-- SEO:BEGIN (generated) -->');
   if (p.desc) L.push('<meta name="description" content="' + esc(p.desc) + '">');
   L.push('<link rel="canonical" href="' + p.url + '">');
   L.push(p.noindex
-    ? '<meta name="robots" content="noindex, follow">'
+    ? '<meta name="robots" content="noindex, ' + (inactivePackage ? 'nofollow' : 'follow') + '">'
     : '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">');
+  if (inactivePackage) {
+    L.push('<meta http-equiv="refresh" content="0;url=../index.html">');
+    L.push('<script>window.location.replace("../index.html")</script>');
+  }
   L.push('<meta name="author" content="AlpenGlow Global">');
   L.push('<meta name="theme-color" content="#9d2420">');
   L.push('<meta name="geo.region" content="IN-TN">');
@@ -294,12 +302,12 @@ function block(p) {
   L.push('<meta property="og:title" content="' + esc(p.title) + '">');
   if (p.desc) L.push('<meta property="og:description" content="' + esc(p.desc) + '">');
   L.push('<meta property="og:url" content="' + p.url + '">');
-  if (p.image) L.push('<meta property="og:image" content="' + p.image + '">');
+  if (p.image) L.push('<meta property="og:image" content="' + esc(p.image) + '">');
   if (p.imageAlt) L.push('<meta property="og:image:alt" content="' + esc(p.imageAlt) + '">');
   L.push('<meta name="twitter:card" content="summary_large_image">');
   L.push('<meta name="twitter:title" content="' + esc(p.title) + '">');
   if (p.desc) L.push('<meta name="twitter:description" content="' + esc(p.desc) + '">');
-  if (p.image) L.push('<meta name="twitter:image" content="' + p.image + '">');
+  if (p.image) L.push('<meta name="twitter:image" content="' + esc(p.image) + '">');
   L.push('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
   L.push('<link rel="preconnect" href="https://images.unsplash.com" crossorigin>');
   L.push('<script type="application/ld+json">\n' + jsonld(p) + '\n</script>');
@@ -330,7 +338,7 @@ const card = (k) => {
   const [slug, title, desc, img] = k;
   const name = title.split(' - ')[0].split(' | ')[0];
   return '      <a class="dest-card" href="packages/' + slug + '.html"' + (dynamicPackageSlugs.has(slug) ? ' data-cms-package="true" data-package-slug="' + slug + '"' : '') + '>\n' +
-    '        <img src="' + img + '" alt="' + esc(k[4]) + '" loading="lazy" decoding="async">\n' +
+    '        <img src="' + esc(img || '') + '" alt="' + esc(k[4]) + '" loading="lazy" decoding="async">\n' +
     '        <div class="dest-card-body">\n' +
     '          <h3>' + esc(name) + '</h3>\n' +
     '          <p>' + esc(desc) + '</p>\n' +
@@ -353,20 +361,5 @@ const destList = '<!-- DESTLIST:BEGIN -->\n' +
   console.log('destinations.html grid rebuilt (' + packs.length + ' packages, ' + GROUPS.length + ' groups)');
 }
 
-/* ---------- sitemap.xml (every indexable page) ---------- */
-{
-  const today = new Date().toISOString().slice(0, 10);
-  const urls = pages.filter(p => !p.noindex).map(p => ({
-    loc: p.url,
-    priority: p.slug === 'index.html' ? '1.0' : (p.isCollection ? '0.9' : '0.8'),
-    freq: p.slug === 'index.html' ? 'weekly' : 'monthly'
-  }));
-  const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-    urls.map(u =>
-      '  <url>\n    <loc>' + u.loc + '</loc>\n    <lastmod>' + today + '</lastmod>\n' +
-      '    <changefreq>' + u.freq + '</changefreq>\n    <priority>' + u.priority + '</priority>\n  </url>').join('\n') +
-    '\n</urlset>\n';
-  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml, 'utf8');
-  console.log('sitemap.xml rebuilt (' + urls.length + ' urls)');
-}
+// sitemap.xml is owned by dev.html. It is regenerated from the live CMS
+// records whenever pages or packages are saved, activated, or deleted.
