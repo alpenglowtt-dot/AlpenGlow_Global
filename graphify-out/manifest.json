@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/dev.html": {
-    "mtime": 1790778902.3388543,
-    "ast_hash": "988d953962e4c6e42f2b364cc6fe4ad6",
+    "mtime": 1790787302.5802562,
+    "ast_hash": "990c4fad88582d5812d0d148bce14246",
     "semantic_hash": ""
   },
   "AlpenGlow/index.html": {
@@ -815,8 +815,8 @@
     "semantic_hash": ""
   },
   "scripts/seo-head.js": {
-    "mtime": 1790778625.8081906,
-    "ast_hash": "a7069fc6c296726d31812c1862189a99",
+    "mtime": 1790787329.62316,
+    "ast_hash": "ea14e8f357f1f50514c4794d0f108613",
     "semantic_hash": ""
   },
   "scripts/seo-homepage.js": {
@@ -922,6 +922,11 @@
   ".gstack/qa-reports/screenshots/offer-modal.png": {
     "mtime": 1787836430.0517287,
     "ast_hash": "d910a8981aa2622cd2868134d8a0dbbc",
+    "semantic_hash": ""
+  },
+  "graphify-out/memory/query_20260930_143547_which_remaining_dev_html_hardening_fixes_were_need.md": {
+    "mtime": 1790778947.683081,
+    "ast_hash": "7157a91e20b0494a1b44126b0db3828b",
     "semantic_hash": ""
   }
 }

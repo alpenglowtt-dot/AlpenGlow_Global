@@ -295,13 +295,13 @@
     "semantic_hash": ""
   },
   "AlpenGlow/dashboard.html": {
-    "mtime": 1784568418.6276486,
-    "ast_hash": "6f3f45ec304f5c2d82d618f45254000a",
+    "mtime": 1790778409.991607,
+    "ast_hash": "a9e8b3e02b5b2d005e0b3f429037072b",
     "semantic_hash": ""
   },
   "AlpenGlow/dev.html": {
-    "mtime": 1790777652.7633877,
-    "ast_hash": "ec06ff7ac011d1ec4ba10914d1b8480c",
+    "mtime": 1790778902.3388543,
+    "ast_hash": "988d953962e4c6e42f2b364cc6fe4ad6",
     "semantic_hash": ""
   },
   "AlpenGlow/index.html": {
@@ -815,8 +815,8 @@
     "semantic_hash": ""
   },
   "scripts/seo-head.js": {
-    "mtime": 1790776736.472073,
-    "ast_hash": "9908347ce4bc3d57e4e166383d6cb8a2",
+    "mtime": 1790778625.8081906,
+    "ast_hash": "a7069fc6c296726d31812c1862189a99",
     "semantic_hash": ""
   },
   "scripts/seo-homepage.js": {
