@@ -579,7 +579,7 @@ async function syncDynamicDestinationCards() {
       if (!grid) return
       const card = doc.createElement('a')
       card.className = 'dest-card'
-      card.href = 'packages/' + slug + '.html'
+      card.href = 'packages/' + slug
       card.setAttribute('data-cms-package', 'true')
       card.setAttribute('data-package-slug', slug)
       if (pkg.image_url) {
@@ -619,7 +619,7 @@ async function regenerateSitemap() {
     const today = new Date().toISOString().slice(0, 10)
     const urls = [
       { loc: SITE_ORIGIN + '/', changefreq: 'weekly', priority: '1.0' },
-      { loc: SITE_ORIGIN + '/destinations.html', changefreq: 'monthly', priority: '0.9' },
+      { loc: SITE_ORIGIN + '/destinations', changefreq: 'monthly', priority: '0.9' },
     ]
     const packageBySlug = new Map(ALL_PKGS.map(p => [
       String(p.link || '').replace(/^packages\//, '').replace(/\.html$/, ''), p
@@ -637,7 +637,7 @@ async function regenerateSitemap() {
       if (slug && page && pkg.active !== false && page.active !== false && ALL_PKG_FILES.includes(slug + '.html')) pageSlugs.add(slug)
     })
     Array.from(pageSlugs).sort().forEach(slug => urls.push({
-      loc: SITE_ORIGIN + '/packages/' + encodeURIComponent(slug) + '.html',
+      loc: SITE_ORIGIN + '/packages/' + encodeURIComponent(slug),
       changefreq: 'monthly', priority: '0.8'
     }))
     const body = urls
@@ -901,7 +901,7 @@ async function writeIndexHTML() {
         <div class="package-location">${e(p.location||'')}</div>
         <h3 class="package-name">${e(p.name||'')}</h3>
         <div class="package-desc-wrap"><p class="package-desc">${e(p.description||'')}</p><div class="package-blur"></div></div>
-        <a href="${e(p.link||'#')}" class="btn-details">View Details</a>
+        <a href="${e((p.link||'#').replace(/\.html$/, ''))}" class="btn-details">View Details</a>
       </div>
     </div>`).join('')
 
@@ -1959,7 +1959,7 @@ function packageSEOBlock(page, slug) {
   const packageRecord = ALL_PKGS.find(item => String(item.link || '').replace(/^packages\//, '').replace(/\.html$/, '') === slug)
   const isActive = page.active !== false && (!packageRecord || packageRecord.active !== false)
   const description = page.meta_description || ''
-  const canonical = SITE_ORIGIN + '/packages/' + encodeURIComponent(slug) + '.html'
+  const canonical = SITE_ORIGIN + '/packages/' + encodeURIComponent(slug)
   const image = page.hero_image_url
     ? new URL(page.hero_image_url, SITE_ORIGIN + '/').href
     : ''
@@ -1995,7 +1995,7 @@ function packageSEOBlock(page, slug) {
     // when either the page record or package record has been marked inactive.
     // The relative target works on both the deployed site and local previews.
     tags.push('<meta http-equiv="refresh" content="0;url=../index.html">')
-    tags.push('<script>window.location.replace("../index.html")</script>')
+    tags.push('<script>window.location.replace("../index.html")<\/script>')
   }
   tags.push('<meta name="author" content="AlpenGlow Global">')
   tags.push('<meta name="theme-color" content="#9d2420">')
@@ -2022,7 +2022,7 @@ function packageSEOBlock(page, slug) {
   tags.push('<script type="application/ld+json">' + safeScriptJSON({
     '@context': 'https://schema.org',
     '@graph': graph
-  }) + '</script>')
+  }) + '<\/script>')
   tags.push('<!-- SEO:END -->')
   return tags.join('\n')
 }
