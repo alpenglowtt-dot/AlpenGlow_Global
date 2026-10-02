@@ -39,7 +39,6 @@
   "37": "Migrating AlpenGlow from Supabase Cloud → self-hosted Supabase (VPS)",
   "38": "seo-homepage.js",
   "39": "Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?",
-  "40": "Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?",
   "41": "data/bundle.js",
   "52": "Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?",
   "53": "Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?"

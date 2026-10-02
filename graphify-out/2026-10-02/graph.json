@@ -516,8 +516,8 @@
       "source_location": "L581",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_nextbtnhtml",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "_nextbtnhtml()"
     },
     {
@@ -549,8 +549,8 @@
       "source_location": "L598",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_rendervibe",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "rendervibe()"
     },
     {
@@ -560,8 +560,8 @@
       "source_location": "L613",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_renderdestination",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "renderdestination()"
     },
     {
@@ -571,8 +571,8 @@
       "source_location": "L642",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_rendertravelers",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "rendertravelers()"
     },
     {
@@ -582,8 +582,8 @@
       "source_location": "L659",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_rendercount",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "rendercount()"
     },
     {
@@ -593,8 +593,8 @@
       "source_location": "L673",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_rendermonth",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "rendermonth()"
     },
     {
@@ -604,8 +604,8 @@
       "source_location": "L686",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_renderorigin",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "renderorigin()"
     },
     {
@@ -615,8 +615,8 @@
       "source_location": "L697",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_cityrows",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "_cityrows()"
     },
     {
@@ -626,8 +626,8 @@
       "source_location": "L705",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_renderduration",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "renderduration()"
     },
     {
@@ -637,8 +637,8 @@
       "source_location": "L721",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_renderbudget",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "renderbudget()"
     },
     {
@@ -780,8 +780,8 @@
       "source_location": "L1011",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_bindcontact",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_bindcontact()"
     },
     {
@@ -791,8 +791,8 @@
       "source_location": "L1044",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpsendphoneotp",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpsendphoneotp()"
     },
     {
@@ -802,8 +802,8 @@
       "source_location": "L1091",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpconfirmphoneotp",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpconfirmphoneotp()"
     },
     {
@@ -813,8 +813,8 @@
       "source_location": "L1114",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpsendemailotp",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpsendemailotp()"
     },
     {
@@ -824,8 +824,8 @@
       "source_location": "L1150",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpconfirmemailotp",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpconfirmemailotp()"
     },
     {
@@ -835,8 +835,8 @@
       "source_location": "L1172",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpcheckbothverified",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpcheckbothverified()"
     },
     {
@@ -901,8 +901,8 @@
       "source_location": "L1328",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_heading",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "_heading()"
     },
     {
@@ -912,8 +912,8 @@
       "source_location": "L1334",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_stepper",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "_stepper()"
     },
     {
@@ -945,8 +945,8 @@
       "source_location": "L1353",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_fmt",
-      "community": 0,
-      "community_name": "trip-planner.js",
+      "community": 2,
+      "community_name": "_bindStep",
       "norm_label": "_fmt()"
     },
     {
@@ -3173,61 +3173,6 @@
       "id": "graphify_out_memory_query_20260930_143547_which_remaining_dev_html_hardening_fixes_were_need_source_nodes",
       "community": 36,
       "community_name": "_bindContact",
-      "norm_label": "source nodes"
-    },
-    {
-      "label": "query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not",
-      "community": 40,
-      "community_name": "Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?",
-      "norm_label": "query_20261002_100451_why_were_package_destinations_page_group_edits_not.md"
-    },
-    {
-      "label": "Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_q_why_were_package_destinations_page_group_edits_not_reliably_reflected_in_the_destination_list",
-      "community": 40,
-      "community_name": "Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?",
-      "norm_label": "q: why were package destinations page group edits not reliably reflected in the destination list?"
-    },
-    {
-      "label": "Answer",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_answer",
-      "community": 40,
-      "community_name": "Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?",
-      "norm_label": "answer"
-    },
-    {
-      "label": "Outcome",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "source_location": "L16",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_outcome",
-      "community": 40,
-      "community_name": "Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?",
-      "norm_label": "outcome"
-    },
-    {
-      "label": "Source Nodes",
-      "file_type": "document",
-      "source_file": "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "source_location": "L20",
-      "_origin": "ast",
-      "id": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_source_nodes",
-      "community": 40,
-      "community_name": "Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?",
       "norm_label": "source nodes"
     }
   ],
@@ -7248,50 +7193,6 @@
       "_origin": "ast",
       "source": "graphify_out_memory_query_20260930_143547_which_remaining_dev_html_hardening_fixes_were_need_q_which_remaining_dev_html_hardening_fixes_were_needed_after_the_package_page_generator_work",
       "target": "graphify_out_memory_query_20260930_143547_which_remaining_dev_html_hardening_fixes_were_need_source_nodes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "source_location": "L10",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not",
-      "target": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_q_why_were_package_destinations_page_group_edits_not_reliably_reflected_in_the_destination_list",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_q_why_were_package_destinations_page_group_edits_not_reliably_reflected_in_the_destination_list",
-      "target": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_answer",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "source_location": "L16",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_q_why_were_package_destinations_page_group_edits_not_reliably_reflected_in_the_destination_list",
-      "target": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_outcome",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md",
-      "source_location": "L20",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_q_why_were_package_destinations_page_group_edits_not_reliably_reflected_in_the_destination_list",
-      "target": "graphify_out_memory_query_20261002_100451_why_were_package_destinations_page_group_edits_not_source_nodes",
       "confidence_score": 1.0
     }
   ],

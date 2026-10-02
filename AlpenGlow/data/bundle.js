@@ -228,7 +228,7 @@ window.ALPEN_DATA = {
           "name": "Beaches",
           "desc": "Palm-lined shores, houseboats, and sunset coves along two very different coasts.",
           "image_url": "https://images.unsplash.com/photo-1646748019366-3f1c922bfe3b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-          "link": ""
+          "link": "packages/andaman.html"
         },
         {
           "name": "Heritage",
@@ -334,7 +334,8 @@ window.ALPEN_DATA = {
       "duration": "",
       "description": "",
       "image_url": "",
-      "sort_order": 0
+      "sort_order": 0,
+      "seo_group": ""
     },
     {
       "id": "1782537436548",
@@ -456,6 +457,18 @@ window.ALPEN_DATA = {
       "description": "",
       "image_url": "",
       "sort_order": 0
+    },
+    {
+      "name": "Andaman Islands",
+      "location": "Andaman Islands",
+      "duration": "6 nights / 7 days.",
+      "description": "This trip covers the Andaman Islands' three main hubs in six nights, from Port Blair's wartime history to Havelock's blue-flag beaches and Neil Island's coral-formed bridges, moving by ferry between islands with a mix of relaxation, snorkeling, and water sports built in.\n\nBest for travelers who want beach time, water activities, and a touch of colonial-era history in one island-hopping trip.",
+      "image_url": "https://images.unsplash.com/photo-1640718835374-6116a99c6e6c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "link": "packages/andaman.html",
+      "seo_group": "asia-subcontinent",
+      "sort_order": 0,
+      "active": false,
+      "id": "1790924323381"
     }
   ],
   "pages": {
@@ -655,7 +668,8 @@ window.ALPEN_DATA = {
         "Daily breakfast"
       ],
       "active": true,
-      "meta_description": "A 7-day Bali tour package moving from the rice terraces and temples of Ubud to the beach clubs of the south coast, with a day-by-day itinerary and full inclusions."
+      "meta_description": "A 7-day Bali tour package moving from the rice terraces and temples of Ubud to the beach clubs of the south coast, with a day-by-day itinerary and full inclusions.",
+      "hero_image_alt": ""
     },
     "bhutan": {
       "slug": "bhutan",
@@ -666,7 +680,7 @@ window.ALPEN_DATA = {
       "title": "Bhutan - High Value, Low Volume",
       "overview_heading": "Overview",
       "overview_paragraphs": [
-        "Bhutan caps the number of tourists it lets in every year, and it shows — no billboards, no traffic jams, and a monastery clinging to a cliff face that looks unreal until you're standing in front of it. This is the only country that measures Gross National Happiness instead of GDP, and the pace of this trip reflects that philosophy.",
+        "Bhutan caps the number of tourists it lets in every year, and it shows —— no billboards, no traffic jams, and a monastery clinging to a cliff face that looks unreal until you're standing in front of it. This is the only country that measures Gross National Happiness instead of GDP, and the pace of this trip reflects that philosophy.",
         "Best for travelers who want a culturally immersive trip with genuine scarcity value, not a beach-and-pool holiday."
       ],
       "places_heading": "",

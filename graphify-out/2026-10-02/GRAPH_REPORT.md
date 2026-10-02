@@ -1,11 +1,11 @@
 # Graph Report - AlpenGlow work  (2026-10-02)
 
 ## Corpus Check
-- 91 files · ~746,197 words
+- 90 files · ~746,002 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 289 nodes · 359 edges · 44 communities (28 shown, 16 thin omitted)
+- 284 nodes · 355 edges · 43 communities (27 shown, 16 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 6 edges (avg confidence: 0.5)
 - Token cost: 0 input · 0 output
 
@@ -52,7 +52,6 @@
 - Migrating AlpenGlow from Supabase Cloud → self-hosted Supabase (VPS)
 - seo-homepage.js
 - Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?
-- Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?
 - Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?
 - Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?
 
@@ -69,25 +68,25 @@
 10. `_bindContact()` - 7 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `_bindContact()` --indirect_call--> `_tpFinalSubmit()`  [INFERRED]
-  AlpenGlow/trip-planner.js → AlpenGlow/trip-planner.js  _Bridges community 2 → community 0_
+- `renderContact()` --calls--> `_heading()`  [EXTRACTED]
+  AlpenGlow/trip-planner.js → AlpenGlow/trip-planner.js  _Bridges community 0 → community 2_
 
 ## Import Cycles
 - None detected.
 
-## Communities (44 total, 16 thin omitted)
+## Communities (43 total, 16 thin omitted)
 
 ### Community 0 - "trip-planner.js"
-Cohesion: 0.10
-Nodes (49): _advance(), _bindBudget(), _bindCount(), _bindDestination(), _bindDuration(), _bindGlobal(), _bindMonth(), _bindMouseGlow() (+41 more)
+Cohesion: 0.11
+Nodes (42): _advance(), _bindBudget(), _bindContact(), _bindCount(), _bindDestination(), _bindDuration(), _bindGlobal(), _bindMonth() (+34 more)
 
 ### Community 1 - "Q: How does OTP verification connect to CRM lead creation?"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How does OTP verification connect to CRM lead creation?, Source Nodes
 
 ### Community 2 - "_bindStep"
-Cohesion: 0.53
-Nodes (6): _bindContact(), _tpCheckBothVerified(), _tpConfirmEmailOTP(), _tpConfirmPhoneOTP(), _tpSendEmailOTP(), _tpSendPhoneOTP()
+Cohesion: 0.24
+Nodes (13): _cityRows(), _fmt(), _heading(), _nextBtnHtml(), renderBudget(), renderCount(), renderDestination(), renderDuration() (+5 more)
 
 ### Community 3 - "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?"
 Cohesion: 0.40
@@ -161,10 +160,6 @@ Nodes (4): F, faqs, fs, h
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?, Source Nodes
 
-### Community 40 - "Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?"
-Cohesion: 0.40
-Nodes (4): Answer, Outcome, Q: Why were package Destinations Page Group edits not reliably reflected in the destination list?, Source Nodes
-
 ### Community 52 - "Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?, Source Nodes
@@ -174,22 +169,17 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?, Source Nodes
 
 ## Knowledge Gaps
-- **118 isolated node(s):** `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script`, `04-apply-frontend-values.sh script`, `crypto` (+113 more)
+- **115 isolated node(s):** `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script`, `04-apply-frontend-values.sh script`, `crypto` (+110 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
-
-## Work-memory lessons
-
-**Preferred sources** — corroborated by past sessions; start here.
-- `seo-head.js` (2× useful, score=1.958453176)
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **What connects `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script` to the rest of the system?**
-  _118 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _115 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `trip-planner.js` be split into smaller, more focused modules?**
-  _Cohesion score 0.09725490196078432 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.113107822410148 - nodes in this community are weakly interconnected._
 - **Should `api.js` be split into smaller, more focused modules?**
   _Cohesion score 0.1349206349206349 - nodes in this community are weakly interconnected._
 - **Should `AlpenGlow — Production Security & Go-Live Checklist` be split into smaller, more focused modules?**

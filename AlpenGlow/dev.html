@@ -430,13 +430,15 @@ html, body { height: 100%; background: var(--dark); color: var(--white); font-fa
   <div class="ce-body" id="ce-body"></div>
   <div class="ce-footer">
     <button class="btn-ce-save" onclick="saveCE()">Save</button>
-    <button class="btn-ce-cancel" onclick="closeCE()">Cancel</button>
+    <button class="btn-ce-cancel" onclick="requestCloseCE()">Cancel</button>
   </div>
 </div>
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────
-const DEV_PASS = 'alpenglow_dev_2025'
+// Keep the convenience gate without exposing the passphrase in page source.
+// The File System Access permission remains the actual boundary for local files.
+const DEV_PASS_SHA256 = '43048c3f604c62f430e3e02f05125f276ceff8e2bd7dbe3b51b155f014444214'
 
 // ── FILE SYSTEM API ───────────────────────────────────────────
 let dirHandle = null   // root: the AlpenGlow folder
@@ -466,7 +468,7 @@ function safeJSON(value, indent) {
 }
 
 function asArr(value, path) {
-  if (value == null) return []
+  if (value == null) throw new Error(path + ' is missing')
   if (!Array.isArray(value)) throw new Error(path + ' must contain a JSON array')
   if (value.some(item => !item || typeof item !== 'object' || Array.isArray(item))) {
     throw new Error(path + ' must contain JSON objects')
@@ -480,11 +482,10 @@ async function openFolder() {
     try {
       await dirHandle.getFileHandle('index.html')
       await dirHandle.getDirectoryHandle('data')
-      const packagesDir = await dirHandle.getDirectoryHandle('packages')
-      await packagesDir.getFileHandle('japan.html')
+      await dirHandle.getDirectoryHandle('packages')
     } catch (_) {
       dirHandle = null
-      document.getElementById('folder-err').textContent = 'Wrong folder — choose the project root containing index.html, data/, and packages/japan.html.'
+      document.getElementById('folder-err').textContent = 'Wrong folder — choose the project root containing index.html, data/, and packages/.'
       return
     }
     document.getElementById('folder-gate').style.display = 'none'
@@ -528,7 +529,10 @@ async function readTextFile(path) {
     for (let i = 0; i < parts.length - 1; i++) dir = await dir.getDirectoryHandle(parts[i])
     const fh = await dir.getFileHandle(parts[parts.length - 1])
     return await (await fh.getFile()).text()
-  } catch(e) { return null }
+  } catch (err) {
+    if (err.name === 'NotFoundError') return null
+    throw err
+  }
 }
 
 async function writeJSON(path, data) {
@@ -563,28 +567,88 @@ const PACKAGE_GROUPS = [
   { id: 'once-in-a-lifetime', label: 'Once-in-a-Lifetime' },
   { id: 'cruises', label: 'Cruises' },
 ]
+const DEFAULT_PACKAGE_GROUP_BY_SLUG = Object.fromEntries([
+  ['asia-subcontinent', ['japan', 'southkorea', 'india', 'nepal', 'bhutan', 'srilanka']],
+  ['islands-honeymoons', ['bali', 'maldives', 'mauritius', 'seychelles', 'santorini']],
+  ['europe', ['italy', 'switzerland', 'norway']],
+  ['once-in-a-lifetime', ['australia', 'newzealand']],
+  ['cruises', ['royalcaribbean', 'resortsworld', 'rivercruise-europe']],
+].flatMap(([groupId, slugs]) => slugs.map(slug => [slug, groupId])))
 
 async function syncDynamicDestinationCards() {
   try {
     const source = await readTextFile('destinations.html')
-    if (!source) return
+    if (!source) throw new Error('destinations.html is missing or unreadable; destination groups were not updated.')
     const doc = new DOMParser().parseFromString(source, 'text/html')
     doc.querySelectorAll('[data-cms-package="true"]').forEach(card => card.remove())
     const groupIds = new Set(PACKAGE_GROUPS.map(group => group.id))
-    ALL_PKGS.forEach(pkg => {
+    PACKAGE_GROUPS.forEach(group => {
+      if (!doc.querySelector('#' + CSS.escape(group.id) + ' .dest-grid')) {
+        throw new Error('The destinations.html page is missing the "' + group.id + '" group.')
+      }
+    })
+    const staticCards = new Map()
+    doc.querySelectorAll('.dest-card').forEach(card => {
+      const match = (card.getAttribute('data-package-slug') || card.getAttribute('href') || '').match(/(?:^|\/)packages\/([a-z0-9-]+)(?:\.html)?(?:[?#]|$)/i) ||
+        (card.getAttribute('data-package-slug') || '').match(/^([a-z0-9-]+)$/i)
+      if (!match) return
+      const slug = match[1]
+      if (staticCards.has(slug)) {
+        card.remove()
+        return
+      }
+      staticCards.set(slug, card)
+      const pkg = ALL_PKGS.find(item => String(item.link || '').replace(/^packages\//, '').replace(/\.html$/, '') === slug)
+      const page = ALL_PAGES.find(item => item.slug === slug)
+      if (!pkg && !page) return
+      const targetGroup = pkg?.seo_group === 'none'
+        ? ''
+        : groupIds.has(pkg?.seo_group)
+          ? pkg.seo_group
+          : DEFAULT_PACKAGE_GROUP_BY_SLUG[slug] || ''
+      if (targetGroup) {
+        const targetGrid = doc.querySelector('#' + CSS.escape(targetGroup) + ' .dest-grid')
+        if (!targetGrid) throw new Error('The destinations.html page is missing the "' + targetGroup + '" group.')
+        targetGrid.appendChild(card)
+      } else if (pkg?.seo_group === 'none') {
+        card.style.display = 'none'
+        card.setAttribute('aria-hidden', 'true')
+        card.removeAttribute('href')
+      } else {
+        card.style.display = 'none'
+      }
+      card.setAttribute('data-package-slug', slug)
+      if (pkg?.seo_group !== 'none') {
+        card.setAttribute('href', 'packages/' + slug + '.html')
+        card.removeAttribute('aria-hidden')
+      }
+      if (pkg?.active === false || page?.active === false) {
+        card.style.display = 'none'
+      } else if (pkg?.seo_group !== 'none' && targetGroup) {
+        card.style.display = ''
+      }
+    })
+    const groupedPackages = [...ALL_PKGS].sort((a, b) =>
+      (Number(a.sort_order) || 0) - (Number(b.sort_order) || 0) || String(a.name || '').localeCompare(String(b.name || '')))
+    groupedPackages.forEach(pkg => {
       const slug = String(pkg.link || '').replace(/^packages\//, '').replace(/\.html$/, '')
       const page = ALL_PAGES.find(record => record.slug === slug)
-      if (!slug || !groupIds.has(pkg.seo_group) || pkg.active === false || !page || page.active === false || !ALL_PKG_FILES.includes(slug + '.html')) return
-      const grid = doc.querySelector('#' + CSS.escape(pkg.seo_group) + ' .dest-grid')
-      if (!grid) return
+      if (pkg.seo_group === 'none') return
+      if (pkg.seo_group && !groupIds.has(pkg.seo_group)) throw new Error('Unknown Destinations Page Group for ' + (pkg.name || slug) + ': ' + pkg.seo_group)
+      const targetGroup = pkg.seo_group || DEFAULT_PACKAGE_GROUP_BY_SLUG[slug] || ''
+      if (!targetGroup || !slug || !page || !ALL_PKG_FILES.includes(slug + '.html') || staticCards.has(slug)) return
+      const grid = doc.querySelector('#' + CSS.escape(targetGroup) + ' .dest-grid')
+      if (!grid) throw new Error('The destinations.html page is missing the "' + targetGroup + '" group.')
       const card = doc.createElement('a')
       card.className = 'dest-card'
-      card.href = 'packages/' + slug
+      card.href = 'packages/' + slug + '.html'
       card.setAttribute('data-cms-package', 'true')
       card.setAttribute('data-package-slug', slug)
-      if (pkg.image_url) {
+      if (pkg.active === false || page.active === false) card.style.display = 'none'
+      const imageURL = pkg.image_url || page.hero_image_url
+      if (imageURL) {
         const image = doc.createElement('img')
-        image.src = pkg.image_url
+        image.src = imageURL
         image.alt = page?.hero_image_alt || ''
         image.loading = 'lazy'
         image.decoding = 'async'
@@ -593,11 +657,12 @@ async function syncDynamicDestinationCards() {
       const body = doc.createElement('div')
       body.className = 'dest-card-body'
       const heading = doc.createElement('h3')
-      heading.textContent = pkg.name || page?.title || ''
+      heading.textContent = pkg.name || page.title || ''
       body.appendChild(heading)
-      if (pkg.description) {
+      const descriptionText = pkg.description || page.meta_description || ''
+      if (descriptionText) {
         const description = doc.createElement('p')
-        description.textContent = pkg.description
+        description.textContent = descriptionText
         body.appendChild(description)
       }
       const link = doc.createElement('span')
@@ -687,9 +752,17 @@ async function listJSONDir(path) {
 }
 
 // ── AUTH ─────────────────────────────────────────────────────
-function login() {
+async function login() {
   const val = document.getElementById('pw').value
-  if (val === DEV_PASS) {
+  let digest = ''
+  try {
+    const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(val))
+    digest = Array.from(new Uint8Array(bytes), byte => byte.toString(16).padStart(2, '0')).join('')
+  } catch (_) {
+    document.getElementById('login-err').textContent = 'Secure password checking is unavailable in this browser.'
+    return
+  }
+  if (digest === DEV_PASS_SHA256) {
     sessionStorage.setItem('ag_dev_auth', '1')
     document.getElementById('login-gate').style.display = 'none'
     // Show folder-gate — user must pick their AlpenGlow folder
@@ -849,6 +922,28 @@ async function generateBundle() {
       pages
     }, null, 2) + ';'
   await writeTextFile('data/bundle.js', bundle)
+
+  // The public site reads this bundle before it tries the JSON files. Give
+  // every reference a content-based URL so localhost and deployed browsers
+  // cannot keep displaying an older cached bundle after an editor save.
+  let revision = 2166136261
+  for (let i = 0; i < bundle.length; i++) {
+    revision ^= bundle.charCodeAt(i)
+    revision = Math.imul(revision, 16777619)
+  }
+  const version = (revision >>> 0).toString(36)
+  await versionBundleReference('index.html', 'data/bundle.js', version)
+  for (const filename of ALL_PKG_FILES) {
+    await versionBundleReference('packages/' + filename, '../data/bundle.js', version)
+  }
+}
+
+async function versionBundleReference(path, bundlePath, version) {
+  const html = await readTextFile(path)
+  if (!html) return
+  const reference = /(<script\b[^>]*\bsrc=["'])(?:\.\.\/)?data\/bundle\.js(?:\?[^"']*)?(["'])/g
+  const updated = html.replace(reference, '$1' + bundlePath + '?v=' + version + '$2')
+  if (updated !== html) await writeTextFile(path, updated)
 }
 
 function replaceMarker(html, key, content) {
@@ -1170,9 +1265,11 @@ function openCE(type, id) {
       <div class="ce-field">
         <label class="ce-lbl">Destinations Page Group (optional)</label>
         <select class="ce-input" id="ce-seo-group">
-          <option value="">Do not add to a destination group</option>
+          <option value="">Use the built-in group (if this package has one)</option>
+          <option value="none"${item?.seo_group === 'none' ? ' selected' : ''}>Do not list on the Destinations page</option>
           ${PACKAGE_GROUPS.map(group => `<option value="${e(group.id)}"${item?.seo_group === group.id ? ' selected' : ''}>${e(group.label)}</option>`).join('')}
         </select>
+        <small style="display:block;color:rgba(255,255,255,.42);font-size:.72rem;line-height:1.5;margin-top:.4rem">A selected group controls placement. Its card stays hidden until both the package and its page are active.</small>
       </div>
       <div class="ce-field">
         <label class="ce-lbl">Sort Order</label>
@@ -1530,22 +1627,26 @@ async function saveCE() {
     const previousPage = CE_ID ? ALL_PAGES.find(page => page.slug === CE_ID || page.id === CE_ID) : null
     const previousSlug = previousPage?.slug || (CE_ID || '')
     let targetJSONExists
+    let targetHTMLExists
     try { targetJSONExists = await fileExists('data/pages/' + slug + '.json') }
     catch (err) { alert('Could not check the target page file: ' + (err.message || err)); return }
-    if (targetJSONExists && previousSlug !== slug) {
-      alert('A page JSON file with this slug already exists. Open that page to edit it.')
+    try { targetHTMLExists = await fileExists('packages/' + slug + '.html') }
+    catch (err) { alert('Could not check the target package page: ' + (err.message || err)); return }
+    if (previousSlug !== slug && (targetJSONExists || targetHTMLExists)) {
+      alert('A page file with this slug already exists. Open that page to edit it.')
       return
     }
     const pageRecord = { ...(previousPage || {}), ...body }
     btn.textContent = 'Saving…'; btn.disabled = true
     try {
-      await writeJSON('data/pages/' + slug + '.json', pageRecord)
-      await syncPackageHTML(pageRecord)
-      if (previousSlug && previousSlug !== slug) {
-        try { await (await getSubDir('data/pages')).removeEntry(previousSlug + '.json') }
-        catch (err) { if (err.name !== 'NotFoundError') throw err }
+      let renameWarning = ''
+      if (previousSlug && previousSlug !== slug) renameWarning = await renamePackagePage(previousSlug, pageRecord)
+      else {
+        await writeJSON('data/pages/' + slug + '.json', pageRecord)
+        await syncPackageHTML(pageRecord)
       }
       closeCE(); await loadAll()
+      if (renameWarning) showToast(renameWarning, 'err')
     } catch(err) { alert('Save failed: ' + err.message)
     } finally { btn.textContent = 'Save'; btn.disabled = false }
     return
@@ -1582,6 +1683,16 @@ async function saveCE() {
       alert('Use lowercase letters, numbers, and single hyphens in the destination slug.')
       return
     }
+    if (isDest) {
+      const current = ALL_DESTS.find(item => item.id === CE_ID || item.slug === CE_ID)
+      if (ALL_DESTS.some(item => item.slug === body.slug && item !== current)) {
+        alert('That destination slug is already in use. Choose a unique slug.')
+        return
+      }
+    } else if (body.seo_group && body.seo_group !== 'none' && !PACKAGE_GROUPS.some(group => group.id === body.seo_group)) {
+      alert('Choose a valid Destinations Page Group.')
+      return
+    }
     let packageSlug = ''
     if (!isDest) {
       if (!body.link) body.link = 'packages/' + slugify(body.name) + '.html'
@@ -1589,6 +1700,14 @@ async function saveCE() {
       if (!linkMatch) { alert('Package link must be packages/<lowercase-slug>.html.'); return }
       body.link = 'packages/' + linkMatch[1] + '.html'
       packageSlug = linkMatch[1]
+      if (CE_ID && !isDest) {
+        const current = ALL_PKGS.find(item => item.id === CE_ID)
+        const currentSlug = String(current?.link || '').replace(/^packages\//, '').replace(/\.html$/, '')
+        if (currentSlug && currentSlug !== packageSlug) {
+          alert('Change the Page Slug in "Package Page Content" so the page files and links move together.')
+          return
+        }
+      }
       if (CE_ORPHAN_SLUG && linkMatch[1] !== CE_ORPHAN_SLUG) {
         alert('This package is attached to an existing page. Keep its current page link.')
         return
@@ -1828,6 +1947,12 @@ function renderPkgs() {
     const imageUrl  = pkg?.image_url || ''
 
     const pg = ALL_PAGES.find(p => p.slug === slug)
+    const selectedGroup = PACKAGE_GROUPS.find(group => group.id === pkg?.seo_group)
+    const groupDescription = pkg?.seo_group === 'none'
+      ? 'not listed on Destinations page'
+      : selectedGroup
+        ? 'Destinations: ' + selectedGroup.label + ((pkg.active === false || pg?.active === false) ? ' (hidden until package and page are active)' : '')
+        : ''
     const toggleAct = pkg
       ? `toggleItem('packages','${pkg.id}',${!isActive})`
       : `openCE('pkg','slug:${slug}')`
@@ -1837,7 +1962,7 @@ function renderPkgs() {
       : `openCE('pkg','slug:${slug}')`
 
     const openBtn = fname
-      ? `<a class="cr-btn" title="Open Page" href="packages/${e(fname)}" target="_blank" style="text-decoration:none">&#128279;</a>`
+      ? `<a class="cr-btn" title="Preview Page" href="packages/${e(fname)}?preview=ag2025" target="_blank" style="text-decoration:none">&#128279;</a>`
       : ''
 
     const deleteBtn = pkg
@@ -1849,7 +1974,7 @@ function renderPkgs() {
       <img class="cr-img" src="${e(imageUrl)}" onerror="this.style.display='none'" alt="">
       <div class="cr-info">
         <div class="cr-title">${e(name)} <span class="cr-code">${e(slug)}</span>${isOrphan ? ' <span style="font-size:.63rem;color:rgba(239,126,25,.55);margin-left:.4rem">not in packages.json</span>' : ''}</div>
-        <div class="cr-sub">${e(location)}${location && duration ? ' · ' : ''}${e(duration)}${pg && pg.active === false ? ' · <span style="color:#f87171">page inactive — hidden on homepage</span>' : ''}</div>
+        <div class="cr-sub">${e(location)}${location && duration ? ' · ' : ''}${e(duration)}${groupDescription ? ' · ' + e(groupDescription) : ''}${pg && pg.active === false ? ' · <span style="color:#f87171">page inactive — hidden on homepage</span>' : ''}</div>
       </div>
       <div class="cr-actions">
         <button class="cr-toggle ${isActive?'on':'off'}" title="${isOrphan?'Add package details':isActive?'Active':'Inactive'}"
@@ -1881,7 +2006,7 @@ function renderPages() {
       <div class="cr-actions">
         <button class="cr-toggle ${isActive?'on':'off'}" title="${isActive?'Active':'Inactive'}"
           onclick="togglePage('${p.slug}',${!isActive})"></button>
-        <a class="cr-btn" title="Open Page" href="packages/${e(p.slug)}.html" target="_blank" style="text-decoration:none">&#128279;</a>
+        <a class="cr-btn" title="Preview Page" href="packages/${e(p.slug)}.html?preview=ag2025" target="_blank" style="text-decoration:none">&#128279;</a>
         <button class="cr-btn" title="Edit" onclick="openCE('page','${p.slug}')">✏</button>
         <button class="cr-btn del" title="Delete" onclick="deleteItem('package_pages','${p.slug}',this)">🗑</button>
       </div>
@@ -1991,11 +2116,9 @@ function packageSEOBlock(page, slug) {
   tags.push('<link rel="canonical" href="' + e(canonical) + '">')
   tags.push('<meta name="robots" content="' + (isActive ? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' : 'noindex, nofollow') + '">')
   if (!isActive) {
-    // Package pages are static files, so make their browser response redirect
-    // when either the page record or package record has been marked inactive.
-    // The relative target works on both the deployed site and local previews.
-    tags.push('<meta http-equiv="refresh" content="0;url=../index.html">')
-    tags.push('<script>window.location.replace("../index.html")<\/script>')
+    // Keep inactive pages out of public navigation while allowing the editor's
+    // explicit preview link to render the saved content for review.
+    tags.push('<script>if(new URLSearchParams(location.search).get("preview")!=="ag2025")window.location.replace("../index.html")<\/script>')
   }
   tags.push('<meta name="author" content="AlpenGlow Global">')
   tags.push('<meta name="theme-color" content="#9d2420">')
@@ -2027,6 +2150,97 @@ function packageSEOBlock(page, slug) {
   return tags.join('\n')
 }
 
+function remapPackagePageLink(value, oldSlug, newSlug) {
+  const escapedSlug = oldSlug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const matcher = new RegExp('(^|/)' + escapedSlug + '(?=\\.html?(?:[?#]|$)|[?#]|$)')
+  return String(value || '').replace(matcher, (_, prefix) => prefix + newSlug)
+}
+
+async function renamePackagePage(oldSlug, pageRecord) {
+  const newSlug = pageRecord.slug
+  if (!validSlug(oldSlug) || !validSlug(newSlug)) throw new Error('Both page slugs must be valid before renaming.')
+  if (oldSlug === newSlug) {
+    await writeJSON('data/pages/' + newSlug + '.json', pageRecord)
+    await syncPackageHTML(pageRecord)
+    return
+  }
+
+  const targetJSONExists = await fileExists('data/pages/' + newSlug + '.json')
+  const targetHTMLExists = await fileExists('packages/' + newSlug + '.html')
+  if (targetJSONExists || targetHTMLExists) throw new Error('A file already exists for the new page slug: ' + newSlug)
+
+  const oldHTML = await readTextFile('packages/' + oldSlug + '.html')
+  const originalPackages = ALL_PKGS.map(item => ({ ...item }))
+  const originalDests = ALL_DESTS.map(item => ({ ...item }))
+  const packages = ALL_PKGS.map(item => ({
+    ...item,
+    link: remapPackagePageLink(item.link, oldSlug, newSlug),
+  }))
+  const destinations = ALL_DESTS.map(item => ({
+    ...item,
+    sub_destinations: Array.isArray(item.sub_destinations)
+      ? item.sub_destinations.map(sub => ({
+          ...sub,
+          link: remapPackagePageLink(sub.link, oldSlug, newSlug),
+        }))
+      : item.sub_destinations,
+  }))
+  const packageChanged = packages.some((item, index) => item.link !== originalPackages[index].link)
+  const destinationChanged = destinations.some((item, index) =>
+    JSON.stringify(item.sub_destinations) !== JSON.stringify(originalDests[index].sub_destinations))
+
+  let wroteHTML = false
+  let wroteJSON = false
+  try {
+    ALL_PKGS = packages
+    ALL_DESTS = destinations
+    if (oldHTML) {
+      await writeTextFile('packages/' + newSlug + '.html', oldHTML)
+      wroteHTML = true
+    }
+    wroteHTML = true
+    await syncPackageHTML(pageRecord)
+    await writeJSON('data/pages/' + newSlug + '.json', pageRecord)
+    wroteJSON = true
+    if (packageChanged) await writeJSON('data/packages.json', packages)
+    if (destinationChanged) await writeJSON('data/destinations.json', destinations)
+  } catch (err) {
+    ALL_PKGS = originalPackages
+    ALL_DESTS = originalDests
+    if (wroteJSON) {
+      try { await (await getSubDir('data/pages')).removeEntry(newSlug + '.json') } catch (_) {}
+    }
+    if (wroteHTML) {
+      try { await (await getSubDir('packages')).removeEntry(newSlug + '.html') } catch (_) {}
+    }
+    if (packageChanged) {
+      try { await writeJSON('data/packages.json', originalPackages) } catch (_) {}
+    }
+    if (destinationChanged) {
+      try { await writeJSON('data/destinations.json', originalDests) } catch (_) {}
+    }
+    throw err
+  }
+
+  ALL_PKGS = packages
+  ALL_DESTS = destinations
+  const cleanupWarnings = []
+  for (const [directory, filename] of [
+    ['data/pages', oldSlug + '.json'],
+    ['packages', oldSlug + '.html'],
+  ]) {
+    try { await (await getSubDir(directory)).removeEntry(filename) }
+    catch (err) {
+      if (err.name !== 'NotFoundError') {
+        cleanupWarnings.push(filename)
+      }
+    }
+  }
+  return cleanupWarnings.length
+    ? 'Page moved; remove the old file manually: ' + cleanupWarnings.join(', ')
+    : ''
+}
+
 async function syncPackageHTML(page) {
   const path = 'packages/' + page.slug + '.html'
   const existing = await readTextFile(path)
@@ -2045,14 +2259,24 @@ async function syncPackageHTML(page) {
   } else {
     updated = updated.replace(/<\/title>/i, '</title>\n' + seoBlock)
   }
+  updated = updated.replace(/loadPackagePage\((['"])[^'"]+\1\)/g, "loadPackagePage('" + page.slug + "')")
   await writeTextFile(path, updated)
 }
 
 async function generatePackageHTML(page) {
   const slug = page.slug
   const title = page.title || ''
-  const template = await readTextFile('packages/japan.html')
-  if (!template) throw new Error('packages/japan.html could not be read as the package page template')
+  let template = await readTextFile('packages/japan.html')
+  if (!template) {
+    for (const filename of ALL_PKG_FILES) {
+      const candidate = await readTextFile('packages/' + filename)
+      if (candidate && candidate.includes('.detail-hero') && candidate.includes('function openCityModal')) {
+        template = candidate
+        break
+      }
+    }
+  }
+  if (!template) throw new Error('No usable package page template was found. Keep at least one package page with a detail hero and city modal.')
 
   let source = template.replace(/<title>[\s\S]*?<\/title>/i, '<title>' + e(page.page_title || title) + '</title>')
   const seoBlock = packageSEOBlock(page, slug)

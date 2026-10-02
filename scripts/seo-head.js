@@ -2,6 +2,7 @@ const fs = require('fs'), path = require('path');
 const ROOT = path.join(__dirname, '..', 'AlpenGlow');
 const SITE = 'https://alpenglowglobal.com';
 const ORG_ID = SITE + '/#organization';
+const DEV_PREVIEW_TOKEN = 'ag2025';
 
 const BIZ = {
   "@type": ["TravelAgency", "LocalBusiness"],
@@ -135,11 +136,35 @@ const packageBySlug = new Map(packageState.map(p => [String(p.link || '').replac
 const rootAssetURL = value => /^(https?:\/\/|\/)/i.test(value || '') ? value : SITE + '/' + String(value || '').replace(/^\.\//, '');
 const dynamicPackageSlugs = new Set();
 
+// CMS group choices override the built-in SEO group for known packages.
+// An empty value keeps the legacy/default group; "none" explicitly removes it.
 for (const [slug, pkg] of packageBySlug) {
-  if (!slug || packs.some(k => k[0] === slug) || !pkg.seo_group) continue;
+  if (!packs.some(k => k[0] === slug)) continue;
+  if (pkg.seo_group === 'none') {
+    for (const [, slugs] of GROUPS) {
+      const index = slugs.indexOf(slug);
+      if (index !== -1) slugs.splice(index, 1);
+    }
+    continue;
+  }
+  if (!pkg.seo_group) continue;
+  const selectedGroup = GROUPS.find(([, , id]) => id === pkg.seo_group);
+  if (!selectedGroup) {
+    console.warn('[seo-head] Unknown destination group for ' + slug + ': ' + pkg.seo_group);
+    continue;
+  }
+  for (const [, slugs] of GROUPS) {
+    const index = slugs.indexOf(slug);
+    if (index !== -1) slugs.splice(index, 1);
+  }
+  selectedGroup[1].push(slug);
+}
+
+for (const [slug, pkg] of packageBySlug) {
+  if (!slug || packs.some(k => k[0] === slug) || !pkg.seo_group || pkg.seo_group === 'none') continue;
   const group = GROUPS.find(([, , id]) => id === pkg.seo_group);
   const record = packagePageData.get(slug);
-  if (!group || !record || pkg.active === false || record.active === false || !fs.existsSync(path.join(ROOT, 'packages', slug + '.html'))) continue;
+  if (!group || !record || !fs.existsSync(path.join(ROOT, 'packages', slug + '.html'))) continue;
   const title = record.page_title || record.title || pkg.name || '';
   packs.push([slug, title, pkg.description || '', pkg.image_url || record.hero_image_url || '', record.hero_image_alt || '', record.location || pkg.location || '', '', '']);
   group[1].push(slug);
@@ -289,8 +314,7 @@ function block(p) {
     ? '<meta name="robots" content="noindex, ' + (inactivePackage ? 'nofollow' : 'follow') + '">'
     : '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">');
   if (inactivePackage) {
-    L.push('<meta http-equiv="refresh" content="0;url=../index.html">');
-    L.push('<script>window.location.replace("../index.html")</script>');
+    L.push('<script>if(new URLSearchParams(location.search).get("preview")!=="' + DEV_PREVIEW_TOKEN + '")window.location.replace("../index.html")</script>');
   }
   L.push('<meta name="author" content="AlpenGlow Global">');
   L.push('<meta name="theme-color" content="#9d2420">');
@@ -331,13 +355,18 @@ console.log('updated ' + n + ' pages');
 /* ---------- Destination grid on destinations.html (generated from `packs`) ---------- */
 const packBySlug = Object.fromEntries(packs.map(k => [k[0], k]));
 const groupedSlugs = new Set(GROUPS.flatMap(([, slugs]) => slugs));
-const ungrouped = packs.map(k => k[0]).filter(s => !groupedSlugs.has(s));
+const ungrouped = packs.map(k => k[0]).filter(s => !groupedSlugs.has(s) && packageBySlug.get(s)?.seo_group !== 'none');
 if (ungrouped.length) console.log('WARNING: not in any GROUPS entry: ' + ungrouped.join(', '));
 
 const card = (k) => {
   const [slug, title, desc, img] = k;
   const name = title.split(' - ')[0].split(' | ')[0];
-  return '      <a class="dest-card" href="packages/' + slug + '.html"' + (dynamicPackageSlugs.has(slug) ? ' data-cms-package="true" data-package-slug="' + slug + '"' : '') + '>\n' +
+  const pkg = packageBySlug.get(slug);
+  const record = packagePageData.get(slug);
+  const inactive = (pkg && pkg.active === false) || (record && record.active === false);
+  return '      <a class="dest-card" href="packages/' + slug + '.html" data-package-slug="' + slug + '"' +
+    (dynamicPackageSlugs.has(slug) ? ' data-cms-package="true"' : '') +
+    (inactive ? ' style="display:none;"' : '') + '>\n' +
     '        <img src="' + esc(img || '') + '" alt="' + esc(k[4]) + '" loading="lazy" decoding="async">\n' +
     '        <div class="dest-card-body">\n' +
     '          <h3>' + esc(name) + '</h3>\n' +
