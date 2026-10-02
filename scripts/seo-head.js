@@ -182,7 +182,7 @@ packs.forEach(function (k) {
   pages.push(P('packages/' + slug + '.html', {
     url: SITE + '/packages/' + slug + '.html',
     title: title, desc: desc, image: img, imageAlt: alt, type: 'article',
-    noindex: !!(record && record.active === false) || !!(pkg && pkg.active === false),
+    noindex: !!(record && record.active === false),
     userPackage: dynamicPackageSlugs.has(slug),
     location: dynamicPackageSlugs.has(slug) ? (record && record.location || loc || undefined) : undefined,
     trip: dynamicPackageSlugs.has(slug) ? undefined : { loc: loc, iso: iso, country: country, name: title.split(' - ')[0].split(' | ')[0] }
@@ -199,7 +199,7 @@ for (const [slug, record] of packagePageData) {
     url: SITE + '/packages/' + slug + '.html',
     title, desc: record.meta_description || undefined, image: image || undefined,
     imageAlt: record.hero_image_alt || undefined, type: 'article',
-    noindex: record.active === false || !!(pkg && pkg.active === false),
+    noindex: record.active === false,
     userPackage: true, location: record.location || undefined
   }));
 }
@@ -363,7 +363,7 @@ const card = (k) => {
   const name = title.split(' - ')[0].split(' | ')[0];
   const pkg = packageBySlug.get(slug);
   const record = packagePageData.get(slug);
-  const inactive = (pkg && pkg.active === false) || (record && record.active === false);
+  const inactive = !!(record && record.active === false);
   return '      <a class="dest-card" href="packages/' + slug + '.html" data-package-slug="' + slug + '"' +
     (dynamicPackageSlugs.has(slug) ? ' data-cms-package="true"' : '') +
     (inactive ? ' style="display:none;"' : '') + '>\n' +

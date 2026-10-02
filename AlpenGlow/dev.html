@@ -622,7 +622,7 @@ async function syncDynamicDestinationCards() {
         card.setAttribute('href', 'packages/' + slug + '.html')
         card.removeAttribute('aria-hidden')
       }
-      if (pkg?.active === false || page?.active === false) {
+      if (page?.active === false) {
         card.style.display = 'none'
       } else if (pkg?.seo_group !== 'none' && targetGroup) {
         card.style.display = ''
@@ -644,7 +644,7 @@ async function syncDynamicDestinationCards() {
       card.href = 'packages/' + slug + '.html'
       card.setAttribute('data-cms-package', 'true')
       card.setAttribute('data-package-slug', slug)
-      if (pkg.active === false || page.active === false) card.style.display = 'none'
+      if (page.active === false) card.style.display = 'none'
       const imageURL = pkg.image_url || page.hero_image_url
       if (imageURL) {
         const image = doc.createElement('img')
@@ -686,20 +686,15 @@ async function regenerateSitemap() {
       { loc: SITE_ORIGIN + '/', changefreq: 'weekly', priority: '1.0' },
       { loc: SITE_ORIGIN + '/destinations', changefreq: 'monthly', priority: '0.9' },
     ]
-    const packageBySlug = new Map(ALL_PKGS.map(p => [
-      String(p.link || '').replace(/^packages\//, '').replace(/\.html$/, ''), p
-    ]))
     const pageSlugs = new Set()
     ALL_PAGES.forEach(page => {
       if (!page || !page.slug || page.active === false || !ALL_PKG_FILES.includes(page.slug + '.html')) return
-      const pkg = packageBySlug.get(page.slug)
-      if (pkg && pkg.active === false) return
       pageSlugs.add(page.slug)
     })
     ALL_PKGS.forEach(pkg => {
       const slug = String(pkg.link || '').replace(/^packages\//, '').replace(/\.html$/, '')
       const page = ALL_PAGES.find(record => record.slug === slug)
-      if (slug && page && pkg.active !== false && page.active !== false && ALL_PKG_FILES.includes(slug + '.html')) pageSlugs.add(slug)
+      if (slug && page && page.active !== false && ALL_PKG_FILES.includes(slug + '.html')) pageSlugs.add(slug)
     })
     Array.from(pageSlugs).sort().forEach(slug => urls.push({
       loc: SITE_ORIGIN + '/packages/' + encodeURIComponent(slug),
@@ -1269,7 +1264,7 @@ function openCE(type, id) {
           <option value="none"${item?.seo_group === 'none' ? ' selected' : ''}>Do not list on the Destinations page</option>
           ${PACKAGE_GROUPS.map(group => `<option value="${e(group.id)}"${item?.seo_group === group.id ? ' selected' : ''}>${e(group.label)}</option>`).join('')}
         </select>
-        <small style="display:block;color:rgba(255,255,255,.42);font-size:.72rem;line-height:1.5;margin-top:.4rem">A selected group controls placement. Its card stays hidden until both the package and its page are active.</small>
+        <small style="display:block;color:rgba(255,255,255,.42);font-size:.72rem;line-height:1.5;margin-top:.4rem">A selected group controls placement on the Destinations page. The Tour Packages card on the homepage is controlled by the package switch above.</small>
       </div>
       <div class="ce-field">
         <label class="ce-lbl">Sort Order</label>
@@ -1278,7 +1273,7 @@ function openCE(type, id) {
       <div class="ce-active-row">
         <button class="cr-toggle ${(item?.active!==false)?'on':'off'}" id="ce-active-toggle"
           onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
-        <span class="ce-active-lbl">Package is active (visible on website)</span>
+        <span class="ce-active-lbl">Show package card under Tour Packages on the homepage</span>
       </div>`
 
   } else if (type === 'page') {
@@ -1376,7 +1371,7 @@ function openCE(type, id) {
       <div class="ce-active-row">
         <button class="cr-toggle ${(item?.active!==false)?'on':'off'}" id="ce-active-toggle"
           onclick="this.classList.toggle('on');this.classList.toggle('off')"></button>
-        <span class="ce-active-lbl">Page is active (visible on website)</span>
+        <span class="ce-active-lbl">Package detail page is active (direct link is available)</span>
       </div>`
     document.getElementById('ce-body').innerHTML = html
     paras.forEach(p => addOverviewParaRow(document.getElementById('ce-overview-paras'), p))
@@ -1750,11 +1745,11 @@ async function saveCE() {
             places_heading: '', places: [],
             itinerary_heading: '', itinerary: [],
             inclusions_heading: '', inclusions: [],
-            active: body.active,
+            active: true,
           }
           if (!existingPage) await writeJSON('data/pages/' + slug + '.json', pageData)
           if (!hasHTML) await writeTextFile('packages/' + slug + '.html', await generatePackageHTML(pageData))
-          else await syncPackageHTML({ ...pageData, active: pageData.active !== false && body.active !== false })
+          else await syncPackageHTML(pageData)
           arr.push(body)
           alert('Package record saved. Only the package details you entered were added; add page sections in "Package Page Content" when ready.')
         } else {
@@ -1951,7 +1946,7 @@ function renderPkgs() {
     const groupDescription = pkg?.seo_group === 'none'
       ? 'not listed on Destinations page'
       : selectedGroup
-        ? 'Destinations: ' + selectedGroup.label + ((pkg.active === false || pg?.active === false) ? ' (hidden until package and page are active)' : '')
+        ? 'Destinations: ' + selectedGroup.label + (pg?.active === false ? ' (hidden while the detail page is inactive)' : '')
         : ''
     const toggleAct = pkg
       ? `toggleItem('packages','${pkg.id}',${!isActive})`
@@ -1974,7 +1969,7 @@ function renderPkgs() {
       <img class="cr-img" src="${e(imageUrl)}" onerror="this.style.display='none'" alt="">
       <div class="cr-info">
         <div class="cr-title">${e(name)} <span class="cr-code">${e(slug)}</span>${isOrphan ? ' <span style="font-size:.63rem;color:rgba(239,126,25,.55);margin-left:.4rem">not in packages.json</span>' : ''}</div>
-        <div class="cr-sub">${e(location)}${location && duration ? ' · ' : ''}${e(duration)}${groupDescription ? ' · ' + e(groupDescription) : ''}${pg && pg.active === false ? ' · <span style="color:#f87171">page inactive — hidden on homepage</span>' : ''}</div>
+        <div class="cr-sub">${e(location)}${location && duration ? ' · ' : ''}${e(duration)}${groupDescription ? ' · ' + e(groupDescription) : ''}${pg && pg.active === false ? ' · <span style="color:#f87171">detail page inactive</span>' : ''}</div>
       </div>
       <div class="cr-actions">
         <button class="cr-toggle ${isActive?'on':'off'}" title="${isOrphan?'Add package details':isActive?'Active':'Inactive'}"
@@ -2081,8 +2076,7 @@ function safeScriptJSON(value) {
 function packageSEOBlock(page, slug) {
   const pageTitle = page.page_title || page.title || ''
   const schemaTitle = pageTitle || ''
-  const packageRecord = ALL_PKGS.find(item => String(item.link || '').replace(/^packages\//, '').replace(/\.html$/, '') === slug)
-  const isActive = page.active !== false && (!packageRecord || packageRecord.active !== false)
+  const isActive = page.active !== false
   const description = page.meta_description || ''
   const canonical = SITE_ORIGIN + '/packages/' + encodeURIComponent(slug)
   const image = page.hero_image_url
