@@ -465,7 +465,7 @@ window.ALPEN_DATA = {
       "hero_image_url": "https://images.unsplash.com/photo-1640718835374-6116a99c6e6c?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "bg_image_url": "https://images.unsplash.com/photo-1638459032642-c658d3d888c0?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Andaman Islands",
-      "duration": "number of days/nights  6 nights / 7 days.",
+      "duration": "6 nights / 7 days.",
       "title": "Andaman Islands",
       "overview_heading": "Overview",
       "overview_paragraphs": [
@@ -660,7 +660,7 @@ window.ALPEN_DATA = {
     "bhutan": {
       "slug": "bhutan",
       "page_title": "Bhutan Tour Packages - 6 Days Paro & Thimphu | AlpenGlow",
-      "hero_image_url": "https://images.unsplash.com/photo-1553856622216-cb6dd1ee6cd5?w=1600&q=80",
+      "hero_image_url": "https://images.unsplash.com/photo-1578556881786-851d4b79cb73?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Sub-Continent - Bhutan",
       "duration": "6 Days / 5 Nights",
       "title": "Bhutan - High Value, Low Volume",
@@ -670,40 +670,49 @@ window.ALPEN_DATA = {
         "Best for travelers who want a culturally immersive trip with genuine scarcity value, not a beach-and-pool holiday."
       ],
       "places_heading": "",
-      "places": [],
-      "itinerary_heading": "Itinerary",
-      "itinerary": [
+      "places": [
         {
-          "range": "Day 1-2",
-          "title": "Paro & Tiger's Nest",
-          "desc": "Arrive at Paro's dramatic mountain-ringed airport, then hike to Paro Taktsang — the legendary Tiger's Nest Monastery perched on a cliff 900 metres above the valley."
+          "key": "thimphu",
+          "name": "Thimphu",
+          "tagline": "Bhutan's capital, home to a 169-foot Buddha and the national animal.",
+          "card_image_url": "https://images.unsplash.com/photo-1584337126407-6b92d30ecbb2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1597658333270-8c0d8f0eb845?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE MODERN BHUTAN AND ITS TRADITIONS SHARE A CITY",
+          "desc": "Thimphu holds the Memorial Chorten, built for Bhutan's Third King, alongside the Buddha Dordenma, a 169-foot statue containing 125,000 smaller Buddha figures. The Takin Sanctuary protects Bhutan's unusual national animal, while Tashichho Dzong, housing the throne room and government offices, anchors the city's blend of monastery and modern administration."
         },
         {
-          "range": "Day 3-4",
-          "title": "Thimphu",
-          "desc": "Drive to the capital, Thimphu, for the Buddha Dordenma statue, the weekend market, and a visit to the Centenary Farmers' Market and Tashichho Dzong fortress."
+          "key": "punakha",
+          "name": "Punakha",
+          "tagline": "",
+          "card_image_url": "https://images.unsplash.com/photo-1602058033339-b9325bb3a6c3?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1579459719973-e1f6d1a5c438?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "THE WINTER SEAT OF BHUTAN'S MONASTIC BODY",
+          "desc": "Punakha Dzong sits at the heart of Bhutanese history, the site of royal coronations and the central monastic body's winter residence. The route here crosses Dochula Pass, its 108 stupas and prayer flags set against pine and juniper forest at over 3,000 meters, and ends at one of Bhutan's longest suspension bridges, strung with prayer flags high above the Po Chhu river."
         },
         {
-          "range": "Day 5",
-          "title": "Punakha",
-          "desc": "Cross the Dochula Pass (108 chortens, Himalayan views permitting) en route to Punakha Dzong, set dramatically between two rivers."
-        },
-        {
-          "range": "Day 6",
-          "title": "Departure",
-          "desc": "Drive back to Paro for your international departure."
+          "key": "paro",
+          "name": "Paro",
+          "tagline": "Home to the Tiger's Nest, Bhutan's most sacred monastery.",
+          "card_image_url": "https://images.unsplash.com/photo-1596516112176-7a9603d246e1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1644261543525-1681f39460c4?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "modal_tagline": "WHERE A MONASTERY CLINGS TO A CLIFF FACE",
+          "desc": "Paro centers on Taktsang Monastery, the Tiger's Nest, perched on a sheer rock face and reachable only by a hiking trail through pine forest. The town itself holds Rinpung Dzong, a 17th-century fortress serving as Paro's administrative center, and Ta Dzong, a converted watchtower now housing the National Museum, alongside a craft market and local Bhutanese cuisine."
         }
       ],
+      "itinerary_heading": "",
+      "itinerary": [],
       "inclusions_heading": "What's Included",
       "inclusions": [
-        "5 nights accommodation",
-        "Bhutan visa & Sustainable Development Fee",
-        "Licensed local guide throughout",
-        "All meals included",
-        "Tiger's Nest Monastery hike"
+        "7 nights accommodation",
+        "Private vehicle with driver throughout",
+        "Tiger's Nest guided hike",
+        "Daily breakfast",
+        "Bhutan permit & border formalities"
       ],
       "active": true,
-      "meta_description": "A 6-day Bhutan tour package through Paro, Thimphu and the Tiger’s Nest monastery, built around the country’s high-value low-volume tourism policy."
+      "meta_description": "This trip crosses the border from West Bengal into the Kingdom of Bhutan, moving through Phuentsholing's gateway town to Thimphu's monasteries and giant Buddha statue, Punakha's riverside dzong, and Paro's cliffside Tiger's Nest, with mountain passes and prayer-flag bridges connecting each stop.\n\nBest for travelers who want Himalayan scenery, centuries-old dzongs, and one of Buddhism's most iconic hikes in a single trip.",
+      "bg_image_url": "https://images.unsplash.com/photo-1532008779255-4b4dd2668c84?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "hero_image_alt": ""
     },
     "india": {
       "slug": "india",
