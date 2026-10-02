@@ -546,6 +546,8 @@ async function writeJSON(path, data) {
 }
 
 async function writeTextFile(path, text) {
+  const current = await readTextFile(path)
+  if (current === text) return false
   const parts = path.split('/')
   let dir = dirHandle
   for (let i = 0; i < parts.length - 1; i++) dir = await dir.getDirectoryHandle(parts[i], { create: true })
@@ -553,12 +555,12 @@ async function writeTextFile(path, text) {
   const w = await fh.createWritable()
   await w.write(text)
   await w.close()
+  return true
 }
 
 // ── SEO SYNC ────────────────────────────────────────────────────
-// The editor is the sole sitemap.xml writer. Keep it synchronized with active
-// page JSON and package HTML on every editor save; seo-head.js leaves this file
-// alone so a later SEO build cannot overwrite the CMS-generated package URLs.
+// The editor is the sole sitemap.xml writer. Refresh it when package routes or
+// page visibility change; seo-head.js leaves it alone to preserve CMS URLs.
 const SITE_ORIGIN = 'https://alpenglowglobal.com'
 const PACKAGE_GROUPS = [
   { id: 'asia-subcontinent', label: 'Asia & the Subcontinent' },
@@ -791,7 +793,6 @@ function e(s) {
 // ── DATA ─────────────────────────────────────────────────────
 let ALL_OFFERS = [], ALL_BLOGS = [], ALL_DESTS = [], ALL_PKGS = [], ALL_PAGES = [], ALL_PKG_FILES = []
 let CE_TYPE = null, CE_ID = null, CE_ORPHAN_SLUG = null, CE_DIRTY = false
-let _isFirstLoad = true
 
 let _uidCounter = Date.now()
 function genUID() { return (_uidCounter++).toString(36) }
@@ -813,7 +814,7 @@ async function listPkgHTMLFiles() {
   }
 }
 
-async function loadAll() {
+async function loadAll(publish = null) {
   if (!dirHandle) { setSaveStatus('err', 'No folder — click Open Folder'); return }
   LOAD_ERRORS = []
   let offers, blogs, dests, pkgs, featureFlags
@@ -861,18 +862,19 @@ async function loadAll() {
     showToast('Nothing was published — unreadable: ' + LOAD_ERRORS.join(', '), 'err')
     return
   }
+  if (!publish) {
+    setSaveStatus('ok', '✓ Ready')
+    return
+  }
   setSaveStatus('saving', 'Writing files…')
-  const justOpened = _isFirstLoad
-  _isFirstLoad = false
   try {
     await generateBundle()
-    await writeIndexHTML()
-    await syncDynamicDestinationCards()
-    await regenerateSitemap()
+    if (publish.homepage) await writeIndexHTML()
+    if (publish.destinations) await syncDynamicDestinationCards()
+    if (publish.sitemap) await regenerateSitemap()
     setSaveStatus('ok', '✓ Saved')
     if (MARKER_WARN.length) showToast('index.html is missing markers: ' + [...new Set(MARKER_WARN)].join(', '), 'err')
-    else if (!justOpened) showToast('✓ Files updated — refresh the website tab to see changes', 'ok')
-    else setSaveStatus('ok', '✓ Ready')
+    else showToast('✓ Files updated — refresh the website tab to see changes', 'ok')
     setTimeout(() => setSaveStatus('', ''), 5000)
   } catch(err) {
     setSaveStatus('err', '✗ Write failed')
@@ -918,27 +920,8 @@ async function generateBundle() {
     }, null, 2) + ';'
   await writeTextFile('data/bundle.js', bundle)
 
-  // The public site reads this bundle before it tries the JSON files. Give
-  // every reference a content-based URL so localhost and deployed browsers
-  // cannot keep displaying an older cached bundle after an editor save.
-  let revision = 2166136261
-  for (let i = 0; i < bundle.length; i++) {
-    revision ^= bundle.charCodeAt(i)
-    revision = Math.imul(revision, 16777619)
-  }
-  const version = (revision >>> 0).toString(36)
-  await versionBundleReference('index.html', 'data/bundle.js', version)
-  for (const filename of ALL_PKG_FILES) {
-    await versionBundleReference('packages/' + filename, '../data/bundle.js', version)
-  }
-}
-
-async function versionBundleReference(path, bundlePath, version) {
-  const html = await readTextFile(path)
-  if (!html) return
-  const reference = /(<script\b[^>]*\bsrc=["'])(?:\.\.\/)?data\/bundle\.js(?:\?[^"']*)?(["'])/g
-  const updated = html.replace(reference, '$1' + bundlePath + '?v=' + version + '$2')
-  if (updated !== html) await writeTextFile(path, updated)
+  // Keep this URL stable. _headers marks the generated bundle for revalidation,
+  // so a data edit does not require rewriting every page that loads it.
 }
 
 function replaceMarker(html, key, content) {
@@ -1632,6 +1615,10 @@ async function saveCE() {
       return
     }
     const pageRecord = { ...(previousPage || {}), ...body }
+    const pageWasRenamed = !!previousSlug && previousSlug !== slug
+    const pageCardChanged = !previousPage || ['active', 'title', 'meta_description', 'hero_image_url', 'hero_image_alt']
+      .some(key => previousPage[key] !== pageRecord[key]) || pageWasRenamed
+    const pageListingChanged = !previousPage || previousPage.active !== pageRecord.active || pageWasRenamed
     btn.textContent = 'Saving…'; btn.disabled = true
     try {
       let renameWarning = ''
@@ -1640,7 +1627,11 @@ async function saveCE() {
         await writeJSON('data/pages/' + slug + '.json', pageRecord)
         await syncPackageHTML(pageRecord)
       }
-      closeCE(); await loadAll()
+      closeCE(); await loadAll({
+        homepage: !previousPage || previousPage.active !== pageRecord.active || pageWasRenamed,
+        destinations: pageCardChanged,
+        sitemap: pageListingChanged,
+      })
       if (renameWarning) showToast(renameWarning, 'err')
     } catch(err) { alert('Save failed: ' + err.message)
     } finally { btn.textContent = 'Save'; btn.disabled = false }
@@ -1650,6 +1641,7 @@ async function saveCE() {
   // ── Destination / Package ─────────────────────────────────────
   if (CE_TYPE === 'dest' || CE_TYPE === 'pkg') {
     const isDest = CE_TYPE === 'dest'
+    const isNewPackage = !isDest && !CE_ID
     const active = document.getElementById('ce-active-toggle').classList.contains('on')
     const body = isDest ? {
       slug:             document.getElementById('ce-slug').value.trim(),
@@ -1757,7 +1749,9 @@ async function saveCE() {
         }
       }
       await writeJSON(file, arr)
-      closeCE(); await loadAll()
+      closeCE(); await loadAll(isDest
+        ? { homepage: true }
+        : { homepage: true, destinations: true, sitemap: isNewPackage })
     } catch(err) { alert('Save failed: ' + err.message)
     } finally { btn.textContent = 'Save'; btn.disabled = false }
     return
@@ -1794,7 +1788,7 @@ async function saveCE() {
       arr.push(body)
     }
     await writeJSON(isOffer ? 'data/offers.json' : 'data/blog_posts.json', arr)
-    closeCE(); await loadAll()
+    closeCE(); await loadAll({ homepage: true })
   } catch(err) { alert('Save failed: ' + err.message)
   } finally { btn.textContent = 'Save'; btn.disabled = false }
 }
@@ -1836,7 +1830,7 @@ async function toggleItem(table, id, newActive) {
     console.error('[Dev] toggleItem write failed:', err)
     return
   }
-  await loadAll()
+  await loadAll({ homepage: true, destinations: table === 'packages' })
 }
 
 // ── DELETE (double-click confirm) ─────────────────────────────
@@ -1887,7 +1881,11 @@ async function deleteItem(table, id, btn) {
     showToast('Delete failed: ' + (err.message || err), 'err')
     console.error('[Dev] delete failed:', err)
   }
-  await loadAll()
+  await loadAll({
+    homepage: true,
+    destinations: table === 'packages' || table === 'package_pages',
+    sitemap: table === 'packages' || table === 'package_pages',
+  })
 }
 
 // ── RENDER DESTINATIONS ───────────────────────────────────────
@@ -2018,7 +2016,7 @@ async function togglePage(slug, newActive) {
   try {
     await writeJSON('data/pages/' + slug + '.json', page)
     await syncPackageHTML(page)
-    await loadAll()
+    await loadAll({ homepage: true, destinations: true, sitemap: true })
   } catch (err) {
     page.active = previous
     try {
