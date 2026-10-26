@@ -1,7 +1,7 @@
 {
   "AlpenGlow/api.js": {
-    "mtime": 1790776915.2768269,
-    "ast_hash": "7f4f423c5c9b79687e279d0c4a8d45f4",
+    "mtime": 1790938902.069916,
+    "ast_hash": "e61b510a13d656249720cfdee6aea783",
     "semantic_hash": ""
   },
   "AlpenGlow/compass.js": {
@@ -15,13 +15,13 @@
     "semantic_hash": ""
   },
   "AlpenGlow/data/bundle.js": {
-    "mtime": 1790932775.984903,
-    "ast_hash": "b38b9608244eaf6ea9b24e3d4391bf7a",
+    "mtime": 1790940168.2556834,
+    "ast_hash": "56a4f50df66a46a9bf01de469fd776f7",
     "semantic_hash": ""
   },
   "AlpenGlow/data/destinations.json": {
-    "mtime": 1790932698.1412835,
-    "ast_hash": "12deeb424c721e9811343d83b2972751",
+    "mtime": 1790939611.907712,
+    "ast_hash": "2bac2287e2d6fa59c9f51382ab6e65ee",
     "semantic_hash": ""
   },
   "AlpenGlow/data/offers.json": {
@@ -30,7 +30,7 @@
     "semantic_hash": ""
   },
   "AlpenGlow/data/packages.json": {
-    "mtime": 1790932772.9181218,
+    "mtime": 1790937925.9213104,
     "ast_hash": "eb909690012199675c4b2f6eeab45bbe",
     "semantic_hash": ""
   },
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/data/pages/bhutan.json": {
-    "mtime": 1790929681.2675662,
-    "ast_hash": "6bf9d84cba02b1bbdc3d55ff605ea7ff",
+    "mtime": 1790940160.8588493,
+    "ast_hash": "5c71c9200f0155013325190a8c8000b1",
     "semantic_hash": ""
   },
   "AlpenGlow/data/pages/india.json": {
@@ -290,7 +290,7 @@
     "semantic_hash": ""
   },
   "AlpenGlow/compass.html": {
-    "mtime": 1790935338.287449,
+    "mtime": 1790938563.2114663,
     "ast_hash": "ac24d911c98f372e02a78d15e48cd38d",
     "semantic_hash": ""
   },
@@ -300,108 +300,108 @@
     "semantic_hash": ""
   },
   "AlpenGlow/dev.html": {
-    "mtime": 1790935557.5200806,
-    "ast_hash": "dded28b66b1fe4bf7e8e942a0cc1983a",
+    "mtime": 1790939750.070261,
+    "ast_hash": "adcccfdb0a16a2e45c4670214693c822",
     "semantic_hash": ""
   },
   "AlpenGlow/index.html": {
-    "mtime": 1790935338.2864358,
-    "ast_hash": "c537fbc98a9267fbbe8d3e29e5efc8d9",
+    "mtime": 1790939611.9187124,
+    "ast_hash": "279685ab26580b703e5e77bb9b9249c2",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/australia.html": {
-    "mtime": 1790935338.2894492,
-    "ast_hash": "995e868f90da0c2550552be5c57415f9",
+    "mtime": 1790939611.9229772,
+    "ast_hash": "d4713603b339b7d41d1f9739ea7a9d8f",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/bali.html": {
-    "mtime": 1790935338.2914484,
-    "ast_hash": "af91ddbe7ebffdeccaf59e10dd7773e2",
+    "mtime": 1790939611.9248786,
+    "ast_hash": "adbf1556d7d0ec555d6c3aa98d5e9ad9",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/bhutan.html": {
-    "mtime": 1790935338.2924478,
-    "ast_hash": "235189f14f6c9aa7ed9c7411186564b7",
+    "mtime": 1790940165.1272602,
+    "ast_hash": "cb2b93279663cc55e2538adc391bd6a8",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/india.html": {
-    "mtime": 1790935338.293448,
-    "ast_hash": "28cb417ecf21a66e65951f51eb2e5e85",
+    "mtime": 1790939611.9286127,
+    "ast_hash": "e4a098071d1895ffa13282f8c9fd0df6",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/italy.html": {
-    "mtime": 1790935338.294448,
-    "ast_hash": "abfc7e622bcf6788c648b4fb21cafe40",
+    "mtime": 1790939611.9312615,
+    "ast_hash": "722bcb39b69634ba2e543a82a5cdc32d",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/japan.html": {
-    "mtime": 1790935338.294448,
-    "ast_hash": "5de738d7829792eea08a5ede491795a0",
+    "mtime": 1790939611.9333832,
+    "ast_hash": "efbdca1f68e43302e73769bb92b8e002",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/maldives.html": {
-    "mtime": 1790935338.2965045,
-    "ast_hash": "1b032419604c2ecc3c27d7468b73ef3c",
+    "mtime": 1790939611.934924,
+    "ast_hash": "b2fb75d378cd93dd2468436c11004715",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/mauritius.html": {
-    "mtime": 1790935338.2978525,
-    "ast_hash": "219593930dcadee567890c16e6029e31",
+    "mtime": 1790939611.937078,
+    "ast_hash": "a08280ed28f7eca77fdb5c1220338f1e",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/nepal.html": {
-    "mtime": 1790935338.2985048,
-    "ast_hash": "e217076b1bfaa76c0043340c528943e2",
+    "mtime": 1790939611.9393232,
+    "ast_hash": "d121c0f0e93fb95a7708e9f5ff5e24b2",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/newzealand.html": {
-    "mtime": 1790935338.3000336,
-    "ast_hash": "15c0f7a3cf06e6bede786ecbd7ef9000",
+    "mtime": 1790939611.941324,
+    "ast_hash": "af39727c6570688008ac7eba4cf68dce",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/norway.html": {
-    "mtime": 1790935338.3000336,
-    "ast_hash": "70f96fa6ae24297556a33dbcb321dcff",
+    "mtime": 1790939611.9433231,
+    "ast_hash": "b5290d4b44d5845cc5cd1f4bcbfa929b",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/resortsworld.html": {
-    "mtime": 1790935338.3015583,
-    "ast_hash": "68a0673255a802fe1dfa67944f304638",
+    "mtime": 1790939611.9443235,
+    "ast_hash": "d1fef798bb3663213f9d524806b666cf",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/rivercruise-europe.html": {
-    "mtime": 1790935338.303572,
-    "ast_hash": "7787ad95759aa2bdb11a97f0dac8c82e",
+    "mtime": 1790939611.9470296,
+    "ast_hash": "063ab4cfc383ec86e313a2f0d18175c0",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/royalcaribbean.html": {
-    "mtime": 1790935338.303572,
-    "ast_hash": "035fba672bf1dcda58e1c3d0a4f55bea",
+    "mtime": 1790939611.9491694,
+    "ast_hash": "c5bfade0afbfbe5240828d7c64ca0c68",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/santorini.html": {
-    "mtime": 1790935338.304574,
-    "ast_hash": "e6588ba09dc40da95e0816872edf1cc2",
+    "mtime": 1790939611.9501576,
+    "ast_hash": "f7715015f2b628a6379e3f1fc130443c",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/seychelles.html": {
-    "mtime": 1790935338.306082,
-    "ast_hash": "874042cd5b1f3c2263d315c7f4736af8",
+    "mtime": 1790939611.9521492,
+    "ast_hash": "c2a9c42ea261bff3e550dc25f26279d8",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/southkorea.html": {
-    "mtime": 1790935338.3065925,
-    "ast_hash": "4d8b7d2ba920f3ddf1cf47af20165fde",
+    "mtime": 1790939611.9541485,
+    "ast_hash": "e62d921e9b4d88dfe0170d34a17efdd4",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/srilanka.html": {
-    "mtime": 1790935338.3076112,
-    "ast_hash": "8df05720e01f59fa81a68d7345e53bd6",
+    "mtime": 1790939611.9566748,
+    "ast_hash": "6ff8ee9bf80517e72264c4ac87d5c88c",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/switzerland.html": {
-    "mtime": 1790935338.308738,
-    "ast_hash": "28fa4b2340f202de4a3d22f447a2371f",
+    "mtime": 1790939611.9580705,
+    "ast_hash": "30ce84e02d3c171a345a448235a91db4",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
@@ -815,8 +815,8 @@
     "semantic_hash": ""
   },
   "scripts/seo-head.js": {
-    "mtime": 1790935222.8348987,
-    "ast_hash": "ca43e47cf33f505c4f91ef447a0f396d",
+    "mtime": 1790938533.4789114,
+    "ast_hash": "451b87116f339bac8588bd8c7144e09c",
     "semantic_hash": ""
   },
   "scripts/seo-homepage.js": {
@@ -825,8 +825,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/destinations.html": {
-    "mtime": 1790935338.3187954,
-    "ast_hash": "50dac2ad2f753dc73dad6373ecfee108",
+    "mtime": 1790939611.9127018,
+    "ast_hash": "c78f98b2d0ac4ca0aa075575aef57bd3",
     "semantic_hash": ""
   },
   "graphify-out/memory/query_20260910_144637_how_is_seo_handled_across_the_alpenglow_site__and.md": {
@@ -935,8 +935,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/packages/andaman.html": {
-    "mtime": 1790935338.3097491,
-    "ast_hash": "a10fdf3e4ec231c81906ae9087a390ce",
+    "mtime": 1790939611.9209707,
+    "ast_hash": "47db4d2477b4f5e2649a1a58768fb50e",
     "semantic_hash": ""
   },
   "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md": {
