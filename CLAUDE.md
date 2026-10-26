@@ -74,6 +74,11 @@ Two things that bite:
   so any new `<nav>` (breadcrumbs, footer link hubs) needs an explicit
   `position: static; display: block` override or it renders as a fixed overlay.
 
-## Server migration
+## Server migration (until both projects have moved)
 
-During the server migration: at the start of every session, run git checkout claude/server-migration-kit and git pull, then read deploy/server-migration/PROGRESS.md and say where we are. At the end of every sitting, update PROGRESS.md, then commit and push it. Never write passwords, keys, connection strings or customer data into it.
+- At the start of every session: git checkout claude/server-migration-kit, git pull, read deploy/server-migration/PROGRESS.md, say where we are and what's next.
+- After EVERY finished step, not only at the end of a sitting: update PROGRESS.md (Done with date, Current step, Next step, Waiting on me), then commit and push it. A session can end without warning (usage limits), so never leave this for later.
+- Pushing PROGRESS.md and migration-kit files to claude/server-migration-kit is pre-approved for the whole migration. Every other push, and every change on any server, still needs my OK.
+- Never write passwords, keys, tokens, connection strings or customer data into PROGRESS.md.
+- deploy/server-migration/progress-hook.sh (a Stop hook) stops a reply from finishing while PROGRESS.md is uncommitted or unpushed.
+- When both projects have moved: remove this section, the hook script and its Stop entry in .claude/settings.json.
