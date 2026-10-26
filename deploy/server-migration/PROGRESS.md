@@ -20,8 +20,9 @@ run every sudo command yourself (`ssh -t`).
   login left as it is), `sshd -t`, reload `ssh`, key login tested in a new
   PowerShell window while the old session stays open, then check that
   nothing listens on port 1022. Undo if the test fails: delete the file,
-  reload `ssh`. 2a done (file written and validated, see Done); now at 2b
-  (safety session open, reload, tests, port 1022 check).
+  reload `ssh`. 2a and 2b done (see Done): password login is off. Left:
+  you repeat the two tests in a new PowerShell window (your first run was
+  before the reload took effect).
 
 ## Next step
 
@@ -151,6 +152,15 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   shows the values that apply after a reload: `passwordauthentication no`,
   `kbdinteractiveauthentication no`, `pubkeyauthentication yes`,
   `permitrootlogin no`. Not live until `ssh` is reloaded (2b).
+- **26 Oct 2026** Old server hardening step 2b (run by you): `systemctl
+  reload ssh` finished at 15:25:42 CET (`ssh.service` active, same
+  listener PID). Nothing listens on port 1022. **Password SSH login is
+  off:** the server now offers only `publickey` (a BatchMode login with
+  password methods gets `Permission denied (publickey)`). Key login works
+  after the reload (Claude's key logins at 15:26:35 and 15:27:01). Your
+  first test run was before the reload took effect (key test 15:25:07,
+  password test 15:25:28, so that password login still got in under the
+  old settings); a repeat of both tests is pending. No undo needed.
 
 ## Decisions made
 
@@ -244,7 +254,8 @@ Decisions still open (listed, not acted on):
       migration.
 - [ ] PSS old `student-photos` bucket may hold public Aadhaar/ID photos:
       delete or move.
-- [x] Old server: check `PasswordAuthentication`: checked 26 Oct, it is ON.
+- [x] Old server: check `PasswordAuthentication`: checked 26 Oct, it was
+      ON; switched off 26 Oct (`00-hardening.conf`).
 - [x] Old server: the "Accepted password" count of 1 was our own check;
       no SSH password login in the logs (26 Oct).
 - [x] Old server: today's `apt upgrade -y` (14:58 CET) was run by you
@@ -253,8 +264,9 @@ Decisions still open (listed, not acted on):
 - [ ] Old server: re-enable the Docker apt source left disabled by the
       aborted `do-release-upgrade` (rename `docker.list.disabled` back to
       `docker.list`, then `apt update`), only with your OK.
-- [ ] Old server: switch password SSH login off (fix the
-      `50-cloud-init.conf` drop-in), only with your OK.
+- [x] Old server: switch password SSH login off: done 26 Oct with
+      `00-hardening.conf` (loaded before `50-cloud-init.conf`, which is
+      left unchanged). Your repeat of the two tests is pending.
 - [ ] Old server housekeeping, only with your OK: clear the ~20 GB Docker
       build cache; remove the stopped container `tender_kowalevski`.
 
