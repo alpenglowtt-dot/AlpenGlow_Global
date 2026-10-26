@@ -9,6 +9,10 @@ connection strings or customer data here.
 
 Ready, waiting for the new server (a new Contabo server).
 
+In progress (26 Oct): read-only check of the old server. Steps 1 and 2
+done (see Done). Waiting for your sudo output (sshd
+`PasswordAuthentication`, "Accepted password" count, ufw, `DOCKER-USER`).
+
 ## Next step
 
 Phase 1: base setup on the new server (`MIGRATION-RUNBOOK.md`, "Phase 1").
@@ -44,6 +48,28 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   `git push` works.
 - **26 Oct 2026** PSS local `main` pulled: equal to GitHub `main`
   (`cb7beeb`).
+- **26 Oct 2026** Read-only check of the old server against the 5 Oct
+  snapshot (`2026-10-05_1803`): **nothing changed.**
+  - All 48 compared files identical (sha256): the 13 deployed function
+    files (`backend/volumes/functions`), the 12 function files and 11
+    migrations in `repo/`, all 10 `docker-compose*.yml` files (incl.
+    `override`), `kong.yml` and `kong-entrypoint.sh`.
+  - `.env`: the same 83 key names; none added, none removed, no value
+    changed (compared by hash, names only).
+  - `_migrations_applied` in the live database: the same 11 rows (001 to
+    011) as the snapshot.
+  - This laptop's repo matches what is deployed: 11 migrations, the 12
+    function files identical, no commits touching `supabase/` since 5 Oct.
+  - So the 5 Oct snapshot is still a faithful copy of the live backend.
+- **26 Oct 2026** Reachability of `169.58.43.191` from this laptop
+  (`Test-NetConnection`), unchanged from the 7 Oct audit:
+  - Open: 22, 80, 443, and 8000, 8443 (Kong, bypassing nginx: known; the
+    new server's firewall unit closes them).
+  - Closed: 5432, 6543 (the `DOCKER-USER` drop rules still work).
+  - `https://api.alpenglowglobal.com/`, `/project/default` and
+    `/auth/v1/settings` all answer 401: Studio's password prompt and Auth
+    are reachable from the internet (known FAILs; the new server's nginx
+    site file returns 404 for them).
 
 ## Decisions made
 
