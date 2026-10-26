@@ -60,9 +60,11 @@ server.
 
 ## Decisions
 
-- [ ] **travel-app (billing):** shut down, or hosted elsewhere? Its data
-      (1 customer, 2 invoices) is only in the snapshots once the old server
-      is cancelled.
+- [x] **travel-app (billing): removed, not moved** (decided 26 Oct). It
+      stays on the old server until that server is cancelled; then delete
+      the `travel` DNS record. Its data (1 customer, 2 invoices, GST
+      records) is kept in the snapshots as `db/app-billing-schema+data.sql`;
+      keep those.
 - [ ] **AlpenGlow security fixes** (runbook, "Security fixes that need a code
       change"): fix 2 (`_migrations_applied`) and fix 3 (CMS tables), each
       one small migration, before cutover; fix 1 (`trip_leads` behind a

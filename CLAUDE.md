@@ -73,3 +73,7 @@ Two things that bite:
 - `index.html` and `packages/package.css` both style bare `nav { position: … }`,
   so any new `<nav>` (breadcrumbs, footer link hubs) needs an explicit
   `position: static; display: block` override or it renders as a fixed overlay.
+
+## Server migration
+
+During the server migration: at the start of every session, run git checkout claude/server-migration-kit and git pull, then read deploy/server-migration/PROGRESS.md and say where we are. At the end of every sitting, update PROGRESS.md, then commit and push it. Never write passwords, keys, connection strings or customer data into it.
