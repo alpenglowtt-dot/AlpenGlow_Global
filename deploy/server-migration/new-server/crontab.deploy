@@ -1,0 +1,16 @@
+# Crontab for the deploy user on the new server. Install it only after the
+# restore has passed:   crontab ~/ops/crontab.deploy
+# Times are server time (Europe/Berlin). 22:30 is about 02:00-03:00 IST,
+# one hour before the automatic-reboot window at 23:30.
+
+# Nightly backup of the database and server-only config
+30 22 * * * $HOME/ops/backup-nightly.sh >> $HOME/ops/state/backup.log 2>&1
+
+# Health check; emails only when something changes
+*/5 * * * * $HOME/ops/healthcheck.sh >> $HOME/ops/state/health.log 2>&1
+
+# Weekly: clear Docker build cache older than a week (13 GB had piled up on the old server)
+15 4 * * 0 docker builder prune -af --filter until=168h > /dev/null 2>&1
+
+# Monthly: keep the backup log from growing forever
+0 5 1 * * tail -n 500 $HOME/ops/state/backup.log > $HOME/ops/state/backup.log.tmp && mv $HOME/ops/state/backup.log.tmp $HOME/ops/state/backup.log

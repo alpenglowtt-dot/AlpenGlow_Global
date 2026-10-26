@@ -1,0 +1,42 @@
+# Memory ceilings for the AlpenGlow stack on the shared server, so it can
+# never starve the PSS stack (or the other way round). Ceilings, not
+# reservations, with room above what the live server uses. Measured on the
+# old server on 26 Oct 2026 (docker stats): Kong 558 MB untuned (one worker
+# per CPU; 145 MB with two workers in the rehearsal), Studio 266 MB, Storage
+# 227 MB, Realtime 220 MB, pooler 213 MB, functions 166 MB, meta 129 MB,
+# Postgres 129 MB, imgproxy 93 MB, REST 65 MB, Auth 11 MB. About 4.6 GB of
+# ceilings in total; real use about 2 GB.
+#
+# Install (runbook Phase 2, after the stack has started once):
+#   as root: cp /root/new-server/alpenglow/docker-compose.limits.yml ~deploy/projects/alpenglow-global/backend/
+#   in .env: COMPOSE_FILE=docker-compose.yml:docker-compose.override.yml:docker-compose.limits.yml
+#   docker compose up -d
+#
+# Kong must run two workers before its cap applies, otherwise it hits the
+# cap and restarts.
+
+services:
+  db:
+    mem_limit: 1g
+  rest:
+    mem_limit: 384m
+  functions:
+    mem_limit: 512m
+  kong:
+    mem_limit: 512m
+    environment:
+      KONG_NGINX_WORKER_PROCESSES: "2"
+  studio:
+    mem_limit: 512m
+  realtime:
+    mem_limit: 384m
+  storage:
+    mem_limit: 384m
+  meta:
+    mem_limit: 256m
+  imgproxy:
+    mem_limit: 256m
+  auth:
+    mem_limit: 128m
+  supavisor:
+    mem_limit: 384m

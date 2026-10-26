@@ -1,1 +1,5 @@
 graphify-out/graph.json merge=graphify
+# Server scripts must keep Unix line endings even when checked out on Windows;
+# a CRLF in a shell script makes it fail on the Linux server.
+*.sh text eol=lf
+deploy/server-migration/** text eol=lf
