@@ -9,9 +9,7 @@ connection strings or customer data here.
 
 Ready, waiting for the new server (a new Contabo server).
 
-In progress (26 Oct): read-only check of the old server. All checks done
-(see Done); one open question: who made the one SSH password login in the
-current `auth.log` (see "Waiting on me").
+Read-only check of the old server (26 Oct): finished, see Done.
 
 ## Next step
 
@@ -74,9 +72,17 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   read-only checks without sudo:
   - `PasswordAuthentication yes`: **password SSH login is ON** (the
     `50-cloud-init.conf` drop-in wins, as the runbook suspected).
-  - "Accepted password": 1 line in the current `/var/log/auth.log`, 0 in
-    the four older ones: **one successful SSH password login recently**,
-    not yet identified.
+  - "Accepted password": **no SSH password login** in any of the five
+    `auth.log*` files. The count of 1 was our own check: sudo logs each
+    command line, and the `zgrep "Accepted password"` command contains that
+    text. The matching lines are all `sudo:` entries from today's checks.
+  - **2616 "Failed password" attempts** in the current `auth.log`: bots
+    guess passwords all the time because password login is on. None
+    succeeded.
+  - fail2ban works: `backend = systemd`, the SSH filter matches
+    `_COMM=sshd`, version `1.0.2-3ubuntu0.1`. It restarted at 15:02 CET
+    after the upgrade below; in its first 27 s it caught 3 failures, and 4
+    bans were restored.
   - **ufw is not installed.** It was removed on 19 Jul 2026 as a side effect
     of `apt-get install -y iptables-persistent` (the two packages conflict);
     only `/etc/ufw` config files remain. The saved ruleset
@@ -90,6 +96,16 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   - fail2ban active and enabled.
   - Kit checked: `01-base-setup.sh` installs and enables ufw and does not
     install iptables-persistent, so this cannot happen on the new server.
+- **26 Oct 2026** Found in the old server's apt log: `apt upgrade -y` run
+  as `deploy` today, 14:58:55 to 15:01:24 CET (not by Claude). Docker
+  Engine 29.6.2 to 29.9.2, containerd 2.2.6 to 2.4.2, Compose plugin 5.3.1
+  to 5.6.1, buildx, cloud-init, apparmor, snapd and about 45 other Ubuntu
+  updates. Docker restarted at 15:02:23 CET (forms down for about 1 to 2
+  minutes). Afterwards all 11 Supabase containers and the 3 travel-app
+  containers were `healthy`/`Up`, the API answered through nginx as before,
+  and no reboot was required. The backend files, `.env` and migrations are
+  untouched (step 1 above), and the container images are pinned, so the
+  snapshot is still valid.
 
 ## Decisions made
 
@@ -182,11 +198,13 @@ Decisions still open (listed, not acted on):
 - [ ] PSS old `student-photos` bucket may hold public Aadhaar/ID photos:
       delete or move.
 - [x] Old server: check `PasswordAuthentication`: checked 26 Oct, it is ON.
-- [ ] Old server: identify the one "Accepted password" SSH login in the
-      current `auth.log` (was it you?).
+- [x] Old server: the "Accepted password" count of 1 was our own check;
+      no SSH password login in the logs (26 Oct).
+- [ ] Old server: confirm that you ran today's `apt upgrade -y` (14:58 CET).
 - [ ] Old server: change the `deploy` sudo password (now more urgent:
-      password SSH login is on, and that password was typed into a chat on
-      7 Oct).
+      password SSH login is on, bots tried passwords 2616 times in the
+      current log (at most a week), and that password was typed into a
+      chat on 7 Oct).
 - [ ] Old server: switch password SSH login off (fix the
       `50-cloud-init.conf` drop-in), only with your OK.
 - [ ] Old server housekeeping, only with your OK: clear the ~20 GB Docker
