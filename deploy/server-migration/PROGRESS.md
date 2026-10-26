@@ -13,13 +13,15 @@ Read-only check of the old server (26 Oct): finished, see Done.
 
 In progress (26 Oct): old server hardening, with your OK at each step. You
 run every sudo command yourself (`ssh -t`).
-- Step 1, change the `deploy` password (you type it): waiting for you.
+- Step 1, change the `deploy` password: done (see Done).
 - Step 2, key-only SSH: new file
   `/etc/ssh/sshd_config.d/00-hardening.conf` with
   `PasswordAuthentication no` and `KbdInteractiveAuthentication no` (root
   login left as it is), `sshd -t`, reload `ssh`, key login tested in a new
-  PowerShell window while the old session stays open. Undo if the test
-  fails: delete the file, reload `ssh`. Not started.
+  PowerShell window while the old session stays open, then check that
+  nothing listens on port 1022. Undo if the test fails: delete the file,
+  reload `ssh`. File content approved by you; now at 2a (write the file and
+  validate, no reload yet).
 
 ## Next step
 
@@ -124,6 +126,24 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   password login on. A `00-hardening.conf` sorts first and wins.
   `PermitRootLogin no` is set in `sshd_config`. `ssh.service` and
   `ssh.socket` are both active. `deploy` has 2 authorized keys.
+- **26 Oct 2026** Old server hardening step 1: you changed the `deploy`
+  password (`passwd`: "password updated successfully"). `sudo` there now
+  uses the new password.
+- **26 Oct 2026** Your note: at 15:05 CET you started `do-release-upgrade`
+  on the old server and aborted it at the Continue prompt. Nothing was
+  installed. It had left a recovery sshd on port 1022 (PID 8035) and its
+  `screen` session (PID 7612); both had exited by the time you checked: no
+  upgrader process, port 1022 closed, `dpkg --audit` clean.
+  Read-only check afterwards: still Ubuntu 24.04.5 LTS (noble); no upgrader
+  or `screen` process; nothing listens on 1022; `ubuntu.sources` restored
+  to `noble`, `noble-updates`, `noble-backports`, `noble-security`.
+  **Leftover:** the upgrader renamed the Docker apt source to
+  `/etc/apt/sources.list.d/docker.list.disabled` (15:03) and did not
+  restore it, so the Docker repository is off. The file still points to
+  `download.docker.com/linux/ubuntu noble stable`. Docker itself is on
+  29.9.2 from today's upgrade, but later `apt upgrade` runs will not update
+  Docker or containerd until it is renamed back. Also left:
+  `/etc/apt/sources.list.disabled` (comments only, harmless).
 
 ## Decisions made
 
@@ -184,6 +204,8 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   re-deployed to the new server during that project's switch-over.
 - Never install `iptables-persistent` / `netfilter-persistent` on the new
   server: it uninstalls ufw (that is how the old server lost its firewall).
+- Never run `do-release-upgrade` on the old server. The new server stays on
+  Ubuntu 24.04 (the kit is built and rehearsed for it).
 - Multi-line remote commands from PowerShell: pipe a here-string into
   `ssh <host> "tr -d '\r' | bash -s"` (plain quoted commands get their
   quotes stripped). Bash scripts run in Git Bash.
@@ -220,10 +242,10 @@ Decisions still open (listed, not acted on):
       no SSH password login in the logs (26 Oct).
 - [x] Old server: today's `apt upgrade -y` (14:58 CET) was run by you
       (confirmed 26 Oct).
-- [ ] Old server: change the `deploy` sudo password (now more urgent:
-      password SSH login is on, bots tried passwords 2616 times in the
-      current log (at most a week), and that password was typed into a
-      chat on 7 Oct).
+- [x] Old server: change the `deploy` sudo password (done 26 Oct).
+- [ ] Old server: re-enable the Docker apt source left disabled by the
+      aborted `do-release-upgrade` (rename `docker.list.disabled` back to
+      `docker.list`, then `apt update`), only with your OK.
 - [ ] Old server: switch password SSH login off (fix the
       `50-cloud-init.conf` drop-in), only with your OK.
 - [ ] Old server housekeeping, only with your OK: clear the ~20 GB Docker
