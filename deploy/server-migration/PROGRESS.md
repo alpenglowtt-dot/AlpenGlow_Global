@@ -9,20 +9,8 @@ connection strings or customer data here.
 
 Ready, waiting for the new server (a new Contabo server).
 
-Read-only check of the old server (26 Oct): finished, see Done.
-
-In progress (26 Oct): old server hardening, with your OK at each step. You
-run every sudo command yourself (`ssh -t`).
-- Step 1, change the `deploy` password: done (see Done).
-- Step 2, key-only SSH: new file
-  `/etc/ssh/sshd_config.d/00-hardening.conf` with
-  `PasswordAuthentication no` and `KbdInteractiveAuthentication no` (root
-  login left as it is), `sshd -t`, reload `ssh`, key login tested in a new
-  PowerShell window while the old session stays open, then check that
-  nothing listens on port 1022. Undo if the test fails: delete the file,
-  reload `ssh`. 2a and 2b done (see Done): password login is off. Left:
-  you repeat the two tests in a new PowerShell window (your first run was
-  before the reload took effect).
+Finished on 26 Oct (see Done): read-only check of the old server, and its
+hardening (new `deploy` password, password SSH login off).
 
 ## Next step
 
@@ -160,7 +148,11 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   after the reload (Claude's key logins at 15:26:35 and 15:27:01). Your
   first test run was before the reload took effect (key test 15:25:07,
   password test 15:25:28, so that password login still got in under the
-  old settings); a repeat of both tests is pending. No undo needed.
+  old settings). No undo needed.
+- **26 Oct 2026** Your repeat of the tests in a new PowerShell window,
+  after the reload: key login prints `key-login-ok`; a password-only login
+  gets `Permission denied (publickey)` with no password prompt. **Old
+  server hardening done.**
 
 ## Decisions made
 
@@ -266,7 +258,7 @@ Decisions still open (listed, not acted on):
       `docker.list`, then `apt update`), only with your OK.
 - [x] Old server: switch password SSH login off: done 26 Oct with
       `00-hardening.conf` (loaded before `50-cloud-init.conf`, which is
-      left unchanged). Your repeat of the two tests is pending.
+      left unchanged); tested by you after the reload.
 - [ ] Old server housekeeping, only with your OK: clear the ~20 GB Docker
       build cache; remove the stopped container `tender_kowalevski`.
 
