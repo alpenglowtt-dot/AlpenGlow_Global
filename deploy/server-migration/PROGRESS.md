@@ -11,6 +11,16 @@ Ready, waiting for the new server (a new Contabo server).
 
 Read-only check of the old server (26 Oct): finished, see Done.
 
+In progress (26 Oct): old server hardening, with your OK at each step. You
+run every sudo command yourself (`ssh -t`).
+- Step 1, change the `deploy` password (you type it): waiting for you.
+- Step 2, key-only SSH: new file
+  `/etc/ssh/sshd_config.d/00-hardening.conf` with
+  `PasswordAuthentication no` and `KbdInteractiveAuthentication no` (root
+  login left as it is), `sshd -t`, reload `ssh`, key login tested in a new
+  PowerShell window while the old session stays open. Undo if the test
+  fails: delete the file, reload `ssh`. Not started.
+
 ## Next step
 
 Phase 1: base setup on the new server (`MIGRATION-RUNBOOK.md`, "Phase 1").
@@ -105,7 +115,15 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   containers were `healthy`/`Up`, the API answered through nginx as before,
   and no reboot was required. The backend files, `.env` and migrations are
   untouched (step 1 above), and the container images are pinned, so the
-  snapshot is still valid.
+  snapshot is still valid. **Confirmed by you: you ran this upgrade
+  yourself.**
+- **26 Oct 2026** sshd layout on the old server (read-only):
+  `sshd_config` includes `sshd_config.d/*.conf` on line 12, before its own
+  `PasswordAuthentication no`; drop-ins load alphabetically and the first
+  value wins, so `50-cloud-init.conf` (not readable by `deploy`) turns
+  password login on. A `00-hardening.conf` sorts first and wins.
+  `PermitRootLogin no` is set in `sshd_config`. `ssh.service` and
+  `ssh.socket` are both active. `deploy` has 2 authorized keys.
 
 ## Decisions made
 
@@ -200,7 +218,8 @@ Decisions still open (listed, not acted on):
 - [x] Old server: check `PasswordAuthentication`: checked 26 Oct, it is ON.
 - [x] Old server: the "Accepted password" count of 1 was our own check;
       no SSH password login in the logs (26 Oct).
-- [ ] Old server: confirm that you ran today's `apt upgrade -y` (14:58 CET).
+- [x] Old server: today's `apt upgrade -y` (14:58 CET) was run by you
+      (confirmed 26 Oct).
 - [ ] Old server: change the `deploy` sudo password (now more urgent:
       password SSH login is on, bots tried passwords 2616 times in the
       current log (at most a week), and that password was typed into a
