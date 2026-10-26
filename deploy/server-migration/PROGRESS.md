@@ -20,8 +20,8 @@ run every sudo command yourself (`ssh -t`).
   login left as it is), `sshd -t`, reload `ssh`, key login tested in a new
   PowerShell window while the old session stays open, then check that
   nothing listens on port 1022. Undo if the test fails: delete the file,
-  reload `ssh`. File content approved by you; now at 2a (write the file and
-  validate, no reload yet).
+  reload `ssh`. 2a done (file written and validated, see Done); now at 2b
+  (safety session open, reload, tests, port 1022 check).
 
 ## Next step
 
@@ -144,6 +144,13 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   29.9.2 from today's upgrade, but later `apt upgrade` runs will not update
   Docker or containerd until it is renamed back. Also left:
   `/etc/apt/sources.list.disabled` (comments only, harmless).
+- **26 Oct 2026** Old server hardening step 2a (run by you, 15:22 CET):
+  `/etc/ssh/sshd_config.d/00-hardening.conf` written (root, 644, 129
+  bytes: a comment, `PasswordAuthentication no`,
+  `KbdInteractiveAuthentication no`). `sshd -t`: config valid. `sshd -T`
+  shows the values that apply after a reload: `passwordauthentication no`,
+  `kbdinteractiveauthentication no`, `pubkeyauthentication yes`,
+  `permitrootlogin no`. Not live until `ssh` is reloaded (2b).
 
 ## Decisions made
 
