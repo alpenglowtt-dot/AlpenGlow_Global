@@ -1,13 +1,13 @@
 # Server migration: progress
 
 Read this at the start of every session (after `git checkout
-claude/server-migration-kit` and `git pull`), and update it at the end of
-every sitting. Never write passwords, keys, connection strings or customer
-data here.
+claude/server-migration-kit` and `git pull`), and update it after every
+finished step, then commit and push. Never write passwords, keys, tokens,
+connection strings or customer data here.
 
 ## Current step
 
-Ready, waiting for the new server.
+Ready, waiting for the new server (a new Contabo server).
 
 ## Next step
 
@@ -20,7 +20,7 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   (commit `e6ce4aa`, see `README.md`).
 - **26 Oct 2026** Old server checked: healthy; 27 `leads`, 72 `trip_leads`,
   11 migrations applied. Certificates valid until 17 Dec (`api`) and 24 Dec
-  (`travel`).
+  (`travel`). `certbot.timer` active (last run 13:14 CET, next 00:04 CET).
 - **26 Oct 2026** Readiness checks, all read-only, all passed:
   - SSH key `~/.ssh/id_ed25519` present (ed25519); `ssh deploy@169.58.43.191
     "echo ok"` answers `ok`.
@@ -30,19 +30,40 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
     `db/exact-row-counts.txt` present.
   - PSS repo `C:\Users\sriva\Desktop\PSS\perfect-study-space` reachable, on
     `main`, 51 migrations (001 to 051). `pss/frontend-csp.patch` passes
-    `git apply --check` there. Local `main` (`bb3ec6a`) is 19 commits behind
-    `origin/main` (`cb7beeb`, last fetched 23 Oct); the only uncommitted
-    files are `.claude-flow/` tool folders.
+    `git apply --check` there. The only uncommitted files are
+    `.claude-flow/` tool folders.
   - Claude runs on the laptop that has the SSH key (remote control), so it
     can run the steps itself.
 - **26 Oct 2026** This file created; billing-app decision recorded in
   `INPUTS-NEEDED.md`; session rule added to `CLAUDE.md`.
+- **26 Oct 2026** Stop hook `progress-hook.sh` added (commit `4a3262e`): a
+  reply cannot finish while this file is uncommitted or unpushed. Takes
+  effect in a fresh session.
+- **26 Oct 2026** Git pushes from this laptop go out as `SriVaibhav14` in
+  every repo (AlpenGlow's remote no longer names `alpenglowtt-dot`); a plain
+  `git push` works.
+- **26 Oct 2026** PSS local `main` pulled: equal to GitHub `main`
+  (`cb7beeb`).
 
 ## Decisions made
 
 - **Order.** AlpenGlow first: old VPS `deploy@169.58.43.191` to the new
   server. PSS about a week later: Supabase cloud project
   `ozatixapvxwrwbpdxuzt` to the same new server, as its own separate stack.
+- **New server: option A, a new Contabo server.** We use Contabo only.
+  Contabo cannot clone a server onto another, so the move follows the
+  runbook as planned.
+- **Old server billing.** Next billing date 16 Nov. The earliest
+  cancellation date Contabo offers (16 Nov or 16 Dec) is still to be checked
+  in the Contabo panel. The move dates are your choice; Claude does not plan
+  them.
+- **Fallbacks.** The old server only has to stay as AlpenGlow's fallback.
+  PSS's fallback is its Supabase cloud project.
+- **Certificates.** `certbot.timer` on the old server is active (checked
+  26 Oct: last run 13:14 CET, next 00:04 CET). The `api` certificate renews
+  there automatically around 17 Nov (the new one is valid to about mid-Feb
+  2027). If AlpenGlow switches before 17 Nov, the copied certificate is
+  valid to 17 Dec, and the new server renews it after the DNS switch.
 - **Deadline.** AlpenGlow must switch before early December (saved
   certificates expire 17 Dec for `api`).
 - **Billing app (travel-app, `travel.alpenglowglobal.com`): removed, not
@@ -87,11 +108,17 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
 
 ## Waiting on me
 
+Dates (your choice):
+
+- [ ] Check the earliest cancellation date for the old server in the
+      Contabo panel (16 Nov or 16 Dec).
+- [ ] Choose the migration dates.
+
 To start Phase 1:
 
-- [ ] The new server: Ubuntu 24.04, 4 vCPU, 8 GB RAM, 100 GB disk, created
-      with the laptop's public key (`~/.ssh/id_ed25519.pub`) as root's SSH
-      key. Send its IP address.
+- [ ] The new Contabo server: Ubuntu 24.04, 4 vCPU, 8 GB RAM, 100 GB disk,
+      created with the laptop's public key (`~/.ssh/id_ed25519.pub`) as
+      root's SSH key. Send its IP address.
 - [ ] A fresh session on this laptop after 1 Nov ~04:30 IST.
 
 Decisions still open (listed, not acted on):
@@ -124,6 +151,4 @@ Later:
 
 - [ ] A day before the AlpenGlow switch-over: lower the TTL of `api` in the
       `alpenglowglobal.com` zone to 5 minutes.
-- [ ] Before PSS Phase 2: OK to `git pull` PSS `main` (local is behind
-      `origin/main`).
 - [ ] The PSS inputs in `INPUTS-NEEDED.md` ("For PSS").
