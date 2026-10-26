@@ -9,9 +9,9 @@ connection strings or customer data here.
 
 Ready, waiting for the new server (a new Contabo server).
 
-In progress (26 Oct): read-only check of the old server. Steps 1 and 2
-done (see Done). Waiting for your sudo output (sshd
-`PasswordAuthentication`, "Accepted password" count, ufw, `DOCKER-USER`).
+In progress (26 Oct): read-only check of the old server. All checks done
+(see Done); one open question: who made the one SSH password login in the
+current `auth.log` (see "Waiting on me").
 
 ## Next step
 
@@ -70,6 +70,26 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
     `/auth/v1/settings` all answer 401: Studio's password prompt and Auth
     are reachable from the internet (known FAILs; the new server's nginx
     site file returns 404 for them).
+- **26 Oct 2026** Old server sudo checks (output pasted by you), plus
+  read-only checks without sudo:
+  - `PasswordAuthentication yes`: **password SSH login is ON** (the
+    `50-cloud-init.conf` drop-in wins, as the runbook suspected).
+  - "Accepted password": 1 line in the current `/var/log/auth.log`, 0 in
+    the four older ones: **one successful SSH password login recently**,
+    not yet identified.
+  - **ufw is not installed.** It was removed on 19 Jul 2026 as a side effect
+    of `apt-get install -y iptables-persistent` (the two packages conflict);
+    only `/etc/ufw` config files remain. The saved ruleset
+    (`/etc/iptables/rules.v4`, 7 Oct copy) has INPUT policy `ACCEPT` and
+    empty ufw chains, and is reloaded at every boot (last boot 18 Oct). So
+    there is no host firewall; only the `DOCKER-USER` drops filter.
+    Listening on public interfaces: exactly 22, 80, 443, 5432, 6543, 8000,
+    8443, so today's exposure is what was tested. The runbook's description
+    of the old server ("ufw (SSH, 80, 443)") is out of date.
+  - `DOCKER-USER`: `DROP` for 6543 and 5432 on `eth0`, as in the runbook.
+  - fail2ban active and enabled.
+  - Kit checked: `01-base-setup.sh` installs and enables ufw and does not
+    install iptables-persistent, so this cannot happen on the new server.
 
 ## Decisions made
 
@@ -128,6 +148,8 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
 - Never deploy backend changes during a switch-over window. Backend code
   deployed to the old server or the cloud after a rehearsal must be
   re-deployed to the new server during that project's switch-over.
+- Never install `iptables-persistent` / `netfilter-persistent` on the new
+  server: it uninstalls ufw (that is how the old server lost its firewall).
 - Multi-line remote commands from PowerShell: pipe a here-string into
   `ssh <host> "tr -d '\r' | bash -s"` (plain quoted commands get their
   quotes stripped). Bash scripts run in Git Bash.
@@ -159,9 +181,14 @@ Decisions still open (listed, not acted on):
       migration.
 - [ ] PSS old `student-photos` bucket may hold public Aadhaar/ID photos:
       delete or move.
-- [ ] Old server: check `PasswordAuthentication`
-      (`sudo sshd -T | grep -i passwordauthentication`).
-- [ ] Old server: change the `deploy` sudo password.
+- [x] Old server: check `PasswordAuthentication`: checked 26 Oct, it is ON.
+- [ ] Old server: identify the one "Accepted password" SSH login in the
+      current `auth.log` (was it you?).
+- [ ] Old server: change the `deploy` sudo password (now more urgent:
+      password SSH login is on, and that password was typed into a chat on
+      7 Oct).
+- [ ] Old server: switch password SSH login off (fix the
+      `50-cloud-init.conf` drop-in), only with your OK.
 - [ ] Old server housekeeping, only with your OK: clear the ~20 GB Docker
       build cache; remove the stopped container `tender_kowalevski`.
 
