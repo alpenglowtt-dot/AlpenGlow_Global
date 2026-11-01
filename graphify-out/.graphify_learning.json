@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-01T07:39:48.085605+00:00",
+  "generated_at": "2026-11-01T08:01:08.822580+00:00",
   "nodes": {
     "alpenglow_api": {
-      "code_fingerprint": "b40df46ca624f79c42e661f49b5d25149fcdfb5225febe9c4f752a0b14490ae1",
+      "code_fingerprint": "93b2ce94d3b8ebd8cded784ba2ce920f2643e74a36456911a120aff79e2dac4b",
       "label": "api.js",
       "last": "2026-11-01T07:39:47.940068+00:00",
       "neg": 1,
@@ -28,14 +28,14 @@
           "q": "How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?"
         }
       ],
-      "score": 1.377481523,
+      "score": 1.377009828,
       "source_file": "AlpenGlow/api.js",
       "status": "contested",
       "uses": 3,
       "verdict": "useful"
     },
     "alpenglow_api_canusecompass": {
-      "code_fingerprint": "b40df46ca624f79c42e661f49b5d25149fcdfb5225febe9c4f752a0b14490ae1",
+      "code_fingerprint": "93b2ce94d3b8ebd8cded784ba2ce920f2643e74a36456911a120aff79e2dac4b",
       "label": "canUseCompass()",
       "last": "2026-11-01T07:39:47.940068+00:00",
       "provenance": [
@@ -45,13 +45,13 @@
           "q": "Which OTP verification unlocks which part of the site, and when does the 30s popup appear?"
         }
       ],
-      "score": 0.999999961,
+      "score": 0.999657528,
       "source_file": "AlpenGlow/api.js",
       "status": "tentative",
       "uses": 1
     },
     "alpenglow_api_isblogunlocked": {
-      "code_fingerprint": "b40df46ca624f79c42e661f49b5d25149fcdfb5225febe9c4f752a0b14490ae1",
+      "code_fingerprint": "93b2ce94d3b8ebd8cded784ba2ce920f2643e74a36456911a120aff79e2dac4b",
       "label": "isBlogUnlocked()",
       "last": "2026-11-01T07:39:47.940068+00:00",
       "provenance": [
@@ -61,13 +61,13 @@
           "q": "Which OTP verification unlocks which part of the site, and when does the 30s popup appear?"
         }
       ],
-      "score": 0.999999961,
+      "score": 0.999657528,
       "source_file": "AlpenGlow/api.js",
       "status": "tentative",
       "uses": 1
     },
     "alpenglow_api_popupdue": {
-      "code_fingerprint": "b40df46ca624f79c42e661f49b5d25149fcdfb5225febe9c4f752a0b14490ae1",
+      "code_fingerprint": "93b2ce94d3b8ebd8cded784ba2ce920f2643e74a36456911a120aff79e2dac4b",
       "label": "_popupDue()",
       "last": "2026-11-01T07:39:47.940068+00:00",
       "provenance": [
@@ -77,13 +77,13 @@
           "q": "Which OTP verification unlocks which part of the site, and when does the 30s popup appear?"
         }
       ],
-      "score": 0.999999961,
+      "score": 0.999657528,
       "source_file": "AlpenGlow/api.js",
       "status": "tentative",
       "uses": 1
     },
     "alpenglow_api_showverifypopup": {
-      "code_fingerprint": "b40df46ca624f79c42e661f49b5d25149fcdfb5225febe9c4f752a0b14490ae1",
+      "code_fingerprint": "93b2ce94d3b8ebd8cded784ba2ce920f2643e74a36456911a120aff79e2dac4b",
       "label": "_showVerifyPopup()",
       "last": "2026-11-01T07:39:47.940068+00:00",
       "provenance": [
@@ -93,13 +93,13 @@
           "q": "Which OTP verification unlocks which part of the site, and when does the 30s popup appear?"
         }
       ],
-      "score": 0.999999961,
+      "score": 0.999657528,
       "source_file": "AlpenGlow/api.js",
       "status": "tentative",
       "uses": 1
     },
     "alpenglow_compass": {
-      "code_fingerprint": "c76c4d3722e26ffe3aefc6d974d1a6091d4ab12da1d9f932bc85ac04d8f0fb86",
+      "code_fingerprint": "a2257bdc5ff0b8f224411ef5d914ff8fd6e14100ec5a654899f8204fa68dfcbb",
       "label": "compass.js",
       "last": "2026-07-21T08:33:37.307106+00:00",
       "neg": 1,
@@ -122,7 +122,7 @@
       "verdict": "dead end"
     },
     "alpenglow_trip_planner_inittripplanner": {
-      "code_fingerprint": "5a19291a83c500fe2496455fb59c35e3b4984a1f68c76e2d021555bb02632ac6",
+      "code_fingerprint": "ceb096662405445ce0bcf2987d427dbc5ae95b8c228d154ac9e7dbac8d9b8557",
       "label": "initTripPlanner()",
       "last": "2026-07-21T08:32:52.537186+00:00",
       "provenance": [
@@ -132,13 +132,13 @@
           "q": "What are the two verification scopes and where do they apply?"
         }
       ],
-      "score": 0.09264746,
+      "score": 0.092615735,
       "source_file": "AlpenGlow/trip-planner.js",
       "status": "tentative",
       "uses": 1
     },
     "alpenglow_trip_planner_tpcheckbothverified": {
-      "code_fingerprint": "5a19291a83c500fe2496455fb59c35e3b4984a1f68c76e2d021555bb02632ac6",
+      "code_fingerprint": "ceb096662405445ce0bcf2987d427dbc5ae95b8c228d154ac9e7dbac8d9b8557",
       "label": "_tpCheckBothVerified()",
       "last": "2026-07-21T08:32:52.537186+00:00",
       "neg": 1,
@@ -161,7 +161,7 @@
       "verdict": "useful"
     },
     "scripts_seo_head": {
-      "code_fingerprint": "bf71747a007610ed962bc4c81ce3805460ac86a4afcf5525b903b84df549b1d5",
+      "code_fingerprint": "be71fdc2ee9bf4e03330318290e3d36f5b04ea4d7e209a9f244001d1b46a6396",
       "label": "seo-head.js",
       "last": "2026-10-02T10:04:51.028209+00:00",
       "provenance": [
@@ -176,7 +176,7 @@
           "q": "How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?"
         }
       ],
-      "score": 0.981508337,
+      "score": 0.981172236,
       "source_file": "scripts/seo-head.js",
       "status": "preferred",
       "uses": 2
@@ -203,7 +203,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 0.092648692,
+      "score": 0.092616966,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "contested",
       "uses": 2,
@@ -220,7 +220,7 @@
           "q": "What is the RLS security model for the CRM tables?"
         }
       ],
-      "score": 0.092647471,
+      "score": 0.092615745,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "tentative",
       "uses": 1
@@ -242,7 +242,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 5.73e-07,
+      "score": 5.72e-07,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "contested",
       "uses": 1,
@@ -259,7 +259,7 @@
           "q": "What is the RLS security model for the CRM tables?"
         }
       ],
-      "score": 0.092647471,
+      "score": 0.092615745,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "tentative",
       "uses": 1

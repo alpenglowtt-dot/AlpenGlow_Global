@@ -1,9 +1,12 @@
 {
   "0": "trip-planner.js",
   "1": "Q: How does OTP verification connect to CRM lead creation?",
+  "2": "environment",
   "3": "Q: Why could OTPs for non-Indian numbers go to the wrong person or fail to verify?",
   "4": "generate-keys.js",
   "5": "api.js",
+  "6": "ref_https",
+  "7": "Q: Which OTP verification unlocks which part of the site, and when does the 30s popup appear?",
   "9": "cors.ts",
   "17": "01-vps-setup.sh",
   "18": "02-migrate-data.sh",
