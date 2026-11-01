@@ -2053,8 +2053,9 @@ function leadSelectChannel(ch) {
 
 function openModal(articleIdx) {
   _currentArticle = articleIdx || 0;
-  // Already verified this session — show article immediately, skip all OTP steps
-  if (AlpenAPI.isVerified('blog')) {
+  // Already verified this session (blog, 30s popup/package page, or Trip
+  // Planner) — show article immediately, skip all OTP steps
+  if (AlpenAPI.isBlogUnlocked()) {
     const art = BLOG_POSTS[_currentArticle];
     document.getElementById('articleTitle').textContent = art.title;
     document.getElementById('articleContent').innerHTML = art.content;
@@ -2493,8 +2494,8 @@ function renderBlogPosts(posts) {
   blogIdx = 0
   clearInterval(blogTimer)
   blogTimer = setInterval(() => scrollBlogs(1), 10000)
-  // Re-apply DEV_MODE blur removal if active
-  if (typeof AlpenAPI !== 'undefined' && AlpenAPI.isVerified('blog')) {
+  // Re-apply blur removal if blogs are already unlocked (or DEV_MODE)
+  if (typeof AlpenAPI !== 'undefined' && AlpenAPI.isBlogUnlocked()) {
     document.querySelectorAll('.blog-blur').forEach(el => el.style.display = 'none')
   }
 }

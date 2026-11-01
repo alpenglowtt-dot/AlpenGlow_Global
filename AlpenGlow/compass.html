@@ -343,7 +343,7 @@ body{
 #unverified-gate a:hover{background:var(--orange-light);transform:translateY(-2px)}
 </style>
 </head>
-<body data-verify-scope="planner">
+<body data-verify-scope="compass">
 
 <!-- Not-verified gate (hidden if verified) -->
 <div id="unverified-gate" style="display:none">
@@ -353,7 +353,7 @@ body{
     </svg>
   </div>
   <h2>Verification Required</h2>
-  <p>Please verify your identity via the trip planner before accessing COMPASS.</p>
+  <p>Please verify your WhatsApp or email before chatting with COMPASS.</p>
   <a href="index.html?startPlanner=1">Go Back &amp; Verify</a>
 </div>
 
@@ -411,15 +411,48 @@ body{
   'use strict'
 
   /* ── Verification gate ──────────────────────────────── */
-  /* Uses the 'planner' scope — shared only with the Trip Planner wizard,
-     intentionally separate from package/blog/offer verification. */
-  if (!(window.AlpenAPI && AlpenAPI.isVerified('planner'))) {
-    document.getElementById('unverified-gate').style.display = 'flex'
-    document.querySelector('.topbar').style.display = 'none'
-    document.getElementById('chat-body').style.display = 'none'
-    document.querySelector('.input-bar').style.display = 'none'
-    return
+  /* COMPASS opens for anyone verified through the Trip Planner, the
+     site-wide 30s popup, or a package page's gate card — see
+     canUseCompass() in api.js. Blog and offer verification don't count.
+     Not verified yet → the same quick WhatsApp/email verification as the
+     site popup is shown right here. Finishing it (or the session QA
+     override) calls window.unlockContent(), which starts the chat. */
+  var _chrome = [document.querySelector('.topbar'), document.getElementById('chat-body'), document.querySelector('.input-bar')]
+  function _showChrome(show) {
+    _chrome.forEach(function (el) { if (el) el.style.display = show ? '' : 'none' })
   }
+  var _started = false
+  window.unlockContent = function () {
+    if (_started) return
+    _started = true
+    document.getElementById('unverified-gate').style.display = 'none'
+    _showChrome(true)
+    _startCompass()
+  }
+
+  if (window.AlpenAPI && AlpenAPI.canUseCompass()) {
+    window.unlockContent()
+  } else {
+    _showChrome(false)
+    if (window.AlpenAPI && AlpenAPI.showVerifyPopup) {
+      AlpenAPI.showVerifyPopup({
+        title: 'Verify to chat with COMPASS',
+        text:  'Verify your WhatsApp or email to start chatting with COMPASS, our trip planning assistant. It also unlocks every package page and our travel articles.',
+        // Offer the Trip Planner route only while the site-wide popup isn't
+        // due yet — once it is, the homepage would block the planner with
+        // the popup anyway. (Unverified + canViewPackages() = not due yet.)
+        altLink: AlpenAPI.canViewPackages()
+          ? { href: 'index.html?startPlanner=1', text: 'Or plan your trip step by step instead →' }
+          : null,
+      })
+    } else {
+      document.getElementById('unverified-gate').style.display = 'flex'
+    }
+  }
+
+  /* Everything below runs once the visitor is verified. (Body left at the
+     outer indentation to keep this file's history readable.) */
+  function _startCompass() {
 
   /* ── Config ─────────────────────────────────────────── */
   // Self-hosted Supabase (see deploy/README.md).
@@ -430,12 +463,11 @@ body{
   var MAX_Q   = 5
 
   /* ── State ──────────────────────────────────────────── */
-  // Name/phone/email come from the Trip Planner's verified profile — the
-  // 'planner' gate above guarantees that flow already ran before COMPASS
-  // could load, so there's no separate contact-collection step in here.
-  var _profile = (function () {
-    try { return JSON.parse(sessionStorage.getItem('ag_planner_profile') || '{}') } catch (e) { return {} }
-  })()
+  // Name/phone/email come from whichever verification opened COMPASS: the
+  // Trip Planner profile (phone + email + trip answers) or the popup/package
+  // gate card (name + ONE of phone or email). The gate above guarantees one
+  // of them ran, so there's no separate contact-collection step in here.
+  var _profile = (window.AlpenAPI && AlpenAPI.verifiedProfile) ? AlpenAPI.verifiedProfile() : {}
 
   var _messages  = []
   var _typing    = false
@@ -444,6 +476,9 @@ body{
   var _userName  = _profile.name  || sessionStorage.getItem('compass_name')  || 'Traveller'
   var _userPhone = _profile.phone || sessionStorage.getItem('compass_phone') || ''
   var _userEmail = _profile.email || ''
+  // Who the daily question limit and the saved lead belong to: the verified
+  // phone, or the verified email when they verified by email only.
+  var _contact   = _userPhone || _userEmail
   var _leadSaved = !!sessionStorage.getItem('compass_lead_saved')
   var _leadId    = sessionStorage.getItem('compass_lead_id') || ''
   if (_userPhone) sessionStorage.setItem('compass_phone', _userPhone)
@@ -454,7 +489,7 @@ body{
   var input     = document.getElementById('msg-input')
   var sendBtn   = document.getElementById('send-btn')
 
-  /* ── Daily usage tracking (localStorage, keyed by phone+date) ── */
+  /* ── Daily usage tracking (localStorage, keyed by contact+date) ── */
   function _dayKey()           { return new Date().toISOString().slice(0,10) }
   function _usageKey(ph)       { return 'cmp_qs_' + ph + '_' + _dayKey() }
   function _getUsed(ph)        { return parseInt(localStorage.getItem(_usageKey(ph)) || '0', 10) }
@@ -462,8 +497,8 @@ body{
 
   function _updateCounter() {
     var el = document.getElementById('q-counter')
-    if (!el || !_userPhone) return
-    var left = Math.max(0, MAX_Q - _getUsed(_userPhone))
+    if (!el || !_contact) return
+    var left = Math.max(0, MAX_Q - _getUsed(_contact))
     el.textContent = left + ' / ' + MAX_Q + ' questions remaining today'
     el.style.color  = left <= 1 ? 'rgba(239,111,111,.75)' : 'rgba(255,255,255,.25)'
   }
@@ -598,7 +633,7 @@ body{
 
   /* ── Lead capture ───────────────────────────────────── */
   function _saveLead() {
-    if (_leadSaved || !_userPhone) return
+    if (_leadSaved || !_contact) return
     _leadSaved = true
     sessionStorage.setItem('compass_lead_saved', '1')
     var fields = _extractFields()
@@ -607,17 +642,17 @@ body{
       headers: Object.assign({}, H, { 'Content-Type': 'application/json' }),
       body: JSON.stringify({
         name:          _userName || 'COMPASS User',
-        phone:         _userPhone,
+        phone:         _userPhone || null,
         email:         _userEmail || fields.email || null,
         source:        'compass_bot',
         packageName:   fields.destination || _profile.destination || null,
         message:       _buildMessage(fields),
-        // COMPASS is only reachable after Trip Planner's phone+email OTP
-        // verification (see the isVerified('planner') gate at the top of
-        // this file) — so any lead created here is verified by definition.
+        // COMPASS is only reachable after verification (see the gate at the
+        // top of this file), and _userPhone/_userEmail only ever hold the
+        // contact that was verified — so each is verified if present.
         // ...unless the session QA override skipped that OTP step.
-        verifiedPhone: !(window.AlpenAPI && AlpenAPI.bypassActive && AlpenAPI.bypassActive()),
-        verifiedEmail: !(window.AlpenAPI && AlpenAPI.bypassActive && AlpenAPI.bypassActive())
+        verifiedPhone: !!_userPhone && !(window.AlpenAPI && AlpenAPI.bypassActive && AlpenAPI.bypassActive()),
+        verifiedEmail: !!_userEmail && !(window.AlpenAPI && AlpenAPI.bypassActive && AlpenAPI.bypassActive())
       })
     })
     .then(function(r){ return r.json() })
@@ -705,7 +740,7 @@ body{
     if (!text || _typing || _state === 'done') return
 
     /* Check limit first */
-    if (_getUsed(_userPhone) >= MAX_Q) { _showLimitReached(); return }
+    if (_getUsed(_contact) >= MAX_Q) { _showLimitReached(); return }
 
     _appendMessage('user', _fmt(text))
     _messages.push({ role: 'user', content: text })
@@ -721,7 +756,7 @@ body{
       _messages.push({ role:'assistant', content: raw })
 
       if (!parsed.offTopic) {
-        var used = _incUsed(_userPhone)
+        var used = _incUsed(_contact)
         if (parsed.display) _appendMessage('assistant', _fmt(parsed.display))
         if (parsed.opts && parsed.opts.length) _renderOptions(parsed.opts)
         // Save lead on 2nd question (enough context); update on every subsequent one
@@ -754,14 +789,16 @@ body{
   input.addEventListener('input', function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,110)+'px' })
 
   /* ── Init ───────────────────────────────────────────── */
-  // Contact info always comes from the verified Trip Planner profile (the
-  // 'planner' gate above guarantees it exists before COMPASS can load), so
-  // the chat can start immediately — no in-chat contact collection needed.
-  if (_getUsed(_userPhone) >= MAX_Q) {
+  // Contact info always comes from the verified profile (the gate above
+  // guarantees one exists before this runs), so the chat can start
+  // immediately — no in-chat contact collection needed.
+  if (_getUsed(_contact) >= MAX_Q) {
     _showLimitReached()
   } else {
     _startChat((_userName || 'there').split(' ')[0])
   }
+
+  } // end _startCompass
 
 })()
 </script>

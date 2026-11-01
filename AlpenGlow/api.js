@@ -71,15 +71,25 @@
   // VERIFY_SESSION_MS (10 minutes) from that moment — any gate checked
   // via isVerified() during that window is skipped automatically.
   //
-  // Four independent scopes — verifying one does NOT unlock the others:
-  //  - 'package' — package-page itinerary/pricing unlock, and the
-  //                site-wide 30s first-visit popup (see below)
-  //  - 'blog'    — blog/article unlock
-  //  - 'offer'   — offer code reveal
-  //  - 'planner' — the "Plan Your Trip" wizard AND the COMPASS chatbot
-  // The one deliberate exception: completing 'planner' verification (which
-  // requires BOTH phone and email) also satisfies 'package' — see
-  // isPackageUnlocked() below.
+  // Four scopes, recorded by WHERE the visitor verified:
+  //  - 'planner' — the "Plan Your Trip" wizard (phone AND email)
+  //  - 'package' — the site-wide 30s popup (see below), COMPASS's own copy
+  //                of it, or a package page's gate card
+  //  - 'blog'    — the blog/article unlock modal
+  //  - 'offer'   — the offer-code modal
+  //
+  // What each one opens:
+  //
+  //                 package pages   COMPASS   blogs   offers
+  //   'planner'          yes          yes      yes      no
+  //   'package'          yes          yes      yes      no
+  //   'blog'             no           no       yes      no
+  //   'offer'            no           no       no       yes
+  //
+  // Offers can ONLY be opened by the offer modal's own verification.
+  // The checks for this live in isPackageUnlocked(), canUseCompass(),
+  // isBlogUnlocked() and isVerified('offer') below — pages call those
+  // rather than reading individual scopes.
   var VERIFY_SESSION_MS = 10 * 60 * 1000
   var _VERIFY_KEYS = {
     package: { flag: 'ag_verified_package', at: 'ag_verified_package_at' },
@@ -116,42 +126,102 @@
     // back as a hard block when the package flag later expires — the
     // package pages' own gates cover that case instead.
     if (scope === 'package' || scope === 'planner') sessionStorage.setItem('ag_pkg_verified_once', '1')
+    // Reveal whatever this verification just opened on the current page
+    // (e.g. a Trip Planner finished on the homepage also opens the blogs).
+    _revealUnlockedTeasers()
   }
-  // Package pages accept either their own 'package' verification OR a
-  // completed Trip Planner/COMPASS ('planner') verification — the latter
-  // already required both phone and email, so it satisfies the lighter
-  // package-only requirement too. This is intentionally NOT symmetric:
-  // 'package' verification does not satisfy 'planner', and neither
-  // satisfies 'blog' or 'offer'.
+  // See the table at the top of this section.
   function isPackageUnlocked() {
     return isVerified('package') || isVerified('planner')
   }
+  function canUseCompass() {
+    return isVerified('package') || isVerified('planner')
+  }
+  function isBlogUnlocked() {
+    return isVerified('blog') || isVerified('package') || isVerified('planner')
+  }
 
-  // ─── FIRST-30-SECONDS GRACE WINDOW ──────────────────────────────
-  // For the first SITE_GRACE_MS of a session, package pages are open to
-  // browse with no gate at all — this is the window before the site-wide
-  // popup below forces a decision. session-start is set synchronously here
-  // (not inside a DOMContentLoaded handler) so it exists before anything
-  // else — the auto-unlock check further down and the popup's own
-  // scheduler both read the exact same timestamp.
+  // ─── VERIFIED CONTACT, FOR COMPASS ──────────────────────────────
+  // COMPASS greets the visitor by name and saves their chat as a lead, so
+  // it needs the contact they verified with. The Trip Planner stores its
+  // own full profile (ag_planner_profile, phone + email + trip answers).
+  // The popup and the package pages' gate card verify ONE channel and
+  // report it through submitLead(), which records it here.
+  var _PROFILE_SOURCES = { site_popup: true, package_unlock: true }
+  function _rememberVerifiedContact(data) {
+    if (!data || !_PROFILE_SOURCES[data.source]) return
+    try {
+      sessionStorage.setItem('ag_verified_profile', JSON.stringify({
+        name:  data.name || '',
+        phone: data.verifiedPhone ? (data.phone || '') : '',
+        email: data.verifiedEmail ? (data.email || '') : '',
+      }))
+    } catch (e) {}
+  }
+  // Popup/gate-card contact, overlaid with the Trip Planner profile where
+  // that has a value (it is the richer, doubly-verified one).
+  function verifiedProfile() {
+    var out = {}
+    ;['ag_verified_profile', 'ag_planner_profile'].forEach(function (key) {
+      var p = {}
+      try { p = JSON.parse(sessionStorage.getItem(key) || '{}') || {} } catch (e) {}
+      Object.keys(p).forEach(function (k) { if (p[k]) out[k] = p[k] })
+    })
+    return out
+  }
+
+  // ─── PACKAGE-PAGE TIMER (drives the 30s popup) ──────────────────
+  // Nothing is timed on the homepage or any other non-package page. The
+  // 30-second clock starts the first time the visitor opens a package page,
+  // and that page's slug is remembered. From then on:
+  //  - 30s later the popup is due, on whatever page they are on by then;
+  //  - opening a DIFFERENT package page before verifying makes it due
+  //    straight away (reloading the first one does not).
+  // Once due it stays due on every page load until they verify — the popup
+  // is a hard block with no close button.
   var SITE_GRACE_MS = 30000
-  if (!sessionStorage.getItem('ag_session_start')) {
-    sessionStorage.setItem('ag_session_start', String(Date.now()))
+  var K_PKG_START = 'ag_pkg_timer_start'
+  var K_PKG_FIRST = 'ag_pkg_first'
+  var K_POPUP_DUE = 'ag_popup_due'
+
+  // Verified (now, or earlier this session) — the popup never shows again.
+  function _popupDone() {
+    return isPackageUnlocked() || sessionStorage.getItem('ag_pkg_verified_once') === '1'
   }
-  function _withinGracePeriod() {
-    var start = parseInt(sessionStorage.getItem('ag_session_start') || '0', 10)
-    if (!start) return false
-    return (Date.now() - start) < SITE_GRACE_MS
+  function _popupDue() {
+    if (sessionStorage.getItem(K_POPUP_DUE) === '1') return true
+    var start = parseInt(sessionStorage.getItem(K_PKG_START) || '0', 10)
+    return !!start && (Date.now() - start) >= SITE_GRACE_MS
   }
-  // What a package page (or the homepage's package teasers) should check to
-  // decide whether to show its content right now — real verification OR
-  // still inside the free grace window. Deliberately NOT the same thing
-  // isPackageUnlocked() checks: the popup's own scheduling logic below needs
-  // "has the user actually verified" without the grace window muddying it,
-  // otherwise the popup would never even schedule itself during the window
-  // it exists to end.
+  function _currentPackageSlug() {
+    if (!document.body || document.body.getAttribute('data-verify-scope') !== 'package') return ''
+    var m = location.pathname.match(/\/packages\/([^\/]+?)(?:\.html)?\/?$/i)
+    return (m ? m[1] : location.pathname).toLowerCase()
+  }
+  // Runs synchronously while api.js loads. Every page includes api.js at
+  // the end of <body>, so the body (and its data-verify-scope) already
+  // exists, and this has run before the package page's own inline script
+  // asks canViewPackages().
+  ;(function _trackPackageVisit() {
+    var slug = _currentPackageSlug()
+    if (!slug) return
+    var first = sessionStorage.getItem(K_PKG_FIRST)
+    if (!first) {
+      sessionStorage.setItem(K_PKG_FIRST, slug)
+      sessionStorage.setItem(K_PKG_START, String(Date.now()))
+    } else if (first !== slug && !_popupDone()) {
+      sessionStorage.setItem(K_POPUP_DUE, '1')
+    }
+  })()
+
+  // What a package page (or the homepage's package teasers) checks to decide
+  // whether to show its content right now: real verification, OR the popup
+  // isn't due yet (free browsing before/while the 30s timer runs).
+  // Deliberately NOT what the popup's own scheduler checks — that needs
+  // "has the visitor actually verified" (_popupDone) without the free
+  // window muddying it.
   function canViewPackageContent() {
-    return isPackageUnlocked() || _withinGracePeriod()
+    return isPackageUnlocked() || !_popupDue()
   }
 
   // ─── PHONE NUMBER RULES (shared by every gate) ──────────────────
@@ -288,11 +358,23 @@
     })
   }
 
+  // Hide the teaser fades for whatever the visitor can currently see: the
+  // homepage's package-description fade and the blog-excerpt fade. Called
+  // on page load and again right after any verification.
+  function _revealUnlockedTeasers() {
+    if (!document.body) return
+    if (canViewPackageContent()) {
+      document.querySelectorAll('.package-blur').forEach(function (el) { el.style.display = 'none' })
+    }
+    if (isBlogUnlocked()) {
+      document.querySelectorAll('.blog-blur').forEach(function (el) { el.style.display = 'none' })
+    }
+  }
+
   // Production mode: if already verified this session, auto-unlock on page
-  // load. Each teaser class/element is gated by its OWN scope now — a page
-  // marks which scope its own gate belongs to via <body data-verify-scope="...">
-  // (only package pages set this, since they're the only page type with a
-  // #detailMain/#contentOverlay gate) rather than api.js guessing page type.
+  // load. A page marks which gate it has via <body data-verify-scope="...">:
+  // 'package' on package pages (the #detailMain/#contentOverlay gate) and
+  // 'compass' on compass.html (which runs its own gate — see below).
   if (!DEV_MODE) {
     document.addEventListener('DOMContentLoaded', function () {
       var pageScope = document.body && document.body.getAttribute('data-verify-scope')
@@ -303,23 +385,19 @@
       }
       // Homepage teaser cards — independent of which page this is, since
       // index.html hosts both kinds of teaser regardless of data-verify-scope.
-      if (canViewPackageContent()) {
-        document.querySelectorAll('.package-blur').forEach(function (el) { el.style.display = 'none' })
-      }
-      if (isVerified('blog')) {
-        document.querySelectorAll('.blog-blur').forEach(function (el) { el.style.display = 'none' })
-      }
+      _revealUnlockedTeasers()
     })
   }
 
-  // ─── SITE-WIDE 30s FIRST-VISIT VERIFICATION POPUP ──────────────
-  // 30 seconds after a visitor's session starts, if package pages still
-  // aren't unlocked (own gate, this popup, or a completed Trip Planner/
-  // COMPASS verification), show a hard-blocking overlay with the same
-  // "pick WhatsApp or Email" flow. No close/skip button — intentional.
-  // Keeps re-appearing on every page load until the visitor verifies (a
-  // reload must not be a way around a hard block), then never again for
-  // the rest of the session — see ag_pkg_verified_once in markVerified().
+  // ─── SITE-WIDE 30s VERIFICATION POPUP ───────────────────────────
+  // Shown when the package-page timer above says it is due (30s after the
+  // first package page, or immediately on a second, different one), unless
+  // the visitor has already verified for package access. A hard-blocking
+  // overlay with the "pick WhatsApp or Email" flow and no close/skip button
+  // — intentional. Keeps re-appearing on every page load until the visitor
+  // verifies (a reload must not be a way around a hard block), then never
+  // again for the rest of the session — see ag_pkg_verified_once in
+  // markVerified().
   if (!DEV_MODE) {
     ;(function () {
       var RETRY_MS = 3000
@@ -329,272 +407,278 @@
         return !!(root && root.classList.contains('tp-open'))
       }
 
-      // Deliberately checks isPackageUnlocked() (real verification only),
-      // NOT canViewPackageContent() — the grace window is what this popup
-      // exists to end, so it must keep scheduling/firing through it.
-      function _done() {
-        return isPackageUnlocked() || sessionStorage.getItem('ag_pkg_verified_once') === '1'
-      }
-
       function _tryFire() {
-        if (_done() || document.getElementById('agSitePopup')) return
+        if (_popupDone() || document.getElementById('agSitePopup')) return
+        // Don't cut into a Trip Planner the visitor is filling in — finishing
+        // it verifies them anyway.
         if (_tpIsOpen()) { setTimeout(_tryFire, RETRY_MS); return }
-        _showSitePopup()
+        _showVerifyPopup()
       }
 
       function _schedule() {
-        if (_done()) return
-        // COMPASS already replaces its whole page with its own
-        // Trip-Planner verification prompt; stacking a second, different
-        // verification on top would be confusing and wouldn't unlock it.
-        if (document.body && document.body.getAttribute('data-verify-scope') === 'planner') return
-        var sessionStart = parseInt(sessionStorage.getItem('ag_session_start') || '0', 10)
-        var remaining = Math.max(0, SITE_GRACE_MS - (Date.now() - sessionStart))
-        setTimeout(_tryFire, remaining)
-      }
-
-      function _showSitePopup() {
-        var overlay = document.createElement('div')
-        overlay.id = 'agSitePopup'
-
-        var style = document.createElement('style')
-        style.textContent =
-          '@keyframes agPopIn{from{opacity:0;transform:scale(.94) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}' +
-          '#agSitePopup{position:fixed;inset:0;z-index:999999;background:rgba(10,10,10,.72);' +
-            'backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;' +
-            'align-items:center;justify-content:center;padding:1.2rem;}' +
-          '#agSitePopup .ag-pop-card{background:#181818;border-radius:22px;padding:2.4rem;' +
-            'max-width:400px;width:100%;max-height:calc(100vh - 2.4rem);overflow-y:auto;' +
-            'color:#fff;box-shadow:0 24px 70px rgba(0,0,0,.55);text-align:left;' +
-            'font-family:inherit;box-sizing:border-box;animation:agPopIn .35s cubic-bezier(.16,1,.3,1);}' +
-          '#agSitePopup .ag-pop-badge{display:inline-block;background:rgba(239,126,25,.15);' +
-            'border:1px solid rgba(239,126,25,.35);color:#f5a623;font-size:.66rem;font-weight:700;' +
-            'letter-spacing:.08em;text-transform:uppercase;padding:.35rem .8rem;border-radius:50px;' +
-            'margin-bottom:.9rem;}' +
-          '#agSitePopup h3{margin:0 0 .5rem;font-size:1.3rem;font-weight:700;font-family:inherit;letter-spacing:-.01em;}' +
-          '#agSitePopup p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6;margin:0 0 1.5rem;}' +
-          '#agSitePopup .form-group{margin-bottom:1.1rem;}' +
-          '#agSitePopup label{display:block;font-size:.68rem;font-weight:600;color:rgba(255,255,255,.5);' +
-            'letter-spacing:.08em;text-transform:uppercase;margin-bottom:.45rem;}' +
-          '#agSitePopup input,#agSitePopup select{width:100%;padding:.8rem 1rem;border-radius:10px;' +
-            'border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);color:#fff;' +
-            'font-size:.9rem;font-family:inherit;box-sizing:border-box;outline:none;' +
-            'transition:border-color .2s,background .2s;}' +
-          '#agSitePopup input::placeholder{color:rgba(255,255,255,.32);}' +
-          '#agSitePopup input:focus,#agSitePopup select:focus{border-color:#ef7e19;background:rgba(255,255,255,.1);}' +
-          '#agSitePopup select{cursor:pointer;appearance:none;-webkit-appearance:none;' +
-            'background-image:url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"><path d="M0 0l5 6 5-6z" fill="%23888"/></svg>\');' +
-            'background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.2rem;}' +
-          '#agSitePopup .ag-phone-row{display:flex;gap:.6rem;}' +
-          '#agSitePopup .ag-phone-row select{flex:0 0 auto;width:auto;min-width:92px;}' +
-          '#agSitePopup .ag-phone-row input{flex:1 1 auto;width:auto;min-width:0;}' +
-          '#agSitePopup .ag-ch-row{display:flex;gap:.6rem;margin-bottom:1.1rem;}' +
-          '#agSitePopup .ag-ch-btn{flex:1;padding:.75rem;border-radius:10px;border:1px solid rgba(255,255,255,.14);' +
-            'background:rgba(255,255,255,.05);color:rgba(255,255,255,.6);font-family:inherit;' +
-            'font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;}' +
-          '#agSitePopup .ag-ch-btn:hover:not(.active){border-color:rgba(255,255,255,.3);color:#fff;}' +
-          '#agSitePopup .ag-ch-btn.active{background:#ef7e19;border-color:#ef7e19;color:#181818;}' +
-          '#agSitePopup .ag-otp-row{display:flex;gap:.6rem;margin-bottom:.9rem;}' +
-          '#agSitePopup .ag-otp-row input{flex:1;min-width:0;width:auto;text-align:center;' +
-            'padding:.75rem 0;font-size:1.2rem;font-weight:600;}' +
-          '#agSitePopup .ag-err{font-size:.78rem;color:#ff8a7a;margin:-.3rem 0 .9rem;line-height:1.4;}' +
-          '#agSitePopup .ag-err:empty{display:none;}' +
-          '#agSitePopup .ag-back{display:inline-block;margin-top:1rem;font-size:.75rem;color:rgba(255,255,255,.5);' +
-            'cursor:pointer;background:none;border:none;padding:0;font-family:inherit;}' +
-          '#agSitePopup .ag-back:hover{color:#fff;}' +
-          '@media (max-width:480px){' +
-            '#agSitePopup{padding:.8rem;}' +
-            '#agSitePopup .ag-pop-card{padding:1.6rem 1.3rem;border-radius:18px;max-height:calc(100vh - 1.6rem);}' +
-            '#agSitePopup h3{font-size:1.15rem;}' +
-            '#agSitePopup p{margin-bottom:1.1rem;}' +
-            // 16px stops iOS Safari from zooming the page in on focus.
-            '#agSitePopup input,#agSitePopup select{font-size:16px;}' +
-            '#agSitePopup .ag-phone-row select{min-width:84px;padding-left:.8rem;}' +
-          '}' +
-          '#agSitePopup button.ag-btn{width:100%;padding:.9rem;border-radius:10px;border:none;' +
-            'background:#ef7e19;color:#181818;font-weight:700;font-size:.88rem;letter-spacing:.02em;' +
-            'cursor:pointer;transition:background .2s,transform .15s;}' +
-          '#agSitePopup button.ag-btn:hover:not(:disabled){background:#f5a623;}' +
-          '#agSitePopup button.ag-btn:active:not(:disabled){transform:translateY(1px);}' +
-          '#agSitePopup button.ag-btn:disabled{opacity:.45;cursor:not-allowed;}' +
-          '#agSitePopup .ag-resend{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:1rem;}' +
-          '#agSitePopup .ag-resend a{color:#f5a623;cursor:pointer;font-weight:600;}'
-        overlay.appendChild(style)
-
-        var card = document.createElement('div')
-        card.className = 'ag-pop-card'
-        card.innerHTML =
-          '<div id="agPopStep1">' +
-            '<span class="ag-pop-badge">Verification Required</span>' +
-            '<h3>Quick verification</h3>' +
-            '<p>Verify your WhatsApp or email to unlock full package details across the site.</p>' +
-            '<div class="form-group"><label>Full Name</label><input type="text" id="agPopName" placeholder="Your name"></div>' +
-            '<div class="ag-ch-row">' +
-              '<button type="button" class="ag-ch-btn active" id="agPopChW">WhatsApp</button>' +
-              '<button type="button" class="ag-ch-btn" id="agPopChE">Email</button>' +
-            '</div>' +
-            '<div class="form-group" id="agPopWaFields"><label>WhatsApp Number</label>' +
-              '<div class="ag-phone-row">' +
-                '<select id="agPopCC"><option value="+91">+91 IN</option><option value="+1">+1 US</option>' +
-                  '<option value="+44">+44 UK</option><option value="+61">+61 AU</option>' +
-                  '<option value="+65">+65 SG</option><option value="+971">+971 AE</option>' +
-                  '<option value="+60">+60 MY</option><option value="+64">+64 NZ</option></select>' +
-                '<input type="tel" id="agPopPhone" placeholder="98765 43210" inputmode="numeric" autocomplete="tel-national">' +
-              '</div>' +
-            '</div>' +
-            '<div class="form-group" id="agPopEmailFields" style="display:none;">' +
-              '<label>Email Address</label><input type="email" id="agPopEmail" placeholder="you@example.com" autocomplete="email"></div>' +
-            '<div class="ag-err" id="agPopErr1"></div>' +
-            '<button class="ag-btn" id="agPopBtn1">Send WhatsApp Code</button>' +
-          '</div>' +
-          '<div id="agPopStep2" style="display:none;">' +
-            '<span class="ag-pop-badge">Verification Required</span>' +
-            '<h3>Enter your code</h3>' +
-            '<p id="agPopStep2Desc">Enter the 4-digit code sent to your WhatsApp.</p>' +
-            '<div class="ag-otp-row">' +
-              '<input type="tel" inputmode="numeric" autocomplete="one-time-code" maxlength="1" id="agPopOtp0">' +
-              '<input type="tel" inputmode="numeric" maxlength="1" id="agPopOtp1">' +
-              '<input type="tel" inputmode="numeric" maxlength="1" id="agPopOtp2">' +
-              '<input type="tel" inputmode="numeric" maxlength="1" id="agPopOtp3">' +
-            '</div>' +
-            '<div class="ag-err" id="agPopErr2"></div>' +
-            '<div class="ag-resend">Didn’t receive it? <a id="agPopResendLink">Resend</a></div>' +
-            '<button class="ag-btn" id="agPopBtn2">Verify &amp; Continue</button>' +
-            '<button type="button" class="ag-back" id="agPopBack">&larr; Change number</button>' +
-          '</div>'
-        overlay.appendChild(card)
-        overlay.setAttribute('role', 'dialog')
-        overlay.setAttribute('aria-modal', 'true')
-        document.body.appendChild(overlay)
-        var prevOverflow = document.body.style.overflow
-        document.body.style.overflow = 'hidden'
-        // Hard block for keyboard users too: without this, Tab still reaches
-        // links and buttons behind the blurred overlay.
-        var inerted = []
-        Array.prototype.forEach.call(document.body.children, function (el) {
-          if (el !== overlay && el.tagName !== 'SCRIPT' && !el.hasAttribute('inert')) {
-            el.setAttribute('inert', ''); inerted.push(el)
-          }
-        })
-
-        var _ch = 'whatsapp', _name = '', _phone = '', _email = ''
-        var $ = function (id) { return document.getElementById(id) }
-        var OTP_IDS = ['agPopOtp0', 'agPopOtp1', 'agPopOtp2', 'agPopOtp3']
-        function sendLabel() { return _ch === 'whatsapp' ? 'Send WhatsApp Code' : 'Send Email Code' }
-        function err(n, msg, info) {
-          var el = $('agPopErr' + n)
-          el.textContent = msg || ''
-          el.style.color = info ? 'rgba(255,255,255,.6)' : ''
-        }
-
-        bindPhoneField('agPopCC', 'agPopPhone')
-        bindOtpInputs(OTP_IDS, function () { $('agPopBtn2').click() })
-        ;['agPopName', 'agPopPhone', 'agPopEmail'].forEach(function (id) {
-          $(id).addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); $('agPopBtn1').click() } })
-          $(id).addEventListener('input', function () { err(1, '') })
-        })
-
-        function selectChannel(ch) {
-          _ch = ch
-          $('agPopChW').classList.toggle('active', ch === 'whatsapp')
-          $('agPopChE').classList.toggle('active', ch === 'email')
-          $('agPopWaFields').style.display = ch === 'whatsapp' ? '' : 'none'
-          $('agPopEmailFields').style.display = ch === 'email' ? '' : 'none'
-          $('agPopBtn1').textContent = sendLabel()
-          err(1, '')
-        }
-        $('agPopChW').addEventListener('click', function () { selectChannel('whatsapp') })
-        $('agPopChE').addEventListener('click', function () { selectChannel('email') })
-
-        function goToOtpStep() {
-          var wa = _ch === 'whatsapp'
-          $('agPopStep2Desc').textContent = 'Enter the 4-digit code sent to ' + (wa ? 'WhatsApp ' + _phone : _email) + '.'
-          $('agPopBack').innerHTML = '&larr; ' + (wa ? 'Change number' : 'Change email')
-          OTP_IDS.forEach(function (id) { $(id).value = '' })
-          err(2, '')
-          $('agPopStep1').style.display = 'none'
-          $('agPopStep2').style.display = 'block'
-          setTimeout(function () { $('agPopOtp0').focus() }, 100)
-        }
-
-        $('agPopBack').addEventListener('click', function () {
-          $('agPopStep2').style.display = 'none'
-          $('agPopStep1').style.display = 'block'
-          var b1 = $('agPopBtn1'); b1.disabled = false; b1.textContent = sendLabel()
-          var b2 = $('agPopBtn2'); b2.disabled = false; b2.innerHTML = 'Verify &amp; Continue'
-          $(_ch === 'whatsapp' ? 'agPopPhone' : 'agPopEmail').focus()
-        })
-
-        $('agPopBtn1').addEventListener('click', function () {
-          var btn = this
-          _name = $('agPopName').value.trim()
-          if (!_name) { err(1, 'Please enter your name.'); $('agPopName').focus(); return }
-          var send
-          if (_ch === 'whatsapp') {
-            var v = validatePhone($('agPopCC').value, $('agPopPhone').value)
-            if (!v.ok) { err(1, v.msg); $('agPopPhone').focus(); return }
-            _phone = v.full
-            send = AlpenAPI.sendSMSOTP(_phone, 'site_popup', { name: _name })
-          } else {
-            _email = $('agPopEmail').value.trim()
-            if (!isValidEmail(_email)) { err(1, 'Please enter a valid email address.'); $('agPopEmail').focus(); return }
-            send = AlpenAPI.sendEmailOTP(_email, 'site_popup', { name: _name })
-          }
-          btn.textContent = 'Sending…'; btn.disabled = true
-          send.then(goToOtpStep).catch(function (e) {
-            btn.disabled = false; btn.textContent = sendLabel()
-            err(1, (e && e.message) || 'Could not send the code. Please check your details and try again.')
-          })
-        })
-
-        $('agPopResendLink').addEventListener('click', function () {
-          OTP_IDS.forEach(function (id) { $(id).value = '' })
-          err(2, 'A new code is on its way.', true)
-          var p = _ch === 'whatsapp' ? AlpenAPI.sendSMSOTP(_phone, 'site_popup') : AlpenAPI.sendEmailOTP(_email, 'site_popup')
-          p.catch(function (e) { err(2, (e && e.message) || 'Could not resend the code.') })
-          $('agPopOtp0').focus()
-        })
-
-        $('agPopBtn2').addEventListener('click', function () {
-          var btn = this
-          if (btn.disabled) return
-          var code = OTP_IDS.map(function (id) { return $(id).value }).join('')
-          if (code.length < 4) { err(2, 'Please enter all 4 digits.'); $('agPopOtp0').focus(); return }
-          btn.textContent = 'Verifying…'; btn.disabled = true
-          err(2, '')
-
-          function done() {
-            AlpenAPI.submitLead({
-              name: _name,
-              phone: _ch === 'whatsapp' ? _phone : '',
-              email: _ch === 'email' ? _email : '',
-              source: 'site_popup',
-              verifiedPhone: _ch === 'whatsapp',
-              verifiedEmail: _ch === 'email',
-            }).catch(function () {})
-            document.querySelectorAll('.package-blur').forEach(function (el) { el.style.display = 'none' })
-            if (typeof window.unlockContent === 'function') { try { window.unlockContent() } catch (e) {} }
-            inerted.forEach(function (el) { el.removeAttribute('inert') })
-            overlay.remove()
-            document.body.style.overflow = prevOverflow
-          }
-          function fail(e) {
-            btn.innerHTML = 'Verify &amp; Continue'; btn.disabled = false
-            err(2, (e && e.message) || 'Invalid code. Please try again.')
-          }
-
-          if (_ch === 'whatsapp') {
-            AlpenAPI.verifySMSOTP(_phone, code).then(function () { markVerified('package'); done() }).catch(fail)
-          } else {
-            AlpenAPI.verifyEmailOTP(_email, code, 'package').then(done).catch(fail)
-          }
-        })
-
-        setTimeout(function () { $('agPopName').focus() }, 350)
+        if (_popupDone()) return
+        // COMPASS shows this same verification itself as its page gate.
+        if (document.body && document.body.getAttribute('data-verify-scope') === 'compass') return
+        if (_popupDue()) { _tryFire(); return }
+        var start = parseInt(sessionStorage.getItem(K_PKG_START) || '0', 10)
+        if (!start) return // no package page opened yet — nothing to time
+        setTimeout(_tryFire, Math.max(0, SITE_GRACE_MS - (Date.now() - start)))
       }
 
       document.addEventListener('DOMContentLoaded', _schedule)
     })()
+  }
+
+  // The popup itself. Also used directly by COMPASS as its page gate, with
+  // its own wording (opts.badge / title / text) and an optional extra link
+  // (opts.altLink = { href, text }). Finishing it marks 'package' scope,
+  // records the lead, and calls window.unlockContent() if the page has one.
+  function _showVerifyPopup(opts) {
+    opts = opts || {}
+    if (document.getElementById('agSitePopup')) return
+    var overlay = document.createElement('div')
+    overlay.id = 'agSitePopup'
+
+    var style = document.createElement('style')
+    style.textContent =
+      '@keyframes agPopIn{from{opacity:0;transform:scale(.94) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}' +
+      '#agSitePopup{position:fixed;inset:0;z-index:999999;background:rgba(10,10,10,.72);' +
+        'backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;' +
+        'align-items:center;justify-content:center;padding:1.2rem;}' +
+      '#agSitePopup .ag-pop-card{background:#181818;border-radius:22px;padding:2.4rem;' +
+        'max-width:400px;width:100%;max-height:calc(100vh - 2.4rem);overflow-y:auto;' +
+        'color:#fff;box-shadow:0 24px 70px rgba(0,0,0,.55);text-align:left;' +
+        'font-family:inherit;box-sizing:border-box;animation:agPopIn .35s cubic-bezier(.16,1,.3,1);}' +
+      '#agSitePopup .ag-pop-badge{display:inline-block;background:rgba(239,126,25,.15);' +
+        'border:1px solid rgba(239,126,25,.35);color:#f5a623;font-size:.66rem;font-weight:700;' +
+        'letter-spacing:.08em;text-transform:uppercase;padding:.35rem .8rem;border-radius:50px;' +
+        'margin-bottom:.9rem;}' +
+      '#agSitePopup h3{margin:0 0 .5rem;font-size:1.3rem;font-weight:700;font-family:inherit;letter-spacing:-.01em;}' +
+      '#agSitePopup p{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.6;margin:0 0 1.5rem;}' +
+      '#agSitePopup .form-group{margin-bottom:1.1rem;}' +
+      '#agSitePopup label{display:block;font-size:.68rem;font-weight:600;color:rgba(255,255,255,.5);' +
+        'letter-spacing:.08em;text-transform:uppercase;margin-bottom:.45rem;}' +
+      '#agSitePopup input,#agSitePopup select{width:100%;padding:.8rem 1rem;border-radius:10px;' +
+        'border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.07);color:#fff;' +
+        'font-size:.9rem;font-family:inherit;box-sizing:border-box;outline:none;' +
+        'transition:border-color .2s,background .2s;}' +
+      '#agSitePopup input::placeholder{color:rgba(255,255,255,.32);}' +
+      '#agSitePopup input:focus,#agSitePopup select:focus{border-color:#ef7e19;background:rgba(255,255,255,.1);}' +
+      '#agSitePopup select{cursor:pointer;appearance:none;-webkit-appearance:none;' +
+        'background-image:url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"><path d="M0 0l5 6 5-6z" fill="%23888"/></svg>\');' +
+        'background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.2rem;}' +
+      '#agSitePopup .ag-phone-row{display:flex;gap:.6rem;}' +
+      '#agSitePopup .ag-phone-row select{flex:0 0 auto;width:auto;min-width:92px;}' +
+      '#agSitePopup .ag-phone-row input{flex:1 1 auto;width:auto;min-width:0;}' +
+      '#agSitePopup .ag-ch-row{display:flex;gap:.6rem;margin-bottom:1.1rem;}' +
+      '#agSitePopup .ag-ch-btn{flex:1;padding:.75rem;border-radius:10px;border:1px solid rgba(255,255,255,.14);' +
+        'background:rgba(255,255,255,.05);color:rgba(255,255,255,.6);font-family:inherit;' +
+        'font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;}' +
+      '#agSitePopup .ag-ch-btn:hover:not(.active){border-color:rgba(255,255,255,.3);color:#fff;}' +
+      '#agSitePopup .ag-ch-btn.active{background:#ef7e19;border-color:#ef7e19;color:#181818;}' +
+      '#agSitePopup .ag-otp-row{display:flex;gap:.6rem;margin-bottom:.9rem;}' +
+      '#agSitePopup .ag-otp-row input{flex:1;min-width:0;width:auto;text-align:center;' +
+        'padding:.75rem 0;font-size:1.2rem;font-weight:600;}' +
+      '#agSitePopup .ag-err{font-size:.78rem;color:#ff8a7a;margin:-.3rem 0 .9rem;line-height:1.4;}' +
+      '#agSitePopup .ag-err:empty{display:none;}' +
+      '#agSitePopup .ag-back{display:inline-block;margin-top:1rem;font-size:.75rem;color:rgba(255,255,255,.5);' +
+        'cursor:pointer;background:none;border:none;padding:0;font-family:inherit;}' +
+      '#agSitePopup .ag-back:hover{color:#fff;}' +
+      '#agSitePopup .ag-alt{display:block;text-align:center;text-decoration:none;}' +
+      '@media (max-width:480px){' +
+        '#agSitePopup{padding:.8rem;}' +
+        '#agSitePopup .ag-pop-card{padding:1.6rem 1.3rem;border-radius:18px;max-height:calc(100vh - 1.6rem);}' +
+        '#agSitePopup h3{font-size:1.15rem;}' +
+        '#agSitePopup p{margin-bottom:1.1rem;}' +
+        // 16px stops iOS Safari from zooming the page in on focus.
+        '#agSitePopup input,#agSitePopup select{font-size:16px;}' +
+        '#agSitePopup .ag-phone-row select{min-width:84px;padding-left:.8rem;}' +
+      '}' +
+      '#agSitePopup button.ag-btn{width:100%;padding:.9rem;border-radius:10px;border:none;' +
+        'background:#ef7e19;color:#181818;font-weight:700;font-size:.88rem;letter-spacing:.02em;' +
+        'cursor:pointer;transition:background .2s,transform .15s;}' +
+      '#agSitePopup button.ag-btn:hover:not(:disabled){background:#f5a623;}' +
+      '#agSitePopup button.ag-btn:active:not(:disabled){transform:translateY(1px);}' +
+      '#agSitePopup button.ag-btn:disabled{opacity:.45;cursor:not-allowed;}' +
+      '#agSitePopup .ag-resend{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:1rem;}' +
+      '#agSitePopup .ag-resend a{color:#f5a623;cursor:pointer;font-weight:600;}'
+    overlay.appendChild(style)
+
+    var badge = escapeHTML(opts.badge || 'Verification Required')
+    var altLink = opts.altLink && opts.altLink.href
+      ? '<a class="ag-back ag-alt" href="' + escapeHTML(opts.altLink.href) + '">' + escapeHTML(opts.altLink.text || '') + '</a>'
+      : ''
+    var card = document.createElement('div')
+    card.className = 'ag-pop-card'
+    card.innerHTML =
+      '<div id="agPopStep1">' +
+        '<span class="ag-pop-badge">' + badge + '</span>' +
+        '<h3>' + escapeHTML(opts.title || 'Quick verification') + '</h3>' +
+        '<p>' + escapeHTML(opts.text || 'Verify your WhatsApp or email to keep exploring our packages. It also unlocks COMPASS, our trip planning assistant, and our travel articles.') + '</p>' +
+        '<div class="form-group"><label>Full Name</label><input type="text" id="agPopName" placeholder="Your name"></div>' +
+        '<div class="ag-ch-row">' +
+          '<button type="button" class="ag-ch-btn active" id="agPopChW">WhatsApp</button>' +
+          '<button type="button" class="ag-ch-btn" id="agPopChE">Email</button>' +
+        '</div>' +
+        '<div class="form-group" id="agPopWaFields"><label>WhatsApp Number</label>' +
+          '<div class="ag-phone-row">' +
+            '<select id="agPopCC"><option value="+91">+91 IN</option><option value="+1">+1 US</option>' +
+              '<option value="+44">+44 UK</option><option value="+61">+61 AU</option>' +
+              '<option value="+65">+65 SG</option><option value="+971">+971 AE</option>' +
+              '<option value="+60">+60 MY</option><option value="+64">+64 NZ</option></select>' +
+            '<input type="tel" id="agPopPhone" placeholder="98765 43210" inputmode="numeric" autocomplete="tel-national">' +
+          '</div>' +
+        '</div>' +
+        '<div class="form-group" id="agPopEmailFields" style="display:none;">' +
+          '<label>Email Address</label><input type="email" id="agPopEmail" placeholder="you@example.com" autocomplete="email"></div>' +
+        '<div class="ag-err" id="agPopErr1"></div>' +
+        '<button class="ag-btn" id="agPopBtn1">Send WhatsApp Code</button>' +
+        altLink +
+      '</div>' +
+      '<div id="agPopStep2" style="display:none;">' +
+        '<span class="ag-pop-badge">' + badge + '</span>' +
+        '<h3>Enter your code</h3>' +
+        '<p id="agPopStep2Desc">Enter the 4-digit code sent to your WhatsApp.</p>' +
+        '<div class="ag-otp-row">' +
+          '<input type="tel" inputmode="numeric" autocomplete="one-time-code" maxlength="1" id="agPopOtp0">' +
+          '<input type="tel" inputmode="numeric" maxlength="1" id="agPopOtp1">' +
+          '<input type="tel" inputmode="numeric" maxlength="1" id="agPopOtp2">' +
+          '<input type="tel" inputmode="numeric" maxlength="1" id="agPopOtp3">' +
+        '</div>' +
+        '<div class="ag-err" id="agPopErr2"></div>' +
+        '<div class="ag-resend">Didn’t receive it? <a id="agPopResendLink">Resend</a></div>' +
+        '<button class="ag-btn" id="agPopBtn2">Verify &amp; Continue</button>' +
+        '<button type="button" class="ag-back" id="agPopBack">&larr; Change number</button>' +
+      '</div>'
+    overlay.appendChild(card)
+    overlay.setAttribute('role', 'dialog')
+    overlay.setAttribute('aria-modal', 'true')
+    document.body.appendChild(overlay)
+    var prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    // Hard block for keyboard users too: without this, Tab still reaches
+    // links and buttons behind the blurred overlay.
+    var inerted = []
+    Array.prototype.forEach.call(document.body.children, function (el) {
+      if (el !== overlay && el.tagName !== 'SCRIPT' && !el.hasAttribute('inert')) {
+        el.setAttribute('inert', ''); inerted.push(el)
+      }
+    })
+
+    var _ch = 'whatsapp', _name = '', _phone = '', _email = ''
+    var $ = function (id) { return document.getElementById(id) }
+    var OTP_IDS = ['agPopOtp0', 'agPopOtp1', 'agPopOtp2', 'agPopOtp3']
+    function sendLabel() { return _ch === 'whatsapp' ? 'Send WhatsApp Code' : 'Send Email Code' }
+    function err(n, msg, info) {
+      var el = $('agPopErr' + n)
+      el.textContent = msg || ''
+      el.style.color = info ? 'rgba(255,255,255,.6)' : ''
+    }
+
+    bindPhoneField('agPopCC', 'agPopPhone')
+    bindOtpInputs(OTP_IDS, function () { $('agPopBtn2').click() })
+    ;['agPopName', 'agPopPhone', 'agPopEmail'].forEach(function (id) {
+      $(id).addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); $('agPopBtn1').click() } })
+      $(id).addEventListener('input', function () { err(1, '') })
+    })
+
+    function selectChannel(ch) {
+      _ch = ch
+      $('agPopChW').classList.toggle('active', ch === 'whatsapp')
+      $('agPopChE').classList.toggle('active', ch === 'email')
+      $('agPopWaFields').style.display = ch === 'whatsapp' ? '' : 'none'
+      $('agPopEmailFields').style.display = ch === 'email' ? '' : 'none'
+      $('agPopBtn1').textContent = sendLabel()
+      err(1, '')
+    }
+    $('agPopChW').addEventListener('click', function () { selectChannel('whatsapp') })
+    $('agPopChE').addEventListener('click', function () { selectChannel('email') })
+
+    function goToOtpStep() {
+      var wa = _ch === 'whatsapp'
+      $('agPopStep2Desc').textContent = 'Enter the 4-digit code sent to ' + (wa ? 'WhatsApp ' + _phone : _email) + '.'
+      $('agPopBack').innerHTML = '&larr; ' + (wa ? 'Change number' : 'Change email')
+      OTP_IDS.forEach(function (id) { $(id).value = '' })
+      err(2, '')
+      $('agPopStep1').style.display = 'none'
+      $('agPopStep2').style.display = 'block'
+      setTimeout(function () { $('agPopOtp0').focus() }, 100)
+    }
+
+    $('agPopBack').addEventListener('click', function () {
+      $('agPopStep2').style.display = 'none'
+      $('agPopStep1').style.display = 'block'
+      var b1 = $('agPopBtn1'); b1.disabled = false; b1.textContent = sendLabel()
+      var b2 = $('agPopBtn2'); b2.disabled = false; b2.innerHTML = 'Verify &amp; Continue'
+      $(_ch === 'whatsapp' ? 'agPopPhone' : 'agPopEmail').focus()
+    })
+
+    $('agPopBtn1').addEventListener('click', function () {
+      var btn = this
+      _name = $('agPopName').value.trim()
+      if (!_name) { err(1, 'Please enter your name.'); $('agPopName').focus(); return }
+      var send
+      if (_ch === 'whatsapp') {
+        var v = validatePhone($('agPopCC').value, $('agPopPhone').value)
+        if (!v.ok) { err(1, v.msg); $('agPopPhone').focus(); return }
+        _phone = v.full
+        send = AlpenAPI.sendSMSOTP(_phone, 'site_popup', { name: _name })
+      } else {
+        _email = $('agPopEmail').value.trim()
+        if (!isValidEmail(_email)) { err(1, 'Please enter a valid email address.'); $('agPopEmail').focus(); return }
+        send = AlpenAPI.sendEmailOTP(_email, 'site_popup', { name: _name })
+      }
+      btn.textContent = 'Sending…'; btn.disabled = true
+      send.then(goToOtpStep).catch(function (e) {
+        btn.disabled = false; btn.textContent = sendLabel()
+        err(1, (e && e.message) || 'Could not send the code. Please check your details and try again.')
+      })
+    })
+
+    $('agPopResendLink').addEventListener('click', function () {
+      OTP_IDS.forEach(function (id) { $(id).value = '' })
+      err(2, 'A new code is on its way.', true)
+      var p = _ch === 'whatsapp' ? AlpenAPI.sendSMSOTP(_phone, 'site_popup') : AlpenAPI.sendEmailOTP(_email, 'site_popup')
+      p.catch(function (e) { err(2, (e && e.message) || 'Could not resend the code.') })
+      $('agPopOtp0').focus()
+    })
+
+    $('agPopBtn2').addEventListener('click', function () {
+      var btn = this
+      if (btn.disabled) return
+      var code = OTP_IDS.map(function (id) { return $(id).value }).join('')
+      if (code.length < 4) { err(2, 'Please enter all 4 digits.'); $('agPopOtp0').focus(); return }
+      btn.textContent = 'Verifying…'; btn.disabled = true
+      err(2, '')
+
+      function done() {
+        AlpenAPI.submitLead({
+          name: _name,
+          phone: _ch === 'whatsapp' ? _phone : '',
+          email: _ch === 'email' ? _email : '',
+          source: 'site_popup',
+          verifiedPhone: _ch === 'whatsapp',
+          verifiedEmail: _ch === 'email',
+        }).catch(function () {})
+        inerted.forEach(function (el) { el.removeAttribute('inert') })
+        overlay.remove()
+        document.body.style.overflow = prevOverflow
+        _revealUnlockedTeasers()
+        if (typeof window.unlockContent === 'function') { try { window.unlockContent() } catch (e) {} }
+      }
+      function fail(e) {
+        btn.innerHTML = 'Verify &amp; Continue'; btn.disabled = false
+        err(2, (e && e.message) || 'Invalid code. Please try again.')
+      }
+
+      if (_ch === 'whatsapp') {
+        AlpenAPI.verifySMSOTP(_phone, code).then(function () { markVerified('package'); done() }).catch(fail)
+      } else {
+        AlpenAPI.verifyEmailOTP(_email, code, 'package').then(done).catch(fail)
+      }
+    })
+
+    setTimeout(function () { $('agPopName').focus() }, 350)
   }
 
   // ─── SESSION QA OVERRIDE (Alt+Shift+B+T+R+4) ────────────────────
@@ -677,16 +761,30 @@
     isVerified: isVerified,
 
     /** Returns true if the visitor has ACTUALLY verified for package access —
-     *  either their own 'package' verification, or a completed Trip
-     *  Planner/COMPASS ('planner') verification satisfies it too. Does NOT
-     *  include the first-30s grace window — see canViewPackages() for that. */
+     *  'package' (30s popup / package-page gate card) or 'planner' (Trip
+     *  Planner). Does NOT include the free window before the popup is due —
+     *  see canViewPackages() for that. */
     isPackageUnlocked: isPackageUnlocked,
 
     /** Returns true if package-page content should be shown right now —
-     *  isPackageUnlocked() OR still inside the first-30-seconds-of-session
-     *  grace window. This is what package pages and the homepage's package
-     *  teasers should check on load, not isPackageUnlocked() directly. */
+     *  isPackageUnlocked() OR the 30s popup isn't due yet (no package page
+     *  opened yet, or still inside the 30s after the first one). This is what
+     *  package pages and the homepage's package teasers should check on load,
+     *  not isPackageUnlocked() directly. */
     canViewPackages: canViewPackageContent,
+
+    /** COMPASS gate: Trip Planner, 30s popup or package-page verification. */
+    canUseCompass: canUseCompass,
+
+    /** Blogs open for blog, 30s popup/package-page or Trip Planner verification. */
+    isBlogUnlocked: isBlogUnlocked,
+
+    /** Contact the visitor verified with (Trip Planner profile wins where set):
+     *  { name, phone, email, + Trip Planner answers if any }. */
+    verifiedProfile: verifiedProfile,
+
+    /** Show the popup verification now (COMPASS uses this as its gate). */
+    showVerifyPopup: _showVerifyPopup,
 
     markVerified: markVerified,
 
@@ -727,10 +825,12 @@
       callEdge('submit-contact', data),
 
     /** Store a generic lead (blog, package gate, offer) */
-    submitLead: (data) =>
+    submitLead: (data) => {
+      _rememberVerifiedContact(data)
       // A session with the QA override on never really verified anything, so
       // never let its leads claim otherwise.
-      callEdge('submit-lead', bypassOn() ? Object.assign({}, data, { verifiedPhone: false, verifiedEmail: false }) : data),
+      return callEdge('submit-lead', bypassOn() ? Object.assign({}, data, { verifiedPhone: false, verifiedEmail: false }) : data)
+    },
 
     /** Fetch active offers from local data/offers.json */
     fetchOffers: () => {
