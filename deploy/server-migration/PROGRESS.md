@@ -25,9 +25,9 @@ test; `main` pushed (`8b1b269`, 02:21 IST) and live on Cloudflare from
 02:21:42 IST; your own final submit confirmed (fix 1c done). Fix 1d:
 migration 014 written and dry-run OK (not committed, not deployed; see
 Done, 3 Nov). Fix 1d deployed 02:47 IST on your order (before the 1 h
-minimum, your decision) and tested: `security-test.sh` 0 FAIL. Current:
-waiting for your OK to push `9047ad7` to `main` (fast-forward), then the
-final re-test (contact form, trip planner, Compass; your dashboard login).
+minimum, your decision) and tested: `security-test.sh` 0 FAIL; `main`
+pushed (`9047ad7`, 02:56:57 IST). Current: final re-test (contact form,
+trip planner, Compass; your dashboard login).
 Until about 06:22 IST, browsers with the old cached `trip-planner.js`
 cannot save trips (401); check Kong for such 401s after 06:22.
 
@@ -552,6 +552,12 @@ move.
     `save-trip-lead`, all 200; no direct `trip_leads` request; 0 console
     errors; row `in_progress`, step 8, the 8 answers, no contact data.
     Deleted (exactly 1, guarded); `trip_leads` 74. Browser files deleted.
+- **3 Nov 2026** Migration 014 pushed to `main` (your OK): `git push
+  origin claude/security-fixes:main` at 02:56:57 IST, fast-forward
+  `8b1b269..9047ad7`, one file (`014_trip_leads_service_only.sql`). No
+  effect on the live site (migrations run only via `vps-deploy.sh`);
+  `main` now matches the server. Your `AlpenGlow work` folder untouched
+  (its local `main` is 5 behind).
 
 ## Decisions made
 
@@ -672,7 +678,7 @@ After the AlpenGlow switch-over (decided 2 Nov):
 
 - [x] AlpenGlow fix 1: `trip_leads` behind an edge function (runbook,
       "Security fixes that need a code change"), on the new server
-      (1a to 1d done 3 Nov; migration 014 still to reach `main`).
+      (1a to 1d done 3 Nov; all on `main` since 02:56 IST).
 - [x] AlpenGlow fix 2: `_migrations_applied` row security and no public
       access, on the new server (deployed 3 Nov, migration 012).
 - [x] AlpenGlow fix 3: remove public write access on the CMS tables, on
