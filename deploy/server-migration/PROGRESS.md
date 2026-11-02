@@ -24,9 +24,12 @@ curl-tested; fix 1b committed (`8b1b269`) and passed a pre-merge browser
 test; `main` pushed (`8b1b269`, 02:21 IST) and live on Cloudflare from
 02:21:42 IST; your own final submit confirmed (fix 1c done). Fix 1d:
 migration 014 written and dry-run OK (not committed, not deployed; see
-Done, 3 Nov). Current: your OK given ("go 1d", 02:45 IST); 014 committed
-(`9047ad7`, not pushed); deploy waits for your 1 h minimum (03:22:42 IST),
-then security-test, health check, browser run, test row deleted.
+Done, 3 Nov). Fix 1d deployed 02:47 IST on your order (before the 1 h
+minimum, your decision) and tested: `security-test.sh` 0 FAIL. Current:
+waiting for your OK to push `9047ad7` to `main` (fast-forward), then the
+final re-test (contact form, trip planner, Compass; your dashboard login).
+Until about 06:22 IST, browsers with the old cached `trip-planner.js`
+cannot save trips (401); check Kong for such 401s after 06:22.
 
 ## Next step
 
@@ -528,6 +531,27 @@ move.
   transaction `anon` SELECT and UPDATE refused, `service_role` reads (74
   rows); afterwards unchanged (3 policies, anon INSERT/SELECT/UPDATE, 014
   not recorded).
+- **3 Nov 2026** Fix 1d deployed (your order "go 1d", then "deploy now",
+  overriding the 1 h minimum): 014 committed `9047ad7` (not pushed);
+  `vps-deploy.sh` from the worktree at 02:46:59 IST applied 014 (guard
+  passed), no function removed, functions restarted.
+  - `security-test.sh` (real DNS): **0 FAIL, 0 WARN**; `trip_leads` and
+    `_migrations_applied` 401. Public-key PATCH and DELETE on `trip_leads`
+    401. Catalog: 0 policies and 0 public grants on `trip_leads`;
+    `_migrations_applied` 14. `healthcheck.sh` exit 0; all containers
+    healthy; functions log 0 errors.
+  - Browser run, steps 1 to 8 on the live site: the first run used a
+    **cached old `trip-planner.js`** (that browser had loaded the site at
+    01:16 IST; 4 h cache): 8 direct `trip_leads` POSTs, all 401, no row.
+    This is the stale-cache case: such a visitor loses progress saves
+    silently and gets an error at the final submit (no lead) until about
+    06:22 IST. Kong since the deploy: every direct `trip_leads` request
+    was Claude's (3 probes, 8 cached-browser POSTs, 3 preflights); no
+    real visitor affected at that time.
+  - Second run with the browser cache bypassed (live file): 8 POSTs to
+    `save-trip-lead`, all 200; no direct `trip_leads` request; 0 console
+    errors; row `in_progress`, step 8, the 8 answers, no contact data.
+    Deleted (exactly 1, guarded); `trip_leads` 74. Browser files deleted.
 
 ## Decisions made
 
@@ -646,8 +670,9 @@ Before the AlpenGlow switch-over (from step 1, 2 Nov):
 
 After the AlpenGlow switch-over (decided 2 Nov):
 
-- [ ] AlpenGlow fix 1: `trip_leads` behind an edge function (runbook,
-      "Security fixes that need a code change"), on the new server.
+- [x] AlpenGlow fix 1: `trip_leads` behind an edge function (runbook,
+      "Security fixes that need a code change"), on the new server
+      (1a to 1d done 3 Nov; migration 014 still to reach `main`).
 - [x] AlpenGlow fix 2: `_migrations_applied` row security and no public
       access, on the new server (deployed 3 Nov, migration 012).
 - [x] AlpenGlow fix 3: remove public write access on the CMS tables, on
