@@ -7,15 +7,16 @@ connection strings or customer data here.
 
 ## Current step
 
-Ready, waiting for the new server (a new Contabo server).
-
-Finished on 26 Oct (see Done): read-only check of the old server, and its
-hardening (new `deploy` password, password SSH login off).
+Sitting 0 finished (2 Nov): PSS read-only checks done, open decisions
+answered (see Done and Decisions made). The new Contabo server exists:
+`84.247.184.195`. Nothing has been done on it yet.
 
 ## Next step
 
-Phase 1: base setup on the new server (`MIGRATION-RUNBOOK.md`, "Phase 1").
-Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
+Step 1, in a fresh session: on `84.247.184.195`, `MIGRATION-RUNBOOK.md`
+Phase 1 (base setup), Phase 2 (AlpenGlow rehearsal, without the billing
+app), Phase 2b (first backup by hand, health check, crontab) and "Audit
+before cutover". No DNS change; the old server is only read from.
 
 ## Done
 
@@ -153,6 +154,21 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   after the reload: key login prints `key-login-ok`; a password-only login
   gets `Permission denied (publickey)` with no password prompt. **Old
   server hardening done.**
+- **2 Nov 2026** New Contabo server created by you: `84.247.184.195`.
+- **2 Nov 2026** PSS live project `ozatixapvxwrwbpdxuzt`, read-only checks
+  (`supabase db query --linked` from a scratch folder, deleted afterwards;
+  catalog and counts only, no rows read):
+  - `overtime_sessions`: **row security is ON** (0 policies, not forced),
+    so the public key can neither read nor change it despite its broad
+    grants. Switched on outside the migrations (probably in the dashboard);
+    the PSS move restores the live database, so this comes along. No
+    migration needed.
+  - All 34 public tables have row security. (The plan says 35 tables;
+    compare in PSS Phase 1.)
+  - Storage: **0 buckets, 0 files**. The `student-photos` bucket no longer
+    exists, so no ID photos are exposed and nothing needs moving.
+  - Your Supabase CLI login (`npx supabase login`) is set up on this
+    laptop.
 
 ## Decisions made
 
@@ -197,6 +213,23 @@ Not before your weekly usage reset on 1 Nov (~04:30 IST), in a fresh session.
   problem.
 - **Scheduling.** Switch-overs only after the weekly usage reset (1 Nov,
   ~04:30 IST). One fresh session per sitting.
+- **AlpenGlow security fixes 1, 2, 3 (decided 2 Nov): yes, right AFTER the
+  AlpenGlow switch-over, on the new server only, so each is deployed once.**
+  Until then the audit's `trip_leads` and `_migrations_applied` rows are
+  expected FAILs (runbook, "Audit before cutover").
+- **PSS `overtime_sessions` (2 Nov):** no migration; row security is
+  already on live. Had it been off: show the migration and ask before
+  applying it to the live PSS project.
+- **PSS `student-photos` (2 Nov):** nothing to do, the bucket is gone.
+  Your rule had it existed: make it private first (with your OK), then you
+  decide about an offline copy and deleting.
+- **Old server (2 Nov):** leave `docker.list` disabled; leave the ~20 GB
+  build cache and the stopped container `tender_kowalevski` as they are.
+- **Recommended set-ups (2 Nov): planned, you set them up yourself:** R2
+  bucket for off-server backups, backup passphrase in a password manager,
+  outside uptime monitor, second SSH key.
+- **Git (2 Nov):** your laptop checkout stays on `main`, untouched; Claude
+  works on `claude/server-migration-kit` in a separate worktree.
 
 ## Rules for every sitting
 
@@ -229,23 +262,24 @@ Dates (your choice):
 
 To start Phase 1:
 
-- [ ] The new Contabo server: Ubuntu 24.04, 4 vCPU, 8 GB RAM, 100 GB disk,
-      created with the laptop's public key (`~/.ssh/id_ed25519.pub`) as
-      root's SSH key. Send its IP address.
-- [ ] A fresh session on this laptop after 1 Nov ~04:30 IST.
+- [x] The new Contabo server: `84.247.184.195` (2 Nov). Step 1 checks
+      that root key login works and that it is Ubuntu 24.04 with 4 vCPU,
+      8 GB RAM and 100 GB disk.
+- [ ] A fresh session on this laptop for step 1.
 
-Decisions still open (listed, not acted on):
+After the AlpenGlow switch-over (decided 2 Nov):
 
 - [ ] AlpenGlow fix 1: `trip_leads` behind an edge function (runbook,
-      "Security fixes that need a code change").
+      "Security fixes that need a code change"), on the new server.
 - [ ] AlpenGlow fix 2: `_migrations_applied` row security and no public
-      access.
-- [ ] AlpenGlow fix 3: remove public write access on the CMS tables.
-- [ ] PSS `overtime_sessions` has no row security: check on the live
-      project first (PSS plan, Phase 1 step 3), then decide on the one-line
-      migration.
-- [ ] PSS old `student-photos` bucket may hold public Aadhaar/ID photos:
-      delete or move.
+      access, on the new server.
+- [ ] AlpenGlow fix 3: remove public write access on the CMS tables, on
+      the new server.
+
+Settled (2 Nov):
+
+- [x] PSS `overtime_sessions`: row security already on live; no migration.
+- [x] PSS `student-photos`: bucket gone, 0 files; nothing to do.
 - [x] Old server: check `PasswordAuthentication`: checked 26 Oct, it was
       ON; switched off 26 Oct (`00-hardening.conf`).
 - [x] Old server: the "Accepted password" count of 1 was our own check;
@@ -253,16 +287,14 @@ Decisions still open (listed, not acted on):
 - [x] Old server: today's `apt upgrade -y` (14:58 CET) was run by you
       (confirmed 26 Oct).
 - [x] Old server: change the `deploy` sudo password (done 26 Oct).
-- [ ] Old server: re-enable the Docker apt source left disabled by the
-      aborted `do-release-upgrade` (rename `docker.list.disabled` back to
-      `docker.list`, then `apt update`), only with your OK.
+- [x] Old server: Docker apt source stays disabled (your decision, 2 Nov).
 - [x] Old server: switch password SSH login off: done 26 Oct with
       `00-hardening.conf` (loaded before `50-cloud-init.conf`, which is
       left unchanged); tested by you after the reload.
-- [ ] Old server housekeeping, only with your OK: clear the ~20 GB Docker
-      build cache; remove the stopped container `tender_kowalevski`.
+- [x] Old server housekeeping: leave the build cache and
+      `tender_kowalevski` as they are (your decision, 2 Nov).
 
-Recommended:
+Recommended (planned 2 Nov; you set them up yourself):
 
 - [ ] Cloudflare R2 bucket for off-server backups.
 - [ ] The backup passphrase in a password manager.
