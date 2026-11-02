@@ -8,14 +8,12 @@ connection strings or customer data here.
 ## Current step
 
 Step 1 (sitting of 2 Nov, evening) on `84.247.184.195`: Phase 1 (base
-setup) done and checked. Fresh snapshot `2026-11-02_2030` pulled.
+setup) and Phase 2 (AlpenGlow rehearsal) done and checked.
 
 ## Next step
 
-Phase 2 (AlpenGlow rehearsal, without the billing app) with snapshot
-`2026-11-02_2030`, then Phase 2b (first backup by hand, health check,
-crontab) and "Audit before cutover". No DNS change; the old server is only
-read from.
+Phase 2b (first backup by hand, health check, crontab), then "Audit before
+cutover". No DNS change; the old server is only read from.
 
 ## Done
 
@@ -192,6 +190,32 @@ read from.
   unattended-upgrades active; Docker 29.9.2; 2 GB swap; ops scripts in
   `~/ops` (crontab not installed yet); backup passphrase created on the
   server (not yet copied off). No reboot pending.
+- **2 Nov 2026** Phase 2 (rehearsal) on the new server, snapshot
+  `2026-11-02_2030`:
+  - Copied to `~deploy/snapshot` (mode 700/600) only what Phase 2 needs:
+    backend archive, public dump, row counts, and the certificate archive
+    from `2026-10-05_1803`; checksums verified. No travel-app or billing
+    files on the new server.
+  - `.env` mode 600; also set 600 on `.env.bak.*`, `.env.old`,
+    `.env.example` (were 664). Original kept as `.env.from-old-server`.
+    Auth sign-up switched off (`DISABLE_SIGNUP=true`, email/phone sign-up
+    and phone autoconfirm false).
+  - All 11 containers healthy on the pinned images, including the pooler.
+    Memory caps on (`docker-compose.limits.yml` in `COMPOSE_FILE`); Kong 2
+    workers, 132 MB of 512 MB.
+  - `restore-public.sh`: only the expected noise (12 + 1); public-role
+    permissions match the runbook table exactly (`leads`,
+    `lead_activities`, `follow_ups`, `otp_verifications` none;
+    `trip_leads` `anon=arw`; CMS tables and `_migrations_applied` full).
+    Migration 008 re-run. COUNTS MATCH (all 11 public tables);
+    `otp-24h-cleanup` hourly, active; 23 policies; 4 functions; 10 tables
+    with row security (`_migrations_applied` has none: fix 2).
+  - Certificates restored (`api` valid to 17 Dec 2026; the `travel`
+    certificate came along in the archive, unused). Kit site file
+    installed, default site removed, `nginx -t` OK.
+  - From the laptop via `--resolve`: `rest/v1/packages` 200 (6 rows),
+    `/`, `/project/default`, `/auth/v1/settings`, `/storage/v1/status` 404,
+    `leads` refused to the public key, `submit-lead` CORS preflight 200.
 
 ## Decisions made
 
