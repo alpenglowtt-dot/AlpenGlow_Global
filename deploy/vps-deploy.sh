@@ -63,6 +63,10 @@ docker exec supabase-db psql -U postgres -v ON_ERROR_STOP=1 -c "
     filename text PRIMARY KEY,
     applied_at timestamptz DEFAULT now()
   );
+  -- Bookkeeping only: never readable or writable with the public key
+  -- (migration 012). postgres owns it and bypasses row security.
+  ALTER TABLE public._migrations_applied ENABLE ROW LEVEL SECURITY;
+  REVOKE ALL ON public._migrations_applied FROM anon, authenticated, PUBLIC;
 " > /dev/null
 
 any_new=0
