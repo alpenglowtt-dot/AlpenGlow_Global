@@ -21,8 +21,9 @@ Security fixes session (3 Nov) in progress, worktree
 cannot reach `main`). Setup done; fixes 2 and 3 deployed and tested on the
 new server; fix 1a (`save-trip-lead` edge function) deployed and
 curl-tested; fix 1b committed (`8b1b269`) and passed a pre-merge browser
-test (see Done, 3 Nov). Current: waiting for your OK to put
-`claude/security-fixes` on `main` and push.
+test; `main` pushed (`8b1b269`, 02:21 IST, see Done, 3 Nov). Current:
+waiting for Cloudflare Pages to serve the new `trip-planner.js`, then your
+own final submit.
 
 ## Next step
 
@@ -488,6 +489,11 @@ move.
     `origin/main` = `d083663` = merge base, so `main` can fast-forward.
   - Your rules for c and d: you do the final submit yourself after the
     Cloudflare deploy; fix 1d waits at least 1 hour after that deploy.
+- **3 Nov 2026** Fix 1c, push (your OK): `git push origin
+  claude/security-fixes:main` from the worktree at 02:21:03 IST,
+  fast-forward `d083663..8b1b269`, no force. Your `AlpenGlow work`
+  folder was not touched (its local `main` is now 4 behind; `git pull`
+  there when you like; the 4 commits do not touch `graphify-out/`).
 
 ## Decisions made
 
