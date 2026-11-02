@@ -7,15 +7,21 @@ connection strings or customer data here.
 
 ## Current step
 
-Step 1 (sitting of 2 Nov, evening) on `84.247.184.195`: Phase 1 (base
-setup), Phase 2 (AlpenGlow rehearsal) and Phase 2b (backup, health check,
-crontab) done and checked.
+Step 1 finished (2 Nov, evening) on `84.247.184.195`: Phase 1, Phase 2
+(rehearsal), Phase 2b and "Audit before cutover" all done and passed. The
+only audit FAILs are the expected `trip_leads` and `_migrations_applied`
+rows (fixes 1 and 2, decided for right after the switch-over). AlpenGlow
+is ready for switch-over once the items under "Before the AlpenGlow
+switch-over" in Waiting on me are done. DNS unchanged; the old server was
+only read from.
 
 ## Next step
 
-"Audit before cutover" (`security-test.sh --burst` from the laptop, then
-the on-server audit items). No DNS change; the old server is only read
-from.
+Phase 3 (cutover), in a fresh session on the date you choose: TTL lowered
+a day before; stop Kong on the old server; final `pull-backup.sh`; reset
+the rehearsal database on the new server and restore the final dump with
+`restore-public.sh` (permissions table and counts again); switch the `api`
+A record; Phase 4 checks. Then fixes 1, 2, 3 on the new server.
 
 ## Done
 
@@ -246,6 +252,12 @@ from.
   - Alert test: `supabase-meta` stopped on purpose, health check emailed
     PROBLEM to the agency address; started again, RECOVERED emailed. Resend
     accepted both (inbox arrival still to be confirmed by you).
+  - Reboot test (21:36 laptop time): back within about a minute; docker,
+    `docker-user-firewall`, nginx, fail2ban, ufw, cron,
+    unattended-upgrades active; `DOCKER-USER` rule re-applied; swap on;
+    crontab intact; all 11 containers healthy, Kong 0 restarts. From the
+    laptop afterwards: `packages` 200, `/` 404, 5432/6543/8000/8443
+    closed.
 
 ## Decisions made
 
@@ -343,8 +355,18 @@ To start Phase 1:
       24.04.5, 4 vCPU, 7.8 GB RAM, 96 GB disk, root key login works.
 - [x] A fresh session on this laptop for step 1 (2 Nov, evening).
 
-From step 1 (2 Nov):
+Before the AlpenGlow switch-over (from step 1, 2 Nov):
 
+- [ ] Confirm the two test alert emails (PROBLEM, then RECOVERED, about
+      17:05 server time) arrived at the agency inbox, not in spam.
+- [ ] Do not deploy backend changes to the old server until the
+      switch-over (or tell Claude, so they are re-deployed on the new
+      server too).
+- [ ] Decide: remove the unused `travel` certificate's renewal config on
+      the new server (otherwise certbot there logs a failed renewal from
+      about 24 Nov; harmless).
+- [ ] Decide: is the old server's second deploy key `batore-vps` still
+      needed? (Not copied to the new server.)
 - [ ] Copy the backup passphrase off the new server:
       `scp deploy@84.247.184.195:ops/backup.passphrase "$HOME/Desktop/AlpenGlow WEB/vps-migration-backup/backup-passphrase.SECRET.txt"`,
       then into your password manager.
