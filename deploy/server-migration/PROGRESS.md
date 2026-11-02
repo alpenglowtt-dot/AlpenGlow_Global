@@ -7,16 +7,10 @@ connection strings or customer data here.
 
 ## Current step
 
-AlpenGlow switch-over in progress (2 Nov). Pre-cutover checks done (see
-Done). You approved steps 2 to 4. **Blocked: the old server
-`169.58.43.191` stopped answering at about 21:59 laptop time** (it
-answered at about 21:55): ports 22, 80, 443 time out from the laptop AND
-from the new server; laptop internet and new server fine; still down at
-22:05. Kong was NOT stopped (the command never reached the server), so
-the site's forms are down because the old server is down. DNS still
-points at the old server. Nothing changed on either server. Waiting for
-your decision: wait for the old server, or cut over from the 20:30
-snapshot already restored on the new server.
+AlpenGlow switch-over in progress (2 Nov). Phase 3 steps 2 and 3 done
+(see Done); now step 4 (reset and restore on the new server). Old Kong
+stopped since 22:17:59 laptop time: **forms are down** until DNS points at
+the new server. DNS still points at the old server.
 
 ## Next step
 
@@ -286,6 +280,25 @@ browser tests. Then Phase 5 (old IP in `vps-deploy.sh`,
     rows. Nothing to re-deploy on the new server.
   - New server: all 11 containers healthy, disk 14% used, `packages` 200
     via `--resolve`.
+- **2 Nov 2026** Old server outage, not caused by us: unreachable from
+  about 21:56 to 22:08 laptop time (ports 22, 80, 443 timed out from the
+  laptop and from the new server). It rebooted at 17:38:12 CET (22:08
+  laptop time). Unclean: `last -x` shows the reboot but no shutdown, and
+  the previous boot's journal (as `deploy` can see it) ends at 17:25:43
+  CET. So a crash or a hard reset on Contabo's side; the kernel log needs
+  sudo (`sudo journalctl -b -1 -p warning -n 50`). Afterwards all 14
+  containers up (11 Supabase healthy, billing app too). The `deploy` logins
+  from `117.98.171.83` are this laptop.
+- **2 Nov 2026** Phase 3 step 2: Kong stopped on the old server at
+  22:17:59 laptop time (your OK); public API answers 502 from nginx.
+- **2 Nov 2026** Phase 3 step 3: final `pull-backup.sh` OK, snapshot
+  `2026-11-02_2218` (4.9 MB, integrity OK). Public counts identical to
+  20:30 (`leads` 29, `trip_leads` 72, `lead_activities` 24, migrations 11):
+  no lead lost to the outage. Ran the folder's own (older) copy of
+  `pull-backup.sh`: same dump commands, writes next to itself, no
+  inside-git guard. Public dump and row counts copied to
+  `~/snapshot-final/db` on the new server (mode 700/600), sha256 equal on
+  both ends.
 
 ## Decisions made
 
