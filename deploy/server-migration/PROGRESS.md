@@ -9,10 +9,11 @@ connection strings or customer data here.
 
 AlpenGlow switch-over in progress (2 Nov). Phase 3 done: `api` points
 at `84.247.184.195` since about 22:28 laptop time; forms run on the new
-server. Phase 4 automated checks passed (see Done). **Waiting for your
-browser tests** (homepage and package page, contact form, trip planner,
-email OTP, WhatsApp OTP Indian and non-Indian, dashboard login, Compass);
-then Claude confirms the test rows on the new server. Old Kong stays
+server. Phase 4 automated checks passed; your browser tests are only
+partly seen on the server (see Done). **Waiting for a re-test** of the
+trip planner, dashboard login, Compass and the second WhatsApp number
+(fresh browser, after `chrome://net-internals/#dns` "Clear host cache"),
+and your OK on the Phase 5 diff. Old Kong stays
 stopped (rollback: point `api` back and `docker compose start kong`
 there).
 
