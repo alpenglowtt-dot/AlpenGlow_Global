@@ -69,7 +69,9 @@ usermod -aG sudo,docker deploy
 install -d -m 700 -o deploy -g deploy /home/deploy/.ssh
 # Keys: the saved authorized_keys from the old server if it sits next to this
 # script, plus whatever root was created with.
-{ cat "$KIT/authorized_keys" 2>/dev/null; cat /root/.ssh/authorized_keys 2>/dev/null; cat /home/deploy/.ssh/authorized_keys 2>/dev/null; } \
+# Any of the three may be missing (on a fresh server the last one always is);
+# without "|| true" a missing file fails the pipe and set -e stops the script.
+{ cat "$KIT/authorized_keys" 2>/dev/null || true; cat /root/.ssh/authorized_keys 2>/dev/null || true; cat /home/deploy/.ssh/authorized_keys 2>/dev/null || true; } \
   | grep -E '^(ssh-|ecdsa-)' | sort -u > /home/deploy/.ssh/authorized_keys.new
 mv /home/deploy/.ssh/authorized_keys.new /home/deploy/.ssh/authorized_keys
 chown deploy:deploy /home/deploy/.ssh/authorized_keys

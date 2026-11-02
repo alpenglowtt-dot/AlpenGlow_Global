@@ -169,6 +169,30 @@ before cutover". No DNS change; the old server is only read from.
     exists, so no ID photos are exposed and nothing needs moving.
   - Your Supabase CLI login (`npx supabase login`) is set up on this
     laptop.
+- **2 Nov 2026** New server checked read-only before setup: Ubuntu 24.04.5,
+  x86_64, 4 vCPU, 7.8 GB RAM, 96 GB disk, interface `eth0`, timezone
+  `Europe/Berlin`. Host key ED25519
+  `SHA256:/fmu+gs1TqeGtQmlz1bbuVVQg3Gzcht7t4eazrtoCAs`. Before setup it had
+  password and root login on (cloud-init default).
+- **2 Nov 2026** Fresh snapshot `2026-11-02_2030` pulled (read-only on the
+  old server, 4.9 MB, integrity OK). Public row counts: `leads` 29,
+  `trip_leads` 72, `lead_activities` 24, `packages` 6, `destinations` 4,
+  `blog_posts` 3, `offers` 3, `package_pages` 1, `_migrations_applied` 11,
+  `follow_ups` 0, `otp_verifications` 0. Certificates still come from
+  `2026-10-05_1803/host/root-only.SECRET.tar.gz` (not re-fetched by
+  `pull-backup.sh`; unchanged until certbot renews around 17 Nov).
+- **2 Nov 2026** Phase 1 on the new server: `01-base-setup.sh` run as root.
+  First run stopped at the `deploy` key step (bug: a missing
+  `authorized_keys` file failed the pipe under `set -e`); fixed in the kit
+  (`|| true` per file) and re-run: exit 0. Checked: `deploy` key login
+  works (laptop key only, your decision; the old server's second key
+  `batore-vps` was NOT copied); password-only login gets `Permission denied
+  (publickey)`; `sshd -T`: `passwordauthentication no`, `permitrootlogin
+  without-password`; ufw active (22, 80, 443 only); `DOCKER-USER` drops
+  5432, 6543, 8000, 8443 on `eth0`; fail2ban, docker, nginx 1.24.0,
+  unattended-upgrades active; Docker 29.9.2; 2 GB swap; ops scripts in
+  `~/ops` (crontab not installed yet); backup passphrase created on the
+  server (not yet copied off). No reboot pending.
 
 ## Decisions made
 
