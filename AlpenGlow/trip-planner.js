@@ -1,26 +1,18 @@
 /* ═══════════════════════════════════════════════════════════
    ALPENGLOW TRIP PLANNER — vanilla JS, no frameworks
-   Requires: @supabase/supabase-js v2 loaded via CDN before this file
+   Requires: nothing (talks to the backend's Edge Functions with fetch)
    Exposes: window.initTripPlanner()
    ═══════════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
-  /* ─── Supabase JS client (CDN: @supabase/supabase-js v2) ─── */
-  // Self-hosted Supabase (see deploy/README.md).
+  /* ─── Backend: self-hosted Supabase (see deploy/README.md) ───
+     The planner never touches a table directly: progress and the final
+     submit go through the save-trip-lead Edge Function, the lead through
+     submit-lead. SB_KEY is the public anon key the gateway expects. */
   const SB_URL = 'https://api.alpenglowglobal.com';
   const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlzcyI6InN1cGFiYXNlIiwiaWF0IjoxNzg0NDczMjU5LCJleHAiOjE5NDIxNTMyNTl9.Flq3Vf1QHQA23sieMT472T5tnKkhzhLcJxdxtbjIv-s';
-
-  /* Lazy-init the client once (window.supabase is set by the CDN script) */
-  let _sb = null;
-  function _getSb() {
-    if (!_sb) {
-      if (!window.supabase) { console.warn('[TripPlanner] Supabase CDN not loaded'); return null; }
-      _sb = window.supabase.createClient(SB_URL, SB_KEY);
-    }
-    return _sb;
-  }
 
   /* Base path — resolves local images relative to this script */
   const BASE = (function () {
@@ -760,7 +752,7 @@
       '<div class="tp-contact-form" id="tp-contact-form">' +
 
       /* ── Name ── */
-      _field('tp-cname', 'text', 'Full Name', 'Your name', a.name || '') +
+      _field('tp-cname', 'text', 'Full Name', 'Your name', a.name || '', 100) +
 
       /* ── Phone + inline OTP ── */
       '<div class="tp-field-wrap">' +
@@ -1253,36 +1245,50 @@
       origin_city:   a.originCity    || null,
       duration:      a.duration      || null,
       budget_range:  a.budget        || null,
-      exact_budget:  a.exactBudget   || null,
+      // save-trip-lead accepts whole rupees 1 – 1,000,000,000; anything else
+      // (empty, 0, negative, absurd) is sent as "not given".
+      exact_budget:  (a.exactBudget > 0 && a.exactBudget <= 1e9) ? a.exactBudget : null,
       contact_name:  a.name          || null,
       contact_phone: a.phone         || null,
       contact_email: a.email         || null,
     };
   }
 
+  // Every trip_leads write goes through the save-trip-lead Edge Function
+  // (service role, validated, keyed by session_id). The public key has no
+  // direct access to the table. Resolves to { status, data }.
+  function _saveTrip(payload) {
+    return fetch(SB_URL + '/functions/v1/save-trip-lead', {
+      method: 'POST',
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).then(function (r) {
+      return r.json()
+        .catch(function () { return {}; })
+        .then(function (d) { return { status: r.status, data: d || {} }; });
+    });
+  }
+
   function _sbUpsert(completedStep) {
-    const sb = _getSb();
-    if (!sb) return;
-    sb.from('trip_leads')
-      .upsert(_buildPayload(completedStep, 'in_progress'), { onConflict: 'session_id' })
+    _saveTrip(_buildPayload(completedStep, 'in_progress'))
       .then(function () {})
       .catch(function () {});
   }
 
   function _sbSubmit() {
-    const sb = _getSb();
-    if (!sb) return Promise.resolve(); /* no CDN (file://) — skip silently */
-    return sb.from('trip_leads')
-      .upsert(_buildPayload(9, 'submitted'), { onConflict: 'session_id' })
+    return _saveTrip(_buildPayload(9, 'submitted'))
       .then(function (res) {
-        if (res.error) throw res.error;
+        // 409 already_submitted: an earlier click already saved this trip
+        // (its answer was lost); carry on exactly as after a fresh save.
+        const already = res.status === 409 && res.data.error === 'already_submitted';
+        if (res.status !== 200 && !already) {
+          throw new Error(res.data.error || 'Something went wrong. Please try again.');
+        }
         return _insertLeadRecord();
       });
   }
 
   function _insertLeadRecord() {
-    const sb = _getSb();
-    if (!sb) return Promise.resolve();
     const a = _s.answers;
 
     const parts = [];
@@ -1342,9 +1348,10 @@
       '</div></div>';
   }
 
-  function _field(id, type, label, placeholder, val) {
+  function _field(id, type, label, placeholder, val, maxLen) {
     return '<div class="tp-field-wrap">' +
-      '<input class="tp-input" id="' + id + '" type="' + type + '" placeholder=" " value="' + _esc(val) + '">' +
+      '<input class="tp-input" id="' + id + '" type="' + type + '" placeholder=" " value="' + _esc(val) + '"' +
+        (maxLen ? ' maxlength="' + maxLen + '"' : '') + '>' +
       '<label class="tp-field-label tp-field-float" for="' + id + '">' + label + '</label>' +
       '</div>';
   }
