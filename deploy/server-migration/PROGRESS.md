@@ -19,13 +19,13 @@ Security fixes session (3 Nov) in progress, worktree
 `C:\Users\sriva\Desktop\AlpenGlow WEB\AlpenGlow-security`, branch
 `claude/security-fixes` (from `origin/main`, no upstream so a plain push
 cannot reach `main`). Setup done; fixes 2 and 3 deployed and tested on the
-new server (see Done, 3 Nov). Current: fix 1a, the new edge function for
-the trip planner (draft, then your OK to deploy and curl-test).
+new server; fix 1a (`save-trip-lead` edge function) deployed and
+curl-tested (see Done, 3 Nov). Current: fix 1b, `trip-planner.js` diff
+shown, waiting for your OK.
 
 ## Next step
 
-Fix 1 in order a (new edge
-function, curl test), b (`trip-planner.js` diff), c (merge to `main` and
+Fix 1 in order b (`trip-planner.js` diff), c (merge to `main` and
 push, separate OK, then a real trip planner run), d (migration revoking
 the public key on `trip_leads`, `security-test.sh` expect 0 FAIL); then the
 final re-test (contact form, trip planner, Compass, your dashboard login).
@@ -436,6 +436,34 @@ move.
     destinations, 3 offers, 0 console errors; `packages/bali` renders
     (title, overview, cities, inclusions, 12 images), 0 console errors.
     Browser snapshot files deleted.
+- **3 Nov 2026** Fix 1a deployed (your OK), commit `9cfc131` on
+  `claude/security-fixes` (not pushed): new edge function
+  `save-trip-lead`. Service role only inside the function; POST/OPTIONS;
+  `ALLOWED_ORIGINS` CORS like `submit-lead` plus 403 for a present but
+  disallowed Origin; rate limit = nginx `alpenglow_api` (20 r/s per IP,
+  burst 60), the same as `submit-lead` (your decision: no server config
+  change; `_shared/ratelimit.ts` is OTP-only and not used by
+  `submit-lead`). Every field validated against the planner's real values
+  (400 otherwise), unknown fields ignored; writes only `trip_leads` by
+  `session_id` (lowercase v4 UUID); a `submitted` row is never changed
+  (guarded UPDATE, 409); `created_at` never written; answers only
+  `{ok:true}` or `{error}`. `trip_leads` permissions unchanged.
+  - Checks first: `ALLOWED_ORIGINS` (in `.env` and in the running
+    container) = `alpenglowglobal.com`, `www.alpenglowglobal.com`,
+    `alpenglow-global.pages.dev` (https). The live site serves only
+    `https://alpenglowglobal.com` (http redirects there); `www` answers
+    Cloudflare 522 (not served at all). Session ids: only `_uuid()` sets
+    `tp_sid`; `crypto.randomUUID()` and the fallback both give lowercase
+    v4; generator unchanged since `d2b0b69` (27 Jun); all 73 existing
+    `trip_leads` session ids match `SESSION_RE`. So `SESSION_RE` stays
+    strict.
+  - `vps-deploy.sh`: no migration, no function removed. Curl tests (one
+    made-up row): preflight 200 with the site origin; valid saves 200
+    `{"ok":true}`; 6 bad fields 400, GET 405; wrong origin 403 (preflight
+    still names the site); submit 200, then an `in_progress` save and a
+    changed re-submit both 409; row stayed `submitted`, step 9, test name,
+    `created_at` unchanged. Test row deleted (exactly 1, guarded);
+    `trip_leads` 73. Functions log 0 errors; all containers healthy.
 
 ## Decisions made
 
