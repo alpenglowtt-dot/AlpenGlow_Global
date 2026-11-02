@@ -15,10 +15,20 @@ and `docker compose start kong` there). Only open check: WhatsApp OTP to
 a non-Indian number (needs a number you can receive on; same code path
 and keys as the Indian one, which works).
 
+Security fixes session (3 Nov) in progress, worktree
+`C:\Users\sriva\Desktop\AlpenGlow WEB\AlpenGlow-security`, branch
+`claude/security-fixes` (from `origin/main`, no upstream so a plain push
+cannot reach `main`). Setup done (see Done, 3 Nov). Current: fixes 2 and 3,
+SQL shown, waiting for your OK to write, deploy and test.
+
 ## Next step
 
-In a fresh session: AlpenGlow security fixes 1, 2 and 3 on the new server
-(each with your go-ahead). Later: Phase 6 (last `pull-backup.sh` of the
+Fixes 2 and 3 deployed and tested; then fix 1 in order a (new edge
+function, curl test), b (`trip-planner.js` diff), c (merge to `main` and
+push, separate OK, then a real trip planner run), d (migration revoking
+the public key on `trip_leads`, `security-test.sh` expect 0 FAIL); then the
+final re-test (contact form, trip planner, Compass, your dashboard login).
+Later: Phase 6 (last `pull-backup.sh` of the
 old server with `VPS_HOST=deploy@169.58.43.191`, then cancel it, delete
 the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
@@ -365,6 +375,37 @@ move.
   - Security fixes 1, 2, 3: not tonight, in a fresh session.
   - Old server untouched for the rollback window.
   - Local `.playwright-mcp/` test snapshots (never committed) deleted.
+- **3 Nov 2026** Security fixes, setup (no server change):
+  - Your main folder `AlpenGlow work` (on `main`): no uncommitted changes
+    to `trip-planner.js`, `supabase/`, `vps-deploy.sh` or
+    `setup-new-laptop.sh` (only `graphify-out/` files). Not modified.
+  - Worktree `AlpenGlow-security` on new branch `claude/security-fixes`
+    from `origin/main` (`d083663`); its upstream removed so a plain
+    `git push` cannot go to `main`.
+  - Phase 5 IP change applied there to `deploy/vps-deploy.sh` and
+    `scripts/setup-new-laptop.sh` only (same base blobs as `dd62a4c`;
+    `bash -n` OK; old IP gone), local commit `3b82503`, not pushed.
+  - Parity proof before any deploy (read-only): worktree
+    `supabase/functions` (12 files) identical to the server's
+    `repo/functions` and live `volumes/functions` (excluding `main`), and
+    `supabase/migrations` (11 files) identical to `repo/migrations`,
+    comparing content with line endings ignored; the 11 local `.sql`
+    names equal the 11 `_migrations_applied` rows. (Raw bytes differ only
+    by CRLF: the Windows checkout has `core.autocrlf=true`; the server
+    already holds 6 CRLF files from earlier deploys.) A deploy from the
+    worktree removes no function and re-runs no migration.
+  - Fix 3 evidence: the only Supabase client in the frontend is
+    `trip-planner.js` (`trip_leads` only); `api.js`, `compass.html`,
+    `dashboard.html` only call edge functions (`submit-lead`,
+    `chat-compass`, `crm`, `send-lead-email`); `dev.html` writes local
+    files via `writeJSON`. No edge function uses the 5 CMS tables or
+    `_migrations_applied`.
+  - Server catalog (read-only): the 5 CMS tables have row security on,
+    full grants to `anon` and `authenticated`, and 15 anon write policies
+    (insert/update/delete per table, all `true`); `_migrations_applied`
+    has no row security and full grants. `postgres` (owner, used by
+    `vps-deploy.sh`) and `service_role` have BYPASSRLS, so neither is
+    affected by the fixes.
 
 ## Decisions made
 
