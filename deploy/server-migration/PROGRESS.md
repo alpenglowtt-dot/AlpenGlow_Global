@@ -8,12 +8,14 @@ connection strings or customer data here.
 ## Current step
 
 Step 1 (sitting of 2 Nov, evening) on `84.247.184.195`: Phase 1 (base
-setup) and Phase 2 (AlpenGlow rehearsal) done and checked.
+setup), Phase 2 (AlpenGlow rehearsal) and Phase 2b (backup, health check,
+crontab) done and checked.
 
 ## Next step
 
-Phase 2b (first backup by hand, health check, crontab), then "Audit before
-cutover". No DNS change; the old server is only read from.
+"Audit before cutover" (`security-test.sh --burst` from the laptop, then
+the on-server audit items). No DNS change; the old server is only read
+from.
 
 ## Done
 
@@ -216,6 +218,13 @@ cutover". No DNS change; the old server is only read from.
   - From the laptop via `--resolve`: `rest/v1/packages` 200 (6 rows),
     `/`, `/project/default`, `/auth/v1/settings`, `/storage/v1/status` 404,
     `leads` refused to the public key, `submit-lead` CORS preflight 200.
+- **2 Nov 2026** Phase 2b on the new server: first backup by hand ended
+  `ok` (156 KB, `~/backups/2026-11-02_1633`, local only: no
+  `RCLONE_REMOTE` yet); health check by hand: all checks pass, nothing
+  emailed; `crontab ~/ops/crontab.deploy` installed (backup 22:30, health
+  every 5 min, Sunday cache prune, monthly log trim), cron active. The
+  backup passphrase is still only on the server: you copy it off with
+  `scp` (command given in chat) and into your password manager.
 
 ## Decisions made
 
@@ -309,10 +318,15 @@ Dates (your choice):
 
 To start Phase 1:
 
-- [x] The new Contabo server: `84.247.184.195` (2 Nov). Step 1 checks
-      that root key login works and that it is Ubuntu 24.04 with 4 vCPU,
-      8 GB RAM and 100 GB disk.
-- [ ] A fresh session on this laptop for step 1.
+- [x] The new Contabo server: `84.247.184.195` (2 Nov). Checked: Ubuntu
+      24.04.5, 4 vCPU, 7.8 GB RAM, 96 GB disk, root key login works.
+- [x] A fresh session on this laptop for step 1 (2 Nov, evening).
+
+From step 1 (2 Nov):
+
+- [ ] Copy the backup passphrase off the new server:
+      `scp deploy@84.247.184.195:ops/backup.passphrase "$HOME/Desktop/AlpenGlow WEB/vps-migration-backup/backup-passphrase.SECRET.txt"`,
+      then into your password manager.
 
 After the AlpenGlow switch-over (decided 2 Nov):
 
