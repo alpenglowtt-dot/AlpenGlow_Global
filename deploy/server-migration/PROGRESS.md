@@ -225,6 +225,27 @@ from.
   every 5 min, Sunday cache prune, monthly log trim), cron active. The
   backup passphrase is still only on the server: you copy it off with
   `scp` (command given in chat) and into your password manager.
+- **2 Nov 2026** "Audit before cutover" on the new server (DNS unchanged):
+  - `security-test.sh … 84.247.184.195 --burst` from the laptop: PASS for
+    the 4 locked lead tables, the 5 CMS reads, all 9 blocked paths (404),
+    ports 5432/6543/8000/8443/3000 closed, TLS 1.0/1.1 refused, certificate
+    valid. FAIL only for `trip_leads` (72 rows) and `_migrations_applied`
+    (11 rows): expected until fixes 1 and 2. Its rate-limit row also said
+    FAIL, but only because the script sends the 200 requests one by one and
+    from Git Bash on Windows each takes ~1.5 s (5 min in total), far below
+    20 r/s. Re-tested with one parallel curl (200 requests, 50 at a time,
+    13 s): 100 answered 429. Rate limiting works. (The other 100 got 500:
+    the edge runtime's normal answer for a function that does not exist.)
+  - On the server: `sshd -T` password and keyboard-interactive `no`, root
+    key-only; mode 600 on every `.env*`, `ops.env`, `backup.passphrase`;
+    `DOCKER-USER` drop rule present; all 11 containers 0 restarts, none
+    OOM-killed (Kong 2 workers inside its 512 MB cap).
+  - Restore test: tonight's `public.sql.gz` into a scratch database: only
+    the expected noise, counts match, 23 policies; scratch database
+    dropped.
+  - Alert test: `supabase-meta` stopped on purpose, health check emailed
+    PROBLEM to the agency address; started again, RECOVERED emailed. Resend
+    accepted both (inbox arrival still to be confirmed by you).
 
 ## Decisions made
 
