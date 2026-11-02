@@ -258,6 +258,18 @@ A record; Phase 4 checks. Then fixes 1, 2, 3 on the new server.
     crontab intact; all 11 containers healthy, Kong 0 restarts. From the
     laptop afterwards: `packages` 200, `/` 404, 5432/6543/8000/8443
     closed.
+- **2 Nov 2026** Your decisions after step 1, carried out:
+  - `certbot delete --cert-name travel.alpenglowglobal.com` on the NEW
+    server only: its certificate, archive and renewal config are gone; only
+    `api.alpenglowglobal.com` remains (valid to 17 Dec), `nginx -t` OK. The
+    old server was not touched.
+  - `batore-vps` key: not needed; the new server's `deploy` keeps the
+    laptop key only.
+  - Backup passphrase: replaced by you on the new server and kept in your
+    password manager. Checked (without reading it): still owned by
+    `deploy`, mode 600. The first backup (`2026-11-02_1633`) was local
+    only and never encrypted with the old passphrase, so nothing depends on
+    it.
 
 ## Decisions made
 
@@ -362,14 +374,13 @@ Before the AlpenGlow switch-over (from step 1, 2 Nov):
 - [ ] Do not deploy backend changes to the old server until the
       switch-over (or tell Claude, so they are re-deployed on the new
       server too).
-- [ ] Decide: remove the unused `travel` certificate's renewal config on
-      the new server (otherwise certbot there logs a failed renewal from
-      about 24 Nov; harmless).
-- [ ] Decide: is the old server's second deploy key `batore-vps` still
-      needed? (Not copied to the new server.)
-- [ ] Copy the backup passphrase off the new server:
-      `scp deploy@84.247.184.195:ops/backup.passphrase "$HOME/Desktop/AlpenGlow WEB/vps-migration-backup/backup-passphrase.SECRET.txt"`,
-      then into your password manager.
+- [x] `travel` certificate on the new server: removed (your decision,
+      2 Nov; `certbot delete`, new server only).
+- [x] Old server's second deploy key `batore-vps`: not needed, not added
+      to the new server (your decision, 2 Nov).
+- [x] Backup passphrase: you replaced it on the new server with a new one
+      and saved it in your password manager yourself (2 Nov); the `scp`
+      step is skipped.
 
 After the AlpenGlow switch-over (decided 2 Nov):
 
