@@ -7,16 +7,15 @@ connection strings or customer data here.
 
 ## Current step
 
-Sitting 0 finished (2 Nov): PSS read-only checks done, open decisions
-answered (see Done and Decisions made). The new Contabo server exists:
-`84.247.184.195`. Nothing has been done on it yet.
+Step 1 (sitting of 2 Nov, evening) on `84.247.184.195`: Phase 1 (base
+setup) done and checked. Fresh snapshot `2026-11-02_2030` pulled.
 
 ## Next step
 
-Step 1, in a fresh session: on `84.247.184.195`, `MIGRATION-RUNBOOK.md`
-Phase 1 (base setup), Phase 2 (AlpenGlow rehearsal, without the billing
-app), Phase 2b (first backup by hand, health check, crontab) and "Audit
-before cutover". No DNS change; the old server is only read from.
+Phase 2 (AlpenGlow rehearsal, without the billing app) with snapshot
+`2026-11-02_2030`, then Phase 2b (first backup by hand, health check,
+crontab) and "Audit before cutover". No DNS change; the old server is only
+read from.
 
 ## Done
 
