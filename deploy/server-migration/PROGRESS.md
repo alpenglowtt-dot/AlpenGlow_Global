@@ -22,9 +22,10 @@ cannot reach `main`). Setup done; fixes 2 and 3 deployed and tested on the
 new server; fix 1a (`save-trip-lead` edge function) deployed and
 curl-tested; fix 1b committed (`8b1b269`) and passed a pre-merge browser
 test; `main` pushed (`8b1b269`, 02:21 IST) and live on Cloudflare from
-02:21:42 IST (see Done, 3 Nov). Current: waiting for your own final
-submit (private window or hard refresh), then Claude checks the rows.
-Fix 1d not before 06:22 IST (4 h browser cache; your minimum was 1 h).
+02:21:42 IST; your own final submit confirmed (fix 1c done). Fix 1d:
+migration 014 written and dry-run OK (not committed, not deployed; see
+Done, 3 Nov). Current: waiting for your OK to deploy 014; earliest 03:22
+IST by your 1 h rule, 06:22 IST recommended (4 h browser cache).
 
 ## Next step
 
@@ -505,6 +506,27 @@ move.
   copy would fail the final submit (alert, and the lead would not reach
   `leads`). So 1d is safe from 06:22 IST (your rule of at least 1 hour
   would allow 03:22).
+- **3 Nov 2026** Fix 1c confirmed with your own final submit (02:27:36 to
+  02:28:15 IST), counts only: 1 new `trip_leads` row, `submitted`, step 9,
+  name/phone/email present; 1 new `trip_planner` lead via `submit-lead`;
+  SMS and email OTP send and verify through functions. Totals:
+  `trip_leads` 74 (30 submitted), `leads` 34. Kong since the deploy: 10
+  POST `save-trip-lead` from the browser side; the 2 POST and 11 PATCH on
+  `/rest/v1/trip_leads` all came from the edge-functions container
+  (`SUPABASE_URL=http://kong`, matched by hashed container address), i.e.
+  `save-trip-lead` itself as service role: 10 guarded updates, 1 insert,
+  plus 1 save that raced the first insert and took the built-in retry
+  path (insert conflict, guarded update). No browser wrote `trip_leads`
+  directly. Functions log 0 errors.
+- **3 Nov 2026** Fix 1d prepared: `014_trip_leads_service_only.sql` in
+  the worktree (not committed): drops every policy on `trip_leads`, keeps
+  row security on and forced, revokes all from `anon`, `authenticated`,
+  `PUBLIC`; a guard aborts unless no policies remain, the public roles
+  have no privilege and `service_role` still has SELECT/INSERT/UPDATE.
+  Dry run on the server (02:3x IST, `ROLLBACK`): exit 0; inside the
+  transaction `anon` SELECT and UPDATE refused, `service_role` reads (74
+  rows); afterwards unchanged (3 policies, anon INSERT/SELECT/UPDATE, 014
+  not recorded).
 
 ## Decisions made
 
