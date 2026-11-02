@@ -558,6 +558,15 @@ move.
   effect on the live site (migrations run only via `vps-deploy.sh`);
   `main` now matches the server. Your `AlpenGlow work` folder untouched
   (its local `main` is 5 behind).
+- **3 Nov 2026** Final re-test, part 1 (after 1d): Compass backend,
+  `chat-compass` called from the site origin with one travel question:
+  200 in 3.0 s, real Groq answer; the function writes nothing. (The
+  `compass` page itself is behind the site's verification popup, so a
+  browser chat needs a real OTP.) Trip planner after 1d: steps 1 to 8
+  OK through `save-trip-lead` (see 1d entry); the final submit after 1d
+  needs a real OTP. Contact form (`submit-contact`, no OTP) not yet
+  submitted: it inserts a `leads` row, emails the agency through Resend
+  and adds a Google Sheets row, so it waits for your OK.
 
 ## Decisions made
 
