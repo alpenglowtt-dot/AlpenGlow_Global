@@ -12,12 +12,12 @@
 #   3. Restarts the edge-functions container so new code takes effect.
 #
 # Requires: the ed25519 key at ~/.ssh/id_ed25519 already installed on the
-# VPS (see the one-time setup done in-session — deploy@169.58.43.191).
+# VPS (see the one-time setup done in-session — deploy@84.247.184.195).
 #
 # Usage: bash deploy/vps-deploy.sh
 set -euo pipefail
 
-VPS_HOST="deploy@169.58.43.191"
+VPS_HOST="deploy@84.247.184.195"
 REMOTE_REPO_DIR="projects/alpenglow-global/repo"
 REMOTE_BACKEND_DIR="projects/alpenglow-global/backend"
 LOCAL_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

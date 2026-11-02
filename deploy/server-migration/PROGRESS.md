@@ -338,6 +338,15 @@ browser tests. Then Phase 5 (old IP in `vps-deploy.sh`,
   any `chat-compass` call (Compass), a second WhatsApp number. Probably
   run before 22:28 or from a browser still caching the old IP (old Kong
   stopped, so 502; the trip planner swallows save errors). Re-test asked.
+- **2 Nov 2026** Phase 5 (your OK: apply, commit, push): old IP replaced
+  by `84.247.184.195` in `deploy/vps-deploy.sh` (lines 15 and 20,
+  `VPS_HOST`), `scripts/setup-new-laptop.sh` (line 34, message) and the
+  kit's `pull-backup.sh` default (line 15); `bash -n` OK. The older
+  `pull-backup.sh` copy in `vps-migration-backup` replaced by the kit's
+  (your OK). Left on purpose: the old IP in `README.md`,
+  `INPUTS-NEEDED.md`, this file and the runbook (history). The last
+  old-server snapshot (Phase 6) needs `VPS_HOST=deploy@169.58.43.191`.
+  `ssh-keygen -R 169.58.43.191` only after the old server is cancelled.
 
 ## Decisions made
 

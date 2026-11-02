@@ -12,7 +12,7 @@
 #         OUT="/c/Users/<you>/Desktop/vps-migration-backup" bash pull-backup.sh
 set -uo pipefail
 
-VPS_HOST="${VPS_HOST:-deploy@169.58.43.191}"
+VPS_HOST="${VPS_HOST:-deploy@84.247.184.195}"
 OUT="${OUT:-$HOME/vps-migration-backup}"
 if git -C "$OUT" rev-parse --is-inside-work-tree >/dev/null 2>&1 || git -C "$(dirname "$OUT")" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Refusing: $OUT is inside a git checkout, and a snapshot must never be committed."; exit 1
