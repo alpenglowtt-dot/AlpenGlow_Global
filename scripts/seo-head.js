@@ -21,6 +21,10 @@ const BIZ = {
 };
 
 const P = (slug, o) => Object.assign({ slug }, o);
+// Canonical/og:url/schema addresses use Cloudflare Pages' clean URLs
+// (/packages/bali, /destinations), the same form dev.html and sitemap.xml
+// use. The ".html" form is answered with a 308 redirect to the clean one,
+// so pointing search engines at it would point them at a redirect.
 
 const pages = [
   P('index.html', {
@@ -32,7 +36,7 @@ const pages = [
     type: 'website'
   }),
   P('compass.html', {
-    url: SITE + '/compass.html',
+    url: SITE + '/compass',
     title: 'COMPASS Trip Planner - Build Your Trip | AlpenGlow',
     desc: 'Use COMPASS, the AlpenGlow trip planner, to match your travel vibe, budget, month and group size to a custom international itinerary in under two minutes.',
     image: SITE + '/aurora.jpg',
@@ -41,7 +45,7 @@ const pages = [
     noindex: true
   }),
   P('destinations.html', {
-    url: SITE + '/destinations.html',
+    url: SITE + '/destinations',
     title: 'All Tour Packages - Every Destination | AlpenGlow Global',
     desc: 'Every AlpenGlow Global tour package in one place - Bali, Japan, Switzerland, the Maldives, Santorini and 14 more, grouped by region with pricing and itineraries.',
     image: SITE + '/swissalps.jpg',
@@ -180,7 +184,7 @@ packs.forEach(function (k) {
   const img = record && record.hero_image_url ? rootAssetURL(record.hero_image_url) : SITE + '/' + legacyImg;
   const alt = record ? (record.hero_image_alt || '') : legacyAlt;
   pages.push(P('packages/' + slug + '.html', {
-    url: SITE + '/packages/' + slug + '.html',
+    url: SITE + '/packages/' + slug,
     title: title, desc: desc, image: img, imageAlt: alt, type: 'article',
     noindex: !!(record && record.active === false),
     userPackage: dynamicPackageSlugs.has(slug),
@@ -196,7 +200,7 @@ for (const [slug, record] of packagePageData) {
   const title = record.page_title || record.title || '';
   const image = record.hero_image_url ? rootAssetURL(record.hero_image_url) : '';
   pages.push(P('packages/' + slug + '.html', {
-    url: SITE + '/packages/' + slug + '.html',
+    url: SITE + '/packages/' + slug,
     title, desc: record.meta_description || undefined, image: image || undefined,
     imageAlt: record.hero_image_alt || undefined, type: 'article',
     noindex: record.active === false,
@@ -234,7 +238,7 @@ function jsonld(p) {
       "@type": "ItemList", name: "Tour packages by AlpenGlow Global",
       itemListElement: packs.map((k, i) => ({
         "@type": "ListItem", position: i + 1,
-        name: k[1].split(' - ')[0].split(' | ')[0], url: SITE + '/packages/' + k[0] + '.html'
+        name: k[1].split(' - ')[0].split(' | ')[0], url: SITE + '/packages/' + k[0]
       }))
     });
   } else if (p.isCollection) {
@@ -251,7 +255,7 @@ function jsonld(p) {
         "@type": "ItemList", name: "Every AlpenGlow Global tour package",
         itemListElement: packs.map((k, i) => ({
           "@type": "ListItem", position: i + 1,
-          name: k[1].split(' - ')[0].split(' | ')[0], url: SITE + '/packages/' + k[0] + '.html'
+          name: k[1].split(' - ')[0].split(' | ')[0], url: SITE + '/packages/' + k[0]
         }))
       }
     });

@@ -974,7 +974,7 @@ async function writeIndexHTML() {
         <div class="package-location">${e(p.location||'')}</div>
         <h3 class="package-name">${e(p.name||'')}</h3>
         <div class="package-desc-wrap"><p class="package-desc">${e(p.description||'')}</p><div class="package-blur"></div></div>
-        <a href="${e((p.link||'#').replace(/\.html$/, ''))}" class="btn-details">View Details</a>
+        <a href="${e(p.link||'#')}" class="btn-details">View Details</a>
       </div>
     </div>`).join('')
 
@@ -1199,6 +1199,10 @@ function openCE(type, id) {
         <span class="ce-active-lbl">Destination is active (visible on website)</span>
       </div>
       <div class="ce-section-lbl">Sub-destinations (countries/places inside this card)</div>
+      <div class="empty-note" style="font-size:.72rem;color:rgba(255,255,255,.4);margin:-.2rem 0 .6rem">
+        Link: start typing a package name and pick its page from the list, or leave it empty (the card shows without a link).
+      </div>
+      ${pkgLinkDatalist()}
       <div id="ce-subdests"></div>
       <button class="btn-add-sd" onclick="addSubDestRow(document.getElementById('ce-subdests'))">+ Add Sub-destination</button>`
     document.getElementById('ce-body').innerHTML = html
@@ -1382,11 +1386,71 @@ function requestCloseCE() {
   closeCE()
 }
 
+// Only real edits count as unsaved changes: typing, changing a select, or
+// pressing one of the drawer's buttons (add/remove row, toggle, upload).
+// Merely clicking into a field must not trigger the "discard?" prompt.
 document.getElementById('ce-body').addEventListener('input', () => { if (CE_TYPE) CE_DIRTY = true })
-document.getElementById('ce-body').addEventListener('click', () => { if (CE_TYPE) CE_DIRTY = true })
+document.getElementById('ce-body').addEventListener('change', () => { if (CE_TYPE) CE_DIRTY = true })
+document.getElementById('ce-body').addEventListener('click', ev => {
+  if (CE_TYPE && ev.target.closest('button')) CE_DIRTY = true
+})
 document.addEventListener('keydown', ev => {
   if (ev.key === 'Escape' && CE_TYPE) requestCloseCE()
 })
+
+// "packages/kerala.html" -> "kerala"
+function pkgSlugFromLink(link) {
+  return String(link || '').replace(/^packages\//, '').replace(/\.html$/, '')
+}
+
+// Sub-destination links are typed by hand, so bring them to the one form
+// every other link on the site uses: packages/<slug>.html. Accepts "kerala",
+// "kerala.html", "packages/Kerala", "/packages/kerala.html" or a full
+// alpenglowglobal.com URL. Returns { link, ok }: ok is false when the link
+// doesn't lead to an existing page (it would 404 from the homepage).
+async function checkSubDestLink(value) {
+  let v = String(value || '').trim()
+  if (!v) return { link: '', ok: true }                       // no link yet: card shows without one
+  v = v.replace(/^https?:\/\/(www\.)?alpenglowglobal\.com/i, '')
+  if (/^https?:\/\//i.test(v)) return { link: v, ok: true }  // another website
+  const path = v.replace(/^\.?\/+/, '')
+  const bare = path.replace(/[?#].*$/, '')
+  const m = bare.match(/^(?:packages\/)?([A-Za-z0-9-]+)(?:\.html?)?$/)
+  if (m && ALL_PKG_FILES.includes(m[1].toLowerCase() + '.html')) {
+    return { link: 'packages/' + m[1].toLowerCase() + '.html' + path.slice(bare.length), ok: true }
+  }
+  // Another page at the site root, e.g. destinations.html or index.html#offers
+  if (/^[A-Za-z0-9-]+\.html$/.test(bare) && await fileExists(bare)) return { link: path, ok: true }
+  return { link: v, ok: false }
+}
+
+// Suggestions for the sub-destination link field: every package page.
+function pkgLinkDatalist() {
+  return '<datalist id="pkg-page-links">' + ALL_PKG_FILES.map(f => {
+    const slug = f.replace(/\.html$/, '')
+    const page = ALL_PAGES.find(p => p.slug === slug)
+    return '<option value="packages/' + e(f) + '">' + e((page && (page.title || page.page_title)) || slug) +
+      (page && page.active === false ? ' (page switched off)' : '') + '</option>'
+  }).join('') + '</datalist>'
+}
+
+// Clear destination-panel links that point at a page that no longer exists,
+// so the homepage never links to a 404. Returns the affected card names.
+async function clearSubDestLinks(slug) {
+  const affected = []
+  const next = ALL_DESTS.map(dest => {
+    if (!Array.isArray(dest.sub_destinations)) return dest
+    let changed = false
+    const subs = dest.sub_destinations.map(sub => {
+      const m = String(sub.link || '').match(/(?:^|\/)packages\/([a-z0-9-]+)(?:\.html?)?(?:[?#]|$)/i)
+      if (m && m[1].toLowerCase() === slug) { changed = true; affected.push((dest.name || dest.slug) + ' → ' + (sub.name || 'card')); return { ...sub, link: '' } }
+      return sub
+    })
+    return changed ? { ...dest, sub_destinations: subs } : dest
+  })
+  if (affected.length) { await writeJSON('data/destinations.json', next); ALL_DESTS = next }
+  return affected
+}
 
 function slugify(str) {
   return str.toLowerCase().trim()
@@ -1671,6 +1735,17 @@ async function saveCE() {
       return
     }
     if (isDest) {
+      const badLinks = []
+      for (const sub of body.sub_destinations) {
+        const checked = await checkSubDestLink(sub.link)
+        sub.link = checked.link
+        if (!checked.ok) badLinks.push('• ' + (sub.name || 'card') + ': "' + sub.link + '"')
+      }
+      if (badLinks.length) {
+        alert('These sub-destination links don\'t lead to an existing page, so they would show an error on the homepage:\n\n' +
+          badLinks.join('\n') + '\n\nPick the page from the suggestion list (start typing the package name), or leave the link empty.')
+        return
+      }
       const current = ALL_DESTS.find(item => item.id === CE_ID || item.slug === CE_ID)
       if (ALL_DESTS.some(item => item.slug === body.slug && item !== current)) {
         alert('That destination slug is already in use. Choose a unique slug.')
@@ -1851,10 +1926,26 @@ async function deleteItem(table, id, btn) {
   try {
     if (table === 'package_pages') {
       const item = ALL_PAGES.find(p => p.id === id || p.slug === id)
-      if (item?.slug) {
-        try { await (await getSubDir('data/pages')).removeEntry(item.slug + '.json') }
+      if (!item?.slug) { await loadAll(); return }
+      // A page that a Tour Package uses can't be deleted on its own: the
+      // homepage card would point at a page with no content. Deleting the
+      // package removes both together.
+      const owner = ALL_PKGS.find(p => pkgSlugFromLink(p.link) === item.slug)
+      if (owner) {
+        alert('This page belongs to the package "' + (owner.name || item.slug) + '".\n\nDelete that package under "Tour Packages" instead; that removes its page too. To hide the page without deleting it, switch it off.')
+        await loadAll()
+        return
+      }
+      if (!confirm('Delete the page "' + item.slug + '"? This removes packages/' + item.slug + '.html and data/pages/' + item.slug + '.json from the website.')) {
+        await loadAll()
+        return
+      }
+      for (const [directory, filename] of [['data/pages', item.slug + '.json'], ['packages', item.slug + '.html']]) {
+        try { await (await getSubDir(directory)).removeEntry(filename) }
         catch (err) { if (err.name !== 'NotFoundError') throw err }
       }
+      const affected = await clearSubDestLinks(item.slug)
+      if (affected.length) setTimeout(() => showToast('Removed links to the deleted page from: ' + affected.join(', '), 'ok'), 400)
     } else {
       const arr = TABLE_ARR[table]?.()
       const file = TABLE_FILE[table]
@@ -1875,6 +1966,8 @@ async function deleteItem(table, id, btn) {
           try { await (await getSubDir(directory)).removeEntry(filename) }
           catch (err) { if (err.name !== 'NotFoundError') throw err }
         }
+        const affected = await clearSubDestLinks(slug)
+        if (affected.length) setTimeout(() => showToast('Removed links to the deleted page from: ' + affected.join(', '), 'ok'), 400)
       }
     }
   } catch(err) {
@@ -2041,7 +2134,7 @@ function addSubDestRow(container, s) {
       <input class="ce-input sd-img" id="${sdImgId}" placeholder="https://… image URL" value="${e(s.image_url||'')}" style="flex:1;min-width:0">
       <button type="button" class="btn-upload-local" onclick="uploadLocalImage('${sdImgId}',null,'images/')">📁 Upload</button>
     </div>
-    <input class="ce-input sd-link" placeholder="Link (e.g. packages/india.html)" value="${e(s.link||'')}">
+    <input class="ce-input sd-link" list="pkg-page-links" placeholder="Link (e.g. packages/india.html)" value="${e(s.link||'')}">
   `
   container.appendChild(row)
 }

@@ -47,17 +47,26 @@ cards, JSON-LD) is **generated**, not hand-edited:
   the lazy-loading attributes (marked with
   `SEOCONTENT`/`SEOFOOTER`/`SEOSTYLE`/`SEOPRELOAD`).
 
-`AlpenGlow/destinations.html` is a real, indexable page listing all 19
-package links grouped by region (`GROUPS` in `seo-head.js`), between
+`AlpenGlow/destinations.html` is a real, indexable page listing every
+package link (20 today) grouped by region (`GROUPS` in `seo-head.js`), between
 `<!-- DESTLIST:BEGIN/END -->` markers that `seo-head.js` regenerates from the
 same `packs` table used for per-package titles/descriptions — it's the single
 source of truth, so a new package only needs adding to `packs` (and to a
 `GROUPS` entry) to appear everywhere. This page is *why* the homepage footer
 only needs one link ("View All Tour Packages & Cruises"): the crawl path is
 `index.html → destinations.html → each package page`, which is just as
-indexable as linking all 19 directly from the homepage, without the footer
-listing them all inline. `seo-head.js` also regenerates `sitemap.xml` from
-the same page list (skipping anything `noindex`).
+indexable as linking every package directly from the homepage, without the footer
+listing them all inline. Packages added in `dev.html` (not in `packs`) are
+picked up from `data/packages.json` + `data/pages/*.json` automatically.
+
+`sitemap.xml` is owned by `dev.html` (the content editor), not `seo-head.js`:
+it is rewritten whenever a page or package is saved, switched on/off or
+deleted, and lists every active package page.
+
+Canonical, `og:url`, JSON-LD and sitemap addresses all use Cloudflare
+Pages' clean URLs (`/packages/bali`, `/destinations`); the `.html` form is
+308-redirected to them. Links *inside* pages keep `.html` (they work both
+on Cloudflare and when a file is opened straight from disk).
 
 Both are idempotent — they strip their own previous block before re-inserting,
 so re-running them is always safe. Edit the script, not the HTML; a hand edit
