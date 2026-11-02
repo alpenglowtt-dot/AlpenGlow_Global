@@ -21,9 +21,10 @@ Security fixes session (3 Nov) in progress, worktree
 cannot reach `main`). Setup done; fixes 2 and 3 deployed and tested on the
 new server; fix 1a (`save-trip-lead` edge function) deployed and
 curl-tested; fix 1b committed (`8b1b269`) and passed a pre-merge browser
-test; `main` pushed (`8b1b269`, 02:21 IST, see Done, 3 Nov). Current:
-waiting for Cloudflare Pages to serve the new `trip-planner.js`, then your
-own final submit.
+test; `main` pushed (`8b1b269`, 02:21 IST) and live on Cloudflare from
+02:21:42 IST (see Done, 3 Nov). Current: waiting for your own final
+submit (private window or hard refresh), then Claude checks the rows.
+Fix 1d not before 06:22 IST (4 h browser cache; your minimum was 1 h).
 
 ## Next step
 
@@ -494,6 +495,16 @@ move.
   fast-forward `d083663..8b1b269`, no force. Your `AlpenGlow work`
   folder was not touched (its local `main` is now 4 behind; `git pull`
   there when you like; the 4 commits do not touch `graphify-out/`).
+- **3 Nov 2026** Cloudflare Pages serves the new `trip-planner.js` from
+  02:21:42 IST (contains `save-trip-lead`, no direct `trip_leads` call).
+  Baseline at 02:22 IST: `trip_leads` 73 (29 submitted), `leads` 33 (8
+  from `trip_planner`). **Cache:** `trip-planner.js` is served with
+  `Cache-Control: max-age=14400` (4 h) and the script tag has no version
+  (`index.html` itself is `max-age=0`). A browser that loaded the old file
+  before 02:21 may keep it until about 06:22 IST; after fix 1d such a
+  copy would fail the final submit (alert, and the lead would not reach
+  `leads`). So 1d is safe from 06:22 IST (your rule of at least 1 hour
+  would allow 03:22).
 
 ## Decisions made
 
