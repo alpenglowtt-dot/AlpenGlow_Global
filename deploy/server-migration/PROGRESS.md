@@ -18,12 +18,13 @@ and keys as the Indian one, which works).
 Security fixes session (3 Nov) in progress, worktree
 `C:\Users\sriva\Desktop\AlpenGlow WEB\AlpenGlow-security`, branch
 `claude/security-fixes` (from `origin/main`, no upstream so a plain push
-cannot reach `main`). Setup done (see Done, 3 Nov). Current: fixes 2 and 3,
-SQL shown, waiting for your OK to write, deploy and test.
+cannot reach `main`). Setup done; fixes 2 and 3 deployed and tested on the
+new server (see Done, 3 Nov). Current: fix 1a, the new edge function for
+the trip planner (draft, then your OK to deploy and curl-test).
 
 ## Next step
 
-Fixes 2 and 3 deployed and tested; then fix 1 in order a (new edge
+Fix 1 in order a (new edge
 function, curl test), b (`trip-planner.js` diff), c (merge to `main` and
 push, separate OK, then a real trip planner run), d (migration revoking
 the public key on `trip_leads`, `security-test.sh` expect 0 FAIL); then the
@@ -406,6 +407,35 @@ move.
     has no row security and full grants. `postgres` (owner, used by
     `vps-deploy.sh`) and `service_role` have BYPASSRLS, so neither is
     affected by the fixes.
+- **3 Nov 2026** Fixes 2 and 3 deployed to the new server (your OK),
+  commit `c6121c3` on `claude/security-fixes` (not pushed):
+  - `012_lock_migrations_table.sql`: row security on
+    `_migrations_applied`, all public roles revoked. `vps-deploy.sh` now
+    applies the same two statements on every run (fresh servers locked
+    from the start).
+  - `013_lock_cms_writes.sql`: every public write policy dropped on the 5
+    CMS tables (15) and write privileges revoked from `anon`,
+    `authenticated`, `PUBLIC`; reads kept; a guard aborts if any table
+    loses its anon read policy.
+  - Dry run first (each file with `ROLLBACK`): both exit 0, nothing kept.
+    Then `vps-deploy.sh` from the worktree: 012 and 013 applied, no
+    function removed, functions restarted. `_migrations_applied` 13 rows.
+  - Catalog after: `_migrations_applied` row security on, no public
+    grants; each CMS table only `SELECT` for `anon`/`authenticated` and
+    its one read policy.
+  - `security-test.sh` (real DNS): 1 FAIL, 0 WARN: only `trip_leads`
+    (73 rows, fix 1). `_migrations_applied` now PASS (401).
+  - Write probes with the public key on the CMS tables (filter
+    `id IS NULL`, matches no row): PATCH and DELETE 401 on all 5; reads
+    200. `_migrations_applied` read and DELETE 401. (A PATCH with an empty
+    `{}` body answers 204 because PostgREST skips it without asking the
+    database; re-probed with a real column.)
+  - `healthcheck.sh` exit 0; all containers healthy; 0 error lines in the
+    functions log (10 min).
+  - Live site in a fresh browser: homepage 6 package cards, 5
+    destinations, 3 offers, 0 console errors; `packages/bali` renders
+    (title, overview, cities, inclusions, 12 images), 0 console errors.
+    Browser snapshot files deleted.
 
 ## Decisions made
 
@@ -526,10 +556,13 @@ After the AlpenGlow switch-over (decided 2 Nov):
 
 - [ ] AlpenGlow fix 1: `trip_leads` behind an edge function (runbook,
       "Security fixes that need a code change"), on the new server.
-- [ ] AlpenGlow fix 2: `_migrations_applied` row security and no public
-      access, on the new server.
-- [ ] AlpenGlow fix 3: remove public write access on the CMS tables, on
-      the new server.
+- [x] AlpenGlow fix 2: `_migrations_applied` row security and no public
+      access, on the new server (deployed 3 Nov, migration 012).
+- [x] AlpenGlow fix 3: remove public write access on the CMS tables, on
+      the new server (deployed 3 Nov, migration 013).
+- [ ] Merge `claude/security-fixes` into `main` and push (your separate
+      OK; carries the Phase 5 IP change and migrations 012, 013 to
+      `main`).
 
 Settled (2 Nov):
 
