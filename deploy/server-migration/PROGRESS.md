@@ -8,8 +8,15 @@ connection strings or customer data here.
 ## Current step
 
 AlpenGlow switch-over in progress (2 Nov). Pre-cutover checks done (see
-Done). Waiting for your go-ahead for Phase 3 step 2 (stop Kong on the old
-server). DNS still points at the old server.
+Done). You approved steps 2 to 4. **Blocked: the old server
+`169.58.43.191` stopped answering at about 21:59 laptop time** (it
+answered at about 21:55): ports 22, 80, 443 time out from the laptop AND
+from the new server; laptop internet and new server fine; still down at
+22:05. Kong was NOT stopped (the command never reached the server), so
+the site's forms are down because the old server is down. DNS still
+points at the old server. Nothing changed on either server. Waiting for
+your decision: wait for the old server, or cut over from the 20:30
+snapshot already restored on the new server.
 
 ## Next step
 
