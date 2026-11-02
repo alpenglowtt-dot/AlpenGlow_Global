@@ -24,8 +24,9 @@ curl-tested; fix 1b committed (`8b1b269`) and passed a pre-merge browser
 test; `main` pushed (`8b1b269`, 02:21 IST) and live on Cloudflare from
 02:21:42 IST; your own final submit confirmed (fix 1c done). Fix 1d:
 migration 014 written and dry-run OK (not committed, not deployed; see
-Done, 3 Nov). Current: waiting for your OK to deploy 014; earliest 03:22
-IST by your 1 h rule, 06:22 IST recommended (4 h browser cache).
+Done, 3 Nov). Current: your OK given ("go 1d", 02:45 IST); 014 committed
+(`9047ad7`, not pushed); deploy waits for your 1 h minimum (03:22:42 IST),
+then security-test, health check, browser run, test row deleted.
 
 ## Next step
 
