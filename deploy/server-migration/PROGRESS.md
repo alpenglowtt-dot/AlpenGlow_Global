@@ -7,23 +7,21 @@ connection strings or customer data here.
 
 ## Current step
 
-AlpenGlow switch-over in progress (2 Nov). Phase 3 done: `api` points
-at `84.247.184.195` since about 22:28 laptop time; forms run on the new
-server. **Phase 3, 4 and 5 done** (see Done). Only open check: WhatsApp
-OTP to a non-Indian number (needs a number you can receive on; same code
-path and keys as the Indian one, which works). Old Kong stays
-stopped (rollback: point `api` back and `docker compose start kong`
-there).
+AlpenGlow switch-over finished (2 Nov): `api` points at `84.247.184.195`
+since about 22:28 laptop time; Phases 3, 4 and 5 done (see Done). Now in
+the Phase 6 rollback window: old server untouched for 1 to 2 weeks, old
+Kong stays STOPPED (rollback only: point `api` back to `169.58.43.191`
+and `docker compose start kong` there). Only open check: WhatsApp OTP to
+a non-Indian number (needs a number you can receive on; same code path
+and keys as the Indian one, which works).
 
 ## Next step
 
-Phase 3: stop old Kong; final `pull-backup.sh`; copy the public dump and
-row counts to `~/snapshot-final` on the new server; reset its database and
-restore with `restore-public.sh` (permissions table, counts, cron,
-policies); then YOU switch the `api` A record; Phase 4 checks and your
-browser tests. Then Phase 5 (old IP in `vps-deploy.sh`,
-`setup-new-laptop.sh`, `pull-backup.sh`; diff shown first). Then fixes 1,
-2, 3 on the new server.
+In a fresh session: AlpenGlow security fixes 1, 2 and 3 on the new server
+(each with your go-ahead). Later: Phase 6 (last `pull-backup.sh` of the
+old server with `VPS_HOST=deploy@169.58.43.191`, then cancel it, delete
+the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
+move.
 
 ## Done
 
@@ -358,6 +356,15 @@ browser tests. Then Phase 5 (old IP in `vps-deploy.sh`,
   and template; only the number normalization differs). Post-cutover
   totals: `leads` 33, `trip_leads` 74. Earlier "missing" tests were simply
   run after Claude's first look at the logs.
+- **2 Nov 2026** Your decisions after the switch-over, carried out:
+  - Old Kong stays stopped (billing app retired; no stale-DNS writes to
+    the old server). Start it only for a rollback.
+  - Claude's test row deleted on the new server (your OK): exactly 1 row
+    in `trip_leads` (18:25:06 CET, `beach`, `in_progress`, step 1), in a
+    guarded transaction; `trip_leads` now 73.
+  - Security fixes 1, 2, 3: not tonight, in a fresh session.
+  - Old server untouched for the rollback window.
+  - Local `.playwright-mcp/` test snapshots (never committed) deleted.
 
 ## Decisions made
 
@@ -462,9 +469,10 @@ Before the AlpenGlow switch-over (from step 1, 2 Nov):
 
 - [ ] Confirm the two test alert emails (PROBLEM, then RECOVERED, about
       17:05 server time) arrived at the agency inbox, not in spam.
-- [ ] Do not deploy backend changes to the old server until the
-      switch-over (or tell Claude, so they are re-deployed on the new
-      server too).
+- [x] Do not deploy backend changes to the old server until the
+      switch-over: none were (checked 2 Nov). From now on deploy only to
+      the new server (`vps-deploy.sh` points there).
+- [ ] WhatsApp OTP to a non-Indian number on the live site.
 - [x] `travel` certificate on the new server: removed (your decision,
       2 Nov; `certbot delete`, new server only).
 - [x] Old server's second deploy key `batore-vps`: not needed, not added
