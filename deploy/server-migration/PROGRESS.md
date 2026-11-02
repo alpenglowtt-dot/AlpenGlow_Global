@@ -7,21 +7,19 @@ connection strings or customer data here.
 
 ## Current step
 
-Step 1 finished (2 Nov, evening) on `84.247.184.195`: Phase 1, Phase 2
-(rehearsal), Phase 2b and "Audit before cutover" all done and passed. The
-only audit FAILs are the expected `trip_leads` and `_migrations_applied`
-rows (fixes 1 and 2, decided for right after the switch-over). AlpenGlow
-is ready for switch-over once the items under "Before the AlpenGlow
-switch-over" in Waiting on me are done. DNS unchanged; the old server was
-only read from.
+AlpenGlow switch-over in progress (2 Nov). Pre-cutover checks done (see
+Done). Waiting for your go-ahead for Phase 3 step 2 (stop Kong on the old
+server). DNS still points at the old server.
 
 ## Next step
 
-Phase 3 (cutover), in a fresh session on the date you choose: TTL lowered
-a day before; stop Kong on the old server; final `pull-backup.sh`; reset
-the rehearsal database on the new server and restore the final dump with
-`restore-public.sh` (permissions table and counts again); switch the `api`
-A record; Phase 4 checks. Then fixes 1, 2, 3 on the new server.
+Phase 3: stop old Kong; final `pull-backup.sh`; copy the public dump and
+row counts to `~/snapshot-final` on the new server; reset its database and
+restore with `restore-public.sh` (permissions table, counts, cron,
+policies); then YOU switch the `api` A record; Phase 4 checks and your
+browser tests. Then Phase 5 (old IP in `vps-deploy.sh`,
+`setup-new-laptop.sh`, `pull-backup.sh`; diff shown first). Then fixes 1,
+2, 3 on the new server.
 
 ## Done
 
