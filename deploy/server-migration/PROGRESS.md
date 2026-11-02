@@ -7,10 +7,10 @@ connection strings or customer data here.
 
 ## Current step
 
-AlpenGlow switch-over in progress (2 Nov). Phase 3 steps 2 and 3 done
-(see Done); now step 4 (reset and restore on the new server). Old Kong
-stopped since 22:17:59 laptop time: **forms are down** until DNS points at
-the new server. DNS still points at the old server.
+AlpenGlow switch-over in progress (2 Nov). Phase 3 steps 2, 3 and 4 done
+(see Done). **Waiting for you to change the `api` A record in Cloudflare
+to `84.247.184.195`** (step 5). Old Kong stopped since 22:17:59 laptop
+time: forms are down until DNS points at the new server.
 
 ## Next step
 
@@ -299,6 +299,19 @@ browser tests. Then Phase 5 (old IP in `vps-deploy.sh`,
   inside-git guard. Public dump and row counts copied to
   `~/snapshot-final/db` on the new server (mode 700/600), sha256 equal on
   both ends.
+- **2 Nov 2026** Phase 3 step 4 on the new server: `docker compose down`;
+  rehearsal database `volumes/db/data` (69 MB) wiped as root; `compose up`
+  with the limits file; all 11 healthy after about 1 minute.
+  `restore-public.sh` with `~/snapshot-final/db`: only the expected noise
+  (12 + 1); permissions exactly the runbook table. Migration 008 re-run
+  (exit 0); rest and functions restarted. COUNTS MATCH against
+  `2026-11-02_2218` (all 11 public tables); `otp-24h-cleanup` hourly,
+  active; 23 policies; 10 tables with row security; 11/11 healthy. Via
+  `--resolve`: `packages` 200 (6 rows), `leads` refused to the public key
+  (401), `submit-lead` preflight 200, `/` 404. (First attempt piped the
+  whole block into `bash -s`: the restore's `docker exec -i` read the rest
+  of the script from stdin, so 008 and the restart did not run; run again
+  on their own.)
 
 ## Decisions made
 
@@ -381,6 +394,9 @@ browser tests. Then Phase 5 (old IP in `vps-deploy.sh`,
 - Multi-line remote commands from PowerShell: pipe a here-string into
   `ssh <host> "tr -d '\r' | bash -s"` (plain quoted commands get their
   quotes stripped). Bash scripts run in Git Bash.
+- In a script piped into `bash -s`, any command that reads stdin
+  (`restore-public.sh`, `docker exec -i`, `psql < file`) swallows the rest
+  of the script. Run those as their own `ssh` call with `</dev/null`.
 
 ## Waiting on me
 
