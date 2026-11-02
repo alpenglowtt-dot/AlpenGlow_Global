@@ -270,6 +270,17 @@ A record; Phase 4 checks. Then fixes 1, 2, 3 on the new server.
     `deploy`, mode 600. The first backup (`2026-11-02_1633`) was local
     only and never encrypted with the old passphrase, so nothing depends on
     it.
+- **2 Nov 2026** Pre-cutover checks for the switch-over (all read-only):
+  - `api` A record: TTL 300 (Auto, DNS only; checked by you today and
+    confirmed via 1.1.1.1), still `169.58.43.191`; zone on Cloudflare.
+  - No backend deployed to the old server since the rehearsal (your
+    statement), confirmed: all 62 backend files on the old server (13
+    deployed function files, `repo/` functions and 11 migrations,
+    `config.toml`, the 10 compose files, Kong and envoy config) identical
+    (sha256) to snapshot `2026-11-02_2030`; live `_migrations_applied` 11
+    rows. Nothing to re-deploy on the new server.
+  - New server: all 11 containers healthy, disk 14% used, `packages` 200
+    via `--resolve`.
 
 ## Decisions made
 
@@ -419,6 +430,6 @@ Recommended (planned 2 Nov; you set them up yourself):
 
 Later:
 
-- [ ] A day before the AlpenGlow switch-over: lower the TTL of `api` in the
-      `alpenglowglobal.com` zone to 5 minutes.
+- [x] A day before the AlpenGlow switch-over: lower the TTL of `api` in the
+      `alpenglowglobal.com` zone to 5 minutes (300 s, checked 2 Nov).
 - [ ] The PSS inputs in `INPUTS-NEEDED.md` ("For PSS").
