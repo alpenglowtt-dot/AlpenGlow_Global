@@ -20,13 +20,16 @@ Security fixes session (3 Nov) in progress, worktree
 `claude/security-fixes` (from `origin/main`, no upstream so a plain push
 cannot reach `main`). Setup done; fixes 2 and 3 deployed and tested on the
 new server; fix 1a (`save-trip-lead` edge function) deployed and
-curl-tested (see Done, 3 Nov). Current: fix 1b, `trip-planner.js` diff
-shown, waiting for your OK.
+curl-tested; fix 1b committed (`8b1b269`) and passed a pre-merge browser
+test (see Done, 3 Nov). Current: waiting for your OK to put
+`claude/security-fixes` on `main` and push.
 
 ## Next step
 
-Fix 1 in order b (`trip-planner.js` diff), c (merge to `main` and
-push, separate OK, then a real trip planner run), d (migration revoking
+Fix 1 in order c (after your OK: `main` updated and pushed; Cloudflare
+Pages deploys; you do the final submit yourself with your own phone and
+email; Claude checks rows reach `trip_leads` through `save-trip-lead`),
+d (NOT before 1 hour after the Cloudflare deploy, your rule) (migration revoking
 the public key on `trip_leads`, `security-test.sh` expect 0 FAIL); then the
 final re-test (contact form, trip planner, Compass, your dashboard login).
 Later: Phase 6 (last `pull-backup.sh` of the
@@ -464,6 +467,27 @@ move.
     changed re-submit both 409; row stayed `submitted`, step 9, test name,
     `created_at` unchanged. Test row deleted (exactly 1, guarded);
     `trip_leads` 73. Functions log 0 errors; all containers healthy.
+- **3 Nov 2026** Fix 1b committed (your OK), `8b1b269` on
+  `claude/security-fixes` (not pushed): `trip-planner.js` saves progress
+  and the final submit through `save-trip-lead` (fetch); the Supabase
+  browser client and every direct `trip_leads` call removed; after the
+  submitted save (or a 409 `already_submitted` retry) the lead still goes
+  through `submit-lead` as before; budget outside 1..1e9 sent as empty;
+  name input `maxlength` 100. `node --check` OK.
+  - Pre-merge browser test (your OK): live `https://alpenglowglobal.com`
+    in a fresh browser with the worktree's `trip-planner.js` served in
+    place of the deployed one; steps 1 to 8, no contact data, no submit.
+    8 POSTs to `save-trip-lead`, all 200; no request to `trip_leads`,
+    `rest/v1` or `submit-lead`. Row: `in_progress`, step 8, all 8 answers
+    present, no contact fields. Deleted (exactly 1, guarded);
+    `trip_leads` 73. No browser files left.
+  - `git diff --stat main...claude/security-fixes`: 6 files (+335/-31):
+    `trip-planner.js`, `vps-deploy.sh`, `setup-new-laptop.sh`,
+    `save-trip-lead/index.ts`, migrations 012 and 013. Nothing from
+    `deploy/server-migration/`, `CLAUDE.md` or `.claude/`. `main` =
+    `origin/main` = `d083663` = merge base, so `main` can fast-forward.
+  - Your rules for c and d: you do the final submit yourself after the
+    Cloudflare deploy; fix 1d waits at least 1 hour after that deploy.
 
 ## Decisions made
 
