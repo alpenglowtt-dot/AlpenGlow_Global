@@ -328,6 +328,15 @@ browser tests. Then Phase 5 (old IP in `vps-deploy.sh`,
   simulated renewals succeeded (it waits a random ~6 min when run without
   a terminal). Functions logs: no errors in the last 50 lines.
   `healthcheck.sh`: all checks pass, now against the new server itself.
+- **2 Nov 2026** Phase 4, your browser tests ("all working"), checked in
+  the new server's database, Kong and nginx logs since the cutover (17:58
+  CET): 2 new `leads` (`site_popup`, 18:04 and 18:05 CET), `submit-lead`,
+  email OTP send and verify, and ONE `send-sms-otp` and `verify-sms-otp`,
+  all 200, no function errors. NOT seen on the new server: any
+  `trip_leads` write or `trip_planner` lead, any `crm` call (dashboard),
+  any `chat-compass` call (Compass), a second WhatsApp number. Probably
+  run before 22:28 or from a browser still caching the old IP (old Kong
+  stopped, so 502; the trip planner swallows save errors). Re-test asked.
 
 ## Decisions made
 
