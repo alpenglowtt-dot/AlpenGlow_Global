@@ -7,10 +7,14 @@ connection strings or customer data here.
 
 ## Current step
 
-AlpenGlow switch-over in progress (2 Nov). Phase 3 steps 2, 3 and 4 done
-(see Done). **Waiting for you to change the `api` A record in Cloudflare
-to `84.247.184.195`** (step 5). Old Kong stopped since 22:17:59 laptop
-time: forms are down until DNS points at the new server.
+AlpenGlow switch-over in progress (2 Nov). Phase 3 done: `api` points
+at `84.247.184.195` since about 22:28 laptop time; forms run on the new
+server. Phase 4 automated checks passed (see Done). **Waiting for your
+browser tests** (homepage and package page, contact form, trip planner,
+email OTP, WhatsApp OTP Indian and non-Indian, dashboard login, Compass);
+then Claude confirms the test rows on the new server. Old Kong stays
+stopped (rollback: point `api` back and `docker compose start kong`
+there).
 
 ## Next step
 
@@ -312,6 +316,18 @@ browser tests. Then Phase 5 (old IP in `vps-deploy.sh`,
   whole block into `bash -s`: the restore's `docker exec -i` read the rest
   of the script from stdin, so 008 and the restart did not run; run again
   on their own.)
+- **2 Nov 2026** Phase 3 step 5: you changed the `api` A record in
+  Cloudflare to `84.247.184.195` (DNS only). At 22:28:56 laptop time
+  1.1.1.1, 8.8.8.8, Cloudflare's own nameserver and the laptop all answer
+  the new IP (TTL 300).
+- **2 Nov 2026** Phase 4, automated part, over real DNS:
+  `security-test.sh` (no `--burst`; rate limit already proven) 2 FAIL,
+  0 WARN, the same as the audit: only `trip_leads` (72) and
+  `_migrations_applied` (11), fixes 1 and 2; all other rows PASS, ports
+  5432, 6543, 8000, 8443, 3000 closed. `certbot renew --dry-run`: all
+  simulated renewals succeeded (it waits a random ~6 min when run without
+  a terminal). Functions logs: no errors in the last 50 lines.
+  `healthcheck.sh`: all checks pass, now against the new server itself.
 
 ## Decisions made
 
