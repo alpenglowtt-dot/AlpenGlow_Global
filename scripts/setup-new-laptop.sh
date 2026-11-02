@@ -31,5 +31,5 @@ echo "==> For VPS deploy access (deploy/vps-deploy.sh), you still need an SSH ke
 echo "    added to the VPS from THIS laptop. Generate one:"
 echo "      ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N \"\""
 echo "    then share the PUBLIC key (cat ~/.ssh/id_ed25519.pub) so it can be added"
-echo "    to deploy@169.58.43.191's authorized_keys from an already-authorized machine —"
+echo "    to deploy@84.247.184.195's authorized_keys from an already-authorized machine —"
 echo "    password auth is disabled on that server, so this is the only way in."
