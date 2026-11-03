@@ -1,16 +1,16 @@
-# Graph Report - AlpenGlow work  (2026-11-01)
+# Graph Report - AlpenGlow work  (2026-11-02)
 
 ## Corpus Check
-- 125 files · ~747,571 words
+- 125 files · ~748,723 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 325 nodes · 415 edges · 35 communities (28 shown, 7 thin omitted)
+- 325 nodes · 414 edges · 35 communities (28 shown, 7 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 14 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c4faa402`
+- Built from commit: `d0836639`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -164,19 +164,19 @@ Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: How were the em/en dashes in the generated SEO content fixed, and what's the escaping pitfall?, Source Nodes
 
 ## Knowledge Gaps
-- **134 isolated node(s):** `Answer`, `Outcome`, `Source Nodes`, `Answer`, `Outcome` (+129 more)
+- **134 isolated node(s):** `Deploy workflow`, `graphify`, `SEO`, `fs`, `path` (+129 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Work-memory lessons
 
 **Preferred sources** — corroborated by past sessions; start here.
-- `seo-head.js` (2× useful, score=0.981191854)
+- `seo-head.js` (2× useful, score=0.981009716) _(code changed — re-verify)_
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What connects `Answer`, `Outcome`, `Source Nodes` to the rest of the system?**
+- **What connects `Deploy workflow`, `graphify`, `SEO` to the rest of the system?**
   _134 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `trip-planner.js` be split into smaller, more focused modules?**
   _Cohesion score 0.08087431693989071 - nodes in this community are weakly interconnected._

@@ -1,0 +1,304 @@
+{
+  "communities": {
+    "0": [
+      "alpenglow_trip_planner",
+      "alpenglow_trip_planner_ccoptions",
+      "alpenglow_trip_planner_checkseasonalwarning",
+      "alpenglow_trip_planner_cityrows",
+      "alpenglow_trip_planner_esc",
+      "alpenglow_trip_planner_field",
+      "alpenglow_trip_planner_fmt",
+      "alpenglow_trip_planner_heading",
+      "alpenglow_trip_planner_nextbtnhtml",
+      "alpenglow_trip_planner_renderbudget",
+      "alpenglow_trip_planner_rendercontact",
+      "alpenglow_trip_planner_rendercount",
+      "alpenglow_trip_planner_renderdestination",
+      "alpenglow_trip_planner_renderduration",
+      "alpenglow_trip_planner_rendermonth",
+      "alpenglow_trip_planner_renderorigin",
+      "alpenglow_trip_planner_rendertravelers",
+      "alpenglow_trip_planner_rendervibe",
+      "alpenglow_trip_planner_stepper"
+    ],
+    "1": [
+      "alpenglow_trip_planner_advance",
+      "alpenglow_trip_planner_bindglobal",
+      "alpenglow_trip_planner_bindmouseglow",
+      "alpenglow_trip_planner_bindnextbtn",
+      "alpenglow_trip_planner_close",
+      "alpenglow_trip_planner_goback",
+      "alpenglow_trip_planner_goto",
+      "alpenglow_trip_planner_inittripplanner",
+      "alpenglow_trip_planner_inject",
+      "alpenglow_trip_planner_open",
+      "alpenglow_trip_planner_renderstep",
+      "alpenglow_trip_planner_setbg",
+      "alpenglow_trip_planner_state_reset",
+      "alpenglow_trip_planner_updatebreadcrumb",
+      "alpenglow_trip_planner_updateprogress",
+      "alpenglow_trip_planner_uuid"
+    ],
+    "2": [
+      "alpenglow_trip_planner_bindbudget",
+      "alpenglow_trip_planner_bindcount",
+      "alpenglow_trip_planner_binddestination",
+      "alpenglow_trip_planner_bindduration",
+      "alpenglow_trip_planner_bindmonth",
+      "alpenglow_trip_planner_bindorigin",
+      "alpenglow_trip_planner_bindstep",
+      "alpenglow_trip_planner_bindtravelers",
+      "alpenglow_trip_planner_bindvibe",
+      "alpenglow_trip_planner_enablenextbtn",
+      "alpenglow_trip_planner_sbupsert"
+    ],
+    "3": [
+      "alpenglow_trip_planner_bindcontact",
+      "alpenglow_trip_planner_buildpayload",
+      "alpenglow_trip_planner_getsb",
+      "alpenglow_trip_planner_insertleadrecord",
+      "alpenglow_trip_planner_sbsubmit",
+      "alpenglow_trip_planner_tpcheckbothverified",
+      "alpenglow_trip_planner_tpconfirmemailotp",
+      "alpenglow_trip_planner_tpconfirmphoneotp",
+      "alpenglow_trip_planner_tpfinalsubmit",
+      "alpenglow_trip_planner_tpsendemailotp",
+      "alpenglow_trip_planner_tpsendphoneotp"
+    ],
+    "4": [
+      "deploy_generate_keys",
+      "deploy_generate_keys_anonkey",
+      "deploy_generate_keys_base64url",
+      "deploy_generate_keys_crypto",
+      "deploy_generate_keys_dashboardpassword",
+      "deploy_generate_keys_jwtsecret",
+      "deploy_generate_keys_now",
+      "deploy_generate_keys_postgrespassword",
+      "deploy_generate_keys_servicerolekey",
+      "deploy_generate_keys_signjwt"
+    ],
+    "5": [
+      "alpenglow_api",
+      "alpenglow_api_calledge",
+      "alpenglow_api_dataurl",
+      "alpenglow_api_hidegatesidebar",
+      "alpenglow_api_isverified",
+      "alpenglow_api_markverified",
+      "alpenglow_api_resolveimg"
+    ],
+    "6": [
+      "supabase_functions_crm_index",
+      "supabase_functions_crm_index_allowed_origins",
+      "supabase_functions_crm_index_corsfor",
+      "supabase_functions_crm_index_followup_writable",
+      "supabase_functions_crm_index_lead_writable",
+      "supabase_functions_crm_index_pick",
+      "supabase_functions_crm_index_safeequal"
+    ],
+    "7": [
+      "supabase_functions_send_sms_otp_index",
+      "supabase_functions_send_sms_otp_index_allowed_origins",
+      "supabase_functions_send_sms_otp_index_corsfor",
+      "supabase_functions_send_sms_otp_index_normalisephone",
+      "supabase_functions_send_sms_otp_index_otpratelimited"
+    ],
+    "8": [
+      "supabase_functions_send_email_otp_index",
+      "supabase_functions_send_email_otp_index_allowed_origins",
+      "supabase_functions_send_email_otp_index_corsfor",
+      "supabase_functions_send_email_otp_index_otpratelimited"
+    ],
+    "9": [
+      "supabase_functions_shared_cors",
+      "supabase_functions_shared_cors_allowed_origins",
+      "supabase_functions_shared_cors_corsfor",
+      "supabase_functions_shared_cors_corsheaders"
+    ],
+    "10": [
+      "supabase_functions_verify_sms_otp_index",
+      "supabase_functions_verify_sms_otp_index_allowed_origins",
+      "supabase_functions_verify_sms_otp_index_corsfor",
+      "supabase_functions_verify_sms_otp_index_normalisephone"
+    ],
+    "11": [
+      "supabase_functions_chat_compass_index",
+      "supabase_functions_chat_compass_index_allowed_origins",
+      "supabase_functions_chat_compass_index_corsfor"
+    ],
+    "12": [
+      "supabase_functions_send_lead_email_index",
+      "supabase_functions_send_lead_email_index_allowed_origins",
+      "supabase_functions_send_lead_email_index_corsfor"
+    ],
+    "13": [
+      "supabase_functions_submit_contact_index",
+      "supabase_functions_submit_contact_index_allowed_origins",
+      "supabase_functions_submit_contact_index_corsfor"
+    ],
+    "14": [
+      "supabase_functions_submit_lead_index",
+      "supabase_functions_submit_lead_index_allowed_origins",
+      "supabase_functions_submit_lead_index_corsfor"
+    ],
+    "15": [
+      "supabase_functions_verify_email_otp_index",
+      "supabase_functions_verify_email_otp_index_allowed_origins",
+      "supabase_functions_verify_email_otp_index_corsfor"
+    ],
+    "16": [
+      "supabase_functions_whatsapp_webhook_index",
+      "supabase_functions_whatsapp_webhook_index_allowed_origins",
+      "supabase_functions_whatsapp_webhook_index_corsfor"
+    ],
+    "17": [
+      "deploy_01_vps_setup",
+      "deploy_01_vps_setup_sh__entry"
+    ],
+    "18": [
+      "deploy_02_migrate_data",
+      "deploy_02_migrate_data_sh__entry"
+    ],
+    "19": [
+      "deploy_03_deploy_functions",
+      "deploy_03_deploy_functions_sh__entry"
+    ],
+    "20": [
+      "deploy_04_apply_frontend_values",
+      "deploy_04_apply_frontend_values_sh__entry"
+    ],
+    "21": [
+      "deploy_vps_deploy",
+      "deploy_vps_deploy_sh__entry"
+    ],
+    "22": [
+      "supabase_functions_shared_ratelimit",
+      "supabase_functions_shared_ratelimit_otpratelimited"
+    ],
+    "23": [
+      "alpenglow_compass"
+    ],
+    "24": [
+      "alpenglow_data_bundle"
+    ]
+  },
+  "cohesion": {
+    "0": 0.24561403508771928,
+    "1": 0.15,
+    "2": 0.41818181818181815,
+    "3": 0.2545454545454545,
+    "4": 0.2222222222222222,
+    "5": 0.2857142857142857,
+    "6": 0.2857142857142857,
+    "7": 0.4,
+    "8": 0.5,
+    "9": 0.5,
+    "10": 0.5,
+    "11": 0.6666666666666666,
+    "12": 0.6666666666666666,
+    "13": 0.6666666666666666,
+    "14": 0.6666666666666666,
+    "15": 0.6666666666666666,
+    "16": 0.6666666666666666,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0
+  },
+  "gods": [
+    {
+      "id": "alpenglow_trip_planner_bindstep",
+      "label": "_bindStep()",
+      "degree": 11
+    },
+    {
+      "id": "alpenglow_trip_planner_sbupsert",
+      "label": "_sbUpsert()",
+      "degree": 10
+    },
+    {
+      "id": "alpenglow_trip_planner_heading",
+      "label": "_heading()",
+      "degree": 10
+    },
+    {
+      "id": "alpenglow_trip_planner_renderstep",
+      "label": "_renderStep()",
+      "degree": 9
+    },
+    {
+      "id": "alpenglow_trip_planner_nextbtnhtml",
+      "label": "_nextBtnHtml()",
+      "degree": 9
+    },
+    {
+      "id": "alpenglow_trip_planner_enablenextbtn",
+      "label": "_enableNextBtn()",
+      "degree": 9
+    },
+    {
+      "id": "alpenglow_trip_planner_inittripplanner",
+      "label": "initTripPlanner()",
+      "degree": 7
+    },
+    {
+      "id": "alpenglow_trip_planner_bindcontact",
+      "label": "_bindContact()",
+      "degree": 7
+    },
+    {
+      "id": "alpenglow_trip_planner_goto",
+      "label": "_goTo()",
+      "degree": 5
+    },
+    {
+      "id": "alpenglow_trip_planner_rendercontact",
+      "label": "renderContact()",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "_sbUpsert()",
+      "target": "_getSb()",
+      "source_files": [
+        "AlpenGlow/trip-planner.js",
+        "AlpenGlow/trip-planner.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "note": "Bridges community 3 → community 2"
+    },
+    {
+      "source": "_bindVibe()",
+      "target": "_setBg()",
+      "source_files": [
+        "AlpenGlow/trip-planner.js",
+        "AlpenGlow/trip-planner.js"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "note": "Bridges community 1 → community 2"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `_bindStep()` connect `Community 2` to `Community 0`, `Community 1`, `Community 3`?",
+      "why": "High betweenness centrality (0.002) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `_renderStep()` connect `Community 1` to `Community 0`, `Community 2`?",
+      "why": "High betweenness centrality (0.002) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `01-vps-setup.sh script`, `02-migrate-data.sh script`, `03-deploy-functions.sh script` to the rest of the system?",
+      "why": "26 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}
