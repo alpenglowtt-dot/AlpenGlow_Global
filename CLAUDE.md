@@ -16,6 +16,15 @@ without explicit user confirmation in that same conversation — it's a
 visible, shared action and should stay opt-in every time, even though the
 VPS deploy script does not.
 
+- The backend runs on the new server `84.247.184.195` (since 2 Nov 2026);
+  `deploy/vps-deploy.sh` points there.
+- Always `git pull` before running `bash deploy/vps-deploy.sh`. The script
+  mirrors `supabase/functions`, so any function missing from the local copy
+  is removed from the server.
+- Whenever `AlpenGlow/trip-planner.js` changes, update the `?v=` value on its
+  script tag in `index.html` and every `packages/*.html`. The value is the
+  file's git hash: `git rev-parse --short=7 HEAD:AlpenGlow/trip-planner.js`.
+
 This applies on any machine this repo is cloned to, not just the one it was
 authored on — that's the whole point of it living here instead of only
 being said in a conversation.
