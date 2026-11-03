@@ -33,13 +33,13 @@ cannot save trips (401); check Kong for such 401s after 06:22.
 
 ## Next step
 
-Fix 1 in order c (after your OK: `main` updated and pushed; Cloudflare
-Pages deploys; you do the final submit yourself with your own phone and
-email; Claude checks rows reach `trip_leads` through `save-trip-lead`),
-d (NOT before 1 hour after the Cloudflare deploy, your rule) (migration revoking
-the public key on `trip_leads`, `security-test.sh` expect 0 FAIL); then the
-final re-test (contact form, trip planner, Compass, your dashboard login).
-Later: Phase 6 (last `pull-backup.sh` of the
+Security fixes 1, 2, 3 are deployed, tested (`security-test.sh` 0 FAIL)
+and on `main`. Left: re-run the final re-test (contact form, trip planner
+final submit, Compass chat, your dashboard login) with times noted, and
+let Claude confirm them in the counts and Kong log. Optional later: a
+version tag on `trip-planner.js` in `index.html` (4 h browser cache);
+remove the unused Supabase CDN script from `index.html`; `www` answers
+Cloudflare 522. Later: Phase 6 (last `pull-backup.sh` of the
 old server with `VPS_HOST=deploy@169.58.43.191`, then cancel it, delete
 the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
@@ -567,6 +567,33 @@ move.
   needs a real OTP. Contact form (`submit-contact`, no OTP) not yet
   submitted: it inserts a `leads` row, emails the agency through Resend
   and adds a Google Sheets row, so it waits for your OK.
+- **3 Nov 2026, 10:41 IST** Check after your report "contact form, trip
+  planner final submit, Compass chat, dashboard login done" (counts and
+  logs only, read-only):
+  - **Stale-cache 401s, 02:47 to 06:22 IST (and on to 10:41): none from a
+    real visitor.** After Claude's last test (02:50:01 IST) there was no
+    direct `/rest/v1/trip_leads` request at all from outside the
+    edge-functions container.
+  - **Your tests are not on the new server.** Since the 1d deploy
+    (02:46:59 IST): 0 new `leads` (total 34), 0 new `trip_leads` (74, 30
+    submitted). Kong since the 1b deploy (02:21 IST), all function POSTs:
+    your 02:27 trip planner run (10 `save-trip-lead`, SMS and email OTP
+    send and verify, 1 `submit-lead`), Claude's 8 `save-trip-lead` and 1
+    `chat-compass`; nothing else: no `submit-contact`, no `crm`
+    (dashboard), no second OTP pair or `submit-lead`. Since 02:47 the only
+    other traffic is the 5-minute health check (97 `GET packages`).
+    Functions log 0 errors.
+  - Logs are complete: Kong running since 2 Nov 22:22 IST, 0 restarts,
+    json-file 5 x 20 MB. This laptop resolves `api` to `84.247.184.195`.
+    The new server's nginx access log is not readable by `deploy`
+    (needs sudo), so requests that never reached Kong cannot be seen.
+  - Possible causes (not checked): tests run before 02:21 (only the
+    02:27 trip planner run matches), a browser or device still resolving
+    `api` to the old server (old Kong is stopped, so it would answer 502),
+    or a different site/page. Next: re-run the four tests and note the
+    times; Claude then checks counts and Kong; if anything is missing,
+    look at the browser's network tab and the new server's nginx log
+    (sudo).
 
 ## Decisions made
 
