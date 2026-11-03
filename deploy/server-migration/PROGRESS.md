@@ -26,10 +26,11 @@ test; `main` pushed (`8b1b269`, 02:21 IST) and live on Cloudflare from
 migration 014 written and dry-run OK (not committed, not deployed; see
 Done, 3 Nov). Fix 1d deployed 02:47 IST on your order (before the 1 h
 minimum, your decision) and tested: `security-test.sh` 0 FAIL; `main`
-pushed (`9047ad7`, 02:56:57 IST). Current: final re-test (contact form,
-trip planner, Compass; your dashboard login).
-Until about 06:22 IST, browsers with the old cached `trip-planner.js`
-cannot save trips (401); check Kong for such 401s after 06:22.
+pushed (`9047ad7`, 02:56:57 IST). No real visitor hit the stale-cache
+401 (checked 10:41 IST). **Open:** your final re-test (contact form,
+trip planner final submit, Compass chat, dashboard login) did NOT reach
+the new server (see Done, 3 Nov, 10:41 check); needs a re-run with the
+time noted, then Claude checks counts and logs.
 
 ## Next step
 
