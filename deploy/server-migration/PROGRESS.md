@@ -35,10 +35,11 @@ security fixes 1, 2, 3: complete.**
 ## Next step
 
 Security fixes 1, 2, 3 are complete (deployed, tested, on `main`, site
-flows confirmed 11:04 IST). Optional later: a
-version tag on `trip-planner.js` in `index.html` (4 h browser cache);
-remove the unused Supabase CDN script from `index.html`; `www` answers
-Cloudflare 522. Later: Phase 6 (last `pull-backup.sh` of the
+flows confirmed 11:04 IST); `trip-planner.js` version tag and Supabase
+CDN removal done (3 Nov, 12:20 IST). Optional later: `www` answers
+Cloudflare 522. Whenever `trip-planner.js` changes, bump its `?v=` in
+`index.html` and every `packages/*.html` (see the comment in
+`index.html`). Later: Phase 6 (last `pull-backup.sh` of the
 old server with `VPS_HOST=deploy@169.58.43.191`, then cancel it, delete
 the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
