@@ -609,6 +609,23 @@ move.
   - **AlpenGlow security fixes 1, 2, 3 complete:** live on the new
     server, `security-test.sh` 0 FAIL, all on `main` (`9047ad7`), site
     flows confirmed.
+- **3 Nov 2026, 12:20 IST** Two frontend follow-ups (your request "do
+  these fixes and push it"), commit `051768d` on `claude/security-fixes`,
+  pushed to `main` (fast-forward `9047ad7..051768d`, 12:20:15 IST), live
+  on Cloudflare from 12:20:44 IST:
+  - `trip-planner.js?v=1611e0f` (its git content hash) in `index.html`
+    and all 20 `packages/*.html` (1 line each; `dev.html` copies
+    `packages/japan.html` as its template, so new pages keep the tag). A
+    comment in `index.html` says to bump it whenever the file changes, so
+    updates no longer wait out the 4 h browser cache.
+  - `index.html` no longer loads `@supabase/supabase-js` from jsdelivr
+    (nothing uses `window.supabase` since fix 1b; no other page loaded
+    it).
+  - Checked live in a fresh browser: homepage and `packages/bali` load
+    `trip-planner.js?v=1611e0f`, no Supabase script, `window.supabase`
+    undefined, the planner opens (step 1 of 9), 0 console errors, all
+    images and scripts load (the only empty image is the hidden city
+    modal's, filled when a city opens; unrelated). Browser files deleted.
 
 ## Decisions made
 
