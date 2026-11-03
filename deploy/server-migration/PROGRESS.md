@@ -27,17 +27,15 @@ migration 014 written and dry-run OK (not committed, not deployed; see
 Done, 3 Nov). Fix 1d deployed 02:47 IST on your order (before the 1 h
 minimum, your decision) and tested: `security-test.sh` 0 FAIL; `main`
 pushed (`9047ad7`, 02:56:57 IST). No real visitor hit the stale-cache
-401 (checked 10:41 IST). **Open:** your final re-test (contact form,
-trip planner final submit, Compass chat, dashboard login) did NOT reach
-the new server (see Done, 3 Nov, 10:41 check); needs a re-run with the
-time noted, then Claude checks counts and logs.
+401 (checked 10:41 IST). Final re-test re-run by you and confirmed
+(11:04 IST): contact form, trip planner final submit, Compass chat,
+dashboard login all reached the new server, 0 errors. **AlpenGlow
+security fixes 1, 2, 3: complete.**
 
 ## Next step
 
-Security fixes 1, 2, 3 are deployed, tested (`security-test.sh` 0 FAIL)
-and on `main`. Left: re-run the final re-test (contact form, trip planner
-final submit, Compass chat, your dashboard login) with times noted, and
-let Claude confirm them in the counts and Kong log. Optional later: a
+Security fixes 1, 2, 3 are complete (deployed, tested, on `main`, site
+flows confirmed 11:04 IST). Optional later: a
 version tag on `trip-planner.js` in `index.html` (4 h browser cache);
 remove the unused Supabase CDN script from `index.html`; `www` answers
 Cloudflare 522. Later: Phase 6 (last `pull-backup.sh` of the
@@ -595,6 +593,22 @@ move.
     times; Claude then checks counts and Kong; if anything is missing,
     look at the browser's network tab and the new server's nginx log
     (sudo).
+- **3 Nov 2026, 11:04 IST** Your re-run of the final re-test, confirmed
+  (counts and Kong since 10:40 IST, read-only):
+  - New `leads`: `contact_form` 1, `trip_planner` 1, `compass_bot` 1.
+    New `trip_leads`: 1, `submitted`, name/phone/email present; 0 left
+    `in_progress`. Totals: `leads` 37, `trip_leads` 75 (31 submitted).
+  - Kong, all 200/201/204: `submit-contact` 1; `save-trip-lead` 11;
+    SMS and email OTP send and verify 1 each; `submit-lead` 2 (trip
+    planner and Compass); `chat-compass` 2; `crm` 5 (your dashboard
+    login and views). Every `/rest/v1/leads` and `/rest/v1/trip_leads`
+    call (1 GET, 3 POST on `leads`; 1 POST, 11 PATCH on `trip_leads`)
+    came from the edge-functions container (service role); 0 from
+    browsers. 0 function calls with status 400 or above; functions log 0
+    errors.
+  - **AlpenGlow security fixes 1, 2, 3 complete:** live on the new
+    server, `security-test.sh` 0 FAIL, all on `main` (`9047ad7`), site
+    flows confirmed.
 
 ## Decisions made
 
