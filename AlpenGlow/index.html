@@ -1545,10 +1545,12 @@ footer { background: rgba(24,24,24,0.96); backdrop-filter: blur(20px); padding: 
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="data/bundle.js?v=1kypmj7"></script>
 <script src="api.js"></script>
-<script src="trip-planner.js"></script>
+<!-- ?v= is trip-planner.js's git content hash (git rev-parse --short=7 HEAD:AlpenGlow/trip-planner.js).
+     Change it here AND in every packages/*.html whenever trip-planner.js changes, so browsers
+     fetch the new file at once instead of a copy cached for up to 4 hours. -->
+<script src="trip-planner.js?v=1611e0f"></script>
 <script>
 // Auto-open the trip planner when arriving via a "verify first" redirect
 // (e.g. from compass.html's unverified gate: index.html?startPlanner=1).
