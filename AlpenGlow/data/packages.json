@@ -220,5 +220,17 @@
     "sort_order": 0,
     "active": false,
     "id": "1790924323381"
+  },
+  {
+    "name": "Iceland",
+    "location": "",
+    "duration": "",
+    "description": "",
+    "image_url": "",
+    "link": "packages/iceland.html",
+    "seo_group": "",
+    "sort_order": 0,
+    "active": false,
+    "id": "1793895486099"
   }
 ]

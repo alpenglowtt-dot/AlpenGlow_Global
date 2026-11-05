@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "updatedMs": 1793654945902,
+  "updatedMs": 1793893692740,
   "mod": "agent",
   "modVersion": "0.4.0",
   "guard": true,
   "summary": "Managed workflows off; budget 2500 cents; inline off; secrets on",
   "calls": 0,
   "blocked": 0,
-  "startedMs": 1793654945706
+  "startedMs": 1793893692645
 }

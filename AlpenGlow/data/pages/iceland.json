@@ -1,0 +1,74 @@
+{
+  "slug": "iceland",
+  "page_title": "Iceland | Alpenglow Global",
+  "hero_image_url": "https://images.unsplash.com/photo-1764276266750-4d6316e972e0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+  "bg_image_url": "https://images.unsplash.com/photo-1546507318-dc206ad061c9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+  "location": "",
+  "duration": "13 Days / 12 Nights",
+  "title": "Iceland",
+  "meta_description": "",
+  "hero_image_alt": "",
+  "overview_heading": "Overview",
+  "overview_paragraphs": [
+    "Iceland’s Ring Road in a single trip, running from Reykjavik’s geothermal lagoon along the south coast’s black sand beaches and waterfalls, past glacier lagoons, and up to the northern lakes before swinging back via the Snæfellsnes peninsula. Whale watching, glacier boats, and volcanic landscapes fill most days.\n\nBest for travelers who want dramatic landscapes and nature-led days over city sightseeing."
+  ],
+  "places_heading": "Explore the Cities",
+  "places": [
+    {
+      "key": "reykjavik",
+      "name": "Reykjavik & the Blue Lagoon",
+      "tagline": "A harbor capital, with a steaming geothermal lagoon nearby.",
+      "card_image_url": "https://images.unsplash.com/photo-1590153739486-208b4dbb473c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1606130503037-6a8ef67c9d2d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "WHERE ICELAND STARTS AND ENDS",
+      "desc": "Reykjavik anchors the trip at both ends: the Blue Lagoon’s milky-blue geothermal pool with a silica mud mask on arrival, then Hallgrímskirkja Church, the Aurora Museum, a FlyOver Iceland ride, and a whale watching cruise out of the harbor before departure. The Golden Circle’s Thingvellir National Park, Geysir, and Gullfoss waterfall sit within easy reach."
+    },
+    {
+      "key": "vik",
+      "name": "Vik & the South Coast",
+      "tagline": "Black sand, basalt cliffs, and waterfalls you can walk behind.",
+      "card_image_url": "https://images.unsplash.com/photo-1679525643777-4aaa7f21e33a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1695846652908-010245ec4909?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "ICELAND’S MOST PHOTOGRAPHED STRETCH OF COAST",
+      "desc": "The south coast packs in Seljalandsfoss and Skógafoss waterfalls, Reynisfjara’s black sand beach, the Dyrhólaey headland, and a view of the Sólheimajökull glacier tongue, all within a single day around the village of Vik."
+    },
+    {
+      "key": "hofn",
+      "name": "Höfn & Jökulsárlón",
+      "tagline": "Icebergs drifting across a glacier lagoon",
+      "card_image_url": "https://images.unsplash.com/photo-1699556589435-32c3a4a94366?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1511959942218-3fc4ff628307?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "WHERE THE GLACIER MEETS THE SEA",
+      "desc": "Jökulsárlón is a lagoon filled with icebergs calved from the glacier above, explored here on an amphibian boat tour. Just across the road, Diamond Beach scatters pieces of ice across black sand, a short drive from the fishing town of Höfn."
+    },
+    {
+      "key": "akureyri",
+      "name": "Akureyri & the North",
+      "tagline": "Iceland’s northern capital, with volcanic lakes, waterfalls, and whales",
+      "card_image_url": "https://images.unsplash.com/photo-1506408117482-b60ae52a2480?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1636575772339-05d719bed718?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "LAKE MÝVATN, GOÐAFOSS, AND THE ARCTIC COAST",
+      "desc": "Lake Mývatn and Goðafoss Waterfall mark the drive north to Akureyri, with Húsavík’s shared whale watching tour and the Forest Lagoon spa making up the next day. Along the way from Egilsstaðir, the east and north show a quieter, more remote side of the island."
+    },
+    {
+      "key": "snaefellsnes",
+      "name": "Snæfellsnes & the West",
+      "tagline": "A peninsula that packs Iceland’s landscapes into one drive.",
+      "card_image_url": "https://images.unsplash.com/photo-1545140976-8c17471ba12d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1595742744735-415fc20ef88f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "ICELAND IN MINIATURE",
+      "desc": "Heading south from the north, the route stops at Deildartunguhver hot springs and the Hraunfossar and Barnafoss waterfalls before reaching Snæfellsjökull National Park. The Snæfellsnes peninsula adds the villages of Grundarfjörður and Arnarstapi, the coastal hamlet of Búðir, and wide views of the Icelandic west coast."
+    }
+  ],
+  "itinerary_heading": "",
+  "itinerary": [],
+  "inclusions_heading": "What's Included",
+  "inclusions": [
+    "12 Nights Accommodation",
+    "Daily breakfast",
+    "Private coach throughout",
+    "Blue Lagoon Comfort entry",
+    "Whale watching & glacier lagoon boat tour"
+  ],
+  "active": true
+}

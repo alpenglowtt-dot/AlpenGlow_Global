@@ -29,7 +29,7 @@
       "label": "graphify",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L23",
+      "source_location": "L32",
       "_origin": "ast",
       "id": "claude_graphify",
       "community": 26,
@@ -40,7 +40,7 @@
       "label": "SEO",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L36",
+      "source_location": "L45",
       "_origin": "ast",
       "id": "claude_seo",
       "community": 26,
@@ -53,10 +53,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "scripts_seo_head",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "seo-head.js"
+      "norm_label": "seo-head.js",
+      "id": "scripts_seo_head"
     },
     {
       "label": "fs",
@@ -64,10 +64,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "scripts_seo_head_fs",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "fs"
+      "norm_label": "fs",
+      "id": "scripts_seo_head_fs"
     },
     {
       "label": "path",
@@ -75,10 +75,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "scripts_seo_head_path",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "path"
+      "norm_label": "path",
+      "id": "scripts_seo_head_path"
     },
     {
       "label": "ROOT",
@@ -86,10 +86,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L2",
       "_origin": "ast",
-      "id": "scripts_seo_head_root",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "root"
+      "norm_label": "root",
+      "id": "scripts_seo_head_root"
     },
     {
       "label": "BIZ",
@@ -97,10 +97,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L7",
       "_origin": "ast",
-      "id": "scripts_seo_head_biz",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "biz"
+      "norm_label": "biz",
+      "id": "scripts_seo_head_biz"
     },
     {
       "label": "P()",
@@ -108,10 +108,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L23",
       "_origin": "ast",
-      "id": "scripts_seo_head_p",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "p()"
+      "norm_label": "p()",
+      "id": "scripts_seo_head_p"
     },
     {
       "label": "pages",
@@ -119,10 +119,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L29",
       "_origin": "ast",
-      "id": "scripts_seo_head_pages",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "pages"
+      "norm_label": "pages",
+      "id": "scripts_seo_head_pages"
     },
     {
       "label": "GROUPS",
@@ -130,10 +130,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L60",
       "_origin": "ast",
-      "id": "scripts_seo_head_groups",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "groups"
+      "norm_label": "groups",
+      "id": "scripts_seo_head_groups"
     },
     {
       "label": "packs",
@@ -141,10 +141,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L68",
       "_origin": "ast",
-      "id": "scripts_seo_head_packs",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "packs"
+      "norm_label": "packs",
+      "id": "scripts_seo_head_packs"
     },
     {
       "label": "packagePageData",
@@ -152,10 +152,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L128",
       "_origin": "ast",
-      "id": "scripts_seo_head_packagepagedata",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "packagepagedata"
+      "norm_label": "packagepagedata",
+      "id": "scripts_seo_head_packagepagedata"
     },
     {
       "label": "packageState",
@@ -163,10 +163,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L136",
       "_origin": "ast",
-      "id": "scripts_seo_head_packagestate",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "packagestate"
+      "norm_label": "packagestate",
+      "id": "scripts_seo_head_packagestate"
     },
     {
       "label": "packageBySlug",
@@ -174,10 +174,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L139",
       "_origin": "ast",
-      "id": "scripts_seo_head_packagebyslug",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "packagebyslug"
+      "norm_label": "packagebyslug",
+      "id": "scripts_seo_head_packagebyslug"
     },
     {
       "label": "rootAssetURL()",
@@ -185,10 +185,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L140",
       "_origin": "ast",
-      "id": "scripts_seo_head_rootasseturl",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "rootasseturl()"
+      "norm_label": "rootasseturl()",
+      "id": "scripts_seo_head_rootasseturl"
     },
     {
       "label": "dynamicPackageSlugs",
@@ -196,10 +196,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L141",
       "_origin": "ast",
-      "id": "scripts_seo_head_dynamicpackageslugs",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "dynamicpackageslugs"
+      "norm_label": "dynamicpackageslugs",
+      "id": "scripts_seo_head_dynamicpackageslugs"
     },
     {
       "label": "knownSlugs",
@@ -207,10 +207,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L196",
       "_origin": "ast",
-      "id": "scripts_seo_head_knownslugs",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "knownslugs"
+      "norm_label": "knownslugs",
+      "id": "scripts_seo_head_knownslugs"
     },
     {
       "label": "esc()",
@@ -218,10 +218,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L211",
       "_origin": "ast",
-      "id": "scripts_seo_head_esc",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "esc()"
+      "norm_label": "esc()",
+      "id": "scripts_seo_head_esc"
     },
     {
       "label": "faqSchema()",
@@ -229,10 +229,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L214",
       "_origin": "ast",
-      "id": "scripts_seo_head_faqschema",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "faqschema()"
+      "norm_label": "faqschema()",
+      "id": "scripts_seo_head_faqschema"
     },
     {
       "label": "jsonld()",
@@ -240,10 +240,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L228",
       "_origin": "ast",
-      "id": "scripts_seo_head_jsonld",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "jsonld()"
+      "norm_label": "jsonld()",
+      "id": "scripts_seo_head_jsonld"
     },
     {
       "label": "block()",
@@ -251,10 +251,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L311",
       "_origin": "ast",
-      "id": "scripts_seo_head_block",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "block()"
+      "norm_label": "block()",
+      "id": "scripts_seo_head_block"
     },
     {
       "label": "packBySlug",
@@ -262,10 +262,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L360",
       "_origin": "ast",
-      "id": "scripts_seo_head_packbyslug",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "packbyslug"
+      "norm_label": "packbyslug",
+      "id": "scripts_seo_head_packbyslug"
     },
     {
       "label": "groupedSlugs",
@@ -273,10 +273,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L361",
       "_origin": "ast",
-      "id": "scripts_seo_head_groupedslugs",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "groupedslugs"
+      "norm_label": "groupedslugs",
+      "id": "scripts_seo_head_groupedslugs"
     },
     {
       "label": "ungrouped",
@@ -284,10 +284,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L362",
       "_origin": "ast",
-      "id": "scripts_seo_head_ungrouped",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "ungrouped"
+      "norm_label": "ungrouped",
+      "id": "scripts_seo_head_ungrouped"
     },
     {
       "label": "card()",
@@ -295,10 +295,10 @@
       "source_file": "scripts/seo-head.js",
       "source_location": "L365",
       "_origin": "ast",
-      "id": "scripts_seo_head_card",
       "community": 35,
       "community_name": "seo-head.js",
-      "norm_label": "card()"
+      "norm_label": "card()",
+      "id": "scripts_seo_head_card"
     },
     {
       "label": "api.js",
@@ -3994,7 +3994,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L23",
+      "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast",
       "source": "claude",
@@ -4005,7 +4005,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L36",
+      "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast",
       "source": "claude",
@@ -4020,9 +4020,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "ref_fs",
-      "confidence_score": 1.0
+      "target": "ref_fs"
     },
     {
       "relation": "imports_from",
@@ -4032,9 +4032,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "ref_path",
-      "confidence_score": 1.0
+      "target": "ref_path"
     },
     {
       "relation": "contains",
@@ -4043,9 +4043,9 @@
       "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_biz",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_biz"
     },
     {
       "relation": "contains",
@@ -4054,9 +4054,9 @@
       "source_location": "L311",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_block",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_block"
     },
     {
       "relation": "contains",
@@ -4065,9 +4065,9 @@
       "source_location": "L365",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_card",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_card"
     },
     {
       "relation": "contains",
@@ -4076,9 +4076,9 @@
       "source_location": "L141",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_dynamicpackageslugs",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_dynamicpackageslugs"
     },
     {
       "relation": "contains",
@@ -4087,9 +4087,9 @@
       "source_location": "L211",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_esc",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_esc"
     },
     {
       "relation": "contains",
@@ -4098,9 +4098,9 @@
       "source_location": "L214",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_faqschema",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_faqschema"
     },
     {
       "relation": "contains",
@@ -4109,9 +4109,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_fs",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_fs"
     },
     {
       "relation": "contains",
@@ -4120,9 +4120,9 @@
       "source_location": "L361",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_groupedslugs",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_groupedslugs"
     },
     {
       "relation": "contains",
@@ -4131,9 +4131,9 @@
       "source_location": "L60",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_groups",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_groups"
     },
     {
       "relation": "contains",
@@ -4142,9 +4142,9 @@
       "source_location": "L228",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_jsonld",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_jsonld"
     },
     {
       "relation": "contains",
@@ -4153,9 +4153,9 @@
       "source_location": "L196",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_knownslugs",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_knownslugs"
     },
     {
       "relation": "contains",
@@ -4164,9 +4164,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_p",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_p"
     },
     {
       "relation": "contains",
@@ -4175,9 +4175,9 @@
       "source_location": "L139",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_packagebyslug",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_packagebyslug"
     },
     {
       "relation": "contains",
@@ -4186,9 +4186,9 @@
       "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_packagepagedata",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_packagepagedata"
     },
     {
       "relation": "contains",
@@ -4197,9 +4197,9 @@
       "source_location": "L136",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_packagestate",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_packagestate"
     },
     {
       "relation": "contains",
@@ -4208,9 +4208,9 @@
       "source_location": "L360",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_packbyslug",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_packbyslug"
     },
     {
       "relation": "contains",
@@ -4219,9 +4219,9 @@
       "source_location": "L68",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_packs",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_packs"
     },
     {
       "relation": "contains",
@@ -4230,9 +4230,9 @@
       "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_pages",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_pages"
     },
     {
       "relation": "contains",
@@ -4241,9 +4241,9 @@
       "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_path",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_path"
     },
     {
       "relation": "contains",
@@ -4252,9 +4252,9 @@
       "source_location": "L2",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_root",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_root"
     },
     {
       "relation": "contains",
@@ -4263,9 +4263,9 @@
       "source_location": "L140",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_rootasseturl",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_rootasseturl"
     },
     {
       "relation": "contains",
@@ -4274,9 +4274,9 @@
       "source_location": "L362",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head",
-      "target": "scripts_seo_head_ungrouped",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_ungrouped"
     },
     {
       "relation": "calls",
@@ -4286,9 +4286,9 @@
       "source_location": "L315",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head_block",
-      "target": "scripts_seo_head_esc",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_esc"
     },
     {
       "relation": "calls",
@@ -4298,9 +4298,9 @@
       "source_location": "L374",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head_card",
-      "target": "scripts_seo_head_esc",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_esc"
     },
     {
       "relation": "calls",
@@ -4310,9 +4310,9 @@
       "source_location": "L236",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head_jsonld",
-      "target": "scripts_seo_head_faqschema",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_faqschema"
     },
     {
       "relation": "calls",
@@ -4322,9 +4322,9 @@
       "source_location": "L341",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "scripts_seo_head_block",
-      "target": "scripts_seo_head_jsonld",
-      "confidence_score": 1.0
+      "target": "scripts_seo_head_jsonld"
     },
     {
       "relation": "contains",
@@ -8752,5 +8752,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d08366393cd32db4194ef378363a05a18708db85"
+  "built_at_commit": "7982eb7a1d8787792a22bfe32d2ea3111d20d562"
 }

@@ -130,8 +130,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/trip-planner.js": {
-    "mtime": 1790078066.1476068,
-    "ast_hash": "51aee08a10137d73d437d7696b26bfd5",
+    "mtime": 1793652893.239104,
+    "ast_hash": "0f0629c1713f54e97c19b4fcbde17d21",
     "semantic_hash": ""
   },
   "deploy/01-vps-setup.sh": {
@@ -160,8 +160,8 @@
     "semantic_hash": ""
   },
   "deploy/vps-deploy.sh": {
-    "mtime": 1785136253.0835054,
-    "ast_hash": "1d29867ae263fc54b5724a5ba0d89a2f",
+    "mtime": 1793652893.244115,
+    "ast_hash": "288d3bfe38f943db99280ae02fed420e",
     "semantic_hash": ""
   },
   "supabase/.temp/linked-project.json": {
@@ -280,8 +280,8 @@
     "semantic_hash": ""
   },
   "scripts/setup-new-laptop.sh": {
-    "mtime": 1784571420.861292,
-    "ast_hash": "b04c73f362e5340238375cb32d7e4681",
+    "mtime": 1793652893.2491252,
+    "ast_hash": "335b252deb5537460ba35c4db7e852c0",
     "semantic_hash": ""
   },
   "AlpenGlow/BACKEND_SETUP.md": {
@@ -290,7 +290,7 @@
     "semantic_hash": ""
   },
   "AlpenGlow/compass.html": {
-    "mtime": 1793636313.0557323,
+    "mtime": 1793689555.306887,
     "ast_hash": "ace5989d8b0d10f0899335b80a937311",
     "semantic_hash": ""
   },
@@ -305,108 +305,108 @@
     "semantic_hash": ""
   },
   "AlpenGlow/index.html": {
-    "mtime": 1793636313.1022644,
-    "ast_hash": "904942030c2257636b064aead02f0c0d",
+    "mtime": 1793689558.0161996,
+    "ast_hash": "adb665d4c22db1cdfd9866055ab29845",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/australia.html": {
-    "mtime": 1793636266.4073794,
-    "ast_hash": "2b9f6f7877e25e07ccba1673f8e4aeef",
+    "mtime": 1793689555.3118868,
+    "ast_hash": "d393fc2ea03dd093efa6b37141604946",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/bali.html": {
-    "mtime": 1793636266.4223826,
-    "ast_hash": "c564ae2b8f7544e66f5ec4552911f3f5",
+    "mtime": 1793689555.3148854,
+    "ast_hash": "69cea79b171103d43e4e4c79d85c90ac",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/bhutan.html": {
-    "mtime": 1793636266.438912,
-    "ast_hash": "746ffbad6f3159b93b855f34d0ddc6fd",
+    "mtime": 1793689555.3158877,
+    "ast_hash": "ed2e1c296265a2992a7ff1fef883c16e",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/india.html": {
-    "mtime": 1793636266.4549146,
-    "ast_hash": "2329350395e03caaa34f5adb2aeede59",
+    "mtime": 1793689555.3178878,
+    "ast_hash": "94ce7061c296c21128865903014278d8",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/italy.html": {
-    "mtime": 1793636266.4704385,
-    "ast_hash": "57d981023a58552147e049ce88355f56",
+    "mtime": 1793689555.3198872,
+    "ast_hash": "ba53e9b124d7bd7d37153a5302333172",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/japan.html": {
-    "mtime": 1793636266.4854407,
-    "ast_hash": "8541cbeec72895aab1afef6b1e96d749",
+    "mtime": 1793689555.3218853,
+    "ast_hash": "057cc8ca4c17b54eec6a292c36f7dcb1",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/maldives.html": {
-    "mtime": 1793636266.5014384,
-    "ast_hash": "c2a40d2000543cb3c28c9920ff99ecac",
+    "mtime": 1793689555.3238857,
+    "ast_hash": "238b42b646ee00997c3de66a8179f931",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/mauritius.html": {
-    "mtime": 1793636266.5174403,
-    "ast_hash": "f2569fd3405b444f6e85360cb0d4e186",
+    "mtime": 1793689555.326899,
+    "ast_hash": "01bc11d9149ce85ebd9d178afe3d12c2",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/nepal.html": {
-    "mtime": 1793636266.5334451,
-    "ast_hash": "e75954ae77b4955386579ee63b12fbd5",
+    "mtime": 1793689555.3279004,
+    "ast_hash": "aff704179ab5553a1457a370ccd28d7b",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/newzealand.html": {
-    "mtime": 1793636266.5489664,
-    "ast_hash": "9d7a27a64087bc55e9f78bd03f3f5cff",
+    "mtime": 1793689555.3308976,
+    "ast_hash": "967e29293cdb92c3fc278e08c95fdaa5",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/norway.html": {
-    "mtime": 1793636266.563975,
-    "ast_hash": "ff9457656e70ef664c3a9f0dec321c16",
+    "mtime": 1793689555.3318968,
+    "ast_hash": "f672eb2c42d53ae7e4d58c4026ffa3e9",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/resortsworld.html": {
-    "mtime": 1793636266.5818062,
-    "ast_hash": "a06c40273c246739bc0500b8fb9abcd1",
+    "mtime": 1793689555.3328984,
+    "ast_hash": "1d9cf86d1ebb3c426858628fac7cb9a7",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/rivercruise-europe.html": {
-    "mtime": 1793636266.6008136,
-    "ast_hash": "fd254d11690f488d2144f5651aa959ec",
+    "mtime": 1793689555.3348958,
+    "ast_hash": "f611c0c9339ddf806691d853c230e4d8",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/royalcaribbean.html": {
-    "mtime": 1793636266.6178143,
-    "ast_hash": "186c04aa6ad18e97a127e2171de02dec",
+    "mtime": 1793689555.3358984,
+    "ast_hash": "e817dd09a266a2e1b5358c8fcd70abb2",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/santorini.html": {
-    "mtime": 1793636266.6353307,
-    "ast_hash": "6c4591af70b0b83381be8d46f14931c1",
+    "mtime": 1793689555.336898,
+    "ast_hash": "a9e7d66b09b7a14a51dfb7c176c45613",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/seychelles.html": {
-    "mtime": 1793636266.6504261,
-    "ast_hash": "2a227b7a6656f32c6a4cb34bbd2c0c22",
+    "mtime": 1793689555.3388977,
+    "ast_hash": "3a92c4e436ec27d17c772b4e0ea65657",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/southkorea.html": {
-    "mtime": 1793636266.6664386,
-    "ast_hash": "d476164f0d47ccf53e3917f857446458",
+    "mtime": 1793689555.3404095,
+    "ast_hash": "56598a52ccca7645b7955e8b197b8d0c",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/srilanka.html": {
-    "mtime": 1793636266.682029,
-    "ast_hash": "e25cebc54e13cd0830aa3484f1aa33d9",
+    "mtime": 1793689555.3414276,
+    "ast_hash": "d157d1966a5542107c64780e7ff9aee9",
     "semantic_hash": ""
   },
   "AlpenGlow/packages/switzerland.html": {
-    "mtime": 1793636266.6987333,
-    "ast_hash": "7f076880dcc3e67e1818e0344c4ff225",
+    "mtime": 1793689555.3434267,
+    "ast_hash": "73cd58bf106c4b0483ef99808d063460",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1793636302.793309,
-    "ast_hash": "e83015dd4c74481e638e231d257de9f7",
+    "mtime": 1793689824.6301174,
+    "ast_hash": "157b52363bf5c409e05e7bf3dad9b07b",
     "semantic_hash": ""
   },
   "PRODUCTION_SECURITY.md": {
@@ -825,7 +825,7 @@
     "semantic_hash": ""
   },
   "AlpenGlow/destinations.html": {
-    "mtime": 1793636313.0697412,
+    "mtime": 1793689555.3614247,
     "ast_hash": "71facd9a01dbca9eac46132055114f58",
     "semantic_hash": ""
   },
@@ -935,8 +935,8 @@
     "semantic_hash": ""
   },
   "AlpenGlow/packages/andaman.html": {
-    "mtime": 1793636266.3913803,
-    "ast_hash": "4487e6d6321b91460b20f5152902c37a",
+    "mtime": 1793689555.3444278,
+    "ast_hash": "40d87cb427b0f42a0a9aaace1f6a59a7",
     "semantic_hash": ""
   },
   "graphify-out/memory/query_20261002_100451_why_were_package_destinations_page_group_edits_not.md": {
@@ -945,163 +945,163 @@
     "semantic_hash": ""
   },
   ".claude-flow/adr-mod/status.json": {
-    "mtime": 1793634920.1143267,
-    "ast_hash": "2ec7c821842123888b06aac72285c84a",
+    "mtime": 1793689737.9731462,
+    "ast_hash": "14b92672eb041bec56617821cfaf3829",
     "semantic_hash": ""
   },
   ".claude-flow/agent-mod/status.json": {
-    "mtime": 1793634920.0490577,
-    "ast_hash": "6c0d1cc0fe8e0c067486d2418b2c39a1",
+    "mtime": 1793689736.3643684,
+    "ast_hash": "e7d2285efea3b42e6380904f48e2541b",
     "semantic_hash": ""
   },
   ".claude-flow/agentdb-mod/status.json": {
-    "mtime": 1793634919.9691327,
-    "ast_hash": "1cd491effafe79999b2d06c5ccee5399",
+    "mtime": 1793689733.6839573,
+    "ast_hash": "cf1fb5a477e876a1ada23edc09f3c7e2",
     "semantic_hash": ""
   },
   ".claude-flow/aidefence-mod/status.json": {
-    "mtime": 1793634919.9090042,
-    "ast_hash": "121d2c736044841403d161a4222376e4",
+    "mtime": 1793689731.143345,
+    "ast_hash": "f14ad890ed832795783f82757508656e",
     "semantic_hash": ""
   },
   ".claude-flow/arena-mod/status.json": {
-    "mtime": 1793634919.8425276,
-    "ast_hash": "da138f90f66234338ec99cb1d39fdaad",
+    "mtime": 1793689729.7161114,
+    "ast_hash": "126d2d59e6ba69d2f6379038dabec6e3",
     "semantic_hash": ""
   },
   ".claude-flow/autopilot-mod/status.json": {
-    "mtime": 1793634919.7641494,
-    "ast_hash": "a39fbb7ca9c0d76cfd74ba6954232752",
+    "mtime": 1793689726.7846684,
+    "ast_hash": "3fa6a51619df61173a4bf99e8837054d",
     "semantic_hash": ""
   },
   ".claude-flow/browser-mod/status.json": {
-    "mtime": 1793634919.673455,
-    "ast_hash": "ce3a5bf1269448cfb6fc2cc3327dcf45",
+    "mtime": 1793689725.1337986,
+    "ast_hash": "49518281a271c83180dde82a5bfcf1d8",
     "semantic_hash": ""
   },
   ".claude-flow/creator-mod/status.json": {
-    "mtime": 1793634918.2083032,
-    "ast_hash": "01e15aa0769771fd2826fbb93add8462",
+    "mtime": 1793689693.291095,
+    "ast_hash": "edaf4f3648623ab8a9bcd3015d6528aa",
     "semantic_hash": ""
   },
   ".claude-flow/daa-mod/status.json": {
-    "mtime": 1793634919.567629,
-    "ast_hash": "bda668d210be623c7675fc54b6b5ac03",
+    "mtime": 1793689724.1245437,
+    "ast_hash": "b0036fb742c9c2c399e86e3371970f50",
     "semantic_hash": ""
   },
   ".claude-flow/ddd-mod/status.json": {
-    "mtime": 1793634919.4865432,
-    "ast_hash": "e7a0ff361894563e2e12e44e31846b43",
+    "mtime": 1793689721.9246066,
+    "ast_hash": "62fe08e445e7cb0b463f037d337cdad0",
     "semantic_hash": ""
   },
   ".claude-flow/docs-mod/status.json": {
-    "mtime": 1793634919.4203324,
-    "ast_hash": "b8f06a9eb9351c1b79daeb5aed69e4a9",
+    "mtime": 1793689720.0114865,
+    "ast_hash": "2a7f943456407acf2a0849cdd73653cb",
     "semantic_hash": ""
   },
   ".claude-flow/federation-mod/status.json": {
-    "mtime": 1793634919.3271432,
-    "ast_hash": "1bbfd1d61763dcd3c63a4c1cf76cfe56",
+    "mtime": 1793689718.1679623,
+    "ast_hash": "3cbe9ff94e6563523668a62280d61255",
     "semantic_hash": ""
   },
   ".claude-flow/goals-mod/status.json": {
-    "mtime": 1793634919.2683141,
-    "ast_hash": "7d5364f1ba822272c5514b90ee6c9ff3",
+    "mtime": 1793689715.725177,
+    "ast_hash": "401edf7611e0baaa74bebeb67da7df3f",
     "semantic_hash": ""
   },
   ".claude-flow/graph-mod/status.json": {
-    "mtime": 1793634919.2072423,
-    "ast_hash": "e21c991c3116989a8954678e8fa63ab4",
+    "mtime": 1793689714.0375233,
+    "ast_hash": "e977e7885ae87178e0ba0283928e5c9c",
     "semantic_hash": ""
   },
   ".claude-flow/intelligence-mod/status.json": {
-    "mtime": 1793634919.1413891,
-    "ast_hash": "93a71d9f8ddff20f86d9f9909682d5ce",
+    "mtime": 1793689712.3325686,
+    "ast_hash": "6ae9a23bc44e751ba32689b5fd76748a",
     "semantic_hash": ""
   },
   ".claude-flow/iot-mod/status.json": {
-    "mtime": 1793634919.0611303,
-    "ast_hash": "f5bfc397bb91be81784ca0399bdfa530",
+    "mtime": 1793689710.3961396,
+    "ast_hash": "5755f427eb654029cc93fca301a722bd",
     "semantic_hash": ""
   },
   ".claude-flow/jujutsu-mod/status.json": {
-    "mtime": 1793634918.9550228,
-    "ast_hash": "d842eeb614f73f059411e777a9da50b0",
+    "mtime": 1793689708.3953125,
+    "ast_hash": "380461ed1f1cbf2dff988e2d7073e997",
     "semantic_hash": ""
   },
   ".claude-flow/kg-mod/status.json": {
-    "mtime": 1793634918.8360126,
-    "ast_hash": "529771ef4d0c2daca19e87894ca1274d",
+    "mtime": 1793689706.432688,
+    "ast_hash": "e65f8bfc8a1e54017e1e9856f542c27e",
     "semantic_hash": ""
   },
   ".claude-flow/loop-mod/status.json": {
-    "mtime": 1793634918.7578104,
-    "ast_hash": "58077112e9e1d4557231bf831920de99",
+    "mtime": 1793689704.303986,
+    "ast_hash": "117ec23a69804d8ea118137d7720c49a",
     "semantic_hash": ""
   },
   ".claude-flow/market-mod/status.json": {
-    "mtime": 1793634918.6757166,
-    "ast_hash": "2b54bca7f14f15687578b140c466bd19",
+    "mtime": 1793689703.4212468,
+    "ast_hash": "7afcff933e36951a4d719fa58da1e475",
     "semantic_hash": ""
   },
   ".claude-flow/metaharness-mod/status.json": {
-    "mtime": 1793634918.6101754,
-    "ast_hash": "dc3c40fc662125e1418c82eaac68156a",
+    "mtime": 1793689701.5637093,
+    "ast_hash": "876a0920e35106d0729ef0da489f9691",
     "semantic_hash": ""
   },
   ".claude-flow/migrations-mod/status.json": {
-    "mtime": 1793634918.478638,
-    "ast_hash": "87c99896ccc6fa15bbe6068896060faf",
+    "mtime": 1793689698.5037484,
+    "ast_hash": "fe37ddba704730c07217865bea23340a",
     "semantic_hash": ""
   },
   ".claude-flow/observe-mod/status.json": {
-    "mtime": 1793634918.290645,
-    "ast_hash": "6fa8c250a8aff9ce0d0cd9ba5acc15d9",
+    "mtime": 1793689694.7544534,
+    "ast_hash": "b5206945fc4fc2d3b1f603f9bbf1305c",
     "semantic_hash": ""
   },
   ".claude-flow/rag-mod/status.json": {
-    "mtime": 1793634918.109645,
-    "ast_hash": "ea1c28d20a836f4c641ea976b4426cde",
+    "mtime": 1793689691.5662577,
+    "ast_hash": "1cd9eca6dfa9d266d24bd16db60bfde5",
     "semantic_hash": ""
   },
   ".claude-flow/ruvector-mod/status.json": {
-    "mtime": 1793634918.0213957,
-    "ast_hash": "71b7d7295bf6bff30ff536fbb3a99602",
+    "mtime": 1793689688.8093042,
+    "ast_hash": "7ccba5cea57a56d041e654934b1bc5eb",
     "semantic_hash": ""
   },
   ".claude-flow/ruvllm-mod/status.json": {
-    "mtime": 1793634917.9270341,
-    "ast_hash": "3237d45deb5e1d4610e42c191c16deb3",
+    "mtime": 1793689687.0881584,
+    "ast_hash": "023c26ca1047046a5a5fc6a520d1d62b",
     "semantic_hash": ""
   },
   ".claude-flow/rvf-mod/status.json": {
-    "mtime": 1793634917.836362,
-    "ast_hash": "c27ee546413ab800e2a25e77675b2025",
+    "mtime": 1793689685.2899003,
+    "ast_hash": "6332609313f0c579705b354a7880149f",
     "semantic_hash": ""
   },
   ".claude-flow/secaudit-mod/status.json": {
-    "mtime": 1793634917.739292,
-    "ast_hash": "f93e424ea29ca9d3eaa6c139f8987999",
+    "mtime": 1793689682.8155181,
+    "ast_hash": "27549c27d856e57e87caaa495475a5d4",
     "semantic_hash": ""
   },
   ".claude-flow/sparc-mod/status.json": {
-    "mtime": 1793634917.648613,
-    "ast_hash": "1f276f8f1148bd3b79615c4e9a16c10e",
+    "mtime": 1793689680.5542347,
+    "ast_hash": "eadbdc28aaf60dca0bab6ea7db796976",
     "semantic_hash": ""
   },
   ".claude-flow/testgen-mod/status.json": {
-    "mtime": 1793634917.519696,
-    "ast_hash": "3b2f752f904f7b791c8aa4e98dfaeb61",
+    "mtime": 1793689678.7443717,
+    "ast_hash": "8f4eb072803915c6ff427225c2c2724b",
     "semantic_hash": ""
   },
   ".claude-flow/trader-mod/status.json": {
-    "mtime": 1793634918.3825269,
-    "ast_hash": "8db4651504756776ab0658b08f51c392",
+    "mtime": 1793689696.5075824,
+    "ast_hash": "44eafd4d4f10b4a171aa74f4cfc0f169",
     "semantic_hash": ""
   },
   ".claude-flow/wf-mod/status.json": {
-    "mtime": 1793634917.4004426,
-    "ast_hash": "2d73bb9d6f5a8ebd723403e95311e7c3",
+    "mtime": 1793689676.8935256,
+    "ast_hash": "f2faeebaa5113a2c32a14f4f9c325b67",
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
@@ -1112,6 +1112,26 @@
   "graphify-out/memory/query_20261101_073947_8738498f_which_otp_verification_unlocks_which_part_of_the_s.md": {
     "mtime": 1793519986.9820025,
     "ast_hash": "7772cfef8950dd420a574cc65dc16637",
+    "semantic_hash": ""
+  },
+  "supabase/functions/save-trip-lead/index.ts": {
+    "mtime": 1793652893.251634,
+    "ast_hash": "c6c1994dc425d08fc51fb9a5de15d4c3",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/012_lock_migrations_table.sql": {
+    "mtime": 1793652893.2536445,
+    "ast_hash": "68a03f6930885ba6b73461bfe4ef0bd6",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/013_lock_cms_writes.sql": {
+    "mtime": 1793652893.2556467,
+    "ast_hash": "d54927c82f9a97e47581a42e3e445633",
+    "semantic_hash": ""
+  },
+  "supabase/migrations/014_trip_leads_service_only.sql": {
+    "mtime": 1793654908.742843,
+    "ast_hash": "90fa5b371137fc29cb8c28fab6fca898",
     "semantic_hash": ""
   }
 }

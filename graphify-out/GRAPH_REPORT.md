@@ -1,7 +1,7 @@
-# Graph Report - AlpenGlow work  (2026-11-02)
+# Graph Report - AlpenGlow work  (2026-11-03)
 
 ## Corpus Check
-- 125 files · ~748,723 words
+- 129 files · ~750,967 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d0836639`
+- Built from commit: `7982eb7a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -171,7 +171,7 @@ Nodes (4): Answer, Outcome, Q: How were the em/en dashes in the generated SEO co
 ## Work-memory lessons
 
 **Preferred sources** — corroborated by past sessions; start here.
-- `seo-head.js` (2× useful, score=0.981009716) _(code changed — re-verify)_
+- `seo-head.js` (2× useful, score=0.937681475)
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
