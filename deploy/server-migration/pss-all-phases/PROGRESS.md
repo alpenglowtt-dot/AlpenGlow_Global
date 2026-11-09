@@ -354,6 +354,33 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
   stripped on the server (0 left); `bash -n` / `sh -n` OK;
   `add-project-full.sh` SHA-256 equal to the committed file. Waiting for
   you to run the root commands (stop condition 1).
+- **9 to 10 Nov 2026** You ran the root commands and the Cloudflare
+  changes ("done"). Checked by Claude (read-only):
+  - **Step 6b root part done:** `travel.alpenglowglobal.com` gone from
+    `sites-enabled` and `sites-available`; its certbot renewal config gone
+    (left: `api.alpenglowglobal.com.conf`, `api.perfectstudyspace.in.conf`).
+    **Differs:** the `travel` A record is **still in Cloudflare**: both
+    zone nameservers (`lorna`, `tanner`) answer `169.58.43.191` (TTL 300);
+    not a cache. Harmless for PSS (no `travel` site any more), asked again.
+  - **Step 8 done:** stack `pss` up, **6 containers healthy** (`pss-db`,
+    `pss-rest`, `pss-kong`, `pss-functions`, `pss-storage`,
+    `realtime-dev.pss-realtime`); the only new listening port
+    `127.0.0.1:8010`; no database port; `.env` and `functions.env` mode
+    600 owned by `deploy` (19 `.env` keys as in `.env.example`); no
+    `~/ops/projects` entry; `conf.d/10-pss.conf` and
+    `snippets/proxy-to-stack.conf` added. AlpenGlow's containers unchanged
+    (10 healthy, Kong Exited as before). Memory after: 2313 MB used, 5627
+    available; PSS containers 23 to 183 MB each (about 620 MB together).
+  - **Step 9 done:** `api.perfectstudyspace.in` A `169.58.43.191` at 1.1.1.1
+    and 8.8.8.8; certificate CN `api.perfectstudyspace.in`, Let's Encrypt
+    YE2, valid to **7 Feb 2027**; TLS site on. From the laptop: http 301 to
+    https; HSTS and nosniff headers; websocket without key 401 (gateway);
+    POST on the sign path 403; **404** for `/`, `/rest/v1/`,
+    `/auth/v1/settings`, `/storage/v1/bucket`, `/storage/v1/object/public/...`,
+    `/storage/v1/object/...`, `/storage/v1/s3`, `/realtime/v1/api/broadcast`,
+    `/functions/v1/main`, `/functions/v1/_shared`, `/pg/`, `/graphql/v1`,
+    `/project/default`. `/functions/v1/api` 500 until the functions are
+    deployed (step 12; the router finds no `api` folder yet).
 
 ## Decisions
 
