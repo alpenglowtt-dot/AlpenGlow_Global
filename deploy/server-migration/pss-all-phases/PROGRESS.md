@@ -7,15 +7,17 @@ here.
 
 ## Current step
 
-Step 3 (stack kit for the full app): files built in this folder, diff
-shown to you (9 Nov). Not committed yet (step 6). Waiting for your OK.
+Step 4 (PSS-side files): built in `Desktop\PSS\pss-all-phases`, diff shown
+to you (9 Nov). Not committed yet (step 6). Waiting for your OK.
 
 ## Next step
 
-Step 4: PSS-side files in `Desktop\PSS\pss-all-phases` (`deploy/vps-deploy.sh`,
-CSP in `public/_headers` and `vercel.json`, `docs/ops/cron-selfhosted.sql`,
-the decision B change in `payments.ts` and `tickets.ts`), diff shown to
-you. Then step 5 (local rehearsal; Docker Desktop not running yet at 19:35).
+Step 5: local rehearsal with Docker Desktop (stack from step 3, all 73
+migrations, the 3 functions, buckets, signed link, pg_cron/pg_net/Vault,
+`cron-selfhosted.sql` paused, Storage login as `supabase_storage_admin`,
+Realtime as `supabase_admin`, the PSS server test suites incl. the new
+`storage_links_test.ts`). Then step 6 (commit and push), then 6b
+(travel-app removal, billing dump first), then 7 (baseline).
 
 ## Done
 
@@ -172,6 +174,47 @@ you. Then step 5 (local rehearsal; Docker Desktop not running yet at 19:35).
     on a scratch copy with dummy values: valid, 6 services, ceilings total
     2688 MB, the only published port `127.0.0.1:8010`, no `__PROJECT__`
     left.
+- **9 Nov 2026** Step 3 approved by you. Your decisions, recorded in
+  `PLAN.md` Decisions: the data is treated as personal data (never printed,
+  logged or committed; `~/projects/pss` wiped before the old server is
+  cancelled); the AlpenGlow rollback no longer needs protecting, but its
+  containers keep running if possible; the travel-app is removed in a new
+  step 6b before the step 7 baseline (billing dump first); every server
+  change still asked. Step 5 gets two more checks (Storage as
+  `supabase_storage_admin` with the slim `roles.sql`, Realtime as
+  `supabase_admin`).
+- **9 Nov 2026** Temporary folder `...\jobs\10ae8e1e\tmp\ag-ref` (the 5
+  files extracted from the backup archive) deleted on your request. Left
+  in the job's temp folder: `compose-check` (template copy with dummy
+  values only, nothing from the backup).
+- **9 Nov 2026** Step 4 built in `Desktop\PSS\pss-all-phases` (not
+  committed):
+  - Decision B: `publicStorageLink()` in `supabase/functions/_shared/http.ts`
+    (link rebased from `SUPABASE_URL` onto `SUPABASE_PUBLIC_URL`; unchanged
+    when that is unset, equal, or the link does not start with
+    `SUPABASE_URL`), used by `get_payment_proof_image`
+    (`api/domains/payments.ts`) and `get_task_photo`
+    (`api/domains/tickets.ts`). New suite `tests/server/storage_links_test.ts`
+    (6 checks). Existing tests do not assert signed links; the fake's links
+    start with `http://fake.local`, so they stay unchanged.
+  - `deploy/vps-deploy.sh`: from the kit's `pss/vps-deploy.sh`; new step 0
+    stops before changing anything if `pss-db`/`pss-functions`/the `main`
+    router is missing or `_migrations_applied` is missing or empty; syncs
+    `api`, `cron`, `agent`, `_shared`; applies only unrecorded migrations;
+    keeps `_migrations_applied` locked; restarts `functions`.
+  - `public/_headers` and `vercel.json`: `https://api.perfectstudyspace.in`
+    added to `img-src` and `connect-src`, `wss://api.perfectstudyspace.in`
+    to `connect-src`; `*.supabase.co` kept; both CSPs identical.
+  - `docs/ops/cron-selfhosted.sql`: one transaction; extensions `pg_cron`,
+    `pg_net`, `supabase_vault` if missing; Vault `pss_project_url =
+    http://kong:8000` and `pss_cron_secret` from the psql variable
+    `cron_secret` (refused if missing or shorter than 16); the two helpers
+    as in `cron.sql`; 27 jobs created and paused in the same transaction;
+    a count check before `COMMIT`.
+  - Checks: `bash -n deploy/vps-deploy.sh` OK; `vercel.json` valid JSON;
+    the 27 (name, schedule, helper, job) entries are identical to
+    `cron.sql` (parsed by script). The server test suites are not run yet
+    (no Deno on the laptop; they run in step 5).
 
 ## Decisions
 
@@ -190,9 +233,11 @@ tracking). In short:
 - [x] Step 2 results: parts 1 to 4 and the secret names (9 Nov).
 - [x] Your OK on step 2 (9 Nov).
 - [x] Feature switches: keep all 39 as in the cloud (9 Nov).
-- [ ] Confirm the nature of the data in `zripsszkprhtyccukrir`: made-up
-      test data, or a copy of live data (treated as personal data until
-      you say).
-- [ ] Your OK on step 3 (diff shown 9 Nov).
+- [x] Data handling: personal data, wipe `~/projects/pss` before the old
+      server is cancelled (9 Nov).
+- [x] Your OK on step 3 (9 Nov).
+- [ ] Your OK on step 4 (diff shown 9 Nov).
+- [ ] Step 6b c: delete the `travel` DNS record in Cloudflare (after the
+      travel-app is removed).
 - [ ] Step 5: Docker Desktop running on this laptop (you are starting it,
       9 Nov).

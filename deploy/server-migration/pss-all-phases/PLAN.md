@@ -66,12 +66,25 @@ Never changed: `AlpenGlow-migration`, `AlpenGlow work`,
 - **Feature switches, schedules, AI (9 Nov):** all 39 feature switches stay
   exactly as in the cloud (faithful copy of `app_settings`). Every schedule
   stays PAUSED on the stack. No AI keys in `functions.env` until you say.
-- **Nature of the data (9 Nov, TO CONFIRM):** your message left both
-  options open ("made-up test data" / "a copy of live data"). Until you
-  confirm, it is treated as **personal data**: never printed, logged or
-  committed, and **`~/projects/pss` is wiped from the old server before that
-  server is cancelled** (as `deploy`: `docker compose down -v`; as root:
-  `rm -rf /home/deploy/projects/pss`, see "Removing it again").
+- **Data handling (9 Nov, your final word):** the data from
+  `zripsszkprhtyccukrir` is treated as **personal data**: never printed,
+  logged or committed, and **`~/projects/pss` is wiped from the old server
+  before that server is cancelled** (as `deploy`: `docker compose down -v`
+  in `~/projects/pss/backend`; as root: `rm -rf /home/deploy/projects/pss`;
+  see "Removing it again").
+- **AlpenGlow on the old server (9 Nov):** the AlpenGlow rollback there no
+  longer needs protecting (AlpenGlow is stable on the new server). Its own
+  containers keep running if possible, so the server can be measured with
+  both projects. If they block this migration (memory, ports, nginx),
+  Claude tells you and proposes a change; nothing of AlpenGlow's is changed
+  without your OK.
+- **travel-app (9 Nov):** not needed any more; removed from the old server
+  in the new **step 6b**, BEFORE the step 7 baseline (so the baseline is
+  without it). The billing schema inside AlpenGlow's old database is left
+  alone; it goes when the server is cancelled. You delete the `travel` DNS
+  record in Cloudflare yourself. Recorded only in this folder's
+  `PROGRESS.md`, never in the main migration's.
+- **Server changes (9 Nov):** still asked for, every single one.
 - **Billing dates of the old server:** yours; not planned around here.
 - **Tracking:** this folder's `PLAN.md` and `PROGRESS.md`. The AlpenGlow
   `CLAUDE.md` "Server migration" rules (`claude/server-migration-kit`,
@@ -97,11 +110,11 @@ secret names.
 
 ## Layout on the old server
 
-| | AlpenGlow (rollback, untouched) | PSS all-phases (new) |
+| | AlpenGlow (kept running; rollback no longer needed) | PSS all-phases (new) |
 |---|---|---|
 | Folder | `~/projects/alpenglow-global/backend` | `~/projects/pss/backend` |
 | Compose project, network | `supabase`, `supabase_default` | `pss`, `pss_default` |
-| Containers | `supabase-*` (Kong STOPPED), travel-app | `pss-db`, `pss-rest`, `pss-kong`, `pss-functions`, `pss-storage`, `realtime-dev.pss-realtime` |
+| Containers | `supabase-*` (Kong STOPPED); travel-app removed in step 6b | `pss-db`, `pss-rest`, `pss-kong`, `pss-functions`, `pss-storage`, `realtime-dev.pss-realtime` |
 | Gateway | `:8000`/`:8443` (stopped) | `127.0.0.1:8010` only |
 | Database port | AlpenGlow pooler, dropped by `DOCKER-USER` | not published at all |
 | nginx | existing site files, never edited | new: `sites-available/api.perfectstudyspace.in`, `conf.d/10-pss.conf` |
@@ -233,13 +246,33 @@ folder).
    the 3 buckets, a signed link opened through a local nginx stand-in,
    pg_cron and pg_net loaded (`shared_preload_libraries`,
    `cron.database_name`), Vault present or not, `cron-selfhosted.sql` with
-   all jobs paused. No Supabase CLI. If Docker cannot run, we go carefully
-   on the server.
+   all jobs paused. Also (your request, 9 Nov): Storage logs in to the
+   database as `supabase_storage_admin` with the slim `roles.sql`, and
+   Realtime connects as `supabase_admin`. No Supabase CLI. If Docker cannot
+   run, we go carefully on the server.
 6. **Commit and push** both worktrees to `claude/sleepy-johnson-fmuoxd`
    (your OK).
 
 ### B. Old server (each step only after your OK)
 
+6b. **Remove the travel-app** (before the baseline):
+    - a. **Billing data first (GST records).** Confirm
+      `db/app-billing-schema+data.sql` is in the latest snapshot in
+      `vps-migration-backup` and passes its `SHA256SUMS`. Then a FRESH,
+      read-only dump of the billing schema from `supabase-db` into a new
+      dated folder in `vps-migration-backup` (outside git, never printed).
+      Report its size and the row count per table. Nothing is deleted
+      until you confirm the dump is good.
+    - b. Then, one command at a time, each with your OK:
+      `docker compose down` in `~/projects/travel-app` (no `-v` until you
+      confirm); remove its images; remove the nginx site
+      `travel.alpenglowglobal.com` (`nginx -t` must pass before the reload;
+      `api.alpenglowglobal.com` stays as it is); `certbot delete` for the
+      `travel` certificate; finally remove the `~/projects/travel-app`
+      folder. Root commands are written out; you run them.
+    - c. You delete the `travel` DNS record in Cloudflare.
+    - d. The billing schema inside AlpenGlow's old database stays; it goes
+      when the server is cancelled.
 7. **Baseline (read-only):** `free -m`, `df -h`, `uptime`,
    `docker stats --no-stream`, `docker ps`, listening ports; port 8010 free;
    nginx version, `snippets/`, `/etc/letsencrypt/options-ssl-nginx.conf`,
@@ -329,9 +362,11 @@ not touched by any of this.
   Supabase, git). Pushing this folder's tracking files is pre-approved.
 - Never print, paste, log or commit secrets, keys, connection strings,
   `.env` contents or customer data. You type secrets on the server.
-- Never touch AlpenGlow on the old server: compose project `supabase`, its
-  stopped Kong, travel-app, existing nginx site files (only add new ones;
-  `nginx -t` before every reload). No `01-base-setup.sh`, `apt upgrade`,
+- AlpenGlow on the old server (compose project `supabase`): keep it
+  running and unchanged unless you approve a change (see Decisions; the
+  rollback itself no longer needs protecting). Existing nginx site files:
+  only add new ones, except the `travel` site removed in step 6b with your
+  OK; `nginx -t` before every reload. No `01-base-setup.sh`, `apt upgrade`,
   `do-release-upgrade`, ufw/iptables/iptables-persistent changes.
 - Multi-line remote scripts: here-string into `ssh <host> "tr -d '\r' | bash -s"`.
   Anything that reads stdin (`restore-public.sh`, `docker exec -i`,
