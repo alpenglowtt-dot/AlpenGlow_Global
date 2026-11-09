@@ -57,6 +57,11 @@ you. Then step 4 (PSS-side files, incl. the decision B change).
   table (dropped at `COMMIT`). Migrations 059, 062, 069 add no
   `storage.objects` policies; their buckets are private, 1572864 bytes
   (1.5 MB), `image/jpeg`, `image/png`, `image/webp`.
+- **9 Nov 2026** Step 2, part 3 (your result): `supabase_migrations.schema_migrations`
+  does not exist; migrations were applied through the SQL Editor, not the
+  CLI. So the cloud has no record of which of 001 to 073 ran; the
+  diagnostic (part 4) is the evidence that the schema matches 001 to 073.
+  No effect on the move: 001 to 073 are recorded on the stack in step 10.
 
 ## Decisions
 
