@@ -7,8 +7,8 @@ here.
 
 ## Current step
 
-Step 4 (PSS-side files): built in `Desktop\PSS\pss-all-phases`, diff shown
-to you (9 Nov). Not committed yet (step 6). Waiting for your OK.
+Step 6b a (billing data before the travel-app removal): fresh dump taken
+and checked (see Done). **Waiting for your "dump OK".**
 
 ## Next step
 
@@ -308,7 +308,8 @@ tracking). In short:
 - [x] Data handling: personal data, wipe `~/projects/pss` before the old
       server is cancelled (9 Nov).
 - [x] Your OK on step 3 (9 Nov).
-- [ ] Your OK on step 4 (diff shown 9 Nov).
+- [x] Your OK on step 4 (9 Nov).
+- [ ] Step 6b: your "dump OK" for the fresh billing dump.
 - [ ] Step 6b c: delete the `travel` DNS record in Cloudflare (after the
       travel-app is removed).
 - [ ] Step 5: Docker Desktop running on this laptop (you are starting it,
