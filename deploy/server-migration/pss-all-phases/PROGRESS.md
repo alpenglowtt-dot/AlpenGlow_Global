@@ -7,8 +7,9 @@ here.
 
 ## Current step
 
-Steps 6b (root part), 8 and 9: waiting for you to run the root commands
-and the Cloudflare changes (given in chat, 9 Nov).
+Step 10 (data): waiting for you to take the dump of `zripsszkprhtyccukrir`
+on the server (connection string at a `read -rs` prompt), and to delete
+the `travel` DNS record (still in Cloudflare).
 
 ## Next step
 
@@ -376,9 +377,14 @@ tracking). In short:
 - [x] Your OK on step 3 (9 Nov).
 - [x] Your OK on step 4 (9 Nov).
 - [x] Step 6b: your "dump OK" for the fresh billing dump (9 Nov).
-- [ ] Root commands: travel nginx site, `certbot delete` (travel),
-      `add-project-full.sh` (1st run), `certbot certonly` (api), 2nd run.
-- [ ] Cloudflare: delete `travel`; add `api` A `169.58.43.191`, DNS only.
+- [x] Root commands: travel nginx site, `certbot delete` (travel),
+      `add-project-full.sh` (1st run), `certbot certonly` (api), 2nd run
+      (done 9/10 Nov).
+- [x] Cloudflare: `api` A `169.58.43.191`, DNS only (done).
+- [ ] Cloudflare: delete `travel` in `alpenglowglobal.com` (still there on
+      10 Nov).
+- [ ] Step 10: dump of `zripsszkprhtyccukrir` on the server (connection
+      string at a `read -rs` prompt).
 - [ ] Step 6b c: delete the `travel` DNS record in Cloudflare (after the
       travel-app is removed).
 - [ ] Step 5: Docker Desktop running on this laptop (you are starting it,
