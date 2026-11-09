@@ -420,6 +420,38 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     bundle still points at `https://zripsszkprhtyccukrir.supabase.co`
     (Preview variables). Production `https://perfectstudyspace.pages.dev`
     200.
+- **10 Nov 2026** You wrote `functions.env` on the server and changed the
+  Cloudflare Pages Preview variables ("done").
+- **10 Nov 2026** **Step 11 done:** `functions.env` mode 600 with exactly
+  `STAFF_JWT_SECRET`, `STUDENT_JWT_SECRET`, `CRON_SECRET`,
+  `CERTIFICATE_SECRET` (fresh random, 64 chars each, generated on the
+  server, never shown), `PORTAL_URL` and `ALLOWED_ORIGINS` (both the
+  branch preview `https://claude-sleepy-johnson-fmuoxd.perfectstudyspace.pages.dev`;
+  origins also `http://localhost:5173`); no duplicates, no empty values,
+  **no AI keys**, no `PUBLIC_SITE_KEY` (as on the cloud).
+  `docker compose up -d functions`: healthy; all 6 secrets plus
+  `SUPABASE_URL` and `SUPABASE_PUBLIC_URL` present in the container.
+- **10 Nov 2026** **Step 12 done:** `VPS_HOST=deploy@169.58.43.191 bash
+  deploy/vps-deploy.sh` from the PSS worktree at `17dcbe9` (no tracked
+  changes): pre-check "stack present, 73 migrations recorded"; synced
+  `_shared`, `agent`, `api`, `cron`; "no new migrations"; functions
+  restarted. Through `https://api.perfectstudyspace.in/functions/v1/`:
+  preflight from the preview origin 200 with that origin allowed, from
+  `https://evil.example` no allow header; login with an unknown user and
+  wrong password **401 "Invalid login credentials"** (0.9 s: function,
+  REST and the `verify_staff_login`/`crypt()` path work);
+  `list_branches` without a token 401; `cron` and `agent` without
+  `x-cron-secret` 401; `main` and `_shared` 404; 0 error lines in the
+  functions log. A successful login needs a real test staff password
+  (yours): one command for you in the final report.
+- **10 Nov 2026** **Step 13 done:** `cron-selfhosted.sql` copied to
+  `~/pss-kit` (SHA-256 equal to the committed file), run by
+  `~/pss-kit/run-cron-selfhosted.sh` (takes `CRON_SECRET` from
+  `functions.env` and feeds it to psql through stdin; never on a command
+  line or printed). Result: **27 `pss_` jobs, 0 active**, 27 jobs in
+  total; Vault `pss_cron_secret` (64 chars) and `pss_project_url` =
+  `http://kong:8000`; helpers not executable by `anon`; `pg_cron` 1.6.4,
+  `pg_net` 0.20.3, `supabase_vault` 0.3.1; 0 scheduled runs so far.
 
 ## Decisions
 
