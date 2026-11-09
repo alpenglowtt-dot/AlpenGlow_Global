@@ -7,9 +7,9 @@ here.
 
 ## Current step
 
-Steps 11 and 14: waiting for you to write the `functions.env` lines on the
-server and to set the Cloudflare Pages Preview variables (given in chat,
-10 Nov). Claude then does 11 (start functions), 12, 13 and checks 14.
+Step 14: steps 5 to 13 done. The branch preview has not been rebuilt with
+the new Preview variables (still the cloud API). Waiting for you to check
+the variables and the deployment in Cloudflare Pages (see chat, 10 Nov).
 
 ## Next step
 
@@ -452,6 +452,22 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
   total; Vault `pss_cron_secret` (64 chars) and `pss_project_url` =
   `http://kong:8000`; helpers not executable by `anon`; `pg_cron` 1.6.4,
   `pg_net` 0.20.3, `supabase_vault` 0.3.1; 0 scheduled runs so far.
+- **10 Nov 2026, 21:41 CET** Whole-server check (read-only): 6 PSS
+  containers healthy, AlpenGlow's 10 unchanged (Kong Exited as before);
+  memory 2547 MB used, 5393 available (PSS stack 816 MiB, AlpenGlow 1460
+  MiB); load 2.1 to 2.3 (baseline 1.2); disk 37 %; listening ports as in
+  step 7 plus `127.0.0.1:8010` only. From the internet: 15 closed paths
+  404, POST on the sign path 403, a forged signed link 400 (Storage checks
+  the token); AlpenGlow's API on the new server answers 200. (`nginx -t`
+  run as `deploy` reports "failed" only because it cannot read root-only
+  files; your `sudo` run passed and the site serves the new config.)
+- **10 Nov 2026** **Step 14 differs (stopped, stop condition 2):** the branch
+  preview has **not been rebuilt**: still bundle `index-DsKqMPqS.js`,
+  calling `https://zripsszkprhtyccukrir.supabase.co` with an anon key
+  whose fingerprint (`81e49de0d54f`) is not the stack's (`e6cd3522f42b`).
+  Checked twice about 10 minutes apart (a longer watch was stopped by
+  Claude Code because the laptop ran low on memory). The CSP of that
+  preview already allows `api.perfectstudyspace.in`.
 
 ## Decisions
 
