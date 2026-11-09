@@ -7,15 +7,15 @@ here.
 
 ## Current step
 
-Step 2 (inventory of `zripsszkprhtyccukrir`): results in (see Done, 9 Nov).
-Waiting for your OK, your decision on the feature switches, and
-(optional) the Edge Function list with last-deployed times.
+Step 3 (stack kit for the full app): files built in this folder, diff
+shown to you (9 Nov). Not committed yet (step 6). Waiting for your OK.
 
 ## Next step
 
-Step 3: stack kit for the full app (template with Storage and Realtime,
-`add-project-full.sh`, `nginx/project-site-full.template`), diff shown to
-you. Then step 4 (PSS-side files, incl. the decision B change).
+Step 4: PSS-side files in `Desktop\PSS\pss-all-phases` (`deploy/vps-deploy.sh`,
+CSP in `public/_headers` and `vercel.json`, `docs/ops/cron-selfhosted.sql`,
+the decision B change in `payments.ts` and `tickets.ts`), diff shown to
+you. Then step 5 (local rehearsal; Docker Desktop not running yet at 19:35).
 
 ## Done
 
@@ -140,6 +140,38 @@ you. Then step 4 (PSS-side files, incl. the decision B change).
   - To check in step 5: `verify_staff_login`/`hash_staff_password` use
     `crypt()`/`gen_salt()` from `pgcrypto` in the `extensions` schema; a
     staff login on the restored data proves the search path works.
+- **9 Nov 2026** Step 2 approved by you. Feature switches: all 39 stay as
+  in the cloud; schedules stay paused; no AI keys until you say (PLAN.md
+  Decisions). Edge Function list not needed. Nature of the data: your
+  answer left both options open; treated as personal data until you
+  confirm (wipe `~/projects/pss` before the old server is cancelled).
+- **9 Nov 2026** Step 3 built (files in this folder, not committed):
+  - `stack-template/`: copy of `../new-server/stack-template` plus
+    `storage` (`supabase/storage-api:v1.60.4`, file backend in
+    `volumes/storage`, 256 MB) and `realtime`
+    (`supabase/realtime:v2.102.3`, container `realtime-dev.__PROJECT__-realtime`,
+    384 MB), settings taken from the AlpenGlow stack's own compose file
+    (backend archive of snapshot `2026-11-02_2218`; only the unresolved
+    compose, `kong.yml` and `realtime.sql` were extracted, to the job's
+    temp folder; no secrets read). REST lowered to 256 MB. Kong plugins
+    `post-function`, `request-termination` added; Storage and Realtime
+    routes copied from AlpenGlow's `kong.yml`. `volumes/db/realtime.sql`
+    new (copy of AlpenGlow's). `kong-entrypoint.sh`, `jwt.sql`,
+    `roles.sql`, `main/index.ts` unchanged.
+  - `add-project-full.sh`: as `add-project.sh` plus the new containers in
+    the pre-check, `__PROJECT__` in `kong.yml`, `volumes/storage`, new
+    secrets (`SECRET_KEY_BASE`, `REALTIME_DB_ENC_KEY` 16 chars, S3 protocol
+    keys), new memory lines; no `~/ops` entry (decision 6); adds
+    `snippets/proxy-to-stack.conf` only if missing; if `nginx -t` fails it
+    removes what this run enabled and does not reload.
+  - `nginx/project-site-full.template`: public only `/functions/v1/` (404
+    for `main` and `_shared`), `GET`/`HEAD` `/storage/v1/object/sign/`,
+    `= /realtime/v1/websocket` (1 h timeout); everything else 404 for
+    everyone.
+  - Checks: `bash -n` OK; both YAML files parse; `docker compose config`
+    on a scratch copy with dummy values: valid, 6 services, ceilings total
+    2688 MB, the only published port `127.0.0.1:8010`, no `__PROJECT__`
+    left.
 
 ## Decisions
 
@@ -156,10 +188,11 @@ tracking). In short:
 
 - [x] Your OK on `PLAN.md` (9 Nov; open choice 1 = B).
 - [x] Step 2 results: parts 1 to 4 and the secret names (9 Nov).
-- [ ] Your OK on step 2.
-- [ ] Optional: the Edge Function list (names, last deployed).
-- [ ] Decide: the 39 feature switches arrive ON with the data. Leave them
-      as in the cloud (Claude's default: no change), or set them off on
-      the stack until "start testing"?
+- [x] Your OK on step 2 (9 Nov).
+- [x] Feature switches: keep all 39 as in the cloud (9 Nov).
+- [ ] Confirm the nature of the data in `zripsszkprhtyccukrir`: made-up
+      test data, or a copy of live data (treated as personal data until
+      you say).
+- [ ] Your OK on step 3 (diff shown 9 Nov).
 - [ ] Step 5: Docker Desktop running on this laptop (you are starting it,
       9 Nov).

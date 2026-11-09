@@ -60,8 +60,18 @@ Never changed: `AlpenGlow-migration`, `AlpenGlow work`,
   `/storage/v1/object/public/`) and `/realtime/v1/api/` are NOT opened to
   anyone, not even `172.16.0.0/12`; the functions reach them inside the
   stack through `kong:8000`.
-- **Open choices 2, 3, 5 (9 Nov):** approved as proposed. **4:** decided
-  after step 2. **6:** no PSS backup on the old server.
+- **Open choices 2, 3, 5 (9 Nov):** approved as proposed. **4:** settled
+  by step 2: the buckets hold 0 files, nothing to copy. **6:** no PSS
+  backup on the old server (`add-project-full.sh` writes no `~/ops` entry).
+- **Feature switches, schedules, AI (9 Nov):** all 39 feature switches stay
+  exactly as in the cloud (faithful copy of `app_settings`). Every schedule
+  stays PAUSED on the stack. No AI keys in `functions.env` until you say.
+- **Nature of the data (9 Nov, TO CONFIRM):** your message left both
+  options open ("made-up test data" / "a copy of live data"). Until you
+  confirm, it is treated as **personal data**: never printed, logged or
+  committed, and **`~/projects/pss` is wiped from the old server before that
+  server is cancelled** (as `deploy`: `docker compose down -v`; as root:
+  `rm -rf /home/deploy/projects/pss`, see "Removing it again").
 - **Billing dates of the old server:** yours; not planned around here.
 - **Tracking:** this folder's `PLAN.md` and `PROGRESS.md`. The AlpenGlow
   `CLAUDE.md` "Server migration" rules (`claude/server-migration-kit`,
