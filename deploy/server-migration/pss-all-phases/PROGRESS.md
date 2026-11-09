@@ -7,9 +7,9 @@ here.
 
 ## Current step
 
-Step 10 (data): waiting for you to take the dump of `zripsszkprhtyccukrir`
-on the server (connection string at a `read -rs` prompt), and to delete
-the `travel` DNS record (still in Cloudflare).
+Steps 11 and 14: waiting for you to write the `functions.env` lines on the
+server and to set the Cloudflare Pages Preview variables (given in chat,
+10 Nov). Claude then does 11 (start functions), 12, 13 and checks 14.
 
 ## Next step
 
@@ -381,6 +381,45 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     `/functions/v1/main`, `/functions/v1/_shared`, `/pg/`, `/graphql/v1`,
     `/project/default`. `/functions/v1/api` 500 until the functions are
     deployed (step 12; the router finds no `api` folder yet).
+- **10 Nov 2026** Step 10 incident (no harm done, no data read): your
+  first attempt passed a connection string of the **live project
+  `ozatixapvxwrwbpdxuzt`** on the `read` command line (so `read` failed,
+  the variable stayed empty, and `pg_dump` was refused by the local socket:
+  nothing connected to the live project). The string then sat in the
+  chat and in `deploy`'s shell history. You cleaned the history (0 pooler
+  strings left in `~/.bash_history`, checked). Resetting that project's
+  database password: your decision (recommended). Two more attempts
+  failed because of Claude's block (the variable was not handed to
+  `docker exec`; fixed with a command prefix) and a wrong test-project
+  password (you then used the right one).
+- **10 Nov 2026** **Step 10 done (data):**
+  - `travel` record now gone from Cloudflare (both zone nameservers answer
+    nothing).
+  - Dump by you on the server (string checked to be `zripsszkprhtyccukrir`,
+    passed only as an environment variable): `pg_dump --schema=public
+    --no-owner`, exit 0, **2490717 bytes**, from Postgres 17.11 by
+    pg_dump 17.6; no reference to `ozatixapvxwrwbpdxuzt`. In the dump: 77
+    tables, **7328 rows** (each table equal to the step 2 inventory), RLS
+    enabled on all 77, 0 policies, 8 functions (the 8th is
+    `rls_auto_enable`), 3 triggers; other schemas referenced only by the
+    two cron helpers (`net.http_post`, `vault.decrypted_secrets`).
+  - `~/ops/restore-public.sh pss-db`: only the expected noise (12 x
+    "permission denied to change default privileges", 1 x "schema public
+    already exists").
+  - `~/pss-kit/after-restore.sql`: 3 buckets, 73 migrations recorded.
+  - **Row counts match: 77 tables, 7328 rows** (database vs dump, per
+    table). Database: 0 tables without RLS, 8 functions, 192 indexes, 3
+    triggers, 0 policies, 0 views; 3 private buckets, 0 objects;
+    `_migrations_applied` 73, RLS on, `anon` cannot read it. `app_settings`
+    45 rows, 40 `pssai_` keys `on` (the 39 switches plus the
+    `pssai_agent_shadow` control), unchanged.
+  - Dump file and count list deleted from the server.
+  - Found for step 14: Pages project `perfectstudyspace` already built this
+    branch as a preview, `https://claude-sleepy-johnson-fmuoxd.perfectstudyspace.pages.dev`
+    (200; serves the new CSP with `api.perfectstudyspace.in`), but its
+    bundle still points at `https://zripsszkprhtyccukrir.supabase.co`
+    (Preview variables). Production `https://perfectstudyspace.pages.dev`
+    200.
 
 ## Decisions
 
@@ -408,10 +447,13 @@ tracking). In short:
       `add-project-full.sh` (1st run), `certbot certonly` (api), 2nd run
       (done 9/10 Nov).
 - [x] Cloudflare: `api` A `169.58.43.191`, DNS only (done).
-- [ ] Cloudflare: delete `travel` in `alpenglowglobal.com` (still there on
-      10 Nov).
-- [ ] Step 10: dump of `zripsszkprhtyccukrir` on the server (connection
-      string at a `read -rs` prompt).
+- [x] Cloudflare: delete `travel` in `alpenglowglobal.com` (gone, 10 Nov).
+- [x] Step 10: dump of `zripsszkprhtyccukrir` on the server (10 Nov).
+- [ ] Recommended: reset the database password of the live project
+      `ozatixapvxwrwbpdxuzt` (its string was exposed in the chat).
+- [ ] Step 11: write the `functions.env` lines on the server.
+- [ ] Step 14: Cloudflare Pages Preview variables, then retry the branch's
+      preview deployment.
 - [ ] Step 6b c: delete the `travel` DNS record in Cloudflare (after the
       travel-app is removed).
 - [ ] Step 5: Docker Desktop running on this laptop (you are starting it,
