@@ -287,6 +287,32 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     (`http://kong:8000`). One manual `pss_run_cron_job('cron_integrity_report')`
     (rehearsal only): pg_net 200, `events` row `integrity_report` ok.
     Scheduled runs: 0.
+- **9 Nov 2026** **Step 6 done:** both worktrees committed and pushed to
+  `claude/sleepy-johnson-fmuoxd` only. PSS `17dcbe9` (8 files: CSP,
+  `publicStorageLink`, `deploy/vps-deploy.sh`, `docs/ops/cron-selfhosted.sql`,
+  `tests/server/storage_links_test.ts`). AlpenGlow `266e73c` (the kit,
+  `after-restore.sql`, `PLAN.md`, `PROGRESS.md`, refreshed `graphify-out`).
+  PSS's `graphify-out` was refreshed by mistake and restored to its
+  committed state (the refresh rewrote tracked files with this laptop's
+  paths); 98 untracked files the refresh left there are not committed.
+  The automatic security review of the push did not run (review API busy,
+  HTTP 429; log in `~\.claude\security\log.txt`).
+- **9 Nov 2026** **Step 6b a, billing data (read-only):**
+  - Latest snapshot `2026-11-02_2218`: `db/app-billing-schema+data.sql`
+    present (12181 bytes) and **OK in its `SHA256SUMS`** (all 22 listed
+    files OK). Schema `billing`, tables `_migrations_applied`, `customers`,
+    `invoices`, `login_attempts`.
+  - **Fresh dump** (`pg_dump --schema=billing` in `supabase-db`, read-only,
+    over SSH): `vps-migration-backup\2026-11-09_2112_billing-before-travel-app-removal\billing-schema+data.sql`,
+    **12926 bytes**, Postgres 17.6, with its own `SHA256SUMS`; no
+    DROP/TRUNCATE/DELETE statements.
+  - Rows per table, identical in the fresh dump, the 2 Nov snapshot and
+    live `count(*)` on the server: `_migrations_applied` 2, `customers` 1,
+    `invoices` 2, `login_attempts` 0. Data lines identical to 2 Nov (0
+    differing); the fresh dump also carries owner statements (2 Nov was
+    taken with `--no-owner`) and its own random `\restrict` line.
+  - **Waiting for your "dump OK"** before anything of the travel-app is
+    removed (stop condition 3).
 
 ## Decisions
 
