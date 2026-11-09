@@ -468,6 +468,12 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
   Checked twice about 10 minutes apart (a longer watch was stopped by
   Claude Code because the laptop ran low on memory). The CSP of that
   preview already allows `api.perfectstudyspace.in`.
+- **10 Nov 2026, 02:33 IST** After your Cloudflare changes the preview was
+  still the `17dcbe9` build (same bundle, cloud URL, cloud anon key); the
+  PSS gateway log shows no browser request from it. The frontend reads
+  only `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` (no `.env` file in
+  the repo, nothing hard-coded), so it needs a new build. Empty commit
+  `c119d4b` pushed to the PSS branch to trigger a fresh preview build.
 
 ## Decisions
 
