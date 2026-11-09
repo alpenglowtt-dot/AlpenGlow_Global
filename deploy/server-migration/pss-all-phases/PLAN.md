@@ -66,12 +66,29 @@ Never changed: `AlpenGlow-migration`, `AlpenGlow work`,
 - **Feature switches, schedules, AI (9 Nov):** all 39 feature switches stay
   exactly as in the cloud (faithful copy of `app_settings`). Every schedule
   stays PAUSED on the stack. No AI keys in `functions.env` until you say.
-- **Data handling (9 Nov, your final word):** the data from
-  `zripsszkprhtyccukrir` is treated as **personal data**: never printed,
-  logged or committed, and **`~/projects/pss` is wiped from the old server
-  before that server is cancelled** (as `deploy`: `docker compose down -v`
-  in `~/projects/pss/backend`; as root: `rm -rf /home/deploy/projects/pss`;
-  see "Removing it again").
+- **Data (9 Nov, corrected by you):** `zripsszkprhtyccukrir` holds
+  **made-up test data** (your 14:14 message; the "personal data" line at
+  14:17 was only a safe default). Row contents are still never printed,
+  logged or committed. As cleanup, **`~/projects/pss` is removed from the
+  old server before it is cancelled** (see "Removing it again").
+- **Working mode (9 Nov, replaces "stop after each step" and "ask before
+  every change" for the steps in this plan):** steps 5, 6, 6b, 7 to 14 run
+  one after another without waiting. Pushing both worktrees to
+  `claude/sleepy-johnson-fmuoxd` is approved (never any other branch).
+  Claude stops only for: (1) something only you can do (sudo/root
+  commands, your password, a secret or the connection string at a
+  `read -rs` prompt, the Cloudflare DNS record, Cloudflare Pages settings);
+  (2) a failure or anything different from this plan (failed check,
+  unhealthy container, row counts not matching, `nginx -t` failing, memory
+  below the step 7 go/no-go): evidence, proposed fix, wait; (3) step 6b
+  after the fresh billing dump: size and row counts, wait for "dump OK"
+  before removing anything of the travel-app; (4) anything not in this
+  plan or touching AlpenGlow's containers, the main branches,
+  `PSS\perfect-study-space`, `AlpenGlow-migration`, `AlpenGlow work` or
+  `ozatixapvxwrwbpdxuzt`. After step 14: stop and wait for "start testing".
+- **Server tests (9 Nov):** the PSS server suites run inside a pinned
+  `denoland/deno` container (no Deno installed on the laptop), dummy data
+  only.
 - **AlpenGlow on the old server (9 Nov):** the AlpenGlow rollback there no
   longer needs protecting (AlpenGlow is stable on the new server). Its own
   containers keep running if possible, so the server can be measured with
@@ -84,7 +101,8 @@ Never changed: `AlpenGlow-migration`, `AlpenGlow work`,
   alone; it goes when the server is cancelled. You delete the `travel` DNS
   record in Cloudflare yourself. Recorded only in this folder's
   `PROGRESS.md`, never in the main migration's.
-- **Server changes (9 Nov):** still asked for, every single one.
+- **Server changes (9 Nov, later replaced):** were asked for one by one
+  until the working-mode decision above.
 - **Billing dates of the old server:** yours; not planned around here.
 - **Tracking:** this folder's `PLAN.md` and `PROGRESS.md`. The AlpenGlow
   `CLAUDE.md` "Server migration" rules (`claude/server-migration-kit`,
@@ -335,6 +353,9 @@ Then STOP: report the migration finished, with evidence, and wait for
   requests can both succeed and leave two active member sessions. Not fixed
   here; it matters once testing starts (and before any production use or
   seat automation).
+- **`golden_test.ts` fails on `65d8f1a` itself** ("golden master differs";
+  found in step 5, identical on an untouched export of the branch). Not
+  caused by this migration, not fixed here.
 - **CRLF on Windows:** the same document notes a CRLF/hashbang problem in a
   Windows checkout. `vps-deploy.sh` copies the working tree as it is; step
   5 (or step 12) checks the functions start from this laptop's files.

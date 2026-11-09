@@ -1,0 +1,240 @@
+# Supabase stack for one project on a shared server: database, REST,
+# gateway, edge functions, Storage and Realtime. No Studio, Auth, pooler,
+# imgproxy or analytics. Copied from new-server/stack-template (the slim
+# stack) and extended for PSS all-phases, whose functions use Storage
+# buckets and whose staff app listens on a Realtime broadcast channel.
+#
+# add-project-full.sh copies this folder to ~/projects/<name>/backend and
+# replaces __PROJECT__ with the project name, so every container, network and
+# volume carries that name and cannot collide with another project's stack.
+#
+# Images and versions match the AlpenGlow stack exactly (storage-api v1.60.4,
+# realtime v2.102.3 included). Every container has a memory ceiling.
+
+name: __PROJECT__
+
+services:
+  db:
+    container_name: __PROJECT__-db
+    image: supabase/postgres:17.6.1.136
+    restart: unless-stopped
+    mem_limit: ${DB_MEM_LIMIT:-768m}
+    volumes:
+      # Realtime's own schema (_realtime), as in the AlpenGlow stack
+      - ./volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z
+      # Must be superuser to alter reserved roles
+      - ./volumes/db/roles.sql:/docker-entrypoint-initdb.d/init-scripts/99-roles.sql:Z
+      # Database settings for JWT_SECRET and JWT_EXP
+      - ./volumes/db/jwt.sql:/docker-entrypoint-initdb.d/init-scripts/99-jwt.sql:Z
+      - ./volumes/db/data:/var/lib/postgresql/data:Z
+      - db-config:/etc/postgresql-custom
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      # The first start initialises the database (Supabase's own init
+      # migrations) and took over 50 s in the rehearsal; failures in this
+      # window do not count, so "compose up" waits instead of giving up.
+      start_period: 120s
+    environment:
+      POSTGRES_HOST: /var/run/postgresql
+      PGPORT: 5432
+      POSTGRES_PORT: 5432
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATABASE: postgres
+      POSTGRES_DB: postgres
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXP: ${JWT_EXPIRY:-3600}
+    command:
+      ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf", "-c", "log_min_messages=fatal"]
+    # No ports: the database is reachable only on this stack's own network.
+
+  rest:
+    container_name: __PROJECT__-rest
+    image: postgrest/postgrest:v14.12
+    restart: unless-stopped
+    mem_limit: ${REST_MEM_LIMIT:-256m}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "postgrest", "--ready"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    environment:
+      PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@db:5432/postgres
+      PGRST_DB_SCHEMAS: public
+      PGRST_DB_MAX_ROWS: ${PGRST_DB_MAX_ROWS:-1000}
+      PGRST_DB_EXTRA_SEARCH_PATH: public,extensions
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_ADMIN_SERVER_PORT: 3001
+      PGRST_ADMIN_SERVER_HOST: localhost
+      PGRST_JWT_SECRET: ${JWT_SECRET}
+      PGRST_DB_USE_LEGACY_GUCS: "false"
+      PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
+      PGRST_APP_SETTINGS_JWT_EXP: ${JWT_EXPIRY:-3600}
+    command: ["postgrest"]
+
+  kong:
+    container_name: __PROJECT__-kong
+    image: kong/kong:3.9.1
+    restart: unless-stopped
+    mem_limit: ${KONG_MEM_LIMIT:-512m}
+    depends_on:
+      rest:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "kong", "health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    # Loopback only: host nginx is the single way in from the internet.
+    ports:
+      - 127.0.0.1:${KONG_HTTP_PORT}:8000/tcp
+    volumes:
+      - ./volumes/api/kong.yml:/home/kong/temp.yml:ro,z
+      - ./volumes/api/kong-entrypoint.sh:/home/kong/kong-entrypoint.sh:ro,z
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /usr/local/kong/kong.yml
+      KONG_ROUTER_FLAVOR: expressions
+      KONG_DNS_ORDER: LAST,A,CNAME
+      KONG_DNS_NOT_FOUND_TTL: 1
+      # post-function: Storage route (drops an empty Authorization header on
+      # signed-link GETs); request-termination: blocked Realtime admin paths.
+      KONG_PLUGINS: request-transformer,cors,key-auth,acl,post-function,request-termination
+      KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
+      KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
+      # Untuned Kong starts one worker per CPU and outgrows its memory cap.
+      KONG_NGINX_WORKER_PROCESSES: "2"
+      KONG_PROXY_ACCESS_LOG: /dev/stdout combined
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
+    entrypoint: ["/bin/sh", "/home/kong/kong-entrypoint.sh"]
+
+  functions:
+    container_name: __PROJECT__-functions
+    image: supabase/edge-runtime:v1.74.0
+    restart: unless-stopped
+    mem_limit: ${FUNCTIONS_MEM_LIMIT:-512m}
+    depends_on:
+      kong:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 1 bash -c '</dev/tcp/127.0.0.1/9000'"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - ./volumes/functions:/home/deno/functions:z
+      - deno-cache:/root/.cache/deno
+    # The project's own function secrets (STAFF_JWT_SECRET and so on).
+    env_file:
+      - ./functions.env
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      # Internal gateway: REST, Storage and the Realtime broadcast API are
+      # reached here, never through the internet.
+      SUPABASE_URL: http://kong:8000
+      # Public address. PSS all-phases builds the signed Storage links a
+      # browser opens from this when it is set (decision B in PLAN.md).
+      SUPABASE_PUBLIC_URL: ${SUPABASE_PUBLIC_URL}
+      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+      SUPABASE_DB_URL: postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/postgres
+      # Functions do their own auth; the gateway check stays off.
+      VERIFY_JWT: "false"
+      # Per-request worker limits, read by volumes/functions/main. Supabase
+      # cloud allows 256 MB and 150 s; the self-hosted default is 150 MB / 60 s.
+      EDGE_WORKER_MEMORY_MB: ${EDGE_WORKER_MEMORY_MB:-256}
+      EDGE_WORKER_TIMEOUT_MS: ${EDGE_WORKER_TIMEOUT_MS:-150000}
+    command: ["start", "--main-service", "/home/deno/functions/main"]
+
+  storage:
+    container_name: __PROJECT__-storage
+    image: supabase/storage-api:v1.60.4
+    restart: unless-stopped
+    mem_limit: ${STORAGE_MEM_LIMIT:-256m}
+    depends_on:
+      db:
+        condition: service_healthy
+      rest:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://storage:5000/status"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    environment:
+      ANON_KEY: ${ANON_KEY}
+      SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      POSTGREST_URL: http://rest:3000
+      AUTH_JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URL: postgres://supabase_storage_admin:${POSTGRES_PASSWORD}@db:5432/postgres
+      STORAGE_PUBLIC_URL: ${SUPABASE_PUBLIC_URL}
+      REQUEST_ALLOW_X_FORWARDED_PATH: "true"
+      # Hard ceiling for any upload; each PSS bucket sets 1.5 MB itself.
+      FILE_SIZE_LIMIT: "5242880"
+      STORAGE_BACKEND: file
+      FILE_STORAGE_BACKEND_PATH: /var/lib/storage
+      # Names only, required by storage-api even with the file backend.
+      GLOBAL_S3_BUCKET: stub
+      TENANT_ID: stub
+      REGION: stub
+      # No imgproxy in this stack: image transformation stays off.
+      ENABLE_IMAGE_TRANSFORMATION: "false"
+      # S3 protocol credentials, random per stack; nginx never exposes /s3.
+      S3_PROTOCOL_ACCESS_KEY_ID: ${S3_PROTOCOL_ACCESS_KEY_ID}
+      S3_PROTOCOL_ACCESS_KEY_SECRET: ${S3_PROTOCOL_ACCESS_KEY_SECRET}
+    volumes:
+      - ./volumes/storage:/var/lib/storage:z
+
+  realtime:
+    # The name looks odd but is required: Realtime takes its tenant id
+    # ("realtime-dev", seeded by SEED_SELF_HOST) from the first label of the
+    # host name the gateway calls it by (same pattern as AlpenGlow).
+    container_name: realtime-dev.__PROJECT__-realtime
+    image: supabase/realtime:v2.102.3
+    restart: unless-stopped
+    mem_limit: ${REALTIME_MEM_LIMIT:-384m}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -sSfL --head -o /dev/null -H \"Authorization: Bearer ${ANON_KEY}\" http://localhost:4000/api/tenants/realtime-dev/health"
+        ]
+      timeout: 5s
+      interval: 30s
+      retries: 3
+      start_period: 10s
+    environment:
+      PORT: 4000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: supabase_admin
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: postgres
+      DB_AFTER_CONNECT_QUERY: SET search_path TO _realtime
+      # 16 characters, random per stack (AlpenGlow uses the upstream default).
+      DB_ENC_KEY: ${REALTIME_DB_ENC_KEY}
+      API_JWT_SECRET: ${JWT_SECRET}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      METRICS_JWT_SECRET: ${JWT_SECRET}
+      ERL_AFLAGS: -proto_dist inet_tcp
+      DNS_NODES: "''"
+      RLIMIT_NOFILE: "10000"
+      APP_NAME: realtime
+      SEED_SELF_HOST: "true"
+      RUN_JANITOR: "true"
+      DISABLE_HEALTHCHECK_LOGGING: "true"
+
+volumes:
+  db-config:
+  deno-cache:

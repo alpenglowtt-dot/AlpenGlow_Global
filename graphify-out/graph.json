@@ -780,8 +780,8 @@
       "source_location": "L1011",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_bindcontact",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_bindcontact()"
     },
     {
@@ -791,8 +791,8 @@
       "source_location": "L1044",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpsendphoneotp",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpsendphoneotp()"
     },
     {
@@ -802,8 +802,8 @@
       "source_location": "L1091",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpconfirmphoneotp",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpconfirmphoneotp()"
     },
     {
@@ -813,8 +813,8 @@
       "source_location": "L1114",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpsendemailotp",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpsendemailotp()"
     },
     {
@@ -824,8 +824,8 @@
       "source_location": "L1150",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpconfirmemailotp",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpconfirmemailotp()"
     },
     {
@@ -835,8 +835,8 @@
       "source_location": "L1172",
       "_origin": "ast",
       "id": "alpenglow_trip_planner_tpcheckbothverified",
-      "community": 2,
-      "community_name": "_bindStep",
+      "community": 0,
+      "community_name": "trip-planner.js",
       "norm_label": "_tpcheckbothverified()"
     },
     {
@@ -1202,7 +1202,775 @@
       "norm_label": "dashboardpassword"
     },
     {
-      "label": "vps-deploy.sh",
+      "label": "01-base-setup.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/01-base-setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_01_base_setup",
+      "community": 55,
+      "community_name": "01-base-setup.sh",
+      "norm_label": "01-base-setup.sh"
+    },
+    {
+      "label": "01-base-setup.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/01-base-setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_01_base_setup_sh__entry",
+      "community": 55,
+      "community_name": "01-base-setup.sh",
+      "norm_label": "01-base-setup.sh script"
+    },
+    {
+      "label": "DEBIAN_FRONTEND",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/01-base-setup.sh",
+      "source_location": "L16",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_01_base_setup_debian_frontend",
+      "community": 55,
+      "community_name": "01-base-setup.sh",
+      "norm_label": "debian_frontend"
+    },
+    {
+      "label": "step()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/01-base-setup.sh",
+      "source_location": "L17",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_01_base_setup_step",
+      "community": 55,
+      "community_name": "01-base-setup.sh",
+      "norm_label": "step()"
+    },
+    {
+      "label": "add-project.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/add-project.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_add_project",
+      "community": 56,
+      "community_name": "add-project.sh",
+      "norm_label": "add-project.sh"
+    },
+    {
+      "label": "add-project.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/add-project.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_add_project_sh__entry",
+      "community": 56,
+      "community_name": "add-project.sh",
+      "norm_label": "add-project.sh script"
+    },
+    {
+      "label": "step()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/add-project.sh",
+      "source_location": "L27",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_add_project_step",
+      "community": 56,
+      "community_name": "add-project.sh",
+      "norm_label": "step()"
+    },
+    {
+      "label": "as_deploy()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/add-project.sh",
+      "source_location": "L28",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_add_project_as_deploy",
+      "community": 56,
+      "community_name": "add-project.sh",
+      "norm_label": "as_deploy()"
+    },
+    {
+      "label": "backup-nightly.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/backup-nightly.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_backup_nightly",
+      "community": 60,
+      "community_name": "backup-nightly.sh",
+      "norm_label": "backup-nightly.sh"
+    },
+    {
+      "label": "backup-nightly.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/backup-nightly.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_backup_nightly_sh__entry",
+      "community": 60,
+      "community_name": "backup-nightly.sh",
+      "norm_label": "backup-nightly.sh script"
+    },
+    {
+      "label": "dump()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/backup-nightly.sh",
+      "source_location": "L30",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_backup_nightly_dump",
+      "community": 60,
+      "community_name": "backup-nightly.sh",
+      "norm_label": "dump()"
+    },
+    {
+      "label": "healthcheck.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_healthcheck",
+      "community": 54,
+      "community_name": "healthcheck.sh",
+      "norm_label": "healthcheck.sh"
+    },
+    {
+      "label": "healthcheck.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_healthcheck_sh__entry",
+      "community": 54,
+      "community_name": "healthcheck.sh",
+      "norm_label": "healthcheck.sh script"
+    },
+    {
+      "label": "envval()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L30",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_healthcheck_envval",
+      "community": 54,
+      "community_name": "healthcheck.sh",
+      "norm_label": "envval()"
+    },
+    {
+      "label": "add()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L36",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_healthcheck_add",
+      "community": 54,
+      "community_name": "healthcheck.sh",
+      "norm_label": "add()"
+    },
+    {
+      "label": "http()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L38",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_healthcheck_http",
+      "community": 54,
+      "community_name": "healthcheck.sh",
+      "norm_label": "http()"
+    },
+    {
+      "label": "restore-public.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/restore-public.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_restore_public",
+      "community": 61,
+      "community_name": "restore-public.sh",
+      "norm_label": "restore-public.sh"
+    },
+    {
+      "label": "restore-public.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/restore-public.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_restore_public_sh__entry",
+      "community": 61,
+      "community_name": "restore-public.sh",
+      "norm_label": "restore-public.sh script"
+    },
+    {
+      "label": "security-test.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/security-test.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_security_test",
+      "community": 57,
+      "community_name": "security-test.sh",
+      "norm_label": "security-test.sh"
+    },
+    {
+      "label": "security-test.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/security-test.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_security_test_sh__entry",
+      "community": 57,
+      "community_name": "security-test.sh",
+      "norm_label": "security-test.sh script"
+    },
+    {
+      "label": "row()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/security-test.sh",
+      "source_location": "L36",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_security_test_row",
+      "community": 57,
+      "community_name": "security-test.sh",
+      "norm_label": "row()"
+    },
+    {
+      "label": "code()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/security-test.sh",
+      "source_location": "L37",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_security_test_code",
+      "community": 57,
+      "community_name": "security-test.sh",
+      "norm_label": "code()"
+    },
+    {
+      "label": "new-server/stack-template/volumes/api/kong-entrypoint.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/api/kong-entrypoint.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_api_kong_entrypoint",
+      "community": 62,
+      "community_name": "new-server/stack-template/volumes/api/kong-entrypoint.sh",
+      "norm_label": "new-server/stack-template/volumes/api/kong-entrypoint.sh"
+    },
+    {
+      "label": "kong-entrypoint.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/api/kong-entrypoint.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_api_kong_entrypoint_sh__entry",
+      "community": 62,
+      "community_name": "new-server/stack-template/volumes/api/kong-entrypoint.sh",
+      "norm_label": "kong-entrypoint.sh script"
+    },
+    {
+      "label": "new-server/stack-template/volumes/functions/main/index.ts",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index",
+      "community": 44,
+      "community_name": "new-server/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "new-server/stack-template/volumes/functions/main/index.ts"
+    },
+    {
+      "label": "JWT_SECRET",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_jwt_secret",
+      "community": 44,
+      "community_name": "new-server/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "jwt_secret"
+    },
+    {
+      "label": "SUPABASE_JWKS",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_supabase_jwks",
+      "community": 44,
+      "community_name": "new-server/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "supabase_jwks"
+    },
+    {
+      "label": "parseJwks()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_parsejwks",
+      "community": 44,
+      "community_name": "new-server/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "parsejwks()"
+    },
+    {
+      "label": "getAuthToken()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_getauthtoken",
+      "community": 44,
+      "community_name": "new-server/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "getauthtoken()"
+    },
+    {
+      "label": "isValidLegacyJWT()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidlegacyjwt",
+      "community": 44,
+      "community_name": "new-server/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "isvalidlegacyjwt()"
+    },
+    {
+      "label": "isValidJWT()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L64",
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidjwt",
+      "community": 44,
+      "community_name": "new-server/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "isvalidjwt()"
+    },
+    {
+      "label": "isValidHybridJWT()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L95",
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidhybridjwt",
+      "community": 44,
+      "community_name": "new-server/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "isvalidhybridjwt()"
+    },
+    {
+      "label": "NOTE:(kallebysantos) We don't check for valid keys but just the bare array parsi",
+      "file_type": "rationale",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_rationale_9",
+      "community": 44,
+      "community_name": "new-server/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "note:(kallebysantos) we don't check for valid keys but just the bare array parsi"
+    },
+    {
+      "label": "progress-hook.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/progress-hook.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress_hook",
+      "community": 63,
+      "community_name": "progress-hook.sh",
+      "norm_label": "progress-hook.sh"
+    },
+    {
+      "label": "progress-hook.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/progress-hook.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress_hook_sh__entry",
+      "community": 63,
+      "community_name": "progress-hook.sh",
+      "norm_label": "progress-hook.sh script"
+    },
+    {
+      "label": "add-project-full.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/add-project-full.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_add_project_full",
+      "community": 58,
+      "community_name": "add-project-full.sh",
+      "norm_label": "add-project-full.sh"
+    },
+    {
+      "label": "add-project-full.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/add-project-full.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_add_project_full_sh__entry",
+      "community": 58,
+      "community_name": "add-project-full.sh",
+      "norm_label": "add-project-full.sh script"
+    },
+    {
+      "label": "step()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/add-project-full.sh",
+      "source_location": "L38",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_add_project_full_step",
+      "community": 58,
+      "community_name": "add-project-full.sh",
+      "norm_label": "step()"
+    },
+    {
+      "label": "as_deploy()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/add-project-full.sh",
+      "source_location": "L39",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_add_project_full_as_deploy",
+      "community": 58,
+      "community_name": "add-project-full.sh",
+      "norm_label": "as_deploy()"
+    },
+    {
+      "label": "pss-all-phases/stack-template/volumes/api/kong-entrypoint.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/api/kong-entrypoint.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_api_kong_entrypoint",
+      "community": 64,
+      "community_name": "pss-all-phases/stack-template/volumes/api/kong-entrypoint.sh",
+      "norm_label": "pss-all-phases/stack-template/volumes/api/kong-entrypoint.sh"
+    },
+    {
+      "label": "kong-entrypoint.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/api/kong-entrypoint.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_api_kong_entrypoint_sh__entry",
+      "community": 64,
+      "community_name": "pss-all-phases/stack-template/volumes/api/kong-entrypoint.sh",
+      "norm_label": "kong-entrypoint.sh script"
+    },
+    {
+      "label": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index",
+      "community": 45,
+      "community_name": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "pss-all-phases/stack-template/volumes/functions/main/index.ts"
+    },
+    {
+      "label": "JWT_SECRET",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_jwt_secret",
+      "community": 45,
+      "community_name": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "jwt_secret"
+    },
+    {
+      "label": "SUPABASE_JWKS",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_supabase_jwks",
+      "community": 45,
+      "community_name": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "supabase_jwks"
+    },
+    {
+      "label": "parseJwks()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_parsejwks",
+      "community": 45,
+      "community_name": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "parsejwks()"
+    },
+    {
+      "label": "getAuthToken()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L34",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_getauthtoken",
+      "community": 45,
+      "community_name": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "getauthtoken()"
+    },
+    {
+      "label": "isValidLegacyJWT()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidlegacyjwt",
+      "community": 45,
+      "community_name": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "isvalidlegacyjwt()"
+    },
+    {
+      "label": "isValidJWT()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L64",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidjwt",
+      "community": 45,
+      "community_name": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "isvalidjwt()"
+    },
+    {
+      "label": "isValidHybridJWT()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L95",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidhybridjwt",
+      "community": 45,
+      "community_name": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "isvalidhybridjwt()"
+    },
+    {
+      "label": "NOTE:(kallebysantos) We don't check for valid keys but just the bare array parsi",
+      "file_type": "rationale",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_rationale_9",
+      "community": 45,
+      "community_name": "pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "norm_label": "note:(kallebysantos) we don't check for valid keys but just the bare array parsi"
+    },
+    {
+      "label": "pss/vps-deploy.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss/vps-deploy.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_vps_deploy",
+      "community": 65,
+      "community_name": "pss/vps-deploy.sh",
+      "norm_label": "pss/vps-deploy.sh"
+    },
+    {
+      "label": "vps-deploy.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pss/vps-deploy.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_vps_deploy_sh__entry",
+      "community": 65,
+      "community_name": "pss/vps-deploy.sh",
+      "norm_label": "vps-deploy.sh script"
+    },
+    {
+      "label": "pull-backup.sh",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pull-backup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pull_backup",
+      "community": 59,
+      "community_name": "pull-backup.sh",
+      "norm_label": "pull-backup.sh"
+    },
+    {
+      "label": "pull-backup.sh script",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pull-backup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pull_backup_sh__entry",
+      "community": 59,
+      "community_name": "pull-backup.sh",
+      "norm_label": "pull-backup.sh script"
+    },
+    {
+      "label": "step()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pull-backup.sh",
+      "source_location": "L24",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pull_backup_step",
+      "community": 59,
+      "community_name": "pull-backup.sh",
+      "norm_label": "step()"
+    },
+    {
+      "label": "check()",
+      "file_type": "code",
+      "source_file": "deploy/server-migration/pull-backup.sh",
+      "source_location": "L25",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "id": "deploy_server_migration_pull_backup_check",
+      "community": 59,
+      "community_name": "pull-backup.sh",
+      "norm_label": "check()"
+    },
+    {
+      "label": "deploy/vps-deploy.sh",
       "file_type": "code",
       "source_file": "deploy/vps-deploy.sh",
       "source_location": "L1",
@@ -1214,7 +1982,7 @@
       "id": "deploy_vps_deploy",
       "community": 21,
       "community_name": "vps-deploy.sh",
-      "norm_label": "vps-deploy.sh"
+      "norm_label": "deploy/vps-deploy.sh"
     },
     {
       "label": "vps-deploy.sh script",
@@ -2263,6 +3031,17 @@
       "norm_label": "seo"
     },
     {
+      "label": "Server migration (until both projects have moved)",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "claude_server_migration_until_both_projects_have_moved",
+      "community": 26,
+      "community_name": "CLAUDE.md",
+      "norm_label": "server migration (until both projects have moved)"
+    },
+    {
       "label": "PRODUCTION_SECURITY.md",
       "file_type": "document",
       "source_file": "PRODUCTION_SECURITY.md",
@@ -2450,7 +3229,7 @@
       "norm_label": "6. reality check on \"unbreachable\""
     },
     {
-      "label": "README.md",
+      "label": "deploy/README.md",
       "file_type": "document",
       "source_file": "deploy/README.md",
       "source_location": "L1",
@@ -2458,7 +3237,7 @@
       "id": "deploy_readme",
       "community": 37,
       "community_name": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
-      "norm_label": "readme.md"
+      "norm_label": "deploy/readme.md"
     },
     {
       "label": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
@@ -2514,6 +3293,996 @@
       "community": 37,
       "community_name": "Migrating AlpenGlow from Supabase Cloud \u2192 self-hosted Supabase (VPS)",
       "norm_label": "adding a domain + tls later"
+    },
+    {
+      "label": "DISASTER-RECOVERY.md",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_disaster_recovery",
+      "community": 50,
+      "community_name": "The server is gone: rebuild procedure",
+      "norm_label": "disaster-recovery.md"
+    },
+    {
+      "label": "The server is gone: rebuild procedure",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_disaster_recovery_the_server_is_gone_rebuild_procedure",
+      "community": 50,
+      "community_name": "The server is gone: rebuild procedure",
+      "norm_label": "the server is gone: rebuild procedure"
+    },
+    {
+      "label": "What you need, and where it must already be",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "deploy_server_migration_disaster_recovery_what_you_need_and_where_it_must_already_be",
+      "community": 50,
+      "community_name": "The server is gone: rebuild procedure",
+      "norm_label": "what you need, and where it must already be"
+    },
+    {
+      "label": "Steps",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "deploy_server_migration_disaster_recovery_steps",
+      "community": 50,
+      "community_name": "The server is gone: rebuild procedure",
+      "norm_label": "steps"
+    },
+    {
+      "label": "If the server was broken into, not just lost",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L92",
+      "_origin": "ast",
+      "id": "deploy_server_migration_disaster_recovery_if_the_server_was_broken_into_not_just_lost",
+      "community": 50,
+      "community_name": "The server is gone: rebuild procedure",
+      "norm_label": "if the server was broken into, not just lost"
+    },
+    {
+      "label": "Keeping this procedure alive",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L104",
+      "_origin": "ast",
+      "id": "deploy_server_migration_disaster_recovery_keeping_this_procedure_alive",
+      "community": 50,
+      "community_name": "The server is gone: rebuild procedure",
+      "norm_label": "keeping this procedure alive"
+    },
+    {
+      "label": "INPUTS-NEEDED.md",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_inputs_needed",
+      "community": 46,
+      "community_name": "What is needed from you",
+      "norm_label": "inputs-needed.md"
+    },
+    {
+      "label": "What is needed from you",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_inputs_needed_what_is_needed_from_you",
+      "community": 46,
+      "community_name": "What is needed from you",
+      "norm_label": "what is needed from you"
+    },
+    {
+      "label": "To start (AlpenGlow rehearsal on the new server)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "deploy_server_migration_inputs_needed_to_start_alpenglow_rehearsal_on_the_new_server",
+      "community": 46,
+      "community_name": "What is needed from you",
+      "norm_label": "to start (alpenglow rehearsal on the new server)"
+    },
+    {
+      "label": "At the AlpenGlow cutover",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "deploy_server_migration_inputs_needed_at_the_alpenglow_cutover",
+      "community": 46,
+      "community_name": "What is needed from you",
+      "norm_label": "at the alpenglow cutover"
+    },
+    {
+      "label": "For PSS (a week later)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L27",
+      "_origin": "ast",
+      "id": "deploy_server_migration_inputs_needed_for_pss_a_week_later",
+      "community": 46,
+      "community_name": "What is needed from you",
+      "norm_label": "for pss (a week later)"
+    },
+    {
+      "label": "Strongly recommended",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "deploy_server_migration_inputs_needed_strongly_recommended",
+      "community": 46,
+      "community_name": "What is needed from you",
+      "norm_label": "strongly recommended"
+    },
+    {
+      "label": "Decisions",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "deploy_server_migration_inputs_needed_decisions",
+      "community": 46,
+      "community_name": "What is needed from you",
+      "norm_label": "decisions"
+    },
+    {
+      "label": "Housekeeping on the old server",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L79",
+      "_origin": "ast",
+      "id": "deploy_server_migration_inputs_needed_housekeeping_on_the_old_server",
+      "community": 46,
+      "community_name": "What is needed from you",
+      "norm_label": "housekeeping on the old server"
+    },
+    {
+      "label": "MIGRATION-RUNBOOK.md",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "migration-runbook.md"
+    },
+    {
+      "label": "VPS migration runbook",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "vps migration runbook"
+    },
+    {
+      "label": "Rehearsal, 26 October 2026",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_rehearsal_26_october_2026",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "rehearsal, 26 october 2026"
+    },
+    {
+      "label": "Change of plan: travel-app is not moving",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_change_of_plan_travel_app_is_not_moving",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "change of plan: travel-app is not moving"
+    },
+    {
+      "label": "What is on the old server",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L59",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_what_is_on_the_old_server",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "what is on the old server"
+    },
+    {
+      "label": "What is in a snapshot folder",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L93",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_what_is_in_a_snapshot_folder",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "what is in a snapshot folder"
+    },
+    {
+      "label": "Not captured",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L115",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_not_captured",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "not captured"
+    },
+    {
+      "label": "Root-only files (captured 2026-10-07)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L123",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_root_only_files_captured_2026_10_07",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "root-only files (captured 2026-10-07)"
+    },
+    {
+      "label": "Phase 1: prepare the new server",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L162",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_phase_1_prepare_the_new_server",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "phase 1: prepare the new server"
+    },
+    {
+      "label": "Phase 2: restore and rehearse (old server still live)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L201",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_phase_2_restore_and_rehearse_old_server_still_live",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "phase 2: restore and rehearse (old server still live)"
+    },
+    {
+      "label": "Phase 2b: switch on backups and health checks",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L298",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_phase_2b_switch_on_backups_and_health_checks",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "phase 2b: switch on backups and health checks"
+    },
+    {
+      "label": "Audit before cutover",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L338",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_audit_before_cutover",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "audit before cutover"
+    },
+    {
+      "label": "Security fixes that need a code change",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L374",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_security_fixes_that_need_a_code_change",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "security fixes that need a code change"
+    },
+    {
+      "label": "Phase 3: cutover",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L403",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_phase_3_cutover",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "phase 3: cutover"
+    },
+    {
+      "label": "Phase 4: verify",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L425",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_phase_4_verify",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "phase 4: verify"
+    },
+    {
+      "label": "Phase 5: update everything that names the old server",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L436",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_phase_5_update_everything_that_names_the_old_server",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "phase 5: update everything that names the old server"
+    },
+    {
+      "label": "Phase 6: rollback and decommission",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L458",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_phase_6_rollback_and_decommission",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "phase 6: rollback and decommission"
+    },
+    {
+      "label": "Server duties: old server versus new setup",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L465",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_server_duties_old_server_versus_new_setup",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "server duties: old server versus new setup"
+    },
+    {
+      "label": "Migration checklist coverage",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L497",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_migration_checklist_coverage",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "migration checklist coverage"
+    },
+    {
+      "label": "Related procedures",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L535",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_related_procedures",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "related procedures"
+    },
+    {
+      "label": "After cutover",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L544",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_after_cutover",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "after cutover"
+    },
+    {
+      "label": "Things noticed on the old server",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L556",
+      "_origin": "ast",
+      "id": "deploy_server_migration_migration_runbook_things_noticed_on_the_old_server",
+      "community": 2,
+      "community_name": "_bindStep",
+      "norm_label": "things noticed on the old server"
+    },
+    {
+      "label": "server-migration/PROGRESS.md",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress",
+      "community": 47,
+      "community_name": "Server migration: progress",
+      "norm_label": "server-migration/progress.md"
+    },
+    {
+      "label": "Server migration: progress",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress_server_migration_progress",
+      "community": 47,
+      "community_name": "Server migration: progress",
+      "norm_label": "server migration: progress"
+    },
+    {
+      "label": "Current step",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress_current_step",
+      "community": 47,
+      "community_name": "Server migration: progress",
+      "norm_label": "current step"
+    },
+    {
+      "label": "Next step",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress_next_step",
+      "community": 47,
+      "community_name": "Server migration: progress",
+      "norm_label": "next step"
+    },
+    {
+      "label": "Done",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L47",
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress_done",
+      "community": 47,
+      "community_name": "Server migration: progress",
+      "norm_label": "done"
+    },
+    {
+      "label": "Decisions made",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L631",
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress_decisions_made",
+      "community": 47,
+      "community_name": "Server migration: progress",
+      "norm_label": "decisions made"
+    },
+    {
+      "label": "Rules for every sitting",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L692",
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress_rules_for_every_sitting",
+      "community": 47,
+      "community_name": "Server migration: progress",
+      "norm_label": "rules for every sitting"
+    },
+    {
+      "label": "Waiting on me",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L716",
+      "_origin": "ast",
+      "id": "deploy_server_migration_progress_waiting_on_me",
+      "community": 47,
+      "community_name": "Server migration: progress",
+      "norm_label": "waiting on me"
+    },
+    {
+      "label": "PSS-MIGRATION-PLAN.md",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "pss-migration-plan.md"
+    },
+    {
+      "label": "Perfect Study Space: Supabase cloud to VPS",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "perfect study space: supabase cloud to vps"
+    },
+    {
+      "label": "Scope: `main` only",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_scope_main_only",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "scope: `main` only"
+    },
+    {
+      "label": "What the project is (checked in the repo, 26 Oct 2026)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_what_the_project_is_checked_in_the_repo_26_oct_2026",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "what the project is (checked in the repo, 26 oct 2026)"
+    },
+    {
+      "label": "What it gets on the VPS",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_what_it_gets_on_the_vps",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "what it gets on the vps"
+    },
+    {
+      "label": "Phase 0: the add-project kit \u2014 done",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_phase_0_the_add_project_kit_done",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "phase 0: the add-project kit \u2014 done"
+    },
+    {
+      "label": "Phase 1: inventory the live cloud project (read-only)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L96",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_phase_1_inventory_the_live_cloud_project_read_only",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "phase 1: inventory the live cloud project (read-only)"
+    },
+    {
+      "label": "Phase 2: build and rehearse (cloud stays live, nothing changes for users)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L110",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_phase_2_build_and_rehearse_cloud_stays_live_nothing_changes_for_users",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "phase 2: build and rehearse (cloud stays live, nothing changes for users)"
+    },
+    {
+      "label": "Phase 3: cutover (about 15 minutes, outside opening hours)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L165",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_phase_3_cutover_about_15_minutes_outside_opening_hours",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "phase 3: cutover (about 15 minutes, outside opening hours)"
+    },
+    {
+      "label": "Phase 4: verify",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L183",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_phase_4_verify",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "phase 4: verify"
+    },
+    {
+      "label": "Rollback",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L193",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_rollback",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "rollback"
+    },
+    {
+      "label": "Known risks",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L200",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_migration_plan_known_risks",
+      "community": 43,
+      "community_name": "Perfect Study Space: Supabase cloud to VPS",
+      "norm_label": "known risks"
+    },
+    {
+      "label": "server-migration/README.md",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_readme",
+      "community": 51,
+      "community_name": "Server migration kit",
+      "norm_label": "server-migration/readme.md"
+    },
+    {
+      "label": "Server migration kit",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_readme_server_migration_kit",
+      "community": 51,
+      "community_name": "Server migration kit",
+      "norm_label": "server migration kit"
+    },
+    {
+      "label": "Order of work",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "deploy_server_migration_readme_order_of_work",
+      "community": 51,
+      "community_name": "Server migration kit",
+      "norm_label": "order of work"
+    },
+    {
+      "label": "What is here",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "deploy_server_migration_readme_what_is_here",
+      "community": 51,
+      "community_name": "Server migration kit",
+      "norm_label": "what is here"
+    },
+    {
+      "label": "Status",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "deploy_server_migration_readme_status",
+      "community": 51,
+      "community_name": "Server migration kit",
+      "norm_label": "status"
+    },
+    {
+      "label": "Still to do in this repo",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "deploy_server_migration_readme_still_to_do_in_this_repo",
+      "community": 51,
+      "community_name": "Server migration kit",
+      "norm_label": "still to do in this repo"
+    },
+    {
+      "label": "UPDATE-PROCEDURE.md",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_update_procedure",
+      "community": 48,
+      "community_name": "Updating the server",
+      "norm_label": "update-procedure.md"
+    },
+    {
+      "label": "Updating the server",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_update_procedure_updating_the_server",
+      "community": 48,
+      "community_name": "Updating the server",
+      "norm_label": "updating the server"
+    },
+    {
+      "label": "When to update the Supabase images",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "deploy_server_migration_update_procedure_when_to_update_the_supabase_images",
+      "community": 48,
+      "community_name": "Updating the server",
+      "norm_label": "when to update the supabase images"
+    },
+    {
+      "label": "Steps, one project at a time",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "deploy_server_migration_update_procedure_steps_one_project_at_a_time",
+      "community": 48,
+      "community_name": "Updating the server",
+      "norm_label": "steps, one project at a time"
+    },
+    {
+      "label": "Rolling back",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "deploy_server_migration_update_procedure_rolling_back",
+      "community": 48,
+      "community_name": "Updating the server",
+      "norm_label": "rolling back"
+    },
+    {
+      "label": "Postgres: minor versus major",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L57",
+      "_origin": "ast",
+      "id": "deploy_server_migration_update_procedure_postgres_minor_versus_major",
+      "community": 48,
+      "community_name": "Updating the server",
+      "norm_label": "postgres: minor versus major"
+    },
+    {
+      "label": "Edge function libraries",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L65",
+      "_origin": "ast",
+      "id": "deploy_server_migration_update_procedure_edge_function_libraries",
+      "community": 48,
+      "community_name": "Updating the server",
+      "norm_label": "edge function libraries"
+    },
+    {
+      "label": "What must never be done casually",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "deploy_server_migration_update_procedure_what_must_never_be_done_casually",
+      "community": 48,
+      "community_name": "Updating the server",
+      "norm_label": "what must never be done casually"
+    },
+    {
+      "label": "PLAN.md",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "plan.md"
+    },
+    {
+      "label": "PSS all-phases on the old server: plan",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "pss all-phases on the old server: plan"
+    },
+    {
+      "label": "Branch and folders",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_branch_and_folders",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "branch and folders"
+    },
+    {
+      "label": "Decisions",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_decisions",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "decisions"
+    },
+    {
+      "label": "What all-phases is (checked in the code, 9 Nov 2026, at `65d8f1a`)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L111",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_what_all_phases_is_checked_in_the_code_9_nov_2026_at_65d8f1a",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "what all-phases is (checked in the code, 9 nov 2026, at `65d8f1a`)"
+    },
+    {
+      "label": "Layout on the old server",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L129",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_layout_on_the_old_server",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "layout on the old server"
+    },
+    {
+      "label": "Open choices (as proposed on 9 Nov; outcomes in \"Decisions\")",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L158",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_open_choices_as_proposed_on_9_nov_outcomes_in_decisions",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "open choices (as proposed on 9 nov; outcomes in \"decisions\")"
+    },
+    {
+      "label": "Steps",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L212",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_steps",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "steps"
+    },
+    {
+      "label": "A. Prepare (no server changes)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L218",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_a_prepare_no_server_changes",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "a. prepare (no server changes)"
+    },
+    {
+      "label": "B. Old server (each step only after your OK)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L274",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_b_old_server_each_step_only_after_your_ok",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "b. old server (each step only after your ok)"
+    },
+    {
+      "label": "Known issues (noted, not fixed in this migration)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L348",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_known_issues_noted_not_fixed_in_this_migration",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "known issues (noted, not fixed in this migration)"
+    },
+    {
+      "label": "Removing it again (if ever needed)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L370",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_removing_it_again_if_ever_needed",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "removing it again (if ever needed)"
+    },
+    {
+      "label": "Rules (from your brief)",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L380",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_plan_rules_from_your_brief",
+      "community": 42,
+      "community_name": "PSS all-phases on the old server: plan",
+      "norm_label": "rules (from your brief)"
+    },
+    {
+      "label": "pss-all-phases/PROGRESS.md",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_progress",
+      "community": 49,
+      "community_name": "PSS all-phases on the old server: progress",
+      "norm_label": "pss-all-phases/progress.md"
+    },
+    {
+      "label": "PSS all-phases on the old server: progress",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_progress_pss_all_phases_on_the_old_server_progress",
+      "community": 49,
+      "community_name": "PSS all-phases on the old server: progress",
+      "norm_label": "pss all-phases on the old server: progress"
+    },
+    {
+      "label": "Current step",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_progress_current_step",
+      "community": 49,
+      "community_name": "PSS all-phases on the old server: progress",
+      "norm_label": "current step"
+    },
+    {
+      "label": "Next step",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_progress_next_step",
+      "community": 49,
+      "community_name": "PSS all-phases on the old server: progress",
+      "norm_label": "next step"
+    },
+    {
+      "label": "Done",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_progress_done",
+      "community": 49,
+      "community_name": "PSS all-phases on the old server: progress",
+      "norm_label": "done"
+    },
+    {
+      "label": "Decisions",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L291",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_progress_decisions",
+      "community": 49,
+      "community_name": "PSS all-phases on the old server: progress",
+      "norm_label": "decisions"
+    },
+    {
+      "label": "Waiting on me",
+      "file_type": "document",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L302",
+      "_origin": "ast",
+      "id": "deploy_server_migration_pss_all_phases_progress_waiting_on_me",
+      "community": 49,
+      "community_name": "PSS all-phases on the old server: progress",
+      "norm_label": "waiting on me"
     },
     {
       "label": "query_20260721_083229_how_does_otp_verification_connect_to_crm_lead_crea.md",
@@ -5597,6 +7366,636 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/01-base-setup.sh",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_01_base_setup",
+      "target": "deploy_server_migration_new_server_01_base_setup_debian_frontend",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/01-base-setup.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_01_base_setup",
+      "target": "deploy_server_migration_new_server_01_base_setup_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/01-base-setup.sh",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_01_base_setup",
+      "target": "deploy_server_migration_new_server_01_base_setup_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/01-base-setup.sh",
+      "source_location": "L19",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_01_base_setup_sh__entry",
+      "target": "deploy_server_migration_new_server_01_base_setup_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/add-project.sh",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_add_project",
+      "target": "deploy_server_migration_new_server_add_project_as_deploy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/add-project.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_add_project",
+      "target": "deploy_server_migration_new_server_add_project_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/add-project.sh",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_add_project",
+      "target": "deploy_server_migration_new_server_add_project_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/add-project.sh",
+      "source_location": "L108",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_add_project_sh__entry",
+      "target": "deploy_server_migration_new_server_add_project_as_deploy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/add-project.sh",
+      "source_location": "L37",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_add_project_sh__entry",
+      "target": "deploy_server_migration_new_server_add_project_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/backup-nightly.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_backup_nightly",
+      "target": "deploy_server_migration_new_server_backup_nightly_dump",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/backup-nightly.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_backup_nightly",
+      "target": "deploy_server_migration_new_server_backup_nightly_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/backup-nightly.sh",
+      "source_location": "L49",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_backup_nightly_sh__entry",
+      "target": "deploy_server_migration_new_server_backup_nightly_dump",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_healthcheck",
+      "target": "deploy_server_migration_new_server_healthcheck_add",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_healthcheck",
+      "target": "deploy_server_migration_new_server_healthcheck_envval",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_healthcheck",
+      "target": "deploy_server_migration_new_server_healthcheck_http",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_healthcheck",
+      "target": "deploy_server_migration_new_server_healthcheck_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/healthcheck.sh",
+      "source_location": "L42",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_healthcheck_sh__entry",
+      "target": "deploy_server_migration_new_server_healthcheck_add",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/restore-public.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_restore_public",
+      "target": "deploy_server_migration_new_server_restore_public_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/security-test.sh",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_security_test",
+      "target": "deploy_server_migration_new_server_security_test_code",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/security-test.sh",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_security_test",
+      "target": "deploy_server_migration_new_server_security_test_row",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/security-test.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_security_test",
+      "target": "deploy_server_migration_new_server_security_test_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/security-test.sh",
+      "source_location": "L49",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_security_test_sh__entry",
+      "target": "deploy_server_migration_new_server_security_test_row",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/api/kong-entrypoint.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_api_kong_entrypoint",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_api_kong_entrypoint_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_getauthtoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidhybridjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidlegacyjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_jwt_secret",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_parsejwks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_supabase_jwks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_rationale_9",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidhybridjwt",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidlegacyjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/new-server/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidhybridjwt",
+      "target": "deploy_server_migration_new_server_stack_template_volumes_functions_main_index_isvalidjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/progress-hook.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_progress_hook",
+      "target": "deploy_server_migration_progress_hook_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/add-project-full.sh",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_add_project_full",
+      "target": "deploy_server_migration_pss_all_phases_add_project_full_as_deploy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/add-project-full.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_add_project_full",
+      "target": "deploy_server_migration_pss_all_phases_add_project_full_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/add-project-full.sh",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_add_project_full",
+      "target": "deploy_server_migration_pss_all_phases_add_project_full_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/add-project-full.sh",
+      "source_location": "L116",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_add_project_full_sh__entry",
+      "target": "deploy_server_migration_pss_all_phases_add_project_full_as_deploy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/add-project-full.sh",
+      "source_location": "L48",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_add_project_full_sh__entry",
+      "target": "deploy_server_migration_pss_all_phases_add_project_full_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/api/kong-entrypoint.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_api_kong_entrypoint",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_api_kong_entrypoint_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_getauthtoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidhybridjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidlegacyjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_jwt_secret",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_parsejwks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_supabase_jwks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_rationale_9",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidhybridjwt",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidlegacyjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/stack-template/volumes/functions/main/index.ts",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidhybridjwt",
+      "target": "deploy_server_migration_pss_all_phases_stack_template_volumes_functions_main_index_isvalidjwt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss/vps-deploy.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_vps_deploy",
+      "target": "deploy_server_migration_pss_vps_deploy_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pull-backup.sh",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pull_backup",
+      "target": "deploy_server_migration_pull_backup_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pull-backup.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pull_backup",
+      "target": "deploy_server_migration_pull_backup_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pull-backup.sh",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pull_backup",
+      "target": "deploy_server_migration_pull_backup_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pull-backup.sh",
+      "source_location": "L30",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_pull_backup_sh__entry",
+      "target": "deploy_server_migration_pull_backup_check",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pull-backup.sh",
+      "source_location": "L29",
+      "weight": 1.0,
+      "context": "call",
+      "_origin": "ast",
+      "source": "deploy_server_migration_pull_backup_sh__entry",
+      "target": "deploy_server_migration_pull_backup_step",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "deploy/vps-deploy.sh",
@@ -6494,6 +8893,17 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "CLAUDE.md",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "claude",
+      "target": "claude_server_migration_until_both_projects_have_moved",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "PRODUCTION_SECURITY.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -6720,6 +9130,897 @@
       "_origin": "ast",
       "source": "deploy_readme_migrating_alpenglow_from_supabase_cloud_self_hosted_supabase_vps",
       "target": "deploy_readme_what_stays_the_same",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_disaster_recovery",
+      "target": "deploy_server_migration_disaster_recovery_the_server_is_gone_rebuild_procedure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_disaster_recovery_the_server_is_gone_rebuild_procedure",
+      "target": "deploy_server_migration_disaster_recovery_if_the_server_was_broken_into_not_just_lost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_disaster_recovery_the_server_is_gone_rebuild_procedure",
+      "target": "deploy_server_migration_disaster_recovery_keeping_this_procedure_alive",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_disaster_recovery_the_server_is_gone_rebuild_procedure",
+      "target": "deploy_server_migration_disaster_recovery_steps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/DISASTER-RECOVERY.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_disaster_recovery_the_server_is_gone_rebuild_procedure",
+      "target": "deploy_server_migration_disaster_recovery_what_you_need_and_where_it_must_already_be",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_inputs_needed",
+      "target": "deploy_server_migration_inputs_needed_what_is_needed_from_you",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_inputs_needed_what_is_needed_from_you",
+      "target": "deploy_server_migration_inputs_needed_at_the_alpenglow_cutover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_inputs_needed_what_is_needed_from_you",
+      "target": "deploy_server_migration_inputs_needed_decisions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_inputs_needed_what_is_needed_from_you",
+      "target": "deploy_server_migration_inputs_needed_for_pss_a_week_later",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_inputs_needed_what_is_needed_from_you",
+      "target": "deploy_server_migration_inputs_needed_housekeeping_on_the_old_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_inputs_needed_what_is_needed_from_you",
+      "target": "deploy_server_migration_inputs_needed_strongly_recommended",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/INPUTS-NEEDED.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_inputs_needed_what_is_needed_from_you",
+      "target": "deploy_server_migration_inputs_needed_to_start_alpenglow_rehearsal_on_the_new_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L544",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_after_cutover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L338",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_audit_before_cutover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_change_of_plan_travel_app_is_not_moving",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L497",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_migration_checklist_coverage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_phase_1_prepare_the_new_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L201",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_phase_2_restore_and_rehearse_old_server_still_live",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L298",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_phase_2b_switch_on_backups_and_health_checks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L403",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_phase_3_cutover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L425",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_phase_4_verify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L436",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_phase_5_update_everything_that_names_the_old_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L458",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_phase_6_rollback_and_decommission",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_rehearsal_26_october_2026",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L535",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_related_procedures",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L374",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_security_fixes_that_need_a_code_change",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L465",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_server_duties_old_server_versus_new_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L556",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_things_noticed_on_the_old_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_what_is_in_a_snapshot_folder",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_vps_migration_runbook",
+      "target": "deploy_server_migration_migration_runbook_what_is_on_the_old_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_what_is_in_a_snapshot_folder",
+      "target": "deploy_server_migration_migration_runbook_not_captured",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/MIGRATION-RUNBOOK.md",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_migration_runbook_what_is_in_a_snapshot_folder",
+      "target": "deploy_server_migration_migration_runbook_root_only_files_captured_2026_10_07",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_progress",
+      "target": "deploy_server_migration_progress_server_migration_progress",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_progress_server_migration_progress",
+      "target": "deploy_server_migration_progress_current_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L631",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_progress_server_migration_progress",
+      "target": "deploy_server_migration_progress_decisions_made",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_progress_server_migration_progress",
+      "target": "deploy_server_migration_progress_done",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_progress_server_migration_progress",
+      "target": "deploy_server_migration_progress_next_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L692",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_progress_server_migration_progress",
+      "target": "deploy_server_migration_progress_rules_for_every_sitting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PROGRESS.md",
+      "source_location": "L716",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_progress_server_migration_progress",
+      "target": "deploy_server_migration_progress_waiting_on_me",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan",
+      "target": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L200",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_known_risks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_phase_0_the_add_project_kit_done",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_phase_1_inventory_the_live_cloud_project_read_only",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_phase_2_build_and_rehearse_cloud_stays_live_nothing_changes_for_users",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L165",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_phase_3_cutover_about_15_minutes_outside_opening_hours",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L183",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_phase_4_verify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L193",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_rollback",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_scope_main_only",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_what_it_gets_on_the_vps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/PSS-MIGRATION-PLAN.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_migration_plan_perfect_study_space_supabase_cloud_to_vps",
+      "target": "deploy_server_migration_pss_migration_plan_what_the_project_is_checked_in_the_repo_26_oct_2026",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_readme",
+      "target": "deploy_server_migration_readme_server_migration_kit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_readme_server_migration_kit",
+      "target": "deploy_server_migration_readme_order_of_work",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_readme_server_migration_kit",
+      "target": "deploy_server_migration_readme_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_readme_server_migration_kit",
+      "target": "deploy_server_migration_readme_still_to_do_in_this_repo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/README.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_readme_server_migration_kit",
+      "target": "deploy_server_migration_readme_what_is_here",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_update_procedure",
+      "target": "deploy_server_migration_update_procedure_updating_the_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_update_procedure_updating_the_server",
+      "target": "deploy_server_migration_update_procedure_edge_function_libraries",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_update_procedure_updating_the_server",
+      "target": "deploy_server_migration_update_procedure_postgres_minor_versus_major",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_update_procedure_updating_the_server",
+      "target": "deploy_server_migration_update_procedure_steps_one_project_at_a_time",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_update_procedure_updating_the_server",
+      "target": "deploy_server_migration_update_procedure_what_must_never_be_done_casually",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_update_procedure_updating_the_server",
+      "target": "deploy_server_migration_update_procedure_when_to_update_the_supabase_images",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/UPDATE-PROCEDURE.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_update_procedure_steps_one_project_at_a_time",
+      "target": "deploy_server_migration_update_procedure_rolling_back",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_branch_and_folders",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_decisions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L348",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_known_issues_noted_not_fixed_in_this_migration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_layout_on_the_old_server",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L158",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_open_choices_as_proposed_on_9_nov_outcomes_in_decisions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L370",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_removing_it_again_if_ever_needed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L380",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_rules_from_your_brief",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L212",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_steps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_pss_all_phases_on_the_old_server_plan",
+      "target": "deploy_server_migration_pss_all_phases_plan_what_all_phases_is_checked_in_the_code_9_nov_2026_at_65d8f1a",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L218",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_steps",
+      "target": "deploy_server_migration_pss_all_phases_plan_a_prepare_no_server_changes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PLAN.md",
+      "source_location": "L274",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_plan_steps",
+      "target": "deploy_server_migration_pss_all_phases_plan_b_old_server_each_step_only_after_your_ok",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_progress",
+      "target": "deploy_server_migration_pss_all_phases_progress_pss_all_phases_on_the_old_server_progress",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_progress_pss_all_phases_on_the_old_server_progress",
+      "target": "deploy_server_migration_pss_all_phases_progress_current_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L291",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_progress_pss_all_phases_on_the_old_server_progress",
+      "target": "deploy_server_migration_pss_all_phases_progress_decisions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_progress_pss_all_phases_on_the_old_server_progress",
+      "target": "deploy_server_migration_pss_all_phases_progress_done",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_progress_pss_all_phases_on_the_old_server_progress",
+      "target": "deploy_server_migration_pss_all_phases_progress_next_step",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/server-migration/pss-all-phases/PROGRESS.md",
+      "source_location": "L302",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "deploy_server_migration_pss_all_phases_progress_pss_all_phases_on_the_old_server_progress",
+      "target": "deploy_server_migration_pss_all_phases_progress_waiting_on_me",
       "confidence_score": 1.0
     },
     {
@@ -7296,5 +10597,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "161213d0290c1988ab1842af910c15b3193861cd"
+  "built_at_commit": "bb04612da73de5f63ab20ca2f2bf1e18da5991ea"
 }

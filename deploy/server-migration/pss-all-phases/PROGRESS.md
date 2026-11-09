@@ -215,6 +215,78 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     the 27 (name, schedule, helper, job) entries are identical to
     `cron.sql` (parsed by script). The server test suites are not run yet
     (no Deno on the laptop; they run in step 5).
+- **9 Nov 2026** Step 4 approved by you. Data corrected: made-up test data
+  (`~/projects/pss` still removed before the old server is cancelled, as
+  cleanup). New working mode: steps 5 to 14 run without waiting (stop
+  conditions in `PLAN.md` Decisions).
+- **9 Nov 2026** **Step 5 done: local rehearsal** (Docker Desktop 29.9.2 on
+  the laptop, dummy data only; torn down afterwards: containers, volumes
+  and temp files removed).
+  - Server test suites in `denoland/deno:2.9.6` (repo pins `^2.9.6`),
+    worktree mounted read-only: **30 of 31 suites pass**, including the new
+    `storage_links_test.ts`. **`golden_test.ts` fails** ("golden master
+    differs"), and fails identically on an untouched export of `65d8f1a`,
+    so it is pre-existing and not caused by this migration (the new helper
+    is a no-op in the tests). Noted under Known issues; not fixed here.
+    `seats_test.ts` (the release-gate race) passed this run.
+  - Found and fixed in `stack-template/docker-compose.yml`: the first start
+    of a fresh database took over 50 s, longer than the db health check
+    allows (10 x 5 s), so `compose up` gave up and the other containers
+    never started (`add-project-full.sh` would have stopped). Added
+    `start_period: 120s` to the db health check; the next fresh start
+    became healthy on its own.
+  - Stack from the step 3 template, `__PROJECT__` = `pss`, freshly
+    generated secrets: **all 6 containers healthy**; only
+    `127.0.0.1:8010` published; no database port. Real memory use with
+    dummy data: **923 MiB** (functions 283, realtime 204, storage 145, kong
+    137, db 91, rest 64), ceilings 2688 MB.
+  - Your two checks: **Storage logs in as `supabase_storage_admin`** (its
+    connection in `pg_stat_activity`, its own `storage.*` tables created);
+    **Realtime connects as `supabase_admin`** (`supabase_mt_realtime`,
+    `cluster_node_realtime`), tenant `realtime-dev` seeded. The slim
+    `roles.sql` set passwords on `authenticator`, `pgbouncer`,
+    `supabase_admin`, `supabase_auth_admin`, `supabase_storage_admin`.
+    `realtime.sql` ran (`_realtime` schema). No errors in either log.
+  - `shared_preload_libraries` as on the cloud (incl. `pg_cron`, `pg_net`,
+    `supabase_vault`); `cron.database_name = postgres`; `supabase_vault`
+    0.3.1 installed; `pg_cron` 1.6.4 and `pg_net` 0.20.3 available.
+  - **All 73 migrations apply from empty** (one transaction each), Storage
+    ones included; 77 tables, 192 indexes, 3 triggers, 0 public policies,
+    the 3 buckets private with 1.5 MB and jpeg/png/webp. (Differences from
+    the cloud explained by the dump path: `overtime_sessions` without RLS
+    and 5 instead of 8 functions here; the cloud's RLS and extra functions
+    come with its dump.)
+  - Real data path: `pg_dump --schema=public --no-owner` (224 KB, 77 tables,
+    218 dummy rows), database wiped, stack restarted empty (healthy),
+    `restore-public.sh pss-db` (no unexpected errors), **row counts match
+    for all 77 tables** (counted from the dump's COPY blocks vs the
+    database). New file `after-restore.sql` (this folder): 3 buckets +
+    `_migrations_applied` (RLS on, no anon/authenticated access) with the
+    73 names generated from the repo: 3 buckets, 73 recorded.
+  - Functions `api`, `cron`, `agent`, `_shared` copied in (as
+    `vps-deploy.sh` does), dummy `functions.env`: healthy. Dummy staff login
+    (seed `owner`): 200 with a token (so `crypt()` from `pgcrypto` works);
+    wrong password 401; `cron` and `agent` without `x-cron-secret` 401.
+  - **Decision B end to end:** dummy image uploaded to `task-photos`
+    (service role, via the gateway, 200); `get_task_photo` returned a link
+    starting `https://api.perfectstudyspace.in/storage/v1/object/sign/task-photos/`.
+  - nginx 1.24.0 stand-in with the rendered `project-site-full.template`
+    (self-signed stand-in certificate): `nginx -t` OK. Open: signed link
+    GET 200 (`image/png`, 70 B), HEAD 200, login 200 / wrong password 401,
+    websocket upgrade **101**. Closed: POST and PUT on the sign path 403;
+    404 for object download, public and authenticated object paths,
+    `/storage/v1/bucket`, `/s3`, `/upload/resumable`, `/rest/v1/`,
+    `/rest/v1/staff`, `/auth/v1/settings`, `/realtime/v1/api/broadcast`
+    (GET and POST with the service key), `/realtime/v1/api/tenants`,
+    `/functions/v1/main`, `/functions/v1/_shared/...`, `/pg/`,
+    `/graphql/v1`, `/project/default`, `/`. Inside the stack the
+    functions' broadcast path (`kong:8000/realtime/v1/api/broadcast`) 202.
+  - `cron-selfhosted.sql`: without `-v cron_secret` and with a too-short
+    one it stops and keeps nothing; with the dummy secret **27 jobs, 0
+    active**, Vault `pss_cron_secret` and `pss_project_url`
+    (`http://kong:8000`). One manual `pss_run_cron_job('cron_integrity_report')`
+    (rehearsal only): pg_net 200, `events` row `integrity_report` ok.
+    Scheduled runs: 0.
 
 ## Decisions
 
