@@ -62,6 +62,44 @@ you. Then step 4 (PSS-side files, incl. the decision B change).
   CLI. So the cloud has no record of which of 001 to 073 ran; the
   diagnostic (part 4) is the evidence that the schema matches 001 to 073.
   No effect on the move: 001 to 073 are recorded on the stack in step 10.
+- **9 Nov 2026** Step 2, part 4 (`full-system-diagnostic.sql`, run by you
+  on `zripsszkprhtyccukrir`): **FAIL 0, BLOCKED 0, WARN 1**, OFF 30,
+  ON_UNVERIFIED 39, PASS 113.
+  - Schema matches 001 to 073: all **77 tables** present with the expected
+    columns, each RLS on, primary key, 0 policies; 6 required unique
+    indexes valid; 0 invalid indexes; 0 unvalidated constraints; triggers
+    `events_no_update_delete`, `events_no_truncate`,
+    `trg_release_orphaned_locker` enabled; SQL functions
+    `events_append_only`, `hash_staff_password`, `verify_staff_login`,
+    `purge_events`, `release_orphaned_locker`, `pss_run_cron_job`,
+    `pss_run_agent_job` present. The three privileged helpers are not
+    executable by `PUBLIC`/`anon`/`authenticated`.
+  - Extensions `pg_cron`, `pg_net`, `pgcrypto` installed. Vault holds
+    exactly one `pss_project_url` and one `pss_cron_secret` (values not
+    shown).
+  - Schedules: all **27** `pss_*` jobs exist with the expected schedules;
+    **2 active** (`pss_integrity_report` 20:30 UTC, `pss_owner_brief`
+    01:30 UTC), 25 paused. Both ran nightly up to 9 Nov (owner brief via
+    Ollama `gemma4:31b`, 30 successful AI attempts, 0 failed; Claude and
+    Gemini unused).
+  - Storage: `id-photos`, `payment-proofs`, `task-photos` present and
+    private; `student-photos` absent (the only WARN; expected, unused).
+    File counts not in the diagnostic (part 1 has them).
+  - Feature switches (`app_settings`): 39 of 44 on, incl.
+    `pssai_realtime`; off (no row, default off): `pssai_auto_approve`,
+    `pssai_cron`, `pssai_proof_reading`, `pssai_retire_staff_ops`,
+    `pssai_upi_pay`. Controls: `pssai_agent_shadow` on, AI budget 10 USD,
+    discount confirm over 1000, enquiry AI 150/day, public AI 40/day.
+  - Data present: 3 active branches, 2 active owner accounts, 3 branch
+    signup links; no self-check-in setup, no student portal PINs.
+  - Consequences for the move: (1) the cloud keeps changing (the two
+    active jobs write `owner_briefs`, `agent_runs`, `events` nightly), so
+    step 10 compares the stack against row counts taken from the dump
+    itself, with step 2's counts only as a sanity check; (2) the dump of
+    `public` includes `pss_run_cron_job`/`pss_run_agent_job` pointing at
+    Vault and pg_net; `cron-selfhosted.sql` replaces them in step 13;
+    (3) the 39 switches arrive ON with the data, unchanged (see Waiting
+    on me).
 
 ## Decisions
 
@@ -77,7 +115,12 @@ tracking). In short:
 ## Waiting on me
 
 - [x] Your OK on `PLAN.md` (9 Nov; open choice 1 = B).
-- [ ] Step 2: results of the inventory SQL (parts 1 to 3) and the
-      diagnostic, the deployed Edge Functions, the secret NAMES.
+- [ ] Step 2: part 1 result (exact row counts, bucket file counts,
+      Postgres version), the deployed Edge Functions, the secret NAMES.
+      (Part 3 and the diagnostic are in; part 2 is no longer needed: the
+      diagnostic listed all 27 jobs.)
+- [ ] Decide: the 39 feature switches arrive ON with the data. Leave them
+      as in the cloud (Claude's default: no change), or set them off on
+      the stack until "start testing"?
 - [ ] Step 5: Docker Desktop running on this laptop (you are starting it,
       9 Nov).
