@@ -47,6 +47,21 @@ Never changed: `AlpenGlow-migration`, `AlpenGlow work`,
   `db push`, `functions deploy`, `secrets`, or anything else) against any
   project without asking you first. **The live PSS project
   `ozatixapvxwrwbpdxuzt` is never touched in any way.**
+- **Signed Storage links: B (9 Nov).** In the two signed-link actions
+  (`api/domains/payments.ts` `get_payment_proof_image`,
+  `api/domains/tickets.ts` task photo) the link is built from
+  `SUPABASE_PUBLIC_URL` when it is set, else `SUPABASE_URL`, so Supabase
+  cloud (where `SUPABASE_PUBLIC_URL` is unset) is unchanged. Functions keep
+  `SUPABASE_URL=http://kong:8000`. A (routing the functions through nginx)
+  is not used.
+- **nginx exposure (9 Nov):** public are only `/functions/v1/` (minus
+  `main` and `_shared`), `GET`/`HEAD` on `/storage/v1/object/sign/`, and the
+  Realtime websocket. `/rest/v1/`, Storage admin paths (and
+  `/storage/v1/object/public/`) and `/realtime/v1/api/` are NOT opened to
+  anyone, not even `172.16.0.0/12`; the functions reach them inside the
+  stack through `kong:8000`.
+- **Open choices 2, 3, 5 (9 Nov):** approved as proposed. **4:** decided
+  after step 2. **6:** no PSS backup on the old server.
 - **Billing dates of the old server:** yours; not planned around here.
 - **Tracking:** this folder's `PLAN.md` and `PROGRESS.md`. The AlpenGlow
   `CLAUDE.md` "Server migration" rules (`claude/server-migration-kit`,
@@ -99,9 +114,9 @@ Go/no-go at step 7: start the stack only if `free -m` shows at least
 3 GB "available" with AlpenGlow and travel-app as they are. Otherwise we
 lower the ceilings first (with your OK).
 
-## Open choices (proposals; your OK at the step named)
+## Open choices (as proposed on 9 Nov; outcomes in "Decisions")
 
-1. **Signed Storage links (step 3).** supabase-js builds a signed link as
+1. **Signed Storage links: decided B (see Decisions); kept for the record.** supabase-js builds a signed link as
    `SUPABASE_URL + /storage/v1/object/sign/...`, client side. With the
    template's `SUPABASE_URL=http://kong:8000` the browser would get a
    `kong:8000` link it cannot open. The storage service cannot fix this; the
@@ -176,18 +191,18 @@ folder).
      `mem_limit`) and Realtime (`supabase/realtime:v2.102.3`, `mem_limit`),
      the same pinned versions as AlpenGlow; gateway routes for
      `/storage/v1/` and `/realtime/v1/`; the db init files they need;
-     memory ceilings above; the signed-link choice (open choice 1).
+     memory ceilings above; functions keep `SUPABASE_URL=http://kong:8000`
+     and get `SUPABASE_PUBLIC_URL=https://<domain>` (decision B).
    - `add-project-full.sh`: copy of `../new-server/add-project.sh` using
      this template and the nginx template below; also checks for the
      `snippets/proxy-to-stack.conf` it includes and adds it as a NEW file if
      the old server lacks it (never edits an existing file).
-   - `nginx/project-site-full.template`: like the kit's, plus:
-     `GET`/`HEAD` on `/storage/v1/object/sign/` and
-     `/storage/v1/object/public/` (never bucket admin paths); the websocket
-     `/realtime/v1/websocket` (upgrade headers, long read timeout); with A:
-     the internal-only `allow 172.16.0.0/12; deny all;` locations. Still 404
-     for `/rest/v1/`, `/auth/v1/`, Studio, `/pg/`, GraphQL, and for
-     `/functions/v1/main` and `/functions/v1/_shared`.
+   - `nginx/project-site-full.template`: like the kit's, plus only:
+     `GET`/`HEAD` on `/storage/v1/object/sign/` and the websocket
+     `/realtime/v1/websocket` (upgrade headers, long read timeout). Still
+     404 for everyone (no internal `allow`) on `/rest/v1/`, `/auth/v1/`,
+     every other `/storage/v1/` path, `/realtime/v1/api/`, Studio, `/pg/`,
+     GraphQL, `/functions/v1/main` and `/functions/v1/_shared`.
    - Diff shown to you.
 4. **PSS-side files** (PSS worktree, this branch only):
    - `deploy/vps-deploy.sh`: from the kit's `pss/vps-deploy.sh`; deploys
@@ -196,6 +211,9 @@ folder).
    - `public/_headers` and `vercel.json`: add `https://api.perfectstudyspace.in`
      to `connect-src` and `img-src`, and `wss://api.perfectstudyspace.in` to
      `connect-src`; `*.supabase.co` stays.
+   - Decision B: `api/domains/payments.ts` (`get_payment_proof_image`) and
+     `api/domains/tickets.ts` (task photo) build the signed link from
+     `SUPABASE_PUBLIC_URL` when set, else `SUPABASE_URL`.
    - `docs/ops/cron-selfhosted.sql`: copy of `cron.sql` calling
      `http://kong:8000/functions/v1/cron|agent`, every job paused.
    - Diff shown to you.
