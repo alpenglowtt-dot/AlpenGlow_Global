@@ -7,8 +7,8 @@ here.
 
 ## Current step
 
-Step 6b a (billing data before the travel-app removal): fresh dump taken
-and checked (see Done). **Waiting for your "dump OK".**
+Steps 6b (root part), 8 and 9: waiting for you to run the root commands
+and the Cloudflare changes (given in chat, 9 Nov).
 
 ## Next step
 
@@ -313,6 +313,46 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     taken with `--no-owner`) and its own random `\restrict` line.
   - **Waiting for your "dump OK"** before anything of the travel-app is
     removed (stop condition 3).
+- **9 Nov 2026** You: "dump OK".
+- **9 Nov 2026** **Step 6b b, as `deploy` (16:5x CET):** before: 3 containers
+  `travel-app-web` (healthy), `travel-app-extraction`, `travel-app-billing`
+  (healthy), no named volumes, folder 7.4 MB. `docker compose down` (no
+  `-v`): containers and network `travel-app_travel-app` removed. Images
+  removed: `travel-app-extraction` (2.9 GB), `travel-app-web` (379 MB),
+  `travel-app-billing` (364 MB); none left. Folder `~/projects/travel-app`
+  removed (everything in it owned by `deploy`); `~/projects` now holds
+  only `alpenglow-global`. Disk 35 GB used, 62 GB free. Rollback source:
+  `vps-migration-backup\2026-11-02_2218\files\travel-app.tar.gz`. Still to
+  do as root (you): the nginx site and `certbot delete`; then the
+  Cloudflare `travel` record.
+- **9 Nov 2026** **Step 7 done: baseline "before PSS"** (read-only, 16:55 CET,
+  travel-app containers already gone; its nginx site still enabled):
+  - Memory 7941 MB total, 1754 used, **6186 available**; **no swap**. Go/no-go
+    (≥ 3 GB available): **GO**. Load 1.13 / 1.20 / 1.28; up 6 days. Disk
+    `/` 96 GB, 35 used, 62 free.
+  - Containers: AlpenGlow's 10 running and healthy (studio 266 MB, storage
+    235, realtime 221, pooler 206, db 135, meta 125, imgproxy 92,
+    functions 86, rest 58, auth 10: about 1.43 GB), `supabase-kong`
+    Exited (0) since 2 Nov (rollback stop), `tender_kowalevski` Exited.
+  - Listening TCP: 22, 80, 443, 5432, 6543 (v4 and v6), resolver on 53
+    (loopback). 8000/8443 not listening (Kong stopped). **Port 8010 free**,
+    no nginx site uses it; no `pss-*` containers.
+  - nginx 1.24.0 (Ubuntu); `nginx.conf` includes `conf.d/*.conf` and
+    `sites-enabled/*`; `conf.d` empty; `snippets/` has no
+    `proxy-to-stack.conf` (the script adds it); sites enabled:
+    `api.alpenglowglobal.com`, `default`, `travel.alpenglowglobal.com`.
+    `/etc/letsencrypt/options-ssl-nginx.conf` and `ssl-dhparams.pem` present;
+    `/etc/letsencrypt/live` root-only; `/var/www/html` present; certbot
+    installed.
+  - Python 3.12.3, OpenSSL 3.0.13, Docker Compose 5.6.1, Ubuntu 24.04.5,
+    IPv6 on. Docker networks: `bridge` 172.17/16, `supabase_default`
+    172.18/16. No `~/ops`, no crontab for `deploy`.
+- **9 Nov 2026** **Step 8, `deploy` part:** committed kit (`add-project-full.sh`,
+  `after-restore.sql`, `stack-template/`, `nginx/`) copied to `~/pss-kit`,
+  `restore-public.sh` to `~/ops/` (mode 700 folder); CR line endings
+  stripped on the server (0 left); `bash -n` / `sh -n` OK;
+  `add-project-full.sh` SHA-256 equal to the committed file. Waiting for
+  you to run the root commands (stop condition 1).
 
 ## Decisions
 
@@ -335,7 +375,10 @@ tracking). In short:
       server is cancelled (9 Nov).
 - [x] Your OK on step 3 (9 Nov).
 - [x] Your OK on step 4 (9 Nov).
-- [ ] Step 6b: your "dump OK" for the fresh billing dump.
+- [x] Step 6b: your "dump OK" for the fresh billing dump (9 Nov).
+- [ ] Root commands: travel nginx site, `certbot delete` (travel),
+      `add-project-full.sh` (1st run), `certbot certonly` (api), 2nd run.
+- [ ] Cloudflare: delete `travel`; add `api` A `169.58.43.191`, DNS only.
 - [ ] Step 6b c: delete the `travel` DNS record in Cloudflare (after the
       travel-app is removed).
 - [ ] Step 5: Docker Desktop running on this laptop (you are starting it,
