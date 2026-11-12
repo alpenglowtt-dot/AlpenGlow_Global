@@ -491,6 +491,17 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
   `9101cd74…` and `https://evil.example` not. Cloudflare steps given to
   you to put Production back on `pss-ai/all-phases` and rebuild the branch
   preview.
+- **12 Nov 2026** **Your decision: the server runs Production only**
+  (`PLAN.md` Decisions; the earlier "put Production back" steps are
+  dropped). `PORTAL_URL` in `functions.env` set to
+  `https://perfectstudyspace.pages.dev` (only that line; backup kept, mode
+  600); functions recreated, healthy, new value in the container.
+  Checked: Production `https://perfectstudyspace.pages.dev` serves bundle
+  `index-CuAnTXqy.js` calling `https://api.perfectstudyspace.in` with the
+  stack's anon key (fingerprint equal to the server's), its CSP allows
+  `api.perfectstudyspace.in`, and a preflight from it is allowed (200).
+  Left for you: confirm the Production branch and variables in Cloudflare
+  so the next build keeps this, then a real login.
 
 ## Decisions
 
