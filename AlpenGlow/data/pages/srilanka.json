@@ -4,7 +4,7 @@
   "hero_image_url": "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1600&q=80",
   "bg_image_url": "https://images.unsplash.com/photo-1574611122955-5baa61496637?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "location": "Sub-Continent - Sri Lanka",
-  "duration": "8 Days / 7 Nights.",
+  "duration": "8 Days / 7 Nights",
   "title": "Sri Lanka - Ramayana Trail",
   "overview_heading": "Overview",
   "overview_paragraphs": [
@@ -123,5 +123,6 @@
     "Airport transfers"
   ],
   "active": true,
-  "meta_description": "A 7-day Sri Lanka tour package threading ancient rock fortresses, tea-country hill stations, wildlife safaris and the palm-lined south coast."
+  "meta_description": "A 7-day Sri Lanka tour package threading ancient rock fortresses, tea-country hill stations, wildlife safaris and the palm-lined south coast.",
+  "hero_image_alt": ""
 }

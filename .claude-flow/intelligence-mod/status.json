@@ -1,7 +1,8 @@
 {
   "version": 1,
-  "updatedMs": 1793893685019,
+  "updatedMs": 1794490513063,
   "guard": true,
+  "piiGuard": true,
   "confirmReset": true,
   "blocked": 0,
   "scans": 0,

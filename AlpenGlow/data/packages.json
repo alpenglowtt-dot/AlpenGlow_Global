@@ -8,7 +8,7 @@
     "image_url": "norway.jpg",
     "link": "packages/norway.html",
     "sort_order": 1,
-    "active": false
+    "active": true
   },
   {
     "id": "2",
@@ -30,7 +30,7 @@
     "image_url": "italy.jpg",
     "link": "packages/italy.html",
     "sort_order": 3,
-    "active": false
+    "active": true
   },
   {
     "id": "4",
@@ -52,7 +52,7 @@
     "image_url": "japan.jpg",
     "link": "packages/japan.html",
     "sort_order": 5,
-    "active": false
+    "active": true
   },
   {
     "id": "6",
@@ -78,13 +78,13 @@
   },
   {
     "id": "1782537432974",
-    "name": "bhutan",
+    "name": "Bhutan - Paro & Thimphu",
     "link": "packages/bhutan.html",
-    "active": false,
-    "location": "",
-    "duration": "",
-    "description": "",
-    "image_url": "",
+    "active": true,
+    "location": "Bhutan - Paro & Thimphu",
+    "duration": "6 Days / 5 Nights",
+    "description": "Bhutan caps the number of tourists it lets in every year, and it shows — no billboards, no traffic jams, and a monastery clinging to a cliff face that looks unreal until you're standing in front of it. This is the only country that measures Gross National Happiness instead of GDP, and the pace of this trip reflects that philosophy.",
+    "image_url": "https://images.unsplash.com/photo-1578556881786-851d4b79cb73?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "sort_order": 0,
     "seo_group": ""
   },
@@ -112,14 +112,15 @@
   },
   {
     "id": "1782537437658",
-    "name": "nepal",
+    "name": "Nepal - Kathmandu & Pokhara",
     "link": "packages/nepal.html",
-    "active": false,
-    "location": "",
-    "duration": "",
-    "description": "",
-    "image_url": "",
-    "sort_order": 0
+    "active": true,
+    "location": "Nepal - Kathmandu & Pokhara",
+    "duration": "9 Days / 8 Nights",
+    "description": "Nepal compresses the Himalaya's scale into a trip that doesn't require technical trekking experience — Kathmandu's temple-dense old town, Pokhara's lakeside calm with the Annapurna range as backdrop, and an early-morning mountain flight that gets you eye-level with Everest without the multi-week trek.",
+    "image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1600&q=80",
+    "sort_order": 0,
+    "seo_group": ""
   },
   {
     "id": "1782537442167",
@@ -156,25 +157,27 @@
   },
   {
     "id": "1782537446552",
-    "name": "srilanka",
+    "name": "Sri Lanka",
     "link": "packages/srilanka.html",
-    "active": false,
-    "location": "",
-    "duration": "",
-    "description": "",
-    "image_url": "",
-    "sort_order": 0
+    "active": true,
+    "location": "Sri Lanka",
+    "duration": "8 Days / 7 Nights",
+    "description": "This trip traces Sri Lanka along two threads at once: the Ramayana trail linking ancient temples across the island's west, north, and east, and the cultural triangle's UNESCO landmarks at Sigiriya, Dambulla, and Kandy. It runs coast to coast and up into hill country, closing in Colombo's colonial-era streets.\n\nBest for travelers who want mythology and pilgrimage sites alongside Sri Lanka's most famous ruins, temples, and tea country.",
+    "image_url": "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1600&q=80",
+    "sort_order": 0,
+    "seo_group": ""
   },
   {
     "id": "1782537451853",
-    "name": "southkorea",
+    "name": "South Korea",
     "link": "packages/southkorea.html",
-    "active": false,
-    "location": "",
-    "duration": "",
-    "description": "",
-    "image_url": "",
-    "sort_order": 0
+    "active": true,
+    "location": "South Korea",
+    "duration": "8 Days / 7 Nights",
+    "description": "South Korea moves between two speeds: the packed, neon rhythm of Seoul and the slower pace of the southeast, where Joseon-era villages, royal tombs, and coastal fish markets set the tone. This trip runs Seoul to the DMZ, then south through Andong and Gyeongju's temple towns, ending on the harbor in Busan, tied together by the KTX bullet train so a five-hour distance feels like a short hop.\n\nBest for travelers who want the capital's scale and street life alongside Korea's older, quieter historical core.",
+    "image_url": "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1600&q=80",
+    "sort_order": 0,
+    "seo_group": ""
   },
   {
     "id": "1782537453004",
@@ -218,19 +221,43 @@
     "link": "packages/andaman.html",
     "seo_group": "asia-subcontinent",
     "sort_order": 0,
-    "active": false,
+    "active": true,
     "id": "1790924323381"
   },
   {
     "name": "Iceland",
-    "location": "",
-    "duration": "",
-    "description": "",
+    "location": "iceland",
+    "duration": "13 Days / 12 Nights",
+    "description": "Iceland’s Ring Road in a single trip, running from Reykjavik’s geothermal lagoon along the south coast’s black sand beaches and waterfalls, past glacier lagoons, and up to the northern lakes before swinging back via the Snæfellsnes peninsula. Whale watching, glacier boats, and volcanic landscapes fill most days.\n\nBest for travelers who want dramatic landscapes and nature-led days over city sightseeing.",
     "image_url": "https://images.unsplash.com/photo-1764276266750-4d6316e972e0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
     "link": "packages/iceland.html",
     "seo_group": "",
     "sort_order": 1,
     "active": true,
     "id": "1793895486099"
+  },
+  {
+    "name": "South Africa",
+    "location": "africa",
+    "duration": "11 Days / 10 Nights",
+    "description": "This trip covers South Africa from coast to bushveld: Cape Town’s mountain and peninsula, the Garden Route lagoon at Knysna, ostrich country around Oudtshoorn, the resort city of Sun City, and a safari in Kruger National Park, with a flight linking the south coast to Johannesburg.\n\nBest for travelers who want city sightseeing, scenic coastline, and a Big 5 safari in a single trip, with Indian meals throughout.",
+    "image_url": "https://images.unsplash.com/photo-1526749837599-b4eba9fd855e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+    "link": "packages/southafrica.html",
+    "seo_group": "",
+    "sort_order": 0,
+    "active": true,
+    "id": "1794488541237"
+  },
+  {
+    "name": "Kenya & Tanzania",
+    "location": "Kenya & Tanzania",
+    "duration": "11 Days / 10 Nights",
+    "description": "This trip crosses two countries on one safari circuit, starting in Kenya with the Mount Kenya foothills, Lake Nakuru, and the Masai Mara, then crossing the border at Isebania into Tanzania for the Serengeti, Ngorongoro Crater, Lake Manyara, and Tarangire. It covers most of East Africa’s best-known game reserves in a single overland route.\n\nBest for travelers who want a long, wildlife-led safari across both Kenya and Tanzania, with the Great Migration’s home territory at its center.",
+    "image_url": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+    "link": "packages/kenyatanz.html",
+    "seo_group": "",
+    "sort_order": 0,
+    "active": true,
+    "id": "1794489812470"
   }
 ]

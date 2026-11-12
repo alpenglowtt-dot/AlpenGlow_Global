@@ -1,0 +1,83 @@
+{
+  "slug": "kenyatanz",
+  "page_title": "Kenya & Tanzania | AlpenGlow Global",
+  "hero_image_url": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+  "bg_image_url": "https://images.unsplash.com/photo-1768734724176-fed302b575ef?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+  "location": "Kenya & Tanzania",
+  "duration": "11 Days / 10 Nights",
+  "title": "Kenya & Tanzania",
+  "meta_description": "",
+  "hero_image_alt": "",
+  "overview_heading": "Overview",
+  "overview_paragraphs": [
+    "This trip crosses two countries on one safari circuit, starting in Kenya with the Mount Kenya foothills, Lake Nakuru, and the Masai Mara, then crossing the border at Isebania into Tanzania for the Serengeti, Ngorongoro Crater, Lake Manyara, and Tarangire. It covers most of East Africa’s best-known game reserves in a single overland route.\n\nBest for travelers who want a long, wildlife-led safari across both Kenya and Tanzania, with the Great Migration’s home territory at its center."
+  ],
+  "places_heading": "Explore The Cities",
+  "places": [
+    {
+      "key": "Aberdares & Mount Kenya",
+      "name": "Aberdares & Mount Kenya",
+      "tagline": "Highland country at the foot of Africa’s second-highest mountain",
+      "card_image_url": "https://images.unsplash.com/photo-1776267196290-d5812bfebb9c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?q=80&w=1167&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "WHERE THE SAFARI BEGINS, ABOVE THE PLAINS",
+      "desc": "After arriving in Nairobi, the route heads north to the Aberdare and Mount Kenya region. The first full day is a quiet one, with country club grounds, cool highland air, and views of Mount Kenya when the weather is clear."
+    },
+    {
+      "key": "Lake Nakuru",
+      "name": "Lake Nakuru",
+      "tagline": "A soda lake ringed by acacia woodland and wildlife",
+      "card_image_url": "https://images.unsplash.com/photo-1710136678658-a12caee832a7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1609848880102-5d08522990b5?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "THE FIRST GAME DRIVES OF THE TRIP",
+      "desc": "Lake Nakuru National Park is known for its rich birdlife and its concentration of rhinos, buffalo, and big cats. The stay here includes a game drive on the way in and another in the afternoon."
+    },
+    {
+      "key": "Masai Mara",
+      "name": "Masai Mara",
+      "tagline": "Kenya’s most famous reserve, open grassland as far as the eye can see",
+      "card_image_url": "https://images.unsplash.com/photo-1645432456049-e7afc3df61da?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1518459384564-ecfd8e80721f?q=80&w=1148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "TWO DAYS IN BIG CAT COUNTRY",
+      "desc": "The Masai Mara anchors the Kenya leg with two days of morning and afternoon game drives across its open savannah, home to lion, elephant, and the herds that cross it during the migration."
+    },
+    {
+      "key": "Serengeti",
+      "name": "Serengeti",
+      "tagline": "Tanzania’s endless plains, reached by crossing the border",
+      "card_image_url": "https://images.unsplash.com/photo-1707410436272-1bcc71ecafb3?q=80&w=1272&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1713924167820-4385f8a758d3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "WHERE THE GREAT MIGRATION LIVES",
+      "desc": "The route crosses from Kenya into Tanzania at Isebania, picks up a Tanzanian guide, and drives into the Serengeti with game viewing along the way. Two days of game drives follow across one of the largest wildlife ecosystems in the world."
+    },
+    {
+      "key": "Ngorongoro Crater",
+      "name": "Ngorongoro Crater",
+      "tagline": "A collapsed volcano that became a natural wildlife enclosure",
+      "card_image_url": "https://images.unsplash.com/photo-1537690381844-9da2b0b69640?q=80&w=1229&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1745885979468-44a855f8a5fa?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "AFRICA’S MOST COMPACT SAFARI",
+      "desc": "Ngorongoro’s crater floor packs lion, elephant, hippo, and flamingos into a single caldera. A half-day crater tour is followed by a late afternoon drive to Karatu."
+    },
+    {
+      "key": "Lake Manyara & Tarangire",
+      "name": "Lake Manyara & Tarangire",
+      "tagline": "A rift valley lake, then elephant country among the baobabs",
+      "card_image_url": "https://images.unsplash.com/photo-1517390820816-01b9f79da005?q=80&w=1554&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1693761668555-bad833e9dbb6?q=80&w=1899&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "TWO MORE PARKS BEFORE THE FINISH",
+      "desc": "Lake Manyara offers a game drive along its lake and forest edge, with a relaxed afternoon at the lodge. Tarangire follows, known for its big elephant herds and baobab-dotted landscape, before the final drive to Arusha."
+    }
+  ],
+  "itinerary_heading": "",
+  "itinerary": [],
+  "inclusions_heading": "What's Included",
+  "inclusions": [
+    "10 nights accommodation",
+    "Full board meals at lodges & camps",
+    "Daily game drives",
+    "Ngorongoro Crater tour",
+    "Airport meet & greet and all transfers"
+  ],
+  "active": true
+}

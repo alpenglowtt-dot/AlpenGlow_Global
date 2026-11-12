@@ -257,7 +257,7 @@ window.ALPEN_DATA = {
       "image_url": "norway.jpg",
       "link": "packages/norway.html",
       "sort_order": 1,
-      "active": false
+      "active": true
     },
     {
       "id": "2",
@@ -279,7 +279,7 @@ window.ALPEN_DATA = {
       "image_url": "italy.jpg",
       "link": "packages/italy.html",
       "sort_order": 3,
-      "active": false
+      "active": true
     },
     {
       "id": "4",
@@ -301,7 +301,7 @@ window.ALPEN_DATA = {
       "image_url": "japan.jpg",
       "link": "packages/japan.html",
       "sort_order": 5,
-      "active": false
+      "active": true
     },
     {
       "id": "6",
@@ -327,13 +327,13 @@ window.ALPEN_DATA = {
     },
     {
       "id": "1782537432974",
-      "name": "bhutan",
+      "name": "Bhutan - Paro & Thimphu",
       "link": "packages/bhutan.html",
-      "active": false,
-      "location": "",
-      "duration": "",
-      "description": "",
-      "image_url": "",
+      "active": true,
+      "location": "Bhutan - Paro & Thimphu",
+      "duration": "6 Days / 5 Nights",
+      "description": "Bhutan caps the number of tourists it lets in every year, and it shows — no billboards, no traffic jams, and a monastery clinging to a cliff face that looks unreal until you're standing in front of it. This is the only country that measures Gross National Happiness instead of GDP, and the pace of this trip reflects that philosophy.",
+      "image_url": "https://images.unsplash.com/photo-1578556881786-851d4b79cb73?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "sort_order": 0,
       "seo_group": ""
     },
@@ -361,14 +361,15 @@ window.ALPEN_DATA = {
     },
     {
       "id": "1782537437658",
-      "name": "nepal",
+      "name": "Nepal - Kathmandu & Pokhara",
       "link": "packages/nepal.html",
-      "active": false,
-      "location": "",
-      "duration": "",
-      "description": "",
-      "image_url": "",
-      "sort_order": 0
+      "active": true,
+      "location": "Nepal - Kathmandu & Pokhara",
+      "duration": "9 Days / 8 Nights",
+      "description": "Nepal compresses the Himalaya's scale into a trip that doesn't require technical trekking experience — Kathmandu's temple-dense old town, Pokhara's lakeside calm with the Annapurna range as backdrop, and an early-morning mountain flight that gets you eye-level with Everest without the multi-week trek.",
+      "image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1600&q=80",
+      "sort_order": 0,
+      "seo_group": ""
     },
     {
       "id": "1782537442167",
@@ -405,25 +406,27 @@ window.ALPEN_DATA = {
     },
     {
       "id": "1782537446552",
-      "name": "srilanka",
+      "name": "Sri Lanka",
       "link": "packages/srilanka.html",
-      "active": false,
-      "location": "",
-      "duration": "",
-      "description": "",
-      "image_url": "",
-      "sort_order": 0
+      "active": true,
+      "location": "Sri Lanka",
+      "duration": "8 Days / 7 Nights",
+      "description": "This trip traces Sri Lanka along two threads at once: the Ramayana trail linking ancient temples across the island's west, north, and east, and the cultural triangle's UNESCO landmarks at Sigiriya, Dambulla, and Kandy. It runs coast to coast and up into hill country, closing in Colombo's colonial-era streets.\n\nBest for travelers who want mythology and pilgrimage sites alongside Sri Lanka's most famous ruins, temples, and tea country.",
+      "image_url": "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1600&q=80",
+      "sort_order": 0,
+      "seo_group": ""
     },
     {
       "id": "1782537451853",
-      "name": "southkorea",
+      "name": "South Korea",
       "link": "packages/southkorea.html",
-      "active": false,
-      "location": "",
-      "duration": "",
-      "description": "",
-      "image_url": "",
-      "sort_order": 0
+      "active": true,
+      "location": "South Korea",
+      "duration": "8 Days / 7 Nights",
+      "description": "South Korea moves between two speeds: the packed, neon rhythm of Seoul and the slower pace of the southeast, where Joseon-era villages, royal tombs, and coastal fish markets set the tone. This trip runs Seoul to the DMZ, then south through Andong and Gyeongju's temple towns, ending on the harbor in Busan, tied together by the KTX bullet train so a five-hour distance feels like a short hop.\n\nBest for travelers who want the capital's scale and street life alongside Korea's older, quieter historical core.",
+      "image_url": "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1600&q=80",
+      "sort_order": 0,
+      "seo_group": ""
     },
     {
       "id": "1782537453004",
@@ -467,20 +470,44 @@ window.ALPEN_DATA = {
       "link": "packages/andaman.html",
       "seo_group": "asia-subcontinent",
       "sort_order": 0,
-      "active": false,
+      "active": true,
       "id": "1790924323381"
     },
     {
       "name": "Iceland",
-      "location": "",
-      "duration": "",
-      "description": "",
+      "location": "iceland",
+      "duration": "13 Days / 12 Nights",
+      "description": "Iceland’s Ring Road in a single trip, running from Reykjavik’s geothermal lagoon along the south coast’s black sand beaches and waterfalls, past glacier lagoons, and up to the northern lakes before swinging back via the Snæfellsnes peninsula. Whale watching, glacier boats, and volcanic landscapes fill most days.\n\nBest for travelers who want dramatic landscapes and nature-led days over city sightseeing.",
       "image_url": "https://images.unsplash.com/photo-1764276266750-4d6316e972e0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
       "link": "packages/iceland.html",
       "seo_group": "",
       "sort_order": 1,
       "active": true,
       "id": "1793895486099"
+    },
+    {
+      "name": "South Africa",
+      "location": "africa",
+      "duration": "11 Days / 10 Nights",
+      "description": "This trip covers South Africa from coast to bushveld: Cape Town’s mountain and peninsula, the Garden Route lagoon at Knysna, ostrich country around Oudtshoorn, the resort city of Sun City, and a safari in Kruger National Park, with a flight linking the south coast to Johannesburg.\n\nBest for travelers who want city sightseeing, scenic coastline, and a Big 5 safari in a single trip, with Indian meals throughout.",
+      "image_url": "https://images.unsplash.com/photo-1526749837599-b4eba9fd855e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "link": "packages/southafrica.html",
+      "seo_group": "",
+      "sort_order": 0,
+      "active": true,
+      "id": "1794488541237"
+    },
+    {
+      "name": "Kenya & Tanzania",
+      "location": "Kenya & Tanzania",
+      "duration": "11 Days / 10 Nights",
+      "description": "This trip crosses two countries on one safari circuit, starting in Kenya with the Mount Kenya foothills, Lake Nakuru, and the Masai Mara, then crossing the border at Isebania into Tanzania for the Serengeti, Ngorongoro Crater, Lake Manyara, and Tarangire. It covers most of East Africa’s best-known game reserves in a single overland route.\n\nBest for travelers who want a long, wildlife-led safari across both Kenya and Tanzania, with the Great Migration’s home territory at its center.",
+      "image_url": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "link": "packages/kenyatanz.html",
+      "seo_group": "",
+      "sort_order": 0,
+      "active": true,
+      "id": "1794489812470"
     }
   ],
   "pages": {
@@ -587,7 +614,7 @@ window.ALPEN_DATA = {
         "Uluru base walk with guide",
         "Daily breakfast"
       ],
-      "active": true,
+      "active": false,
       "meta_description": "A 9-day Australia tour package covering Sydney harbour, the red Outback and the Great Barrier Reef, planned end to end by AlpenGlow Global for travellers from India."
     },
     "bali": {
@@ -685,7 +712,7 @@ window.ALPEN_DATA = {
     },
     "bhutan": {
       "slug": "bhutan",
-      "page_title": "Bhutan Tour Packages - 6 Days Paro & Thimphu | AlpenGlow",
+      "page_title": "Bhutan Tour Packages - 6 Days Paro & Thimphu | AlpenGlow Global",
       "hero_image_url": "https://images.unsplash.com/photo-1578556881786-851d4b79cb73?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Sub-Continent - Bhutan",
       "duration": "6 Days / 5 Nights",
@@ -745,7 +772,7 @@ window.ALPEN_DATA = {
       "page_title": "Iceland | Alpenglow Global",
       "hero_image_url": "https://images.unsplash.com/photo-1764276266750-4d6316e972e0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
       "bg_image_url": "https://images.unsplash.com/photo-1546507318-dc206ad061c9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
-      "location": "",
+      "location": "iceland",
       "duration": "13 Days / 12 Nights",
       "title": "Iceland",
       "meta_description": "",
@@ -860,7 +887,7 @@ window.ALPEN_DATA = {
         "Amber Fort jeep ride",
         "Daily breakfast"
       ],
-      "active": true,
+      "active": false,
       "meta_description": "An 8-day Golden Triangle tour package covering Delhi, Agra and Jaipur, extended beyond the standard circuit with Mughal monuments and royal Rajasthan."
     },
     "italy": {
@@ -991,6 +1018,89 @@ window.ALPEN_DATA = {
       "active": true,
       "meta_description": "A 9-day Japan tour package from Tokyo’s neon districts to Kyoto’s temple gardens and the classic Mount Fuji viewpoints, planned by AlpenGlow Global."
     },
+    "kenyatanz": {
+      "slug": "kenyatanz",
+      "page_title": "Kenya & Tanzania | AlpenGlow Global",
+      "hero_image_url": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "bg_image_url": "https://images.unsplash.com/photo-1768734724176-fed302b575ef?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "location": "Kenya & Tanzania",
+      "duration": "11 Days / 10 Nights",
+      "title": "Kenya & Tanzania",
+      "meta_description": "",
+      "hero_image_alt": "",
+      "overview_heading": "Overview",
+      "overview_paragraphs": [
+        "This trip crosses two countries on one safari circuit, starting in Kenya with the Mount Kenya foothills, Lake Nakuru, and the Masai Mara, then crossing the border at Isebania into Tanzania for the Serengeti, Ngorongoro Crater, Lake Manyara, and Tarangire. It covers most of East Africa’s best-known game reserves in a single overland route.\n\nBest for travelers who want a long, wildlife-led safari across both Kenya and Tanzania, with the Great Migration’s home territory at its center."
+      ],
+      "places_heading": "Explore The Cities",
+      "places": [
+        {
+          "key": "Aberdares & Mount Kenya",
+          "name": "Aberdares & Mount Kenya",
+          "tagline": "Highland country at the foot of Africa’s second-highest mountain",
+          "card_image_url": "https://images.unsplash.com/photo-1776267196290-d5812bfebb9c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?q=80&w=1167&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "WHERE THE SAFARI BEGINS, ABOVE THE PLAINS",
+          "desc": "After arriving in Nairobi, the route heads north to the Aberdare and Mount Kenya region. The first full day is a quiet one, with country club grounds, cool highland air, and views of Mount Kenya when the weather is clear."
+        },
+        {
+          "key": "Lake Nakuru",
+          "name": "Lake Nakuru",
+          "tagline": "A soda lake ringed by acacia woodland and wildlife",
+          "card_image_url": "https://images.unsplash.com/photo-1710136678658-a12caee832a7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1609848880102-5d08522990b5?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "THE FIRST GAME DRIVES OF THE TRIP",
+          "desc": "Lake Nakuru National Park is known for its rich birdlife and its concentration of rhinos, buffalo, and big cats. The stay here includes a game drive on the way in and another in the afternoon."
+        },
+        {
+          "key": "Masai Mara",
+          "name": "Masai Mara",
+          "tagline": "Kenya’s most famous reserve, open grassland as far as the eye can see",
+          "card_image_url": "https://images.unsplash.com/photo-1645432456049-e7afc3df61da?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1518459384564-ecfd8e80721f?q=80&w=1148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "TWO DAYS IN BIG CAT COUNTRY",
+          "desc": "The Masai Mara anchors the Kenya leg with two days of morning and afternoon game drives across its open savannah, home to lion, elephant, and the herds that cross it during the migration."
+        },
+        {
+          "key": "Serengeti",
+          "name": "Serengeti",
+          "tagline": "Tanzania’s endless plains, reached by crossing the border",
+          "card_image_url": "https://images.unsplash.com/photo-1707410436272-1bcc71ecafb3?q=80&w=1272&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1713924167820-4385f8a758d3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "WHERE THE GREAT MIGRATION LIVES",
+          "desc": "The route crosses from Kenya into Tanzania at Isebania, picks up a Tanzanian guide, and drives into the Serengeti with game viewing along the way. Two days of game drives follow across one of the largest wildlife ecosystems in the world."
+        },
+        {
+          "key": "Ngorongoro Crater",
+          "name": "Ngorongoro Crater",
+          "tagline": "A collapsed volcano that became a natural wildlife enclosure",
+          "card_image_url": "https://images.unsplash.com/photo-1537690381844-9da2b0b69640?q=80&w=1229&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1745885979468-44a855f8a5fa?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "AFRICA’S MOST COMPACT SAFARI",
+          "desc": "Ngorongoro’s crater floor packs lion, elephant, hippo, and flamingos into a single caldera. A half-day crater tour is followed by a late afternoon drive to Karatu."
+        },
+        {
+          "key": "Lake Manyara & Tarangire",
+          "name": "Lake Manyara & Tarangire",
+          "tagline": "A rift valley lake, then elephant country among the baobabs",
+          "card_image_url": "https://images.unsplash.com/photo-1517390820816-01b9f79da005?q=80&w=1554&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1693761668555-bad833e9dbb6?q=80&w=1899&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "TWO MORE PARKS BEFORE THE FINISH",
+          "desc": "Lake Manyara offers a game drive along its lake and forest edge, with a relaxed afternoon at the lodge. Tarangire follows, known for its big elephant herds and baobab-dotted landscape, before the final drive to Arusha."
+        }
+      ],
+      "itinerary_heading": "",
+      "itinerary": [],
+      "inclusions_heading": "What's Included",
+      "inclusions": [
+        "10 nights accommodation",
+        "Full board meals at lodges & camps",
+        "Daily game drives",
+        "Ngorongoro Crater tour",
+        "Airport meet & greet and all transfers"
+      ],
+      "active": true
+    },
     "maldives": {
       "slug": "maldives",
       "page_title": "Maldives Honeymoon Packages - 5 Days | AlpenGlow Global",
@@ -1036,7 +1146,7 @@ window.ALPEN_DATA = {
         "Daily breakfast & dinner",
         "Snorkelling gear included"
       ],
-      "active": true,
+      "active": false,
       "meta_description": "A 5-day Maldives honeymoon package with an overwater villa, a private sandbank and a lagoon clear enough to watch reef fish from bed. Short and unhurried."
     },
     "mauritius": {
@@ -1089,7 +1199,7 @@ window.ALPEN_DATA = {
         "Chamarel & rum tasting tour",
         "Daily breakfast"
       ],
-      "active": true,
+      "active": false,
       "meta_description": "A 6-day Mauritius honeymoon package mixing Indian Ocean beaches, volcanic mountain hikes and French-Indian-Creole culture across one compact island."
     },
     "nepal": {
@@ -1097,48 +1207,75 @@ window.ALPEN_DATA = {
       "page_title": "Nepal Tour Packages - 7 Days Kathmandu, Pokhara | AlpenGlow",
       "hero_image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1600&q=80",
       "location": "Sub-Continent · Nepal",
-      "duration": "7 Days / 6 Nights",
+      "duration": "9 Days / 8 Nights",
       "title": "Kathmandu, Pokhara & the Himalayan Foothills",
       "overview_heading": "Overview",
       "overview_paragraphs": [
         "Nepal compresses the Himalaya's scale into a trip that doesn't require technical trekking experience — Kathmandu's temple-dense old town, Pokhara's lakeside calm with the Annapurna range as backdrop, and an early-morning mountain flight that gets you eye-level with Everest without the multi-week trek.",
         "Suited to travelers who want genuine Himalayan scenery and culture on a comfortable, non-trekking itinerary."
       ],
-      "places_heading": "",
-      "places": [],
-      "itinerary_heading": "Itinerary",
-      "itinerary": [
+      "places_heading": "Explore The Cities",
+      "places": [
         {
-          "range": "Day 1-2",
-          "title": "Kathmandu",
-          "desc": "Explore Kathmandu Durbar Square, the Boudhanath Stupa, and Swayambhunath (the Monkey Temple) overlooking the valley."
+          "key": "Kathmandu",
+          "name": "Kathmandu",
+          "tagline": "Temple squares, stupas, and the Living Goddess, all in one valley",
+          "card_image_url": "https://images.unsplash.com/photo-1605640840605-14ac1855827b?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1706188370039-e0cf9bd6ea16?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "WHERE THE TRIP BEGINS AND ENDS",
+          "desc": "Kathmandu opens with a traditional khada welcome and closes with a full day of sightseeing: Pashupatinath Temple, one of Hinduism’s most revered sites, Boudhanath Stupa, one of the largest stupas in the world, and Kathmandu Durbar Square, a UNESCO World Heritage Site home to the Kumari House, where Nepal’s Living Goddess resides."
         },
         {
-          "range": "Day 3-5",
-          "title": "Pokhara",
-          "desc": "Drive or fly to Pokhara — sunrise over the Annapurna range from Sarangkot, a boat ride on Phewa Lake, and a visit to the World Peace Pagoda."
+          "key": "Pokhara",
+          "name": "Pokhara",
+          "tagline": "A lakeside city framed by the Annapurna range",
+          "card_image_url": "https://images.unsplash.com/photo-1618083840944-31cc42fcf250?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1610997686651-98492fd08108?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "NEPAL’S CITY OF LAKES AND MOUNTAINS",
+          "desc": "Pokhara’s day starts before dawn with a sunrise visit to Sarangkot Hill for Himalayan views, followed by Bindabasini Temple, Davis Falls, Gupteshwor Cave, and boating on Fewa Lake, Nepal’s largest, out to the mid-lake Talbarahi Temple. The town is also Nepal’s adventure hub, with options for ultra-light flights, zip-lining, and bungee jumping."
         },
         {
-          "range": "Day 6",
-          "title": "Mountain Flight",
-          "desc": "An early-morning scenic mountain flight along the Himalayan range, weather permitting, with close-up views of Everest and Annapurna."
+          "key": "Lumbini",
+          "name": "Lumbini",
+          "tagline": "The birthplace of Lord Buddha.",
+          "card_image_url": "https://images.unsplash.com/photo-1616166831783-f239fea49bdc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1553243173-a022fcf96e44?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "NEPAL’S MOST SACRED PILGRIMAGE SITE",
+          "desc": "Lumbini centers on Maya Devi Temple, marking the Buddha’s birthplace, alongside Kapilvastu, Kudan, and Ramagrama Stupa, a quiet, spiritually significant stop between Pokhara and Chitwan."
         },
         {
-          "range": "Day 7",
-          "title": "Departure",
-          "desc": "Transfer to Kathmandu for your international departure."
+          "key": "Chitwan",
+          "name": "Chitwan",
+          "tagline": "A national park built for elephants, crocodiles, and jungle walks",
+          "card_image_url": "https://images.unsplash.com/photo-1562462159-bc2c0c305fdb?q=80&w=1412&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1549888668-19281758dfbe?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "NEPAL’S WILDLIFE HEARTLAND",
+          "desc": "Chitwan National Park fills a full day with jungle activity: the elephant breeding center, a canoe ride on the Budhi Rapti River to spot crocodiles, an elephant safari, jungle walks, and bird watching, closing with an evening Tharu cultural show."
+        },
+        {
+          "key": "Manakamana",
+          "name": "Manakamana",
+          "tagline": "A hilltop temple said to grant wishes",
+          "card_image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1562462181-b228e3cff9ad?q=80&w=1310&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "A PILGRIM STOP ON THE ROAD BACK TO KATHMANDU",
+          "desc": "On the drive back from Chitwan, Manakamana Temple is dedicated to the goddess believed to fulfill the wishes of those who visit, a popular pilgrimage stop between the jungle and the capital."
         }
       ],
+      "itinerary_heading": "",
+      "itinerary": [],
       "inclusions_heading": "What's Included",
       "inclusions": [
-        "6 nights accommodation",
-        "Sarangkot sunrise viewpoint",
-        "Phewa Lake boat ride",
-        "Himalayan mountain flight (optional)",
-        "Daily breakfast"
+        "8 nights accommodation",
+        "Private tourist vehicle throughout",
+        "Chitwan jungle activities & safari",
+        "Daily breakfast",
+        "Airport transfers"
       ],
       "active": true,
-      "meta_description": "A 7-day Nepal tour package covering Kathmandu’s temple quarter, lakeside Pokhara under the Annapurna range and an early-morning Himalayan mountain flight."
+      "meta_description": "A 7-day Nepal tour package covering Kathmandu’s temple quarter, lakeside Pokhara under the Annapurna range and an early-morning Himalayan mountain flight.",
+      "bg_image_url": "https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "hero_image_alt": ""
     },
     "newzealand": {
       "slug": "newzealand",
@@ -1190,7 +1327,7 @@ window.ALPEN_DATA = {
         "Maori cultural performance & hangi",
         "Daily breakfast"
       ],
-      "active": true,
+      "active": false,
       "meta_description": "A 10-day New Zealand tour package covering both islands properly - geothermal valleys and Maori culture in the north, fjords and glacier peaks in the south."
     },
     "norway": {
@@ -1312,7 +1449,7 @@ window.ALPEN_DATA = {
         "Pool deck & spa access",
         "Port taxes included"
       ],
-      "active": true,
+      "active": false,
       "meta_description": "A 4-day Resorts World cruise from Singapore - casino floors, pool decks and a full entertainment lineup packed into a long weekend at sea."
     },
     "rivercruise-europe": {
@@ -1370,13 +1507,13 @@ window.ALPEN_DATA = {
         "Wachau Valley scenic cruising",
         "Melk Abbey entry"
       ],
-      "active": true,
+      "active": false,
       "meta_description": "An 8-day European river cruise along the Danube through three capitals - unpack once and step off the boat straight into each old town."
     },
     "royalcaribbean": {
       "slug": "royalcaribbean",
       "page_title": "Royal Caribbean Cruise - 7 Days Singapore | AlpenGlow",
-      "hero_image_url": "https://images.unsplash.com/photo-1548574169-47bbe03cb22f?w=1600&q=80",
+      "hero_image_url": "https://images.unsplash.com/photo-1717541262982-731503ac4dc2?q=80&w=1236&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
       "location": "Cruise Sailings · Large Liner",
       "duration": "7 Days / 6 Nights",
       "title": "Royal Caribbean — Singapore & Southeast Asia",
@@ -1428,8 +1565,10 @@ window.ALPEN_DATA = {
         "Onboard entertainment & activities",
         "Port taxes included"
       ],
-      "active": true,
-      "meta_description": "A 7-day Royal Caribbean sailing from Singapore through Penang, Phuket and Langkawi - Southeast Asia without separate flights and hotels between stops."
+      "active": false,
+      "meta_description": "A 7-day Royal Caribbean sailing from Singapore through Penang, Phuket and Langkawi - Southeast Asia without separate flights and hotels between stops.",
+      "bg_image_url": "",
+      "hero_image_alt": ""
     },
     "santorini": {
       "slug": "santorini",
@@ -1553,8 +1692,91 @@ window.ALPEN_DATA = {
         "Daily breakfast",
         "Private airport transfers"
       ],
-      "active": true,
+      "active": false,
       "meta_description": "A 6-day Seychelles honeymoon package - granite boulder beaches, giant tortoises and UNESCO-protected forest across the granitic inner islands."
+    },
+    "southafrica": {
+      "slug": "southafrica",
+      "page_title": "South Africa | AlpenGlow Global",
+      "hero_image_url": "https://images.unsplash.com/photo-1526749837599-b4eba9fd855e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "bg_image_url": "https://images.unsplash.com/photo-1576485375217-d6a95e34d043?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "location": "South Africa",
+      "duration": "11 Days / 10 Nights",
+      "title": "South Africa",
+      "meta_description": "",
+      "hero_image_alt": "",
+      "overview_heading": "Overview",
+      "overview_paragraphs": [
+        "This trip covers South Africa from coast to bushveld: Cape Town’s mountain and peninsula, the Garden Route lagoon at Knysna, ostrich country around Oudtshoorn, the resort city of Sun City, and a safari in Kruger National Park, with a flight linking the south coast to Johannesburg.\n\nBest for travelers who want city sightseeing, scenic coastline, and a Big 5 safari in a single trip, with Indian meals throughout."
+      ],
+      "places_heading": "",
+      "places": [
+        {
+          "key": "cape",
+          "name": "Cape Town",
+          "tagline": "A city folded around Table Mountain and two oceans",
+          "card_image_url": "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1773825406587-b3676d46c738?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "WHERE THE TRIP BEGINS AT THE EDGE OF AFRICA",
+          "desc": "Cape Town opens with a city tour through Clifton, Bo-Kaap, and Greenmarket Square, a cable car ride up Table Mountain, and an afternoon at the V&A Waterfront. A full-day peninsula tour follows, with a Seal Island cruise from Hout Bay, the Cape of Good Hope, the funicular to the old lighthouse, and the penguin colony at Boulders Beach."
+        },
+        {
+          "key": "knysna",
+          "name": "Knysna",
+          "tagline": "A tidal lagoon guarded by two sandstone cliffs",
+          "card_image_url": "https://images.unsplash.com/photo-1577883437419-1beb38400e15?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "",
+          "modal_tagline": "THE GARDEN ROUTE’S QUIET HARBOR",
+          "desc": "Knysna sits on a large lagoon opening to the sea between the sandstone Heads, explored here on an evening cruise past forests, marshes, and unspoiled beaches."
+        },
+        {
+          "key": "oudtshoorn",
+          "name": "Oudtshoorn",
+          "tagline": "The feather capital of the world, with caves beneath it",
+          "card_image_url": "https://images.unsplash.com/photo-1523220973952-872f5122213e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "",
+          "modal_tagline": "A DAY TRIP INTO OSTRICH COUNTRY",
+          "desc": "Oudtshoorn is reached as a day trip from Knysna, with the Cango Caves’ underground limestone formations, a working ostrich farm, and a wildlife ranch with a crocodile park, where you can also have your photo taken with a cheetah."
+        },
+        {
+          "key": "suncity",
+          "name": "Sun City",
+          "tagline": "A resort city with a wave pool, golf courses, and a casino",
+          "card_image_url": "https://images.unsplash.com/photo-1583087769555-dc42d3805650?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1748999761926-d31c15124947?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "TWO DAYS OFF THE SIGHTSEEING CLOCK",
+          "desc": "Sun City is a full resort complex built around a man-made lake, two championship golf courses, the Valley of the Waves water park, and the gardens of the Lost City. One day is left free to relax, with optional hot air ballooning available."
+        },
+        {
+          "key": "krugernp",
+          "name": "Kruger National Park",
+          "tagline": "One of Africa’s largest reserves, and home to the Big 5",
+          "card_image_url": "https://images.unsplash.com/photo-1681829496174-e9b03398a0a9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1586943353950-95bdbe3207a1?q=80&w=1318&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "THE SAFARI AT THE HEART OF THE TRIP",
+          "desc": "Kruger fills a full day with morning and afternoon game drives, with lunch inside the park. Elephant, giraffe, zebra, buffalo, lion, hippo, and hyena are all commonly seen, with leopard, cheetah, wild dog, and rhino among the rarer sightings"
+        },
+        {
+          "key": "johannesburg",
+          "name": "Johannesburg",
+          "tagline": "South Africa’s largest city, closing out the trip",
+          "card_image_url": "https://images.unsplash.com/photo-1636706519609-988babca3dd5?q=80&w=1258&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_image_url": "https://images.unsplash.com/photo-1610307766999-01f45d259959?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+          "modal_tagline": "WHERE THE JOURNEY ENDS",
+          "desc": "Johannesburg serves as the trip’s transit hub, connecting the south coast flight to Sun City on arrival and closing the trip with an overnight stay before the flight home."
+        }
+      ],
+      "itinerary_heading": "",
+      "itinerary": [],
+      "inclusions_heading": "What's Included",
+      "inclusions": [
+        "10 nights accommodation",
+        "Daily meals (Indian restaurants & local)",
+        "Table Mountain cable car & Peninsula tour",
+        "Kruger game drives",
+        "George to Johannesburg flight & transfers"
+      ],
+      "active": true
     },
     "southkorea": {
       "slug": "southkorea",
@@ -1655,7 +1877,7 @@ window.ALPEN_DATA = {
       "hero_image_url": "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1600&q=80",
       "bg_image_url": "https://images.unsplash.com/photo-1574611122955-5baa61496637?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "location": "Sub-Continent - Sri Lanka",
-      "duration": "8 Days / 7 Nights.",
+      "duration": "8 Days / 7 Nights",
       "title": "Sri Lanka - Ramayana Trail",
       "overview_heading": "Overview",
       "overview_paragraphs": [
@@ -1774,7 +1996,8 @@ window.ALPEN_DATA = {
         "Airport transfers"
       ],
       "active": true,
-      "meta_description": "A 7-day Sri Lanka tour package threading ancient rock fortresses, tea-country hill stations, wildlife safaris and the palm-lined south coast."
+      "meta_description": "A 7-day Sri Lanka tour package threading ancient rock fortresses, tea-country hill stations, wildlife safaris and the palm-lined south coast.",
+      "hero_image_alt": ""
     },
     "switzerland": {
       "slug": "switzerland",
@@ -1821,7 +2044,7 @@ window.ALPEN_DATA = {
         "Gornergrat railway to the Matterhorn",
         "Daily breakfast"
       ],
-      "active": true,
+      "active": false,
       "meta_description": "A 7-day Switzerland tour package riding the country’s scenic mountain trains between snow-capped Alpine peaks, emerald valleys and lakeside towns."
     }
   }

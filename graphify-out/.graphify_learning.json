@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-05T16:20:06.716553+00:00",
+  "generated_at": "2026-11-09T13:20:46.575371+00:00",
   "nodes": {
     "alpenglow_api": {
       "code_fingerprint": "93b2ce94d3b8ebd8cded784ba2ce920f2643e74a36456911a120aff79e2dac4b",
@@ -28,7 +28,7 @@
           "q": "How is SEO handled across the AlpenGlow site, and what silently undoes SEO edits?"
         }
       ],
-      "score": 1.245439904,
+      "score": 1.138767611,
       "source_file": "AlpenGlow/api.js",
       "status": "contested",
       "uses": 3,
@@ -45,7 +45,7 @@
           "q": "Which OTP verification unlocks which part of the site, and when does the 30s popup appear?"
         }
       ],
-      "score": 0.904142694,
+      "score": 0.826702607,
       "source_file": "AlpenGlow/api.js",
       "status": "tentative",
       "uses": 1
@@ -61,7 +61,7 @@
           "q": "Which OTP verification unlocks which part of the site, and when does the 30s popup appear?"
         }
       ],
-      "score": 0.904142694,
+      "score": 0.826702607,
       "source_file": "AlpenGlow/api.js",
       "status": "tentative",
       "uses": 1
@@ -77,7 +77,7 @@
           "q": "Which OTP verification unlocks which part of the site, and when does the 30s popup appear?"
         }
       ],
-      "score": 0.904142694,
+      "score": 0.826702607,
       "source_file": "AlpenGlow/api.js",
       "status": "tentative",
       "uses": 1
@@ -93,7 +93,7 @@
           "q": "Which OTP verification unlocks which part of the site, and when does the 30s popup appear?"
         }
       ],
-      "score": 0.904142694,
+      "score": 0.826702607,
       "source_file": "AlpenGlow/api.js",
       "status": "tentative",
       "uses": 1
@@ -115,7 +115,7 @@
           "q": "What are the two verification scopes and where do they apply?"
         }
       ],
-      "score": -1.003e-06,
+      "score": -9.17e-07,
       "source_file": "AlpenGlow/compass.js",
       "status": "contested",
       "uses": 1,
@@ -132,7 +132,7 @@
           "q": "What are the two verification scopes and where do they apply?"
         }
       ],
-      "score": 0.083766527,
+      "score": 0.0765919,
       "source_file": "AlpenGlow/trip-planner.js",
       "status": "tentative",
       "uses": 1
@@ -154,7 +154,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 5.08e-07,
+      "score": 4.65e-07,
       "source_file": "AlpenGlow/trip-planner.js",
       "status": "contested",
       "uses": 1,
@@ -176,7 +176,7 @@
           "q": "How should dev.html generate complete package pages and keep SEO and sitemap data synchronized?"
         }
       ],
-      "score": 0.887423627,
+      "score": 0.811415532,
       "source_file": "scripts/seo-head.js",
       "status": "preferred",
       "uses": 2
@@ -203,7 +203,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 0.083767641,
+      "score": 0.076592918,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "contested",
       "uses": 2,
@@ -220,7 +220,7 @@
           "q": "What is the RLS security model for the CRM tables?"
         }
       ],
-      "score": 0.083766537,
+      "score": 0.076591909,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "tentative",
       "uses": 1
@@ -242,7 +242,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 5.18e-07,
+      "score": 4.73e-07,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "contested",
       "uses": 1,
@@ -259,7 +259,7 @@
           "q": "What is the RLS security model for the CRM tables?"
         }
       ],
-      "score": 0.083766537,
+      "score": 0.076591909,
       "source_file": "supabase/functions/crm/index.ts",
       "status": "tentative",
       "uses": 1
@@ -281,7 +281,7 @@
           "q": "How does OTP verification connect to CRM lead creation?"
         }
       ],
-      "score": 1.104e-06,
+      "score": 1.01e-06,
       "source_file": "supabase/functions/submit-lead/index.ts",
       "status": "contested",
       "uses": 1,

@@ -3,46 +3,73 @@
   "page_title": "Nepal Tour Packages - 7 Days Kathmandu, Pokhara | AlpenGlow",
   "hero_image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1600&q=80",
   "location": "Sub-Continent · Nepal",
-  "duration": "7 Days / 6 Nights",
+  "duration": "9 Days / 8 Nights",
   "title": "Kathmandu, Pokhara & the Himalayan Foothills",
   "overview_heading": "Overview",
   "overview_paragraphs": [
     "Nepal compresses the Himalaya's scale into a trip that doesn't require technical trekking experience — Kathmandu's temple-dense old town, Pokhara's lakeside calm with the Annapurna range as backdrop, and an early-morning mountain flight that gets you eye-level with Everest without the multi-week trek.",
     "Suited to travelers who want genuine Himalayan scenery and culture on a comfortable, non-trekking itinerary."
   ],
-  "places_heading": "",
-  "places": [],
-  "itinerary_heading": "Itinerary",
-  "itinerary": [
+  "places_heading": "Explore The Cities",
+  "places": [
     {
-      "range": "Day 1-2",
-      "title": "Kathmandu",
-      "desc": "Explore Kathmandu Durbar Square, the Boudhanath Stupa, and Swayambhunath (the Monkey Temple) overlooking the valley."
+      "key": "Kathmandu",
+      "name": "Kathmandu",
+      "tagline": "Temple squares, stupas, and the Living Goddess, all in one valley",
+      "card_image_url": "https://images.unsplash.com/photo-1605640840605-14ac1855827b?q=80&w=1333&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1706188370039-e0cf9bd6ea16?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "WHERE THE TRIP BEGINS AND ENDS",
+      "desc": "Kathmandu opens with a traditional khada welcome and closes with a full day of sightseeing: Pashupatinath Temple, one of Hinduism’s most revered sites, Boudhanath Stupa, one of the largest stupas in the world, and Kathmandu Durbar Square, a UNESCO World Heritage Site home to the Kumari House, where Nepal’s Living Goddess resides."
     },
     {
-      "range": "Day 3-5",
-      "title": "Pokhara",
-      "desc": "Drive or fly to Pokhara — sunrise over the Annapurna range from Sarangkot, a boat ride on Phewa Lake, and a visit to the World Peace Pagoda."
+      "key": "Pokhara",
+      "name": "Pokhara",
+      "tagline": "A lakeside city framed by the Annapurna range",
+      "card_image_url": "https://images.unsplash.com/photo-1618083840944-31cc42fcf250?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1610997686651-98492fd08108?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "NEPAL’S CITY OF LAKES AND MOUNTAINS",
+      "desc": "Pokhara’s day starts before dawn with a sunrise visit to Sarangkot Hill for Himalayan views, followed by Bindabasini Temple, Davis Falls, Gupteshwor Cave, and boating on Fewa Lake, Nepal’s largest, out to the mid-lake Talbarahi Temple. The town is also Nepal’s adventure hub, with options for ultra-light flights, zip-lining, and bungee jumping."
     },
     {
-      "range": "Day 6",
-      "title": "Mountain Flight",
-      "desc": "An early-morning scenic mountain flight along the Himalayan range, weather permitting, with close-up views of Everest and Annapurna."
+      "key": "Lumbini",
+      "name": "Lumbini",
+      "tagline": "The birthplace of Lord Buddha.",
+      "card_image_url": "https://images.unsplash.com/photo-1616166831783-f239fea49bdc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1553243173-a022fcf96e44?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "NEPAL’S MOST SACRED PILGRIMAGE SITE",
+      "desc": "Lumbini centers on Maya Devi Temple, marking the Buddha’s birthplace, alongside Kapilvastu, Kudan, and Ramagrama Stupa, a quiet, spiritually significant stop between Pokhara and Chitwan."
     },
     {
-      "range": "Day 7",
-      "title": "Departure",
-      "desc": "Transfer to Kathmandu for your international departure."
+      "key": "Chitwan",
+      "name": "Chitwan",
+      "tagline": "A national park built for elephants, crocodiles, and jungle walks",
+      "card_image_url": "https://images.unsplash.com/photo-1562462159-bc2c0c305fdb?q=80&w=1412&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1549888668-19281758dfbe?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "NEPAL’S WILDLIFE HEARTLAND",
+      "desc": "Chitwan National Park fills a full day with jungle activity: the elephant breeding center, a canoe ride on the Budhi Rapti River to spot crocodiles, an elephant safari, jungle walks, and bird watching, closing with an evening Tharu cultural show."
+    },
+    {
+      "key": "Manakamana",
+      "name": "Manakamana",
+      "tagline": "A hilltop temple said to grant wishes",
+      "card_image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_image_url": "https://images.unsplash.com/photo-1562462181-b228e3cff9ad?q=80&w=1310&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "modal_tagline": "A PILGRIM STOP ON THE ROAD BACK TO KATHMANDU",
+      "desc": "On the drive back from Chitwan, Manakamana Temple is dedicated to the goddess believed to fulfill the wishes of those who visit, a popular pilgrimage stop between the jungle and the capital."
     }
   ],
+  "itinerary_heading": "",
+  "itinerary": [],
   "inclusions_heading": "What's Included",
   "inclusions": [
-    "6 nights accommodation",
-    "Sarangkot sunrise viewpoint",
-    "Phewa Lake boat ride",
-    "Himalayan mountain flight (optional)",
-    "Daily breakfast"
+    "8 nights accommodation",
+    "Private tourist vehicle throughout",
+    "Chitwan jungle activities & safari",
+    "Daily breakfast",
+    "Airport transfers"
   ],
   "active": true,
-  "meta_description": "A 7-day Nepal tour package covering Kathmandu’s temple quarter, lakeside Pokhara under the Annapurna range and an early-morning Himalayan mountain flight."
+  "meta_description": "A 7-day Nepal tour package covering Kathmandu’s temple quarter, lakeside Pokhara under the Annapurna range and an early-morning Himalayan mountain flight.",
+  "bg_image_url": "https://images.unsplash.com/photo-1518002054494-3a6f94352e9d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+  "hero_image_alt": ""
 }
