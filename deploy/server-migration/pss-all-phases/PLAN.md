@@ -86,6 +86,17 @@ Never changed: `AlpenGlow-migration`, `AlpenGlow work`,
   plan or touching AlpenGlow's containers, the main branches,
   `PSS\perfect-study-space`, `AlpenGlow-migration`, `AlpenGlow work` or
   `ozatixapvxwrwbpdxuzt`. After step 14: stop and wait for "start testing".
+- **Frontend on Production (12 Nov, your decision; replaces "Preview only"
+  in step 14):** the self-hosted stack is used by the Cloudflare Pages
+  **Production** site of project `perfectstudyspace`,
+  `https://perfectstudyspace.pages.dev`. Production branch =
+  `claude/sleepy-johnson-fmuoxd` (it carries the CSP change;
+  `pss-ai/all-phases` is not edited), Production variables =
+  `VITE_SUPABASE_URL=https://api.perfectstudyspace.in` and the stack's
+  `ANON_KEY`. Server: `PORTAL_URL=https://perfectstudyspace.pages.dev`,
+  `ALLOWED_ORIGINS` = that, the branch preview address and
+  `http://localhost:5173`. So `pss-ai/all-phases` no longer has a
+  cloud-backed site on this project.
 - **Server tests (9 Nov):** the PSS server suites run inside a pinned
   `denoland/deno` container (no Deno installed on the laptop), dummy data
   only.
