@@ -474,6 +474,23 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
   only `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` (no `.env` file in
   the repo, nothing hard-coded), so it needs a new build. Empty commit
   `c119d4b` pushed to the PSS branch to trigger a fresh preview build.
+- **12 Nov 2026** Found: the `c119d4b` build (deployment
+  `9101cd74.perfectstudyspace.pages.dev`, API `api.perfectstudyspace.in`,
+  stack anon key, CSP with `api`) is published as **Production**
+  (`https://perfectstudyspace.pages.dev` serves it), while the branch
+  preview address still serves the old cloud build. So the Pages project's
+  Production now follows this branch (Production branch setting or a
+  promotion; differs from the plan). Browser calls from the hash address
+  `9101cd74…` failed CORS (not in `ALLOWED_ORIGINS`, exact match only).
+- **12 Nov 2026** On your instruction ("do whatever necessary"):
+  `ALLOWED_ORIGINS` in `functions.env` now
+  `https://claude-sleepy-johnson-fmuoxd.perfectstudyspace.pages.dev,https://perfectstudyspace.pages.dev,http://localhost:5173`
+  (only that line changed with `sed`; previous file kept as
+  `functions.env.bak-<date>`, mode 600); functions recreated, healthy.
+  Preflight: branch preview and `perfectstudyspace.pages.dev` allowed;
+  `9101cd74…` and `https://evil.example` not. Cloudflare steps given to
+  you to put Production back on `pss-ai/all-phases` and rebuild the branch
+  preview.
 
 ## Decisions
 
