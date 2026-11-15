@@ -502,6 +502,50 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
   `api.perfectstudyspace.in`, and a preflight from it is allowed (200).
   Left for you: confirm the Production branch and variables in Cloudflare
   so the next build keeps this, then a real login.
+- **15 Nov 2026** You: Cloudflare done, logged in, "start the testing part
+  and finish it"; reported "URI too long" on the all-branches memberships
+  page.
+- **15 Nov 2026** **Fix: "URI too long" (HTTP 414 from Kong).** Kong had
+  refused 14 internal requests in 3 days (`GET /rest/v1/cashbacks` and
+  `/rest/v1/overtime_sessions`, every one cut at 8189 characters): the
+  `api` function puts the ids of all students (442) into the URL on
+  all-branches pages (~18 KB); Kong's default request-line buffer is 8 KB
+  (Supabase cloud's gateway allows more). Added
+  `KONG_NGINX_PROXY_LARGE_CLIENT_HEADER_BUFFERS: "4 64k"` to the live
+  stack's `docker-compose.yml` (backup kept) and to `stack-template/`
+  (commit `4a7465f`); `docker compose up -d kong`: healthy,
+  `large_client_header_buffers 4 64k` in Kong's generated config. A
+  16427-character `GET` through Kong now 200; 0 new 414 since. (PostgREST
+  behind it accepts about 50 KB; querying in chunks in the app would
+  remove the limit for good: noted.)
+- **15 Nov 2026** **Testing (started on your word; test data only):**
+  - Temporary owner `claude_test_owner` created for the tests (random
+    password, given to the server only through stdin), **deactivated
+    afterwards** (login 401); local token/password files deleted.
+  - **Read sweep** through `https://api.perfectstudyspace.in` (origin
+    `https://perfectstudyspace.pages.dev`): 80 `get_*`/`list_*` actions x
+    (all branches + each of 3 branches) = 320 calls: **262 x 2xx, 0 x 414,
+    0 slower than 10 s**; 52 x 4xx, all input checks (a student / enquiry /
+    membership / date needed, or one branch instead of all); 6 x 500 only
+    where the sweep omitted parameters the frontend always sends
+    (`list_food_bills` without `dateFrom`/`dateTo`; `list_food_orders` and
+    `list_tickets` without `branchId`/`allBranches`). Re-run exactly as the
+    pages call them (`FoodMenuPage`, `FoodQueuePage`, `TicketsPage`): all
+    200, plus `list_active_memberships` (all branches) and
+    `get_combined_hall` 200. (App robustness note: an owner call without a
+    branch gives 500 instead of 400 in those two actions; not a migration
+    issue.)
+  - **Storage:** test image uploaded (service role) to `task-photos`, signed
+    by Storage, opened via `https://api.perfectstudyspace.in/storage/v1/object/sign/...`
+    **200** (`image/png`, 70 B); tampered token **400**; test image deleted
+    (0 objects left).
+  - **Realtime:** internal broadcast **202**; public websocket upgrade with
+    the anon key **101**.
+  - **Schedules:** one manual `pss_run_cron_job('cron_integrity_report')`:
+    pg_net **200**, `events` row `integrity_report` ok; still **27 jobs, 0
+    active**, 0 scheduled runs.
+  - Earlier (step 5): 30 of 31 server suites pass in Deno 2.9.6
+    (`golden_test.ts` fails on untouched `65d8f1a` too).
 
 ## Decisions
 
