@@ -110,6 +110,9 @@ services:
       KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
       # Untuned Kong starts one worker per CPU and outgrows its memory cap.
       KONG_NGINX_WORKER_PROCESSES: "2"
+      # Long request lines: the api function queries REST with id lists in the URL
+      # (all-branches pages, ~18 KB for 442 students); Kong's default is 8 KB (414).
+      KONG_NGINX_PROXY_LARGE_CLIENT_HEADER_BUFFERS: "4 64k"
       KONG_PROXY_ACCESS_LOG: /dev/stdout combined
       SUPABASE_ANON_KEY: ${ANON_KEY}
       SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
