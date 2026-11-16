@@ -545,6 +545,60 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
   - Earlier (step 5): 30 of 31 server suites pass in Deno 2.9.6
     (`golden_test.ts` fails on untouched `65d8f1a` too).
 
+- **16 Nov 2026** **Testing round 2 (for the PSS main move; test data only).**
+  Temporary accounts `claude_t2_owner`, `claude_t2_admin`, `claude_t2_staff`
+  (branch 1 `02641307…`) created in SQL with random passwords sent only
+  through stdin (deactivated at the end, see Part F).
+  - **Part A.1 PASS:** login 200 for all three roles (first call 9.1 s:
+    cold worker; then 0.5 to 0.8 s); wrong password 401; no token 401;
+    the same stored token still works on later requests and after 45 s
+    (token lifetime 7 days). Branch isolation: staff of branch 1 gets
+    **403 "Branch access denied"** for branch 2 on all 13 reads tried
+    (students, dashboard, memberships, seat map, bookings, lockers,
+    enquiries, transactions, revenue, food bills, sign-ups, sign-up link,
+    cashbacks); with `allBranches` 10 of them answer 403 and 3 fall back to
+    branch 1 only (transactions 55 = branch 1, owner sees 733; revenue
+    ₹98,533 = branch 1, owner ₹911,015). Owner-only actions with the staff
+    token 403; owner and admin 200.
+  - **Part A.2 PASS:** app vs database, per branch (1/2/3): students
+    90/213/139, active-flag memberships 49/98/65, valid memberships 0/23/28
+    (temporary 0/7/11, permanent 0/16/17), desks 58/71/49, free 21/8/4,
+    lockers 6/35/10, today's bookings 0/0/0; all-branches hall 51 valid,
+    8 with dues, ₹5,570 dues, 178 desks, 33 free: **all equal**. DB totals
+    before the writes: 442 students, 770 memberships, 3016 bookings (=
+    step 2 inventory).
+  - **Part A.3 PASS** (as staff of branch 1; every row checked in the DB):
+    `create_membership` (creates the student; ₹200 of ₹500 paid), check-in
+    3 h ago on a 2 h plan, pay-later food bill ₹14, checkout with 60 min
+    overtime (billed ₹10, paid now) and the food bill settled (paid, cash),
+    `record_payment` ₹300 (fee due now 0; **the same Idempotency-Key
+    replayed gave 200 and no second charge**), locker 19 assigned (₹197)
+    and returned (₹100 deposit refunded as a payout), enquiry (status
+    `new`). New rows: students +1, memberships +1, bookings +1,
+    overtime_sessions +1, food_bills +1, food_bill_items +1, transactions
+    +5, lockers +1, payouts +1, enquiries +1, events +9, idempotency_keys
+    +2 (ids listed in Part F).
+  - **Part A.4 PASS:** branch 1's sign-up link → `public_signup_info` and
+    `public_signup_submit` with only the anon key (as the join site) 200;
+    a resubmit kept the same Ref (`updated`); staff list showed it, Approve
+    (`claim_signup_request`) 200, Register (`create_membership` with
+    `signupId`) 200; the sign-up row is deleted by design, new student,
+    membership (₹500 paid), transaction and the `[new_signup]` staff
+    message present.
+  - **Part A.5 PASS:** 29 heavy owner calls, all-branches and all-time
+    where possible, all **200**: slowest `get_revenue` all-time
+    all-branches 5.2 s; `get_combined_seatmap` 2.0 s,
+    `list_active_memberships` all-branches 2.0 s, `list_transactions`
+    all-time (export source) 1.7 s / 446 KB; all others under 1.5 s. No
+    414, no 500, nothing near 150 s; no worker memory-limit message.
+    Runtime logged "CPU time soft limit reached" (4) and "wall clock
+    duration warning" (2) without any failed request (soft limits; one at
+    `get_combined_seatmap`). **Weak spot:** the `pss-functions` container
+    peaked at 467 MiB and idles at about 465 MiB of its **512 MiB**
+    container ceiling (91 %); see Part D.
+  - **Part A.6 PASS:** Kong log: **0 × 414** since the fix (Kong up since
+    15 Nov 16:27 UTC, 0 restarts); last 2 h: 946 × 200, no 5xx.
+
 ## Decisions
 
 See `PLAN.md`, "Decisions" (branch, folders, Supabase rules, billing,
