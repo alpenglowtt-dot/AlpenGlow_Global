@@ -7,16 +7,14 @@ here.
 
 ## Current step
 
-Testing round 2 (16 Nov): Parts A to E done; F (report, cleanup) in progress.
+Testing round 2 (16 Nov) finished: Parts A to F done (report under Done,
+16 Nov, Part F). Waiting on your answers under "Waiting on me".
 
 ## Next step
 
-Step 5: local rehearsal with Docker Desktop (stack from step 3, all 73
-migrations, the 3 functions, buckets, signed link, pg_cron/pg_net/Vault,
-`cron-selfhosted.sql` paused, Storage login as `supabase_storage_admin`,
-Realtime as `supabase_admin`, the PSS server test suites incl. the new
-`storage_links_test.ts`). Then step 6 (commit and push), then 6b
-(travel-app removal, billing dump first), then 7 (baseline).
+Your answers to the open items under "Waiting on me" (backup files,
+optional root checks, main-move proposals). Then the PSS main move per
+`../PSS-MIGRATION-PLAN.md`.
 
 ## Done
 
@@ -705,6 +703,134 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     issued before the restart still valid; fresh login 200. Schedules
     after the restart: 27 jobs, 0 active, 0 runs in the last day.
 
+- **16 Nov 2026** **Part F: final report of testing round 2.**
+
+  **Results per part**
+
+  | Part | Result |
+  |---|---|
+  | A.1 logins (owner, admin, staff), token after refresh, branch isolation | PASS |
+  | A.2 app counts = database (3 branches + all-branches) | PASS |
+  | A.3 writes end to end (student, membership, check-in/out with overtime, food bill settled, payment, locker in/out, enquiry) | PASS |
+  | A.4 join-site signup → approve → register | PASS |
+  | A.5 heaviest actions (29 calls; max 5.2 s; no 414/500/150 s/256 MB) | PASS |
+  | A.6 Kong 414 sweep | PASS (0 since the fix) |
+  | B browser, 52 page visits | run 1 FAIL (functions restarts), **fixed**; run 2 PASS except 1 × 500 (runtime race) |
+  | C.1 security-test.sh | PASS except burst: the script never reaches the limit; a parallel burst is limited but answers **503** (kit fixed) |
+  | C.2 listening ports | PASS (only `127.0.0.1:8010` added) |
+  | D load with both projects | 5 users PASS; **10 users stopped** (functions at 1 GiB, 1 restart); 20 not run |
+  | E.1 dump → scratch restore → compare | PASS (identical) |
+  | E.2 full stack restart | PASS (46 s to healthy, first call 1.7 s) |
+
+  **Found (bugs and weak spots)**
+
+  Server / kit:
+  1. **Functions container memory too small (fixed).** At 512 MiB the
+     container idled at about 91 % and restarted twice during normal page
+     loads (12 to 17 calls each), giving 502s that the browser shows as
+     CORS errors. `FUNCTIONS_MEM_LIMIT` now 1024m on the stack and in the
+     kit (`add-project-full.sh`, `.env.example`, compose default). Root
+     confirmation of the kill pending (`dmesg`, see Waiting on me).
+  2. **Runtime memory grows with concurrency, no cap (open).** 813 MiB at
+     5 busy users, over 1 GiB (restart) at 10. The runtime starts without
+     `--policy`/`--max-parallelism`, and the router sets no CPU limits.
+  3. **"Worker has already retired" 500 (open, rare).** A request handed to
+     a worker that just hit the CPU soft limit fails (1 in about 600
+     browser calls; 1 to 3 per load level). The router does not retry.
+  4. **Rate limit answers 503 on this server (kit fixed).** The old server
+     has no `limit_req_status 429`; the template now sets it per site. The
+     live file needs sudo (optional). The new server already sets it
+     server-wide.
+  5. **`security-test.sh` burst cannot trigger the limit from far away:**
+     sequential requests from the laptop stay under 20 r/s (test tool).
+  6. **Errors from Kong or the runtime carry no CORS headers**, so any 502
+     or runtime 500 looks like a CORS error in the browser (diagnosis
+     trap; check Kong's log first).
+  7. The router answers **500, not 404, for a function that does not
+     exist** (`/functions/v1/does-not-exist`).
+  8. Restart window: about **46 s** until all 6 containers are healthy.
+  9. (Not PSS) AlpenGlow's `supabase-auth` shows 2 restarts from before
+     this round.
+
+  App (reported only, not fixed):
+  10. Heavy reads run into the CPU soft limit regularly
+      (`get_combined_seatmap`; all-time all-branches `get_revenue` 5.2 s);
+      they still answer 200.
+  11. The all-branches pages still build URLs with every student id
+      (`student_id=in.(...)`); safe now only because of Kong's 64k buffer.
+  12. Owner calls without a branch give 500 instead of 400 in
+      `list_food_orders` and `list_tickets` (15 Nov).
+  13. `create_staff` accepts any `role` from an owner, including `admin`
+      (which outranks owner): read in the code (`api/domains/staff.ts`,
+      `create_staff`), not exercised.
+  14. `golden_test.ts` fails on untouched `65d8f1a` too (step 5).
+
+  **Lessons for the PSS main move (PROPOSALS ONLY; no main-kit file was
+  changed)**
+  - db health check `start_period: 120s` (`new-server/stack-template`): a
+    fresh database took over 50 s on first start.
+  - Kong `KONG_NGINX_PROXY_LARGE_CLIENT_HEADER_BUFFERS: "4 64k"`: main's
+    `api/index.ts` also builds long `student_id=in.(...)` URLs (cashbacks
+    and `overtime_sessions`, around lines 4723 and 4734); 8 KB fails with
+    414 at a few hundred students.
+  - **`FUNCTIONS_MEM_LIMIT` 1024m** instead of 512m
+    (`new-server/add-project.sh` line 79, `.env.example`, compose
+    default), and rehearse a 15-call burst plus a 10-user load before the
+    cutover. Consider a worker cap (`--policy per_worker
+    --max-parallelism <n>` on the runtime) and explicit CPU limits or one
+    retry on "worker has already retired" in `main/index.ts`; test before
+    adopting.
+  - `vps-deploy.sh` pre-check (stack, `main` router and
+    `_migrations_applied` present and non-empty before anything changes).
+  - `nginx -t` with rollback of what the run enabled, no reload on failure.
+  - Block `/functions/v1/main` and `/functions/v1/_shared` in nginx.
+  - Cloudflare Pages needs a **new build** after variable changes (the
+    `VITE_*` values are baked in); check which branch Production follows.
+  - Paste connection strings only at a `read -rs` prompt, never on the
+    command line (10 Nov incident).
+  - New: `security-test.sh --burst` should send in parallel (for example
+    50 at a time), or it proves nothing from a distant PC.
+  - New: when the browser shows CORS errors, first read Kong's log for
+    502/500 and the functions container's restart count.
+  - New: plan about 1 minute of API downtime for any full stack restart
+    (46 s to healthy) and call the API once after it (cold start 1.7 s).
+  - New: `restore-public.sh <container> <dump> <scratch-db>` works as a
+    restore drill without touching the real database.
+  - New: `deploy` cannot read `dmesg` or the nginx logs; an OOM or
+    rate-limit diagnosis needs root. Consider letting the health check
+    record container restart counts.
+  - New: capacity with both projects on 4 cores: about 35 API requests/s,
+    CPU-bound in the edge runtime; memory is not the limit (at least
+    4.3 GB free under load).
+
+  **Cleanup done**
+  - Test accounts `claude_t2_owner`, `claude_t2_admin`, `claude_t2_staff`
+    **deactivated** (and `claude_test_owner` from 15 Nov still inactive):
+    login and existing tokens 401.
+  - Test rows left in the database (made-up data, by id): staff 3
+    (`1cbed1b0…`, `5c5c8a35…`, `13affdee…`); staff_attendance 2
+    (`30ca403d…`, `0b66f8b7…`); students 2 (`dd0dc920…` "Claude Testone",
+    `3b871e5e…` "Claude Testtwo"); memberships 2 (`471f95e9…`,
+    `fa35ce80…`); bookings 1 (`af93c81c…`); overtime_sessions 1
+    (`def9f7a1…`); food_bills 1 (`80cded35…`); food_bill_items 1
+    (`3b20bb31…`); transactions 6 (`be19b42d…`, `850aad36…`, `a5d43ebb…`,
+    `b4207efa…`, `e5f02d4e…`, `b16ff3ef…`); lockers 1 (`e9747087…`,
+    inactive); payouts 1 (`150292d7…`); enquiries 1 (`998088b4…`);
+    messages 1 (`4b36edff…`); idempotency_keys 2; events 36 on 16 Nov (22
+    by the test accounts, the rest public sign-up and system rows);
+    signup_requests 0 (the test sign-up was registered).
+  - Scratch files deleted: on the server `~/pss-loadtest` (script, token
+    and key copies), the memory samplers, the scratch database, the dump
+    and its restore log; on the laptop the job's temporary folder
+    (passwords, tokens, scripts, results).
+  - Left on the server, **not deleted (your call)**:
+    `~/projects/pss/backend/.env.bak-20261116-145238` (before 1024m),
+    `functions.env.bak-20261112-1241` and
+    `functions.env.bak-20261112-124904` (before the `ALLOWED_ORIGINS` /
+    `PORTAL_URL` changes), `docker-compose.yml.bak-20261115-172708`
+    (before the Kong buffer), and `~/restore-pss-db-20261109-212510.log`
+    (step 10 restore log).
+
 ## Decisions
 
 See `PLAN.md`, "Decisions" (branch, folders, Supabase rules, billing,
@@ -735,10 +861,16 @@ tracking). In short:
 - [x] Step 10: dump of `zripsszkprhtyccukrir` on the server (10 Nov).
 - [ ] Recommended: reset the database password of the live project
       `ozatixapvxwrwbpdxuzt` (its string was exposed in the chat).
-- [ ] Step 11: write the `functions.env` lines on the server.
-- [ ] Step 14: Cloudflare Pages Preview variables, then retry the branch's
-      preview deployment.
-- [ ] Step 6b c: delete the `travel` DNS record in Cloudflare (after the
-      travel-app is removed).
-- [ ] Step 5: Docker Desktop running on this laptop (you are starting it,
-      9 Nov).
+- [x] Step 11: `functions.env` lines on the server (10 Nov).
+- [x] Step 14: Pages variables and build; Production serves the stack (12 to 15 Nov).
+- [x] Step 6b c: `travel` DNS record deleted (10 Nov).
+- [x] Step 5: Docker Desktop (local rehearsal done 9 Nov).
+- [ ] Optional (root): confirm the functions OOM kill at 13:46 and 13:49
+      UTC on 16 Nov: `sudo dmesg -T | grep -iE "oom|killed process" | tail`.
+- [ ] Optional (root): add `limit_req_status 429;` to
+      `/etc/nginx/sites-enabled/api.perfectstudyspace.in`, then
+      `sudo nginx -t` and `sudo systemctl reload nginx`.
+- [ ] Your decision: delete the four `*.bak-*` files and the old restore
+      log listed in Part F (16 Nov)?
+- [ ] Your decision: adopt the main-move proposals in Part F (main kit
+      files untouched so far).
