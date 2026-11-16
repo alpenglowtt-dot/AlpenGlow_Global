@@ -7,7 +7,7 @@ here.
 
 ## Current step
 
-Testing round 2 (16 Nov): Parts A to C done; D to F in progress.
+Testing round 2 (16 Nov): Parts A to D done; E and F in progress.
 
 ## Next step
 
@@ -647,6 +647,46 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     v4/v6, resolver on loopback 53) plus **only `127.0.0.1:8010`**
     (`pss-kong`); 5432/6543 are AlpenGlow's pooler (closed from the
     internet, C.1).
+  - **Part D.1 baseline** (14:04 UTC, after the 1024m change): 4 CPUs,
+    7941 MB, **4964 MB available**, no swap, load 1.56 / 1.79 / 2.00. PSS
+    stack about 1.18 GiB (functions 385, kong 237, realtime 194, db 164,
+    storage 149, rest 55 MiB); AlpenGlow's 10 about 1.45 GiB; no restarts
+    (AlpenGlow's `supabase-auth` shows 2 old ones).
+  - **Part D.2** on the server to `127.0.0.1:8010` (inside nginx), staff
+    test token, random mix of 10 branch-1 reads (dashboard, seat map,
+    today's bookings, active memberships, students, alerts, actionable
+    items, whoami, lockers, enquiries), no think time, sampling every
+    10 s:
+
+    | users | req/s | p50 | p95 | max | errors | functions peak | min available | max load |
+    |---|---|---|---|---|---|---|---|---|
+    | 5 (120 s) | 36.0 | 95 ms | 272 ms | 3.3 s | 3 × 500 (0.07 %) | 236 % CPU, 813 MiB | 4522 MB | 7.1 |
+    | 10 (stopped at 83 s) | 33.9 | 198 ms | 758 ms | 3.9 s | **140 × 502 + 1 × 500 (5 %)** | 275 % CPU, **991 MiB** | 4325 MB | 8.5 |
+    | 20 | not run (stop rule) | | | | | | | |
+
+    **Stopped at 10 users:** `pss-functions` reached its 1 GiB ceiling and
+    restarted once (back by itself, healthy, 368 MiB). During it: 96
+    isolates hit the CPU soft limit and were replaced, 4 × "worker has
+    already retired". Other PSS containers stayed small (db ≤ 168 MiB,
+    rest ≤ 55 MiB, kong ≤ 245 MiB); AlpenGlow's containers unchanged
+    (memory flat, CPU ≤ 43 %, no restarts).
+  - **Part D.4 "server efficiency with both projects":** memory is not
+    the limit: with both stacks running and PSS under load, at least 4.3
+    GB stayed available. **CPU is:** the edge runtime alone uses 2.4 to
+    2.8 of the 4 cores and throughput tops out at **about 35 requests/s**
+    (5 and 10 users give the same), so more users only add latency. One
+    page load sends 12 to 17 calls, so that is about 2 page loads per
+    second sustained: plenty for 3 branches and a few staff. **The weak
+    spot is the runtime's memory under concurrency:** it starts a worker
+    per concurrent request with no cap (`start --main-service` without
+    `--policy`/`--max-parallelism`; the router sets no CPU limits), and
+    workers retiring at the CPU soft limit are replaced while still
+    counted, so memory grows with concurrency: about 490 MB for one
+    15-call burst, 813 MiB for 5 busy users, over 1 GiB for 10. The
+    1024m ceiling covers normal use (page-load bursts); a cap on parallel
+    workers is the real fix (proposal, needs its own test).
+  - Load-test files and the token copy deleted from the server
+    (`~/pss-loadtest`, samplers).
 
 ## Decisions
 
