@@ -122,7 +122,7 @@ services:
     container_name: __PROJECT__-functions
     image: supabase/edge-runtime:v1.74.0
     restart: unless-stopped
-    mem_limit: ${FUNCTIONS_MEM_LIMIT:-512m}
+    mem_limit: ${FUNCTIONS_MEM_LIMIT:-1024m}
     depends_on:
       kong:
         condition: service_healthy

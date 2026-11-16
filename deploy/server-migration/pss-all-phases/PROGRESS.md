@@ -7,7 +7,7 @@ here.
 
 ## Current step
 
-Testing round 2 (16 Nov): Part A done; Parts B to F in progress.
+Testing round 2 (16 Nov): Parts A and B done; C to F in progress.
 
 ## Next step
 
@@ -598,6 +598,36 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     container ceiling (91 %); see Part D.
   - **Part A.6 PASS:** Kong log: **0 × 414** since the fix (Kong up since
     15 Nov 16:27 UTC, 0 restarts); last 2 h: 946 × 200, no 5xx.
+  - **Part B (browser), run 1 FOUND A SERVER PROBLEM:** headless Chromium
+    (the Playwright MCP's cached `playwright-core` 1.66 and the local
+    `chromium-1248`; nothing installed), script logs in on
+    `https://perfectstudyspace.pages.dev` with the test password read from
+    a file. 52 page visits: owner on 21 pages for branch 1 and again for
+    all branches (`__combined_hall__`), staff on 9 pages, a reload each,
+    the join page. **`pss-functions` restarted twice** (13:46:20 and
+    13:49:04 UTC): Kong logged 19 × 502 "upstream prematurely closed
+    connection", which the browser shows as CORS errors (Kong's error
+    answer has no CORS header). No error line before either restart.
+    Cause: memory. The container idles at about 430 to 465 MiB of its 512
+    MiB `mem_limit` (no swap on the server), and one page load sends 12 to
+    17 calls at once. A controlled 15-call burst (all 200) took it from
+    257 MB to a **491 MB peak** (cgroup `memory.peak`). A kill at the
+    ceiling leaves no log line; Docker resets the OOM flag on restart, and
+    `dmesg` needs root to confirm.
+  - **Fix (kit setting, like the Kong buffer):** `FUNCTIONS_MEM_LIMIT`
+    512m → **1024m** in the live `.env` (backup `.env.bak-<date>`, mode
+    600, only that line) and in `add-project-full.sh`,
+    `stack-template/.env.example` and the compose default. Functions
+    recreated, healthy, limit 1 GiB.
+  - **Part B run 2 PASS:** same 52 visits: **0 restarts, 0 × 502, 0 CSP
+    errors, 0 page errors**; every page rendered (no "URI too long" or
+    error text), staff sent to `/` from `/revenue` (owner-only page);
+    still logged in after a reload (owner and staff); join page shows its
+    form with no errors. One remaining failure: 1 × 500 on the
+    all-branches Reports page, body from the runtime ("user worker failed
+    to respond: request cannot be handled because the worker has already
+    retired"): a request routed to an `api` worker that had just hit the
+    CPU soft limit (Found list).
 
 ## Decisions
 
