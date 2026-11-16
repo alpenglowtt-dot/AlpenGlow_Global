@@ -7,9 +7,7 @@ here.
 
 ## Current step
 
-Step 14: steps 5 to 13 done. The branch preview has not been rebuilt with
-the new Preview variables (still the cloud API). Waiting for you to check
-the variables and the deployment in Cloudflare Pages (see chat, 10 Nov).
+Testing round 2 (16 Nov): Part A done; Parts B to F in progress.
 
 ## Next step
 
