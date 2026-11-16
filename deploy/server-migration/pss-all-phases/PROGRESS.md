@@ -7,7 +7,7 @@ here.
 
 ## Current step
 
-Testing round 2 (16 Nov): Parts A to D done; E and F in progress.
+Testing round 2 (16 Nov): Parts A to E done; F (report, cleanup) in progress.
 
 ## Next step
 
@@ -687,6 +687,23 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     workers is the real fix (proposal, needs its own test).
   - Load-test files and the token copy deleted from the server
     (`~/pss-loadtest`, samplers).
+  - **Part E.1 PASS (backup and restore):** `pg_dump --schema=public
+    --no-owner` inside `pss-db`: exit 0, 2535696 bytes, 0.7 s. New
+    database `pss_scratch_restore` on the same Postgres;
+    `~/ops/restore-public.sh pss-db <dump> pss_scratch_restore` (its 3rd
+    argument; the real database never the target): 4.5 s, only the
+    expected noise (12 × "permission denied to change default
+    privileges", 1 × "schema public already exists"). Real vs scratch:
+    **identical**: 78 tables, 7510 rows, every table count equal, RLS on
+    for all, 193 indexes, 8 functions, 3 triggers, 0 policies, same
+    anon/authenticated grants (hash). Scratch database dropped, dump and
+    its restore log deleted.
+  - **Part E.2 PASS (restart):** `docker compose restart` of the whole
+    stack: command 6 s, **all 6 containers healthy after 46 s**; first
+    API call after it (cold worker) 1.7 s, then 0.5 to 0.6 s; dashboard
+    1.1 s, all-branches hall 0.7 s, all-branches memberships 2.3 s; tokens
+    issued before the restart still valid; fresh login 200. Schedules
+    after the restart: 27 jobs, 0 active, 0 runs in the last day.
 
 ## Decisions
 
