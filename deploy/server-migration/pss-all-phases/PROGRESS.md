@@ -7,7 +7,7 @@ here.
 
 ## Current step
 
-Testing round 2 (16 Nov): Parts A and B done; C to F in progress.
+Testing round 2 (16 Nov): Parts A to C done; D to F in progress.
 
 ## Next step
 
@@ -628,6 +628,25 @@ Realtime as `supabase_admin`, the PSS server test suites incl. the new
     to respond: request cannot be handled because the worker has already
     retired"): a request routed to an `api` worker that had just hit the
     CPU soft limit (Found list).
+  - **Part C.1** `new-server/security-test.sh` from the laptop, all 78
+    public tables as `LOCKED`, `CLOSED_PORTS="5432 6543 8000 8010 8443
+    3000"`, `--burst`: **all 78 tables 404**, Studio/Auth/Storage/admin
+    paths 404, all 6 ports closed, TLS 1.0 and 1.1 refused, certificate
+    valid > 14 days. **Burst: FAIL in the script** (no 429): it sends its
+    200 requests one by one, and from the laptop that never passes 20 r/s.
+    The same 200 sent 50 at a time: **95 refused, but with 503, not 429**;
+    the other 105 got 500 (the router answers 500 for a function that
+    does not exist). Cause: nginx's default `limit_req_status` is 503; the
+    new server sets `limit_req_status 429;` server-wide in
+    `01-base-setup.sh`, the old server never had that. Kit fix:
+    `limit_req_status 429;` in the `server` block of
+    `nginx/project-site-full.template` (valid there, no clash with an
+    http-level line). The live site file is root-owned: applying it there
+    is a sudo step for you (optional; the old server is temporary).
+  - **Part C.2 PASS:** listening TCP = baseline (22, 80, 443, 5432, 6543 on
+    v4/v6, resolver on loopback 53) plus **only `127.0.0.1:8010`**
+    (`pss-kong`); 5432/6543 are AlpenGlow's pooler (closed from the
+    internet, C.1).
 
 ## Decisions
 

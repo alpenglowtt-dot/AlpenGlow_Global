@@ -32,6 +32,9 @@ server {
     ssl_dhparam         /etc/letsencrypt/ssl-dhparams.pem;
 
     client_max_body_size 5m;
+    # Refused requests answer 429, not nginx's default 503 (the new server sets
+    # this server-wide in 01-base-setup.sh; the old server never had it).
+    limit_req_status 429;
     add_header Strict-Transport-Security "max-age=31536000" always;
     add_header X-Content-Type-Options "nosniff" always;
 
