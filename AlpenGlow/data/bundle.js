@@ -256,8 +256,9 @@ window.ALPEN_DATA = {
       "description": "Towering cliffs and crystal waters carve nature's masterpiece. Cruise through breathtaking fjords beneath snow-capped peaks. Discover charming Nordic villages steeped in timeless traditions. An unforgettable journey into the heart of Scandinavia's wilderness.",
       "image_url": "norway.jpg",
       "link": "packages/norway.html",
-      "sort_order": 1,
-      "active": true
+      "sort_order": 8,
+      "active": true,
+      "seo_group": ""
     },
     {
       "id": "2",
@@ -267,8 +268,9 @@ window.ALPEN_DATA = {
       "description": "Whitewashed villages cascading down volcanic cliffs above the Aegean Sea. World-famous sunsets paint the horizon in shades of gold and crimson. Luxury, romance, and timeless Greek charm at every turn.",
       "image_url": "santorini.jpg",
       "link": "packages/santorini.html",
-      "sort_order": 2,
-      "active": true
+      "sort_order": 9,
+      "active": true,
+      "seo_group": ""
     },
     {
       "id": "3",
@@ -278,8 +280,9 @@ window.ALPEN_DATA = {
       "description": "Rome's ruins at golden hour, a Tuscan hill town where the wine list is the neighbour's vineyard, and an Amalfi coast road that makes you grip the seat and not regret it. Ten days built around what Italy actually tastes and feels like.",
       "image_url": "italy.jpg",
       "link": "packages/italy.html",
-      "sort_order": 3,
-      "active": true
+      "sort_order": 4,
+      "active": true,
+      "seo_group": ""
     },
     {
       "id": "4",
@@ -301,7 +304,8 @@ window.ALPEN_DATA = {
       "image_url": "japan.jpg",
       "link": "packages/japan.html",
       "sort_order": 5,
-      "active": true
+      "active": true,
+      "seo_group": ""
     },
     {
       "id": "6",
@@ -311,8 +315,9 @@ window.ALPEN_DATA = {
       "description": "Rice terraces at sunrise before the tour buses arrive, a family temple ceremony you're invited into rather than photographing from outside, and a coastline built for doing absolutely nothing well.",
       "image_url": "baligods.jpg",
       "link": "packages/bali.html",
-      "sort_order": 6,
-      "active": true
+      "sort_order": 1,
+      "active": true,
+      "seo_group": ""
     },
     {
       "id": "1782537374243",
@@ -334,7 +339,7 @@ window.ALPEN_DATA = {
       "duration": "6 Days / 5 Nights",
       "description": "Bhutan caps the number of tourists it lets in every year, and it shows — no billboards, no traffic jams, and a monastery clinging to a cliff face that looks unreal until you're standing in front of it. This is the only country that measures Gross National Happiness instead of GDP, and the pace of this trip reflects that philosophy.",
       "image_url": "https://images.unsplash.com/photo-1578556881786-851d4b79cb73?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "sort_order": 0,
+      "sort_order": 2,
       "seo_group": ""
     },
     {
@@ -368,7 +373,7 @@ window.ALPEN_DATA = {
       "duration": "9 Days / 8 Nights",
       "description": "Nepal compresses the Himalaya's scale into a trip that doesn't require technical trekking experience — Kathmandu's temple-dense old town, Pokhara's lakeside calm with the Annapurna range as backdrop, and an early-morning mountain flight that gets you eye-level with Everest without the multi-week trek.",
       "image_url": "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1600&q=80",
-      "sort_order": 0,
+      "sort_order": 7,
       "seo_group": ""
     },
     {
@@ -413,7 +418,7 @@ window.ALPEN_DATA = {
       "duration": "8 Days / 7 Nights",
       "description": "This trip traces Sri Lanka along two threads at once: the Ramayana trail linking ancient temples across the island's west, north, and east, and the cultural triangle's UNESCO landmarks at Sigiriya, Dambulla, and Kandy. It runs coast to coast and up into hill country, closing in Colombo's colonial-era streets.\n\nBest for travelers who want mythology and pilgrimage sites alongside Sri Lanka's most famous ruins, temples, and tea country.",
       "image_url": "https://images.unsplash.com/photo-1546708973-b339540b5162?w=1600&q=80",
-      "sort_order": 0,
+      "sort_order": 12,
       "seo_group": ""
     },
     {
@@ -425,7 +430,7 @@ window.ALPEN_DATA = {
       "duration": "8 Days / 7 Nights",
       "description": "South Korea moves between two speeds: the packed, neon rhythm of Seoul and the slower pace of the southeast, where Joseon-era villages, royal tombs, and coastal fish markets set the tone. This trip runs Seoul to the DMZ, then south through Andong and Gyeongju's temple towns, ending on the harbor in Busan, tied together by the KTX bullet train so a five-hour distance feels like a short hop.\n\nBest for travelers who want the capital's scale and street life alongside Korea's older, quieter historical core.",
       "image_url": "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1600&q=80",
-      "sort_order": 0,
+      "sort_order": 11,
       "seo_group": ""
     },
     {
@@ -481,7 +486,7 @@ window.ALPEN_DATA = {
       "image_url": "https://images.unsplash.com/photo-1764276266750-4d6316e972e0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
       "link": "packages/iceland.html",
       "seo_group": "",
-      "sort_order": 1,
+      "sort_order": 3,
       "active": true,
       "id": "1793895486099"
     },
@@ -493,7 +498,7 @@ window.ALPEN_DATA = {
       "image_url": "https://images.unsplash.com/photo-1526749837599-b4eba9fd855e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
       "link": "packages/southafrica.html",
       "seo_group": "",
-      "sort_order": 0,
+      "sort_order": 10,
       "active": true,
       "id": "1794488541237"
     },
@@ -505,7 +510,7 @@ window.ALPEN_DATA = {
       "image_url": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
       "link": "packages/kenyatanz.html",
       "seo_group": "",
-      "sort_order": 0,
+      "sort_order": 6,
       "active": true,
       "id": "1794489812470"
     }
