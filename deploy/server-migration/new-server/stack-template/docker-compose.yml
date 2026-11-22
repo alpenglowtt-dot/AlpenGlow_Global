@@ -15,7 +15,7 @@ services:
     container_name: __PROJECT__-db
     image: supabase/postgres:17.6.1.136
     restart: unless-stopped
-    mem_limit: ${DB_MEM_LIMIT:-1536m}
+    mem_limit: ${DB_MEM_LIMIT:-1280m}
     volumes:
       # Must be superuser to alter reserved roles
       - ./volumes/db/roles.sql:/docker-entrypoint-initdb.d/init-scripts/99-roles.sql:Z
@@ -115,6 +115,11 @@ services:
       # Functions call REST through Kong with every id of an all-branches page in the URL;
       # Kong's default 4 x 8k header buffers answered 414 "URI too long".
       KONG_NGINX_PROXY_LARGE_CLIENT_HEADER_BUFFERS: "4 64k"
+      # Kong keeps a DNS answer for its TTL. After "docker compose restart rest functions"
+      # the two containers can swap addresses, and Kong then sent REST traffic to the
+      # functions container (502 on every REST call, so every function failed) until the
+      # answer expired. Answers are now trusted for at most 10 s.
+      KONG_DNS_VALID_TTL: "10"
       # Untuned Kong starts one worker per CPU and outgrows its memory cap.
       KONG_NGINX_WORKER_PROCESSES: "2"
       KONG_PROXY_ACCESS_LOG: /dev/stdout combined
@@ -129,8 +134,9 @@ services:
     # 512m crashed under normal page loads (one page sends 12 to 17 calls at once, each
     # call a worker of its own); the browser showed that as CORS errors.
     # Up to 8 workers of 512 MB each could in theory need 4 GB; real workers use a fraction
-    # of their limit, and the load test decides whether this ceiling holds.
-    mem_limit: ${FUNCTIONS_MEM_LIMIT:-2560m}
+    # of their limit, and the load test decides whether this ceiling holds. Sized so both
+    # stacks' ceilings together fit in the server's RAM (decided 22 Nov).
+    mem_limit: ${FUNCTIONS_MEM_LIMIT:-2048m}
     # CPU ceiling (3 of the 4 cores), so a burst on this project cannot take every core
     # from the other stacks on the server (AlpenGlow's are not capped).
     cpus: ${FUNCTIONS_CPUS:-3}
