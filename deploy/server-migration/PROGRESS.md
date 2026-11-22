@@ -7,27 +7,28 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov): step 2b done and proven locally; two diffs wait for your OK.**
+**PSS Sitting 3 (22 Nov): step 2b done, proven locally, all committed and pushed. Stopped here on your order; next: Phase 1.**
 
 HANDOVER (for a fresh session):
 - Committed and pushed (branches only, never main): PSS `fix/pre-migration` at
   `d560eb0` (all of 2b except the two items below); kit `claude/server-migration-kit`
   at `64d0085` (router + jose, nginx `_*` block, security-test, check.mjs) plus PROGRESS.
-- UNCOMMITTED, waiting for your OK on the diff (shown in the chat 22 Nov):
-  1. PSS, worktree `C:\Users\sriva\Desktop\PSS\pss-main-fixes` (branch fix/pre-migration):
-     `supabase/migrations/054_money_transactions.sql` (new), `supabase/functions/api/index.ts`
-     (+64 lines), `tests/scale/money-tx.mjs` (new), `tests/scale/run.mjs`, `tests/scale/README.md`.
-     See it with `git -C <worktree> diff; git -C <worktree> status`.
-  2. Kit, this worktree: `new-server/backup-nightly.sh`, `healthcheck.sh`, `crontab.deploy`,
-     `01-base-setup.sh`, `ops.env.example`, `restore-test.sh` (new), `MIGRATION-RUNBOOK.md`,
-     `README.md`, `UPDATE-PROCEDURE.md` (J, see Done 22 Nov).
-  On OK: commit each on its branch and push (PSS: branch only).
+- Your OK 22 Nov on both diffs; committed and pushed: PSS `fix/pre-migration` at
+  `8fd2fb3` (054_money_transactions.sql, api moneyTx, tests/scale/money-tx.mjs, run.mjs,
+  README); kit at `c41876d` (J: backup-nightly.sh, healthcheck.sh, crontab.deploy,
+  01-base-setup.sh, ops.env.example, restore-test.sh, runbook, README, UPDATE-PROCEDURE).
+  Nothing uncommitted for the migration in either worktree.
 - Re-run the proofs any time (Docker, dummy data): in the PSS worktree
   `npm run test:scale -- --orig d560eb0` (about 4 min; all steps incl. 4f must PASS).
   Never the large seed on the laptop (your decision): it runs in Phase 2 on the server.
   The local stack (compose project psslocal, `.scale-test/backend`) is stopped, not deleted.
-- The live server is unchanged by J: it still has backup 22:30, reboot 23:30 and no
-  restore test. Putting J on it is a server change (your OK; commands written out for you).
+- J is NOT installed on the live server (your decision 22 Nov): it still has backup 22:30,
+  reboot 23:30 and no restore test. Install J in Phase 2 together with adding the PSS stack,
+  with your OK, and without disturbing AlpenGlow's backups or health check: before the
+  change take a backup and note `healthcheck.sh --status`; after it, run one backup by hand
+  (must end "ok" for alpenglow-global AND pss), `healthcheck.sh --status` clean, and
+  `crontab -l` showing the new schedule; keep the old crontab and apt reboot file as dated
+  copies to roll back.
 - AlpenGlow: 24-hour read-only memory sampling running on the server since 09:58 CET
   (`~/alpenglow-mem-24h.sh`, log `~/alpenglow-mem-24h.log`, ends by itself about 09:58 CET
   23 Nov; stop early: `pkill -f alpenglow-mem-24h`). Afterwards: peaks per container, the
@@ -63,8 +64,7 @@ security fixes 1, 2, 3: complete.**
 
 ## Next step
 
-PSS Sitting 3, in this order: (1) your OK on the two diffs above, then commit and push
-them. (2) Phase 1 (read-only, PSS-MIGRATION-PLAN.md): you run `npx supabase login` on the
+PSS Sitting 3, in this order: (1) done: both diffs committed (8fd2fb3, c41876d). (2) Phase 1 (read-only, PSS-MIGRATION-PLAN.md): you run `npx supabase login` on the
 laptop (access token: secret NAMES and a download of the deployed `api` to diff); you
 type the session-pooler string yourself at a `read -rs` prompt on the server (never in the
 chat). Read: counts incl. students per branch, sessions and transactions per month;
@@ -74,7 +74,7 @@ location of 84.247.184.195; where `api.perfectstudyspace.in` points (STOP if
 169.58.43.191). Check AlpenGlow is healthy before and after. (3) Phase 2 on the new
 server (each step with your OK): PSS rehearsal stack with DUMMY data first: 20,000-student
 seed, all checks, load at 10, 20 and 50 users while watching AlpenGlow's response times;
-then wipe it, then restore the live copy (`restore-public.sh` only; migrations 001-051
+then wipe it, then restore the live copy; install J then too (see the J rule above) (`restore-public.sh` only; migrations 001-051
 recorded as applied BEFORE the first deploy). GO needs: 0 functions restarts, 0 Kong
 errors, all checks PASS, at least 1 GB memory free, AlpenGlow response times unchanged.
 Cloud order before the fixed `api` is deployed there: 052, then 053, then 054, by you in
@@ -94,6 +94,9 @@ move.
 
 ## Done
 
+
+- **22 Nov 2026, E-transactions and J committed (your OK):** PSS `fix/pre-migration`
+  `8fd2fb3` pushed (branch only); kit `c41876d` pushed. J stays kit-only until Phase 2.
 - **22 Nov 2026, J (ops in the kit) proven locally (uncommitted, diff to show you):**
   `backup-nightly.sh` runs from cron every 6 h (03:30, 09:30, 15:30, 21:30 server time);
   without an off-server copy it stops while the last good backup is under 20 h old (one
@@ -1072,9 +1075,9 @@ PSS Sitting 3 (22 Nov):
       migration is 053.
 - [x] Copy your `052_owner_last_login.sql` and its 10 `api` lines UNCHANGED into
       `fix/pre-migration` (your OK 22 Nov; committed `d560eb0`).
-- [ ] OK on the E-transactions diff (054 + api + money-tx.mjs) and on the J kit diff
-      (both shown 22 Nov); then I commit and push both (PSS: branch only).
-- [ ] Later, your OK: put J on the live server (crontab, reboot time 22:30, restore-test.sh).
+- [x] OK on the E-transactions diff and the J kit diff (22 Nov; `8fd2fb3`, `c41876d`).
+- [ ] Phase 2, your OK: put J on the live server together with the PSS stack (crontab,
+      reboot time 22:30, restore-test.sh), without disturbing AlpenGlow's backups or health check.
 - [ ] Sitting 5 backlog (after the move, one at a time, each with your OK): the big
       membership actions (new/renew/transfer/cancel membership and the other multi-step
       writes) each in one SQL transaction; AlpenGlow's live router `jsr:@panva/jose@6`
