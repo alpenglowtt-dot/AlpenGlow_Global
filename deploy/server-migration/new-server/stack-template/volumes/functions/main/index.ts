@@ -149,26 +149,54 @@ Deno.serve(async (req: Request) => {
   // 150 MB / 60 s, below Supabase cloud's 256 MB / 150 s.
   const memoryLimitMb = Number(Deno.env.get('EDGE_WORKER_MEMORY_MB')) || 150
   const workerTimeoutMs = Number(Deno.env.get('EDGE_WORKER_TIMEOUT_MS')) || 1 * 60 * 1000
+  // CPU time a worker may use, added up over every request it serves (the per_worker
+  // policy reuses workers). Soft: the worker finishes what it has and retires, the next
+  // request gets a fresh one. Hard: requests still running on it are cancelled (500).
+  // Left unset, the runtime's small defaults cancelled heavy reports mid-request.
+  const cpuTimeSoftLimitMs = Number(Deno.env.get('EDGE_WORKER_CPU_SOFT_MS')) || 15000
+  const cpuTimeHardLimitMs = Number(Deno.env.get('EDGE_WORKER_CPU_HARD_MS')) || 45000
   const noModuleCache = false
   const importMapPath = null
   const envVarsObj = Deno.env.toObject()
   const envVars = Object.keys(envVarsObj).map((k) => [k, envVarsObj[k]])
-
-  try {
-    const worker = await EdgeRuntime.userWorkers.create({
+  const createWorker = (forceCreate: boolean) =>
+    EdgeRuntime.userWorkers.create({
       servicePath,
       memoryLimitMb,
       workerTimeoutMs,
+      cpuTimeSoftLimitMs,
+      cpuTimeHardLimitMs,
       noModuleCache,
       importMapPath,
       envVars,
+      forceCreate,
     })
+
+  // Kept for the one retry below; a request body can be read only once.
+  const spare = req.clone()
+  try {
+    const worker = await createWorker(false)
     return await worker.fetch(req)
   } catch (e) {
-    const error = { msg: e.toString() }
-    return new Response(JSON.stringify(error), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    // One retry, on a new worker, ONLY when the request never reached a worker (the one
+    // picked had just retired): nothing ran, so nothing can happen twice. "user worker
+    // failed to respond" means it did reach one and may have written data: no retry.
+    if (/failed to send request to user worker|worker has already retired/i.test(String(e))) {
+      console.error(`request never reached a worker, retrying once on a new one: ${e}`)
+      try {
+        const worker = await createWorker(true)
+        return await worker.fetch(spare)
+      } catch (e2) {
+        return errorResponse(e2)
+      }
+    }
+    return errorResponse(e)
   }
 })
+
+function errorResponse(e: unknown) {
+  return new Response(JSON.stringify({ msg: String(e) }), {
+    status: 500,
+    headers: { 'Content-Type': 'application/json' },
+  })
+}

@@ -9,7 +9,7 @@
 // create_staff role rules, branch isolation, and the longest internal REST URL each
 // version sent (read from Kong's access log; Kong and nginx refuse a URL over 8 KB
 // by default). It never prints row contents.
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 
 const BASE = "http://127.0.0.1:8010/functions/v1";
 const DB = "psslocal-db";
@@ -114,6 +114,54 @@ const CHECKS = [
 ];
 
 const mode = process.argv[2] ?? "";
+const startedAt = new Date().toISOString();
+const restartsBefore = Number(execFileSync("docker", ["inspect", "-f", "{{.RestartCount}}", "psslocal-functions"], { encoding: "utf8" }).trim());
+
+// ── --alerts: batched expiry alerts give the same end state as the old loop ──
+// Needs function "apiprev" (the fixed code before batching). Sets up every case the
+// old createAlert loop handled (no alert, one, two or more; a student with two
+// expiring memberships), snapshots alerts, runs apiprev, fingerprints the table,
+// restores, runs api, fingerprints again, then puts everything back.
+if (mode === "--alerts") {
+  const WEEK = `end_date BETWEEN ${T} AND ${T} + 7`;
+  const pick = (off, n) => `(SELECT m.student_id FROM memberships m JOIN students s ON s.id = m.student_id
+    WHERE m.is_active AND m.${WEEK} ORDER BY s.s_no OFFSET ${off} LIMIT ${n})`;
+  sql(`DROP TABLE IF EXISTS _t_extra_mem; CREATE TABLE _t_extra_mem (id uuid);
+    DELETE FROM alerts WHERE alert_type = 'expiry' AND status = 'pending' AND student_id IN ${pick(0, 20)};
+    INSERT INTO alerts (student_id, branch_id, alert_type, due_date, message, status)
+      SELECT student_id, branch_id, 'expiry', ${T}, 'second alert', 'pending' FROM memberships
+      WHERE is_active AND student_id IN ${pick(20, 20)};
+    WITH x AS (INSERT INTO memberships (student_id, branch_id, category, seat_type, hours_per_day, start_date, end_date,
+                 due_date, months_paid, monthly_fee, total_paid, fee_due, is_active, payment_mode)
+      SELECT m.student_id, (SELECT id FROM branches WHERE id <> m.branch_id ORDER BY name LIMIT 1), 'temporary', 'floating', 6,
+             ${T} - 20, ${T} + 6, ${T} + 10, 1, 1000, 1000, 0, true, 'cash'
+      FROM memberships m WHERE m.is_active AND m.student_id IN (${pick(40, 10)} UNION ${pick(0, 5)})
+      RETURNING id) INSERT INTO _t_extra_mem SELECT id FROM x;
+    DROP TABLE IF EXISTS _t_snap; CREATE TABLE _t_snap AS SELECT * FROM alerts;`);
+  const fingerprint = () => sql(`SELECT count(*) || ' rows, md5 ' || md5(coalesce(string_agg(concat_ws('|', student_id, branch_id, alert_type,
+      status, due_date, message), E'\\n' ORDER BY student_id, alert_type, status, due_date, message, branch_id), '')) FROM alerts`);
+  const restore = () => sql(`DELETE FROM alerts; INSERT INTO alerts SELECT * FROM _t_snap;`);
+  const before = fingerprint();
+  const runs = {};
+  for (const fn of ["apiprev", "api"]) {
+    restore();
+    const token = await login(fn, "owner", "local-owner-pass");
+    const r = await call(fn, "list_active_memberships", { allBranches: true }, token);
+    runs[fn] = { status: r.status, ms: r.ms, members: len(r.body.members), state: fingerprint() };
+  }
+  const cases = sql(`SELECT (SELECT count(*) FROM ${pick(0, 20)} z) || ' with no alert, ' || (SELECT count(*) FROM ${pick(20, 20)} z)
+    || ' with two, ' || (SELECT count(*) FROM _t_extra_mem) || ' second expiring memberships'`);
+  restore();
+  sql(`DELETE FROM memberships WHERE id IN (SELECT id FROM _t_extra_mem); DROP TABLE _t_extra_mem; DROP TABLE _t_snap;`);
+  console.log(`\n-- expiry alerts after list_active_memberships (cases set up: ${cases})`);
+  console.log(`  before            ${before}`);
+  for (const fn of ["apiprev", "api"]) console.log(`  ${fn.padEnd(8)} HTTP ${runs[fn].status}, ${runs[fn].members} members, ${String(runs[fn].ms).padStart(5)} ms   ${runs[fn].state}`);
+  const same = runs.api.state === runs.apiprev.state && runs.api.status === 200 && runs.apiprev.status === 200;
+  const changed = runs.api.state !== before;
+  console.log(`  ${same && changed ? "PASS" : "FAIL"}: end state ${same ? "identical" : "DIFFERENT"}${changed ? "" : " (and nothing changed: the test did not exercise the code)"}; alerts restored afterwards`);
+  process.exit(same && changed ? 0 : 1);
+}
+
 const fns = mode === "--orig-only" ? ["apiorig"] : mode === "--fixed-only" ? ["api"] : ["api", "apiorig"];
 const tokens = {};
 for (const fn of fns) {
@@ -201,6 +249,19 @@ for (const fn of fns) {
   }
   console.log(`  ${fn.padEnd(8)} ${n} REST calls, longest URL ${(max / 1024).toFixed(1)} KB, ${over8k} over 8 KB, ${s414} answered 414`);
 }
+
+// ── the runtime itself: supervisor cancels and container restarts during this run ──
+// docker logs writes the container's stderr to its own stderr: keep both.
+const lg = spawnSync("docker", ["logs", "--since", startedAt, "psslocal-functions"], { encoding: "utf8", maxBuffer: 1 << 28 });
+const fnLog = (lg.stdout ?? "") + (lg.stderr ?? "");
+const countOf = (re) => (fnLog.match(re) ?? []).length;
+const cancels = countOf(/cancelled by supervisor/g);
+const hard = countOf(/CPU time hard limit reached/g);
+const soft = countOf(/CPU time soft limit reached/g);
+const retries = countOf(/request never reached a worker, retrying once/g);
+const restarts = Number(execFileSync("docker", ["inspect", "-f", "{{.RestartCount}}", "psslocal-functions"], { encoding: "utf8" }).trim()) - restartsBefore;
+console.log(`\n-- edge runtime during this run: ${cancels} supervisor cancels, ${hard} CPU hard-limit hits, ${soft} soft-limit retirements, ${retries} retries, ${restarts} functions restarts`);
+if (cancels > 0 || hard > 0 || restarts > 0) { fails++; console.log("  FAIL: must be 0 cancels, 0 hard-limit hits, 0 restarts"); }
 
 console.log(`\nResult: ${fails === 0 ? "all checks PASS" : `${fails} FAIL`}`);
 process.exit(fails === 0 ? 0 : 1);

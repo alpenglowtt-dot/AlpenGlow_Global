@@ -33,7 +33,8 @@ server {
     location ~ ^/functions/v1/(main|_shared)(/|$) { return 404; }
 
     location /functions/v1/ {
-        limit_req zone=__ZONE__ burst=60 nodelay;
+        # burst: NGINX_BURST in the project's .env (rate: NGINX_RATE, in conf.d/10-<name>.conf)
+        limit_req zone=__ZONE__ burst=__BURST__ nodelay;
         include snippets/proxy-to-stack.conf;
         proxy_pass http://127.0.0.1:__PORT__;
     }

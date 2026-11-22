@@ -15,7 +15,7 @@ services:
     container_name: __PROJECT__-db
     image: supabase/postgres:17.6.1.136
     restart: unless-stopped
-    mem_limit: ${DB_MEM_LIMIT:-768m}
+    mem_limit: ${DB_MEM_LIMIT:-1536m}
     volumes:
       # Must be superuser to alter reserved roles
       - ./volumes/db/roles.sql:/docker-entrypoint-initdb.d/init-scripts/99-roles.sql:Z
@@ -41,15 +41,25 @@ services:
       POSTGRES_DB: postgres
       JWT_SECRET: ${JWT_SECRET}
       JWT_EXP: ${JWT_EXPIRY:-3600}
+    # The image's postgresql.conf sets shared_buffers and effective_cache_size to 128MB;
+    # a -c setting on the command line outranks every config file, so these two win.
     command:
-      ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf", "-c", "log_min_messages=fatal"]
+      - postgres
+      - -c
+      - config_file=/etc/postgresql/postgresql.conf
+      - -c
+      - log_min_messages=fatal
+      - -c
+      - shared_buffers=${DB_SHARED_BUFFERS:-384MB}
+      - -c
+      - effective_cache_size=${DB_EFFECTIVE_CACHE_SIZE:-1GB}
     # No ports: the database is reachable only on this stack's own network.
 
   rest:
     container_name: __PROJECT__-rest
     image: postgrest/postgrest:v14.12
     restart: unless-stopped
-    mem_limit: ${REST_MEM_LIMIT:-384m}
+    mem_limit: ${REST_MEM_LIMIT:-512m}
     depends_on:
       db:
         condition: service_healthy
@@ -62,6 +72,8 @@ services:
       PGRST_DB_URI: postgres://authenticator:${POSTGRES_PASSWORD}@db:5432/postgres
       PGRST_DB_SCHEMAS: public
       PGRST_DB_MAX_ROWS: ${PGRST_DB_MAX_ROWS:-1000}
+      # Database connections REST keeps open (its own default is 10).
+      PGRST_DB_POOL: ${PGRST_DB_POOL:-20}
       PGRST_DB_EXTRA_SEARCH_PATH: public,extensions
       PGRST_DB_ANON_ROLE: anon
       PGRST_ADMIN_SERVER_PORT: 3001
@@ -76,7 +88,7 @@ services:
     container_name: __PROJECT__-kong
     image: kong/kong:3.9.1
     restart: unless-stopped
-    mem_limit: ${KONG_MEM_LIMIT:-512m}
+    mem_limit: ${KONG_MEM_LIMIT:-768m}
     depends_on:
       rest:
         condition: service_healthy
@@ -116,10 +128,12 @@ services:
     restart: unless-stopped
     # 512m crashed under normal page loads (one page sends 12 to 17 calls at once, each
     # call a worker of its own); the browser showed that as CORS errors.
-    mem_limit: ${FUNCTIONS_MEM_LIMIT:-1024m}
-    # CPU ceiling, so a burst on this project cannot take every core from the other
-    # stacks on the server (AlpenGlow's are not capped).
-    cpus: ${FUNCTIONS_CPUS:-2}
+    # Up to 8 workers of 512 MB each could in theory need 4 GB; real workers use a fraction
+    # of their limit, and the load test decides whether this ceiling holds.
+    mem_limit: ${FUNCTIONS_MEM_LIMIT:-2560m}
+    # CPU ceiling (3 of the 4 cores), so a burst on this project cannot take every core
+    # from the other stacks on the server (AlpenGlow's are not capped).
+    cpus: ${FUNCTIONS_CPUS:-3}
     depends_on:
       kong:
         condition: service_healthy
@@ -146,10 +160,13 @@ services:
       SUPABASE_DB_URL: postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/postgres
       # Functions do their own auth; the gateway check stays off.
       VERIFY_JWT: "false"
-      # Per-request worker limits, read by volumes/functions/main. Supabase
-      # cloud allows 256 MB and 150 s; the self-hosted default is 150 MB / 60 s.
-      EDGE_WORKER_MEMORY_MB: ${EDGE_WORKER_MEMORY_MB:-256}
+      # Per-worker limits, read by volumes/functions/main. Supabase cloud allows
+      # 256 MB and 150 s; the self-hosted default is 150 MB / 60 s.
+      EDGE_WORKER_MEMORY_MB: ${EDGE_WORKER_MEMORY_MB:-512}
       EDGE_WORKER_TIMEOUT_MS: ${EDGE_WORKER_TIMEOUT_MS:-150000}
+      # CPU time per worker, summed over the requests it serves (see main/index.ts).
+      EDGE_WORKER_CPU_SOFT_MS: ${EDGE_WORKER_CPU_SOFT_MS:-15000}
+      EDGE_WORKER_CPU_HARD_MS: ${EDGE_WORKER_CPU_HARD_MS:-45000}
     # Worker pool: reuse workers (per_worker) and cap how many exist at once. Uncapped, a
     # new worker started for every parallel request: memory grew with busy users, every
     # burst paid cold starts, and a few calls got "worker has already retired" (500).
@@ -161,7 +178,7 @@ services:
       - --policy
       - per_worker
       - --max-parallelism
-      - "${EDGE_MAX_PARALLELISM:-4}"
+      - "${EDGE_MAX_PARALLELISM:-8}"
       - --request-wait-timeout
       - "${EDGE_REQUEST_WAIT_TIMEOUT_MS:-30000}"
 

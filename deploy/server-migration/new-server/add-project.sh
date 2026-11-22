@@ -80,15 +80,22 @@ SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY
 JWT_EXPIRY=3600
 KONG_HTTP_PORT=$PORT
 SUPABASE_PUBLIC_URL=https://$DOMAIN
-DB_MEM_LIMIT=768m
-REST_MEM_LIMIT=384m
-KONG_MEM_LIMIT=512m
-FUNCTIONS_MEM_LIMIT=1024m
-FUNCTIONS_CPUS=2
-EDGE_WORKER_MEMORY_MB=256
+DB_MEM_LIMIT=1536m
+DB_SHARED_BUFFERS=384MB
+DB_EFFECTIVE_CACHE_SIZE=1GB
+REST_MEM_LIMIT=512m
+PGRST_DB_POOL=20
+KONG_MEM_LIMIT=768m
+FUNCTIONS_MEM_LIMIT=2560m
+FUNCTIONS_CPUS=3
+EDGE_WORKER_MEMORY_MB=512
 EDGE_WORKER_TIMEOUT_MS=150000
-EDGE_MAX_PARALLELISM=4
+EDGE_WORKER_CPU_SOFT_MS=15000
+EDGE_WORKER_CPU_HARD_MS=45000
+EDGE_MAX_PARALLELISM=8
 EDGE_REQUEST_WAIT_TIMEOUT_MS=30000
+NGINX_RATE=40r/s
+NGINX_BURST=120
 EOF
   cat > "$DIR/functions.env" <<'EOF'
 # This project's own edge-function secrets, one NAME=value per line.
@@ -151,17 +158,24 @@ restore_nginx_files() {
     if [ -e "$NGINX_SAVED/$i" ] || [ -L "$NGINX_SAVED/$i" ]; then cp -P "$NGINX_SAVED/$i" "${NGINX_FILES[$i]}"; fi
   done
 }
+# Rate and burst per client IP come from the project's .env (NGINX_RATE, NGINX_BURST),
+# so changing them there and re-running this script is enough.
+envget() { grep -E "^$1=" "$DIR/.env" 2>/dev/null | tail -1 | cut -d= -f2- | tr -d '[:space:]'; }
+NGINX_RATE="$(envget NGINX_RATE)"; NGINX_RATE="${NGINX_RATE:-40r/s}"
+NGINX_BURST="$(envget NGINX_BURST)"; NGINX_BURST="${NGINX_BURST:-120}"
+[[ "$NGINX_RATE" =~ ^[0-9]+r/[sm]$ ]] || { echo "NGINX_RATE in $DIR/.env looks wrong: $NGINX_RATE (e.g. 40r/s)"; exit 1; }
+[[ "$NGINX_BURST" =~ ^[0-9]+$ ]] || { echo "NGINX_BURST in $DIR/.env looks wrong: $NGINX_BURST (e.g. 120)"; exit 1; }
 cat > "/etc/nginx/conf.d/10-$NAME.conf" <<EOF
 # Rate limit zone for $NAME only, so its traffic never uses up another
-# project's allowance. Written by add-project.sh.
-limit_req_zone \$binary_remote_addr zone=$ZONE:10m rate=20r/s;
+# project's allowance. Written by add-project.sh from NGINX_RATE in its .env.
+limit_req_zone \$binary_remote_addr zone=$ZONE:10m rate=$NGINX_RATE;
 EOF
 if [ -f "/etc/letsencrypt/live/$DOMAIN/fullchain.pem" ]; then
   for f in /etc/letsencrypt/options-ssl-nginx.conf /etc/letsencrypt/ssl-dhparams.pem; do
     # Both come back with the AlpenGlow certificates from the old server.
     [ -f "$f" ] || { echo "$f is missing; restore /etc/letsencrypt first (runbook Phase 2)."; restore_nginx_files; exit 1; }
   done
-  sed -e "s/__DOMAIN__/$DOMAIN/g" -e "s/__PORT__/$PORT/g" -e "s/__ZONE__/$ZONE/g" -e "s/__PROJECT__/$NAME/g" \
+  sed -e "s/__DOMAIN__/$DOMAIN/g" -e "s/__PORT__/$PORT/g" -e "s/__ZONE__/$ZONE/g" -e "s/__PROJECT__/$NAME/g" -e "s/__BURST__/$NGINX_BURST/g" \
     "$KIT/nginx/project-site.template" > "$SITE"
   tls=1
 else
