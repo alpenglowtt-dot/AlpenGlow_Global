@@ -28,6 +28,9 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+      # A fresh database (first start, or a restore into an empty data folder) took more
+      # than 50 s to answer; failed checks inside this window do not count.
+      start_period: 120s
     environment:
       POSTGRES_HOST: /var/run/postgresql
       PGPORT: 5432
@@ -97,6 +100,9 @@ services:
       KONG_PLUGINS: request-transformer,cors,key-auth,acl
       KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
       KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
+      # Functions call REST through Kong with every id of an all-branches page in the URL;
+      # Kong's default 4 x 8k header buffers answered 414 "URI too long".
+      KONG_NGINX_PROXY_LARGE_CLIENT_HEADER_BUFFERS: "4 64k"
       # Untuned Kong starts one worker per CPU and outgrows its memory cap.
       KONG_NGINX_WORKER_PROCESSES: "2"
       KONG_PROXY_ACCESS_LOG: /dev/stdout combined
@@ -108,7 +114,12 @@ services:
     container_name: __PROJECT__-functions
     image: supabase/edge-runtime:v1.74.0
     restart: unless-stopped
-    mem_limit: ${FUNCTIONS_MEM_LIMIT:-512m}
+    # 512m crashed under normal page loads (one page sends 12 to 17 calls at once, each
+    # call a worker of its own); the browser showed that as CORS errors.
+    mem_limit: ${FUNCTIONS_MEM_LIMIT:-1024m}
+    # CPU ceiling, so a burst on this project cannot take every core from the other
+    # stacks on the server (AlpenGlow's are not capped).
+    cpus: ${FUNCTIONS_CPUS:-2}
     depends_on:
       kong:
         condition: service_healthy
@@ -119,11 +130,14 @@ services:
       retries: 3
     volumes:
       - ./volumes/functions:/home/deno/functions:z
+      # Downloaded function libraries (esm.sh), kept across restarts and re-creates so a
+      # restart does not depend on esm.sh being reachable. DENO_DIR below points here.
       - deno-cache:/root/.cache/deno
     # The project's own function secrets (STAFF_JWT_SECRET and so on).
     env_file:
       - ./functions.env
     environment:
+      DENO_DIR: /root/.cache/deno
       JWT_SECRET: ${JWT_SECRET}
       SUPABASE_URL: http://kong:8000
       SUPABASE_PUBLIC_URL: ${SUPABASE_PUBLIC_URL}
@@ -136,7 +150,20 @@ services:
       # cloud allows 256 MB and 150 s; the self-hosted default is 150 MB / 60 s.
       EDGE_WORKER_MEMORY_MB: ${EDGE_WORKER_MEMORY_MB:-256}
       EDGE_WORKER_TIMEOUT_MS: ${EDGE_WORKER_TIMEOUT_MS:-150000}
-    command: ["start", "--main-service", "/home/deno/functions/main"]
+    # Worker pool: reuse workers (per_worker) and cap how many exist at once. Uncapped, a
+    # new worker started for every parallel request: memory grew with busy users, every
+    # burst paid cold starts, and a few calls got "worker has already retired" (500).
+    # Requests beyond the cap wait up to EDGE_REQUEST_WAIT_TIMEOUT_MS for a free worker.
+    command:
+      - start
+      - --main-service
+      - /home/deno/functions/main
+      - --policy
+      - per_worker
+      - --max-parallelism
+      - "${EDGE_MAX_PARALLELISM:-4}"
+      - --request-wait-timeout
+      - "${EDGE_REQUEST_WAIT_TIMEOUT_MS:-30000}"
 
 volumes:
   db-config:

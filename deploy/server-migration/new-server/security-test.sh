@@ -5,7 +5,8 @@
 #   bash security-test.sh <api-host> <anon-key> [server-ip] [--burst]
 #
 # server-ip: test a server before DNS points at it.
-# --burst:   also fire 200 quick requests to prove rate limiting answers 429.
+# --burst:   also fire 200 requests, 50 at a time, to prove rate limiting
+#            answers 429 (BURST_TOTAL / BURST_PARALLEL change the counts).
 #
 # It only reads status codes and row counts. It never prints row contents and
 # never writes anything.
@@ -15,6 +16,7 @@
 # every table must be closed:
 #   T=$(ssh deploy@NEW_IP "docker exec pss-db psql -U postgres -d postgres -tAc \"select string_agg(tablename, ' ') from pg_tables where schemaname = 'public'\"")
 #   LOCKED="$T" PUBLIC_OK="" CLOSED_PORTS="5432 6543 8000 8010 8443 3000" \
+#   BLOCKED_PATHS="/ /project/default /auth/v1/settings /auth/v1/signup /storage/v1/status /pg/ /analytics/v1/ /realtime/v1/ /graphql/v1 /rest/v1/ /functions/v1/main /functions/v1/_shared/" \
 #     bash security-test.sh api.perfectstudyspace.in <pss anon key> NEW_IP --burst
 set -uo pipefail
 
@@ -92,13 +94,26 @@ else
 fi
 
 if [ "$BURST" = 1 ]; then
+  # Sent in parallel waves: one by one from a laptop, each request waits for the
+  # previous answer, the rate stays far below the per-IP limit and nothing is ever
+  # limited. BURST_TOTAL and BURST_PARALLEL override the counts.
+  BURST_TOTAL="${BURST_TOTAL:-200}"; BURST_PARALLEL="${BURST_PARALLEL:-50}"
   echo
-  echo "-- rate limiting (200 quick requests)"
-  n429=0
-  for i in $(seq 1 200); do
-    [ "$(code -H "apikey: $KEY" "https://$HOST/functions/v1/does-not-exist")" = 429 ] && n429=$((n429+1))
+  echo "-- rate limiting ($BURST_TOTAL requests, $BURST_PARALLEL at a time)"
+  codes="$(mktemp)"
+  sent=0
+  while [ "$sent" -lt "$BURST_TOTAL" ]; do
+    for _ in $(seq 1 "$BURST_PARALLEL"); do
+      [ "$sent" -lt "$BURST_TOTAL" ] || break
+      code -H "apikey: $KEY" "https://$HOST/functions/v1/does-not-exist" >> "$codes" &
+      sent=$((sent + 1))
+    done
+    wait
   done
-  if [ "$n429" -gt 0 ]; then row PASS "rate limit" "$n429 of 200 answered 429"; else row FAIL "rate limit" "no request was limited"; fi
+  n429=$(grep -c '^429$' "$codes"); nall=$(wc -l < "$codes" | tr -d ' ')
+  summary=$(sort "$codes" | uniq -c | awk '{printf "%s%s x %s", (NR>1?", ":""), $1, $2}')
+  rm -f "$codes"
+  if [ "$n429" -gt 0 ]; then row PASS "rate limit" "$n429 of $nall answered 429 ($summary)"; else row FAIL "rate limit" "no request was limited ($summary)"; fi
 fi
 
 echo

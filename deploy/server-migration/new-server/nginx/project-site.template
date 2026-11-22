@@ -27,6 +27,11 @@ server {
     add_header Strict-Transport-Security "max-age=31536000" always;
     add_header X-Content-Type-Options "nosniff" always;
 
+    # Not functions: "main" is the stack's own router (calling it from outside makes it
+    # start a worker of itself) and "_shared" holds code imported by functions. A regex
+    # location is checked before the /functions/v1/ prefix below, so this one wins.
+    location ~ ^/functions/v1/(main|_shared)(/|$) { return 404; }
+
     location /functions/v1/ {
         limit_req zone=__ZONE__ burst=60 nodelay;
         include snippets/proxy-to-stack.conf;

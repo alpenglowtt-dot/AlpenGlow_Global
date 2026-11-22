@@ -20,6 +20,8 @@
 #      That table is created with row security on and no access for the
 #      public key (AlpenGlow's copy was readable and writable by anyone).
 #   3. Restarts the PSS functions container.
+# Step 0 checks the server first and stops, with nothing changed, if the stack,
+# its router, the recorded migrations or the function secrets are not in place.
 set -euo pipefail
 
 VPS_HOST="${VPS_HOST:-}"
@@ -27,6 +29,41 @@ VPS_HOST="${VPS_HOST:-}"
 REMOTE_REPO_DIR="projects/pss/repo"
 REMOTE_BACKEND_DIR="projects/pss/backend"
 LOCAL_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# Migrations that arrived with the live data (the dump) and must already be recorded
+# in _migrations_applied: every repo file up to and including this number.
+BASELINE_MAX=051
+
+echo "==> [0/3] Checking the server before changing anything..."
+# Stops here, with nothing changed, unless: the PSS stack exists and runs, its "main"
+# router is in place, _migrations_applied lists every baseline migration (an empty or
+# missing table would make step 2 replay 001 onwards over the live data), and the
+# function secrets are filled in. Values are never printed, only whether they are set.
+baseline=""
+for f in "$LOCAL_ROOT"/supabase/migrations/*.sql; do
+  n=$(basename "$f"); num="${n%%_*}"
+  [[ "$num" =~ ^[0-9]+$ ]] && [ "$((10#$num))" -le "$((10#$BASELINE_MAX))" ] && baseline+="$n "
+done
+ssh "$VPS_HOST" "BASELINE='$baseline' bash -s" <<'PRECHECK'
+set -uo pipefail
+bad=0
+fail() { echo "  ! $1"; bad=1; }
+cd ~/projects/pss/backend 2>/dev/null || { echo "  ! ~/projects/pss/backend does not exist: the PSS stack is not set up on this server"; exit 1; }
+for c in pss-db pss-rest pss-kong pss-functions; do
+  st=$(docker inspect -f '{{.State.Status}}{{if .State.Health}}/{{.State.Health.Status}}{{end}}' "$c" 2>/dev/null || echo missing)
+  case "$st" in running|running/healthy) ;; *) fail "container $c is $st" ;; esac
+done
+[ -f volumes/functions/main/index.ts ] || fail "the stack's main router (volumes/functions/main/index.ts) is missing"
+for k in STAFF_JWT_SECRET PUBLIC_SITE_KEY; do
+  grep -qE "^$k=.+" functions.env 2>/dev/null || fail "$k is not set in functions.env"
+done
+recorded=$(docker exec pss-db psql -U postgres -d postgres -tAc "SELECT filename FROM public._migrations_applied" 2>/dev/null) \
+  || { fail "public._migrations_applied cannot be read (missing table, or the database is down)"; recorded=""; }
+missing=0
+for f in $BASELINE; do printf '%s\n' "$recorded" | grep -qxF "$f" || missing=$((missing + 1)); done
+[ "$missing" = 0 ] || fail "$missing of the baseline migrations are not recorded in _migrations_applied (PSS plan, Phase 2 step 5)"
+[ "$bad" = 0 ] || { echo "  Nothing was changed."; exit 1; }
+echo "  stack running, router present, secrets set, $(printf '%s\n' "$recorded" | grep -c .) migrations recorded"
+PRECHECK
 
 echo "==> [1/3] Syncing edge functions..."
 # rsync isn't available on Windows/Git Bash, so mirror via tar over ssh.
