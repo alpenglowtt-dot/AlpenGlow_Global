@@ -16,8 +16,8 @@ cache; tested: lockout 11/11 PASS, cached reads byte-identical, 28/28
 checks PASS, type check 2 old errors). Section A (report SQL functions +
 indexes) is designed but NOT yet in 053. Next: append A, prove
 to-the-rupee equality, then B, E, C, D (combined actions, pollers), H, I,
-J. AlpenGlow memory: measured read-only (partial 12-min sample, no
-restarts); new ceilings to propose, wait for your OK. Nothing changed on
+J. AlpenGlow memory: measured read-only (12 min, 0 restarts); proposed
+ceilings total 2,992 MiB (table in Done, 22 Nov); waiting for your OK. Nothing changed on
 any server, Cloudflare or Supabase.
 
 Earlier (AlpenGlow): switch-over finished (2 Nov): `api` points at `84.247.184.195`
@@ -70,13 +70,16 @@ move.
 
 ## Done
 
-- **22 Nov 2026, AlpenGlow memory, read-only sample (partial, from 07:00
-  CET; average / peak MiB, ceiling):** realtime 218/218 (384), auth
-  10/10 (128), db 134/135 (1024), edge-functions 86/88 (512), imgproxy
-  93/104 (256), kong 310/313 (512), meta 126/143 (256), pooler 209/209
-  (384), rest 61/62 (384), storage 220/220 (384), studio 264/267 (512).
-  No restarts while sampling. 1.5x peak (min 128m) adds up to about
-  2,800 MiB. Proposal still to be made; nothing changed.
+- **22 Nov 2026, AlpenGlow memory, read-only, 12 minutes (07:00 to 07:15
+  CET, 72 samples, 0 restarts, 5.9 GB available at the end).** Container:
+  ceiling now / peak / PROPOSED (at least 1.5x peak, min 128), MiB:
+  realtime 384/218/336, auth 128/14/128, db 1024/135/256, edge-functions
+  512/88/192, imgproxy 256/104/160, kong 512/318/480, meta 256/155/240,
+  pooler 384/209/320, rest 384/63/128, storage 384/223/336, studio
+  512/273/416. **Total now 4,736, proposed 2,992.** With PSS (4,608):
+  7,600 of 7,941 MiB RAM, about 340 MiB left for the system, nginx and
+  Docker (tight; db and edge-functions are the ones to raise for room).
+  Waiting for your OK on the numbers and a quiet hour; nothing changed.
 - **22 Nov 2026, found in my own change and fixed before any commit:**
   the cache helper `allBranches(db)` was shadowed by the request field
   `allBranches` in 6 report handlers (would have failed every
