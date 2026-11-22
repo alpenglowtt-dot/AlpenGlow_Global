@@ -7,19 +7,27 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov), step 2b in progress.** Kit at `e63f446`, PSS
-`fix/pre-migration` at `bfe2cb1` (pushed). UNCOMMITTED in
-`C:UserssrivaDesktopPSSpss-main-fixes` (diff + evidence to show you
-before committing): `053_scale_hardening.sql` (G, F, A), `api` (G, F, D
-part, A), `ReportsPage.jsx` (counts), and your `052_owner_last_login.sql`
-plus its 10 `api` lines copied UNCHANGED (your OK, 22 Nov; diff shown,
-not committed). Done and proven locally: G, F, A, B, E (keys + session
-rules + router; the SQL-transaction part waits for your scope decision).
-C, D and H done too (see Done). Uncommitted kit changes for 2b: router (main/index.ts + jose@6.2.18.mjs), nginx template, security-test.sh, check.mjs. In progress: I. In the fix worktree, uncommitted: tests/scale/ with stack/ (copy of the kit stack-template incl. router + jose@6.2.18.mjs), setup.sh (adapted: work dir + optional orig ref; copies _vendor), seed-small.sql, seed-large.sql (20,000 students, 10 branches, 2 years; NOT yet run), check.mjs, students-pages.mjs, calls.mjs, duplicates.mjs, login-and-cache.mjs (reference = apiorig), lint-paging.mjs (passes after 9 findings resolved: 5 paged/chunked incl. bulk enquiry delete, 4 marked paging-ok with reasons), typecheck-import-map.json (type check via esm.sh types: back to the 2 old errors); package.json scripts test:scale and test:lint-paging; .gitignore .scale-test/. Also written: tests/scale/run.mjs (npm run test:scale), README.md, .github/workflows/scale-test.yml (small seed on every PR vs the base branch; large by hand; type check report-only until main's 2 old errors are fixed). npm run test:scale with the small seed: ALL STEPS PASS in 3.5 min (lint, stack incl. 052+053, seed, 28 figures, students pages, batch/pollers, duplicates, lockout/cache). Large seed (20,000 students): the run was STOPPED by Claude Code because the laptop ran critically low on memory (22 Nov); it got no further than building the stack, so there are no large-seed results yet. Not restarted (needs your go; free memory first, e.g. close other apps). Local test stack stopped (not deleted) to free memory. Then J (ops in the kit). Local test scripts so far live in the job temp folder (a-equality, b-summary, b-corrections, c-equality, d-calls, e-dupes, fd-test) and move into the PSS repo in I. AlpenGlow: 24-hour read-only memory sampling running on the server
-since 09:58 CET (`~/alpenglow-mem-24h.sh`, log
-`~/alpenglow-mem-24h.log`, ends by itself about 09:58 CET 23 Nov; stop
-early: `pkill -f alpenglow-mem-24h`). Nothing else changed on any
-server, Cloudflare or Supabase.
+**PSS Sitting 3 (22 Nov), step 2b SAVED; now E-transactions, then J.**
+Committed and pushed (branch only, never main): PSS `fix/pre-migration` at
+`d560eb0` (all of step 2b: 052 + its 10 api lines unchanged, 053, api,
+website, `supabase/functions/_vendor`, `tests/scale` incl. the 2b proofs
+moved from the job temp folder, `.github/workflows/scale-test.yml`). Kit at
+`64d0085` (router + jose@6.2.18.mjs, nginx `_*` block, security-test.sh,
+check.mjs). Uncommitted in the kit: J work in progress (backup every 6 h with
+a once-a-day skip while there is no off-server copy, 14 days both places,
+`restore-test.sh` monthly with email, alert under 1 GB free memory, weekly
+`--db-size` line, reboot 22:30 server time = 03:00 IST in winter); local
+proof of J half done (backup, skip rule, restore test PASS and a broken
+backup FAILs, size line: all ran; the backup's config archive needed a
+dummy .env, rerun pending). Now: E-transactions (record_payment,
+record_locker_payment, create_food_bill, topup_food_pass,
+apply_loyalty_discount, each one SQL transaction, with equality tests),
+then finish J. The 20,000-student run is NOT done on the laptop (your
+decision): it runs in Phase 2 on the new server. AlpenGlow: 24-hour
+read-only memory sampling running on the server since 09:58 CET
+(`~/alpenglow-mem-24h.sh`, log `~/alpenglow-mem-24h.log`, ends by itself
+about 09:58 CET 23 Nov; stop early: `pkill -f alpenglow-mem-24h`). Nothing
+else changed on any server, Cloudflare or Supabase.
 
 Earlier (AlpenGlow): switch-over finished (2 Nov): `api` points at `84.247.184.195`
 since about 22:28 laptop time; Phases 3, 4 and 5 done (see Done). Now in
@@ -48,16 +56,21 @@ security fixes 1, 2, 3: complete.**
 
 ## Next step
 
-PSS Sitting 3, step 2b (extreme-case hardening, your message of 22 Nov):
-A to I on `fix/pre-migration`, local proof for each (to-the-rupee
-equality, 20,000-student load, all checks PASS, 0 supervisor cancels),
-diff and evidence shown before committing; J in the kit. Hardening migration is
-**053** (`053_scale_hardening.sql`; 052 is yours, see Done 22 Nov), applied
-to the cloud by you in the SQL editor before the fixed `api` is deployed
-there. Then Phase 1 (read-only; includes the check for live
-violations of "one active session per student / per desk"), Phase 2 with
-the 20,000-student seed at 10, 20 and 50 users while watching AlpenGlow.
-Each server, DNS or Supabase change only with your OK.
+PSS Sitting 3: (1) E-transactions on `fix/pre-migration`: the five money
+actions each in one SQL function (one transaction), old and new results
+equal, diff and evidence shown before committing. (2) Finish J in the kit
+and commit. (3) Phase 1 (read-only): counts incl. students per branch,
+sessions and transactions per month; whether `staff.last_login_at` exists
+on the cloud; live violations of one open session per student / per desk;
+secret names and a diff of the deployed `api`; where
+`api.perfectstudyspace.in` points (STOP if 169.58.43.191). (4) Phase 2 on
+the new server: PSS rehearsal stack with DUMMY data first: 20,000-student
+seed (`tests/scale/seed-large.sql`), all checks, load at 10, 20 and 50
+users while watching AlpenGlow; then wipe it, then restore the live copy
+(`restore-public.sh` only, migrations 001-051 recorded as applied BEFORE
+the first deploy). Cloud order before the fixed `api` is deployed there:
+052, then 053, by you in the SQL editor. Each server, DNS or Supabase
+change only with your OK.
 
 Earlier (AlpenGlow): security fixes 1, 2, 3 are complete (deployed, tested, on `main`, site
 flows confirmed 11:04 IST); `trip-planner.js` version tag and Supabase
@@ -70,6 +83,21 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, step 2b saved (your order "SAVE NOW"):** PSS `fix/pre-migration`
+  `d560eb0` pushed (41 files): `052_owner_last_login.sql` byte-identical to yours plus its
+  10 api lines unchanged; 053; api; website; `_vendor`; `tests/scale` (run.mjs, setup.sh,
+  stack/, both seeds, check/students-pages/calls/duplicates/login-and-cache, lint-paging,
+  README) plus the 2b proofs moved in from the job temp folder (a-equality.mjs,
+  b-summary.sql, b-corrections.sql, c-equality.mjs, d-calls.mjs, e-dupes.mjs, fd-test.mjs);
+  `.github/workflows/scale-test.yml`. Secret scan of the commit: none (only
+  `${POSTGRES_PASSWORD}` references). Kit `64d0085` pushed: router with
+  `jose@6.2.18.mjs`, nginx template blocks `/functions/v1/_*`, security-test.sh
+  `_vendor` path, check.mjs retry counter. Your decisions the same day: transactions now
+  for the five money actions, the big membership actions after the move (Sitting 5
+  backlog); the 20,000-student test only on the new server in Phase 2 (dummy data first,
+  then wipe, then the live copy), never again on the laptop; AlpenGlow's router
+  `jsr:@panva/jose@6` import: note only, a separate fix later with your OK.
 
 - **22 Nov 2026, 2b-H proven locally (uncommitted):** `supabase/functions/_vendor/` holds
   supabase-js 2.49.1 (esbuild browser bundle of the npm package, 104 KB, imports nothing) and
@@ -994,9 +1022,12 @@ PSS Sitting 3 (22 Nov):
       your choice to apply them (AlpenGlow only, `docker compose up -d`).
 - [x] Migration numbers (decided 22 Nov): 052 is yours, the hardening
       migration is 053.
-- [ ] OK to copy your `052_owner_last_login.sql` UNCHANGED into
-      `fix/pre-migration` (and whether its 10-line `api` change, also
-      uncommitted in your checkout, comes with it).
+- [x] Copy your `052_owner_last_login.sql` and its 10 `api` lines UNCHANGED into
+      `fix/pre-migration` (your OK 22 Nov; committed `d560eb0`).
+- [ ] Sitting 5 backlog (after the move, one at a time, each with your OK): the big
+      membership actions (new/renew/transfer/cancel membership and the other multi-step
+      writes) each in one SQL transaction; AlpenGlow's live router `jsr:@panva/jose@6`
+      import replaced by a stored copy (separate fix).
 - [ ] For Phase 1: a Supabase access token on the laptop (secret names,
       download of the deployed `api`), and the session-pooler string
       typed by you at a `read -rs` prompt on the server.
