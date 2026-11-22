@@ -97,6 +97,22 @@ move.
 ## Done
 
 
+- **22 Nov 2026, Phase 2 so far (PSS stack on 84.247.184.195, DUMMY data):** kit uploaded to
+  `~/kit-20261122` (23 files; your OK). You ran as root `OPS_ENTRY=later add-project.sh pss
+  api.perfectstudyspace.in 8010 api`, certbot (certificate until 2027-02-20) and the second run:
+  pss-db/rest/kong/functions healthy; limits db 1280, rest 512, kong 768, functions 2048 MiB,
+  3 CPUs, 8 workers; nginx 40 r/s burst 120; `~/ops/projects/pss.conf.later` (NOT read by
+  AlpenGlow's backup or health check). AlpenGlow after: 11/11 healthy, its only restarts are
+  supabase-auth x2 on 14 Nov (old), probe 13 ms. HTTPS: /functions/v1/api answers (401 for a
+  wrong password), /rest/v1/ 404. Rehearsal files in `~/pss-rehearsal` (migrations, seeds,
+  api = fix/pre-migration 1c660c3, apiorig = main cb7beeb, _vendor); functions.env holds
+  THROW-AWAY STAFF_JWT_SECRET and PUBLIC_SITE_KEY (never printed; replaced at the wipe).
+  Migrations 001-054 applied to the empty pss-db and recorded (54 rows, 39 tables). 20,000-
+  student seed: 8.5 min, exit 0: 20,000 students, 10 branches, 1,277,767 bookings, 247,252
+  transactions, 65,273 memberships, database 528 MB; pss-db peak 521 MiB of 1,280. AlpenGlow
+  DURING the seed: probe p50 11 ms, p95 18 ms, max 52 ms, 0 errors; lowest memory available
+  5,213 MB; 0 PSS restarts, 0 Kong errors.
+
 - **22 Nov 2026, Phase 1 quiet hours (cloud, read-only, `pss/quiet-hours.sql`, last 60 days
   23 Sep to 22 Nov, 3,723 sessions; events = check-ins + check-outs + payments + food bills):**
   quietest hour per weekday (IST): Mon 03:00-04:00 (0 events, 0.5 students on site on
