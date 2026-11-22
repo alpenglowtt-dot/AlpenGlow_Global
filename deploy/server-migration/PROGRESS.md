@@ -15,7 +15,7 @@ part, A), `ReportsPage.jsx` (counts), and your `052_owner_last_login.sql`
 plus its 10 `api` lines copied UNCHANGED (your OK, 22 Nov; diff shown,
 not committed). Done and proven locally: G, F, A, B, E (keys + session
 rules + router; the SQL-transaction part waits for your scope decision).
-C done too (see Done). Next: D, H, I, J. AlpenGlow: 24-hour read-only memory sampling running on the server
+C and D done too (see Done). Next: H (vendor libraries), I (test suite in the PSS repo, 20,000-student seed, CI), J (ops in the kit). Local test scripts so far live in the job temp folder (a-equality, b-summary, b-corrections, c-equality, d-calls, e-dupes, fd-test) and move into the PSS repo in I. AlpenGlow: 24-hour read-only memory sampling running on the server
 since 09:58 CET (`~/alpenglow-mem-24h.sh`, log
 `~/alpenglow-mem-24h.log`, ends by itself about 09:58 CET 23 Nov; stop
 early: `pkill -f alpenglow-mem-24h`). Nothing else changed on any
@@ -70,6 +70,15 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, 2b-D proven locally (uncommitted):** besides the cache and parallel
+  login/sign-in lookups: action `batch` (up to 10 READ actions in one request through the
+  same handler; writes, nesting and more than 10 refused); `poll_session_alerts` and
+  `poll_my_tasks` for the two minute-by-minute hooks; both Dashboard views load through
+  `apiBatch` (2 and 3 calls become 1). Checks: every batch part equals its own call,
+  branch rules hold inside a batch; session alerts 78 KB instead of 360 KB per poll, the
+  owner task bell 12 bytes instead of 761 KB per poll (every minute, every open tab);
+  batches and polls store no idempotency records. Type check 2 old errors; vite build OK.
 
 - **22 Nov 2026, 2b-C proven locally (uncommitted):** new actions `list_students_page`
   (50 per page) and `export_students` (filtered rows, for the CSV only), with the Students
