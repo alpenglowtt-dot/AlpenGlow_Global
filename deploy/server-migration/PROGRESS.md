@@ -97,8 +97,8 @@ move.
 ## Done
 
 
-- **22 Nov 2026, PSS Phase 1 done (read-only, cloud read 15:14 UTC via  in a
-  READ ONLY transaction, run by you with the pooler string at ):** Postgres 17.6, 17 MB.
+- **22 Nov 2026, PSS Phase 1 done (read-only, cloud read 15:14 UTC via `pss/phase1-inventory.sql` in a
+  READ ONLY transaction, run by you with the pooler string at `read -rs`):** Postgres 17.6, 17 MB.
   34 public tables = exactly the repo's 001-051 schema (the repo-built db adds only
   _migrations_applied and 053's 4 tables); 92 indexes, 4 functions, 1 trigger, 0 policies, 12
   enums; row security on every table (overtime_sessions too). Rows: students 482, memberships
