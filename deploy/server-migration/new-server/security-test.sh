@@ -16,7 +16,7 @@
 # every table must be closed:
 #   T=$(ssh deploy@NEW_IP "docker exec pss-db psql -U postgres -d postgres -tAc \"select string_agg(tablename, ' ') from pg_tables where schemaname = 'public'\"")
 #   LOCKED="$T" PUBLIC_OK="" CLOSED_PORTS="5432 6543 8000 8010 8443 3000" \
-#   BLOCKED_PATHS="/ /project/default /auth/v1/settings /auth/v1/signup /storage/v1/status /pg/ /analytics/v1/ /realtime/v1/ /graphql/v1 /rest/v1/ /functions/v1/main /functions/v1/_shared/" \
+#   BLOCKED_PATHS="/ /project/default /auth/v1/settings /auth/v1/signup /storage/v1/status /pg/ /analytics/v1/ /realtime/v1/ /graphql/v1 /rest/v1/ /functions/v1/main /functions/v1/_shared/ /functions/v1/_vendor/" \
 #     bash security-test.sh api.perfectstudyspace.in <pss anon key> NEW_IP --burst
 set -uo pipefail
 

@@ -1,4 +1,12 @@
-import * as jose from 'jsr:@panva/jose@6'
+// Stored next to this router, pinned: upstream imported 'jsr:@panva/jose@6', which is
+// downloaded from jsr.io whenever the module cache is empty, so with no internet the whole
+// functions container could not start (worker boot error, restart loop). 6.2.18 is what
+// that range resolved to (22 Nov 2026); the file is esm.sh's single-file bundle of npm
+// jose 6.2.18 (same code as jsr @panva/jose), sha256 72ae2cd5b9a228b6...
+import * as jose from './jose@6.2.18.mjs'
+
+// Only the shape parseJwks checks; jose checks the keys themselves.
+type JSONWebKeySet = { keys: unknown[] }
 
 console.log('main function started')
 
@@ -8,12 +16,12 @@ const VERIFY_JWT = Deno.env.get('VERIFY_JWT') === 'true'
 
 // NOTE:(kallebysantos) We don't check for valid keys but just the bare array parsing,
 // let this for 'jose' lib verification
-export function parseJwks(raw: string | undefined): jose.JSONWebKeySet | null {
+export function parseJwks(raw: string | undefined): JSONWebKeySet | null {
   if (!raw) return null
   try {
     const parsed = JSON.parse(raw)
     if (parsed?.keys && Array.isArray(parsed.keys)) {
-      return parsed as jose.JSONWebKeySet
+      return parsed as JSONWebKeySet
     }
     return null
   } catch {
@@ -178,11 +186,15 @@ Deno.serve(async (req: Request) => {
     const worker = await createWorker(false)
     return await worker.fetch(req)
   } catch (e) {
-    // One retry, on a new worker, ONLY when the request never reached a worker (the one
-    // picked had just retired): nothing ran, so nothing can happen twice. "user worker
-    // failed to respond" means it did reach one and may have written data: no retry.
-    if (/failed to send request to user worker|worker has already retired/i.test(String(e))) {
-      console.error(`request never reached a worker, retrying once on a new one: ${e}`)
+    // One retry, on a new worker, only when nothing can happen twice:
+    //  - the request never reached a worker (the one picked had just retired), or
+    //  - it carries an Idempotency-Key: the function then runs it at most once and answers
+    //    a repeat with the first run's stored result (PSS migration 053).
+    // "user worker failed to respond" without a key means it did reach a worker and may
+    // have written data: no retry.
+    const neverReached = /failed to send request to user worker|worker has already retired/i.test(String(e))
+    if (neverReached || spare.headers.has('idempotency-key')) {
+      console.error(`${neverReached ? 'request never reached a worker' : 'idempotent request failed'}, retrying once on a new worker: ${e}`)
       try {
         const worker = await createWorker(true)
         return await worker.fetch(spare)

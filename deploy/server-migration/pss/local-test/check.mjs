@@ -258,7 +258,7 @@ const countOf = (re) => (fnLog.match(re) ?? []).length;
 const cancels = countOf(/cancelled by supervisor/g);
 const hard = countOf(/CPU time hard limit reached/g);
 const soft = countOf(/CPU time soft limit reached/g);
-const retries = countOf(/request never reached a worker, retrying once/g);
+const retries = countOf(/retrying once on a new worker/g);
 const restarts = Number(execFileSync("docker", ["inspect", "-f", "{{.RestartCount}}", "psslocal-functions"], { encoding: "utf8" }).trim()) - restartsBefore;
 console.log(`\n-- edge runtime during this run: ${cancels} supervisor cancels, ${hard} CPU hard-limit hits, ${soft} soft-limit retirements, ${retries} retries, ${restarts} functions restarts`);
 if (cancels > 0 || hard > 0 || restarts > 0) { fails++; console.log("  FAIL: must be 0 cancels, 0 hard-limit hits, 0 restarts"); }
