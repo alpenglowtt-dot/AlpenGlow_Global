@@ -7,18 +7,18 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov), stopped at the usage limit in step 2b.** Kit at
-`e63f446` (memory option A, Kong DNS fix), PSS `fix/pre-migration` at
-`bfe2cb1` (pushed). UNCOMMITTED in `C:UserssrivaDesktopPSSpss-main-fixes`:
-`supabase/migrations/053_scale_hardening.sql` (sections G and F only) and
-`api` changes for G/F/D (lockout, parallel login and auth lookups, 60 s
-cache; tested: lockout 11/11 PASS, cached reads byte-identical, 28/28
-checks PASS, type check 2 old errors). Section A (report SQL functions +
-indexes) is designed but NOT yet in 053. Next: append A, prove
-to-the-rupee equality, then B, E, C, D (combined actions, pollers), H, I,
-J. AlpenGlow memory: measured read-only (12 min, 0 restarts); proposed
-ceilings total 2,992 MiB (table in Done, 22 Nov); waiting for your OK. Nothing changed on
-any server, Cloudflare or Supabase.
+**PSS Sitting 3 (22 Nov), step 2b in progress.** Kit at `e63f446`, PSS
+`fix/pre-migration` at `bfe2cb1` (pushed). UNCOMMITTED in
+`C:UserssrivaDesktopPSSpss-main-fixes` (diff + evidence to show you
+before committing): `053_scale_hardening.sql` (G, F, A), `api` (G, F, D
+part, A), `ReportsPage.jsx` (counts), and your `052_owner_last_login.sql`
+plus its 10 `api` lines copied UNCHANGED (your OK, 22 Nov; diff shown,
+not committed). Done and proven locally: G, F, A. Next: B, E, C, D, H, I,
+J. AlpenGlow: 24-hour read-only memory sampling running on the server
+since 09:58 CET (`~/alpenglow-mem-24h.sh`, log
+`~/alpenglow-mem-24h.log`, ends by itself about 09:58 CET 23 Nov; stop
+early: `pkill -f alpenglow-mem-24h`). Nothing else changed on any
+server, Cloudflare or Supabase.
 
 Earlier (AlpenGlow): switch-over finished (2 Nov): `api` points at `84.247.184.195`
 since about 22:28 laptop time; Phases 3, 4 and 5 done (see Done). Now in
@@ -69,6 +69,35 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, your decisions:** AlpenGlow ceilings only after a 24-hour
+  measurement (incl. the 22:30 backup): db at least 512m, edge-functions
+  at least 384m, the others at least 1.5x their 24-hour peak (min 128m);
+  if the total with PSS (4,608) exceeds 7,941 MiB, propose stopping
+  AlpenGlow's Studio (start when needed) instead of cutting further; you
+  pick the quiet hour. Your 052 and its api lines go into
+  `fix/pre-migration` unchanged; cloud order: 052, then 053.
+- **22 Nov 2026, 2b-A proven locally (uncommitted):** six SQL functions in
+  053 (`report_revenue`, `report_daily`, `report_top_students`,
+  `report_referrals`, `active_member_dues`, `dashboard_counts`), each
+  one jsonb value (no row cap), plus 11 indexes; the api uses them and
+  keeps the old method as a fallback. Equality against the committed
+  JavaScript (`bfe2cb1`), 6 scopes x 5 periods and owner/staff views,
+  with 400 payouts and payments one second either side of IST midnight
+  added: **98/98 comparisons PASS** (money within half a paisa: revenue,
+  daily/monthly reports, referral stats, top students, active-membership
+  dues, dashboards, transactions, discounts). Same 98/98 with the SQL
+  functions hidden (fallback path; 78 fallback log lines). Whole run:
+  SQL 5.5 s vs JavaScript 13.2 s; monthly report about 100 ms instead of
+  1.8 to 2.2 s. 28/28 checks PASS, 0 supervisor cancels. Found:
+  `transactions.payment_mode` is NOT NULL, so the "null" key cannot occur.
+  Reports page reads `walkinCount`/`newMemberCount` (falls back to list
+  lengths), so it must go live before the new api.
+- **22 Nov 2026, your 052 copied into the fix worktree (uncommitted):**
+  migration byte-identical; its 10 api lines taken from your checkout's
+  own diff, byte-identical, inserted after the token is signed as in your
+  version. Local test: owner login sets `last_login_at`, staff login
+  leaves it empty, both HTTP 200.
 
 - **22 Nov 2026, AlpenGlow memory, read-only, 12 minutes (07:00 to 07:15
   CET, 72 samples, 0 restarts, 5.9 GB available at the end).** Container:
