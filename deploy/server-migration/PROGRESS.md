@@ -7,7 +7,7 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov), step 2b SAVED; now E-transactions, then J.**
+**PSS Sitting 3 (22 Nov), step 2b SAVED; E-transactions proven locally (UNCOMMITTED, waiting for your OK on the diff); now J.**
 Committed and pushed (branch only, never main): PSS `fix/pre-migration` at
 `d560eb0` (all of step 2b: 052 + its 10 api lines unchanged, 053, api,
 website, `supabase/functions/_vendor`, `tests/scale` incl. the 2b proofs
@@ -19,10 +19,11 @@ a once-a-day skip while there is no off-server copy, 14 days both places,
 `--db-size` line, reboot 22:30 server time = 03:00 IST in winter); local
 proof of J half done (backup, skip rule, restore test PASS and a broken
 backup FAILs, size line: all ran; the backup's config archive needed a
-dummy .env, rerun pending). Now: E-transactions (record_payment,
-record_locker_payment, create_food_bill, topup_food_pass,
-apply_loyalty_discount, each one SQL transaction, with equality tests),
-then finish J. The 20,000-student run is NOT done on the laptop (your
+dummy .env, rerun pending). E-transactions UNCOMMITTED in
+`C:\Users\sriva\Desktop\PSS\pss-main-fixes`: `054_money_transactions.sql` (new),
+api (+64 lines: `moneyTx` helper and one call in each of the five actions,
+old steps kept as fallback while 054 is missing), `tests/scale/money-tx.mjs`
+(new, step 4f of npm run test:scale), README, run.mjs. Then finish J. The 20,000-student run is NOT done on the laptop (your
 decision): it runs in Phase 2 on the new server. AlpenGlow: 24-hour
 read-only memory sampling running on the server since 09:58 CET
 (`~/alpenglow-mem-24h.sh`, log `~/alpenglow-mem-24h.log`, ends by itself
@@ -69,7 +70,7 @@ seed (`tests/scale/seed-large.sql`), all checks, load at 10, 20 and 50
 users while watching AlpenGlow; then wipe it, then restore the live copy
 (`restore-public.sh` only, migrations 001-051 recorded as applied BEFORE
 the first deploy). Cloud order before the fixed `api` is deployed there:
-052, then 053, by you in the SQL editor. Each server, DNS or Supabase
+052, then 053, then 054, by you in the SQL editor. Each server, DNS or Supabase
 change only with your OK.
 
 Earlier (AlpenGlow): security fixes 1, 2, 3 are complete (deployed, tested, on `main`, site
@@ -84,6 +85,25 @@ move.
 
 ## Done
 
+
+- **22 Nov 2026, E-transactions proven locally (uncommitted, diff to show you):** migration
+  **054_money_transactions.sql**: record_payment, record_locker_payment, topup_food_pass,
+  create_food_bill, apply_loyalty_discount each as one SQL function = one transaction; the
+  changed row is locked (FOR UPDATE; food items locked in id order; the student row for a
+  top-up); same checks and messages; staff errors as SQLSTATE P0001 -> HTTP 400. Only
+  service_role can run them (anon: 404). The api calls them and keeps its old steps as
+  fallback ONLY when the function is missing (PGRST202). Evidence (local dummy stack,
+  reference = api of d560eb0): `tests/scale/money-tx.mjs` 38/38 PASS, twice in a row:
+  33 twin cases (two students in the same state, old steps vs one transaction) equal in
+  every row and reply to the paisa, incl. refusals and their messages; a split that does not
+  add up: new 400 with nothing changed (old: HTTP 500 with fee_due already 0 and no ledger
+  row); a bill whose 2nd item is out of stock: new leaves stock untouched (old: 1st item's
+  stock taken); at the same moment: 2 x 600 on a due of 1000 -> new 1 accepted, ledger 600
+  (old: both accepted, ledger 1200, fee due 400); 5 top-ups of 100 on a new pass -> new pass
+  500 = ledger 500 (old: pass 100, ledger 500); 2 pass bills of 80 on 100 -> new 1 paid, 1
+  unpaid (old: both "paid from the pass", balance 20). With 054 hidden: 33/33 equal through
+  the fallback. Full npm run test:scale (054 applied, 54 migrations) all PASS; type check
+  back to the 2 old errors; paging lint OK; 0 restarts, 0 CPU-limit cancels.
 - **22 Nov 2026, step 2b saved (your order "SAVE NOW"):** PSS `fix/pre-migration`
   `d560eb0` pushed (41 files): `052_owner_last_login.sql` byte-identical to yours plus its
   10 api lines unchanged; 053; api; website; `_vendor`; `tests/scale` (run.mjs, setup.sh,
