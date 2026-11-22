@@ -7,16 +7,13 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov): kit improvements (step 1) and app fixes (step 2)
-written and tested locally; diffs shown to you, NOT committed yet, waiting
-for your OK.** Kit changes sit uncommitted in this worktree
-(`deploy/server-migration/new-server/*`, `pss/vps-deploy.sh`, new
-`pss/local-test/`). App fixes sit uncommitted on PSS branch
-`fix/pre-migration` (from `origin/main` `cb7beeb`, upstream unset so a plain
-push cannot reach `main`), worktree `C:\Users\sriva\Desktop\PSS\pss-main-fixes`.
-Nothing changed on any server, Cloudflare or Supabase. Phase 1 and 2 not
-started. The local test stack (compose project `psslocal`, dummy data) is
-still running on the laptop.
+**PSS Sitting 3 (22 Nov): steps 1 and 2 done, committed and pushed (kit
+`1499d46` on this branch; PSS `bfe2cb1` on `fix/pre-migration`, not on
+`main`). Local rehearsal with the 75% resource plan: 28/28 checks PASS,
+0 supervisor cancels. Now: step 2b (extreme-case hardening A to J), not
+started yet.** Nothing changed on any server, Cloudflare or Supabase.
+Phase 1 and 2 not started. The local test stack (compose project
+`psslocal`, dummy data) runs on the laptop.
 
 Earlier (AlpenGlow): switch-over finished (2 Nov): `api` points at `84.247.184.195`
 since about 22:28 laptop time; Phases 3, 4 and 5 done (see Done). Now in
@@ -45,14 +42,15 @@ security fixes 1, 2, 3: complete.**
 
 ## Next step
 
-PSS Sitting 3, in this order:
-1. Your OK on the two diffs (then: commit + push the kit files; commit the
-   PSS fix branch locally, push only with your separate OK).
-2. Your decision on the worker CPU-limit fix (see Done, 22 Nov, "Found in
-   the local test"); then rehearse it locally with a load burst.
-3. Phase 1 (read-only inventory of `ozatixapvxwrwbpdxuzt`), then Phase 2
-   and the rehearsal tests a to e on the new server; each server, DNS or
-   Supabase change only with your OK.
+PSS Sitting 3, step 2b (extreme-case hardening, your message of 22 Nov):
+A to I on `fix/pre-migration`, local proof for each (to-the-rupee
+equality, 20,000-student load, all checks PASS, 0 supervisor cancels),
+diff and evidence shown before committing; J in the kit. Migration 052 is
+applied to the cloud by you in the SQL editor before the fixed `api` is
+deployed there. Then Phase 1 (read-only; includes the check for live
+violations of "one active session per student / per desk"), Phase 2 with
+the 20,000-student seed at 10, 20 and 50 users while watching AlpenGlow.
+Each server, DNS or Supabase change only with your OK.
 
 Earlier (AlpenGlow): security fixes 1, 2, 3 are complete (deployed, tested, on `main`, site
 flows confirmed 11:04 IST); `trip-planner.js` version tag and Supabase
@@ -66,6 +64,40 @@ move.
 
 ## Done
 
+- **22 Nov 2026, your OKs carried out:** kit step 1 committed + pushed
+  (`924237f`); PSS fixes committed on `fix/pre-migration` with
+  `.gitattributes` (`*.sh text eol=lf`) and pushed to
+  `origin/fix/pre-migration` only (`1d2e6f9`; `origin/main` still
+  `cb7beeb`).
+- **22 Nov 2026, worker CPU limits + safe retry (kit `main/index.ts`):**
+  `cpuTimeSoftLimitMs` / `cpuTimeHardLimitMs` from `.env`
+  (`EDGE_WORKER_CPU_SOFT_MS` 15000, `EDGE_WORKER_CPU_HARD_MS` 45000); one
+  retry on a new worker only for "failed to send request to user worker"
+  / "worker has already retired" (never reached a worker), never for
+  "user worker failed to respond".
+- **22 Nov 2026, batched expiry alerts** (`bfe2cb1`, pushed to
+  `fix/pre-migration`): `list_active_memberships` 3079 ms -> 376 ms at
+  1,500 members; alerts end state identical to the old loop
+  (`check.mjs --alerts`: 4540 rows, same md5, cases: no alert, two
+  alerts, second expiring membership).
+- **22 Nov 2026, 75% resource plan in the kit** (`1499d46`), defaults
+  overridable in `.env`: functions 3 CPUs, 2560m, worker 512 MB, max 8
+  workers, 30 s queue, CPU 15 s / 45 s; db 1536m, `shared_buffers` 384MB
+  and `effective_cache_size` 1GB as `postgres -c` arguments (source
+  "command line" in `pg_settings`; outranks the image's
+  `postgresql.conf`, which sets both to 128MB); rest 512m,
+  `PGRST_DB_POOL` 20; kong 768m; nginx `NGINX_RATE` 40r/s,
+  `NGINX_BURST` 120 (read from the project's `.env` by `add-project.sh`).
+  Local rehearsal with these values: **28/28 checks PASS, 0 supervisor
+  cancels, 0 CPU hard-limit hits, 0 restarts**; longest internal URL
+  5.9 KB. Server load test still to do (Phase 2).
+- **22 Nov 2026, memory ceilings (read-only, nothing changed):**
+  AlpenGlow's containers on the server add up to 4,736 MiB (db 1024,
+  edge-functions/kong/studio 512, realtime/pooler/rest/storage 384,
+  meta/imgproxy 256, auth 128; no CPU caps). PSS at the new defaults:
+  5,376 MiB. Together 10,112 MiB: above the 7,941 MiB RAM by about
+  2.2 GB, and above RAM + swap (9,988 MiB). Real use now about 2 GB.
+  Your decision.
 - **22 Nov 2026, PSS Sitting 3, start.** Read-only check of the new server
   (05:48 CET): AlpenGlow healthy, 11 containers up 7 days, health state
   clean (last event RECOVERED 4 Nov), last backup 21 Nov 22:30, 5.9 GB
@@ -804,10 +836,13 @@ move.
 
 PSS Sitting 3 (22 Nov):
 
-- [ ] OK on the step 1 kit diff (commit + push to this branch).
-- [ ] OK on the step 2 app-fix diff (commit on `fix/pre-migration`;
-      pushing it is a separate OK).
-- [ ] Decision on the worker CPU-limit fix (proposal in the chat).
+- [x] OK on the step 1 kit diff (done 22 Nov, `924237f`).
+- [x] OK on the step 2 app-fix diff (done 22 Nov, `1d2e6f9`, branch pushed).
+- [x] Worker CPU-limit fix (done 22 Nov, `1499d46`).
+- [ ] Memory ceilings: both stacks together 10,112 MiB > 7,941 MiB RAM
+      (see Done, 22 Nov). Your decision.
+- [ ] Migration number: your uncommitted `052_owner_last_login.sql` in
+      the laptop checkout collides with the hardening migration 052.
 - [ ] For Phase 1: a Supabase access token on the laptop (secret names,
       download of the deployed `api`), and the session-pooler string
       typed by you at a `read -rs` prompt on the server.
