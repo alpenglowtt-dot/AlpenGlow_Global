@@ -7,7 +7,9 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov): step 2b done, proven locally, all committed and pushed. Stopped here on your order; next: Phase 1.**
+**PSS Sitting 3 (22 Nov), Phase 1 STOPPED at the DNS check:** `api.perfectstudyspace.in` resolves to **169.58.43.191** (old server, also the PSS all-phases test; DNS only, not proxied; checked 15:54 CET via 1.1.1.1). Rule: stop and ask. Nothing touched on 169.58.43.191. Also read (read-only): AlpenGlow 11 containers healthy, 5.1 GB of 7.9 GB free; 24 h sampler running (8,528 lines); no Supabase access token on the laptop yet. Note: the live `~/ops/healthcheck.sh` has no `--status` mode yet (older copy), so a `--status` call runs a normal, quiet check; use the kit copy in Phase 2.
+
+Earlier: step 2b done, proven locally, all committed and pushed.
 
 HANDOVER (for a fresh session):
 - Committed and pushed (branches only, never main): PSS `fix/pre-migration` at
