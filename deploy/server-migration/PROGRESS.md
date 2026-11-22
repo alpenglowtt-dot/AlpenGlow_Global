@@ -7,7 +7,7 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov), Phase 1 STOPPED at the DNS check:** `api.perfectstudyspace.in` resolves to **169.58.43.191** (old server, also the PSS all-phases test; DNS only, not proxied; checked 15:54 CET via 1.1.1.1). Rule: stop and ask. Nothing touched on 169.58.43.191. Also read (read-only): AlpenGlow 11 containers healthy, 5.1 GB of 7.9 GB free; 24 h sampler running (8,528 lines); no Supabase access token on the laptop yet. Note: the live `~/ops/healthcheck.sh` has no `--status` mode yet (older copy), so a `--status` call runs a normal, quiet check; use the kit copy in Phase 2.
+**PSS Sitting 3 (22 Nov), Phase 1 in progress.** DNS: you repointed `api.perfectstudyspace.in` to 84.247.184.195 (checked 16:0x CET; was 169.58.43.191). Supabase CLI (read-only): secret names set on the cloud: PUBLIC_SITE_KEY, STAFF_JWT_SECRET (both explicit), VITE_SUPABASE_ANON_KEY, VITE_SUPABASE_URL (unused by the api) and the platform SUPABASE_* ones. Deployed `api` = PSS main `cb7beeb` exactly (only a final newline differs); your 052 api lines are not on the cloud. Server: no host psql; the inventory runs in a throw-away container of the already present image supabase/postgres:17.6.1.136 (AlpenGlow containers untouched). Inventory query: kit `pss/phase1-inventory.sql` (READ ONLY transaction, counts and names only; tested on the local dummy db). Waiting: you copy it and run it with the pooler string typed at `read -rs`. The pooler string with the password was pasted into the chat again (22 Nov): not used; change the password after the final dump (Sitting 4).
 
 Earlier: step 2b done, proven locally, all committed and pushed.
 
