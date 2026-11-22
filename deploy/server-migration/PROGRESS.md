@@ -13,8 +13,9 @@ connection strings or customer data here.
 before committing): `053_scale_hardening.sql` (G, F, A), `api` (G, F, D
 part, A), `ReportsPage.jsx` (counts), and your `052_owner_last_login.sql`
 plus its 10 `api` lines copied UNCHANGED (your OK, 22 Nov; diff shown,
-not committed). Done and proven locally: G, F, A. Next: B, E, C, D, H, I,
-J. AlpenGlow: 24-hour read-only memory sampling running on the server
+not committed). Done and proven locally: G, F, A, B, E (keys + session
+rules + router; the SQL-transaction part waits for your scope decision).
+Next: C, D, H, I, J. AlpenGlow: 24-hour read-only memory sampling running on the server
 since 09:58 CET (`~/alpenglow-mem-24h.sh`, log
 `~/alpenglow-mem-24h.log`, ends by itself about 09:58 CET 23 Nov; stop
 early: `pkill -f alpenglow-mem-24h`). Nothing else changed on any
@@ -69,6 +70,35 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, 2b-B proven locally (uncommitted):** daily revenue summary
+  (`revenue_daily`), rebuilt nightly at 02:00 IST by pg_cron (job
+  `pss-nightly-summary`; a test job really ran, "succeeded"), today and
+  newer days summed live, and a trigger that rebuilds a branch-day at once
+  when a past payment or payout is added, edited, moved or deleted. 40/40
+  day ranges identical to the plain row sums; 5/5 corrections stay exact;
+  98/98 API comparisons PASS with `get_revenue` on the summary.
+- **22 Nov 2026, 2b-E proven locally (uncommitted), apart from the
+  SQL-transaction part:** `idempotency_keys` (purged after 7 days);
+  every staff write runs through `withIdempotency` (the 4,957-line action
+  chain moved unchanged into `handleStaffAction`); the website sends a key
+  with each write and does not resend an identical write still in flight;
+  the router may retry an undelivered request or one with a key. Unique
+  rules: one open session per student and per desk (created only if the
+  data already obeys them, else a warning). Tests: double-click payment
+  recorded once (second answer a replay, fee due down once), same key with
+  another amount 422, a new key is a new payment; 5 simultaneous
+  check-ins of one student give 1 open session; two students on one free
+  desk give one winner and "That desk is already in use by another open
+  session". Regression after the move: 28/28, 98/98, lockout and cache
+  all PASS. **Waiting on you:** scope of "each multi-step write in one
+  transaction": 33 actions write 2+ times (renew_membership 11 writes /
+  290 lines, update_attendance 11/173, delete_membership 10/129,
+  close_membership 9/154, checkout_booking 8/217, create_membership
+  6/250, ...). Recommendation: now the short money writes
+  (record_payment, record_locker_payment, create_food_bill,
+  topup_food_pass, apply_loyalty_discount, about 260 lines); the big
+  membership actions after the move, one at a time with equality tests.
 
 - **22 Nov 2026, your decisions:** AlpenGlow ceilings only after a 24-hour
   measurement (incl. the 22:30 backup): db at least 512m, edge-functions
