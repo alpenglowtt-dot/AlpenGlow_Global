@@ -15,7 +15,7 @@ part, A), `ReportsPage.jsx` (counts), and your `052_owner_last_login.sql`
 plus its 10 `api` lines copied UNCHANGED (your OK, 22 Nov; diff shown,
 not committed). Done and proven locally: G, F, A, B, E (keys + session
 rules + router; the SQL-transaction part waits for your scope decision).
-C and D done too (see Done). Next: H (vendor libraries), I (test suite in the PSS repo, 20,000-student seed, CI), J (ops in the kit). Local test scripts so far live in the job temp folder (a-equality, b-summary, b-corrections, c-equality, d-calls, e-dupes, fd-test) and move into the PSS repo in I. AlpenGlow: 24-hour read-only memory sampling running on the server
+C, D and H done too (see Done). Uncommitted kit changes for 2b: router (main/index.ts + jose@6.2.18.mjs), nginx template, security-test.sh, check.mjs. Next: I (test suite in the PSS repo, 20,000-student seed, CI), J (ops in the kit). Local test scripts so far live in the job temp folder (a-equality, b-summary, b-corrections, c-equality, d-calls, e-dupes, fd-test) and move into the PSS repo in I. AlpenGlow: 24-hour read-only memory sampling running on the server
 since 09:58 CET (`~/alpenglow-mem-24h.sh`, log
 `~/alpenglow-mem-24h.log`, ends by itself about 09:58 CET 23 Nov; stop
 early: `pkill -f alpenglow-mem-24h`). Nothing else changed on any
@@ -70,6 +70,21 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, 2b-H proven locally (uncommitted):** `supabase/functions/_vendor/` holds
+  supabase-js 2.49.1 (esbuild browser bundle of the npm package, 104 KB, imports nothing) and
+  jose 5.10.0 (esm.sh bundle, 66 KB, imports nothing), with a README (how each was made,
+  sha256); api imports them by relative path. Found: esm.sh Deno bundle of supabase-js
+  imports 13 node: modules, and Deno then fetches @types/node from npm on an empty cache, so
+  it could not start offline; the browser build avoids that. **Found in the kit router:**
+  `main/index.ts` imported `jsr:@panva/jose@6` (a moving range, fetched from jsr.io on an
+  empty cache): with no internet the whole functions container looped on "worker boot
+  error". Now `./jose@6.2.18.mjs` stored next to it (what @6 resolved to). AlpenGlow live
+  router has the same jsr import (not changed; note only). Proof: fresh empty module cache
+  + outbound internet blocked: container healthy, 0 restarts; login, revenue, students page,
+  daily report, open sessions all HTTP 200; control (original api, esm.sh imports) HTTP 500;
+  0 files downloaded. Back online, full regression: 28/28, 98/98, 191/191, D, E, lockout and
+  cache all PASS. nginx template now 404s every /functions/v1/_ folder.
 
 - **22 Nov 2026, 2b-D proven locally (uncommitted):** besides the cache and parallel
   login/sign-in lookups: action `batch` (up to 10 READ actions in one request through the
