@@ -7,7 +7,7 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov), Phase 1 in progress.** DNS: you repointed `api.perfectstudyspace.in` to 84.247.184.195 (checked 16:0x CET; was 169.58.43.191). Supabase CLI (read-only): secret names set on the cloud: PUBLIC_SITE_KEY, STAFF_JWT_SECRET (both explicit), VITE_SUPABASE_ANON_KEY, VITE_SUPABASE_URL (unused by the api) and the platform SUPABASE_* ones. Deployed `api` = PSS main `cb7beeb` exactly (only a final newline differs); your 052 api lines are not on the cloud. Server: no host psql; the inventory runs in a throw-away container of the already present image supabase/postgres:17.6.1.136 (AlpenGlow containers untouched). Inventory query: kit `pss/phase1-inventory.sql` (READ ONLY transaction, counts and names only; tested on the local dummy db). Waiting: you copy it and run it with the pooler string typed at `read -rs`. The pooler string with the password was pasted into the chat again (22 Nov): not used; change the password after the final dump (Sitting 4).
+**PSS Sitting 3 (22 Nov), Phase 1 DONE (read-only, see Done); Phase 2 waiting for your OKs (batched in the chat).** Earlier in Phase 1: DNS: you repointed `api.perfectstudyspace.in` to 84.247.184.195 (checked 16:0x CET; was 169.58.43.191). Supabase CLI (read-only): secret names set on the cloud: PUBLIC_SITE_KEY, STAFF_JWT_SECRET (both explicit), VITE_SUPABASE_ANON_KEY, VITE_SUPABASE_URL (unused by the api) and the platform SUPABASE_* ones. Deployed `api` = PSS main `cb7beeb` exactly (only a final newline differs); your 052 api lines are not on the cloud. Server: no host psql; the inventory runs in a throw-away container of the already present image supabase/postgres:17.6.1.136 (AlpenGlow containers untouched). Inventory query: kit `pss/phase1-inventory.sql` (READ ONLY transaction, counts and names only; tested on the local dummy db). Waiting: you copy it and run it with the pooler string typed at `read -rs`. The pooler string with the password was pasted into the chat again (22 Nov): not used; change the password after the final dump (Sitting 4).
 
 Earlier: step 2b done, proven locally, all committed and pushed.
 
@@ -96,6 +96,26 @@ move.
 
 ## Done
 
+
+- **22 Nov 2026, PSS Phase 1 done (read-only, cloud read 15:14 UTC via  in a
+  READ ONLY transaction, run by you with the pooler string at ):** Postgres 17.6, 17 MB.
+  34 public tables = exactly the repo's 001-051 schema (the repo-built db adds only
+  _migrations_applied and 053's 4 tables); 92 indexes, 4 functions, 1 trigger, 0 policies, 12
+  enums; row security on every table (overtime_sessions too). Rows: students 482, memberships
+  911, bookings 4,523, transactions 861, alerts 852, desks 178, lockers 116, staff 8, branches 3
+  (full list in ~/pss-phase1.txt on the server). Students per branch: 100 Feet Road 95 (31 with
+  an active membership), Hopes 240 (92), Ram Nagar 147 (61). Per month (IST) sessions /
+  transactions / revenue: 2026-07 12/20/24,883; 08 8/142/239,091; 09 1,050/289/373,739; 10
+  2,463/220/283,817; 11 (to 22nd) 990/190/265,615. staff.last_login_at: ABSENT (052 needed).
+  None of the names 053/054 create exist. Open sessions: 13; students or desks with 2+ open
+  sessions: 0 and 0, so 053 creates both unique indexes. service_role has no timeout (053
+  sets 30 s); anon 3 s, authenticated 8 s. pg_cron available but not installed (053 creates
+  it; if the SQL editor refuses, enable pg_cron under Database > Extensions first, then run
+  053 again: it is safe to run twice). Not used: auth.users 0, storage buckets 0 / objects 0
+  (student-photos gone), realtime 0 tables, no webhooks; Supabase CLI migration history
+  empty (migrations were run in the SQL editor). Secrets: STAFF_JWT_SECRET and
+  PUBLIC_SITE_KEY set. Deployed api = main cb7beeb. New server 84.247.184.195 is Contabo,
+  Germany (RIPE), so expect about 150 ms more per request from India than a nearby server.
 
 - **22 Nov 2026, E-transactions and J committed (your OK):** PSS `fix/pre-migration`
   `8fd2fb3` pushed (branch only); kit `c41876d` pushed. J stays kit-only until Phase 2.
