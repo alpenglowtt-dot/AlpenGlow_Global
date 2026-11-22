@@ -15,7 +15,7 @@ part, A), `ReportsPage.jsx` (counts), and your `052_owner_last_login.sql`
 plus its 10 `api` lines copied UNCHANGED (your OK, 22 Nov; diff shown,
 not committed). Done and proven locally: G, F, A, B, E (keys + session
 rules + router; the SQL-transaction part waits for your scope decision).
-Next: C, D, H, I, J. AlpenGlow: 24-hour read-only memory sampling running on the server
+C done too (see Done). Next: D, H, I, J. AlpenGlow: 24-hour read-only memory sampling running on the server
 since 09:58 CET (`~/alpenglow-mem-24h.sh`, log
 `~/alpenglow-mem-24h.log`, ends by itself about 09:58 CET 23 Nov; stop
 early: `pkill -f alpenglow-mem-24h`). Nothing else changed on any
@@ -70,6 +70,19 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, 2b-C proven locally (uncommitted):** new actions `list_students_page`
+  (50 per page) and `export_students` (filtered rows, for the CSV only), with the Students
+  page own filter, sort and status rules moved into the api unchanged; rows kept 15 s per
+  branch scope in the worker, cleared by every write. Both views of StudentsPage.jsx page
+  through it (search sent after a 300 ms pause, Prev/Next). Proof: 142 branch-view
+  combinations (every sort column and direction, statuses, searches, course and column
+  filters; 199 pages) and 48 Combined Hall combinations give exactly the old browser
+  result (same students, same order, same totals, courses and branch counts); export
+  equals the filtered list (73 rows). One page 20.8 KB vs 607 KB for the whole list at
+  1,500 students. `vite build` OK. Not yet clicked through in a browser (Playwright not
+  available here): part of rehearsal test d. `list_students` is kept for the old website
+  until the new one is live.
 
 - **22 Nov 2026, 2b-B proven locally (uncommitted):** daily revenue summary
   (`revenue_daily`), rebuilt nightly at 02:00 IST by pg_cron (job
