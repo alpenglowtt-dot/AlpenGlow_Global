@@ -12,7 +12,7 @@ set -euo pipefail
 
 KIT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TZ_NAME="${TZ_NAME:-Europe/Berlin}"        # same as the old server
-REBOOT_TIME="${REBOOT_TIME:-23:30}"        # server time; about 03:00-04:00 IST
+REBOOT_TIME="${REBOOT_TIME:-22:30}"        # server time; 03:00 IST in winter (02:00 IST in summer, CEST)
 export DEBIAN_FRONTEND=noninteractive
 step() { echo; echo "==> $1"; }
 
@@ -169,7 +169,7 @@ systemctl enable --now unattended-upgrades
 
 step "ops scripts (backups, health checks)"
 install -d -m 700 -o deploy -g deploy /home/deploy/ops /home/deploy/ops/state /home/deploy/backups
-for f in backup-nightly.sh healthcheck.sh restore-public.sh; do
+for f in backup-nightly.sh healthcheck.sh restore-public.sh restore-test.sh; do
   install -m 750 -o deploy -g deploy "$KIT/$f" "/home/deploy/ops/$f"
 done
 install -m 640 -o deploy -g deploy "$KIT/crontab.deploy" /home/deploy/ops/crontab.deploy

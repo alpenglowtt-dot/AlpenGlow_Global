@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-# Nightly backup, run by cron as the deploy user. The old server had no
-# backup at all.
+# Backup, run by cron every 6 hours as the deploy user (one local backup a day
+# until an off-server copy is set up, see below). The old server had no backup.
+#   backup-nightly.sh          as cron runs it
+#   backup-nightly.sh --now    back up now, even if today's backup exists
 #
 # Covers every project listed in ~/ops/projects/*.conf (AlpenGlow, PSS, ...).
 # Each project has its own Postgres, so each gets its own folder:
@@ -17,10 +19,18 @@ umask 077
 
 ROOT="$HOME/backups"
 KEEP_DAYS=14
-KEEP_OFFSITE_DAYS=90
+KEEP_OFFSITE_DAYS=14
 RCLONE_REMOTE=""
 # shellcheck disable=SC1091
 [ -f "$HOME/ops/ops.env" ] && . "$HOME/ops/ops.env"
+
+# Cron calls this every 6 hours. With an off-server copy (RCLONE_REMOTE set) every call
+# backs up; without one, a second local copy the same day adds little, so the run is
+# skipped while the last good backup is under 20 hours old: one local backup a day.
+if [ -z "$RCLONE_REMOTE" ] && [ "${1:-}" != "--now" ] \
+   && find "$ROOT/last-success" -mmin -1200 2>/dev/null | grep -q .; then
+  exit 0
+fi
 
 D="$ROOT/$(date +%Y-%m-%d_%H%M)"
 fail=0

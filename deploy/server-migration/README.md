@@ -31,7 +31,7 @@ write into a git checkout; `.gitignore` is a second guard).
 | `new-server/add-project.sh` | Adds a project (PSS) as its own slim stack: containers, secrets, nginx, backups, health checks |
 | `new-server/stack-template/` | That slim stack: database, REST, gateway, edge functions |
 | `new-server/restore-public.sh` | Restores a dump with table permissions intact (a plain restore re-opens them) |
-| `new-server/backup-nightly.sh`, `healthcheck.sh`, `crontab.deploy`, `ops.env.example` | Nightly backups and 5-minute health checks for every project |
+| `new-server/backup-nightly.sh`, `healthcheck.sh`, `restore-test.sh`, `crontab.deploy`, `ops.env.example` | Backups (every 6 h with an off-server copy, else daily), 5-minute health checks, a weekly database-size line and a monthly restore test for every project |
 | `new-server/projects/alpenglow-global.conf` | AlpenGlow's entry for those scripts |
 | `new-server/alpenglow/docker-compose.limits.yml` | Memory caps and two Kong workers for the AlpenGlow stack |
 | `new-server/nginx/` | AlpenGlow's site file, and the template `add-project.sh` uses |

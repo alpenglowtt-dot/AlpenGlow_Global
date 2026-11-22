@@ -26,14 +26,29 @@
 #   healthcheck.sh --status   print every check, every container's restart
 #                             count, and the current problems; changes no state
 #                             and sends no mail
+#   healthcheck.sh --db-size  one line with every project's database size (cron
+#                             writes it into the health log once a week)
 set -uo pipefail
+if [ "${1:-}" = "--db-size" ]; then
+  line=""
+  for conf in "$HOME"/ops/projects/*.conf; do
+    [ -e "$conf" ] || continue
+    unset NAME DB_CONTAINER
+    # shellcheck disable=SC1090
+    . "$conf"
+    size=$(docker exec "$DB_CONTAINER" psql -U postgres -d postgres -X -tAc "select pg_size_pretty(pg_database_size('postgres'))" 2>/dev/null || echo "unreadable")
+    line+=" $NAME $size,"
+  done
+  echo "== $(date -Is) database size:${line%,}; disk $(df --output=pcent / | tail -1 | tr -d ' ') used"
+  exit 0
+fi
 STATUS=0; [ "${1:-}" = "--status" ] && STATUS=1
 say() { [ "$STATUS" = 1 ] && echo "$@"; return 0; }
 
 STATE_DIR="$HOME/ops/state"
 STATE="$STATE_DIR/health.state"
 DISK_MAX=80          # percent
-MEM_MIN_MB=300
+MEM_MIN_MB=1024     # alert when less than 1 GB is available
 CERT_MIN_DAYS=14
 BACKUP_MAX_MIN=1560  # 26 hours
 ALERT_TO=""

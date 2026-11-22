@@ -185,7 +185,7 @@ the rehearsal). It sets up:
 - a systemd unit that drops 5432, 6543, 8000 and 8443 from the internet after
   every Docker start
 - Docker log limits (20 MB x 5 per container), 2 GB swap
-- automatic security patches with a reboot at 23:30 server time when needed
+- automatic security patches with a reboot at 22:30 server time when needed (03:00 IST in winter)
 - the ops scripts in `/home/deploy/ops` (not scheduled yet) and AlpenGlow's
   entry in `~/ops/projects/`; `add-project.sh` adds the PSS entry later
 - nginx rate-limit zones that belong to AlpenGlow alone (`alpenglow_api`,
@@ -321,9 +321,11 @@ What runs from then on:
 
 | When (server time) | What |
 |---|---|
-| every 5 min | `healthcheck.sh`: for every project in `~/ops/projects/`, its containers, Postgres, API, domain and certificate expiry; for the server, disk, memory, load and backup age. Emails `AGENCY_EMAIL` through Resend when something changes. |
-| 22:30 daily | `backup-nightly.sh`: for every project, its `public` schema, roles and full-cluster dumps, row counts, `.env`, compose files, Kong config and functions, in `~/backups/<date>/<project>/`; plus nginx and ops settings. Keeps 14 days. |
-| 23:30 when needed | reboot after kernel or libc patches |
+| every 5 min | `healthcheck.sh`: for every project in `~/ops/projects/`, its containers, Postgres, API, domain and certificate expiry; for the server, disk, memory (alert under 1 GB available), load and backup age. Emails `AGENCY_EMAIL` through Resend when something changes. |
+| 03:30, 09:30, 15:30, 21:30 | `backup-nightly.sh`: for every project, its `public` schema, roles and full-cluster dumps, row counts, `.env`, compose files, Kong config and functions, in `~/backups/<date>/<project>/`; plus nginx and ops settings. Every 6 hours once the off-server copy is set up (encrypted, 14 days kept there); until then one local backup a day (the other runs see today's backup and stop). Keeps 14 days on the server. `--now` backs up at once. |
+| 22:30 when needed | reboot after kernel or libc patches (03:00 IST in winter, 02:00 IST in summer) |
+| Monday 07:00 | `healthcheck.sh --db-size`: one line with every project's database size and disk use in `health.log` |
+| 2nd of the month, 05:00 | `restore-test.sh`: the newest backup of every project restored into a scratch database, every table's row count checked, scratch database dropped, PASS or FAIL emailed |
 | Sunday 04:15 | clear Docker build cache older than a week |
 
 Off-server copy (needs a bucket, for example Cloudflare R2): run
@@ -477,7 +479,7 @@ Before cancelling the old server, take one last `pull-backup.sh` snapshot.
 | Container management | Restart `unless-stopped`, health checks | Same |
 | JWT and secrets | `.env`, world-readable | Same values, mode 600, in the nightly backup |
 | Firewall and hardening | ufw + DB ports dropped; Kong ports open; password SSH possibly on | ufw + DB and Kong ports dropped; password SSH forced off |
-| Security patching | Installed, never rebooted (79 days) | Installed, reboots at 23:30 when needed |
+| Security patching | Installed, never rebooted (79 days) | Installed, reboots at 22:30 (03:00 IST) when needed |
 | Logs | nginx rotated; Docker logs unlimited (one at 240 MB) | Docker logs capped at 100 MB per container |
 | Disk space | No alert; 13 GB stale build cache | Alert at 80%; weekly cache prune |
 | Health checks | Docker only, nobody told | Email alert every time state changes |

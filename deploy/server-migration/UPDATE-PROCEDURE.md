@@ -4,7 +4,7 @@ Three layers, three different rhythms. Not rehearsed yet.
 
 | Layer | How it updates | Your part |
 |---|---|---|
-| Ubuntu packages and kernel | Automatically every night; reboots at 23:30 server time when a patch needs it | None. The health check emails if something does not come back |
+| Ubuntu packages and kernel | Automatically every night; reboots at 22:30 server time (03:00 IST in winter) when a patch needs it | None. The health check emails if something does not come back |
 | Docker engine | With the Ubuntu packages (it comes from Docker's apt repository) | None |
 | Supabase images (Postgres, Kong, REST, functions runtime, Studio, Auth) | **Never by themselves.** Versions are pinned in each project's `docker-compose.yml` | Decide when, then follow the steps below |
 
