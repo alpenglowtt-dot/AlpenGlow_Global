@@ -7,28 +7,34 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov), step 2b SAVED; E-transactions proven locally (UNCOMMITTED, waiting for your OK on the diff); now J.**
-Committed and pushed (branch only, never main): PSS `fix/pre-migration` at
-`d560eb0` (all of step 2b: 052 + its 10 api lines unchanged, 053, api,
-website, `supabase/functions/_vendor`, `tests/scale` incl. the 2b proofs
-moved from the job temp folder, `.github/workflows/scale-test.yml`). Kit at
-`64d0085` (router + jose@6.2.18.mjs, nginx `_*` block, security-test.sh,
-check.mjs). Uncommitted in the kit: J work in progress (backup every 6 h with
-a once-a-day skip while there is no off-server copy, 14 days both places,
-`restore-test.sh` monthly with email, alert under 1 GB free memory, weekly
-`--db-size` line, reboot 22:30 server time = 03:00 IST in winter); local
-proof of J half done (backup, skip rule, restore test PASS and a broken
-backup FAILs, size line: all ran; the backup's config archive needed a
-dummy .env, rerun pending). E-transactions UNCOMMITTED in
-`C:\Users\sriva\Desktop\PSS\pss-main-fixes`: `054_money_transactions.sql` (new),
-api (+64 lines: `moneyTx` helper and one call in each of the five actions,
-old steps kept as fallback while 054 is missing), `tests/scale/money-tx.mjs`
-(new, step 4f of npm run test:scale), README, run.mjs. Then finish J. The 20,000-student run is NOT done on the laptop (your
-decision): it runs in Phase 2 on the new server. AlpenGlow: 24-hour
-read-only memory sampling running on the server since 09:58 CET
-(`~/alpenglow-mem-24h.sh`, log `~/alpenglow-mem-24h.log`, ends by itself
-about 09:58 CET 23 Nov; stop early: `pkill -f alpenglow-mem-24h`). Nothing
-else changed on any server, Cloudflare or Supabase.
+**PSS Sitting 3 (22 Nov): step 2b done and proven locally; two diffs wait for your OK.**
+
+HANDOVER (for a fresh session):
+- Committed and pushed (branches only, never main): PSS `fix/pre-migration` at
+  `d560eb0` (all of 2b except the two items below); kit `claude/server-migration-kit`
+  at `64d0085` (router + jose, nginx `_*` block, security-test, check.mjs) plus PROGRESS.
+- UNCOMMITTED, waiting for your OK on the diff (shown in the chat 22 Nov):
+  1. PSS, worktree `C:\Users\sriva\Desktop\PSS\pss-main-fixes` (branch fix/pre-migration):
+     `supabase/migrations/054_money_transactions.sql` (new), `supabase/functions/api/index.ts`
+     (+64 lines), `tests/scale/money-tx.mjs` (new), `tests/scale/run.mjs`, `tests/scale/README.md`.
+     See it with `git -C <worktree> diff; git -C <worktree> status`.
+  2. Kit, this worktree: `new-server/backup-nightly.sh`, `healthcheck.sh`, `crontab.deploy`,
+     `01-base-setup.sh`, `ops.env.example`, `restore-test.sh` (new), `MIGRATION-RUNBOOK.md`,
+     `README.md`, `UPDATE-PROCEDURE.md` (J, see Done 22 Nov).
+  On OK: commit each on its branch and push (PSS: branch only).
+- Re-run the proofs any time (Docker, dummy data): in the PSS worktree
+  `npm run test:scale -- --orig d560eb0` (about 4 min; all steps incl. 4f must PASS).
+  Never the large seed on the laptop (your decision): it runs in Phase 2 on the server.
+  The local stack (compose project psslocal, `.scale-test/backend`) is stopped, not deleted.
+- The live server is unchanged by J: it still has backup 22:30, reboot 23:30 and no
+  restore test. Putting J on it is a server change (your OK; commands written out for you).
+- AlpenGlow: 24-hour read-only memory sampling running on the server since 09:58 CET
+  (`~/alpenglow-mem-24h.sh`, log `~/alpenglow-mem-24h.log`, ends by itself about 09:58 CET
+  23 Nov; stop early: `pkill -f alpenglow-mem-24h`). Afterwards: peaks per container, the
+  ceilings table under your rules (db >= 512m, edge-functions >= 384m, others >= 1.5 x peak,
+  min 128m; propose stopping Studio if the total with PSS 4,608 MiB exceeds 7,941 MiB),
+  then you pick the quiet hour.
+- Nothing else changed on any server, Cloudflare or Supabase.
 
 Earlier (AlpenGlow): switch-over finished (2 Nov): `api` points at `84.247.184.195`
 since about 22:28 laptop time; Phases 3, 4 and 5 done (see Done). Now in
@@ -57,21 +63,24 @@ security fixes 1, 2, 3: complete.**
 
 ## Next step
 
-PSS Sitting 3: (1) E-transactions on `fix/pre-migration`: the five money
-actions each in one SQL function (one transaction), old and new results
-equal, diff and evidence shown before committing. (2) Finish J in the kit
-and commit. (3) Phase 1 (read-only): counts incl. students per branch,
-sessions and transactions per month; whether `staff.last_login_at` exists
-on the cloud; live violations of one open session per student / per desk;
-secret names and a diff of the deployed `api`; where
-`api.perfectstudyspace.in` points (STOP if 169.58.43.191). (4) Phase 2 on
-the new server: PSS rehearsal stack with DUMMY data first: 20,000-student
-seed (`tests/scale/seed-large.sql`), all checks, load at 10, 20 and 50
-users while watching AlpenGlow; then wipe it, then restore the live copy
-(`restore-public.sh` only, migrations 001-051 recorded as applied BEFORE
-the first deploy). Cloud order before the fixed `api` is deployed there:
-052, then 053, then 054, by you in the SQL editor. Each server, DNS or Supabase
-change only with your OK.
+PSS Sitting 3, in this order: (1) your OK on the two diffs above, then commit and push
+them. (2) Phase 1 (read-only, PSS-MIGRATION-PLAN.md): you run `npx supabase login` on the
+laptop (access token: secret NAMES and a download of the deployed `api` to diff); you
+type the session-pooler string yourself at a `read -rs` prompt on the server (never in the
+chat). Read: counts incl. students per branch, sessions and transactions per month;
+whether `staff.last_login_at` exists on the cloud; live violations of one open session per
+student / per desk (053 skips its two unique indexes with a WARNING if any); the IP
+location of 84.247.184.195; where `api.perfectstudyspace.in` points (STOP if
+169.58.43.191). Check AlpenGlow is healthy before and after. (3) Phase 2 on the new
+server (each step with your OK): PSS rehearsal stack with DUMMY data first: 20,000-student
+seed, all checks, load at 10, 20 and 50 users while watching AlpenGlow's response times;
+then wipe it, then restore the live copy (`restore-public.sh` only; migrations 001-051
+recorded as applied BEFORE the first deploy). GO needs: 0 functions restarts, 0 Kong
+errors, all checks PASS, at least 1 GB memory free, AlpenGlow response times unchanged.
+Cloud order before the fixed `api` is deployed there: 052, then 053, then 054, by you in
+the SQL editor. (4) End of sitting: GO/NO-GO and the Sitting 4 list; if GO, ask your OK to
+merge fix/pre-migration into main and to deploy the api to the cloud. Each server, DNS or
+Supabase change only with your OK.
 
 Earlier (AlpenGlow): security fixes 1, 2, 3 are complete (deployed, tested, on `main`, site
 flows confirmed 11:04 IST); `trip-planner.js` version tag and Supabase
@@ -84,6 +93,25 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, J (ops in the kit) proven locally (uncommitted, diff to show you):**
+  `backup-nightly.sh` runs from cron every 6 h (03:30, 09:30, 15:30, 21:30 server time);
+  without an off-server copy it stops while the last good backup is under 20 h old (one
+  local backup a day), `--now` forces one; 14 days kept locally and off-server
+  (KEEP_OFFSITE_DAYS 90 -> 14). New `restore-test.sh` (cron, 2nd of the month 05:00):
+  newest complete backup of each project restored with `restore-public.sh` into a scratch
+  database `restore_test_<date>` in the project's own db container, every table's row count
+  compared with the backup's row-counts.txt, scratch database dropped, PASS/FAIL emailed via
+  Resend (`--no-mail` prints only). `healthcheck.sh`: memory alert under 1,024 MB available
+  (was 300); `--db-size` writes one line (each project's database size, disk use) weekly,
+  Monday 07:00. Reboot window 22:30 server time = 03:00 IST in winter (02:00 IST in summer),
+  was 23:30; backups moved off 22:30. `01-base-setup.sh` installs restore-test.sh. Docs:
+  runbook schedule table, README, UPDATE-PROCEDURE, ops.env.example. Local proof (dummy
+  stack, throw-away HOME): backup ok (4.9 MB, 39 tables); the next 6-hourly run skipped;
+  restore test PASS (39 tables, every count equal, 0 scratch databases left); a backup with
+  one wrong count -> FAIL, exit 1; size line "pss 26 MB; disk 86% used". bash -n clean on
+  all kit scripts. The memory alert reads /proc/meminfo, so it is checked on the server
+  (`healthcheck.sh --status`).
 
 
 - **22 Nov 2026, E-transactions proven locally (uncommitted, diff to show you):** migration
@@ -1044,6 +1072,9 @@ PSS Sitting 3 (22 Nov):
       migration is 053.
 - [x] Copy your `052_owner_last_login.sql` and its 10 `api` lines UNCHANGED into
       `fix/pre-migration` (your OK 22 Nov; committed `d560eb0`).
+- [ ] OK on the E-transactions diff (054 + api + money-tx.mjs) and on the J kit diff
+      (both shown 22 Nov); then I commit and push both (PSS: branch only).
+- [ ] Later, your OK: put J on the live server (crontab, reboot time 22:30, restore-test.sh).
 - [ ] Sitting 5 backlog (after the move, one at a time, each with your OK): the big
       membership actions (new/renew/transfer/cancel membership and the other multi-step
       writes) each in one SQL transaction; AlpenGlow's live router `jsr:@panva/jose@6`
