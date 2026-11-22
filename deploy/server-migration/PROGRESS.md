@@ -7,7 +7,18 @@ connection strings or customer data here.
 
 ## Current step
 
-AlpenGlow switch-over finished (2 Nov): `api` points at `84.247.184.195`
+**PSS Sitting 3 (22 Nov): kit improvements (step 1) and app fixes (step 2)
+written and tested locally; diffs shown to you, NOT committed yet, waiting
+for your OK.** Kit changes sit uncommitted in this worktree
+(`deploy/server-migration/new-server/*`, `pss/vps-deploy.sh`, new
+`pss/local-test/`). App fixes sit uncommitted on PSS branch
+`fix/pre-migration` (from `origin/main` `cb7beeb`, upstream unset so a plain
+push cannot reach `main`), worktree `C:\Users\sriva\Desktop\PSS\pss-main-fixes`.
+Nothing changed on any server, Cloudflare or Supabase. Phase 1 and 2 not
+started. The local test stack (compose project `psslocal`, dummy data) is
+still running on the laptop.
+
+Earlier (AlpenGlow): switch-over finished (2 Nov): `api` points at `84.247.184.195`
 since about 22:28 laptop time; Phases 3, 4 and 5 done (see Done). Now in
 the Phase 6 rollback window: old server untouched for 1 to 2 weeks, old
 Kong stays STOPPED (rollback only: point `api` back to `169.58.43.191`
@@ -34,7 +45,16 @@ security fixes 1, 2, 3: complete.**
 
 ## Next step
 
-Security fixes 1, 2, 3 are complete (deployed, tested, on `main`, site
+PSS Sitting 3, in this order:
+1. Your OK on the two diffs (then: commit + push the kit files; commit the
+   PSS fix branch locally, push only with your separate OK).
+2. Your decision on the worker CPU-limit fix (see Done, 22 Nov, "Found in
+   the local test"); then rehearse it locally with a load burst.
+3. Phase 1 (read-only inventory of `ozatixapvxwrwbpdxuzt`), then Phase 2
+   and the rehearsal tests a to e on the new server; each server, DNS or
+   Supabase change only with your OK.
+
+Earlier (AlpenGlow): security fixes 1, 2, 3 are complete (deployed, tested, on `main`, site
 flows confirmed 11:04 IST); `trip-planner.js` version tag and Supabase
 CDN removal done (3 Nov, 12:20 IST). Optional later: `www` answers
 Cloudflare 522. Whenever `trip-planner.js` changes, bump its `?v=` in
@@ -45,6 +65,73 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, PSS Sitting 3, start.** Read-only check of the new server
+  (05:48 CET): AlpenGlow healthy, 11 containers up 7 days, health state
+  clean (last event RECOVERED 4 Nov), last backup 21 Nov 22:30, 5.9 GB
+  memory free, load 1.5 to 2.3 (fail2ban, nginx, node; no container over
+  10% CPU), `supabase-auth` 2 restarts since 14 Nov. No PSS stack yet.
+  `/etc/nginx/conf.d/00-ratelimit.conf` has `limit_req_status 429;`
+  (step 1 item 8 confirmed).
+- **22 Nov 2026, found:** the PSS laptop checkout (`perfect-study-space`,
+  on `main`) has uncommitted work from 14 Nov: an owner "last login"
+  timestamp in `api` (10 lines) and an untracked migration
+  `052_owner_last_login.sql` (+ `supabase/rollback/`). Not on
+  `origin/main`. Phase 1 step 5 must show whether the cloud runs it.
+  Left untouched.
+- **22 Nov 2026, security note:** the PSS cloud database password was
+  pasted into the chat. Not used, not stored. Change it in the Supabase
+  dashboard after the final dump (Sitting 4). The `api` function does not
+  use the database password (only `SUPABASE_URL`, the service-role key,
+  `STAFF_JWT_SECRET`/`JWT_SECRET`, `PUBLIC_SITE_KEY`), so changing it does
+  not affect the live site.
+- **22 Nov 2026, step 1 (kit) written, uncommitted:**
+  `stack-template/docker-compose.yml` (db `start_period: 120s`; Kong
+  `KONG_NGINX_PROXY_LARGE_CLIENT_HEADER_BUFFERS "4 64k"`; functions
+  `mem_limit` 1024m, `cpus: 2`, `--policy per_worker --max-parallelism 4
+  --request-wait-timeout 30000`, `DENO_DIR` on the `deno-cache` volume),
+  same defaults in `.env.example` and `add-project.sh`; `add-project.sh`
+  optional 4th argument (keep-warm function) and nginx roll-back when
+  `nginx -t` fails; nginx template 404 for `/functions/v1/main` and
+  `/_shared`; `healthcheck.sh` restart/OOM alerts, keep-warm call,
+  `--status`; `security-test.sh` parallel burst (200, 50 at a time);
+  `pss/vps-deploy.sh` step 0 pre-check (stack, router, 001-051 recorded,
+  both secrets set). New `pss/local-test/` (setup-local.sh, seed.sql,
+  check.mjs). All scripts pass `bash -n`.
+- **22 Nov 2026, step 2 (app fixes) written, uncommitted, branch
+  `fix/pre-migration`:** `create_staff` accepts only staff/owner/admin and
+  only an admin may create an admin; new helpers `allRows` (paged) and
+  `allRowsIn` (ids in chunks of 150, about 6 KB per URL, each chunk
+  paged) used in 36 queries (all-branches students/memberships/lockers,
+  dashboard due/expired, recent activity, combined pending, actionable
+  items, open sessions and their 5 lookups, active memberships and their
+  cashback/overtime lookups, daily report x4, top students, cashbacks,
+  food bills, alerts, enquiries, 4 task lists + completions,
+  fix_membership_dates, negative food passes); `jose@5` pinned to
+  `jose@5.10.0` (what `@5` resolves to, the last 5.x); `deploy/vps-deploy.sh`
+  added. Type check: 2 errors, both pre-existing (`main` has 17).
+- **22 Nov 2026, local test (dummy data, 1,500 students over 3
+  branches, laptop only):** 28 list checks against the database: fixed
+  `api` exact on 27, the original stops at 1000 on every growing list
+  (e.g. students 1000 of 1500, open sessions 1000 of 1150, recent
+  sessions 1000 of 5783, enquiries 1000 of 3500, unbilled overtime
+  Rs 8,940 of 13,000, missed tasks 50 of 55). `create_staff`: original
+  lets an owner create an admin (200, row created); fixed 403, no row;
+  admin creating admin 200; unknown role 400. Branch isolation PASS.
+  Longest internal REST URL: fixed 5.9 KB (0 over 8 KB), original
+  38.2 KB (25 over 8 KB). Kit settings verified in the running container;
+  module cache survives a container re-create (first call 0.34 s, 0
+  downloads). Re-run: `pss/local-test/check.mjs`.
+- **22 Nov 2026, found in the local test (not yet fixed):** 1 of 28
+  checks got HTTP 500 "request has been cancelled by supervisor". Cause in
+  the functions log: "CPU time soft limit reached" x9, "hard limit
+  reached" x1 (0 restarts, no OOM). With `per_worker`, a worker's CPU
+  budget adds up over all its requests; the router sets no CPU limits,
+  so the runtime defaults apply. The fixed reports do more CPU work
+  (they read all rows), so they hit it sooner. Proposal waiting for your
+  decision. Also: `list_active_memberships` takes about 3 s in both
+  versions with 1,500 members (it upserts an alert one by one for every
+  member expiring within 7 days); relevant to rehearsal test b.
 
 - **26 Oct 2026** Migration kit built and rehearsed end to end in a sandbox
   (commit `e6ce4aa`, see `README.md`).
@@ -714,6 +801,18 @@ move.
   of the script. Run those as their own `ssh` call with `</dev/null`.
 
 ## Waiting on me
+
+PSS Sitting 3 (22 Nov):
+
+- [ ] OK on the step 1 kit diff (commit + push to this branch).
+- [ ] OK on the step 2 app-fix diff (commit on `fix/pre-migration`;
+      pushing it is a separate OK).
+- [ ] Decision on the worker CPU-limit fix (proposal in the chat).
+- [ ] For Phase 1: a Supabase access token on the laptop (secret names,
+      download of the deployed `api`), and the session-pooler string
+      typed by you at a `read -rs` prompt on the server.
+- [ ] Sitting 4: change the PSS cloud database password after the final
+      dump (it was pasted into the chat on 22 Nov).
 
 Dates (your choice):
 
