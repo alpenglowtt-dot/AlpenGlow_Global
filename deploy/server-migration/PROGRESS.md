@@ -7,13 +7,18 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov): steps 1 and 2 done, committed and pushed (kit
-`1499d46` on this branch; PSS `bfe2cb1` on `fix/pre-migration`, not on
-`main`). Local rehearsal with the 75% resource plan: 28/28 checks PASS,
-0 supervisor cancels. Now: step 2b (extreme-case hardening A to J), not
-started yet.** Nothing changed on any server, Cloudflare or Supabase.
-Phase 1 and 2 not started. The local test stack (compose project
-`psslocal`, dummy data) runs on the laptop.
+**PSS Sitting 3 (22 Nov), stopped at the usage limit in step 2b.** Kit at
+`e63f446` (memory option A, Kong DNS fix), PSS `fix/pre-migration` at
+`bfe2cb1` (pushed). UNCOMMITTED in `C:UserssrivaDesktopPSSpss-main-fixes`:
+`supabase/migrations/053_scale_hardening.sql` (sections G and F only) and
+`api` changes for G/F/D (lockout, parallel login and auth lookups, 60 s
+cache; tested: lockout 11/11 PASS, cached reads byte-identical, 28/28
+checks PASS, type check 2 old errors). Section A (report SQL functions +
+indexes) is designed but NOT yet in 053. Next: append A, prove
+to-the-rupee equality, then B, E, C, D (combined actions, pollers), H, I,
+J. AlpenGlow memory: measured read-only (partial 12-min sample, no
+restarts); new ceilings to propose, wait for your OK. Nothing changed on
+any server, Cloudflare or Supabase.
 
 Earlier (AlpenGlow): switch-over finished (2 Nov): `api` points at `84.247.184.195`
 since about 22:28 laptop time; Phases 3, 4 and 5 done (see Done). Now in
@@ -64,6 +69,20 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, AlpenGlow memory, read-only sample (partial, from 07:00
+  CET; average / peak MiB, ceiling):** realtime 218/218 (384), auth
+  10/10 (128), db 134/135 (1024), edge-functions 86/88 (512), imgproxy
+  93/104 (256), kong 310/313 (512), meta 126/143 (256), pooler 209/209
+  (384), rest 61/62 (384), storage 220/220 (384), studio 264/267 (512).
+  No restarts while sampling. 1.5x peak (min 128m) adds up to about
+  2,800 MiB. Proposal still to be made; nothing changed.
+- **22 Nov 2026, found in my own change and fixed before any commit:**
+  the cache helper `allBranches(db)` was shadowed by the request field
+  `allBranches` in 6 report handlers (would have failed every
+  all-branches report); renamed `getAllBranches`. Lesson: type-check
+  after every change; the 28 checks do not cover get_revenue, referral
+  stats, transactions, discounts (to be added in 2b-A/I).
 
 - **22 Nov 2026, decisions (yours):** migration 052 is yours
   (`052_owner_last_login.sql`, uncommitted in
