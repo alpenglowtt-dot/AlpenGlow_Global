@@ -97,6 +97,28 @@ move.
 ## Done
 
 
+- **22 Nov 2026 (server time), Phase 2 checks and first load test on the 20,000-student DUMMY
+  stack:** npm run test:scale from the laptop against the server (SSH tunnel to 8010,
+  DOCKER_HOST=ssh, SCALE_PREFIX=pss): 4a 28 figures PASS (648 s), 4b 275 student-page checks
+  PASS, 4c PASS, 4e PASS; 4d and 4f first failed on TEST problems (no eligible student in the
+  big seed; laptop-side keep-alive drops through the tunnel), fixed in tests/scale
+  (duplicates.mjs picks and checks out dummy students; money-tx.mjs retries a dropped
+  connection once with the same Idempotency-Key), then 4d all PASS, 4f 38/38 PASS.
+  **Found and fixed: Kong <-> PostgREST keep-alive race** (6 "upstream prematurely closed" /
+  "connection reset by peer" lines, all on reads that Kong retried): KONG_UPSTREAM_KEEPALIVE_
+  IDLE_TIMEOUT "20" in the kit stack-template, tests/scale/stack and the server's pss stack
+  (compose backed up as docker-compose.yml.bak-20261123, pss-kong recreated, healthy). After
+  it: 1 reset in about 1 h, during the OLD api's 5-at-once burst, retried, client got 200.
+  AlpenGlow's own Kong has the same default (note only; separate fix with your OK).
+  **Load test, 10 users x 120 s (load.mjs through the tunnel):** 280 calls, 0 failed, 0 Kong
+  errors, 0 restarts, lowest memory 4,597 MB; BUT PSS p50 1.7 s / p95 7.5 s (dashboard batch
+  p95 11.7 s) and **AlpenGlow probe p95 272 ms, max 752 ms (baseline 22 / 131): AlpenGlow
+  slowed, so the 20 and 50-user runs were NOT started (your stop rule).** Cause: list_students_
+  page builds each page from the FULL list per worker (all 20,000 students in 20 reads of 1,000
+  plus all 65,000 memberships, sorted in JavaScript; 15 s cache per worker, 8 workers): top
+  queries by total time are those two reads (1,737 and 1,585 calls, ~85 ms each); pss-functions
+  CPU-bound; nothing caps the PSS database's CPU. Real data today: 482 students (trivial).
+
 - **22 Nov 2026, Phase 2 so far (PSS stack on 84.247.184.195, DUMMY data):** kit uploaded to
   `~/kit-20261122` (23 files; your OK). You ran as root `OPS_ENTRY=later add-project.sh pss
   api.perfectstudyspace.in 8010 api`, certbot (certificate until 2027-02-20) and the second run:

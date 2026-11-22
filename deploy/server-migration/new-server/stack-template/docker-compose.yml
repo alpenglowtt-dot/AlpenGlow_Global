@@ -120,6 +120,11 @@ services:
       # functions container (502 on every REST call, so every function failed) until the
       # answer expired. Answers are now trusted for at most 10 s.
       KONG_DNS_VALID_TTL: "10"
+      # Kong keeps idle connections to PostgREST for 60 s by default, but PostgREST's web
+      # server closes them after about 30 s; a connection reused in between is already dead
+      # ("upstream prematurely closed" / "connection reset by peer", seen in the 20,000-
+      # student rehearsal on 22 Nov). Kong retries reads, not writes. 20 s ends it first.
+      KONG_UPSTREAM_KEEPALIVE_IDLE_TIMEOUT: "20"
       # Untuned Kong starts one worker per CPU and outgrows its memory cap.
       KONG_NGINX_WORKER_PROCESSES: "2"
       KONG_PROXY_ACCESS_LOG: /dev/stdout combined
