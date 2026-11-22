@@ -45,9 +45,10 @@ security fixes 1, 2, 3: complete.**
 PSS Sitting 3, step 2b (extreme-case hardening, your message of 22 Nov):
 A to I on `fix/pre-migration`, local proof for each (to-the-rupee
 equality, 20,000-student load, all checks PASS, 0 supervisor cancels),
-diff and evidence shown before committing; J in the kit. Migration 052 is
-applied to the cloud by you in the SQL editor before the fixed `api` is
-deployed there. Then Phase 1 (read-only; includes the check for live
+diff and evidence shown before committing; J in the kit. Hardening migration is
+**053** (`053_scale_hardening.sql`; 052 is yours, see Done 22 Nov), applied
+to the cloud by you in the SQL editor before the fixed `api` is deployed
+there. Then Phase 1 (read-only; includes the check for live
 violations of "one active session per student / per desk"), Phase 2 with
 the 20,000-student seed at 10, 20 and 50 users while watching AlpenGlow.
 Each server, DNS or Supabase change only with your OK.
@@ -63,6 +64,35 @@ the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
 move.
 
 ## Done
+
+- **22 Nov 2026, decisions (yours):** migration 052 is yours
+  (`052_owner_last_login.sql`, uncommitted in
+  `C:UserssrivaDesktopPSSperfect-study-space`; never edit,
+  move, delete or commit there). It adds one empty column,
+  `staff.last_login_at` (timestamptz, `IF NOT EXISTS`), nothing else;
+  its rollback drops that column. The matching uncommitted `api` change
+  (10 lines) writes the time into it after an owner's successful login,
+  without changing the login's answer. Phase 1 checks whether the column
+  exists on the cloud. Hardening migration renumbered to **053**.
+  Memory option A: both stacks within RAM.
+- **22 Nov 2026, PSS memory option A in the kit** (`e63f446`): functions
+  2048m (3 CPUs, 8 workers, 512 MB each, CPU 15 s / 45 s unchanged), db
+  1280m (shared_buffers 384MB, effective_cache_size 1GB unchanged), rest
+  512m, kong 768m: **4,608 MiB**. Local re-run: 28/28 PASS, 0 supervisor
+  cancels, 0 restarts.
+- **22 Nov 2026, found and fixed in the kit:** after `docker compose
+  restart rest functions` (used in Phase 3 step 2) the two containers
+  swapped addresses and Kong kept sending REST traffic to the old one:
+  502 on every REST call, so every function failed, until Kong's DNS
+  answer expired or Kong restarted. `KONG_DNS_VALID_TTL: "10"`: the same
+  restart, REST and login answered 200 after 1 s. (AlpenGlow's stack has
+  the upstream Kong settings; not changed.)
+- **22 Nov 2026, 2b-G proven locally:** before 053 every api query had
+  an 8 s limit (the `authenticator` login role's; a 10 s query was
+  cancelled at 8.03 s). 053 sets `service_role` to 30 s: a 10 s query
+  ran to the end, a 35 s query was cancelled at 30 s; anon 3 s and
+  authenticated 8 s unchanged; 053 runs twice without error.
+  Autovacuum is on. pg_cron 1.6.4 is preloaded in the image.
 
 - **22 Nov 2026, your OKs carried out:** kit step 1 committed + pushed
   (`924237f`); PSS fixes committed on `fix/pre-migration` with
@@ -839,10 +869,16 @@ PSS Sitting 3 (22 Nov):
 - [x] OK on the step 1 kit diff (done 22 Nov, `924237f`).
 - [x] OK on the step 2 app-fix diff (done 22 Nov, `1d2e6f9`, branch pushed).
 - [x] Worker CPU-limit fix (done 22 Nov, `1499d46`).
-- [ ] Memory ceilings: both stacks together 10,112 MiB > 7,941 MiB RAM
-      (see Done, 22 Nov). Your decision.
-- [ ] Migration number: your uncommitted `052_owner_last_login.sql` in
-      the laptop checkout collides with the hardening migration 052.
+- [x] Memory: option A (decided 22 Nov): both stacks must fit in RAM,
+      swap only as a buffer. PSS kit defaults done (`e63f446`).
+- [ ] AlpenGlow ceilings: OK on the new numbers (table in the chat,
+      after the 12-minute read-only measurement), then a quiet hour of
+      your choice to apply them (AlpenGlow only, `docker compose up -d`).
+- [x] Migration numbers (decided 22 Nov): 052 is yours, the hardening
+      migration is 053.
+- [ ] OK to copy your `052_owner_last_login.sql` UNCHANGED into
+      `fix/pre-migration` (and whether its 10-line `api` change, also
+      uncommitted in your checkout, comes with it).
 - [ ] For Phase 1: a Supabase access token on the laptop (secret names,
       download of the deployed `api`), and the session-pooler string
       typed by you at a `read -rs` prompt on the server.
