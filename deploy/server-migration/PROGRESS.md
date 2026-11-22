@@ -7,7 +7,7 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov), Phase 1 DONE (read-only, see Done); Phase 2 waiting for your OKs (batched in the chat).** Earlier in Phase 1: DNS: you repointed `api.perfectstudyspace.in` to 84.247.184.195 (checked 16:0x CET; was 169.58.43.191). Supabase CLI (read-only): secret names set on the cloud: PUBLIC_SITE_KEY, STAFF_JWT_SECRET (both explicit), VITE_SUPABASE_ANON_KEY, VITE_SUPABASE_URL (unused by the api) and the platform SUPABASE_* ones. Deployed `api` = PSS main `cb7beeb` exactly (only a final newline differs); your 052 api lines are not on the cloud. Server: no host psql; the inventory runs in a throw-away container of the already present image supabase/postgres:17.6.1.136 (AlpenGlow containers untouched). Inventory query: kit `pss/phase1-inventory.sql` (READ ONLY transaction, counts and names only; tested on the local dummy db). Waiting: you copy it and run it with the pooler string typed at `read -rs`. The pooler string with the password was pasted into the chat again (22 Nov): not used; change the password after the final dump (Sitting 4).
+**PSS Sitting 3 (22 Nov), Phase 1 DONE incl. quiet hours (see Done); Phase 2 IN PROGRESS with your recommended choices (OK 22 Nov: kit upload + root commands; rehearse now, stop if under 1.5 GB free or AlpenGlow slows; tests via SCALE_PREFIX + load.mjs; throw-away secrets for the dummy phase).** Before restoring the live data: check the new server's nginx logs show no requests from perfectstudyspace.pages.dev (your test site, being deleted by you). Earlier in Phase 1: DNS: you repointed `api.perfectstudyspace.in` to 84.247.184.195 (checked 16:0x CET; was 169.58.43.191). Supabase CLI (read-only): secret names set on the cloud: PUBLIC_SITE_KEY, STAFF_JWT_SECRET (both explicit), VITE_SUPABASE_ANON_KEY, VITE_SUPABASE_URL (unused by the api) and the platform SUPABASE_* ones. Deployed `api` = PSS main `cb7beeb` exactly (only a final newline differs); your 052 api lines are not on the cloud. Server: no host psql; the inventory runs in a throw-away container of the already present image supabase/postgres:17.6.1.136 (AlpenGlow containers untouched). Inventory query: kit `pss/phase1-inventory.sql` (READ ONLY transaction, counts and names only; tested on the local dummy db). Waiting: you copy it and run it with the pooler string typed at `read -rs`. The pooler string with the password was pasted into the chat again (22 Nov): not used; change the password after the final dump (Sitting 4).
 
 Earlier: step 2b done, proven locally, all committed and pushed.
 
@@ -96,6 +96,21 @@ move.
 
 ## Done
 
+
+- **22 Nov 2026, Phase 1 quiet hours (cloud, read-only, `pss/quiet-hours.sql`, last 60 days
+  23 Sep to 22 Nov, 3,723 sessions; events = check-ins + check-outs + payments + food bills):**
+  quietest hour per weekday (IST): Mon 03:00-04:00 (0 events, 0.5 students on site on
+  average), Tue 02:00-03:00 (0, 0.5), Wed 01:00-02:00 (0, 0.3), Thu 00:00-01:00 (0, 0.1),
+  Fri 01:00-02:00 (0, 0.4), Sat 03:00-04:00 (0, 0.7), Sun 03:00-04:00 (0, 0.4). All weekdays
+  together: 03:00 (1 event in 60 days), 01:00 (5), 02:00 (6), 04:00 (6), 00:00 (9), 05:00 (15).
+  Busiest: 09:00-10:00 (93-152 per weekday) and 19:00-21:00. Full hour-by-weekday grid in
+  ~/pss-quiet-hours.txt on the server. Note: 03:00 IST is also the automatic-reboot window
+  (only on nights a patch needs it), so for the cutover 01:00-02:00 IST is as quiet and clear
+  of it.
+- **22 Nov 2026, AlpenGlow baseline before any PSS change (`pss/load-watch.sh`, 60 s,
+  read-only):** AlpenGlow API probe p50 13 ms, p95 22 ms, max 131 ms, 0 errors; memory
+  available 5,896 MB; peaks kong 312, studio 263, storage 220, realtime 216, pooler 212, meta
+  156, db 133, edge 110, imgproxy 90, rest 62, auth 10 MiB.
 
 - **22 Nov 2026, PSS Phase 1 done (read-only, cloud read 15:14 UTC via `pss/phase1-inventory.sql` in a
   READ ONLY transaction, run by you with the pooler string at `read -rs`):** Postgres 17.6, 17 MB.

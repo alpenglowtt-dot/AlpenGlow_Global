@@ -107,7 +107,12 @@ EOF
 
   step "ops entry (nightly backup and health check)"
   install -d -m 700 -o deploy -g deploy "$DEPLOY_HOME/ops/projects"
-  cat > "$DEPLOY_HOME/ops/projects/$NAME.conf" <<EOF
+  # OPS_ENTRY=later: write it as <name>.conf.later, which backup-nightly.sh and
+  # healthcheck.sh do not read (they read *.conf), e.g. while the stack only holds
+  # rehearsal data. Switch it on later: mv ~/ops/projects/<name>.conf.later ~/ops/projects/<name>.conf
+  OPS_CONF="$DEPLOY_HOME/ops/projects/$NAME.conf"
+  [ "${OPS_ENTRY:-now}" = later ] && OPS_CONF="$OPS_CONF.later"
+  cat > "$OPS_CONF" <<EOF
 # Read by backup-nightly.sh and healthcheck.sh. Written by add-project.sh.
 NAME=$NAME
 BACKEND="\$HOME/projects/$NAME/backend"
@@ -122,8 +127,8 @@ PROBE_KEY_VAR=ANON_KEY
 WARM_URL="${WARM_FN:+http://127.0.0.1:$PORT/functions/v1/$WARM_FN}"
 WARM_BODY='{"action":"keep_warm"}'
 EOF
-  chown deploy:deploy "$DEPLOY_HOME/ops/projects/$NAME.conf"
-  chmod 600 "$DEPLOY_HOME/ops/projects/$NAME.conf"
+  chown deploy:deploy "$OPS_CONF"
+  chmod 600 "$OPS_CONF"
 
   step "start the stack"
   as_deploy "cd '$DIR' && docker compose up -d"
@@ -136,7 +141,7 @@ EOF
   if [ -n "$unhealthy" ]; then
     echo "Not healthy after 5 minutes: $unhealthy"
     echo "Logs: cd $DIR && docker compose logs. To start over (deletes this new, empty stack):"
-    echo "  cd $DIR && sudo -u deploy docker compose down -v && cd / && rm -rf $DEPLOY_HOME/projects/$NAME $DEPLOY_HOME/ops/projects/$NAME.conf"
+    echo "  cd $DIR && sudo -u deploy docker compose down -v && cd / && rm -rf $DEPLOY_HOME/projects/$NAME $OPS_CONF"
     exit 1
   fi
 else
