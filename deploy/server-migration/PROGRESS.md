@@ -97,6 +97,31 @@ move.
 ## Done
 
 
+- **23 Nov 2026, 055 on 20,000 students and the load retest (cpu_shares 512, functions 3 CPUs):**
+  055 committed `ac543bc` (your OK). Server page checks: 275/275 PASS, 167,020 page rows compared
+  field by field, 0 differ; one page 21 KB vs 8.1 MB whole list; one students_page() call 300 ms for
+  all 10 branches, 40 ms for one branch. Load (load.mjs through the tunnel, 120 s each;
+  load-watch.sh now also records CPU):
+  | users | PSS p50 / p95 | dashboard batch p50 / p95 | AlpenGlow p50 / p95 / max | lowest free | top CPU | failed / Kong err / restarts |
+  | 10 | 1,174 / 5,516 ms | 2,988 / 5,960 ms | 9 / 39 / 43 ms | 5,014 MB | pss-db 147 %, load 5.5 | 0 / 0 / 0 |
+  | 20 | 1,874 / 6,142 ms | 3,373 / 8,534 ms | 7 / 32 / 36 ms | 4,858 MB | pss-db 124 %, functions 113 % | 0 / 0 / 0 |
+  | 50 | 5,679 / 16,559 ms | 13,067 / 28,420 ms | 8 / 18 / 28 ms | 4,765 MB | pss-db 201 %, functions 125 % | 0 / 0 / 0 |
+  AlpenGlow stays under the 44 ms line at every level (baseline p95 22 ms), so functions keep 3 CPUs.
+  GO criteria met (0 restarts, 0 Kong errors, all checks PASS, >= 1 GB free, AlpenGlow unchanged).
+  PSS itself is slow at 20,000 students (database-bound: the dashboard, the four big lists and the
+  all-branches student page, 300 ms each): Sitting 5 work; real data today is 482 students.
+- **23 Nov 2026, AlpenGlow 24-hour memory measurement (read-only, 2,646 samples, 22 Nov 09:58 to
+  23 Nov 10:02 CET, incl. the 22:30 backup; lowest memory available 4,523 MiB at 05:39; restarts:
+  supabase-auth 2, both on 14 Nov):** peak MiB (during backup) -> proposed ceiling under your rules:
+  auth 15 (14) -> 128m; db 140 (140, at 22:30) -> 512m; edge-functions 137 (111) -> 384m; imgproxy
+  105 -> 160m; kong 330 (325) -> 512m; meta 167 -> 256m; pooler 213 -> 320m; realtime 221 -> 352m;
+  rest 69 -> 128m; storage 226 -> 352m; studio 278 -> 448m. Total now 4,736 MiB, proposed 3,552 MiB;
+  with PSS 4,608 = 8,160 MiB, over 7,941 by 219, so per your rule: stop Studio (start only when
+  needed) -> 7,712 MiB. Waiting for your OK; then: dated backup of docker-compose.limits.yml on the
+  server, new ceilings + Studio behind a compose profile, docker compose up -d (about 1 min of
+  AlpenGlow downtime), the same file in the kit; checks: 10 containers healthy, api 200, contact
+  form + dashboard login, health clean, 0 restarts in 1 h; roll back on failure.
+
 - **23 Nov 2026, ORDER OF THE SITTINGS (your decision; each as early as possible, kept separate):**
   * **Sitting 3, now:** commit 055 (your OK), retest at 10/20/50 users, AlpenGlow ceilings table
     today (apply with your OK), then wipe the dummy data, live copy, real secrets, fixed api,

@@ -13,7 +13,7 @@ AG_KEY="$(envval "$HOME/projects/alpenglow-global/backend/.env" ANON_KEY)"   # k
 PROBE="http://127.0.0.1:8000/rest/v1/packages?select=id&limit=1"
 since="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 rc0=$(docker inspect -f '{{.RestartCount}}' pss-functions 2>/dev/null || echo 0)
-ms=(); minavail=999999; declare -A peak
+ms=(); minavail=999999; maxload=0; declare -A peak cpu
 end=$(( $(date +%s) + SECS ))
 echo "time      alpenglow_ms  mem_available_MB  pss-functions"
 while [ "$(date +%s)" -lt "$end" ]; do
@@ -22,10 +22,12 @@ while [ "$(date +%s)" -lt "$end" ]; do
   [ "$code" = 200 ] || m="ERR$code"
   ms+=("$m")
   avail=$(awk '/MemAvailable/{print int($2/1024)}' /proc/meminfo); [ "$avail" -lt "$minavail" ] && minavail=$avail
-  while read -r name mem; do
+  l1=$(awk '{print $1}' /proc/loadavg); awk -v a="$l1" -v b="$maxload" 'BEGIN{exit !(a>b)}' && maxload=$l1
+  while read -r name mem c; do
     v=$(awk -v x="$mem" 'BEGIN{n=x+0; if (x ~ /GiB/) n*=1024; else if (x ~ /KiB/) n/=1024; printf "%d", n}')
     [ "${peak[$name]:-0}" -lt "$v" ] && peak[$name]=$v
-  done < <(docker stats --no-stream --format '{{.Name}} {{.MemUsage}}' | awk '{print $1, $2}')
+    cv=$(awk -v x="$c" 'BEGIN{printf "%d", x+0}'); [ "${cpu[$name]:-0}" -lt "$cv" ] && cpu[$name]=$cv
+  done < <(docker stats --no-stream --format '{{.Name}} {{.MemUsage}} {{.CPUPerc}}' | awk '{print $1, $2, $5}')
   printf '%s  %12s  %16s  %s MiB\n' "$(date +%H:%M:%S)" "$m" "$avail" "${peak[pss-functions]:-?}"
   sleep 5
 done
@@ -35,8 +37,9 @@ pct() { printf '%s\n' "$ok" | awk -v p="$1" -v n="$n" 'NR==int((n-1)*p)+1{print;
 echo "== summary ($since to now)"
 echo "AlpenGlow probe: $n ok, $errs errors, p50 $(pct 0.5) ms, p95 $(pct 0.95) ms, max $(printf '%s\n' "$ok" | tail -1) ms"
 echo "lowest memory available: $minavail MB"
-echo "highest memory per container (MiB):"
-for k in "${!peak[@]}"; do echo "  $k ${peak[$k]}"; done | sort -k2 -n -r
+echo "highest 1-minute load average: $maxload on $(nproc) CPUs"
+echo "highest memory per container (MiB), highest CPU % (100 = one CPU):"
+for k in "${!peak[@]}"; do echo "  $k ${peak[$k]} MiB, ${cpu[$k]:-0}% CPU"; done | sort -k2 -n -r
 rc1=$(docker inspect -f '{{.RestartCount}}' pss-functions 2>/dev/null || echo 0)
 echo "pss-functions restarts during the window: $((rc1 - rc0)), OOM-killed flag: $(docker inspect -f '{{.State.OOMKilled}}' pss-functions 2>/dev/null)"
 echo "pss-kong 5xx answers: $(docker logs --since "$since" pss-kong 2>/dev/null | grep -cE '" 5[0-9][0-9] ')"
