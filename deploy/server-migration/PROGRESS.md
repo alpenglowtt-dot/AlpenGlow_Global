@@ -57,6 +57,8 @@ second SSH key; docs and cleanup.
 ## Done
 
 
+- **23 Nov 2026 15:44-15:49 CET, AlpenGlow incident fixed (your request "solve those fast"):** a phone (WhatsApp/SMS) login code failed: send-sms-otp at 15:44:10 CET got ENETUNREACH ("Network is unreachable", os error 101) calling https://graph.facebook.com (WhatsApp API) -> HTTP 500, then 3 retries refused 429 by the OTP rate limit. Cause: Docker DNS answers graph.facebook.com with IPv6 first (2a03:2880:...), the server has no IPv6 route, and the edge runtime does not fall back to IPv4. Email codes unaffected. Fix (AlpenGlow docker-compose.override.yml, backup .bak-20261123): functions extra_hosts graph.facebook.com:157.240.0.13 (IPv4 pin) and kong KONG_DNS_VALID_TTL "10" (so recreated containers are found again at once; cause of the 10:25 CET 502); docker compose up -d functions kong 15:48:13-15:48:45 CET (about 32 s), Studio stopped again. After: 10/10 healthy, rest 200, https functions OPTIONS 200, pin in the container's /etc/hosts. To confirm: one real phone OTP login (after the rate-limit window). Sitting 5: proper fix (IPv6 on the server, or prefer IPv4) and drop the pin; the pinned address can change.
+
 - **23 Nov 2026, SITTING 4 REPORT (PSS switch-over):** freeze 13:59:23 UTC (cloud api -> 503,
   version 166) -> final copy (34 tables = the frozen cloud: students 482, memberships 911,
   bookings 4,523, transactions 861; 052-055 applied; dump deleted) -> Pages variables set by you ->
