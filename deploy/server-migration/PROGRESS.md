@@ -97,6 +97,20 @@ move.
 ## Done
 
 
+- **23 Nov 2026, ORDER OF THE SITTINGS (your decision; each as early as possible, kept separate):**
+  * **Sitting 3, now:** commit 055 (your OK), retest at 10/20/50 users, AlpenGlow ceilings table
+    today (apply with your OK), then wipe the dummy data, live copy, real secrets, fixed api,
+    rehearsal tests, your own test, GO. The four big lists (active memberships, alerts,
+    enquiries, cashbacks; and the date limits) stay as they are for now; no proposal today.
+  * **Sitting 4, right after GO (today or tomorrow, staff are off):** the switch as planned (freeze,
+    final copy, merge to main, Pages switch and new build, live checks, 1-hour watch) PLUS turning
+    on PSS's backups and health check on the server (J; with your OK; without disturbing
+    AlpenGlow's) and sending PSS alerts to srivaibhav14@gmail.com.
+  * **Sitting 5, from the next day:** database paging for the four big lists + date limits;
+    transactions for the big membership actions; prefill; CORS; R2 off-server backups; a weekly
+    "all OK" email; AlpenGlow Kong keep-alive and router jose fixes; a second SSH key; docs and
+    cleanup; at the end the 2-week check and pausing the cloud project.
+
 - **23 Nov 2026, your decisions and NEW TIMING:** (1) PSS containers get cpu_shares 512 (AlpenGlow
   keeps 1024), functions stay at 3 CPUs; if the retest still shows AlpenGlow p95 above 44 ms (2x its
   22 ms baseline), lower to 2 CPUs and retest. (2) Paging rule for ALL big lists: the database
