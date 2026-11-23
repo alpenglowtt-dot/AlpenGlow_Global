@@ -7,95 +7,66 @@ connection strings or customer data here.
 
 ## Current step
 
-**PSS Sitting 3 (22 Nov), Phase 1 DONE incl. quiet hours (see Done); Phase 2 IN PROGRESS with your recommended choices (OK 22 Nov: kit upload + root commands; rehearse now, stop if under 1.5 GB free or AlpenGlow slows; tests via SCALE_PREFIX + load.mjs; throw-away secrets for the dummy phase).** Before restoring the live data: check the new server's nginx logs show no requests from perfectstudyspace.pages.dev (your test site, being deleted by you). Earlier in Phase 1: DNS: you repointed `api.perfectstudyspace.in` to 84.247.184.195 (checked 16:0x CET; was 169.58.43.191). Supabase CLI (read-only): secret names set on the cloud: PUBLIC_SITE_KEY, STAFF_JWT_SECRET (both explicit), VITE_SUPABASE_ANON_KEY, VITE_SUPABASE_URL (unused by the api) and the platform SUPABASE_* ones. Deployed `api` = PSS main `cb7beeb` exactly (only a final newline differs); your 052 api lines are not on the cloud. Server: no host psql; the inventory runs in a throw-away container of the already present image supabase/postgres:17.6.1.136 (AlpenGlow containers untouched). Inventory query: kit `pss/phase1-inventory.sql` (READ ONLY transaction, counts and names only; tested on the local dummy db). Waiting: you copy it and run it with the pooler string typed at `read -rs`. The pooler string with the password was pasted into the chat again (22 Nov): not used; change the password after the final dump (Sitting 4).
+**PSS IS LIVE ON THE NEW SERVER (switched 23 Nov 2026, 14:17 UTC / 19:47 IST).** Sitting 3 ended
+with GO; Sitting 4 steps 1-6 done; the 1-hour watch runs until 15:27 UTC (final reading below in
+Done when taken). Staff site (perfect-study-space Pages build of PSS main 1fc9b41), join site and
+the public enquiry form (PSS-WEB) all call https://api.perfectstudyspace.in -> 84.247.184.195.
+The cloud project ozatixapvxwrwbpdxuzt is FROZEN (its api answers 503 "System upgrade in
+progress...") and holds the data as of 13:59 UTC: it is the rollback base, untouched otherwise.
+PSS backups, health check (alerts to srivaibhav14@gmail.com), keep-warm and the monthly restore
+test are on. AlpenGlow: memory ceilings applied, Studio stopped, 10/10 healthy.
 
-Earlier: step 2b done, proven locally, all committed and pushed.
-
-HANDOVER (for a fresh session):
-- Committed and pushed (branches only, never main): PSS `fix/pre-migration` at
-  `d560eb0` (all of 2b except the two items below); kit `claude/server-migration-kit`
-  at `64d0085` (router + jose, nginx `_*` block, security-test, check.mjs) plus PROGRESS.
-- Your OK 22 Nov on both diffs; committed and pushed: PSS `fix/pre-migration` at
-  `8fd2fb3` (054_money_transactions.sql, api moneyTx, tests/scale/money-tx.mjs, run.mjs,
-  README); kit at `c41876d` (J: backup-nightly.sh, healthcheck.sh, crontab.deploy,
-  01-base-setup.sh, ops.env.example, restore-test.sh, runbook, README, UPDATE-PROCEDURE).
-  Nothing uncommitted for the migration in either worktree.
-- Re-run the proofs any time (Docker, dummy data): in the PSS worktree
-  `npm run test:scale -- --orig d560eb0` (about 4 min; all steps incl. 4f must PASS).
-  Never the large seed on the laptop (your decision): it runs in Phase 2 on the server.
-  The local stack (compose project psslocal, `.scale-test/backend`) is stopped, not deleted.
-- J is NOT installed on the live server (your decision 22 Nov): it still has backup 22:30,
-  reboot 23:30 and no restore test. Install J in Phase 2 together with adding the PSS stack,
-  with your OK, and without disturbing AlpenGlow's backups or health check: before the
-  change take a backup and note `healthcheck.sh --status`; after it, run one backup by hand
-  (must end "ok" for alpenglow-global AND pss), `healthcheck.sh --status` clean, and
-  `crontab -l` showing the new schedule; keep the old crontab and apt reboot file as dated
-  copies to roll back.
-- AlpenGlow: 24-hour read-only memory sampling running on the server since 09:58 CET
-  (`~/alpenglow-mem-24h.sh`, log `~/alpenglow-mem-24h.log`, ends by itself about 09:58 CET
-  23 Nov; stop early: `pkill -f alpenglow-mem-24h`). Afterwards: peaks per container, the
-  ceilings table under your rules (db >= 512m, edge-functions >= 384m, others >= 1.5 x peak,
-  min 128m; propose stopping Studio if the total with PSS 4,608 MiB exceeds 7,941 MiB),
-  then you pick the quiet hour.
-- Nothing else changed on any server, Cloudflare or Supabase.
-
-Earlier (AlpenGlow): switch-over finished (2 Nov): `api` points at `84.247.184.195`
-since about 22:28 laptop time; Phases 3, 4 and 5 done (see Done). Now in
-the Phase 6 rollback window: old server untouched for 1 to 2 weeks, old
-Kong stays STOPPED (rollback only: point `api` back to `169.58.43.191`
-and `docker compose start kong` there). Only open check: WhatsApp OTP to
-a non-Indian number (needs a number you can receive on; same code path
-and keys as the Indian one, which works).
-
-Security fixes session (3 Nov) in progress, worktree
-`C:\Users\sriva\Desktop\AlpenGlow WEB\AlpenGlow-security`, branch
-`claude/security-fixes` (from `origin/main`, no upstream so a plain push
-cannot reach `main`). Setup done; fixes 2 and 3 deployed and tested on the
-new server; fix 1a (`save-trip-lead` edge function) deployed and
-curl-tested; fix 1b committed (`8b1b269`) and passed a pre-merge browser
-test; `main` pushed (`8b1b269`, 02:21 IST) and live on Cloudflare from
-02:21:42 IST; your own final submit confirmed (fix 1c done). Fix 1d:
-migration 014 written and dry-run OK (not committed, not deployed; see
-Done, 3 Nov). Fix 1d deployed 02:47 IST on your order (before the 1 h
-minimum, your decision) and tested: `security-test.sh` 0 FAIL; `main`
-pushed (`9047ad7`, 02:56:57 IST). No real visitor hit the stale-cache
-401 (checked 10:41 IST). Final re-test re-run by you and confirmed
-(11:04 IST): contact form, trip planner final submit, Compass chat,
-dashboard login all reached the new server, 0 errors. **AlpenGlow
-security fixes 1, 2, 3: complete.**
+ROLLBACK (if something fails that cannot be fixed in 10 minutes, decided by you): redeploy the
+real api (main cb7beeb, kept in the job folder as cloudapi/supabase/functions/api/index.ts; deploy
+through the management api as on 23 Nov, the CLI rejects sbp_v0_ tokens) to the cloud; Pages
+perfect-study-space: roll back to the previous production deployment and restore the two old
+variables; revert the PSS-WEB line; data written on the server after 14:05 UTC must then be
+carried to the cloud by hand (the server backup has it).
 
 ## Next step
 
-PSS Sitting 3, in this order: (1) done: both diffs committed (8fd2fb3, c41876d). (2) Phase 1 (read-only, PSS-MIGRATION-PLAN.md): you run `npx supabase login` on the
-laptop (access token: secret NAMES and a download of the deployed `api` to diff); you
-type the session-pooler string yourself at a `read -rs` prompt on the server (never in the
-chat). Read: counts incl. students per branch, sessions and transactions per month;
-whether `staff.last_login_at` exists on the cloud; live violations of one open session per
-student / per desk (053 skips its two unique indexes with a WARNING if any); the IP
-location of 84.247.184.195; where `api.perfectstudyspace.in` points (STOP if
-169.58.43.191). Check AlpenGlow is healthy before and after. (3) Phase 2 on the new
-server (each step with your OK): PSS rehearsal stack with DUMMY data first: 20,000-student
-seed, all checks, load at 10, 20 and 50 users while watching AlpenGlow's response times;
-then wipe it, then restore the live copy; install J then too (see the J rule above) (`restore-public.sh` only; migrations 001-051
-recorded as applied BEFORE the first deploy). GO needs: 0 functions restarts, 0 Kong
-errors, all checks PASS, at least 1 GB memory free, AlpenGlow response times unchanged.
-Cloud order before the fixed `api` is deployed there: 052, then 053, then 054, by you in
-the SQL editor. (4) End of sitting: GO/NO-GO and the Sitting 4 list; if GO, ask your OK to
-merge fix/pre-migration into main and to deploy the api to the cloud. Each server, DNS or
-Supabase change only with your OK.
+**2-week watch, then Sitting 5** (order decided 23 Nov; Sitting 5 starts the next day):
 
-Earlier (AlpenGlow): security fixes 1, 2, 3 are complete (deployed, tested, on `main`, site
-flows confirmed 11:04 IST); `trip-planner.js` version tag and Supabase
-CDN removal done (3 Nov, 12:20 IST). Optional later: `www` answers
-Cloudflare 522. Whenever `trip-planner.js` changes, bump its `?v=` in
-`index.html` and every `packages/*.html` (see the comment in
-`index.html`). Later: Phase 6 (last `pull-backup.sh` of the
-old server with `VPS_HOST=deploy@169.58.43.191`, then cancel it, delete
-the `travel` DNS record, `ssh-keygen -R 169.58.43.191`), then the PSS
-move.
+2-WEEK CHECKLIST (switch on 23 Nov 2026; final check on 7 Dec 2026):
+- [ ] 24 Nov: every staff member has logged in once (new login secret); no complaints; health
+      log quiet; ~/backups has a new folder with pss/ and alpenglow-global/ (one per day until R2).
+- [ ] 24-30 Nov, daily: `~/ops/healthcheck.sh --status` clean; pss-functions restarts 0; Kong
+      5xx and 414 0; enquiries from perfectstudyspace.in and join-site signups arrive on the server.
+- [ ] 30 Nov (Mon) 07:00 CET and 7 Dec: the weekly database-size line in ~/ops/state/health.log.
+- [ ] 2 Dec, 05:00 CET: first monthly restore test runs; PASS email for alpenglow-global and pss
+      (log ~/ops/state/restore-test.log).
+- [ ] 7 Dec 2026, FINAL CHECK: two clean weeks (no PROBLEM emails left open, 0 restarts, backups
+      every day); read-only count check of the frozen cloud (pss/phase1-inventory.sql through the
+      pooler, you type the string): its counts still equal the freeze (students 482, memberships
+      911, bookings 4,523, transactions 861), i.e. nothing was written there after 13:59 UTC 23 Nov.
+- [ ] 7 Dec 2026, THEN YOU: pause the cloud project ozatixapvxwrwbpdxuzt (Supabase dashboard ->
+      Project settings -> Pause; a paused free project can be restored for 90 days). Optionally a
+      last pg_dump of it first.
+- [ ] After the pause: remove the server leftovers (volumes/db/data-dummy-20261123,
+      volumes/db/data-copy1-20261123, ~/pss-rehearsal, ~/pss-live incl. the deleted-20261123 copy,
+      ~/pss-phase1.txt, ~/pss-quiet-hours.txt, the *.sql query files in ~).
+
+SITTING 5 (from 24 Nov, each item with your OK): database paging for the four big lists
+(active memberships, alerts, enquiries, cashbacks) + date limits; transactions for the big
+membership actions; prefill; CORS; R2 off-server backups; a weekly "all OK" email; AlpenGlow
+Kong: KONG_DNS_VALID_TTL (the 502 blip at 10:25 CET 23 Nov) and upstream keep-alive 20 s; AlpenGlow
+router jose stored copy; rotate AlpenGlow's service-role key (printed once in this session);
+api: unknown function -> 404, empty body -> 400; security-test.sh burst with one parallel curl;
+second SSH key; docs and cleanup.
 
 ## Done
 
+
+- **23 Nov 2026, SITTING 4 REPORT (PSS switch-over):** freeze 13:59:23 UTC (cloud api -> 503,
+  version 166) -> final copy (34 tables = the frozen cloud: students 482, memberships 911,
+  bookings 4,523, transactions 861; 052-055 applied; dump deleted) -> Pages variables set by you ->
+  PSS main fast-forwarded cb7beeb -> 1fc9b41 (14:08:30 UTC) -> new Pages build live with the new api
+  and CSP -> your PSS-WEB line published (14:17 UTC). Users blocked about 18 minutes. Operations on
+  (step 5). Live checks passed (step 6), test records deleted. You revoked the Supabase access
+  token (my copy deleted) and reset the cloud database password. AlpenGlow: the ceilings change at
+  10:24 CET caused a 502 on its REST api through Kong for up to 5 minutes (health check PROBLEM
+  10:25, RECOVERED 10:30, emailed to info@alpenglowglobal.com): Kong kept the old address of the
+  recreated rest container; fix in Sitting 5 (KONG_DNS_VALID_TTL). Otherwise 10/10 healthy all day.
 
 - **23 Nov 2026, SITTING 4 step 6 (live checks) DONE:** you: everything working; staff site served from perfect-study-space.pages.dev (509 api calls, all 200, after the switch), join site and public site reached the new api. Seen on the server: Admin claimed your join signup and created student "test test" + membership with Rs 1 cash payment (20:04 IST), check-in + check-out (20:05), food bill Rs 24 cash (20:05), enquiry from perfectstudyspace.in (website_form, 20:06). Console: only "A listener indicated an asynchronous response ... message channel closed" = a browser extension (Chrome), not the site; no CSP errors. Your test records DELETED at your request in one transaction with a saved copy (~/pss-live/deleted-20261123/*.csv, mode 600): 2 transactions, 1 food bill (+1 item), the student (cascade: 1 session, 1 membership), 1 enquiry. After: students 482, memberships 911, bookings 4,523, transactions 861 (= the freeze), revenue this month Rs 2,65,615 (= Phase 1), summary+live = rows.
 
