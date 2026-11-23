@@ -97,6 +97,43 @@ move.
 ## Done
 
 
+- **23 Nov 2026, your decisions and NEW TIMING:** (1) PSS containers get cpu_shares 512 (AlpenGlow
+  keeps 1024), functions stay at 3 CPUs; if the retest still shows AlpenGlow p95 above 44 ms (2x its
+  22 ms baseline), lower to 2 CPUs and retest. (2) Paging rule for ALL big lists: the database
+  returns only one page (sorting, search, filters, total in SQL); never a whole table into a
+  function; totals and reports stay SQL functions (053). (3) Retest 10/20/50 users with the stop
+  rule; record PSS and AlpenGlow p50/p95, memory, CPU, dashboard separately. (4) AlpenGlow ceilings
+  table after the 24 h measurement, applied today with your OK (about 1 min AlpenGlow downtime).
+  (5) Note only: AlpenGlow's Kong keep-alive and its router's jsr jose import, separate fix later.
+  NEW TIMING: staff of both apps are not using them today and tomorrow, so finish Sitting 3 AND do
+  Sitting 4 today if usage allows; no quiet-hour wait; keep every downtime short (public sites
+  still get visitors). The cloud is NOT updated: it keeps the OLD main code and data as the
+  rollback; 052-055, the fixed api and the new website go live only on the new server at the
+  switch (rollback = old Pages build + old variables, cloud untouched). Before GO, after the live
+  copy is restored: a way for you to use the new server's app yourself (test address or hosts
+  entry, test login) to click through login, students, check-in/out, a payment and the reports;
+  your OK there is required for GO. Order: Students-page SQL paging + retest, wipe dummy data, live
+  copy (you type the pooler string at read -rs), real secrets, fixed api, rehearsal tests, your own
+  test, GO, AlpenGlow ceilings, then Sitting 4 (freeze, final copy, merge to main, Pages switch and
+  new build, live checks, 1-hour watch). If the usage limit gets close: stop BEFORE the freeze,
+  write the handover here, leave the live cloud untouched.
+- **23 Nov 2026, done:** cpu_shares 512 on pss-db/rest/kong/functions (server stack, compose
+  backup docker-compose.yml.bak-20261123b; kit stack-template; tests/scale/stack), all healthy,
+  AlpenGlow 11/11. **Migration 055_students_page.sql** (uncommitted, diff to show you): one SQL
+  function students_page() returns the page, total, totalAll, courses and branch counts; ICU
+  collation pss_ui_sort (numeric, case/accent-insensitive) to sort like the page did; 3 indexes;
+  api list_students_page/export_students call it (old JavaScript path only if 055 is missing).
+  Local proof (1,500 students): 191 page checks PASS and 18,805 page rows compared field by field
+  with the old rows, 0 differ; 0 fallbacks. Applied on the server's dummy stack (55 migrations).
+  **Big-list inventory at 20,000 students (dummy, largest branch / all branches):** active
+  memberships 1,838 / 17,971 (list_active_memberships, get_actionable_items, get_combined_pending);
+  alerts pending 1,838 / 17,887 (list_alerts); enquiries all-time 3,000 / 30,000 (list_enquiries);
+  cashbacks all-time 2,867 / 14,142 (list_cashbacks); transactions this month 974 / 7,903, all-time
+  28,167 / 247,339 (list_transactions: period-bounded, a year = about 12x a month); food bills
+  all-time 20,705 / 181,654 (list_food_bills: date-range bounded, default one day); payouts 669 /
+  3,198; overtime 667 / 6,261; sessions all-time 145,810 / 1,277,770 (only per student, capped at
+  the last 100 in get_student_profile; reports are SQL). The website no longer calls list_students.
+
 - **22 Nov 2026 (server time), Phase 2 checks and first load test on the 20,000-student DUMMY
   stack:** npm run test:scale from the laptop against the server (SSH tunnel to 8010,
   DOCKER_HOST=ssh, SCALE_PREFIX=pss): 4a 28 figures PASS (648 s), 4b 275 student-page checks
