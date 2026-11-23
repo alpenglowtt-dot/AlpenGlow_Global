@@ -97,6 +97,42 @@ move.
 ## Done
 
 
+- **23 Nov 2026, Sitting 3: wipe, live copy, real secrets, fixed api, rehearsal tests (server
+  pss stack only; AlpenGlow untouched, 10/10 healthy throughout):** your nginx check (root): 0
+  requests from perfectstudyspace.pages.dev in access.log, access.log.1 and the .gz logs. AlpenGlow
+  contact form and dashboard login: worked (you, after the ceilings). WIPE: docker compose down -v,
+  dummy data folder renamed volumes/db/data-dummy-20261123 (delete in Sitting 5), apiorig moved to
+  ~/pss-rehearsal, fresh empty pss-db. SECRETS: new random STAFF_JWT_SECRET (you have no copy of
+  the cloud one; everyone logs in once); PUBLIC_SITE_KEY = the same key the public site uses (your
+  choice (a), copied from its page source, 32 characters, never printed). LIVE COPY: your pg_dump
+  through the pooler (exit 0, 2,870,707 bytes, ~/pss-cloud-public.sql, mode 600); restore-public.sh:
+  only the expected noise (12 "permission denied to change default privileges", 1 "schema public
+  already exists"); 001-051 recorded, then 052, 053, 054, 055 applied, 0 warnings, 55 recorded;
+  all 34 tables' row counts equal the dump's (students 482, memberships 911, bookings 4,523,
+  transactions 861, staff 8, branches 3); 053's two one-open-session indexes created; pg_cron job
+  pss-nightly-summary; staff.last_login_at present; 39/39 tables with row security, 0 policies
+  (the 34 cloud tables keep the cloud's grants to anon/authenticated, unreachable: no policies,
+  and nginx exposes only /functions/v1/). api restarted with the real secrets, healthy.
+  TESTS on the copy (temporary owner zz_migration_test, random password in ~/pss-live/test-owner.pass;
+  the final copy at the freeze removes it): read smoke of every main screen for the 3 branches and
+  the owner's all-branch views: 53/53 HTTP 200; students pages: 191/191 identical, 2,018 rows field
+  by field 0 differ. security-test.sh: every table closed, every blocked path 404, ports 5432 6543
+  8000 8010 8443 3000 closed, TLS 1.0/1.1 refused, certificate valid; its burst from the laptop
+  cannot reach 40 requests/s (curl processes too slow), so the limit was proven from the server:
+  300 parallel requests from one curl process -> 153 x 200, 147 x 429, then 200 again; 0 restarts.
+  Found (Sitting 5): an unknown function answers 500 (router), an empty request body answers 500
+  instead of 400; security-test.sh burst should use one parallel curl (-Z).
+  YOUR TEST: the fixed website built on the laptop for the new server (VITE_SUPABASE_URL
+  https://api.perfectstudyspace.in, PSS anon key; .env.newserver.local, git-ignored) served at
+  http://127.0.0.1:4173 (vite preview); CORS preflight from it 200. No change to Pages or the cloud.
+- **23 Nov 2026, public website perfectstudyspace.in (separate site, not in the PSS repo; served
+  through Cloudflare, no Content-Security-Policy):** its contact form posts public_create_enquiry
+  with PSS_APP_SITE_KEY to the cloud. Change for the switch, one line in its page source:
+  `const PSS_APP_SUPABASE_URL = "https://ozatixapvxwrwbpdxuzt.supabase.co";` ->
+  `const PSS_APP_SUPABASE_URL = "https://api.perfectstudyspace.in";` (the code adds
+  /functions/v1/api; key unchanged). Until it is changed, its enquiries keep landing in the cloud.
+  Still needed from you: where that site lives and who changes it at the switch.
+
 - **23 Nov 2026 10:24 CET, AlpenGlow memory ceilings APPLIED (your OK):** server file backed up as docker-compose.limits.yml.bak-20261123 (md5 e82b8c9d...), new file = kit new-server/alpenglow/docker-compose.limits.yml (db 512m, rest 128m, functions 384m, kong 512m, studio 448m, realtime 352m, storage 352m, meta 256m, imgproxy 160m, auth 128m, supavisor 320m); docker compose up -d took 24 s (10:24:08-10:24:32), then docker compose stop studio (a profile was not used: kong depends_on studio, and changing that is more than memory ceilings; a stopped container stays stopped across reboots, the deploy script only restarts functions). After: 10/10 healthy, Studio stopped, every ceiling in place, 0 new restarts (auth 2 are from 14 Nov), rest probe 200, auth health 200, https functions OPTIONS 200, site 200, 5.1 GB available. Still to check: your contact form + dashboard login, 0 restarts after 1 h. Rollback: cp docker-compose.limits.yml.bak-20261123 docker-compose.limits.yml && docker compose up -d. NOTE: a docker compose config call printed AlpenGlow's service-role key in this session (not sent anywhere else); rotate it in Sitting 5 if you want.
 - **23 Nov 2026, PUBLIC_SITE_KEY: STOPPED (your rule):** only action public_create_enquiry checks it; the PSS repo does not send it; the public website perfectstudyspace.in (a separate site, not in this repo) sends it from its contact form, with the key written in its page source (PSS_APP_SITE_KEY), to the CLOUD url https://ozatixapvxwrwbpdxuzt.supabase.co/functions/v1/api. Waiting for your decision.
 
