@@ -1,42 +1,53 @@
 # Memory ceilings for the AlpenGlow stack on the shared server, so it can
 # never starve the PSS stack (or the other way round). Ceilings, not
-# reservations, with room above what the live server uses. Measured on the
-# old server on 26 Oct 2026 (docker stats): Kong 558 MB untuned (one worker
-# per CPU; 145 MB with two workers in the rehearsal), Studio 266 MB, Storage
-# 227 MB, Realtime 220 MB, pooler 213 MB, functions 166 MB, meta 129 MB,
-# Postgres 129 MB, imgproxy 93 MB, REST 65 MB, Auth 11 MB. About 4.6 GB of
-# ceilings in total; real use about 2 GB.
+# reservations, with room above what the live server uses.
+#
+# Set on 23 Nov 2026 from a 24-hour read-only measurement on the new server
+# (22 Nov 09:58 to 23 Nov 10:02 CET, 2,646 samples, incl. the 22:30 backup):
+# peaks auth 15, db 140, edge-functions 137, imgproxy 105, kong 330, meta 167,
+# pooler 213, realtime 221, rest 69, storage 226, studio 278 MiB. Rules: db at
+# least 512m, edge-functions at least 384m, the others at least 1.5 x their
+# peak (min 128m), rounded up to 32m: 3,552 MiB without Studio's 448.
+# With the PSS stack (4,608 MiB) all eleven came to 8,160 MiB on a 7,941 MiB
+# machine, so Studio is kept STOPPED (docker compose stop studio): a stopped
+# container stays stopped across reboots; the deploy script only restarts
+# functions. Kong waits for Studio only when Kong itself is (re)started; then
+# Studio starts too, so stop it again afterwards. To use the dashboard:
+#   docker compose start studio      ... and afterwards: docker compose stop studio
+# Before 23 Nov: db 1g, rest 384m, functions 512m, kong 512m, studio 512m,
+# realtime 384m, storage 384m, meta 256m, imgproxy 256m, auth 128m,
+# supavisor 384m (4,736 MiB).
 #
 # Install (runbook Phase 2, after the stack has started once):
 #   as root: cp /root/new-server/alpenglow/docker-compose.limits.yml ~deploy/projects/alpenglow-global/backend/
 #   in .env: COMPOSE_FILE=docker-compose.yml:docker-compose.override.yml:docker-compose.limits.yml
-#   docker compose up -d
+#   docker compose up -d && docker compose stop studio
 #
 # Kong must run two workers before its cap applies, otherwise it hits the
 # cap and restarts.
 
 services:
   db:
-    mem_limit: 1g
-  rest:
-    mem_limit: 384m
-  functions:
     mem_limit: 512m
+  rest:
+    mem_limit: 128m
+  functions:
+    mem_limit: 384m
   kong:
     mem_limit: 512m
     environment:
       KONG_NGINX_WORKER_PROCESSES: "2"
   studio:
-    mem_limit: 512m
+    mem_limit: 448m
   realtime:
-    mem_limit: 384m
+    mem_limit: 352m
   storage:
-    mem_limit: 384m
+    mem_limit: 352m
   meta:
     mem_limit: 256m
   imgproxy:
-    mem_limit: 256m
+    mem_limit: 160m
   auth:
     mem_limit: 128m
   supavisor:
-    mem_limit: 384m
+    mem_limit: 320m

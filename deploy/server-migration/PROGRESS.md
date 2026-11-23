@@ -97,6 +97,9 @@ move.
 ## Done
 
 
+- **23 Nov 2026 10:24 CET, AlpenGlow memory ceilings APPLIED (your OK):** server file backed up as docker-compose.limits.yml.bak-20261123 (md5 e82b8c9d...), new file = kit new-server/alpenglow/docker-compose.limits.yml (db 512m, rest 128m, functions 384m, kong 512m, studio 448m, realtime 352m, storage 352m, meta 256m, imgproxy 160m, auth 128m, supavisor 320m); docker compose up -d took 24 s (10:24:08-10:24:32), then docker compose stop studio (a profile was not used: kong depends_on studio, and changing that is more than memory ceilings; a stopped container stays stopped across reboots, the deploy script only restarts functions). After: 10/10 healthy, Studio stopped, every ceiling in place, 0 new restarts (auth 2 are from 14 Nov), rest probe 200, auth health 200, https functions OPTIONS 200, site 200, 5.1 GB available. Still to check: your contact form + dashboard login, 0 restarts after 1 h. Rollback: cp docker-compose.limits.yml.bak-20261123 docker-compose.limits.yml && docker compose up -d. NOTE: a docker compose config call printed AlpenGlow's service-role key in this session (not sent anywhere else); rotate it in Sitting 5 if you want.
+- **23 Nov 2026, PUBLIC_SITE_KEY: STOPPED (your rule):** only action public_create_enquiry checks it; the PSS repo does not send it; the public website perfectstudyspace.in (a separate site, not in this repo) sends it from its contact form, with the key written in its page source (PSS_APP_SITE_KEY), to the CLOUD url https://ozatixapvxwrwbpdxuzt.supabase.co/functions/v1/api. Waiting for your decision.
+
 - **23 Nov 2026, 055 on 20,000 students and the load retest (cpu_shares 512, functions 3 CPUs):**
   055 committed `ac543bc` (your OK). Server page checks: 275/275 PASS, 167,020 page rows compared
   field by field, 0 differ; one page 21 KB vs 8.1 MB whole list; one students_page() call 300 ms for
