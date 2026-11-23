@@ -72,16 +72,21 @@ shopt -s nullglob
 confs=("$HOME"/ops/projects/*.conf)
 [ "${#confs[@]}" -gt 0 ] || add "no project files in ~/ops/projects"
 
+# A project's .conf may set PROJECT_ALERT_TO: that project's problems then go to that address
+# (together with the server-wide ones) and no longer to ALERT_TO. Each recipient has its own
+# state file; ALERT_TO keeps health.state, so its alerts behave exactly as before.
+declare -A proj_to=()
 for conf in "${confs[@]}"; do
-  unset NAME BACKEND DB_CONTAINER CONTAINERS DOMAIN PROBE_URL PROBE_KEY_VAR WARM_URL WARM_BODY
+  unset NAME BACKEND DB_CONTAINER CONTAINERS DOMAIN PROBE_URL PROBE_KEY_VAR WARM_URL WARM_BODY PROJECT_ALERT_TO
   # shellcheck disable=SC1090
   . "$conf"
+  [ -n "${PROJECT_ALERT_TO:-}" ] && proj_to[$NAME]="$PROJECT_ALERT_TO"
   say "== $NAME"
 
   rstate="$STATE_DIR/restarts.$NAME"
   rnew=""
   for c in $CONTAINERS; do
-    st=$(docker inspect -f '{{.State.Status}}{{if .State.Health}}/{{.State.Health.Status}}{{end}}' "$c" 2>/dev/null || echo missing)
+    st=$(docker inspect -f '{{.State.Status}}{{if .State.Health}}/{{.State.Health.Status}}{{end}}' "$c" 2>/dev/null) || st=missing
     case "$st" in running|running/healthy|running/starting) ;; *) add "$NAME: container $c is $st" ;; esac
     # Restarts done by Docker's restart policy (a crash, an out-of-memory kill). A
     # container re-created by compose starts again at 0, which is not reported.
@@ -147,33 +152,36 @@ if [ "$STATUS" = 1 ]; then
   exit 0
 fi
 
-send=0
-if [ "$current" != "$previous" ]; then
-  send=1
-elif [ -n "$current" ] && find "$STATE" -mmin +1440 2>/dev/null | grep -q .; then
-  send=1   # still broken a day later: remind
-fi
-[ "$send" = 1 ] || exit 0
+# Problems are prefixed "<project>: "; any other line is server-wide.
+declare -A proj_names=()
+for conf in "${confs[@]}"; do n=$(grep -E '^NAME=' "$conf" | head -1 | cut -d= -f2-); [ -n "$n" ] && proj_names[$n]=1; done
+proj_lines() { printf '%s\n' "$current" | grep -E "^$1: " || true; }
+server_lines() {
+  local all="$current" p
+  for p in "${!proj_names[@]}"; do all=$(printf '%s\n' "$all" | grep -vE "^$p: " || true); done
+  printf '%s\n' "$all" | sed '/^$/d'
+}
 
-if [ -n "$current" ]; then
-  subject="[AlpenGlow server] PROBLEM: $(printf '%s\n' "$current" | wc -l) issue(s)"
-  body="$current"
-else
-  subject="[AlpenGlow server] RECOVERED"
-  body="All checks pass again. Previously failing:
-$previous"
-fi
-echo "== $(date -Is) $subject"
-printf '%s\n' "$body" | sed 's/^/   /'
-printf '%s\n' "$current" > "$STATE"
-
-if [ -z "$RESEND_API_KEY" ] || [ -z "$ALERT_TO" ]; then
-  echo "   (no RESEND_API_KEY or ALERT_TO, alert not emailed)"
-  exit 0
-fi
-from="onboarding@resend.dev"
-[ -z "$FROM_DOMAIN" ] || from="info@$FROM_DOMAIN"
-payload=$(SUBJECT="$subject" BODY="$body" FROM="$from" TO="$ALERT_TO" HOST="$(hostname)" python3 -c '
+# send_alert <to> <state-file> <label> <current problems for this recipient>
+send_alert() {
+  local to="$1" st="$2" label="$3" cur="$4" prev send=0 subject body
+  prev=$(cat "$st" 2>/dev/null || true)
+  if [ "$cur" != "$prev" ]; then send=1
+  elif [ -n "$cur" ] && find "$st" -mmin +1440 2>/dev/null | grep -q .; then send=1; fi   # still broken a day later
+  [ "$send" = 1 ] || return 0
+  if [ -n "$cur" ]; then
+    subject="[$label] PROBLEM: $(printf '%s\n' "$cur" | wc -l) issue(s)"; body="$cur"
+  else
+    subject="[$label] RECOVERED"; body="All checks pass again. Previously failing:
+$prev"
+  fi
+  echo "== $(date -Is) to ${to:-(nobody)}: $subject"
+  printf '%s\n' "$body" | sed 's/^/   /'
+  printf '%s\n' "$cur" > "$st"
+  if [ -z "$RESEND_API_KEY" ] || [ -z "$to" ]; then echo "   (no RESEND_API_KEY or recipient, alert not emailed)"; return 0; fi
+  local from="onboarding@resend.dev" payload code
+  [ -z "$FROM_DOMAIN" ] || from="info@$FROM_DOMAIN"
+  payload=$(SUBJECT="$subject" BODY="$body" FROM="$from" TO="$to" HOST="$(hostname)" python3 -c '
 import json, os
 print(json.dumps({
   "from": "Alpen Glow Server <%s>" % os.environ["FROM"],
@@ -181,6 +189,17 @@ print(json.dumps({
   "subject": os.environ["SUBJECT"],
   "text": os.environ["BODY"] + "\n\nServer: " + os.environ["HOST"],
 }))')
-code=$(http -X POST https://api.resend.com/emails \
-  -H "Authorization: Bearer $RESEND_API_KEY" -H "Content-Type: application/json" -d "$payload")
-case "$code" in 2??) echo "   emailed $ALERT_TO" ;; *) echo "   email failed, Resend answered $code" ;; esac
+  code=$(http -X POST https://api.resend.com/emails \
+    -H "Authorization: Bearer $RESEND_API_KEY" -H "Content-Type: application/json" -d "$payload")
+  case "$code" in 2??) echo "   emailed $to" ;; *) echo "   email failed, Resend answered $code" ;; esac
+}
+
+# ALERT_TO: everything except the problems of projects that have their own recipient.
+default_cur="$current"
+for p in "${!proj_to[@]}"; do default_cur=$(printf '%s\n' "$default_cur" | grep -vE "^$p: " | sed '/^$/d' || true); done
+send_alert "$ALERT_TO" "$STATE" "AlpenGlow server" "$default_cur"
+# Each project with its own recipient: its problems plus the server-wide ones.
+for p in "${!proj_to[@]}"; do
+  cur=$( { proj_lines "$p"; server_lines; } | sed '/^$/d' | sort)
+  send_alert "${proj_to[$p]}" "$STATE.$p" "$p on the server" "$cur"
+done
