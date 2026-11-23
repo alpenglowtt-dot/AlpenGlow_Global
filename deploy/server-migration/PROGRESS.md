@@ -1253,31 +1253,31 @@ PSS Sitting 3 (22 Nov):
 - [x] Worker CPU-limit fix (done 22 Nov, `1499d46`).
 - [x] Memory: option A (decided 22 Nov): both stacks must fit in RAM,
       swap only as a buffer. PSS kit defaults done (`e63f446`).
-- [ ] AlpenGlow ceilings: OK on the new numbers (table in the chat,
+- [x] AlpenGlow ceilings: OK on the new numbersAlpenGlow ceilings: OK on the new numbers (table in the chat,
       after the 12-minute read-only measurement), then a quiet hour of
-      your choice to apply them (AlpenGlow only, `docker compose up -d`).
+      your choice to apply them (AlpenGlow only, `docker compose up -d`). (24 Nov check: applied 23 Nov 10:24 CET, see Done)
 - [x] Migration numbers (decided 22 Nov): 052 is yours, the hardening
       migration is 053.
 - [x] Copy your `052_owner_last_login.sql` and its 10 `api` lines UNCHANGED into
       `fix/pre-migration` (your OK 22 Nov; committed `d560eb0`).
 - [x] OK on the E-transactions diff and the J kit diff (22 Nov; `8fd2fb3`, `c41876d`).
-- [ ] Phase 2, your OK: put J on the live server together with the PSS stack (crontab,
-      reboot time 22:30, restore-test.sh), without disturbing AlpenGlow's backups or health check.
+- [x] Phase 2, your OK: put J on the live serverPhase 2, your OK: put J on the live server together with the PSS stack (crontab,
+      reboot time 22:30, restore-test.sh), without disturbing AlpenGlow's backups or health check. (24 Nov check: on the server: crontab backups 4x/day, health 5 min, weekly size, restore test 2nd of the month; reboot 22:30 set)
 - [ ] Sitting 5 backlog (after the move, one at a time, each with your OK): the big
       membership actions (new/renew/transfer/cancel membership and the other multi-step
       writes) each in one SQL transaction; AlpenGlow's live router `jsr:@panva/jose@6`
       import replaced by a stored copy (separate fix).
-- [ ] For Phase 1: a Supabase access token on the laptop (secret names,
+- [x] For Phase 1: a Supabase access tokenFor Phase 1: a Supabase access token on the laptop (secret names,
       download of the deployed `api`), and the session-pooler string
-      typed by you at a `read -rs` prompt on the server.
-- [ ] Sitting 4: change the PSS cloud database password after the final
-      dump (it was pasted into the chat on 22 Nov).
+      typed by you at a `read -rs` prompt on the server. (24 Nov check: done; token revoked 23 Nov)
+- [x] Sitting 4: change the PSS cloud database passwordSitting 4: change the PSS cloud database password after the final
+      dump (it was pasted into the chat on 22 Nov). (24 Nov check: done 23 Nov)
 
 Dates (your choice):
 
 - [ ] Check the earliest cancellation date for the old server in the
       Contabo panel (16 Nov or 16 Dec).
-- [ ] Choose the migration dates.
+- [x] Choose the migration dates.Choose the migration dates. (24 Nov check: both moved)
 
 To start Phase 1:
 
@@ -1310,9 +1310,9 @@ After the AlpenGlow switch-over (decided 2 Nov):
       access, on the new server (deployed 3 Nov, migration 012).
 - [x] AlpenGlow fix 3: remove public write access on the CMS tables, on
       the new server (deployed 3 Nov, migration 013).
-- [ ] Merge `claude/security-fixes` into `main` and push (your separate
+- [x] Merge `claude/security-fixes` into `main`Merge `claude/security-fixes` into `main` and push (your separate
       OK; carries the Phase 5 IP change and migrations 012, 013 to
-      `main`).
+      `main`). (24 Nov check: all its commits are on main, 0 missing)
 
 Settled (2 Nov):
 
@@ -1335,7 +1335,7 @@ Settled (2 Nov):
 Recommended (planned 2 Nov; you set them up yourself):
 
 - [ ] Cloudflare R2 bucket for off-server backups.
-- [ ] The backup passphrase in a password manager.
+- [x] The backup passphrase in a password manager.The backup passphrase in a password manager. (24 Nov check: done by you 2 Nov)
 - [ ] An outside uptime monitor (`https://api.alpenglowglobal.com`, later
       `https://api.perfectstudyspace.in`).
 - [ ] A second SSH key from another machine.
@@ -1344,4 +1344,4 @@ Later:
 
 - [x] A day before the AlpenGlow switch-over: lower the TTL of `api` in the
       `alpenglowglobal.com` zone to 5 minutes (300 s, checked 2 Nov).
-- [ ] The PSS inputs in `INPUTS-NEEDED.md` ("For PSS").
+- [x] The PSS inputs in `INPUTS-NEEDED.md`The PSS inputs in `INPUTS-NEEDED.md` ("For PSS").
