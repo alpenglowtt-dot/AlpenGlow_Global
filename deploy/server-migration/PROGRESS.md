@@ -97,6 +97,8 @@ move.
 ## Done
 
 
+- **23 Nov 2026, SITTING 4 NOT STARTED: STOPPED at its first check (your rule).** (1) The live public page perfectstudyspace.in ALREADY sends enquiries to https://api.perfectstudyspace.in (your PSS-WEB change is live), i.e. into the server's COPY, which the final copy wipes; the cloud no longer receives them. 0 enquiries had arrived on the server by the check. (2) Sitting 3 GO is NOT confirmed: in the 90 min before the check no browser request reached the new server (pss-kong log: only my curl calls: 3 x 401, 1 x 500, all mine); the only login on the copy since 10:00 CET is the temporary test owner; 0 new sessions, 0 payments. The 1,800 functions boot errors were all 09:41-09:45 UTC, my rate-limit bursts to /functions/v1/does-not-exist. Confirmed for Sitting 4: the server runs fixed code (052-055 recorded, api from fix/pre-migration ac543bc, kit router); the cloud runs OLD main cb7beeb, untouched since Phase 1; api.perfectstudyspace.in -> 84.247.184.195. Waiting for your decisions.
+
 - **23 Nov 2026, Sitting 3: wipe, live copy, real secrets, fixed api, rehearsal tests (server
   pss stack only; AlpenGlow untouched, 10/10 healthy throughout):** your nginx check (root): 0
   requests from perfectstudyspace.pages.dev in access.log, access.log.1 and the .gz logs. AlpenGlow
