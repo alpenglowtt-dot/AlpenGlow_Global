@@ -1161,8 +1161,6 @@ second SSH key; docs and cleanup.
 
 ## Decisions made
 
-- **24 Nov 2026, CPU priority: keep as is** (PSS cpu_shares 512, AlpenGlow 1024; PSS api max 3 cores). Reason: the server is 80-88% idle, PSS gets about 1.3 cores even when both are busy (far more than it uses), AlpenGlow (customers) keeps 2/3 under contention, and no change during the 2-week watch. Switch to equal priority (PSS 1024 + DB_CPUS=3 on pss-db; diff shown in the chat 24 Nov; PSS restart about 20-30 s in a quiet hour) only if: staff report slowness while AlpenGlow is busy, PSS grows to several thousand students, or the health check / weekly report shows the CPU running full. Re-check CPU in the 7 Dec final check.
-
 - **Order.** AlpenGlow first: old VPS `deploy@169.58.43.191` to the new
   server. PSS about a week later: Supabase cloud project
   `ozatixapvxwrwbpdxuzt` to the same new server, as its own separate stack.
